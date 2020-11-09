@@ -1,0 +1,118 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "ctrl+alt+l",
+    "command": "editor.action.formatDocument",
+    "when": "resourceExtname != .cpp"
+  },
+  {
+    "key": "ctrl+alt+l",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "astyle -n --add-braces -s2 \"${file}\" && clang-format -i -style=\"{ColumnLimit: 100, AllowShortBlocksOnASingleLine: false}\" \"${file}\" \u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+b",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${workspaceFolder}/../Script/run.sh \"${fileDirname}\"/ \u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+shift+b",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${workspaceFolder}/../Script/run_with_terminal.sh \"${fileDirname}\"/ \u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+n",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${workspaceFolder}/../Script/new.sh ${workspaceFolder}/../Task\u000D"
+    }
+  },
+  {
+    "key": "ctrl+alt+e",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${workspaceFolder}/../Script/config.sh \"${fileDirname}\"/ \u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+t",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${workspaceFolder}/../Script/test_dialog.sh \"${fileDirname}\"/ \u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+c",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "cd ${workspaceFolder}/../CC/ && npm start\u000D"
+    }
+  },
+  {
+    "key": "ctrl+alt+a",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${workspaceFolder}/../Script/archive.sh \"${fileDirname}\"/ \u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "alt+1",
+    "command": "-workbench.action.openEditorAtIndex1"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "alt+4",
+    "command": "-workbench.action.openEditorAtIndex4"
+  },
+  {
+    "key": "alt+enter",
+    "command": "-notebook.cell.executeAndInsertBelow",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "alt+enter",
+    "command": "-search.action.openInEditor",
+    "when": "hasSearchResult && searchViewletFocus"
+  },
+  {
+    "key": "alt+enter",
+    "command": "-debug.openBreakpointToSide",
+    "when": "breakpointsFocused"
+  },
+  {
+    "key": "alt+enter",
+    "command": "-editor.action.selectAllMatches",
+    "when": "editorFocus && findWidgetVisible"
+  },
+  {
+    "key": "alt+enter",
+    "command": "-python.datascience.runcurrentcellandaddbelow",
+    "when": "editorTextFocus && python.datascience.featureenabled && python.datascience.hascodecells && !editorHasSelection && !notebookEditorFocused"
+  },
+  {
+    "key": "alt+enter",
+    "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+.",
+    "command": "-editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  }
+]

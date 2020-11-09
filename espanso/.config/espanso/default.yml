@@ -1,0 +1,45 @@
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: ":espanso"
+    replace: "Hi there!"
+
+  - trigger: ":address"
+    replace: "Room 219, Johnson Hall, 380 Thatcher Road, Amherst, MA 01003-9359, United States"
+
+  - trigger: ":uni"
+    replace: "University of Massachusetts at Amherst"
+
+  - trigger: ":phone"
+    replace: "+1 413 313 9462"
+
+  - trigger: ":unimail"
+    replace: "dhpham@umass.edu"
+
+  - trigger: ":vinai"
+    replace: "VinAI Reasearch"
+
+  - trigger: ":air"
+    replace: "AI Reasearcher"
+
+  - trigger: ":swei"
+    replace: "Software Developer Intern"
+
+  - trigger: ":github"
+    replace: "https://github.com/cunbidun"
+
+  - trigger: ":zip"
+    replace: "MA 01003-9359"
+
+  - trigger: ":linkedin"
+    replace: "https://www.linkedin.com/in/duy-pham-90652a152/"
+
+  - trigger: ":info"
+    replace: "I'm always eager to learn ideas and concepts and love finding the most optimal solutions for any challenging problems, many requiring solid technique skills. And that also made me a fast-learner. When encountering a new or difficult concept, I could quickly locate the right resources, and by using those materials, I would be able to understand the intuitions behind the new idea as well as how to utilize them."

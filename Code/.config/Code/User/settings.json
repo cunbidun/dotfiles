@@ -1,0 +1,81 @@
+{
+  "editor.minimap.enabled": false,
+  "window.menuBarVisibility": "toggle",
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.visible": true,
+  "window.restoreFullscreen": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "breadcrumbs.enabled": true,
+  "editor.renderWhitespace": "none",
+  "files.autoSave": "afterDelay",
+  "explorer.confirmDelete": false,
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "C_Cpp.updateChannel": "Insiders",
+
+  // Vim
+  "vim.handleKeys": {
+    "<C-w>": false,
+    "<C-c>": false,
+    "<C-v>": false
+  },
+  "vim.useSystemClipboard": true,
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": 0,
+  "editor.fontFamily": "Source Code Pro",
+  "editor.fontLigatures": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.panel.defaultLocation": "right",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "git.enableSmartCommit": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "editor.smoothScrolling": true,
+  "editor.cursorSmoothCaretAnimation": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.lineHeight": 22,
+  "terminal.integrated.fontFamily": "Source Code Pro",
+  "python.languageServer": "Pylance",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "java.completion.filteredTypes": ["java.awt.*", "com.sun.*"],
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "python.formatting.provider": "autopep8",
+  "workbench.list.smoothScrolling": true,
+  "editor.largeFileOptimizations": false,
+  "python.showStartPage": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "output.smartScroll.enabled": false,
+  "terminal.integrated.fontWeight": "600",
+  "editor.fontSize": 15,
+  "editor.tabSize": 2,
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "[js]": {
+    "editor.tabSize": 4
+  },
+  "workbench.colorTheme": "Nord",
+  "files.autoSaveDelay": 500,
+  "glassit.alpha": 240
+}
