@@ -247,11 +247,11 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
-   -- Hide all notifications
-    awful.key({ modkey, }, "\\", naughty.destroy_all_notifications,
-    {description = "clear notifications", group = "awesome"}), 
-   -- Show/Hide Wibox
-   awful.key({ modkey }, "b" , function ()
+
+    -- Hide all notifications
+    awful.key({ modkey, }, "\\", naughty.destroy_all_notifications,{description = "clear notifications", group = "awesome"}), 
+    -- Show/Hide Wibox
+    awful.key({ modkey }, "b" , function ()
            for s in screen do
                s.mywibox.visible = not s.mywibox.visible
                if s.mybottomwibox then
@@ -605,3 +605,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- Auto start applications 
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("nm-applet")
+awful.spawn.with_shell("ibus-daemon -drx")
+-- awful.spawn.with_shell("xrandr --output eDP-1-1 --auto")
