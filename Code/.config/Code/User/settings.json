@@ -18,7 +18,8 @@
   "vim.handleKeys": {
     "<C-w>": false,
     "<C-c>": false,
-    "<C-v>": false
+    "<C-v>": false,
+    "<C-h>": false,
   },
   "vim.useSystemClipboard": true,
 
@@ -52,10 +53,11 @@
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "java.completion.filteredTypes": ["java.awt.*", "com.sun.*"],
   "files.exclude": {
+    "**/__pycache__": true,
     "**/.classpath": true,
+    "**/.factorypath": true,
     "**/.project": true,
-    "**/.settings": true,
-    "**/.factorypath": true
+    "**/.settings": true
   },
   "python.formatting.provider": "autopep8",
   "workbench.list.smoothScrolling": true,
@@ -77,5 +79,5 @@
   },
   "workbench.colorTheme": "Nord",
   "files.autoSaveDelay": 500,
-  "glassit.alpha": 240
+  "glassit.alpha": 255
 }

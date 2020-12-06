@@ -4,8 +4,10 @@ pcall(require, "luarocks.loader")
 
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
-
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 local volume_control = require("volume-control")
+
 volumecfg = volume_control({})
 
 -- Standard awesome library
@@ -67,8 +69,8 @@ beautiful.orientation = "vertical"
 -- notification theme
 beautiful.notification_icon_size = 50 
 beautiful.notification_margin = 10
-beautiful.notification_border_width = 5
-beautiful.notification_border_color = "#D08770"
+beautiful.notification_border_width = 10 
+beautiful.notification_border_color = "#88c0d0"
 
 -- Default modkey.
 modkey = "Mod4"
@@ -121,7 +123,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock("%a %b %d, %H:%M:%S", 1)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -218,13 +220,39 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        wibox.container.place(mytextclock, "center"),
+        wibox.widget.textbox(''),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
-            volume_widget({show_current_level = true}),
+            wibox.widget.textbox(' | '),
+            weather_widget({
+                api_key='3dff20a5d0fa80417a4344483ac59cdc',
+                coordinates = {21.028511, 105.804817}, -- Hanoi, Vietnam
+                show_hourly_forecast = true,
+                show_daily_forecast = true,
+            }),
+            wibox.widget.textbox(' | '),
+            cpu_widget({
+                width = 70,
+                step_width = 5,
+                step_spacing = 2,
+                color = '#88c0d0'
+            }),
+            wibox.widget.textbox(' | '),
+            volume_widget({
+              show_current_level = true,
+              display_notification = true,
+              show_hourly_forecast = true,
+              show_daily_forecast = true,
+            }),
             volumecfg.widget,
-            battery_widget({show_current_level = true}),
+            wibox.widget.textbox(' | '),
+            battery_widget({
+              show_current_level = true,
+            }),
+            wibox.widget.textbox(' | '),
+            mytextclock,
+            wibox.widget.textbox('  '),
         },
     }
 end)
@@ -244,9 +272,28 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "s", function () awful.util.spawn_with_shell("import png:- | xclip -selection clipboard -t image/png", false) end),
     
     -- sound
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
+    -- awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
+    awful.key(
+      {},
+      'XF86AudioRaiseVolume',
+      volume_widget.raise,
+      {description = 'volume up', group = 'hotkeys'}
+    ),
+    awful.key(
+      {},
+      'XF86AudioLowerVolume',
+      volume_widget.lower,
+      {description = 'volume down', group = 'hotkeys'}
+    ),
+    awful.key(
+      {},
+      'XF86AudioMute',
+      volume_widget.toggle,
+      {description = 'toggle mute', group = 'hotkeys'}
+    ),
+
+    -- awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
+    -- awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
 
     -- Hide all notifications
     awful.key({ modkey, }, "\\", naughty.destroy_all_notifications,{description = "clear notifications", group = "awesome"}), 

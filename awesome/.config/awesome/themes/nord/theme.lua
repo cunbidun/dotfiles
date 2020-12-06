@@ -75,7 +75,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 
-theme.wallpaper   = theme_path.."wpp.jpeg"
+theme.wallpaper   = theme_path.."wallpaper2.png"
 theme.background  = theme.nord0
 
 -- Generate Awesome icon:

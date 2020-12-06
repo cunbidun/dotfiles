@@ -58,7 +58,7 @@ ZSH_THEME="robbyrussell"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -80,13 +80,13 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="nvim ~/.zshrc"
 alias MO="~/Documents/Cinnamon/cassia_ta/"
 alias CP="~/Documents/competitive_programming/"
 alias 311="~/Documents/Umass/Fall2020/COMPSCI\ 311/"
@@ -95,6 +95,7 @@ alias 377="~/Documents/Umass/Fall2020/COMPSCI\ 377/"
 alias 383="~/Documents/Umass/Fall2020/COMPSCI\ 383/"
 alias 453="~/Documents/Umass/Fall2020/COMPSCI\ 453/"
 alias b="~/.script/brightness.sh"
+alias r="ranger"
 
 unsetopt PROMPT_SP
 export PATH="/home/cunbidun/.pyenv/bin:$PATH"
@@ -102,6 +103,11 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
+
 export PATH=$PATH:$HOME/.poetry/bin
+source /usr/share/nvm/init-nvm.sh
+
+export TCFRAME_HOME=~/tcframe
+alias tcframe=$TCFRAME_HOME/scripts/tcframe
 
 export EDITOR=nvim;
