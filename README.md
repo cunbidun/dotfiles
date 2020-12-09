@@ -16,3 +16,20 @@
 2. Clone the repo
 3. `cd ~/dotfiles`
 4. `stow`
+
+# After install Arch
+## Install yay: https://github.com/Jguer/yay
+
+1. pacman -S --needed git base-devel
+2. git clone https://aur.archlinux.org/yay.git
+3. cd yay
+4. makepkg -si
+
+## Install networkmanager: yay -S network-manager-applet 
+## Theme:
+###  install picom: yay -S picom
+###  install lxappearance: yay -S lxappearance
+### install Arc icon: 
+1. git clone https://github.com/horst3180/arc-icon-theme --depth 1 && cd arc-icon-theme
+2. ./autogen.sh --prefix=/usr
+3. sudo make install
