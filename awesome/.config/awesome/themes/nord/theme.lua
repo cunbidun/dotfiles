@@ -1,7 +1,3 @@
----------------------------
--- noaccOS' Nord minimal theme --
----------------------------
-
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
@@ -42,7 +38,7 @@ theme.fg_focus      = theme.fg_normal
 theme.fg_urgent     = theme.fg_normal
 theme.fg_minimize   = theme.fg_normal
 
-theme.useless_gap   = dpi(3)
+theme.useless_gap   = dpi(5)
 theme.border_width  = dpi(2)
 theme.border_normal = theme.nord5
 theme.border_marked = theme.nord11
