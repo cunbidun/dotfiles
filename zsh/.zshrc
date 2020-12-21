@@ -87,15 +87,12 @@ else
 fi
 
 alias zshconfig="nvim ~/.zshrc"
-alias MO="~/Documents/Cinnamon/cassia_ta/"
 alias CP="~/Documents/competitive_programming/"
-alias 311="~/Documents/Umass/Fall2020/COMPSCI\ 311/"
-alias 326="~/Documents/Umass/Fall2020/COMPSCI\ 326/"
-alias 377="~/Documents/Umass/Fall2020/COMPSCI\ 377/"
-alias 383="~/Documents/Umass/Fall2020/COMPSCI\ 383/"
-alias 453="~/Documents/Umass/Fall2020/COMPSCI\ 453/"
+alias MMS="~/Documents/Cinnamon/model-management-service/"
 alias b="~/.script/brightness.sh"
+alias svim='vim -u ~/.SpaceVim/vimrc'
 alias r="ranger"
+# alias ls="ls -a"
 
 unsetopt PROMPT_SP
 export PATH="/home/cunbidun/.pyenv/bin:$PATH"
@@ -104,10 +101,5 @@ eval "$(pyenv virtualenv-init -)"
 
 test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 
-export PATH=$PATH:$HOME/.poetry/bin
 source /usr/share/nvm/init-nvm.sh
 
-export TCFRAME_HOME=~/tcframe
-alias tcframe=$TCFRAME_HOME/scripts/tcframe
-
-export EDITOR=nvim;

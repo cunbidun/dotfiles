@@ -39,3 +39,4 @@ fi
 source ~/.zshrc
 
 exec awesome
+# exec bspwm

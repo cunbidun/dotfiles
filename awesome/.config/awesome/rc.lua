@@ -6,6 +6,7 @@ local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
+local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local volume_control = require("volume-control")
 
 volumecfg = volume_control({})
@@ -57,11 +58,18 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 local theme = beautiful.init("~/.config/awesome/themes/nord/theme.lua")
+
+-- utils function -- 
+function useless_gaps_resize(thatmuch, s, t)
+    local scr = s or awful.screen.focused()
+    local tag = t or scr.selected_tag
+    tag.gap = tag.gap + tonumber(thatmuch)
+    awful.layout.arrange(scr)
+end
+
+
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
@@ -81,7 +89,12 @@ beautiful.notification_border_color = "#88c0d0"
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {awful.layout.suit.tile, awful.layout.suit.floating}
+awful.layout.layouts = {
+  awful.layout.suit.tile, 
+  awful.layout.suit.floating,
+  awful.layout.suit.max,
+  awful.layout.suit.magnifier,
+}
 -- }}}
 
 -- {{{ Menu
@@ -170,7 +183,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
+    awful.tag({"1:termial", "2:dev", "3:browser", "4", "5", "6", "7", "8:video_call", "9:slack"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -229,7 +242,9 @@ awful.screen.connect_for_each_screen(function(s)
                 step_spacing = 2,
                 color = '#88c0d0'
             }),
-            wibox.widget.textbox(' | '),
+            wibox.widget.textbox(' |'),
+            net_speed_widget({}),
+            wibox.widget.textbox('| '),
             volume_widget({
                 show_current_level = true,
                 display_notification = true,
@@ -256,7 +271,14 @@ end), awful.button({}, 4, awful.tag.viewnext), awful.button({}, 5, awful.tag.vie
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(awful.key({modkey, "Shift"}, "s", function()
+globalkeys = gears.table.join(
+
+awful.key(
+  { modkey, "Control" }, "k", function () useless_gaps_resize(1) end,
+    {description = "increment useless gaps", group = "tag"}),
+    awful.key({ modkey, "Control" }, "j", function () useless_gaps_resize(-1) end,
+              {description = "decrement useless gaps", group = "tag"}),
+awful.key({modkey, "Shift"}, "s", function()
     awful.util.spawn_with_shell("import png:- | xclip -selection clipboard -t image/png", false)
 end), awful.key({}, 'XF86AudioRaiseVolume', volume_widget.raise, {
     description = 'volume up',

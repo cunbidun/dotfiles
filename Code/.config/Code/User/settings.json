@@ -79,5 +79,9 @@
   },
   "workbench.colorTheme": "Nord",
   "files.autoSaveDelay": 500,
-  "glassit.alpha": 255
+  "glassit.alpha": 250,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "gitlens.views.repositories.enabled": true
 }

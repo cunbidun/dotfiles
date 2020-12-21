@@ -6,7 +6,6 @@ call plug#begin('~/.nvim/bundle')
 Plug 'w0rp/ale'
 
 " " Autocompletion & snippets Plug 'prabirshrestha/vim-lsp' " vim-lsp
-" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'} " LanguageClient-neovim
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -22,7 +21,10 @@ Plug 'tpope/vim-commentary'
 
 Plug 'Raimondi/delimitMate'
 
+" vimwiki
+Plug 'vimwiki/vimwiki'
 
+Plug 'mattn/calendar-vim'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
@@ -32,7 +34,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
 
 " Latex
 Plug 'lervag/vimtex'
@@ -63,10 +64,7 @@ let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_powerline_fonts = 1
 
 " Theme
 colorscheme nord 
