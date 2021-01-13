@@ -13,9 +13,13 @@ set mouse=n
 " Encodeing
 set encoding=UTF-8
 
+syntax enable
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM UI
 """""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Word wrap
+set wrap linebreak
 
 " Indentation
 set shiftwidth=2
@@ -68,13 +72,3 @@ autocmd ColorScheme * highlight SignColumn guibg=none
 
 set timeoutlen=1000 ttimeoutlen=0
 
-nmap <M-1> :NERDTreeToggle<CR>
-
-autocmd filetype cpp nnoremap <C-M-b> :w <bar> ! tmux send -t 1 './Script/run.sh "%:p:h/"' Enter <CR> <CR>
-autocmd filetype cpp nnoremap <C-M-e> :w <bar> ! tmux send -t 1 './Script/config.sh "%:p:h/"' Enter <CR> <CR>
-autocmd filetype cpp nnoremap <C-M-t> :w <bar> ! tmux send -t 1 './Script/test_dialog.sh "%:p:h/"' Enter <CR> <CR>
-autocmd filetype cpp nnoremap <C-M-a> :w <bar> ! tmux send -t 1 './Script/archive.sh "%:p:h/"' Enter <CR> <CR>
-autocmd filetype cpp nnoremap <C-M-d> :w <bar> ! tmux send -t 1 'mv "%:p:h/" ~/.local/share/Trash/files/' Enter <CR> <CR>
-autocmd filetype cpp nnoremap <C-M-n> ! tmux send -t 1 './Script/new.sh ./Task' Enter <CR> <CR>
-autocmd filetype cpp nnoremap <C-M-l> :%!astyle -n --add-braces -s2 <bar> clang-format -style="{ColumnLimit: 0, AllowShortBlocksOnASingleLine: false}" <CR>
-" CP

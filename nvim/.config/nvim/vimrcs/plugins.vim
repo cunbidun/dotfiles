@@ -1,53 +1,72 @@
-""""""""""""
-" vim-plug "
-""""""""""""
+""""""""""""""""""
+" vim-plug begin "
+""""""""""""""""""
 call plug#begin('~/.nvim/bundle')
-" Linting
-Plug 'w0rp/ale'
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Linting                                                           "
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  Plug 'w0rp/ale'
 
-" " Autocompletion & snippets Plug 'prabirshrestha/vim-lsp' " vim-lsp
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Languages                                                         "
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'tpope/vim-surround'
+  Plug 'preservim/nerdtree'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " git
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
 
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+  Plug 'tpope/vim-commentary' " quickly comment 
+  Plug 'Raimondi/delimitMate' " provides automatic closing of quotes, parenthesis, brackets, etc.
 
-Plug 'tpope/vim-surround'
+  " vimwiki
+  Plug 'vimwiki/vimwiki'
 
-Plug 'preservim/nerdtree'
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Languages
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Markdown
+  Plug 'godlygeek/tabular'
+  Plug 'plasticboy/vim-markdown'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
-Plug 'tpope/vim-fugitive'
+  " Latex
+  Plug 'lervag/vimtex'
 
-Plug 'tpope/vim-commentary'
+  " fzf
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
 
-Plug 'Raimondi/delimitMate'
+  Plug 'vim-airline/vim-airline' " status bar
+  Plug 'easymotion/vim-easymotion'
+  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'} " ranger in vim
+  Plug 'Yggdroot/indentLine' " for indentation
+  " Plug 'yuttie/comfortable-motion.vim' " smooth scrolling 
+  Plug 'psliwka/vim-smoothie'
 
-" vimwiki
-Plug 'vimwiki/vimwiki'
 
-Plug 'mattn/calendar-vim'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Languages
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-" Latex
-Plug 'lervag/vimtex'
-
-" Navigation
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-Plug 'mileszs/ack.vim'
-Plug 'vim-airline/vim-airline'
-
-" Theme
-Plug 'arcticicestudio/nord-vim'
-
-Plug 'ryanoasis/vim-devicons'
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Visualization 
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  Plug 'arcticicestudio/nord-vim' " nord theme
+  Plug 'altercation/vim-colors-solarized' " solarized theme
+  Plug 'ryanoasis/vim-devicons' " icon pack
 call plug#end()
+"""""""""""""""
+" vim-plug end"
+"""""""""""""""
+" scrolling
+" let g:comfortable_motion_friction = 200.0
+" let g:comfortable_motion_air_drag = 0.0
+
+" set vimwiki default file type to md
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" Disable auto folding for markdown
+let g:vim_markdown_folding_disabled = 1
 
 " NEEDTRee
 let NERDTreeShowHidden=1
@@ -55,57 +74,31 @@ let NERDTreeMinimalUI = 1
 
 " commentary
 autocmd FileType cpp setlocal commentstring=//\ %s
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Visualization
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " devicons
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 
-" airline symbols
-" let g:airline_powerline_fonts = 1
-
 " Theme
-colorscheme nord 
+"""""""""""""""""""
+colorscheme nord " nord theme
+"""""""""""""""""""
+" set background=light
+" colorscheme solarized
+"""""""""""""""""""
+
 if (has("termguicolors"))
   set termguicolors
 endif
-
-" Clap
-nnoremap <silent> <C-p> :Clap files <CR>
-" ack.vim --- {{{
-
-" Use ripgrep for searching ⚡️
-" Options include:
-" --vimgrep -> Needed to parse the rg response properly for ack.vim
-" --type-not sql -> Avoid huge sql file dumps as it slows down the search
-" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
-let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
-
-" Auto close the Quickfix list after pressing '<enter>' on a list item
-let g:ack_autoclose = 1
-
-" Any empty ack search will search for the work the cursor is on
-let g:ack_use_cword_for_empty_search = 1
-
-" Don't jump to first match
-cnoreabbrev Ack Ack!
-
-" Maps <leader>/ so we're ready to type the search keyword
-nnoremap <Leader>/ :Ack!<Space>
-" }}}
-
-" Navigate quickfix list with ease
-nnoremap <silent> [q :cprevious<CR>
-nnoremap <silent> ]q :cnext<CR>
-
-let g:lsp_cxx_hl_use_text_props = 1
 
 " Latex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
+
+" indentation
+let g:indentLine_color_gui = '#4C566A'
+" let g:indentLine_setConceal = 0
 
 " Coc
 " Use tab for trigger completion with characters ahead and navigate.
@@ -230,3 +223,4 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+nmap <M-1> :NERDTreeToggle<CR>

@@ -57,7 +57,8 @@
     "**/.classpath": true,
     "**/.factorypath": true,
     "**/.project": true,
-    "**/.settings": true
+    "**/.settings": true,
+    "venv": true
   },
   "python.formatting.provider": "autopep8",
   "workbench.list.smoothScrolling": true,
@@ -83,5 +84,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "gitlens.views.repositories.enabled": true
+  "gitlens.views.repositories.enabled": true,
+  "terminal.integrated.shell.linux": "/bin/zsh"
 }

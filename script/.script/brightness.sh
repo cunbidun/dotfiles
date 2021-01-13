@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 nvidia=eDP-1-1
 intel=eDP-1
 num=$1

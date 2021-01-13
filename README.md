@@ -28,24 +28,33 @@
 3. cd yay
 4. makepkg -si
 
-## Install networkmanager: yay -S network-manager-applet
+## Install networkmanager: 
+yay -S network-manager-applet
 
 ## Theme:
-### install adobe-source-code-pro-fonts: yay -S adobe-source-code-pro-fonts
-### install ibus ibus-bamboo: yay -S ibus ibus-bamboo
-1. ibus-setup to install ibus-bamboo
-### install picom: yay -S picom
+### install adobe-source-code-pro-fonts: 
+yay -S adobe-source-code-pro-fonts
+
+### install ibus ibus-bamboo: 
+1. yay -S ibus ibus-bamboo
+2. ibus-setup to setup ibus-bamboo
+
+### install picom: 
+yay -S picom
 
 ### install lxappearance:
 
 1. yay -S lxappearance
 2. setup in the GUI
 
-### install acpi: yay -S acpi
+### install acpi: 
+yay -S acpi
 
-### install apulse: yay -S apulse
+### install apulse: 
+yay -S apulse
 
-### install alsa-utils: yay -S alsa-utils
+### install alsa-utils: 
+yay -S alsa-utils
 
 ### install Arc icon:
 
@@ -55,14 +64,14 @@
 
 ## Install tools
 
-### install chromium: yay -S chromium
+### install chromium: 
+yay -S chromium
 
 ### install VimPlug
-
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-
-### install nodejs: pacman -S nodejs npm
+### install nodejs: 
+pacman -S nodejs npm
 
 # Install nvidia
 1. yay -S nvidia

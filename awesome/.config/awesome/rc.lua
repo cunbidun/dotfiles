@@ -124,7 +124,10 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%a %b %d, %H:%M:%S", 1)
+mytextclock = wibox.widget.textclock("<span color='#BF616A'> </span>%a %b %d, %H:%M:%S", 1)
+
+
+separator = wibox.widget.textbox(' │ ')
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(awful.button({}, 1, function(t)
@@ -183,7 +186,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"1:termial", "2:dev", "3:browser", "4", "5", "6", "7", "8:video_call", "9:slack"}, s, awful.layout.layouts[1])
+    awful.tag({"1:termial", "2:dev", "3:browser", "4", "5", "6", "7:game", "8:video_call", "9:slack"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -228,23 +231,31 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
-            wibox.widget.textbox(' | '),
+
+            separator, ------------------------------------------
+
             weather_widget({
                 api_key = '3dff20a5d0fa80417a4344483ac59cdc',
                 coordinates = {21.028511, 105.804817}, -- Hanoi, Vietnam
                 show_hourly_forecast = true,
                 show_daily_forecast = true
             }),
-            wibox.widget.textbox(' | '),
+
+            separator, ------------------------------------------
+
             cpu_widget({
                 width = 70,
                 step_width = 5,
                 step_spacing = 2,
                 color = '#88c0d0'
             }),
-            wibox.widget.textbox(' |'),
+
+            separator, ------------------------------------------
+
             net_speed_widget({}),
-            wibox.widget.textbox('| '),
+
+            separator, ------------------------------------------
+
             volume_widget({
                 show_current_level = true,
                 display_notification = true,
@@ -252,13 +263,17 @@ awful.screen.connect_for_each_screen(function(s)
                 show_daily_forecast = true
             }),
             volumecfg.widget,
-            wibox.widget.textbox(' | '),
+
+            separator, ------------------------------------------
+
             battery_widget({
                 show_current_level = true
             }),
-            wibox.widget.textbox(' | '),
+
+            separator, ------------------------------------------
+
             mytextclock,
-            wibox.widget.textbox('  ')
+            wibox.widget.textbox('  ') -- padding
         }
     }
 end)
@@ -280,7 +295,11 @@ awful.key(
               {description = "decrement useless gaps", group = "tag"}),
 awful.key({modkey, "Shift"}, "s", function()
     awful.util.spawn_with_shell("import png:- | xclip -selection clipboard -t image/png", false)
-end), awful.key({}, 'XF86AudioRaiseVolume', volume_widget.raise, {
+end),
+awful.key({modkey, }, "space", function()
+    awful.util.spawn_with_shell("~/.script/changelanguage.sh", false)
+end),
+awful.key({}, 'XF86AudioRaiseVolume', volume_widget.raise, {
     description = 'volume up',
     group = 'hotkeys'
 }), awful.key({}, 'XF86AudioLowerVolume', volume_widget.lower, {
@@ -608,6 +627,7 @@ awful.rules.rules = {{
         titlebars_enabled = false
     }
 }}
+
 -- }}}
 
 -- {{{ Signals
@@ -622,7 +642,7 @@ end)
 client.connect_signal("manage", function(c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
+    if not awesome.startup then awful.client.setslave(c) end
 
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
@@ -690,3 +710,4 @@ end)
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("ibus-daemon -drx")
+-- awful.spawn.with_shell("xrandr --output eDP-1-1 --primary --auto")
