@@ -50,11 +50,13 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export LANG=en_US.UTF-8
 
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
   export EDITOR='nvim'
+  export VISUAL='nvim'
 fi
 
 alias zshconfig="nvim ~/.zshrc"
@@ -66,6 +68,13 @@ alias r="ranger"
 # Cinnamon
 alias MMS="~/Work/Cinnamon/model-management-service/"
 alias RAP="~/Work/Cinnamon/rossa-saas-server/"
+
+# Umass
+alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"
+alias 445="~/Documents/Umass/Spring2021/COMPSCI\ 445"
+alias 446="~/Documents/Umass/Spring2021/COMPSCI\ 446"
+alias 466="~/Documents/Umass/Spring2021/COMPSCI\ 466"
+alias 497="~/Documents/Umass/Spring2021/COMPSCI\ 497S"
 
 unsetopt PROMPT_SP
 

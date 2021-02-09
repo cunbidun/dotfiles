@@ -37,18 +37,10 @@
     }
   },
   {
-    "key": "ctrl+alt+e",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": {
-      "text": "${workspaceFolder}/../Script/config.sh \"${fileDirname}\"/ \u000D"
-    },
-    "when": "resourceExtname == .cpp"
-  },
-  {
     "key": "ctrl+alt+t",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${workspaceFolder}/../Script/test_dialog.sh \"${fileDirname}\"/ \u000D"
+      "text": "${workspaceFolder}/../Script/config.sh \"${fileDirname}\"/ \u000D"
     },
     "when": "resourceExtname == .cpp"
   },

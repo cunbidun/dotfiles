@@ -45,6 +45,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'Yggdroot/indentLine' " for indentation
   " Plug 'yuttie/comfortable-motion.vim' " smooth scrolling 
   Plug 'psliwka/vim-smoothie'
+  Plug 'Asheq/close-buffers.vim'
 
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,7 +70,7 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 let g:vim_markdown_folding_disabled = 1
 
 " NEEDTRee
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 
 " commentary
@@ -224,3 +225,4 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 nmap <M-1> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=45

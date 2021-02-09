@@ -137,7 +137,7 @@ local function worker(args)
     local show_daily_forecast = args.show_daily_forecast
     local icon_pack_name = args.icons or 'weather-underground-icons'
     local icons_extension = args.icons_extension or '.png'
-    local timeout = args.timeout or 120
+    local timeout = args.timeout or 300
 
     local owm_one_cal_api =
         ('https://api.openweathermap.org/data/2.5/onecall' ..

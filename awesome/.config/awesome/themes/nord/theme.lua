@@ -43,7 +43,7 @@ theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(2)
 theme.border_normal = theme.nord5
 theme.border_marked = theme.nord11
-theme.border_focus  = theme.nord13
+theme.border_focus  = theme.nord8
 
 theme.tasklist_bg_focus         = theme.nord0
 theme.tasklist_icon_size        = dpi(5)

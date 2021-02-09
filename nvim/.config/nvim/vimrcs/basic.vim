@@ -14,6 +14,12 @@ set mouse=n
 set encoding=UTF-8
 
 syntax enable
+
+" auto makeview 
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
+set foldmethod=manual
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM UI
 """""""""""""""""""""""""""""""""""""""""""""""""""""
