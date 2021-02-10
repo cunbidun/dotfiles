@@ -31,30 +31,30 @@ require("awful.hotkeys_popup.keys")
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-    naughty.notify({
-        preset = naughty.config.presets.critical,
-        title = "Oops, there were errors during startup!",
-        text = awesome.startup_errors
-    })
+	naughty.notify({
+		preset = naughty.config.presets.critical,
+		title = "Oops, there were errors during startup!",
+		text = awesome.startup_errors
+	})
 end
 
 -- Handle runtime errors after startup
 do
-    local in_error = false
-    awesome.connect_signal("debug::error", function(err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then
-            return
-        end
-        in_error = true
+	local in_error = false
+	awesome.connect_signal("debug::error", function(err)
+		-- Make sure we don't go into an endless error loop
+		if in_error then
+			return
+		end
+		in_error = true
 
-        naughty.notify({
-            preset = naughty.config.presets.critical,
-            title = "Oops, an error happened!",
-            text = tostring(err)
-        })
-        in_error = false
-    end)
+		naughty.notify({
+				preset = naughty.config.presets.critical,
+				title = "Oops, an error happened!",
+				text = tostring(err)
+		})
+		in_error = false
+	end)
 end
 -- }}}
 
@@ -213,7 +213,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({
         position = "top",
         screen = s,
-        visible = false
+        -- visible = false
     })
 
     -- Add widgets to the wibox
@@ -596,8 +596,9 @@ awful.rules.rules = {{
         keys = clientkeys,
         buttons = clientbuttons,
         screen = awful.screen.preferred,
-        placement = awful.placement.no_overlap + awful.placement.no_offscreen
-    }
+        placement = awful.placement.no_overlap +
+                awful.placement.no_offscreen
+       }
 }, {
     rule_any = {
         instance = {"DTA", -- Firefox addon DownThemAll.
@@ -710,4 +711,3 @@ end)
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("ibus-daemon -drx")
--- awful.spawn.with_shell("xrandr --output eDP-1-1 --primary --auto")

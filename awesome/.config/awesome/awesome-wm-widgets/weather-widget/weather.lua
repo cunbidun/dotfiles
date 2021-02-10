@@ -36,9 +36,9 @@ local tooltip = awful.tooltip {
 local weather_popup = awful.popup {
     ontop = true,
     visible = false,
-    shape = gears.shape.rounded_rect,
-    border_width = 1,
-    border_color = beautiful.bg_focus,
+    shape = gears.shape.rectangle,
+    border_width = 2,
+    border_color = "#88c0d0", -- TODO: change this no a variable
     maximum_width = 400,
     offset = {y = 5},
     widget = {}
@@ -325,6 +325,7 @@ local function worker(args)
             self.min_value = new_min_value
         end
     }
+
     local hourly_forecast_negative_graph = wibox.widget {
         step_width = 12,
         color = '#5E81AC',
@@ -534,6 +535,8 @@ local function worker(args)
                 weather_popup:move_next_to(mouse.current_widget_geometry)
             end
         end)))
+        
+    weather_widget:connect_signal("mouse::leave", function() weather_popup.visible = false end)
 
     watch(
         string.format(GET_FORECAST_CMD, owm_one_cal_api),

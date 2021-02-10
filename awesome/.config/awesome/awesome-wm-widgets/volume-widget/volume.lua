@@ -42,7 +42,7 @@ local function parse_output(stdout)
     local level = string.match(stdout, "(%d?%d?%d)%%")
     if stdout:find("%[off%]") then
         volume_icon_name="audio-volume-muted-symbolic_red"
-        return level.."% <span color=\"red\"><b>Mute</b></span>"
+        return level.."% <span color=\"#BF616A\"><b>Mute</b></span>"
     end
     level = tonumber(string.format("% 3d", level))
 
@@ -147,16 +147,16 @@ local function worker(args)
     - clicking on the widget to mute/unmute
     - scrolling when cursor is over the widget
     ]]
-    volume.widget:connect_signal("button::press", function(_,_,_,button)
-        if (button == 4)     then volume.raise()
-        elseif (button == 5) then volume.lower()
-        elseif (button == 1) then volume.toggle()
-        end
-    end)
-    if volume.display_notification then
-        volume.widget:connect_signal("mouse::enter", function() show() end)
-        volume.widget:connect_signal("mouse::leave", function() naughty.destroy(volume.notification) end)
-    end
+    -- volume.widget:connect_signal("button::press", function(_,_,_,button)
+    --     if (button == 4)     then volume.raise()
+    --     elseif (button == 5) then volume.lower()
+    --     elseif (button == 1) then volume.toggle()
+    --     end
+    -- end)
+    -- if volume.display_notification then
+    --     volume.widget:connect_signal("mouse::enter", function() show() end)
+    --     volume.widget:connect_signal("mouse::leave", function() naughty.destroy(volume.notification) end)
+    -- end
 --}}}
 
 --{{{ Set initial icon

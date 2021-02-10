@@ -74,7 +74,7 @@ function vcontrol:init(args)
     self.channel = args.channel or "Master"
     self.step = args.step or '5%'
 
-    self.timer = timer({ timeout = args.timeout or 0.5 })
+    self.timer = timer({ timeout = args.timeout or 0.1 })
     self.timer:connect_signal("timeout", function() self:get() end)
     self.timer:start()
 
