@@ -11,7 +11,7 @@
     "args": {
       "text": "astyle -n --add-braces -s2 \"${file}\" && clang-format -i -style=\"{ColumnLimit: 100, AllowShortBlocksOnASingleLine: false}\" \"${file}\" \u000D"
     },
-    "when": "resourceExtname == .cpp"
+    "when": "resourceExtname == .cpp || resourceExtname == .h"
   },
   {
     "key": "ctrl+alt+b",

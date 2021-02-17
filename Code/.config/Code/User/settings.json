@@ -8,7 +8,6 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "breadcrumbs.enabled": true,
   "editor.renderWhitespace": "none",
-  "files.autoSave": "afterDelay",
   "explorer.confirmDelete": false,
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "latex-workshop.view.pdf.viewer": "tab",
@@ -85,5 +84,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "gitlens.views.repositories.enabled": true,
-  "terminal.integrated.shell.linux": "/bin/zsh"
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  "files.autoSave": "afterDelay"
 }

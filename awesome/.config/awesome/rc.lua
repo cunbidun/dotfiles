@@ -6,7 +6,6 @@ local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
-local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local volume_control = require("volume-control")
 
 volumecfg = volume_control({})
@@ -186,7 +185,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"1:termial", "2:dev", "3:browser", "4:notion", "5", "6", "7:game", "8:video_call", "9:slack"}, s, awful.layout.layouts[1])
+    awful.tag({"1:term", "2:dev", "3:web", "4:notion", "5:reading", "6", "7:gaming", "8:video_call", "9:slack"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -220,8 +219,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox:setup{
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
-
-            wibox.widget.textbox('  '),
+            wibox.widget.textbox('  '), -- pading
             layout = wibox.layout.fixed.horizontal,
             -- mylauncher,
             s.mytaglist,
@@ -231,31 +229,21 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
-
             separator, ------------------------------------------
-
             weather_widget({
                 api_key = '3dff20a5d0fa80417a4344483ac59cdc',
                 coordinates = {21.028511, 105.804817}, -- Hanoi, Vietnam
                 show_hourly_forecast = true,
                 show_daily_forecast = true
             }),
-
             separator, ------------------------------------------
-
             cpu_widget({
                 width = 70,
                 step_width = 5,
                 step_spacing = 2,
                 color = '#88c0d0'
             }),
-
             separator, ------------------------------------------
-
-            net_speed_widget({}),
-
-            separator, ------------------------------------------
-
             volume_widget({
                 show_current_level = true,
                 display_notification = true,
@@ -263,15 +251,11 @@ awful.screen.connect_for_each_screen(function(s)
                 show_daily_forecast = true
             }),
             volumecfg.widget,
-
             separator, ------------------------------------------
-
             battery_widget({
                 show_current_level = true
             }),
-
             separator, ------------------------------------------
-
             mytextclock,
             wibox.widget.textbox('  ') -- padding
         }
@@ -288,7 +272,11 @@ end), awful.button({}, 4, awful.tag.viewnext), awful.button({}, 5, awful.tag.vie
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
+awful.key({ modkey, "Mod1"    }, "j",     function () awful.client.incwfact( 0.05)    end),
+awful.key({ modkey, "Mod1"    }, "k",     function () awful.client.incwfact(-0.05)    end),
+
 awful.key(
+
   { modkey, "Control" }, "k", function () useless_gaps_resize(1) end,
     {description = "increment useless gaps", group = "tag"}),
     awful.key({ modkey, "Control" }, "j", function () useless_gaps_resize(-1) end,
