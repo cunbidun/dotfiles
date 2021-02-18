@@ -61,7 +61,7 @@ colors:
 font:
   size: 7.5 
   normal:
-    family: Source Code Pro for Powerline 
+    family: Source Code Pro
 
 window:
     padding:
