@@ -6,6 +6,7 @@ local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
+local temperature_widget = require("awesome-wm-widgets.temperature-widget.temperature")
 local volume_control = require("volume-control")
 
 volumecfg = volume_control({})
@@ -272,15 +273,10 @@ end), awful.button({}, 4, awful.tag.viewnext), awful.button({}, 5, awful.tag.vie
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
-awful.key({ modkey, "Mod1"    }, "j",     function () awful.client.incwfact( 0.05)    end),
-awful.key({ modkey, "Mod1"    }, "k",     function () awful.client.incwfact(-0.05)    end),
-
-awful.key(
-
-  { modkey, "Control" }, "k", function () useless_gaps_resize(1) end,
-    {description = "increment useless gaps", group = "tag"}),
-    awful.key({ modkey, "Control" }, "j", function () useless_gaps_resize(-1) end,
-              {description = "decrement useless gaps", group = "tag"}),
+awful.key({ modkey, "Mod1"    }, "j", function () awful.client.incwfact( 0.05) end),
+awful.key({ modkey, "Mod1"    }, "k", function () awful.client.incwfact(-0.05) end),
+-- awful.key({ modkey, "Control" }, "k", function () useless_gaps_resize(1)  end, {description = "increment useless gaps", group = "tag"}),
+-- awful.key({ modkey, "Control" }, "j", function () useless_gaps_resize(-1) end, {description = "decrement useless gaps", group = "tag"}),
 awful.key({modkey, "Shift"}, "s", function()
     awful.util.spawn_with_shell("import png:- | xclip -selection clipboard -t image/png", false)
 end),
@@ -290,16 +286,20 @@ end),
 awful.key({}, 'XF86AudioRaiseVolume', volume_widget.raise, {
     description = 'volume up',
     group = 'hotkeys'
-}), awful.key({}, 'XF86AudioLowerVolume', volume_widget.lower, {
+}),
+awful.key({}, 'XF86AudioLowerVolume', volume_widget.lower, {
     description = 'volume down',
     group = 'hotkeys'
-}), awful.key({}, 'XF86AudioMute', volume_widget.toggle, {
+}),
+awful.key({}, 'XF86AudioMute', volume_widget.toggle, {
     description = 'toggle mute',
     group = 'hotkeys'
-}), awful.key({modkey}, "\\", naughty.destroy_all_notifications, {
+}),
+awful.key({modkey}, "\\", naughty.destroy_all_notifications, {
     description = "clear notifications",
     group = "awesome"
-}), awful.key({modkey}, "b", function()
+}),
+awful.key({modkey}, "b", function()
     for s in screen do
         s.mywibox.visible = not s.mywibox.visible
         if s.mybottomwibox then

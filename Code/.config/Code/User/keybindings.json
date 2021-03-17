@@ -3,16 +3,16 @@
   {
     "key": "ctrl+alt+l",
     "command": "editor.action.formatDocument",
-    "when": "resourceExtname != .cpp"
+    // "when": "resourceExtname != .cpp"
   },
-  {
-    "key": "ctrl+alt+l",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": {
-      "text": "astyle -n --add-braces -s2 \"${file}\" && clang-format -i -style=\"{ColumnLimit: 100, AllowShortBlocksOnASingleLine: false}\" \"${file}\" \u000D"
-    },
-    "when": "resourceExtname == .cpp || resourceExtname == .h"
-  },
+  // {
+  //   "key": "ctrl+alt+l",
+  //   "command": "workbench.action.terminal.sendSequence",
+  //   "args": {
+  //     "text": "bash -c 'astyle -n --add-braces -s2 \"${file}\" && clang-format -i -style=\"{ColumnLimit: 100, AllowShortBlocksOnASingleLine: false}\" \"${file}\"' \u000D"
+  //   },
+  //   "when": "resourceExtname == .cpp || resourceExtname == .h"
+  // },
   {
     "key": "ctrl+alt+b",
     "command": "workbench.action.terminal.sendSequence",

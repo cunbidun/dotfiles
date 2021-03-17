@@ -85,5 +85,17 @@
   },
   "gitlens.views.repositories.enabled": true,
   "terminal.integrated.shell.linux": "/bin/zsh",
-  "files.autoSave": "afterDelay"
+  "cSpell.userWords": [
+    "compsci",
+    "subreddit",
+    "upvotes"
+  ],
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, AllowShortIfStatementsOnASingleLine: false}",
+  "settingsSync.ignoredSettings": [
+    "-C_Cpp.clang_format_style"
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
