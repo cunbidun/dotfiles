@@ -26,49 +26,9 @@ local function worker(args)
             focus_date_fg = '#000000',
             weekend_day_bg = '#3B4252',
             weekday_fg = '#88C0D0',
-            header_fg = '#E5E9F0',
+            header_fg = '#EBCB8B',
             border = '#4C566A'
         },
-        outrun = {
-            bg = '#0d0221',
-            fg = '#D8DEE9',
-            focus_date_bg = '#650d89',
-            focus_date_fg = '#2de6e2',
-            weekend_day_bg = '#261447',
-            weekday_fg = '#2de6e2',
-            header_fg = '#f6019d',
-            border = '#261447'
-        },
-        dark = {
-            bg = '#000000',
-            fg = '#ffffff',
-            focus_date_bg = '#ffffff',
-            focus_date_fg = '#000000',
-            weekend_day_bg = '#444444',
-            weekday_fg = '#ffffff',
-            header_fg = '#ffffff',
-            border = '#333333'
-        },
-        light = {
-            bg = '#ffffff',
-            fg = '#000000',
-            focus_date_bg = '#000000',
-            focus_date_fg = '#ffffff',
-            weekend_day_bg = '#AAAAAA',
-            weekday_fg = '#000000',
-            header_fg = '#000000',
-            border = '#CCCCCC'
-        },
-        monokai = {
-            bg = '#272822',
-            fg = '#F8F8F2',
-            focus_date_bg = '#AE81FF',
-            focus_date_fg = '#ffffff',
-            weekend_day_bg = '#75715E',
-            weekday_fg = '#FD971F',
-            header_fg = '#F92672',
-            border = '#75715E'
-        }
     }
 
     local args = args or {}
@@ -175,10 +135,10 @@ local function worker(args)
     local popup = awful.popup {
         ontop = true,
         visible = false,
-        shape = gears.shape.rounded_rect,
+        shape = gears.shape.rectangle,
+        border_width = 2,
+        border_color = "#88c0d0", 
         offset = { y = 5 },
-        border_width = 1,
-        border_color = calendar_themes[theme].border,
         widget = cal
     }
 
@@ -202,7 +162,6 @@ local function worker(args)
     )
 
     function calendar_widget.toggle()
-
         if popup.visible then
             -- to faster render the calendar refresh it and just hide
             cal:set_date(nil) -- the new date is not set without removing the old one
@@ -211,19 +170,14 @@ local function worker(args)
             popup:set_widget(cal)
             popup.visible = not popup.visible
         else
-            if placement == 'top' then
-                awful.placement.top(popup, { margins = { top = 30 }, parent = awful.screen.focused() })
-            elseif placement == 'top_right' then
-                awful.placement.top_right(popup, { margins = { top = 30, right = 10}, parent = awful.screen.focused() })
-            elseif placement == 'bottom_right' then
-                awful.placement.bottom_right(popup, { margins = { bottom = 30, right = 10}, parent = awful.screen.focused() })
-            else
-                awful.placement.top(popup, { margins = { top = 30 }, parent = awful.screen.focused() })
-            end
-
+            awful.placement.top_right(popup, { margins = { top = 30, right = 10}, parent = awful.screen.focused() })
             popup.visible = true
 
         end
+    end
+
+    function calendar_widget.close()
+        popup.visible = false 
     end
 
     return calendar_widget
