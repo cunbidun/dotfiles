@@ -4,13 +4,7 @@ pcall(require, "luarocks.loader")
 
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 local temperature_widget = require("awesome-wm-widgets.temperature-widget.temperature")
-local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-local volume_control = require("volume-control")
-
-volumecfg = volume_control({})
 
 -- Standard awesome library
 local gears = require("gears")
@@ -96,18 +90,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("<span color='#BF616A'> </span>%a %b %d, %H:%M:%S", 1)
-local cw = calendar_widget({})
-
-mytextclock:connect_signal("button::press",
- 	function(_, _, _, button)
-  	if button == 1 then cw.toggle() end
-  end)
-
-mytextclock:connect_signal("mouse::leave", 
-    function()
-        cw.close()
-    end)
+mytextclock = wibox.widget.textclock("<span color='#81A1C1'>%a %b %d, %H:%M:%S</span>", 1)
 
 separator = wibox.widget.textbox(' │ ')
 
@@ -168,7 +151,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"1:term", "2:dev", "3:web", "4:notion", "5:reading", "6:music", "7:gaming", "8:call", "9:slack"}, s, awful.layout.layouts[1])
+    awful.tag({"1:term", "2:dev", "3:web", "4:note", "5:reading", "6:music", "7:gaming", "8:meeting", "9:workspace"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -198,26 +181,23 @@ awful.screen.connect_for_each_screen(function(s)
                   id = 'text_role',
                   widget = wibox.widget.textbox
                 },
-                top = 1,
-                bottom = 3,
+                top = 2,
+                bottom = 2,
                 widget = wibox.container.margin
               },
               {
                 {
-                  left = 10,
-                  right = 10,
                   top = 2,
                   widget = wibox.container.margin
                 },
                 id = 'overline',
-                bg = beautiful.bg_normal,
+                bg = beautiful.wibar_bg,
                 shape = gears.shape.rectangle,
                 widget = wibox.container.background
               }
             },
-            left = 4,
             right = 4,
-            top = 2,
+            top = 1,
             widget = wibox.container.margin
           },
           id = 'background_role',
@@ -234,7 +214,7 @@ awful.screen.connect_for_each_screen(function(s)
             if focused then
               self:get_children_by_id("overline")[1].bg = beautiful.accent 
             else
-              self:get_children_by_id("overline")[1].bg = beautiful.bg_normal
+              self:get_children_by_id("overline")[1].bg = beautiful.wibar_bg
             end
           end,
           update_callback = function(self, c3, index, objects)
@@ -248,7 +228,7 @@ awful.screen.connect_for_each_screen(function(s)
             if focused then
               self:get_children_by_id("overline")[1].bg = beautiful.accent
             else
-              self:get_children_by_id("overline")[1].bg = beautiful.bg_normal
+              self:get_children_by_id("overline")[1].bg = beautiful.wibar_bg
             end
           end
         },
@@ -275,33 +255,12 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
             separator, ------------------------------------------
-            weather_widget({
-                api_key = '3dff20a5d0fa80417a4344483ac59cdc',
-                coordinates = {21.028511, 105.804817}, -- Hanoi, Vietnam
-                show_hourly_forecast = true,
-                show_daily_forecast = true
-            }),
+            temperature_widget(),
             separator, ------------------------------------------
-            cpu_widget({
-                width = 70,
-                step_width = 5,
-                step_spacing = 2,
-                color = '#88c0d0'
-            }),
+            volume_widget(),
+            -- volumecfg.widget,
             separator, ------------------------------------------
-            -- temperature_widget,
-            -- separator, ------------------------------------------
-            volume_widget({
-                show_current_level = true,
-                display_notification = true,
-                show_hourly_forecast = true,
-                show_daily_forecast = true
-            }),
-            volumecfg.widget,
-            separator, ------------------------------------------
-            battery_widget({
-                show_current_level = true
-            }),
+            battery_widget(),
             separator, ------------------------------------------
             mytextclock,
             wibox.widget.textbox('  ') -- padding

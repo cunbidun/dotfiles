@@ -26,12 +26,13 @@ theme.nord15 = "#B48EAD"
 theme.font          = "Source Code Pro 10"
 theme.transparent   = "#00000000"
 
-theme.bg_normal     = theme.nord1
-theme.wibar_bg      = theme.bg_normal
+theme.bg_normal     = theme.nord0
+
+theme.wibar_bg      = theme.nord1
 theme.bg_focus      = theme.bg_normal
 theme.bg_urgent     = theme.bg_normal
 theme.bg_minimize   = theme.bg_normal
-theme.bg_systray    = theme.bg_normal
+theme.bg_systray    = theme.wibar_bg
 
 theme.fg_normal     = theme.nord4
 theme.fg_focus      = theme.fg_normal
@@ -59,13 +60,13 @@ theme.background  = theme.nord0
 
 theme.icon_theme = nil
 
-theme.taglist_bg_focus    = theme.bg_normal
+theme.taglist_bg_focus    = theme.nord1
 theme.taglist_fg_focus    = theme.nord13
-theme.taglist_bg_occupied = theme.bg_normal
+theme.taglist_bg_occupied = theme.nord1
 theme.taglist_fg_occupied = theme.nord14
-theme.taglist_bg_empty    = theme.bg_normal
+theme.taglist_bg_empty    = theme.nord1
 theme.taglist_fg_empty    = theme.nord9
-theme.taglist_bg_urgent   = theme.bg_normal
+theme.taglist_bg_urgent   = theme.nord1
 theme.taglist_fg_urgent   = theme.nord11
 
 -- hotkey
