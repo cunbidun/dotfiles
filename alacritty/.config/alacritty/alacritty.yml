@@ -69,6 +69,6 @@ window:
         y: 5
     dynamic_padding: true
     decorations: none
-# background_opacity: 0.98
+# background_opacity: 0.95
 live_config_reload: true 
 

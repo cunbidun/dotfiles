@@ -87,5 +87,17 @@ theme.taglist_fg_empty    = theme.nord9
 theme.taglist_bg_urgent   = theme.bg_normal
 theme.taglist_fg_urgent   = theme.nord11
 
+-- hotkey
+theme.hotkeys_border_color = theme.nord8
+theme.hotkeys_modifiers_fg = theme.nord3
+
+
+-- notification theme
+theme.notification_width = 250
+theme.notification_icon_size = 50
+theme.notification_margin = 20 
+-- theme.notification_border_width = 
+theme.notification_border_color = theme.nord8 
+
 return theme
 

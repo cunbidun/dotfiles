@@ -70,26 +70,10 @@ function useless_gaps_resize(thatmuch, s, t)
 	awful.layout.arrange(scr)
 end
 
-
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
-
--- separator
-beautiful.separator_color = "#D08770"
-beautiful.orientation = "vertical"
-
--- notification theme
-beautiful.notification_icon_size = 50
-beautiful.notification_margin = 10
-beautiful.notification_border_width = 20 
-beautiful.notification_border_color = "#88c0d0"
-
-
--- hotkey
-beautiful.hotkeys_border_color = "#88c0d0"
-beautiful.hotkeys_modifiers_fg = "#ECEFF4"
 
 -- Default modkey.
 modkey = "Mod4"
