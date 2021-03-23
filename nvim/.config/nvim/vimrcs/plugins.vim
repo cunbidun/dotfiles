@@ -54,6 +54,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'arcticicestudio/nord-vim' " nord theme
   Plug 'altercation/vim-colors-solarized' " solarized theme
   Plug 'ryanoasis/vim-devicons' " icon pack
+  Plug 'ap/vim-css-color'
 call plug#end()
 """""""""""""""
 " vim-plug end"

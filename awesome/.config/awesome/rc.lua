@@ -168,7 +168,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"1:term", "2:dev", "3:web", "4:notion", "5:reading", "6", "7:gaming", "8:video_call", "9:slack"}, s, awful.layout.layouts[1])
+    awful.tag({"1:term", "2:dev", "3:web", "4:notion", "5:reading", "6:music", "7:gaming", "8:call", "9:slack"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -188,7 +188,70 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen = s,
         filter = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+        widget_template = {
+          {
+            {
+              layout = wibox.layout.fixed.vertical,
+              {
+                {
+                  id = 'text_role',
+                  widget = wibox.widget.textbox
+                },
+                top = 1,
+                bottom = 3,
+                widget = wibox.container.margin
+              },
+              {
+                {
+                  left = 10,
+                  right = 10,
+                  top = 2,
+                  widget = wibox.container.margin
+                },
+                id = 'overline',
+                bg = beautiful.bg_normal,
+                shape = gears.shape.rectangle,
+                widget = wibox.container.background
+              }
+            },
+            left = 4,
+            right = 4,
+            top = 2,
+            widget = wibox.container.margin
+          },
+          id = 'background_role',
+          widget = wibox.container.background,
+          shape = gears.shape.rectangle,
+          create_callback = function(self, c3, index, objects)
+            local focused = false
+            for _, x in pairs(awful.screen.focused().selected_tags) do
+              if x.index == index then
+                focused = true
+                break
+              end
+            end
+            if focused then
+              self:get_children_by_id("overline")[1].bg = beautiful.accent 
+            else
+              self:get_children_by_id("overline")[1].bg = beautiful.bg_normal
+            end
+          end,
+          update_callback = function(self, c3, index, objects)
+            local focused = false
+            for _, x in pairs(awful.screen.focused().selected_tags) do
+              if x.index == index then
+                focused = true
+                break
+              end
+            end
+            if focused then
+              self:get_children_by_id("overline")[1].bg = beautiful.accent
+            else
+              self:get_children_by_id("overline")[1].bg = beautiful.bg_normal
+            end
+          end
+        },
     }
 
     -- Create the wibox

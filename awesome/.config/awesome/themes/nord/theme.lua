@@ -1,8 +1,6 @@
-local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local gfs = require("gears.filesystem")
 local theme_path = "~/.config/awesome/themes/nord/"
 
 local theme = {}
@@ -28,7 +26,8 @@ theme.nord15 = "#B48EAD"
 theme.font          = "Source Code Pro 10"
 theme.transparent   = "#00000000"
 
-theme.bg_normal     = theme.nord0
+theme.bg_normal     = theme.nord1
+theme.wibar_bg      = theme.bg_normal
 theme.bg_focus      = theme.bg_normal
 theme.bg_urgent     = theme.bg_normal
 theme.bg_minimize   = theme.bg_normal
@@ -44,6 +43,7 @@ theme.border_width  = dpi(2)
 theme.border_normal = theme.nord5
 theme.border_marked = theme.nord11
 theme.border_focus  = theme.nord8
+theme.accent        = theme.nord8
 
 theme.tasklist_bg_focus         = theme.nord0
 theme.tasklist_icon_size        = dpi(5)
@@ -51,32 +51,13 @@ theme.tasklist_plain_task_name  = true
 
 theme.taglist_spacing = dpi(5)
 
--- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
-
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 
 theme.wallpaper   = theme_path.."wallpaper2.png"
 theme.background  = theme.nord0
 
--- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
-)
-
 theme.icon_theme = nil
-
-theme.taglist_text_empty    = {"", "", "", "", "", "", "", "", ""}
-theme.taglist_text_occupied = {"", "", "", "", "", "", "", "", ""}
-theme.taglist_text_focused  = {"", "", "", "", "", "", "", "", ""}
-theme.taglist_text_urgent   = {"", "", "", "", "", "", "", "", ""}
 
 theme.taglist_bg_focus    = theme.bg_normal
 theme.taglist_fg_focus    = theme.nord13
@@ -91,13 +72,12 @@ theme.taglist_fg_urgent   = theme.nord11
 theme.hotkeys_border_color = theme.nord8
 theme.hotkeys_modifiers_fg = theme.nord3
 
-
 -- notification theme
 theme.notification_width = 250
 theme.notification_icon_size = 50
-theme.notification_margin = 20 
--- theme.notification_border_width = 
-theme.notification_border_color = theme.nord8 
+theme.notification_margin = 20
+-- theme.notification_border_width =
+theme.notification_border_color = theme.nord8
 
 return theme
 
