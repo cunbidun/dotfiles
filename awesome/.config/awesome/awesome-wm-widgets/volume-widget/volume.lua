@@ -6,10 +6,7 @@ local beautiful = require('beautiful')
 
 local GET_VOLUME_CMD = 'amixer sget Master'
 
-local level_widget = {} wibox.widget {
-    font = beautiful.font,
-    widget = wibox.widget.textbox
-}
+local level_widget = {} 
 
 local volume = {device = '',  notification = nil, delta = 5}
 
