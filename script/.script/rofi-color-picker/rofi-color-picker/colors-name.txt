@@ -1,0 +1,16 @@
+<span color='#2E3440' weight='normal' fallback='true' lang='nord0'> nord0, polar night, background</span>
+<span color='#3B4252' weight='normal' fallback='true' lang='nord1'> nord1</span>
+<span color='#434C5E' weight='normal' fallback='true' lang='nord2'> nord2</span>
+<span color='#4C566A' weight='normal' fallback='true' lang='nord3'> nord3, snow storm</span>
+<span color='#D8DEE9' weight='normal' fallback='true' lang='nord4'> nord4</span>
+<span color='#E5E9F0' weight='normal' fallback='true' lang='nord5'> nord5</span>
+<span color='#ECEFF4' weight='normal' fallback='true' lang='nord6'> nord6</span>
+<span color='#8FBCBB' weight='normal' fallback='true' lang='nord7'> nord7, frozen polar water</span>
+<span color='#88C0D0' weight='normal' fallback='true' lang='nord8'> nord8, accent, clear ice</span>
+<span color='#81A1C1' weight='normal' fallback='true' lang='nord9'> nord9, arctic waters</span>
+<span color='#5E81AC' weight='normal' fallback='true' lang='nord10'> nord10, deep arctic ocean</span>
+<span color='#BF616A' weight='normal' fallback='true' lang='nord11'> nord11, red</span>
+<span color='#D08770' weight='normal' fallback='true' lang='nord12'> nord12, orange</span>
+<span color='#EBCB8B' weight='normal' fallback='true' lang='nord13'> nord13, yellow</span>
+<span color='#A3BE8C' weight='normal' fallback='true' lang='nord14'> nord14, green</span>
+<span color='#B48EAD' weight='normal' fallback='true' lang='nord15'> nord15, purple</span>

@@ -31,7 +31,7 @@ local function worker(args)
         level_widget.markup = string.format("<span color='#81A1C1'>%s</span>", stdout)
     end)
 
-    return wibox.container.margin(temperature_widget, 0, 0)
+    return temperature_widget
 end
 
 return setmetatable(temperature_widget, { __call = function(_, ...) return worker(...) end })

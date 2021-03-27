@@ -11,7 +11,7 @@ local language = {}
 function language:toggle()
     spawn.easy_async('ibus engine', function(stdout, stderr, exitreason, exitcode)
         local lang = string.gsub(stdout, "%s+", "")
-        awful.util.spawn_with_shell("~/.script/changelanguage.sh", false)
+        awful.spawn.with_shell("~/.script/changelanguage.sh", false)
         if lang == "xkb:us::eng" then
             current_language.markup = "<span color='#81A1C1'>vi</span>"
         end
@@ -37,15 +37,9 @@ local function worker(args)
         current_language,
         layout = wibox.layout.fixed.horizontal,
     }
-
     spawn.easy_async('ibus engine', function(stdout, stderr, exitreason, exitcode)
-        local lang = string.gsub(stdout, "%s+", "")
-        if lang == "xkb:us::eng" then
-            current_language.markup = "<span color='#81A1C1'>en</span>"
-        end
-        if lang == 'Bamboo' then
-            current_language.markup = "<span color='#81A1C1'>vi</span>"
-        end
+        awful.spawn.with_shell("ibus engine xkb:us:eng", false)
+        current_language.markup = "<span color='#81A1C1'>en</span>"
     end)
     return language.widget 
 end

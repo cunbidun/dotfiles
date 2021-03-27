@@ -59,7 +59,7 @@ local function worker(args)
         end
     end
     )
-    return wibox.container.margin(battery_widget, 0, 0)
+    return battery_widget 
 end
 
 return setmetatable(battery_widget, { __call = function(_, ...) return worker(...) end })

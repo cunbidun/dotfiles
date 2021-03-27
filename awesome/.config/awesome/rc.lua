@@ -299,14 +299,18 @@ globalkeys = gears.table.join(
   -- awful.key({ modkey, "Control" }, "k", function () useless_gaps_resize(1)  end, {description = "increment useless gaps", group = "tag"}),
   -- awful.key({ modkey, "Control" }, "j", function () useless_gaps_resize(-1) end, {description = "decrement useless gaps", group = "tag"}),
   awful.key({modkey, "Shift"}, "s", function()
-	  awful.util.spawn_with_shell("import png:- | xclip -selection clipboard -t image/png", false)
+	  awful.spawn.with_shell("import png:- | xclip -selection clipboard -t image/png", false)
   end, {
 	  description = 'take screen shot',
 	  group = 'hotkeys'
   }),
 
+  awful.key({modkey, "Shift"}, "n", function()
+	  awful.spawn.with_shell("~/.script/rofi-color-picker/rofi-color-picker/rofi-color-picker", false)
+  end),
+
   awful.key({"Mod1"}, "Tab", function()
-	  awful.util.spawn_with_shell("rofi -show window", false)
+	  awful.spawn.with_shell("rofi -show window", false)
   end),
 
   awful.key({modkey, }, "space", language_widget.toggle, {

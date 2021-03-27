@@ -43,8 +43,8 @@ HIST_STAMPS="mm/dd/yyyy"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# plugins=(git docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
-plugins=(git docker docker-compose zsh-autosuggestions)
+plugins=(git docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=(git docker docker-compose zsh-autosuggestions)
 # plugins=(git docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
@@ -78,6 +78,7 @@ alias 446="~/Documents/Umass/Spring2021/COMPSCI\ 446"
 alias 466="~/Documents/Umass/Spring2021/COMPSCI\ 466"
 alias 497="~/Documents/Umass/Spring2021/COMPSCI\ 497S"
 alias cpf='f() { xclip -sel clip < $1 }; f'
+
 alias ls="exa -la"
 
 unsetopt PROMPT_SP
