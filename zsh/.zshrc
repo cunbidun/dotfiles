@@ -95,3 +95,4 @@ test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 colorscript -e 19
 # source /usr/share/nvm/init-nvm.sh
 
+
