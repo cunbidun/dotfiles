@@ -164,7 +164,7 @@ awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({"1:term", "2:dev", "3:web", "4:note", "5:reading", "6:music", "7:gaming", "8:meeting", "9:workspace"}, s, awful.layout.layouts[1])
+	awful.tag({"1:term", "2:dev", "3:web", "4:tool", "5:note", "6:music", "7:gaming", "8:meeting", "9:workspace"}, s, awful.layout.layouts[1])
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -773,6 +773,6 @@ end)
 
 
 -- Auto start applications
-awful.spawn.with_shell("picom")
+awful.spawn.with_shell("picom --experimental-backends")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("ibus-daemon -drx")

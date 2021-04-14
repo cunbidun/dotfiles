@@ -40,12 +40,8 @@ DISABLE_UPDATE_PROMPT="true"
 # see 'man strftime' for details.
 HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(git docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
-# plugins=(git docker docker-compose zsh-autosuggestions)
-# plugins=(git docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -64,12 +60,7 @@ fi
 alias zshconfig="nvim ~/.zshrc"
 alias CP="~/competitive_programming/"
 alias b="~/.script/brightness.sh"
-alias svim='vim -u ~/.SpaceVim/vimrc'
 alias r="ranger"
-
-# Cinnamon
-alias MMS="~/Work/Cinnamon/model-management-service/"
-alias RAP="~/Work/Cinnamon/rossa-saas-server/"
 
 # Umass
 alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"
@@ -92,7 +83,7 @@ source /usr/share/fzf/key-bindings.zsh
 
 test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 
-colorscript -e 19
+# colorscript -e 19
 # source /usr/share/nvm/init-nvm.sh
 
 

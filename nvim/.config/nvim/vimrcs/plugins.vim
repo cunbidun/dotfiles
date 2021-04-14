@@ -41,9 +41,8 @@ call plug#begin('~/.nvim/bundle')
 
   Plug 'vim-airline/vim-airline' " status bar
   Plug 'easymotion/vim-easymotion'
-  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'} " ranger in vim
   Plug 'Yggdroot/indentLine' " for indentation
-  " Plug 'yuttie/comfortable-motion.vim' " smooth scrolling 
+
   Plug 'psliwka/vim-smoothie'
   Plug 'Asheq/close-buffers.vim'
 
@@ -84,9 +83,7 @@ let g:webdevicons_enable_nerdtree = 1
 " Theme
 """""""""""""""""""
 colorscheme nord " nord theme
-"""""""""""""""""""
-" set background=light
-" colorscheme solarized
+hi Normal ctermbg=NONE guibg=NONE
 """""""""""""""""""
 
 if (has("termguicolors"))

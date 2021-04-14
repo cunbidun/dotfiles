@@ -1,8 +1,8 @@
 <span color='#2E3440' weight='normal' fallback='true' lang='nord0'> nord0, polar night, background</span>
 <span color='#3B4252' weight='normal' fallback='true' lang='nord1'> nord1</span>
 <span color='#434C5E' weight='normal' fallback='true' lang='nord2'> nord2</span>
-<span color='#4C566A' weight='normal' fallback='true' lang='nord3'> nord3, snow storm</span>
-<span color='#D8DEE9' weight='normal' fallback='true' lang='nord4'> nord4</span>
+<span color='#4C566A' weight='normal' fallback='true' lang='nord3'> nord3</span>
+<span color='#D8DEE9' weight='normal' fallback='true' lang='nord4'> nord4, snow storm</span>
 <span color='#E5E9F0' weight='normal' fallback='true' lang='nord5'> nord5</span>
 <span color='#ECEFF4' weight='normal' fallback='true' lang='nord6'> nord6</span>
 <span color='#8FBCBB' weight='normal' fallback='true' lang='nord7'> nord7, frozen polar water</span>
