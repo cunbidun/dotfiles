@@ -19,9 +19,10 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+-- require("awful.hotkeys_popup.keys")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -78,7 +79,7 @@ awful.layout.layouts = {
   awful.layout.suit.tile,
   awful.layout.suit.floating,
   awful.layout.suit.max,
-  awful.layout.suit.magnifier,
+  awful.layout.suit.spiral.dwindle
 }
 -- }}}
 
@@ -91,7 +92,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
--- mytextclock = wibox.widget.textclock("<span color='#81A1C1'>%a %b %d, %H:%M:%S</span>", 1)
 mytextclock = wibox.widget{
 	font = beautiful.font,
 	widget = wibox.widget.textbox,
@@ -99,7 +99,7 @@ mytextclock = wibox.widget{
 }
 
 myclocktimer = timer({ timeout = 1 })
-myclocktimer:connect_signal("timeout", 
+myclocktimer:connect_signal("timeout",
 	function() 
 		mytextclock:set_markup(string.format("<span color='#81A1C1'>%s</span>", string.lower(os.date("%a %b %d, %H:%M:%S"))))
  	end)
@@ -164,22 +164,14 @@ awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({"1:term", "2:dev", "3:web", "4:tool", "5:note", "6:music", "7:gaming", "8:meeting", "9:workspace"}, s, awful.layout.layouts[1])
+	local l = awful.layout.suit
+	local layouts = {l.tile, l.tile, l.tile, l.tile, l.max, l.tile, l.tile, l.tile, l.tile}
+	awful.tag({"1:term", "2:dev", "3:web", "4:tool", "5:note", "6:music", "7:gaming", "8:meeting", "9:workspace"}, s, layouts)
 
-	-- Create a promptbox for each screen
-	s.mypromptbox = awful.widget.prompt()
 	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
 	s.mylayoutbox = awful.widget.layoutbox(s)
-	s.mylayoutbox:buttons(gears.table.join(awful.button({}, 1, function()
-		awful.layout.inc(1)
-	end), awful.button({}, 3, function()
-		awful.layout.inc(-1)
-	end), awful.button({}, 4, function()
-		awful.layout.inc(1)
-	end), awful.button({}, 5, function()
-		awful.layout.inc(-1)
-	end)))
+
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist {
 		screen = s,
@@ -187,31 +179,31 @@ awful.screen.connect_for_each_screen(function(s)
 		buttons = taglist_buttons,
 		widget_template = {
 		  {
-			{
-			  layout = wibox.layout.fixed.vertical,
-			  {
-				{
-				  id = 'text_role',
-				  widget = wibox.widget.textbox
-				},
-				top = 2,
-				bottom = 2,
-				widget = wibox.container.margin
-			  },
-			  {
-				{
-				  top = 2,
-				  widget = wibox.container.margin
-				},
-				id = 'overline',
-				bg = beautiful.wibar_bg,
-				shape = gears.shape.rectangle,
-				widget = wibox.container.background
-			  }
-			},
-			right = 4,
-			top = 1,
-			widget = wibox.container.margin
+        {
+          layout = wibox.layout.fixed.vertical,
+          {
+            {
+              id = 'text_role',
+              widget = wibox.widget.textbox
+            },
+            top = 2,
+            bottom = 2,
+            widget = wibox.container.margin
+          },
+          {
+            {
+              top = 2,
+              widget = wibox.container.margin
+            },
+            id = 'overline',
+            bg = beautiful.wibar_bg,
+            shape = gears.shape.rectangle,
+            widget = wibox.container.background
+          }
+        },
+        right = 4,
+        top = 1,
+        widget = wibox.container.margin
 		  },
 		  id = 'background_role',
 		  widget = wibox.container.background,
@@ -257,13 +249,13 @@ awful.screen.connect_for_each_screen(function(s)
 	-- Add widgets to the wibox
 	s.mywibox:setup{
 		layout = wibox.layout.align.horizontal,
+    expand = "none",
 		{ -- Left widgets
 			wibox.widget.textbox('  '), -- pading
 			layout = wibox.layout.fixed.horizontal,
 			s.mytaglist,
-			s.mypromptbox
 		},
-		wibox.widget.textbox(''),
+    s.mylayoutbox,
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
@@ -283,12 +275,6 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 -- }}}
 
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-	awful.button({}, 4, awful.tag.viewnext),
-	awful.button({}, 5, awful.tag.viewprev)
-))
--- }}}
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
@@ -382,13 +368,6 @@ globalkeys = gears.table.join(
   end, {
 	  description = "focus previous by index",
 	  group = "client"
-  }),
-
-  awful.key({modkey}, "w", function()
-	  mymainmenu:show()
-  end, {
-	  description = "show main menu",
-	  group = "awesome"
   }),
 
   awful.key({modkey, "Shift"}, "j", function()
@@ -651,53 +630,66 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {{
-	rule = {},
-	properties = {
-		border_width = beautiful.border_width,
-		border_color = beautiful.border_normal,
-		focus = awful.client.focus.filter,
-		raise = true,
-		keys = clientkeys,
-		buttons = clientbuttons,
-		screen = awful.screen.preferred,
-		placement = awful.placement.no_overlap +
-				awful.placement.no_offscreen
-	   }
-}, {
-	rule_any = {
-		instance = {"DTA", -- Firefox addon DownThemAll.
-		"copyq", -- Includes session name in class.
-		"pinentry"},
-		class = {"Arandr", "Blueman-manager", "Gpick", "Kruler", "MessageWin", -- kalarm.
-		"Sxiv", "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-		"Wpa_gui", "veromix", "xtightvncviewer"},
+awful.rules.rules = {
+  {
+    rule = {},
+    properties = {
+      border_width = beautiful.border_width,
+      border_color = beautiful.border_normal,
+      focus = awful.client.focus.filter,
+      raise = true,
+      keys = clientkeys,
+      buttons = clientbuttons,
+      screen = awful.screen.preferred,
+      placement = awful.placement.no_overlap + awful.placement.no_offscreen
+    }
+  },
 
-		-- Note that the name property shown in xprop might be set slightly after creation of the client
-		-- and the name shown there might not match defined rules here.
-		name = {"Event Tester" -- xev.
-		},
-		role = {"AlarmWindow", -- Thunderbird's calendar.
-		"ConfigManager", -- Thunderbird's about:config.
-		"pop-up" -- e.g. Google Chrome's (detached) Developer Tools.
-		}
-	},
-	properties = {
-		floating = true
-	}
-}, {
-	rule_any = {
-		type = {"normal", "dialog"}
-	},
-	properties = {
-		titlebars_enabled = false
-	}
-}}
+  ------------------------------ pop-up ------------------------------
+  {
+    rule_any = {
+      role = { "pop-up" }
+    },
+    properties = {
+      floating = true
+    }
+  },
 
+  ------------------------------ to titlebar rule ------------------------------
+  {
+    rule_any = {
+      type = {"normal", "dialog"}
+    },
+    properties = {titlebars_enabled = false}
+  },
+
+  ------------------------------ discord rule ------------------------------
+  {
+    rule = {class = "discord"},
+    properties = { screen = 1, tag = "9:workspace" }
+  },
+
+  ------------------------------ slack rule ------------------------------
+  {
+    rule = {instance = "slack"},
+    properties = { screen = 1, tag = "9:workspace" }
+  },
+
+  ------------------------------ chromium ------------------------------
+  {
+    rule = {instance = "chromium"},
+    properties = { screen = 1, tag = "3:web" }
+  },
+
+  ------------------------------ zoom ------------------------------
+  {
+    rule = {instance = "zoom"},
+    properties = { screen = 1, tag = "8:meeting" }
+  },
+}
 -- }}}
 
 -- {{{ Signals
-
 -- Focus urgent clients automatically
 client.connect_signal("property::urgent", function(c)
 	c.minimized = false

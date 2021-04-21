@@ -21,9 +21,6 @@ call plug#begin('~/.nvim/bundle')
   Plug 'tpope/vim-commentary' " quickly comment 
   Plug 'Raimondi/delimitMate' " provides automatic closing of quotes, parenthesis, brackets, etc.
 
-  " vimwiki
-  Plug 'vimwiki/vimwiki'
-
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Languages
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -46,7 +43,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'psliwka/vim-smoothie'
   Plug 'Asheq/close-buffers.vim'
 
-
+  Plug 'christoomey/vim-tmux-navigator'
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Visualization 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,10 +58,6 @@ call plug#end()
 " scrolling
 " let g:comfortable_motion_friction = 200.0
 " let g:comfortable_motion_air_drag = 0.0
-
-" set vimwiki default file type to md
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " Disable auto folding for markdown
 let g:vim_markdown_folding_disabled = 1

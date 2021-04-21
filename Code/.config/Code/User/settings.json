@@ -82,7 +82,7 @@
   },
   "workbench.colorTheme": "Nord",
   "files.autoSaveDelay": 500,
-  "glassit.alpha": 250,
+  "glassit.alpha": 230,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
