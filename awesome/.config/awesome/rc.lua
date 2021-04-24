@@ -686,6 +686,12 @@ awful.rules.rules = {
     rule = {instance = "zoom"},
     properties = { screen = 1, tag = "8:meeting" }
   },
+
+  ------------------------------ steam ------------------------------
+  {
+    rule = {instance = "Steam"},
+    properties = { screen = 1, tag = "7:gaming" }
+  },
 }
 -- }}}
 
