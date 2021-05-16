@@ -2,7 +2,11 @@
 " => General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Show relative line number
-set nu rnu
+
+" set nu rnu
+set nonumber
+
+set conceallevel=0
 
 " Clipboard
 set clipboard+=unnamedplus
@@ -17,9 +21,10 @@ syntax enable
 
 " auto makeview 
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+autocmd BufWinEnter *.* silent! loadview 
 
 set foldmethod=manual
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM UI
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -54,6 +59,7 @@ set cursorline
 " 'Natural' splitting
 set splitbelow
 set splitright
+
 " ----------------------------------------------------------------------------
 " coc.nvim
 " ----------------------------------------------------------------------------
@@ -76,4 +82,3 @@ set signcolumn=yes
 autocmd ColorScheme * highlight SignColumn guibg=none
 
 set timeoutlen=1000 ttimeoutlen=0
-
