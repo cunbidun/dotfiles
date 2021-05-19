@@ -3,20 +3,17 @@ call plug#begin('~/.nvim/bundle')
   Plug 'tpope/vim-surround'
   Plug 'w0rp/ale'
   Plug 'airblade/vim-gitgutter' " git status on gutter
+  Plug 'Yggdroot/indentLine' " for indentation
 
   Plug 'vim-airline/vim-airline' " status bar
   Plug 'tpope/vim-commentary' " quickly comment 
   Plug 'Raimondi/delimitMate' " provides automatic closing of quotes, parenthesis, brackets, etc.
-
   Plug 'christoomey/vim-tmux-navigator' " moving between vim buffer and tmux panel
   Plug 'lervag/vimtex' " Latex
-
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-
   Plug 'psliwka/vim-smoothie' " smooth scrolling
   Plug 'Asheq/close-buffers.vim'
-
   Plug 'arcticicestudio/nord-vim' " nord theme
   Plug 'ap/vim-css-color' " display color hex code
 call plug#end()
@@ -38,6 +35,9 @@ let g:vimtex_quickfix_mode=0
 
 let g:airline_section_b=''
 let g:airline#extensions#scrollbar#enabled=0
+
+let g:indentLine_color_gui = '#4C566A'
+let g:indentLine_char = '▏'
 
 " Coc
 " Use tab for trigger completion with characters ahead and navigate.

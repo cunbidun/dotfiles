@@ -11,7 +11,7 @@ let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffse
 nnoremap <silent> <C-p> :Files<CR>
 
 " search text in fiels
-" nnoremap <silent> <C-f> :Rg<CR>
+nnoremap <silent> <C-f> :Rg<CR>
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
