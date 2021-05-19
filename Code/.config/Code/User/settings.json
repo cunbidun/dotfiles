@@ -94,7 +94,7 @@
     "upvotes"
   ],
   "C_Cpp.default.cppStandard": "c++17",
-  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, AllowShortIfStatementsOnASingleLine: false}",
+  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, AllowShortIfStatementsOnASingleLine: false, ColumnLimit: 0}",
   "settingsSync.ignoredSettings": [
     "-C_Cpp.clang_format_style"
   ],

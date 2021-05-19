@@ -6,6 +6,7 @@ local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local temperature_widget = require("awesome-wm-widgets.temperature-widget.temperature")
 local language_widget = require("awesome-wm-widgets.language-widget.language")
+local doge_widget = require("awesome-wm-widgets.doge-widget.doge")
 
 -- Standard awesome library
 local gears = require("gears")
@@ -165,8 +166,8 @@ awful.screen.connect_for_each_screen(function(s)
 
 	-- Each screen has its own tag table.
 	local l = awful.layout.suit
-	local layouts = {l.max, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.max}
-	awful.tag({"1:note", "2:dev", "3:web", "4:term", "5:tool", "6:music", "7:gaming", "8:meeting", "9:workspace"}, s, layouts)
+	local layouts = {l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.max}
+	awful.tag({"1:term", "2:dev", "3:web", "4:tool", "5:note", "6:music", "7:gaming", "8:meeting", "9:workspace"}, s, layouts)
 
 	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
@@ -261,6 +262,8 @@ awful.screen.connect_for_each_screen(function(s)
 			wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
 			separator, ------------------------------------------
 			language_widget(),
+			separator, ------------------------------------------
+			doge_widget(),
 			separator, ------------------------------------------
 			temperature_widget(),
 			separator, ------------------------------------------
