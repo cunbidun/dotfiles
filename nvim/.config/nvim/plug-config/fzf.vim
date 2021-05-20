@@ -4,7 +4,7 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.9,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Keyword', 'border': 'sharp' } }
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Keyword', 'border': 'sharp' } }
 
 " search for files
 nnoremap <silent> <C-p> :Files<CR>

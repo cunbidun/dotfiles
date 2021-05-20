@@ -1,8 +1,13 @@
 export ZSH="/home/cunbidun/.oh-my-zsh"
 export TERM="xterm-256color"
-export FZF_DEFAULT_OPTS='
+export FZF_DEFAULT_OPTS="
   --color fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C,pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
-'
+  --preview-window sharp
+"
+
+export BAT_STYLE="plain"
+export BAT_THEME="Nord"
+export BAT_OPTS="--color always"
 
 # set words split for zsh
 # why? for git integration to work correctly
