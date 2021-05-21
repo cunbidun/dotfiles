@@ -1,0 +1,1 @@
+nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>

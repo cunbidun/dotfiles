@@ -22,7 +22,10 @@ call plug#begin('~/.nvim/bundle')
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'kabouzeid/nvim-lspinstall' " for installing lsp
+
+  " auto completion
   Plug 'hrsh7th/nvim-compe'
+  Plug 'hrsh7th/vim-vsnip'
 
   " navigation tree
   Plug 'kyazdani42/nvim-web-devicons' " for file icons

@@ -61,8 +61,6 @@ set splitright
 " don't show mode at the comment line (we already have vim airline)
 set noshowmode 
 
-" no signcolumn background
-autocmd ColorScheme * highlight SignColumn guibg=none
 
 set updatetime=300
 

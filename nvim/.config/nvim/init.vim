@@ -13,3 +13,7 @@ source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/compe.vim
 source $HOME/.config/nvim/plug-config/nvimtree.vim
 source $HOME/.config/nvim/plug-config/nvim-treesitter.vim
+
+" lspconfig
+source $HOME/.config/nvim/lsp-config/lsp-config.vim
+source $HOME/.config/nvim/lsp-config/cpp.vim
