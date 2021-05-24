@@ -55,7 +55,6 @@ theme.taglist_spacing = dpi(5)
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 
-theme.wallpaper   = theme_path.."4.png"
 theme.background  = theme.nord0
 
 theme.icon_theme = nil

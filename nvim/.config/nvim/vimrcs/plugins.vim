@@ -27,6 +27,8 @@ call plug#begin('~/.nvim/bundle')
   Plug 'hrsh7th/nvim-compe'
   Plug 'hrsh7th/vim-vsnip'
 
+  Plug 'justinmk/vim-sneak'
+  
   " navigation tree
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua'

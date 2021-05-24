@@ -772,8 +772,10 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
-
 -- Auto start applications
+awful.spawn.with_shell("xset r rate 200 30")
+awful.spawn.with_shell("feh --bg-fill --randomize ~/.wallpapers/nord/*")
 awful.spawn.with_shell("picom --experimental-backends")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("ibus-daemon -drx")
+

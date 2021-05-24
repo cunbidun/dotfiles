@@ -5,7 +5,7 @@ inoremap <expr> <C-j>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k>   pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
-lua << EOF
+lua <<EOF
 vim.o.completeopt = "menuone,noselect"
 
 require'compe'.setup {
