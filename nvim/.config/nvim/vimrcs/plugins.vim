@@ -34,6 +34,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'kyazdani42/nvim-tree.lua'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+  Plug 'romgrk/barbar.nvim'
 call plug#end()
 
 " commentary

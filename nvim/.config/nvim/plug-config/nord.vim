@@ -57,9 +57,6 @@ hi WarningMsg guifg=#2e3440 ctermfg=237 guibg=#ebcb8b ctermbg=222 gui=NONE cterm
 hi WildMenu guifg=#88c0d0 ctermfg=110 guibg=#3b4252 ctermbg=238 gui=NONE cterm=NONE
 hi IncSearch guifg=#2e3440 ctermfg=237 guibg=#ebcb8b ctermbg=222 gui=underline cterm=underline
 hi Search guifg=#2e3440 ctermfg=237 guibg=#ebcb8b ctermbg=222 gui=NONE cterm=NONE
-hi TabLine guifg=#d8dee9 ctermfg=254 guibg=#3b4252 ctermbg=238 gui=NONE cterm=NONE
-hi TabLineFill guifg=#d8dee9 ctermfg=254 guibg=#3b4252 ctermbg=238 gui=NONE cterm=NONE
-hi TabLineSel guifg=#88c0d0 ctermfg=110 guibg=#4c566a ctermbg=240 gui=NONE cterm=NONE
 hi Title guifg=#d8dee9 ctermfg=254 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi VertSplit guifg=#434c5e ctermfg=239 guibg=#2e3440 ctermbg=237 gui=NONE cterm=NONE
 hi Boolean guifg=#81a1c1 ctermfg=109 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -255,3 +252,30 @@ hi LspDiagnosticsUnderlineWarning guifg=#ebcb8b ctermfg=222 guibg=NONE ctermbg=N
 hi LspDiagnosticsUnderlineError guifg=#bf616a ctermfg=131 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi LspDiagnosticsUnderlineInformation guifg=#88c0d0 ctermfg=110 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi LspDiagnosticsUnderlineHint guifg=#5e81ac ctermfg=67 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+
+hi BufferCurrent guifg=#88c0d0 guibg=NONE
+hi BufferCurrentIndex guifg=#88c0d0 guibg=NONE
+hi BufferCurrentSign guifg=#88c0d0 guibg=NONE
+hi BufferCurrentIcon guifg=#A3BE8C guibg=NONE
+
+hi BufferVisible guifg=#4C566A guibg=NONE
+hi BufferVisibleIndex guifg=#4C566A guibg=NONE
+hi BufferVisibleIcon guifg=#4C566A guibg=NONE
+hi BufferVisibleSign guifg=#4C566A guibg=NONE
+
+hi BufferInactive guifg=#4C566A guibg=NONE
+hi BufferInactiveIndex guifg=#4C566A guibg=NONE
+hi BufferInactiveIcon guifg=#4C566A guibg=NONE
+hi BufferInactiveSign guifg=#4C566A guibg=NONE
+
+
+hi BufferCurrentMod guifg=#EBCB8B guibg=NONE
+hi BufferInactiveMod guifg=#EBCB8B guibg=NONE
+hi BufferVisibleMod guifg=#EBCB8B guibg=NONE
+
+hi BufferOffset guifg=NONE guibg=NONE
+hi BufferTabpages guifg=NONE guibg=NONE
+
+hi TabLine guifg=#4C566A guibg=#3B4252 ctermfg=254 ctermbg=238 gui=NONE cterm=NONE
+hi TabLineFill guifg=#4C566A guibg=#3B4252 ctermfg=254 ctermbg=NONE gui=NONE cterm=NONE
+hi TabLineSel guifg=#88c0d0 guibg=NONE ctermfg=110 ctermbg=240 gui=NONE cterm=NONE

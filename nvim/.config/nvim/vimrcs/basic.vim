@@ -33,7 +33,6 @@ set wrap linebreak
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
-set showtabline=2
 set expandtab
 
 " Ignore case when searching
@@ -61,7 +60,6 @@ set splitright
 " don't show mode at the comment line (we already have vim airline)
 set noshowmode 
 
-
 set updatetime=300
 
 set timeoutlen=500 
@@ -70,3 +68,14 @@ set timeoutlen=500
 set signcolumn=yes
 
 set shortmess+=c " Avoid showing message extra message when using completion
+
+augroup rc
+au!
+au TermOpen * setlocal nobuflisted
+augroup END
+
+" Without :set hidden, which is disabled by default and not very easy to find, 
+" Vim makes it impossible to switch to another buffer without writing the current 
+" one or abandoning its changes
+" https://stackoverflow.com/questions/26708822/why-do-vim-experts-prefer-buffers-over-tabs
+set hidden

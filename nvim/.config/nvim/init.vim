@@ -14,6 +14,7 @@ source $HOME/.config/nvim/plug-config/compe.vim
 source $HOME/.config/nvim/plug-config/nvimtree.vim
 source $HOME/.config/nvim/plug-config/nvim-treesitter.vim
 source $HOME/.config/nvim/plug-config/vim-sneak.vim
+source $HOME/.config/nvim/plug-config/barbar.vim
 
 " lspconfig
 source $HOME/.config/nvim/lsp-config/lsp-config.vim

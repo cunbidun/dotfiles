@@ -8,7 +8,7 @@ function! TermWrapper(command)
 	exec 'vnew'
 	exec 'vertical resize 30'
   set nonu
-  set rnu!
+  set nornu
 	exec 'term ' . a:command
   exec '$'
   exec printf('exec win_gotoid(%s)', g:current_window) 
