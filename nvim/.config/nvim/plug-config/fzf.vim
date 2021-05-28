@@ -9,7 +9,7 @@ let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.8,'yoffse
 " search for files
 nnoremap <silent> <C-p> :Files<CR>
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden -g '!.git' -g '!node_modules' -g '!Cache'"
 
 " search text in fiels
 nnoremap <silent> <C-f> :Rg<CR>

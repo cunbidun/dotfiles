@@ -10,7 +10,9 @@ EOF
 " Enable/disable animations
 let bufferline.animation = v:false
 let bufferline.icon_custom_colors = v:true
-let bufferline.maximum_length = 30
+
+let bufferline.maximum_length = 20 
+let bufferline.maximum_padding = 1 
 
 " Enable/disable close button
 let bufferline.closable = v:false

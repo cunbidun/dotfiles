@@ -19,3 +19,5 @@ source $HOME/.config/nvim/plug-config/barbar.vim
 " lspconfig
 source $HOME/.config/nvim/lsp-config/lsp-config.vim
 source $HOME/.config/nvim/lsp-config/cpp.vim
+source $HOME/.config/nvim/lsp-config/json.vim
+source $HOME/.config/nvim/lsp-config/bash.vim

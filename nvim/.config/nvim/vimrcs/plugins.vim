@@ -18,6 +18,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'lervag/vimtex' " Latex
 
   Plug 'arcticicestudio/nord-vim' " nord theme
+
   Plug 'ap/vim-css-color' " display color hex code
 
   Plug 'neovim/nvim-lspconfig'

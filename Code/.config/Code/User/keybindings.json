@@ -3,21 +3,20 @@
   {
     "key": "ctrl+alt+l",
     "command": "editor.action.formatDocument",
-    // "when": "resourceExtname != .cpp"
   },
-  // {
-  //   "key": "ctrl+alt+l",
-  //   "command": "workbench.action.terminal.sendSequence",
-  //   "args": {
-  //     "text": "bash -c 'astyle -n --add-braces -s2 \"${file}\" && clang-format -i -style=\"{ColumnLimit: 100, AllowShortBlocksOnASingleLine: false}\" \"${file}\"' \u000D"
-  //   },
-  //   "when": "resourceExtname == .cpp || resourceExtname == .h"
-  // },
   {
     "key": "ctrl+alt+b",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${workspaceFolder}/../Script/run.sh \"${fileDirname}\"/ \u000D"
+      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 0\u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+e",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 1\u000D"
     },
     "when": "resourceExtname == .cpp"
   },
@@ -25,7 +24,23 @@
     "key": "ctrl+alt+shift+b",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${workspaceFolder}/../Script/run_with_terminal.sh \"${fileDirname}\"/ \u000D"
+      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 2\u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+t",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 3\u000D"
+    },
+    "when": "resourceExtname == .cpp"
+  },
+  {
+    "key": "ctrl+alt+a",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 4\u000D"
     },
     "when": "resourceExtname == .cpp"
   },
@@ -33,16 +48,8 @@
     "key": "ctrl+alt+n",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${workspaceFolder}/../Script/new.sh ${workspaceFolder}/../Task\u000D"
+      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 5\u000D"
     }
-  },
-  {
-    "key": "ctrl+alt+t",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": {
-      "text": "${workspaceFolder}/../Script/config.sh \"${fileDirname}\"/ \u000D"
-    },
-    "when": "resourceExtname == .cpp"
   },
   {
     "key": "ctrl+alt+c",
@@ -51,14 +58,7 @@
       "text": "cd ${workspaceFolder}/../CC/ && npm start\u000D"
     }
   },
-  {
-    "key": "ctrl+alt+a",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": {
-      "text": "${workspaceFolder}/../Script/archive.sh \"${fileDirname}\"/ \u000D"
-    },
-    "when": "resourceExtname == .cpp"
-  },
+
   {
     "key": "alt+1",
     "command": "-workbench.action.openEditorAtIndex1"

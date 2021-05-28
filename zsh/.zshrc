@@ -9,6 +9,7 @@ export BAT_STYLE="plain"
 export BAT_THEME="Nord"
 export BAT_OPTS="--color always"
 
+export CPS_PATH="$HOME/competitive_programming/cps_scripts/"
 # set words split for zsh
 # why? for git integration to work correctly
 # see more: https://stackoverflow.com/questions/23157613/how-to-iterate-through-string-one-word-at-a-time-in-zsh
@@ -27,7 +28,7 @@ prompt igloo
 DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
- export UPDATE_ZSH_DAYS=3
+export UPDATE_ZSH_DAYS=3
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -71,11 +72,12 @@ alias b="~/.script/brightness.sh"
 alias r="ranger"
 
 # Umass
-alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"
-alias 445="~/Documents/Umass/Spring2021/COMPSCI\ 445"
-alias 446="~/Documents/Umass/Spring2021/COMPSCI\ 446"
-alias 466="~/Documents/Umass/Spring2021/COMPSCI\ 466"
-alias 497="~/Documents/Umass/Spring2021/COMPSCI\ 497S"
+# alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"
+# alias 445="~/Documents/Umass/Spring2021/COMPSCI\ 445"
+# alias 446="~/Documents/Umass/Spring2021/COMPSCI\ 446"
+# alias 466="~/Documents/Umass/Spring2021/COMPSCI\ 466"
+# alias 497="~/Documents/Umass/Spring2021/COMPSCI\ 497S"
+
 alias cpf='f() { xclip -sel clip < $1 }; f'
 
 alias ls="exa -la"
