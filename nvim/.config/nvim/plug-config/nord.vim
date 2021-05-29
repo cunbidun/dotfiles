@@ -1,9 +1,9 @@
+" set theme
+colorscheme nord " nord theme
+
 if (has("termguicolors"))
   set termguicolors
 endif
-
-" set theme
-colorscheme nord " nord theme
 
 " no signcolumn and background
 hi Normal ctermbg=NONE guibg=NONE

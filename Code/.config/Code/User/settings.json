@@ -80,7 +80,7 @@
   "[lua]": {
     "editor.tabSize": 2
   },
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
   "files.autoSaveDelay": 500,
   "glassit.alpha": 255,
   "[typescript]": {
