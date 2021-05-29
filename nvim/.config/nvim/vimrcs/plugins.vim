@@ -3,8 +3,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'airblade/vim-gitgutter' " git status on gutter
   Plug 'Yggdroot/indentLine' " for indentation
 
-  Plug 'vim-airline/vim-airline' " status bar
-  Plug 'vim-airline/vim-airline-themes'
+  Plug 'glepnir/galaxyline.nvim'
 
   Plug 'tpope/vim-commentary' " quickly comment 
   Plug 'Raimondi/delimitMate' " provides automatic closing of quotes, parenthesis, brackets, etc.
@@ -14,10 +13,10 @@ call plug#begin('~/.nvim/bundle')
   Plug 'junegunn/fzf.vim'
   Plug 'psliwka/vim-smoothie' " smooth scrolling
 
-  Plug 'rhysd/vim-clang-format'
   Plug 'lervag/vimtex' " Latex
 
   Plug 'arcticicestudio/nord-vim' " nord theme
+  " Plug 'shaunsingh/nord.nvim'
 
   Plug 'ap/vim-css-color' " display color hex code
 
@@ -49,3 +48,12 @@ let g:vimtex_quickfix_mode=0
 let g:indentLine_color_gui = '#4C566A'
 let g:indentLine_char = '▏'
 
+" let g:nord_disable_background=1
+
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
+
+" hi Normal ctermbg=NONE guibg=NONE
+" hi SignColumn guibg=NONE
+" colorscheme nord

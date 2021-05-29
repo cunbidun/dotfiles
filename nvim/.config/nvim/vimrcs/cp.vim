@@ -30,6 +30,4 @@ autocmd filetype cpp nnoremap <C-M-e> :w <bar> :RunWithTermDebug<CR>
 autocmd filetype cpp nnoremap <C-M-t> :w <bar> :TaskConfig<CR>
 autocmd filetype cpp nnoremap <C-M-a> :w <bar> :ArchiveTask<CR>
 autocmd filetype cpp nnoremap <C-M-d> :w <bar> :DeleteTask<CR>
-autocmd filetype cpp nnoremap <C-M-n> :w <bar> :NewTask<CR>
-autocmd filetype cpp nnoremap <C-M-l> :ClangFormat<CR> 
 

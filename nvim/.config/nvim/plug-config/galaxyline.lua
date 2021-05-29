@@ -2,7 +2,7 @@ local gl = require('galaxyline')
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
 local colors = {
-  bg = '#2E3440',
+  bg = '#434C5E',
   yellow = '#EBCB8B',
   dark_yellow = '#EBCB8B',
   info_yellow = '#EBCB8B',
@@ -18,7 +18,7 @@ local colors = {
   magenta = '#B48EAD',
   blue = '#81A1C1',
   light_blue = '#8FBCBB',
-  grey = '#D8DEE9',
+  grey = '#D8DEE9'
 }
 local condition = require('galaxyline.condition')
 local gls = gl.section
@@ -50,10 +50,31 @@ table.insert(gls.left, {
         ['!'] = colors.blue,
         t = colors.blue
       }
+      local alias = {
+        n = 'NORMAL',
+        i = 'INSERT',
+        c = 'COMMAND',
+        V = 'VISUAL',
+        [''] = 'VISUAL',
+        v = 'VISUAL',
+        ['r?'] = ':CONFIRM',
+        rm = '--MORE',
+        R = 'REPLACE',
+        Rv = 'VIRTUAL',
+        s = 'SELECT',
+        S = 'SELECT',
+        ['r'] = 'HIT-ENTER',
+        [''] = 'SELECT',
+        t = 'TERMINAL',
+        ['!'] = 'SHELL'
+      }
       vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
-      return '▊ '
+
+      local vim_mode = vim.fn.mode()
+      return '▊ ' .. alias[vim_mode] .. '  '
+      -- return '▊ '
     end,
-    highlight = {colors.red, colors.bg}
+    highlight = {colors.red, colors.bg, 'bold'}
   }
 })
 print(vim.fn.getbufvar(0, 'ts'))
@@ -93,15 +114,15 @@ table.insert(gls.left, {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.hide_in_width,
-    icon = ' 柳',
-    highlight = {colors.blue, colors.bg}
+    icon = '   ',
+    highlight = {colors.yellow, colors.bg}
   }
 })
 table.insert(gls.left, {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = condition.hide_in_width,
-    icon = '  ',
+    icon = '   ',
     highlight = {colors.red, colors.bg}
   }
 })
@@ -218,5 +239,3 @@ table.insert(gls.short_line_left, {
 table.insert(gls.short_line_left, {
   SFileName = {provider = 'SFileName', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
 })
-
--- table.insert(gls.short_line_right[1] = {BufferIcon = {provider = 'BufferIcon', highlight = {colors.grey, colors.bg}}})
