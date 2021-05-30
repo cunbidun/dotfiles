@@ -11,6 +11,10 @@ luafile $HOME/.config/nvim/plug-config/nvim-treesitter.lua
 source $HOME/.config/nvim/plug-config/vim-sneak.vim
 source $HOME/.config/nvim/plug-config/barbar.vim
 luafile $HOME/.config/nvim/plug-config/galaxyline.lua
+luafile $HOME/.config/nvim/plug-config/colorizer.lua
+luafile $HOME/.config/nvim/plug-config/gitblame.lua
+luafile $HOME/.config/nvim/plug-config/matchup.lua
+luafile $HOME/.config/nvim/plug-config/rnvimr.lua
 
 " lspconfig
 source $HOME/.config/nvim/lsp-config/lsp-config.vim

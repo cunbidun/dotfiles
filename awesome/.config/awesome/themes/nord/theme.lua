@@ -1,8 +1,6 @@
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local theme_path = "~/.config/awesome/themes/nord/"
-
 local theme = {}
 
 -- color
@@ -76,7 +74,6 @@ theme.hotkeys_modifiers_fg = theme.nord3
 theme.notification_width = 250
 theme.notification_icon_size = 50
 theme.notification_margin = 20
--- theme.notification_border_width =
 theme.notification_border_color = theme.nord8
 
 return theme

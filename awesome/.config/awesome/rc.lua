@@ -175,7 +175,7 @@ awful.screen.connect_for_each_screen(function(s)
       id = 'background_role',
       widget = wibox.container.background,
       shape = gears.shape.rectangle,
-      create_callback = function(self, c3, index, objects)
+      create_callback = function(self, _, index, _)
         local focused = false
         for _, x in pairs(awful.screen.focused().selected_tags) do
           if x.index == index then
@@ -189,7 +189,7 @@ awful.screen.connect_for_each_screen(function(s)
           self:get_children_by_id('overline')[1].bg = beautiful.wibar_bg
         end
       end,
-      update_callback = function(self, c3, index, objects)
+      update_callback = function(self, _, index, _)
         local focused = false
         for _, x in pairs(awful.screen.focused().selected_tags) do
           if x.index == index then

@@ -70,6 +70,8 @@ alias zshconfig="nvim ~/.zshrc"
 alias CP="~/competitive_programming/"
 alias b="~/.script/brightness.sh"
 alias r="ranger"
+alias v="nvim"
+alias s="source ~/.zshrc"
 
 # Umass
 # alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"
