@@ -212,18 +212,9 @@ awful.screen.connect_for_each_screen(function(s)
     screen = s
     -- visible = false
   })
-
-  -- Add widgets to the wibox
-  s.mywibox:setup{
-    layout = wibox.layout.align.horizontal,
-    expand = 'none',
-    { -- Left widgets
-      wibox.widget.textbox('  '), -- pading
-      layout = wibox.layout.fixed.horizontal,
-      s.mytaglist
-    },
-    s.mylayoutbox,
-    { -- Right widgets
+  local right_widget = {layout = wibox.layout.fixed.horizontal}
+  if s.index == 1 then
+    right_widget = { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
       separator, ------------------------------------------
@@ -240,6 +231,19 @@ awful.screen.connect_for_each_screen(function(s)
       TextClock,
       wibox.widget.textbox('  ') -- padding
     }
+  end
+
+  -- Add widgets to the wibox
+  s.mywibox:setup{
+    layout = wibox.layout.align.horizontal,
+    expand = 'none',
+    { -- Left widgets
+      wibox.widget.textbox('  '), -- pading
+      layout = wibox.layout.fixed.horizontal,
+      s.mytaglist
+    },
+    s.mylayoutbox,
+    right_widget
   }
 end)
 -- }}}
@@ -250,9 +254,8 @@ globalkeys = gears.table.join(awful.key({Modkey, 'Mod1'}, 'j', function()
 end), awful.key({Modkey, 'Mod1'}, 'k', function()
   awful.client.incwfact(-0.05)
 end),
-
--- awful.key({ modkey, "Control" }, "k", function () useless_gaps_resize(1)  end, {description = "increment useless gaps", group = "tag"}),
--- awful.key({ modkey, "Control" }, "j", function () useless_gaps_resize(-1) end, {description = "decrement useless gaps", group = "tag"}),
+-- awful.key({ Modkey}, "+", function () useless_gaps_resize(1)  end, {description = "increment useless gaps", group = "tag"}),
+-- awful.key({ Modkey}, "-", function () useless_gaps_resize(-1) end, {description = "decrement useless gaps", group = "tag"}),
                               awful.key({Modkey, 'Shift'}, 's', function()
   awful.spawn.with_shell('import png:- | xclip -selection clipboard -t image/png', false)
 end, {description = 'take screen shot', group = 'hotkeys'}), awful.key({Modkey, 'Shift'}, 'n', function()
@@ -260,7 +263,6 @@ end, {description = 'take screen shot', group = 'hotkeys'}), awful.key({Modkey, 
 end), awful.key({'Mod1'}, 'Tab', function()
   awful.spawn.with_shell('rofi -show window', false)
 end), awful.key({Modkey}, 'space', language_widget.toggle, {description = 'change language', group = 'hotkeys'}),
-
                               awful.key({}, 'XF86AudioRaiseVolume', volume_widget.raise,
                                         {description = 'volume up', group = 'hotkeys'}), awful.key({},
                                                                                                    'XF86AudioLowerVolume',
@@ -273,10 +275,8 @@ end), awful.key({Modkey}, 'space', language_widget.toggle, {description = 'chang
                                   {description = 'clear notifications', group = 'awesome'}),
 
                               awful.key({Modkey}, 'b', function()
-  for s in screen do
-    s.mywibox.visible = not s.mywibox.visible
-    if s.mybottomwibox then s.mybottomwibox.visible = not s.mybottomwibox.visible end
-  end
+  local s = awful.screen.focused()
+  s.mywibox.visible = not s.mywibox.visible
 end, {description = 'toggle wibox', group = 'awesome'}), awful.key({Modkey}, 's', hotkeys_popup.show_help,
                                                                    {description = 'show help', group = 'awesome'}),
 
@@ -296,7 +296,6 @@ end, {description = 'focus previous by index', group = 'client'}), awful.key({Mo
 end, {description = 'swap with next client by index', group = 'client'}), awful.key({Modkey, 'Shift'}, 'k', function()
   awful.client.swap.byidx(-1)
 end, {description = 'swap with previous client by index', group = 'client'}),
-
                               awful.key({Modkey, 'Control'}, 'j', function()
   awful.screen.focus_relative(1)
 end, {description = 'focus the next screen', group = 'screen'}), awful.key({Modkey, 'Control'}, 'k', function()
@@ -435,19 +434,19 @@ awful.rules.rules = {
   {rule_any = {type = {'normal', 'dialog'}}, properties = {titlebars_enabled = false}},
 
   ------------------------------ discord rule ------------------------------
-  {rule = {class = 'discord'}, properties = {screen = 1, tag = '9:workspace'}},
+  {rule = {class = 'discord'}, properties = {tag = '9:workspace'}},
 
   ------------------------------ slack rule ------------------------------
-  {rule = {instance = 'slack'}, properties = {screen = 1, tag = '9:workspace'}},
+  {rule = {instance = 'slack'}, properties = {tag = '9:workspace'}},
 
   ------------------------------ chromium ------------------------------
-  {rule = {instance = 'chromium'}, properties = {screen = 1, tag = '3:web'}},
+  {rule = {instance = 'chromium'}, properties = {tag = '3:web'}},
 
   ------------------------------ zoom ------------------------------
-  {rule = {instance = 'zoom'}, properties = {screen = 1, tag = '8:meeting'}},
+  {rule = {instance = 'zoom'}, properties = {tag = '8:meeting'}},
 
   ------------------------------ steam ------------------------------
-  {rule = {instance = 'Steam'}, properties = {screen = 1, tag = '7:gaming'}}
+  {rule = {instance = 'Steam'}, properties = {tag = '7:gaming'}}
 }
 -- }}}
 

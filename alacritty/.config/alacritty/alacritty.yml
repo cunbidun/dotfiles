@@ -8,6 +8,16 @@
 # References:
 #   https://github.com/alacritty/alacritty
 
+env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  #TERM: alacritty
+  WINIT_X11_SCALE_FACTOR: "1.5"
+
 colors:
   primary:
     background: '#2e3440'
@@ -59,7 +69,7 @@ colors:
 
 # Font configuration (changes require restart)
 font:
-  size: 7.5 
+  size: 7.5
   normal:
     family: Source Code Pro
 

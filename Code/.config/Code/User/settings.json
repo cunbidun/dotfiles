@@ -21,11 +21,10 @@
     "<C-h>": false,
   },
   "vim.useSystemClipboard": true,
-
+  "vim.vimrc.enable": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": 0,
   "editor.fontFamily": "Source Code Pro",
   "editor.fontLigatures": false,
   "[json]": {
@@ -69,7 +68,7 @@
   },
   "output.smartScroll.enabled": false,
   "terminal.integrated.fontWeight": "600",
-  "editor.fontSize": 15,
+  "editor.fontSize": 16,
   "editor.tabSize": 2,
   "[python]": {
     "editor.tabSize": 4

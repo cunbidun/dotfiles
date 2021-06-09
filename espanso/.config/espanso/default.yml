@@ -7,18 +7,17 @@
 # Matches are the substitution rules, when you type the "trigger" string
 # it gets replaced by the "replace" string.
 matches:
-  # Simple text replacement
-  - trigger: ":espanso"
-    replace: "Hi there!"
+  # - trigger: ":address"
+  #   replace: "Room 219, Johnson Hall, 380 Thatcher Road, Amherst, MA 01003-9359, United States"
 
   - trigger: ":address"
-    replace: "Room 219, Johnson Hall, 380 Thatcher Road, Amherst, MA 01003-9359, United States"
+    replace: "27 Chestnut Ave, Apartment 2, Jamaica Plain MA 02130"
 
   - trigger: ":uni"
     replace: "University of Massachusetts at Amherst"
 
   - trigger: ":phone"
-    replace: "+1 413 313 9462"
+    replace: "+1 617 396 6428"
 
   - trigger: ":unimail"
     replace: "dhpham@umass.edu"
@@ -36,7 +35,7 @@ matches:
     replace: "https://github.com/cunbidun"
 
   - trigger: ":zip"
-    replace: "MA 01003-9359"
+    replace: "02130"
 
   - trigger: ":linkedin"
     replace: "https://www.linkedin.com/in/duy-pham-90652a152/"

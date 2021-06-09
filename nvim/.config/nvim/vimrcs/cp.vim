@@ -6,7 +6,7 @@ function! TermWrapper(command)
   let g:current_window = win_getid()
   exec 'mkview'
 	exec 'vnew'
-	exec 'vertical resize 30'
+	exec 'vertical resize 100'
   set nonu
   set nornu
 	exec 'term ' . a:command

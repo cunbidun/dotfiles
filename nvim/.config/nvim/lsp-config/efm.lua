@@ -23,7 +23,7 @@ require'lspconfig'.efm.setup {
       },
       cpp = {
         {
-          formatCommand = 'clang-format -style="{ BasedOnStyle: Google, AllowShortIfStatementsOnASingleLine: false, ColumnLimit: 0}"',
+          formatCommand = 'clang-format -style="{ BasedOnStyle: LLVM, AllowShortIfStatementsOnASingleLine: false, ColumnLimit: 0}"',
           formatStdin = true
         }
       }

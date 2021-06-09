@@ -17,10 +17,6 @@ hi Error guifg=#d8dee9 ctermfg=254 guibg=#bf616a ctermbg=131 gui=NONE cterm=NONE
 hi LineNr guifg=#4c566a ctermfg=240 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi MatchParen guifg=#88c0d0 ctermfg=110 guibg=#4c566a ctermbg=240 gui=NONE cterm=NONE
 hi NonText guifg=#434c5e ctermfg=239 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Pmenu guifg=#d8dee9 ctermfg=254 guibg=#434c5e ctermbg=239 gui=NONE cterm=NONE
-hi PmenuSbar guifg=#d8dee9 ctermfg=254 guibg=#434c5e ctermbg=239 gui=NONE cterm=NONE
-hi PmenuSel guifg=#88c0d0 ctermfg=110 guibg=#4c566a ctermbg=240 gui=NONE cterm=NONE
-hi PmenuThumb guifg=#88c0d0 ctermfg=110 guibg=#4c566a ctermbg=240 gui=NONE cterm=NONE
 hi SpecialKey guifg=#4c566a ctermfg=240 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi SpellBad guifg=#bf616a ctermfg=131 guibg=#2e3440 ctermbg=237 gui=underline cterm=underline
 hi SpellCap guifg=#bf616a ctermfg=131 guibg=#2e3440 ctermbg=237 gui=underline cterm=underline
@@ -242,6 +238,8 @@ hi TSURI guifg=#ffff00 ctermfg=226 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSTag guifg=#81a1c1 ctermfg=109 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi TSTagDelimiter guifg=#5c6370 ctermfg=241 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 
+hi QuickScopePrimary guifg='#2E3440' guibg=#88C0D0 gui=bold ctermfg=155 cterm=underline
+hi QuickScopeSecondary guifg='#2E3440' guibg=#EBCB8B gui=bold ctermfg=81 cterm=underline
 " buffer bar
 hi BufferCurrent guifg=#88c0d0 guibg=NONE
 hi BufferCurrentIndex guifg=#88c0d0 guibg=NONE

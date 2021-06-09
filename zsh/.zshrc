@@ -67,6 +67,8 @@ else
 fi
 
 alias zshconfig="nvim ~/.zshrc"
+alias vconfig="cd ~/.config/nvim/ && nvim"
+
 alias CP="~/competitive_programming/"
 alias b="~/.script/brightness.sh"
 alias r="ranger"

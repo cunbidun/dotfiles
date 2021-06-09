@@ -51,21 +51,6 @@
       ""
     ],
     "description": "basic mod_int"
-  }, 
-  "compress": {
-    "prefix": "compress",
-    "body": [
-      "vector<int> _l;",
-      "map<int, int> _mp;",
-      "auto compress = [&]() {",
-      "  sort(_l.begin(), _l.end());",
-      "  _l.resize(distance(_l.begin(), unique(_l.begin(), _l.end())));",
-      "  for (int i : _l)",
-      "    _mp[i] = (int)_mp.size() + 1;",
-      "};",
-      ""
-    ],
-    "description": "compress"
   },
   "union_find": {
     "prefix": "union_find",
@@ -140,7 +125,7 @@
       ""
     ],
     "description": "y_combinator_result"
-  }, 
+  },
   "dfs_tree": {
     "prefix": "dfs_tree",
     "body": [
@@ -216,7 +201,8 @@
       ""
     ],
     "description": "dfs_tree"
-  }, "fenwick_tree": {
+  },
+  "fenwick_tree": {
     "prefix": "fenwick_tree",
     "body": [
       "// fenwick_tree",
@@ -255,7 +241,8 @@
       ""
     ],
     "description": "fenwick_tree"
-  }, "segment_tree": {
+  },
+  "segment_tree": {
     "prefix": "segment_tree",
     "body": [
       "template <typename T>",
@@ -298,5 +285,79 @@
       ""
     ],
     "description": "segment_tree"
+  },
+  "debug": {
+    "prefix": "debug",
+    "body": [
+      "template <class c>",
+      "struct rge { c b, e; };",
+      "template <class c>",
+      "rge<c> range(c i, c j) { return rge<c>{i, j}; }",
+      "template <class c>",
+      "auto dud(c *x) -> decltype(cerr << *x, 0);",
+      "template <class c>",
+      "char dud(...);",
+      "struct debug {",
+      "#ifdef LOCAL",
+      "  ~debug() { cout << endl; }",
+      "  template <class c>",
+      "  typename enable_if<sizeof dud<c>(0) != 1, debug &>::type operator<<(c i) {",
+      "    cout << boolalpha << i;",
+      "    return *this;",
+      "  }",
+      "  template <class c>",
+      "  typename enable_if<sizeof dud<c>(0) == 1, debug &>::type operator<<(c i) {",
+      "    return *this << range(begin(i), end(i));",
+      "  }",
+      "  template <class c, class b>",
+      "  debug &operator<<(pair<b, c> d) {",
+      "    return *this << \"(\" << d.first << \", \" << d.second << \")\";",
+      "  }",
+      "  template <class c>",
+      "  debug &operator<<(rge<c> d) {",
+      "    *this << \"[\";",
+      "    for (auto it = d.b; it != d.e; ++it) {",
+      "      *this << \", \" + 2 * (it == d.b) << *it;",
+      "    }",
+      "    return *this << \"]\";",
+      "  }",
+      "#else",
+      "  template <class c>",
+      "  debug &operator<<(const c &) { return *this; }",
+      "#endif",
+      "};",
+      "#define imie(...) \"[\" << #__VA_ARGS__ \": \" << (__VA_ARGS__) << \"] \"",
+      ""
+    ],
+    "description": "debug"
+  },
+  "compressor": {
+    "prefix": "compressor",
+    "body": [
+      "template <class T>",
+      "struct compressor {",
+      "public:",
+      "  vector<T> l;",
+      "  map<T, int> mp;",
+      "  compressor() {}",
+      "  void add(T x) {",
+      "    l.push_back(x);",
+      "  }",
+      "  void compress() {",
+      "    sort(l.begin(), l.end());",
+      "    l.resize(distance(l.begin(), unique(l.begin(), l.end())));",
+      "    for (int i : l)",
+      "      mp[i] = (int)mp.size() + 1;",
+      "  }",
+      "  int get(T x) {",
+      "    return mp[x];",
+      "  }",
+      "  int size() {",
+      "    return (int)mp.size();",
+      "  }",
+      "};",
+      ""
+    ],
+    "description": "compressor"
   }
 }
