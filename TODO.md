@@ -1,0 +1,34 @@
+Todo-list
+
+## alacritty
+- [ ] font issue in external monitor [X]
+
+## awesome-wm
+- [ ] resize and move windows by keyboard
+- [ ] add the currently selected window to wibar
+- [ ] add keyboard for showing wallpaper (mod + D)
+- [ ] floating windows spawn at the center of the screen
+- [ ] modkey + tab visit all windows in the same tag
+- [ ] optimus switch between nvidia and integrated
+- [ ] research conky for system info
+- [ ] system tray alternate solution
+- [ ] window(max, floating) status taskbar
+
+## external monitor
+- [ ] move sound to external monitor [X]
+
+## firefox 
+- [ ] font problem in firefox
+- [ ] smooth scrolling
+
+## vim
+- [ ] add line number when grepping text with fzf preview
+- [ ] set up nvim comment
+- [ ] set up xdg-mime to open with nvim [X]
+
+## rofi
+- [ ] transparent background
+
+## general 
+- [ ] Mirgate Notion note as README in dotfiles project
+- [ ] Setup scripts for editing dotfiles
