@@ -25,10 +25,18 @@ Todo-list
 - [ ] add line number when grepping text with fzf preview
 - [ ] set up nvim comment
 - [ ] set up xdg-mime to open with nvim [X]
+- [ ] add support for .h file
 
 ## rofi
 - [ ] transparent background
+- [ ] alt-tab switching 
+
+## zsh
+- [ ] add commit message to prompt
 
 ## general 
-- [ ] Mirgate Notion note as README in dotfiles project
-- [ ] Setup scripts for editing dotfiles
+- [ ] mirgate notion note as README in dotfiles project
+- [X] setup scripts for editing dotfiles
+- [ ] allow multiple themes
+- [ ] full text file search
+- [ ] move to rofi luncher

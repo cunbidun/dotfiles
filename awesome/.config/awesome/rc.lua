@@ -8,6 +8,8 @@ local temperature_widget = require('awesome-wm-widgets.temperature-widget.temper
 local language_widget = require('awesome-wm-widgets.language-widget.language')
 local doge_widget = require('awesome-wm-widgets.doge-widget.doge')
 
+local machi = require('layout-machi')
+
 -- Standard awesome library
 local gears = require('gears')
 local awful = require('awful')
@@ -59,6 +61,8 @@ function useless_gaps_resize(thatmuch, s, t)
   awful.layout.arrange(scr)
 end
 
+beautiful.layout_machi = machi.get_icon()
+
 -- This is used later as the default terminal and editor to run.
 terminal = 'alacritty'
 editor = os.getenv('EDITOR') or 'nvim'
@@ -69,7 +73,8 @@ Modkey = 'Mod4'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-  awful.layout.suit.tile, awful.layout.suit.floating, awful.layout.suit.max, awful.layout.suit.spiral.dwindle
+  awful.layout.suit.tile, awful.layout.suit.floating, awful.layout.suit.max, awful.layout.suit.spiral.dwindle,
+  machi.default_layout
 }
 -- }}}
 
@@ -253,14 +258,22 @@ globalkeys = gears.table.join(awful.key({Modkey, 'Mod1'}, 'j', function()
   awful.client.incwfact(0.05)
 end), awful.key({Modkey, 'Mod1'}, 'k', function()
   awful.client.incwfact(-0.05)
-end),
+end), -- machi layout special keybindings
+awful.key({Modkey}, '.', function()
+  machi.default_editor.start_interactive()
+end, {description = 'machi: edit the current machi layout', group = 'layout'}), awful.key({Modkey}, '/', function()
+  machi.switcher.start(client.focus)
+end, {description = 'machi: switch between windows', group = 'layout'}),
+
 -- awful.key({ Modkey}, "+", function () useless_gaps_resize(1)  end, {description = "increment useless gaps", group = "tag"}),
 -- awful.key({ Modkey}, "-", function () useless_gaps_resize(-1) end, {description = "decrement useless gaps", group = "tag"}),
                               awful.key({Modkey, 'Shift'}, 's', function()
   awful.spawn.with_shell('import png:- | xclip -selection clipboard -t image/png', false)
 end, {description = 'take screen shot', group = 'hotkeys'}), awful.key({Modkey, 'Shift'}, 'n', function()
   awful.spawn.with_shell('~/.script/rofi-color-picker/rofi-color-picker/rofi-color-picker', false)
-end), awful.key({'Mod1'}, 'Tab', function()
+end), awful.key({Modkey, 'Shift'}, 'd', function()
+  awful.spawn.with_shell('alacritty -e ~/.script/dotfiles-picker/dotfiles-picker.sh', false)
+end, {description = 'edit config', group = 'hotkeys'}), awful.key({'Mod1'}, 'Tab', function()
   awful.spawn.with_shell('rofi -show window', false)
 end), awful.key({Modkey}, 'space', language_widget.toggle, {description = 'change language', group = 'hotkeys'}),
                               awful.key({}, 'XF86AudioRaiseVolume', volume_widget.raise,

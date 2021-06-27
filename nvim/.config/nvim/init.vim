@@ -7,6 +7,7 @@ source $HOME/.config/nvim/plug-config/nord.vim
 source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/compe.vim
 source $HOME/.config/nvim/plug-config/barbar.vim
+source $HOME/.config/nvim/plug-config/markdown-preview.vim
 luafile $HOME/.config/nvim/plug-config/nvim-treesitter.lua
 luafile $HOME/.config/nvim/plug-config/galaxyline.lua
 luafile $HOME/.config/nvim/plug-config/colorizer.lua

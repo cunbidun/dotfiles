@@ -45,6 +45,8 @@ call plug#begin('~/.nvim/bundle')
   " treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
   Plug 'christoomey/vim-tmux-navigator' " moving between vim buffer and tmux panel
+
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 call plug#end()
 
 " commentary
