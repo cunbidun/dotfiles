@@ -23,6 +23,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'neovim/nvim-lspconfig'
   Plug 'kabouzeid/nvim-lspinstall' " for installing lsp
   Plug 'ahmedkhalf/lsp-rooter.nvim' " auto find and set porject root
+  Plug 'RRethy/vim-illuminate'
 
   " auto completion
   Plug 'hrsh7th/nvim-compe'
@@ -40,7 +41,7 @@ call plug#begin('~/.nvim/bundle')
   
   " explorer
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
-  Plug 'kevinhwang91/rnvimr'
+  Plug 'kevinhwang91/rnvimr' " ranger
 
   " treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update

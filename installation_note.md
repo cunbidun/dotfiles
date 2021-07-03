@@ -19,6 +19,8 @@ pacman -S nodejs npm go yarn pyenv pyenv-virtualenv
 ```
 yay -S fzf ripgrep bat exa gnome-keyring imagemagick unzip stow acpi apulse alsa-utils network-manager-applet
 ```
+1. fzf: fuzzy finder
+2. acpi: battery status
 ---
 
 ### Install ibus and ibus-bamboo

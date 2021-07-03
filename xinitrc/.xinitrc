@@ -42,6 +42,8 @@ xrandr --output HDMI-0 --primary --output eDP-1-1 --left-of HDMI-0 --auto
 # xrandr --output eDP-1-1 --primary --auto
 xrandr --dpi 96 
 
-exec awesome
+
+xset r rate 200 30; exec awesome 
+# xset r rate 200 30; exec dwm 
 # exec bspwm
 # exec dwm 

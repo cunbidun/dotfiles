@@ -11,16 +11,16 @@ local function worker(args)
   local text_widget = wibox.widget {
     font = beautiful.font,
     widget = wibox.widget.textbox,
-    markup = '<span color=\'#81A1C1\'>bat: </span>'
+    markup = '<span color=\'#81A1C1\'> </span>'
   }
   local level_widget = wibox.widget {font = beautiful.font, widget = wibox.widget.textbox}
   battery_widget = wibox.widget {text_widget, level_widget, layout = wibox.layout.fixed.horizontal}
 
-  watch('acpi -i', timeout, function(widget, stdout, stderr, exitreason, exitcode)
+  watch('acpi -i', timeout, function(_, stdout, _, _, _)
     local battery_info = {}
     local capacities = {}
     for s in stdout:gmatch('[^\r\n]+') do
-      local status, charge_str, time = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?(.*)')
+      local status, charge_str, _ = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?(.*)')
       if status ~= nil then
         table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
       else
@@ -30,7 +30,7 @@ local function worker(args)
     end
 
     local capacity = 0
-    for i, cap in ipairs(capacities) do capacity = capacity + cap end
+    for _, cap in ipairs(capacities) do capacity = capacity + cap end
 
     local charge = 0
     local status

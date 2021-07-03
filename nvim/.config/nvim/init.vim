@@ -18,6 +18,7 @@ luafile $HOME/.config/nvim/plug-config/lsp-rooter.lua
 luafile $HOME/.config/nvim/plug-config/hop.lua
 luafile $HOME/.config/nvim/plug-config/quickscope.lua
 
+
 " lspconfig
 source $HOME/.config/nvim/lsp-config/lsp-config.vim
 luafile $HOME/.config/nvim/lsp-config/bash.lua

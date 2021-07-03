@@ -60,7 +60,7 @@ local function worker(args)
     local text_widget = wibox.widget {
         font = beautiful.font,
         widget = wibox.widget.textbox,
-        markup = "<span color='#81A1C1'>vol: </span>",
+        markup = "<span color='#81A1C1'> </span>",
     }
     level_widget = wibox.widget {
         font = beautiful.font,

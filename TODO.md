@@ -1,7 +1,7 @@
 Todo-list
 
 ## alacritty
-- [ ] font issue in external monitor [X]
+- [X] font issue in external monitor
 
 ## awesome-wm
 - [ ] resize and move windows by keyboard
@@ -29,7 +29,7 @@ Todo-list
 
 ## rofi
 - [ ] transparent background
-- [ ] alt-tab switching 
+- [X] alt-tab switching 
 
 ## zsh
 - [ ] add commit message to prompt
@@ -40,3 +40,4 @@ Todo-list
 - [ ] allow multiple themes
 - [ ] full text file search
 - [ ] move to rofi luncher
+- [ ] allow to increase volume pass 100

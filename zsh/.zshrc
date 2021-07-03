@@ -74,6 +74,7 @@ alias b="~/.script/brightness.sh"
 alias r="ranger"
 alias v="nvim"
 alias s="source ~/.zshrc"
+alias x="nvim ~/.xinitrc"
 
 # Umass
 # alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"

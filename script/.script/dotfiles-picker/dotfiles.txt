@@ -1,4 +1,5 @@
 /home/cunbidun/.config/awesome/rc.lua
+/home/cunbidun/.config/awesome
 /home/cunbidun/.config/nvim
 /home/cunbidun/.config/nvim/lsp-config
 /home/cunbidun/.config/nvim/plug-config

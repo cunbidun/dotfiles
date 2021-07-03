@@ -8,8 +8,6 @@ local temperature_widget = require('awesome-wm-widgets.temperature-widget.temper
 local language_widget = require('awesome-wm-widgets.language-widget.language')
 local doge_widget = require('awesome-wm-widgets.doge-widget.doge')
 
-local machi = require('layout-machi')
-
 -- Standard awesome library
 local gears = require('gears')
 local awful = require('awful')
@@ -61,8 +59,6 @@ function useless_gaps_resize(thatmuch, s, t)
   awful.layout.arrange(scr)
 end
 
-beautiful.layout_machi = machi.get_icon()
-
 -- This is used later as the default terminal and editor to run.
 terminal = 'alacritty'
 editor = os.getenv('EDITOR') or 'nvim'
@@ -73,8 +69,7 @@ Modkey = 'Mod4'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-  awful.layout.suit.tile, awful.layout.suit.floating, awful.layout.suit.max, awful.layout.suit.spiral.dwindle,
-  machi.default_layout
+  awful.layout.suit.tile, awful.layout.suit.floating, awful.layout.suit.max, awful.layout.suit.spiral.dwindle
 }
 -- }}}
 
@@ -90,12 +85,13 @@ Keyboardlayout = awful.widget.keyboardlayout()
 TextClock = wibox.widget {
   font = beautiful.font,
   widget = wibox.widget.textbox,
-  markup = string.format('<span color=\'#81A1C1\'>%s</span>', string.lower(os.date('%a %b %d, %H:%M:%S')))
+  markup = string.format('<span color=\'#81A1C1\'> %s</span>', string.lower(os.date('%a %b %d, %H:%M:%S')))
 }
 
 myclocktimer = timer({timeout = 1})
 myclocktimer:connect_signal('timeout', function()
-  TextClock:set_markup(string.format('<span color=\'#81A1C1\'>%s</span>', string.lower(os.date('%a %b %d, %H:%M:%S'))))
+  TextClock:set_markup(string.format('<span color=\'#81A1C1\'> %s</span>',
+                                     string.lower(os.date('%a %b %d, %H:%M:%S'))))
 end)
 myclocktimer:start()
 
@@ -148,8 +144,7 @@ awful.screen.connect_for_each_screen(function(s)
   -- Each screen has its own tag table.
   local l = awful.layout.suit
   local layouts = {l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.max}
-  awful.tag({'1:term', '2:dev', '3:web', '4:tool', '5:note', '6:music', '7:gaming', '8:meeting', '9:workspace'}, s,
-            layouts)
+  awful.tag({'', '','','','','', '', '', ''}, s, layouts)
 
   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
@@ -159,56 +154,56 @@ awful.screen.connect_for_each_screen(function(s)
   s.mytaglist = awful.widget.taglist {
     screen = s,
     filter = awful.widget.taglist.filter.all,
-    buttons = taglist_buttons,
-    widget_template = {
-      {
-        {
-          layout = wibox.layout.fixed.vertical,
-          {{id = 'text_role', widget = wibox.widget.textbox}, top = 2, bottom = 2, widget = wibox.container.margin},
-          {
-            {top = 2, widget = wibox.container.margin},
-            id = 'overline',
-            bg = beautiful.wibar_bg,
-            shape = gears.shape.rectangle,
-            widget = wibox.container.background
-          }
-        },
-        right = 4,
-        top = 1,
-        widget = wibox.container.margin
-      },
-      id = 'background_role',
-      widget = wibox.container.background,
-      shape = gears.shape.rectangle,
-      create_callback = function(self, _, index, _)
-        local focused = false
-        for _, x in pairs(awful.screen.focused().selected_tags) do
-          if x.index == index then
-            focused = true
-            break
-          end
-        end
-        if focused then
-          self:get_children_by_id('overline')[1].bg = beautiful.accent
-        else
-          self:get_children_by_id('overline')[1].bg = beautiful.wibar_bg
-        end
-      end,
-      update_callback = function(self, _, index, _)
-        local focused = false
-        for _, x in pairs(awful.screen.focused().selected_tags) do
-          if x.index == index then
-            focused = true
-            break
-          end
-        end
-        if focused then
-          self:get_children_by_id('overline')[1].bg = beautiful.accent
-        else
-          self:get_children_by_id('overline')[1].bg = beautiful.wibar_bg
-        end
-      end
-    }
+    buttons = taglist_buttons
+    -- widget_template = {
+    --   {
+    --     {
+    --       layout = wibox.layout.fixed.vertical,
+    --       {{id = 'text_role', widget = wibox.widget.textbox}, top = 2, bottom = 2, widget = wibox.container.margin},
+    --       {
+    --         {top = 2, widget = wibox.container.margin},
+    --         id = 'overline',
+    --         bg = beautiful.wibar_bg,
+    --         shape = gears.shape.rectangle,
+    --         widget = wibox.container.background
+    --       }
+    --     },
+    --     right = 4,
+    --     top = 1,
+    --     widget = wibox.container.margin
+    --   },
+    --   id = 'background_role',
+    --   widget = wibox.container.background,
+    --   shape = gears.shape.rectangle,
+    --   create_callback = function(self, _, index, _)
+    --     local focused = false
+    --     for _, x in pairs(awful.screen.focused().selected_tags) do
+    --       if x.index == index then
+    --         focused = true
+    --         break
+    --       end
+    --     end
+    --     if focused then
+    --       self:get_children_by_id('overline')[1].bg = beautiful.accent
+    --     else
+    --       self:get_children_by_id('overline')[1].bg = beautiful.wibar_bg
+    --     end
+    --   end,
+    --   update_callback = function(self, _, index, _)
+    --     local focused = false
+    --     for _, x in pairs(awful.screen.focused().selected_tags) do
+    --       if x.index == index then
+    --         focused = true
+    --         break
+    --       end
+    --     end
+    --     if focused then
+    --       self:get_children_by_id('overline')[1].bg = beautiful.accent
+    --     else
+    --       self:get_children_by_id('overline')[1].bg = beautiful.wibar_bg
+    --     end
+    --   end
+    -- }
   }
 
   -- Create the wibox
@@ -258,13 +253,7 @@ globalkeys = gears.table.join(awful.key({Modkey, 'Mod1'}, 'j', function()
   awful.client.incwfact(0.05)
 end), awful.key({Modkey, 'Mod1'}, 'k', function()
   awful.client.incwfact(-0.05)
-end), -- machi layout special keybindings
-awful.key({Modkey}, '.', function()
-  machi.default_editor.start_interactive()
-end, {description = 'machi: edit the current machi layout', group = 'layout'}), awful.key({Modkey}, '/', function()
-  machi.switcher.start(client.focus)
-end, {description = 'machi: switch between windows', group = 'layout'}),
-
+end),
 -- awful.key({ Modkey}, "+", function () useless_gaps_resize(1)  end, {description = "increment useless gaps", group = "tag"}),
 -- awful.key({ Modkey}, "-", function () useless_gaps_resize(-1) end, {description = "decrement useless gaps", group = "tag"}),
                               awful.key({Modkey, 'Shift'}, 's', function()
