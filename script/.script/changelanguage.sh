@@ -11,4 +11,7 @@ if [ $lang = $VN_ibus ];then
   notify-send "[en] welcome" -t 1000 -a "System"
   ibus engine $EN_ibus
 fi
-
+ps cax | grep slstatus > /dev/null
+if [ $? -eq 0 ]; then
+  killall slstatus; slstatus &
+fi

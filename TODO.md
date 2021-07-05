@@ -14,6 +14,11 @@ Todo-list
 - [ ] system tray alternate solution
 - [ ] window(max, floating) status taskbar
 
+## dwm
+- [ ] setup alt tab feature to cycle around the task
+- [ ] setup status bar for dwm
+- [ ] remove iscentre patch?
+
 ## external monitor
 - [ ] move sound to external monitor [X]
 
@@ -35,8 +40,8 @@ Todo-list
 - [ ] add commit message to prompt
 
 ## general 
-- [ ] mirgate notion note as README in dotfiles project
-- [X] setup scripts for editing dotfiles
+- [X] mirgate notion note as README in dotfiles project
+- [ ] setup scripts for editing dotfiles, using dmenu
 - [ ] allow multiple themes
 - [ ] full text file search
 - [ ] move to rofi luncher
