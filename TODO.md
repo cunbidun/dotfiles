@@ -1,7 +1,7 @@
 Todo-list
 
 ## alacritty
-- [X] font issue in external monitor
+- [O] font issue in external monitor
 
 ## awesome-wm
 - [ ] resize and move windows by keyboard
@@ -13,6 +13,9 @@ Todo-list
 - [ ] research conky for system info
 - [ ] system tray alternate solution
 - [ ] window(max, floating) status taskbar
+
+## dunst
+- [O] setup dunst
 
 ## dwm
 - [ ] setup alt tab feature to cycle around the task
