@@ -1,3 +1,4 @@
+export PATH=$PATH:~/.scripts/bin
 export ZSH="/home/cunbidun/.oh-my-zsh"
 export TERM="xterm-256color"
 export FZF_DEFAULT_OPTS="
@@ -70,7 +71,7 @@ alias zshconfig="nvim ~/.zshrc"
 alias vconfig="cd ~/.config/nvim/ && nvim"
 
 alias CP="~/competitive_programming/"
-alias b="~/.script/brightness.sh"
+alias b="set_brightness"
 alias r="ranger"
 alias v="nvim"
 alias s="source ~/.zshrc"

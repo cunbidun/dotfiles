@@ -67,8 +67,11 @@ static const struct arg args[] = {
     /* function format          argument */
     {cpu_perc, "CPU: %s%% │ ", NULL},
     {ram_perc, "RAM: %s%% │ ", NULL},
-    {run_command, "VOL: %s │ " , "~/.script/get_volume.sh"},
-    {run_command, "TEMP: %s │ ", "~/.script/get_temp.sh"},
-    {run_command, "LANG: %s │ " , "~/.script/get_language.sh"},
+    {run_command, "IN: %s │ ", "get_internet"},
+    {run_command, "DOGE: %s USD │ ", "get_doge"},
+    {run_command, "BAT: %s │ ", "get_battery"},
+    {run_command, "VOL: %s │ " , "get_volume"},
+    {run_command, "TEMP: %s │ ", "get_temp"},
+    {run_command, "LANG: %s │ " , "get_language"},
     {datetime, "%s │", "%a %b %d, %H:%M:%S"},
 };

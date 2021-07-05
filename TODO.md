@@ -18,6 +18,7 @@ Todo-list
 - [ ] setup alt tab feature to cycle around the task
 - [ ] setup status bar for dwm
 - [ ] remove iscentre patch?
+- [ ] add edit config to dwm
 
 ## external monitor
 - [ ] move sound to external monitor [X]
@@ -34,13 +35,13 @@ Todo-list
 
 ## rofi
 - [ ] transparent background
-- [X] alt-tab switching 
+- [O] alt-tab switching 
 
 ## zsh
 - [ ] add commit message to prompt
 
 ## general 
-- [X] mirgate notion note as README in dotfiles project
+- [O] mirgate notion note as README in dotfiles project
 - [ ] setup scripts for editing dotfiles, using dmenu
 - [ ] allow multiple themes
 - [ ] full text file search
