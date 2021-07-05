@@ -90,7 +90,6 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", nord9, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *select_config[] = { "/home/cunbidun/.script/dotfiles-picker/dotfiles-picker.sh",  NULL };
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
@@ -111,7 +110,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("import png:- | xclip -selection clipboard -t image/png") },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("nord_color_picker") },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = select_config} },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("alacritty -e dotfiles_picker") },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
