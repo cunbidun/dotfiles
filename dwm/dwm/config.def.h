@@ -2,6 +2,8 @@
 
 #include <X11/XF86keysym.h>
 
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -74,6 +76,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -87,9 +90,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", nord9, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *changelanguage[] = { "set_language",  NULL };
 static const char *select_config[] = { "/home/cunbidun/.script/dotfiles-picker/dotfiles-picker.sh",  NULL };
-static const char *screenshot[] = { "import png:- | xclip -selection clipboard -t image/png",  NULL };
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
@@ -97,6 +98,7 @@ static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "togg
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ ALTKEY,                       XK_Tab,    spawn,          SHCMD("rofi -show window") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -107,7 +109,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot} },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("import png:- | xclip -selection clipboard -t image/png") },
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("nord_color_picker") },
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = select_config} },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -132,7 +135,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0] } },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1] } },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2] } },
-	{ MODKEY,                       XK_space,  spawn,          {.v = changelanguage} },
+	{ MODKEY,                       XK_space,  spawn,          SHCMD("set_language") },
 	{ MODKEY|ControlMask,           XK_space,  togglefloating, {0} },
 	{ MODKEY|ControlMask,	  	      XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },

@@ -17,7 +17,7 @@ pacman -S nodejs npm go yarn pyenv pyenv-virtualenv
 
 ### Install utilities
 ```
-yay -S fzf ripgrep bat exa gnome-keyring imagemagick unzip stow acpi apulse alsa-utils network-manager-applet
+yay -S fzf xclip ripgrep bat exa gnome-keyring imagemagick unzip stow acpi apulse alsa-utils network-manager-applet
 ```
 1. fzf: fuzzy finder
 2. acpi: battery status
