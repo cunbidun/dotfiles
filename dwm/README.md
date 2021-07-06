@@ -1,0 +1,13 @@
+# Patches (In order)
+- [1] dwm-movestack-6.1.diff
+- [2] dwm-vanitygaps-6.2.diff
+- [3] dwm-alwayscenter-20200625-f04cac6.diff
+- [4] dwm-hide_vacant_tags-6.2.diff
+- [5] dwm-sticky-6.1.diff
+- [6] dwm-autostart-20210120-cb3f58a.diff
+- [7] dwm-ewmhtags-6.2.diff
+- [8] dwm-focusonnetactive-6.2.diff
+- [9] dwm-swapfocus-20160731-56a31dc.diff
+- [10] dwm-systray-6.2.diff
+- [11] dwm-cyclelayouts-20180524-6.2.diff
+- [12] dwm-6.2-attachbottom.diff
