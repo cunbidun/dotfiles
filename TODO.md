@@ -16,13 +16,15 @@ Todo-list
 
 ## dunst
 - [O] setup dunst
-- [O] remove duplicate noti 
+- [ ] remove duplicate noti 
+- [ ] noti when unplug
 
 ## dwm
-- [ ] setup alt tab feature to cycle around the task
-- [ ] setup status bar for dwm
+- [O] setup alt tab feature to cycle around windows 
+- [O] setup status bar for dwm
 - [ ] remove iscentre patch?
-- [ ] add edit config to dwm
+- [O] add edit config to dwm
+- [ ] spawn slave instead of master
 
 ## external monitor
 - [ ] move sound to external monitor [X]
@@ -50,4 +52,4 @@ Todo-list
 - [ ] allow multiple themes
 - [ ] full text file search
 - [ ] move to rofi luncher
-- [ ] allow to increase volume pass 100
+- [O] allow to increase volume pass 100

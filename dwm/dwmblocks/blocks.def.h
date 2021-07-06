@@ -5,7 +5,7 @@ static const Block blocks[] = {
     {"MEM: ", "get_memory", 10, 0},
     {"NET: ", "get_internet", 10, 0},
     {"DOGE: ", "get_doge", 10, 0},
-    {"BAT: ", "get_battery", 10, 0},
+    {"BAT: ", "get_battery", 5, 12},
     {"VOL: " , "get_volume", 30, 10},
     {"TEMP: ", "get_temp", 10, 0},
     {"LANG: " , "get_language", 30, 11},
