@@ -16,6 +16,7 @@ Todo-list
 
 ## dunst
 - [O] setup dunst
+- [O] remove duplicate noti 
 
 ## dwm
 - [ ] setup alt tab feature to cycle around the task
