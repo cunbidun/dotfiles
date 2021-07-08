@@ -11,3 +11,4 @@
 - [10] dwm-systray-6.2.diff
 - [11] dwm-cyclelayouts-20180524-6.2.diff
 - [12] dwm-6.2-attachbottom.diff
+- [13] dwm-warp-6.2.diff

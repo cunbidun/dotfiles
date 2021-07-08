@@ -79,7 +79,7 @@
   "[lua]": {
     "editor.tabSize": 2
   },
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "GitHub Light",
   "files.autoSaveDelay": 500,
   "glassit.alpha": 255,
   "[typescript]": {
@@ -117,5 +117,6 @@
     "[ ]",
     "[x]"
   ],
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)"
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "window.zoomLevel": 1
 }
