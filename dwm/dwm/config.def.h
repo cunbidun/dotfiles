@@ -22,12 +22,17 @@ static const char col_gray1[]       = "#2E3440";
 static const char col_gray2[]       = "#4C566A";
 static const char col_gray3[]       = "#D8DEE9";
 static const char col_gray4[]       = "#ECEFF4";
+static const char nord0[]           = "#2E3440";
+static const char nord3[]           = "#4C566A";
+static const char nord4[]           = "#D8DEE9";
 static const char nord8[]           = "#88c0d0";
 static const char nord9[]           = "#81A1C1";
+static const char nord12[]          = "#D08770";
+
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, nord9,     nord9},
+	/*               fg           bg            border   */
+	[SchemeNorm] = { nord4,       nord0,        nord3},
+	[SchemeSel]  = { nord0,       nord12,       nord9},
 };
 
 
@@ -42,6 +47,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           0,           -1 },
+	{ "Chromium",  NULL,       NULL,      1 << 2,       0,           0,           -1 }, // tag 3
 };
 
 /* layout(s) */
@@ -91,7 +97,7 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ ALTKEY,                       XK_Tab,    spawn,          SHCMD("rofi -show window") },
+	{ ALTKEY,                       XK_Tab,    spawn,          SHCMD("skippy-xd-runner --toggle") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -99,6 +105,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_z,      zoom,           {0} },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask|Mod1Mask,    XK_k,      setcfact,       {.f = +0.25} },
