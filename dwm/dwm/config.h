@@ -31,8 +31,9 @@ static const char nord12[]          = "#D08770";
 
 static const char *colors[][3]      = {
 	/*               fg           bg            border   */
-	[SchemeNorm] = { nord4,       nord0,        nord3},
+	[SchemeNorm] = { nord4,       nord0,       nord3},
 	[SchemeSel]  = { nord0,       nord9,       nord9},
+	[SchemeUrg]  = { nord0,      nord12,      nord12},
 };
 
 
