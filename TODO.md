@@ -38,10 +38,12 @@ Todo-list
 - [ ] set up nvim comment
 - [ ] set up xdg-mime to open with nvim [X]
 - [ ] add support for .h file
+- [ ] fix format json
 
 ## rofi
 - [ ] transparent background
 - [O] alt-tab switching 
+- [ ] rofi select first and last element bug
 
 ## zsh
 - [ ] add commit message to prompt

@@ -31,9 +31,7 @@ call plug#begin('~/.nvim/bundle')
 
   " navigation
   Plug 'unblevable/quick-scope'  
-  Plug 'phaazon/hop.nvim'
   Plug 'psliwka/vim-smoothie' " smooth scrolling
-  Plug 'andymass/vim-matchup' " extend neovim % operator
 
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary' " quickly comment 
@@ -42,12 +40,16 @@ call plug#begin('~/.nvim/bundle')
   " explorer
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kevinhwang91/rnvimr' " ranger
+  " Plug 'kyazdani42/nvim-tree.lua' " file explorer
 
   " treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
   Plug 'christoomey/vim-tmux-navigator' " moving between vim buffer and tmux panel
 
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  
+  " term
+  Plug 'akinsho/nvim-toggleterm.lua'
 call plug#end()
 
 " commentary

@@ -9,10 +9,13 @@ endif
 hi Normal ctermbg=NONE guibg=NONE
 hi SignColumn guibg=NONE
 
+hi Nord0 guibg=#2E3440
+hi Nord9 guifg=#81A1C1 guibg=NONE
+
 hi Error guifg=#BF616A guibg=NONE
 
-hi QuickScopePrimary guifg='#2E3440' guibg=#88C0D0 gui=bold ctermfg=155 cterm=underline
-hi QuickScopeSecondary guifg='#2E3440' guibg=#EBCB8B gui=bold ctermfg=81 cterm=underline
+hi QuickScopePrimary guifg=#2E3440 guibg=#88C0D0 gui=bold ctermfg=155 cterm=underline
+hi QuickScopeSecondary guifg=#2E3440 guibg=#EBCB8B gui=bold ctermfg=81 cterm=underline
 " buffer bar
 hi BufferCurrent guifg=#88c0d0 guibg=NONE
 hi BufferCurrentIndex guifg=#88c0d0 guibg=NONE

@@ -13,12 +13,11 @@
   "latex-workshop.view.pdf.viewer": "tab",
   "C_Cpp.updateChannel": "Insiders",
 
-  // Vim
   "vim.handleKeys": {
     "<C-w>": false,
     "<C-c>": false,
     "<C-v>": false,
-    "<C-h>": false,
+    "<C-h>": false
   },
   "vim.useSystemClipboard": true,
   "vim.vimrc.enable": true,
@@ -68,7 +67,7 @@
   },
   "output.smartScroll.enabled": false,
   "terminal.integrated.fontWeight": "600",
-  "editor.fontSize": 16,
+  "editor.fontSize": 15,
   "editor.tabSize": 8,
   "[python]": {
     "editor.tabSize": 4
@@ -79,7 +78,7 @@
   "[lua]": {
     "editor.tabSize": 2
   },
-  "workbench.colorTheme": "GitHub Light",
+  "workbench.colorTheme": "Nord",
   "files.autoSaveDelay": 500,
   "glassit.alpha": 255,
   "[typescript]": {
@@ -118,5 +117,5 @@
     "[x]"
   ],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "window.zoomLevel": 1
+  "files.autoSave": "afterDelay"
 }

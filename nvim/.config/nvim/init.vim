@@ -12,11 +12,10 @@ luafile $HOME/.config/nvim/plug-config/nvim-treesitter.lua
 luafile $HOME/.config/nvim/plug-config/galaxyline.lua
 luafile $HOME/.config/nvim/plug-config/colorizer.lua
 luafile $HOME/.config/nvim/plug-config/gitblame.lua
-luafile $HOME/.config/nvim/plug-config/matchup.lua
 luafile $HOME/.config/nvim/plug-config/rnvimr.lua
 luafile $HOME/.config/nvim/plug-config/lsp-rooter.lua
-luafile $HOME/.config/nvim/plug-config/hop.lua
 luafile $HOME/.config/nvim/plug-config/quickscope.lua
+luafile $HOME/.config/nvim/plug-config/nvim-toggleterm.lua
 
 
 " lspconfig

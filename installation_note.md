@@ -17,7 +17,7 @@ pacman -S nodejs npm go yarn pyenv pyenv-virtualenv
 
 ### Install utilities
 ```
-yay -S fzf skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow acpi pamixer apulse alsa-utils network-manager-applet
+yay -S fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow acpi pamixer apulse alsa-utils network-manager-applet
 ```
 1. fzf: fuzzy finder
 2. acpi: battery status
@@ -120,6 +120,11 @@ cd dotfiles && stow nvim
 2. install plug-in manager([vim-plug](https://github.com/junegunn/vim-plug))
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+```
+
+3. Lsp install
+```
+:LspInstall cpp json
 ```
 ---
 
