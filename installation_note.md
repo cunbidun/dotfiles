@@ -23,6 +23,12 @@ yay -S fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring ima
 2. acpi: battery status
 ---
 
+### Install utilities for neomutt
+```
+yay -S abook lynx
+```
+---
+
 ### Install ibus and ibus-bamboo
 1. install ibus and ibus-bamboo
 ```

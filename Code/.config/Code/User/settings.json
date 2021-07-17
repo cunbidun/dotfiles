@@ -78,7 +78,7 @@
   "[lua]": {
     "editor.tabSize": 2
   },
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "Default Light+",
   "files.autoSaveDelay": 500,
   "glassit.alpha": 255,
   "[typescript]": {
@@ -117,5 +117,6 @@
     "[x]"
   ],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "afterDelay",
+  "window.zoomLevel": 2
 }
