@@ -21,12 +21,7 @@ require'lspconfig'.efm.setup {
           lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
         }
       },
-      cpp = {
-        {
-          formatCommand = 'clang-format -style="{ BasedOnStyle: LLVM, AllowShortIfStatementsOnASingleLine: false, ColumnLimit: 0}"',
-          formatStdin = true
-        }
-      }
+      cpp = {{formatCommand = 'clang-format -style="{ BasedOnStyle: LLVM,  ColumnLimit: 0}"', formatStdin = true}}
     }
   }
 }

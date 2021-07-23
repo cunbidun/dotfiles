@@ -22,9 +22,10 @@ Todo-list
 ## dwm
 - [O] setup alt tab feature to cycle around windows 
 - [O] setup status bar for dwm
-- [ ] remove iscentre patch?
+- [X] remove iscentre patch?
 - [O] add edit config to dwm
-- [ ] spawn slave instead of master
+- [O] spawn slave instead of master
+- [ ] chrome app from dmenu? 
 
 ## external monitor
 - [ ] move sound to external monitor [X]
@@ -38,7 +39,8 @@ Todo-list
 - [ ] set up nvim comment
 - [ ] set up xdg-mime to open with nvim [X]
 - [ ] add support for .h file
-- [ ] fix format json
+- [O] fix format json
+- [ ] folding in vim 
 
 ## rofi
 - [ ] transparent background

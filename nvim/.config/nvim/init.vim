@@ -27,6 +27,7 @@ luafile $HOME/.config/nvim/lsp-config/lua.lua
 luafile $HOME/.config/nvim/lsp-config/json.lua
 luafile $HOME/.config/nvim/lsp-config/vim.lua
 luafile $HOME/.config/nvim/lsp-config/latex.lua
+luafile $HOME/.config/nvim/lsp-config/lsp_signature.lua
 
 " competitive programming config
 source $HOME/.config/nvim/vimrcs/cp.vim

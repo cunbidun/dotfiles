@@ -20,6 +20,7 @@ setopt shwordsplit
 source ~/.git-prompt.sh
 setopt PROMPT_SUBST ; PS1='[%n@%m %c$(__git_ps1 " (%s)")]\$ '
 
+
 fpath=(/home/cunbidun/.zprompts/ $fpath)
 autoload -Uz promptinit
 promptinit
@@ -102,4 +103,4 @@ test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 # colorscript -e 19
 # source /usr/share/nvm/init-nvm.sh
 
-
+source ~/.scripts/todoist_functions_fzf_bash.sh
