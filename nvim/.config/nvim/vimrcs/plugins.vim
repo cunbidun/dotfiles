@@ -24,6 +24,7 @@ call plug#begin('~/.nvim/bundle')
   Plug 'kabouzeid/nvim-lspinstall' " for installing lsp
   Plug 'ahmedkhalf/lsp-rooter.nvim' " auto find and set porject root
   Plug 'RRethy/vim-illuminate'
+  Plug 'ray-x/lsp_signature.nvim'
 
   " auto completion
   Plug 'hrsh7th/nvim-compe'

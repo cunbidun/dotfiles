@@ -68,7 +68,6 @@
   "output.smartScroll.enabled": false,
   "terminal.integrated.fontWeight": "600",
   "editor.fontSize": 15,
-  "editor.tabSize": 8,
   "[python]": {
     "editor.tabSize": 4
   },
@@ -78,7 +77,7 @@
   "[lua]": {
     "editor.tabSize": 2
   },
-  "workbench.colorTheme": "Default Light+",
+  "workbench.colorTheme": "Nord",
   "files.autoSaveDelay": 500,
   "glassit.alpha": 255,
   "[typescript]": {
@@ -116,7 +115,5 @@
     "[ ]",
     "[x]"
   ],
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "files.autoSave": "afterDelay",
-  "window.zoomLevel": 2
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)"
 }
