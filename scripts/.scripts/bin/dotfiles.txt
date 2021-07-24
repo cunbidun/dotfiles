@@ -1,0 +1,15 @@
+/home/cunbidun/.config/awesome/rc.lua
+/home/cunbidun/.config/awesome
+/home/cunbidun/.config/nvim
+/home/cunbidun/.config/nvim/lsp-config
+/home/cunbidun/.config/nvim/plug-config
+/home/cunbidun/.config/nvim/plug-config/nord.vim
+/home/cunbidun/.scripts/bin
+/home/cunbidun/.scripts/bin/dotfiles-picker.sh
+/home/cunbidun/.scripts/bin/dotfiles.txt
+/home/cunbidun/dwmblocks
+/home/cunbidun/dwm
+/home/cunbidun/.config/alacritty/alacritty.yml
+/home/cunbidun/.config/alacritty/README.md
+/home/cunbidun/dotfiles/TODO.md
+/home/cunbidun/dotfiles/installation_note.md
