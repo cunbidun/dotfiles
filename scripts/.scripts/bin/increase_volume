@@ -1,0 +1,4 @@
+#!/bin/bash
+pamixer -i 5 --allow-boost; pkill -RTMIN+10 dwmblocks
+vol=$(get_volume)
+notify-send "volume $vol" -t 1000 -a "System"
