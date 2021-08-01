@@ -1,6 +1,6 @@
 #!/bin/bash
 
-xset r rate 200 30 &
+xset r rate 200 40 &
 feh --bg-fill --randomize ~/.wallpapers/favorite/* &
 killall skippy-xd; skippy-xd --start-daemon &
 # nm-applet &
