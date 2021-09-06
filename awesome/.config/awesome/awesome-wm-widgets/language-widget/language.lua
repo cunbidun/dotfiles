@@ -9,7 +9,7 @@ local language = {}
 function language:toggle()
   spawn.easy_async('ibus engine', function(stdout, _, _, _)
     local lang = string.gsub(stdout, '%s+', '')
-    awful.spawn.with_shell('~/.script/changelanguage.sh', false)
+    awful.spawn.with_shell('set_language', false)
     if lang == 'xkb:us::eng' then current_language.markup = '<span color=\'#EBCB8B\'> vi</span>' end
     if lang == 'Bamboo' then current_language.markup = '<span color=\'#81A1C1\'> en</span>' end
   end)

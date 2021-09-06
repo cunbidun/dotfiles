@@ -180,3 +180,13 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugi
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 ```
 ---
+
+### Java applet topcoder
+Disable security by deleting "MD5" from the line that starts with "jdk.jar.disabledAlgorithms" in the following file:
+```
+sudo nvim /usr/lib/jvm/default/jre/lib/security/java.security
+
+Before: jdk.jar.disabledAlgorithms=MD2, MD5, RSA keySize < 1024, \
+After:  jdk.jar.disabledAlgorithms=MD2, RSA keySize < 1024, \
+```
+[Source](https://codeforces.cc/blog/entry/90503?#comment-789564)

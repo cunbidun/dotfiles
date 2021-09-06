@@ -41,6 +41,9 @@ Todo-list
 - [ ] add support for .h file
 - [O] fix format json
 - [ ] folding in vim 
+- [ ] https://github.com/folke/todo-comments.nvim
+- [ ] formatter and lsp for md
+- [ ] formatter and lsp for yaml
 
 ## rofi
 - [ ] transparent background
