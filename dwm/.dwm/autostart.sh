@@ -7,5 +7,5 @@ killall skippy-xd; skippy-xd --start-daemon &
 ibus-daemon -drx &
 killall dwmblocks; dwmblocks &
 killall dunst; dunst &
-cd ~/competitive_programming/cc/ && npm start &
+cd ~/competitive_programming/cc && npm start &
 # picom --experimental-backends &

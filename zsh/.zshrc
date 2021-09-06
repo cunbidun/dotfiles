@@ -10,7 +10,7 @@ export BAT_STYLE="plain"
 export BAT_THEME="Nord"
 export BAT_OPTS="--color always"
 
-export CPS_PATH="$HOME/competitive_programming/cps_scripts/"
+export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
 # set words split for zsh
 # why? for git integration to work correctly
 # see more: https://stackoverflow.com/questions/23157613/how-to-iterate-through-string-one-word-at-a-time-in-zsh

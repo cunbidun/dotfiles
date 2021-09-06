@@ -10,8 +10,11 @@ matches:
   # - trigger: ":address"
   #   replace: "Room 219, Johnson Hall, 380 Thatcher Road, Amherst, MA 01003-9359, United States"
 
+  # - trigger: ":address"
+  #   replace: "27 Chestnut Ave, Apartment 2, Jamaica Plain MA 02130"
+
   - trigger: ":address"
-    replace: "27 Chestnut Ave, Apartment 2, Jamaica Plain MA 02130"
+    replace: "Apartment 12B, 1001 N Pleasant St, Amherst, MA 01002-1339"
 
   - trigger: ":uni"
     replace: "University of Massachusetts at Amherst"
@@ -36,6 +39,9 @@ matches:
 
   - trigger: ":zip"
     replace: "02130"
+
+  - trigger: ":ts"
+    replace: "Two Sigma"
 
   - trigger: ":linkedin"
     replace: "https://www.linkedin.com/in/duy-pham-90652a152/"
