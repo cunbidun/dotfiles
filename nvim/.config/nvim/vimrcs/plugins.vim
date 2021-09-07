@@ -23,7 +23,6 @@ call plug#begin('~/.nvim/bundle')
   Plug 'neovim/nvim-lspconfig'
   Plug 'kabouzeid/nvim-lspinstall' " for installing lsp
   Plug 'ahmedkhalf/lsp-rooter.nvim' " auto find and set porject root
-  Plug 'RRethy/vim-illuminate'
   Plug 'ray-x/lsp_signature.nvim'
 
   " auto completion
@@ -45,6 +44,8 @@ call plug#begin('~/.nvim/bundle')
 
   " treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+  Plug 'nvim-treesitter/nvim-treesitter-refactor'
+
   Plug 'christoomey/vim-tmux-navigator' " moving between vim buffer and tmux panel
 
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
