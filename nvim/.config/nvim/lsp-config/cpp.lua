@@ -1,5 +1,9 @@
 DATA_PATH = vim.fn.stdpath('data')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 require'lspconfig'.clangd.setup {
+  capabilities = capabilities,
   cmd = {
     DATA_PATH .. '/lspinstall/cpp/clangd/bin/clangd', '--background-index', '--header-insertion=never',
     '--cross-file-rename', '--clang-tidy', '--clang-tidy-checks=-*,llvm-*,clang-analyzer-*'
