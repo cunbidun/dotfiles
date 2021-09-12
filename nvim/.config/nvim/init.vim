@@ -1,6 +1,5 @@
 source $HOME/.config/nvim/vimrcs/basic.vim
 source $HOME/.config/nvim/vimrcs/plugins.vim
-source $HOME/.config/nvim/vimrcs/filetype.vim
 
 
 " competitive programming config
