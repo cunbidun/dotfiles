@@ -71,7 +71,7 @@ colors:
 font:
   size: 7.5
   normal:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font Mono
 
 window:
     padding:

@@ -8,7 +8,7 @@
     "key": "ctrl+alt+b",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 0\u000D"
+      "text": "${CPCLI_PATH}/main.sh \"${fileDirname}\"/ 0\u000D"
     },
     "when": "resourceExtname == .cpp"
   },
@@ -16,7 +16,7 @@
     "key": "ctrl+alt+e",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 1\u000D"
+      "text": "${CPCLI_PATH}/main.sh \"${fileDirname}\"/ 1\u000D"
     },
     "when": "resourceExtname == .cpp"
   },
@@ -24,7 +24,7 @@
     "key": "ctrl+alt+shift+b",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 2\u000D"
+      "text": "${CPCLI_PATH}/main.sh \"${fileDirname}\"/ 2\u000D"
     },
     "when": "resourceExtname == .cpp"
   },
@@ -32,7 +32,7 @@
     "key": "ctrl+alt+t",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 3\u000D"
+      "text": "${CPCLI_PATH}/main.sh \"${fileDirname}\"/ 3\u000D"
     },
     "when": "resourceExtname == .cpp"
   },
@@ -40,7 +40,7 @@
     "key": "ctrl+alt+a",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 4\u000D"
+      "text": "${CPCLI_PATH}/main.sh \"${fileDirname}\"/ 4\u000D"
     },
     "when": "resourceExtname == .cpp"
   },
@@ -48,17 +48,9 @@
     "key": "ctrl+alt+n",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "${CPS_PATH}/main.sh \"${fileDirname}\"/ 5\u000D"
+      "text": "${CPCLI_PATH}/main.sh \"${fileDirname}\"/\u000D"
     }
   },
-  {
-    "key": "ctrl+alt+c",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": {
-      "text": "cd ${workspaceFolder}/../CC/ && npm start\u000D"
-    }
-  },
-
   {
     "key": "alt+1",
     "command": "-workbench.action.openEditorAtIndex1"
