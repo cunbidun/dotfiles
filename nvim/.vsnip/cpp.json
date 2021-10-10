@@ -767,5 +767,48 @@
       ""
     ],
     "description": "max_flow"
+  },
+  "trie_bit": {
+    "prefix": "trie_bit",
+    "body": [
+      "template <int MXBIT> struct trie_bit {",
+      "  int id;",
+      "  vector<array<int, 2>> trie;",
+      "  trie_bit(int _sz) : id(1), trie(vector<array<int, 2>>(_sz)) {}",
+      "",
+      "  void add(long long n) {",
+      "    int cur = 1;",
+      "    int f = 0;",
+      "    for (int i = MXBIT - 1; i >= 0; i--) {",
+      "      int b = (n >> i) & 1;",
+      "      f |= (!f && b == 1);",
+      "      if (f) {",
+      "        if (trie[cur][b] == 0) {",
+      "          trie[cur][b] = ++id;",
+      "        }",
+      "        cur = trie[cur][b];",
+      "      }",
+      "    }",
+      "  }",
+      "",
+      "  bool check(long long n) {",
+      "    int cur = 1;",
+      "    int f = 0;",
+      "    for (int i = MXBIT - 1; i >= 0; i--) {",
+      "      int b = (n >> i) & 1;",
+      "      f |= (!f && b == 1);",
+      "      if (f) {",
+      "        if (trie[cur][b] == 0) {",
+      "          return false;",
+      "        }",
+      "        cur = trie[cur][b];",
+      "      }",
+      "    }",
+      "    return true;",
+      "  }",
+      "};",
+      ""
+    ],
+    "description": "trie_bit"
   }
 }

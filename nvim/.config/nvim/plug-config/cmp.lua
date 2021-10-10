@@ -79,7 +79,7 @@ cmp.setup {
     end
   },
   sources = {
-    {name = 'nvim_lsp'}, {name = 'nvim_lua'}, {name = 'buffer'}, {name = 'vsnip'}, {name = 'path'}, {name = 'calc'},
+    {name = 'nvim_lsp'}, {name = 'nvim_lua'}, {name = 'buffer'}, {name = 'vsnip'}, {name = 'path'},
     {name = 'cmp_tabnine'}
     -- {name = 'emoji'}
   }

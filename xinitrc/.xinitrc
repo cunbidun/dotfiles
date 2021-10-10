@@ -40,6 +40,7 @@ xset r rate 200 30 &
 
 # xrandr --output eDP-1 --primary --auto
 # xrandr --output eDP-1-1 --primary --auto
+# xrandr --output HDMI-0 --primary --output eDP-1-1 --below HDMI-0 --auto
 xrandr --output HDMI-0 --primary --output eDP-1-1 --left-of HDMI-0 --auto
 # xrandr --output eDP-1-1 --primary --auto
 xrandr --dpi 96 
@@ -47,3 +48,4 @@ xrandr --dpi 96
 # exec awesome 
 while type dwm >/dev/null ; do dwm && continue || break ; done 
 # exec bspwm
+# exec i3
