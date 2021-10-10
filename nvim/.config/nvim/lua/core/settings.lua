@@ -50,6 +50,14 @@ M.load_options = function()
   for k, v in pairs(default_options) do
     vim.opt[k] = v
   end
+
+  -- don't list terminal to buffer list
+  vim.cmd [[
+    augroup rc
+    au!
+    au TermOpen * setlocal nobuflisted
+    augroup END
+  ]]
 end
 
 return M
