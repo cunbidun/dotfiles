@@ -16,6 +16,7 @@ require('packer').startup(function()
     'romgrk/barbar.nvim',
     requires = {{'kyazdani42/nvim-web-devicons'}},
     require("plugins.configs.barbar").setup(),
+
   }
   use {
     'glepnir/galaxyline.nvim',
@@ -124,5 +125,15 @@ require('packer').startup(function()
   use {
     'iamcco/markdown-preview.nvim',
     vim.cmd [[source $HOME/.config/nvim/lua/plugins/configs/markdown-preview.vim]]
+  }
+
+  -- latex
+  use {
+    'lervag/vimtex',
+    vim.cmd [[
+      let g:tex_flavor='latex'
+      let g:vimtex_view_method='zathura'
+      let g:vimtex_quickfix_mode=0
+    ]] 
   }
 end)
