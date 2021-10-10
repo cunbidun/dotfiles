@@ -1,0 +1,18 @@
+local present1, autopairs = pcall(require, 'nvim-autopairs')
+local present2, autopairs_completion = pcall(require, 'nvim-autopairs.completion.cmp')
+
+local M = {setup = function() end}
+
+if not (present1 or present2) then return M end
+
+M.setup = function()
+  autopairs.setup()
+
+  autopairs_completion.setup {
+    map_complete = true, -- insert () func completion
+    map_cr = true,
+    auto_select = true -- automatically select the first item
+  }
+end
+
+return M
