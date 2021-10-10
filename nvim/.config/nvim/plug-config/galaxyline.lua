@@ -1,6 +1,5 @@
 local gl = require('galaxyline')
--- get my theme in galaxyline repo
--- local colors = require('galaxyline.theme').default
+
 local colors = {
   bg = '#434C5E',
   yellow = '#EBCB8B',
@@ -20,6 +19,7 @@ local colors = {
   light_blue = '#8FBCBB',
   grey = '#D8DEE9'
 }
+
 local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree', 'vista', 'dbui', 'packer'}
@@ -72,7 +72,6 @@ table.insert(gls.left, {
 
       local vim_mode = vim.fn.mode()
       return '▊ ' .. alias[vim_mode] .. '  '
-      -- return '▊ '
     end,
     highlight = {colors.red, colors.bg, 'bold'}
   }
@@ -239,3 +238,4 @@ table.insert(gls.short_line_left, {
 table.insert(gls.short_line_left, {
   SFileName = {provider = 'SFileName', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
 })
+

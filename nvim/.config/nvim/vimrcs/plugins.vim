@@ -29,14 +29,12 @@ call plug#begin('~/.nvim/bundle')
   Plug 'hrsh7th/vim-vsnip'
 
   " auto completion
-  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/nvim-cmp', {'commit': 'af70f40'}
   Plug 'hrsh7th/cmp-nvim-lsp' " cmp lsp
   Plug 'hrsh7th/cmp-nvim-lua' " cmp lua vim api
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-calc'
   Plug 'hrsh7th/cmp-vsnip'
-  Plug 'hrsh7th/cmp-emoji'
   Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 
   " navigation
@@ -50,7 +48,6 @@ call plug#begin('~/.nvim/bundle')
   " explorer
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kevinhwang91/rnvimr' " ranger
-  Plug 'kyazdani42/nvim-tree.lua' " file explorer
 
   " treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -63,7 +60,7 @@ call plug#begin('~/.nvim/bundle')
   
   " term
   Plug 'akinsho/nvim-toggleterm.lua'
-
+  Plug 'rhysd/vim-grammarous'
 call plug#end()
 
 " Latex
@@ -71,26 +68,25 @@ let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 
-" plugin config
+" " plugin config
 source $HOME/.config/nvim/plug-config/nord.vim
 source $HOME/.config/nvim/plug-config/fzf.vim
-source $HOME/.config/nvim/plug-config/cmp.lua
 source $HOME/.config/nvim/plug-config/barbar.vim
 source $HOME/.config/nvim/plug-config/markdown-preview.vim
-luafile $HOME/.config/nvim/plug-config/nvim-treesitter.lua
-luafile $HOME/.config/nvim/plug-config/galaxyline.lua
-luafile $HOME/.config/nvim/plug-config/colorizer.lua
-luafile $HOME/.config/nvim/plug-config/gitblame.nvim.lua
 luafile $HOME/.config/nvim/plug-config/rnvimr.lua
-luafile $HOME/.config/nvim/plug-config/project.nvim.lua
 luafile $HOME/.config/nvim/plug-config/quickscope.lua
 luafile $HOME/.config/nvim/plug-config/nvim-toggleterm.lua
 luafile $HOME/.config/nvim/plug-config/neoscroll.nvim.lua
-luafile $HOME/.config/nvim/plug-config/nvim-tree.lua
 luafile $HOME/.config/nvim/plug-config/nvim-comment.lua
 luafile $HOME/.config/nvim/plug-config/indent-blankline.nvim.lua
 luafile $HOME/.config/nvim/plug-config/nvim-autopairs.lua
 luafile $HOME/.config/nvim/plug-config/gitsigns.nvim.lua
+luafile $HOME/.config/nvim/plug-config/colorizer.lua
+luafile $HOME/.config/nvim/plug-config/gitblame.nvim.lua
+luafile $HOME/.config/nvim/plug-config/cmp.lua
+luafile $HOME/.config/nvim/plug-config/project.nvim.lua
+luafile $HOME/.config/nvim/plug-config/nvim-treesitter.lua
+luafile $HOME/.config/nvim/plug-config/galaxyline.lua
 
 " lspconfig
 source $HOME/.config/nvim/lsp-config/lsp-config.vim
