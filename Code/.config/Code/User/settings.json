@@ -121,5 +121,6 @@
   "leetcode.hint.commandShortcut": false,
   "leetcode.hint.configWebviewMarkdown": false,
   "leetcode.defaultLanguage": "cpp",
-  "leetcode.hint.commentDescription": false
+  "leetcode.hint.commentDescription": false,
+  "workbench.colorTheme": "Nord"
 }

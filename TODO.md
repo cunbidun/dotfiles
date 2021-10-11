@@ -31,14 +31,13 @@ Todo-list
 - [ ] move sound to external monitor [X]
 
 ## firefox 
-- [ ] font problem in firefox
+- [ ] font problem in firefox (probably couldn't solve it. Chrome use proprietary fonts)
 - [ ] smooth scrolling
 
 ## vim
 - [ ] add line number when grepping text with fzf preview
-- [ ] set up nvim comment
+- [O] set up nvim comment
 - [ ] set up xdg-mime to open with nvim [X]
-- [ ] add support for .h file
 - [O] fix format json
 - [ ] folding in vim 
 - [ ] https://github.com/folke/todo-comments.nvim
@@ -52,6 +51,9 @@ Todo-list
 
 ## zsh
 - [ ] add commit message to prompt
+
+# ranger
+- [ ] open pdf/images inplace
 
 ## general 
 - [O] mirgate notion note as README in dotfiles project
