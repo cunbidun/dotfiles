@@ -1,139 +1,193 @@
-require('packer').startup(function()
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  Packer_bootstrap = fn.system({
+    'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path
+  })
+end
+
+require('packer').startup(function(use)
   -- packer
-  use "wbthomason/packer.nvim"
+  use 'wbthomason/packer.nvim'
 
   -- nord theme
   use {
-    "arcticicestudio/nord-vim",
-    require("plugins.configs.nord-vim").setup(),
+    'arcticicestudio/nord-vim',
+    config = function()
+      require('plugins.configs.nord-vim').setup()
+    end
   }
 
   -- icons
-  use "kyazdani42/nvim-web-devicons"
+  use 'kyazdani42/nvim-web-devicons'
 
   -- bars
   use {
     'romgrk/barbar.nvim',
     requires = {{'kyazdani42/nvim-web-devicons'}},
-    require("plugins.configs.barbar").setup(),
-
+    config = function()
+      require('plugins.configs.barbar').setup()
+    end
   }
   use {
     'glepnir/galaxyline.nvim',
-    require("plugins.configs.galaxyline").setup(),
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    config = function()
+      require('plugins.configs.galaxyline').setup()
+    end
   }
 
   -- auto completion
-  use "hrsh7th/vim-vsnip"
+  use 'hrsh7th/vim-vsnip'
   use {
-    "hrsh7th/nvim-cmp",
-    commit = "af70f40", 
-    require("plugins.configs.nvim-cmp").setup(),
+    'hrsh7th/nvim-cmp',
+    commit = 'af70f40',
+    config = function()
+      require('plugins.configs.nvim-cmp').setup()
+    end
   }
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lua"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-path" 
-  use "hrsh7th/cmp-vsnip" 
-  use {
-    "tzachar/cmp-tabnine", 
-    run = './install.sh'
-  }
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-vsnip'
+  use {'tzachar/cmp-tabnine', run = './install.sh'}
 
   -- treesitter
   use {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    require("plugins.configs.nvim-treesitter").setup(),
+    config = function()
+      require('plugins.configs.nvim-treesitter').setup()
+    end
   }
-  use {
-    'nvim-treesitter/nvim-treesitter-refactor',
-    requires = {{"nvim-treesitter/nvim-treesitter"}}
-  }
-  
+  use {'nvim-treesitter/nvim-treesitter-refactor', requires = {{'nvim-treesitter/nvim-treesitter'}}}
+
   -- lsp
   use {
     'neovim/nvim-lspconfig',
-    require("plugins.configs.nvim-lspconfig").setup(),
+    config = function()
+      require('plugins.configs.nvim-lspconfig').setup()
+    end
   }
-  use "kabouzeid/nvim-lspinstall"
-  use { 
+  use 'kabouzeid/nvim-lspinstall'
+  use {
     'ahmedkhalf/project.nvim',
-    require("plugins.configs.project").setup()
+    config = function()
+      require('plugins.configs.project').setup()
+    end
   }
   use {
     'ray-x/lsp_signature.nvim',
-    require("plugins.configs.lsp_signature").setup()
+    config = function()
+      require('plugins.configs.lsp_signature').setup()
+    end
   }
   use {
     'akinsho/nvim-toggleterm.lua',
-    require("plugins.configs.nvim-toggleterm").setup(),
+    config = function()
+      require('plugins.configs.nvim-toggleterm').setup()
+    end
+  }
+
+  -- motions
+  use {
+    'unblevable/quick-scope',
+    config = function()
+      require('plugins.configs.quick-scope').setup()
+    end
   }
 
   -- utils
-  use "nvim-lua/plenary.nvim"
+  use 'nvim-lua/plenary.nvim'
   use 'tpope/vim-surround'
   use {
     'terrortylor/nvim-comment',
-    require("plugins.configs.nvim-comment").setup(),
+    config = function()
+      require('plugins.configs.nvim-comment').setup()
+    end
   }
   use {
     'lukas-reineke/indent-blankline.nvim',
-    require("plugins.configs.indent-blankline").setup(),
-  }
-  use {
-   'unblevable/quick-scope',
-   require("plugins.configs.quick-scope").setup(),
+    config = function()
+      require('plugins.configs.indent-blankline').setup()
+    end
   }
   use {
     'windwp/nvim-autopairs',
-    require("plugins.configs.nvim-autopairs").setup(),
+    config = function()
+      require('plugins.configs.nvim-autopairs').setup()
+    end
   }
-  use { 
+  use {
     'norcalli/nvim-colorizer.lua',
-    require("plugins.configs.nvim-colorizer").setup(),
+    config = function()
+      require('plugins.configs.nvim-colorizer').setup()
+    end
   }
-  use { 
+  use {
     'karb94/neoscroll.nvim',
-    require("plugins.configs.neoscroll").setup(),
+    config = function()
+      require('plugins.configs.neoscroll').setup()
+    end
   }
   use 'christoomey/vim-tmux-navigator'
 
-  -- git 
-  use { 
-    'lewis6991/gitsigns.nvim',
-    require("plugins.configs.gitsigns").setup(),
-  }
-  use { 
+  -- git
+  use {'lewis6991/gitsigns.nvim', require('plugins.configs.gitsigns').setup()}
+  use {
     'f-person/git-blame.nvim',
-    require("plugins.configs.git-blame").setup(),
+    config = function()
+      require('plugins.configs.git-blame').setup()
+    end
   }
 
   -- explorer
   use {
     'kevinhwang91/rnvimr',
-    require("plugins.configs.rnvimr").setup(),
+    config = function()
+      require('plugins.configs.rnvimr').setup()
+    end
+  }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('plugins.configs.nvim-tree').setup()
+    end
   }
 
   -- fzf
   use {
     'junegunn/fzf.vim',
-    vim.cmd [[source $HOME/.config/nvim/lua/plugins/configs/fzf.vim]]
+    config = function()
+      vim.cmd [[source $HOME/.config/nvim/lua/plugins/configs/fzf.vim]]
+    end
   }
 
   -- markdown
   use {
     'iamcco/markdown-preview.nvim',
-    vim.cmd [[source $HOME/.config/nvim/lua/plugins/configs/markdown-preview.vim]]
+    run = 'cd app && yarn install',
+    config = function()
+      vim.cmd [[source $HOME/.config/nvim/lua/plugins/configs/markdown-preview.vim]]
+    end
   }
 
   -- latex
   use {
     'lervag/vimtex',
-    vim.cmd [[
-      let g:tex_flavor='latex'
-      let g:vimtex_view_method='zathura'
-      let g:vimtex_quickfix_mode=0
-    ]] 
+    config = function()
+      vim.cmd [[
+        let g:tex_flavor='latex'
+        let g:vimtex_view_method='zathura'
+        let g:vimtex_quickfix_mode=0
+      ]]
+    end
   }
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if Packer_bootstrap then require('packer').sync() end
 end)
+

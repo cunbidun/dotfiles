@@ -13,3 +13,5 @@
 - [12] dwm-6.2-attachbottom.diff
 - [13] dwm-warp-6.2.diff
 - [14] dwm-6.2-urg-border.diff
+- [15] dwm-pertag-6.2.diff
+- [16] dwm-pertag-monitorrules-6.2.diff
