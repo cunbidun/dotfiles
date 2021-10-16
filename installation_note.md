@@ -11,7 +11,7 @@ makepkg -si
 
 ### Install dev tool
 ```
-pacman -S nodejs npm go yarn pyenv pyenv-virtualenv
+pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo
 ```
 ---
 
@@ -123,9 +123,14 @@ By default, the Bluetooth adapter does not power on after a reboot, you need to 
 cd dotfiles && stow nvim 
 ```
 
-2. install plug-in manager([vim-plug](https://github.com/junegunn/vim-plug))
+2. install plug-in manager and formatter 
 ```
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+yay -S nvim-packer-git
+cargo install stylua
+sudo npm install -g prettier
+npm install -g write-good
+pip install flake8 black isort --upgrade
+sudo cpan -i YAML::Tiny Unicode::GCString File::HomeDir # for latex formatter
 ```
 
 3. Lsp install
@@ -178,6 +183,7 @@ awk 'BEGIN{
 ```
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/timewarrior
 ```
 ---
 

@@ -89,6 +89,13 @@ require('packer').startup(function(use)
       require('plugins.configs.nvim-toggleterm').setup()
     end
   }
+  use({
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require('plugins.configs.null-ls').setup()
+    end,
+    requires = {'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig'}
+  })
 
   -- motions
   use {
