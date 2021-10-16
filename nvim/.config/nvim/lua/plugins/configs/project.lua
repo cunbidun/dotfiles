@@ -1,10 +1,11 @@
 local present, project_nvim = pcall(require, 'project_nvim')
 
-local M = {setup = function() end}
+local M = {
+  setup = function()
+  end
+}
 
-if not present then 
-  return M 
-end
+if not present then return M end
 
 M.setup = function()
   vim.g.nvim_tree_update_cwd = 1
@@ -44,6 +45,7 @@ M.setup = function()
     -- telescope
     datapath = vim.fn.stdpath('data')
   }
-end 
+end
+
 
 return M
