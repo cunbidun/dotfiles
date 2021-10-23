@@ -57,6 +57,27 @@ end
 
 local theme = beautiful.init("~/.config/awesome/themes/nord/theme.lua")
 
+local bling = require("bling")
+
+-- bling.module.flash_focus.enable()
+
+bling.widget.window_switcher.enable({
+	type = "thumbnail", -- set to anything other than "thumbnail" to disable client previews
+
+	-- keybindings (the examples provided are also the default if kept unset)
+	hide_window_switcher_key = "Escape", -- The key on which to close the popup
+	minimize_key = "n", -- The key on which to minimize the selected client
+	unminimize_key = "N", -- The key on which to unminimize all clients
+	kill_client_key = "q", -- The key on which to close the selected client
+	cycle_key = "Tab", -- The key on which to cycle through all clients
+	previous_key = "Left", -- The key on which to select the previous client
+	next_key = "Right", -- The key on which to select the next client
+	vim_previous_key = "h", -- Alternative key on which to select the previous client
+	vim_next_key = "l", -- Alternative key on which to select the next client
+})
+
+bling.module.window_swallowing.start() -- activates window swallowing
+
 -- utils function --
 function useless_gaps_resize(thatmuch, s, t)
 	local scr = s or awful.screen.focused()
@@ -79,6 +100,7 @@ awful.layout.layouts = {
 	awful.layout.suit.floating,
 	awful.layout.suit.max,
 	awful.layout.suit.spiral.dwindle,
+	bling.layout.centered,
 }
 -- }}}
 
@@ -172,20 +194,19 @@ awful.screen.connect_for_each_screen(function(s)
 	-- Each screen has its own tag table.
 	local l = awful.layout.suit
 	local layouts = { l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.tile, l.max }
-	awful.tag({ "", "", "", "", "", "", "", "", "" }, s, layouts)
+	awful.tag({ "sys", "dev", "web", "school", "5", "6", "7", "8", "9" }, s, layouts)
 
 	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
 	s.mylayoutbox = awful.widget.layoutbox(s)
 
-	-- Create a taglist widget
+	--	Create a taglist widget
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
 	})
 
-	-- Create the wibox
 	s.mywibox = awful.wibar({
 		position = "top",
 		screen = s,
@@ -253,8 +274,11 @@ globalkeys = gears.table.join(
 		group = "hotkeys",
 	}),
 	awful.key({ "Mod1" }, "Tab", function()
-		awful.spawn.with_shell("rofi -show window", false)
-	end),
+		awesome.emit_signal("bling::window_switcher::turn_on")
+	end, {
+		description = "Window Switcher",
+		group = "bling",
+	}),
 	awful.key({ Modkey }, "space", language_widget.toggle, { description = "change language", group = "hotkeys" }),
 	awful.key({}, "XF86AudioRaiseVolume", volume_widget.raise, { description = "volume up", group = "hotkeys" }),
 	awful.key({}, "XF86AudioLowerVolume", volume_widget.lower, {
@@ -387,12 +411,14 @@ globalkeys = gears.table.join(
 	awful.key({ Modkey }, "i", function()
 		awful.layout.inc(1)
 	end, { description = "select next", group = "layout" }),
-	awful.key({ Modkey, "Shift" }, "i", function()
-		awful.layout.inc(-1)
-	end, {
-		description = "select previous",
-		group = "layout",
-	}),
+
+	-- awful.key({ Modkey, "Shift" }, "i", function()
+	-- 	awful.layout.inc(-1)
+	-- end, {
+	-- 	description = "select previous",
+	-- 	group = "layout",
+	-- }),
+
 	awful.key({ Modkey, "Control" }, "n", function()
 		local c = awful.client.restore()
 		-- Focus restored client
@@ -446,6 +472,26 @@ clientkeys = gears.table.join(
 		description = "toggle keep on top",
 		group = "client",
 	}),
+
+	awful.key({ Modkey, "Shift" }, "t", function()
+		bling.module.tabbed.pick_with_dmenu()
+	end, {
+		description = "pick client for tabbed",
+		group = "client",
+	}),
+	awful.key({ Modkey, "Shift" }, "p", function()
+		bling.module.tabbed.pop()
+	end, {
+		description = "pop client from tabbed group",
+		group = "client",
+	}),
+	awful.key({ Modkey, "Shift" }, "i", function()
+		bling.module.tabbed.iter()
+	end, {
+		description = "tabbed group iter",
+		group = "client",
+	}),
+
 	awful.key({ Modkey }, "n", function(c)
 		-- The client currently has the input focus, so it cannot be
 		-- minimized, since minimized clients can't have the focus.
@@ -660,7 +706,7 @@ end)
 -- Auto start applications
 awful.spawn.with_shell("xset r rate 200 30")
 awful.spawn.with_shell("feh --bg-fill --randomize ~/.wallpapers/nord/*")
--- awful.spawn.with_shell('picom --experimental-backends')
+-- awful.spawn.with_shell("picom --experimental-backends")
 -- awful.spawn.with_shell('nm-applet')
 awful.spawn.with_shell("ibus-daemon -drx")
 awful.spawn.with_shell("cd ~/competitive_programming/cc/ && npm start")

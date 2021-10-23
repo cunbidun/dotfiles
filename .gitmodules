@@ -1,3 +1,6 @@
 [submodule "awesome/.config/awesome/layout-machi"]
 	path = awesome/.config/awesome/layout-machi
 	url = git@github.com:xinhaoyuan/layout-machi.git
+[submodule "awesome/.config/awesome/blingOD"]
+	path = awesome/.config/awesome/blingOD
+	url = https://github.com/BlingCorp/bling.git
