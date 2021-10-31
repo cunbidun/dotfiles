@@ -3,15 +3,15 @@ tnoremap <Esc> <C-\><C-n>
 function! TermWrapper(command) 
   exec 'wa'
   exec 'silent! only'
-  let g:current_window = win_getid()
-  exec 'mkview'
+	let g:current_window = win_getid()
+	exec 'mkview'
 	exec 'vnew'
 	exec 'vertical resize 100'
-  set nonu
-  set nornu
+	set nonu
+	set nornu
 	exec 'term ' . a:command
-  exec '$'
-  exec printf('exec win_gotoid(%s)', g:current_window) 
+	exec '$'
+	exec printf('exec win_gotoid(%s)', g:current_window) 
   exec 'loadview'
 endfunction
 

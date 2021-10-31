@@ -21,7 +21,7 @@ theme.nord13 = "#EBCB8B"
 theme.nord14 = "#A3BE8C"
 theme.nord15 = "#B48EAD"
 
-theme.font = "SauceCodePro Nerd Font Mono 11"
+theme.font = "SauceCodePro Nerd Font Mono 10.5"
 theme.transparent = "#00000000"
 
 theme.bg_normal = theme.nord0
@@ -103,7 +103,7 @@ theme.window_switcher_icon_valign = "center" -- How to vertically align the one 
 theme.window_switcher_icon_width = 40 -- The width of one icon
 
 -- window swallowing
-theme.dont_swallow_classname_list = { "firefox", "Gimp" } -- list of class names that should not be swallowed
+theme.dont_swallow_classname_list = { "firefox", "Gimp", "Google-chrome" } -- list of class names that should not be swallowed
 theme.dont_swallow_filter_activated = true -- whether the filter above should be active
 
 -- For tabbed only

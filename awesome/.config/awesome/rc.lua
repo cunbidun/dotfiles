@@ -76,7 +76,7 @@ bling.widget.window_switcher.enable({
 	vim_next_key = "l", -- Alternative key on which to select the next client
 })
 
-bling.module.window_swallowing.start() -- activates window swallowing
+-- bling.module.window_swallowing.start() -- activates window swallowing
 
 -- utils function --
 function useless_gaps_resize(thatmuch, s, t)
@@ -213,16 +213,13 @@ awful.screen.connect_for_each_screen(function(s)
 		-- visible = false
 	})
 	local right_widget = { layout = wibox.layout.fixed.horizontal }
-	if s.index == 1 then
+
+	if s.index == 1 then -- only apply for first screen
 		right_widget = { -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			wibox.layout.margin(wibox.widget.systray(), 2, 2, 3, 3),
 			separator, ------------------------------------------
 			language_widget(),
-			-- separator, ------------------------------------------
-			-- doge_widget(),
-			-- separator, ------------------------------------------
-			-- mm_widget(),
 			separator, ------------------------------------------
 			temperature_widget(),
 			separator, ------------------------------------------
@@ -460,7 +457,7 @@ clientkeys = gears.table.join(
 		description = "move to master",
 		group = "client",
 	}),
-	awful.key({ Modkey, "Shift" }, ".", function(c)
+	awful.key({ Modkey, "Shift" }, ",", function(c)
 		c:move_to_screen()
 	end, {
 		description = "move to screen",
@@ -704,7 +701,7 @@ client.connect_signal("unfocus", function(c)
 end)
 
 -- Auto start applications
-awful.spawn.with_shell("xset r rate 200 30")
+awful.spawn.with_shell("xset r rate 200 50")
 awful.spawn.with_shell("feh --bg-fill --randomize ~/.wallpapers/nord/*")
 -- awful.spawn.with_shell("picom --experimental-backends")
 -- awful.spawn.with_shell('nm-applet')

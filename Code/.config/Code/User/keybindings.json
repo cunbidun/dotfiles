@@ -98,5 +98,9 @@
     "key": "ctrl+.",
     "command": "-editor.action.quickFix",
     "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+alt+b",
+    "command": "python.execInTerminal"
   }
 ]
