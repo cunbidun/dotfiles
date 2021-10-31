@@ -1,0 +1,1162 @@
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T010739Z","tags":["quiz 6","school.compsci514"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T010739Z","tags":["quiz 6","school.compsci514"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T010739Z","end":"20211012T010751Z","tags":["quiz 6","school.compsci514"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T013551Z","tags":["[compsci 461]","week 5 material"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T013551Z","tags":["[compsci 461]","week 5 material"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T013551Z","end":"20211012T013553Z","tags":["[compsci 461]","week 5 material"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T013647Z","tags":["[compsci 514]","homework 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T013647Z","tags":["[compsci 514]","homework 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T013647Z","end":"20211012T013648Z","tags":["[compsci 514]","homework 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T014533Z","tags":["[compsci 514]","quiz 6"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T014533Z","tags":["[compsci 514]","quiz 6"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T014533Z","end":"20211012T014534Z","tags":["[compsci 514]","quiz 6"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T014556Z","tags":["linux configuration"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T014556Z","tags":["linux configuration"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T014556Z","end":"20211012T014557Z","tags":["linux configuration"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T015153Z","tags":["[compsci 590]","part 2","programming_assignment"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T015153Z","tags":["[compsci 590]","part 2","programming_assignment"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T015153Z","end":"20211012T015154Z","tags":["[compsci 590]","part 2","programming_assignment"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T015418Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T015418Z","tags":["linux configuration","linux_config"]}
+  after: 
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T015153Z","end":"20211012T015154Z","tags":["[compsci 590]","part 2","programming_assignment"]}
+  after: 
+  type: interval
+  before: {"id":2,"start":"20211012T014556Z","end":"20211012T014557Z","tags":["linux configuration"]}
+  after: 
+  type: interval
+  before: {"id":3,"start":"20211012T014533Z","end":"20211012T014534Z","tags":["[compsci 514]","quiz 6"]}
+  after: 
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T013647Z","end":"20211012T013648Z","tags":["[compsci 514]","homework 2"]}
+  after: 
+  type: interval
+  before: {"id":2,"start":"20211012T013551Z","end":"20211012T013553Z","tags":["[compsci 461]","week 5 material"]}
+  after: 
+  type: interval
+  before: {"id":3,"start":"20211012T010739Z","end":"20211012T010751Z","tags":["quiz 6","school.compsci514"]}
+  after: 
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T020138Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T020138Z","tags":["linux configuration","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T020138Z","end":"20211012T020159Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T020210Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T020210Z","tags":["linux configuration","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T020210Z","end":"20211012T020211Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T020245Z","tags":["compsci_514","quiz 6"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T020245Z","tags":["compsci_514","quiz 6"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T020245Z","end":"20211012T020316Z","tags":["compsci_514","quiz 6"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T025209Z","tags":["compsci_514","quiz 6"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T025209Z","tags":["compsci_514","quiz 6"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T025209Z","end":"20211012T025230Z","tags":["compsci_514","quiz 6"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T025232Z","tags":["compsci_514","quiz 6"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T025232Z","tags":["compsci_514","quiz 6"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T025232Z","end":"20211012T032106Z","tags":["compsci_514","quiz 6"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T032915Z","tags":["compsci_590","depends","programming_assignment"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T032915Z","tags":["compsci_590","depends","programming_assignment"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T032915Z","end":"20211012T032916Z","tags":["compsci_590","depends","programming_assignment"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T033451Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T033451Z","tags":["linux configuration","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T033451Z","end":"20211012T035238Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T035321Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T035321Z","tags":["linux configuration","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T035321Z","end":"20211012T042907Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T124707Z","tags":["competitive programming","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T124707Z","tags":["competitive programming","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T124707Z","end":"20211012T131219Z","tags":["competitive programming","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T202525Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T202525Z","tags":["linux configuration","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T202525Z","end":"20211012T204400Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T223007Z","tags":["compsci_514.pset2","problem 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T223007Z","tags":["compsci_514.pset2","problem 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T223007Z","end":"20211012T223017Z","tags":["compsci_514.pset2","problem 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T224809Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T224809Z","tags":["linux configuration","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T224809Z","end":"20211012T225611Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T225722Z","tags":["compsci_590.programming_assignment","part 1"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T225722Z","tags":["compsci_590.programming_assignment","part 1"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T225722Z","end":"20211012T225730Z","tags":["compsci_590.programming_assignment","part 1"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211012T225809Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211012T225809Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211012T225809Z","end":"20211012T225812Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211013T010134Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211013T010134Z","tags":["linux configuration","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211013T010134Z","end":"20211013T012858Z","tags":["linux configuration","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211013T013030Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211013T013030Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211013T013030Z","end":"20211013T040640Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211013T045000Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211013T045000Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211013T045000Z","end":"20211013T054334Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211013T054940Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211013T054940Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211013T054940Z","end":"20211013T063917Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211013T153817Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211013T153817Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211013T153817Z","end":"20211013T161810Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211013T163030Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211013T163030Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211013T163030Z","end":"20211013T180000Z","tags":["compsci_590.programming_assignment","part 1","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211014T002217Z","tags":["competitive programming","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T002217Z","tags":["competitive programming","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T002217Z","end":"20211014T003522Z","tags":["competitive programming","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211014T015702Z","tags":["compsci_514.pset2","problem 1","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T015702Z","tags":["compsci_514.pset2","problem 1","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T015702Z","end":"20211014T020047Z","tags":["compsci_514.pset2","problem 1","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211014T020429Z","tags":["compsci_514.pset2","problem 1","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T020429Z","tags":["compsci_514.pset2","problem 1","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T020429Z","end":"20211014T024043Z","tags":["compsci_514.pset2","problem 1","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211014T024426Z","tags":["compsci_514.pset2","problem 2","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T024426Z","tags":["compsci_514.pset2","problem 2","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T024426Z","end":"20211014T033309Z","tags":["compsci_514.pset2","problem 2","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211014T171002Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T171002Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T171002Z","end":"20211014T171104Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T171002Z","end":"20211014T171104Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T171002Z","end":"20211014T181104Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T171002Z","end":"20211014T181104Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T171002Z","end":"20211014T182604Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211014T212119Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T212119Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T212119Z","end":"20211014T222527Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211014T233848Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211014T233848Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211014T233848Z","end":"20211015T000815Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211015T001045Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T001045Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T001045Z","end":"20211015T004329Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211015T004334Z","tags":["compsci_514.pset2","problem 5","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T004334Z","tags":["compsci_514.pset2","problem 5","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T004334Z","end":"20211015T010126Z","tags":["compsci_514.pset2","problem 5","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211015T014730Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T014730Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T014730Z","end":"20211015T034346Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211015T034350Z","tags":["compsci_514.pset2","problem 5","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T034350Z","tags":["compsci_514.pset2","problem 5","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T034350Z","end":"20211015T041723Z","tags":["compsci_514.pset2","problem 5","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211015T142611Z","tags":["compsci_514.pset2","problem 2","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T142611Z","tags":["compsci_514.pset2","problem 2","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T142611Z","end":"20211015T144848Z","tags":["compsci_514.pset2","problem 2","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211015T145113Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T145113Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T145113Z","end":"20211015T145240Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T145113Z","end":"20211015T145240Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T145113Z","end":"20211015T151240Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211015T171800Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T171800Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T171800Z","end":"20211015T184322Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: {"id":2,"start":"20211015T145113Z","end":"20211015T151240Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":2,"start":"20211015T145113Z","end":"20211015T154240Z","tags":["compsci_514.pset2","problem 3","todo","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211015T171800Z","end":"20211015T184322Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211015T171800Z","end":"20211015T201322Z","tags":["compsci_514.pset2","problem 4","todo","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211016T133208Z","tags":["linux_config.nvim","neovim setup formatter"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T133208Z","tags":["linux_config.nvim","neovim setup formatter"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T133208Z","end":"20211016T143841Z","tags":["linux_config.nvim","neovim setup formatter"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211016T144856Z","tags":["linux_config.nvim","neovim setup formatter"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T144856Z","tags":["linux_config.nvim","neovim setup formatter"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T144856Z","end":"20211016T160835Z","tags":["linux_config.nvim","neovim setup formatter"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211016T203434Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T203434Z","tags":["compsci_590.homework3","problem 1","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T203434Z","end":"20211016T204401Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211016T204446Z","tags":["linux_config.nvim","neovim fix pwd"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T204446Z","tags":["linux_config.nvim","neovim fix pwd"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T204446Z","end":"20211016T205633Z","tags":["linux_config.nvim","neovim fix pwd"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211016T205648Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T205648Z","tags":["compsci_590.homework3","problem 1","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T205648Z","end":"20211016T211418Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T205648Z","end":"20211016T211418Z","tags":["compsci_590.homework3","problem 1","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T205648Z","end":"20211016T211418Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T205648Z","end":"20211016T211418Z","tags":["compsci_590.homework3","problem 1","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T205648Z","end":"20211016T205918Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211016T212512Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211016T212512Z","tags":["compsci_590.homework3","problem 1","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211016T212512Z","end":"20211016T221714Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211017T192403Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211017T192403Z","tags":["compsci_590.homework3","problem 1","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211017T192403Z","end":"20211017T204811Z","tags":["compsci_590.homework3","problem 1","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211017T212632Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211017T212632Z","tags":["compsci_590.homework3","problem 3","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211017T212632Z","end":"20211017T221311Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211018T002349Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T002349Z","tags":["compsci_590.homework3","problem 3","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T002349Z","end":"20211018T005819Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211018T011522Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T011522Z","tags":["compsci_590.homework3","problem 3","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T011522Z","end":"20211018T014334Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211018T031323Z","tags":["design robinhood","interview_prep","swe2022"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T031323Z","tags":["design robinhood","interview_prep","swe2022"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T031323Z","end":"20211018T141704Z","tags":["design robinhood","interview_prep","swe2022"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T031323Z","end":"20211018T141704Z","tags":["design robinhood","interview_prep","swe2022"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T031323Z","end":"20211018T041704Z","tags":["design robinhood","interview_prep","swe2022"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211018T142326Z","tags":["compsci_514","compsci_514 midterm prep","exam"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T142326Z","tags":["compsci_514","compsci_514 midterm prep","exam"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T142326Z","end":"20211018T153804Z","tags":["compsci_514","compsci_514 midterm prep","exam"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211018T154130Z","tags":["compsci_514","compsci_514 S21 midterm","exam"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T154130Z","tags":["compsci_514","compsci_514 S21 midterm","exam"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T154130Z","end":"20211018T171253Z","tags":["compsci_514","compsci_514 S21 midterm","exam"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211018T182724Z","tags":["compsci_514","compsci_514 F20 midterm","exam"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T182724Z","tags":["compsci_514","compsci_514 F20 midterm","exam"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T182724Z","end":"20211018T193932Z","tags":["compsci_514","compsci_514 F20 midterm","exam"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211018T214059Z","tags":["compsci_461","prepare cheatsheet"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211018T214059Z","tags":["compsci_461","prepare cheatsheet"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211018T214059Z","end":"20211018T230505Z","tags":["compsci_461","prepare cheatsheet"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211019T005720Z","tags":["compsci_461","prepare cheatsheet"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211019T005720Z","tags":["compsci_461","prepare cheatsheet"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211019T005720Z","end":"20211019T031911Z","tags":["compsci_461","prepare cheatsheet"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211019T204029Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211019T204029Z","tags":["compsci_590.homework3","problem 3","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211019T204029Z","end":"20211019T213051Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211020T001603Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211020T001603Z","tags":["compsci_590.homework3","problem 3","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211020T001603Z","end":"20211020T002550Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211020T005201Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211020T005201Z","tags":["compsci_590.homework3","problem 3","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211020T005201Z","end":"20211020T010808Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211020T015100Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211020T015100Z","tags":["compsci_590.homework3","problem 3","written"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211020T015100Z","end":"20211020T034556Z","tags":["compsci_590.homework3","problem 3","written"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211021T000454Z","tags":["compsci_590","compsci_590 review homeworks"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211021T000454Z","tags":["compsci_590","compsci_590 review homeworks"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211021T000454Z","end":"20211021T003131Z","tags":["compsci_590","compsci_590 review homeworks"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211021T003144Z","tags":["compsci_590","compsci_590 read chapter 8"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211021T003144Z","tags":["compsci_590","compsci_590 read chapter 8"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211021T003144Z","end":"20211021T011632Z","tags":["compsci_590","compsci_590 read chapter 8"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211021T003144Z","end":"20211021T011632Z","tags":["compsci_590","compsci_590 read chapter 8"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211021T003144Z","end":"20211021T020132Z","tags":["compsci_590","compsci_590 read chapter 8"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211022T141530Z","tags":["vi","write fb email"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211022T141530Z","tags":["vi","write fb email"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211022T141530Z","end":"20211022T155400Z","tags":["vi","write fb email"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211022T220811Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211022T220811Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211022T220811Z","end":"20211022T223830Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211022T220811Z","end":"20211022T223830Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211022T220811Z","end":"20211022T220830Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211023T013926Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211023T013926Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211023T013926Z","end":"20211023T024117Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211023T013926Z","end":"20211023T024117Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211023T013926Z","end":"20211023T015617Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211023T213734Z","tags":["linux_config.awesomewm","setup awesome wm tile\/window mode"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211023T213734Z","tags":["linux_config.awesomewm","setup awesome wm tile\/window mode"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211023T213734Z","end":"20211023T215637Z","tags":["linux_config.awesomewm","setup awesome wm tile\/window mode"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211024T040113Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211024T040113Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211024T040113Z","end":"20211024T043123Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211024T142313Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211024T142313Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211024T142313Z","end":"20211024T144507Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211024T164029Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211024T164029Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211024T164029Z","end":"20211024T184720Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211024T164029Z","end":"20211024T184720Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211024T164029Z","end":"20211024T174720Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211024T184733Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211024T184733Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211024T184733Z","end":"20211024T185158Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211024T192504Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211024T192504Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211024T192504Z","end":"20211025T011528Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211024T192504Z","end":"20211025T011528Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211024T192504Z","end":"20211024T201528Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211025T011752Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T011752Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T011752Z","end":"20211025T025051Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T011752Z","end":"20211025T025051Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T011752Z","end":"20211025T012051Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211025T031942Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T031942Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T031942Z","end":"20211025T041924Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211025T135913Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T135913Z","tags":["IOI09 P7 - Regions","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T135913Z","end":"20211025T150124Z","tags":["IOI09 P7 - Regions","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211025T152658Z","tags":["compsci_305","compsci_305 homework"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T152658Z","tags":["compsci_305","compsci_305 homework"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T152658Z","end":"20211025T183128Z","tags":["compsci_305","compsci_305 homework"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T152658Z","end":"20211025T183128Z","tags":["compsci_305","compsci_305 homework"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T152658Z","end":"20211025T160128Z","tags":["compsci_305","compsci_305 homework"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211025T215657Z","tags":["C. Optimal Insertion","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T215657Z","tags":["C. Optimal Insertion","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T215657Z","end":"20211025T215721Z","tags":["C. Optimal Insertion","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211025T223050Z","tags":["C. Optimal Insertion","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T223050Z","tags":["C. Optimal Insertion","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T223050Z","end":"20211025T230106Z","tags":["C. Optimal Insertion","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211025T235213Z","tags":["compsci_514","lecture recording"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211025T235213Z","tags":["compsci_514","lecture recording"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211025T235213Z","end":"20211026T012109Z","tags":["compsci_514","lecture recording"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211027T153040Z","tags":["compsci_305","thesis statement"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211027T153040Z","tags":["compsci_305","thesis statement"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211027T153040Z","end":"20211027T162710Z","tags":["compsci_305","thesis statement"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211028T001046Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211028T001046Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211028T001046Z","end":"20211028T012649Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211028T152340Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211028T152340Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211028T152340Z","end":"20211028T190623Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211028T152340Z","end":"20211028T190623Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211028T152340Z","end":"20211028T175123Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211028T190653Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211028T190653Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211028T190653Z","end":"20211028T192028Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211028T190653Z","end":"20211028T192028Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211028T190653Z","end":"20211028T190728Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211028T192546Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211028T192546Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211028T192546Z","end":"20211028T193833Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211028T211125Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211028T211125Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211028T211125Z","end":"20211028T221318Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211029T014016Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211029T014016Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211029T014016Z","end":"20211029T030821Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211029T042617Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211029T042617Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211029T042617Z","end":"20211029T052531Z","tags":["coding","compsci_590.programming_assignment","part 2"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211029T185549Z","tags":["linux","linux_config","taskwarrior add config to dotfile repo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211029T185549Z","tags":["linux","linux_config","taskwarrior add config to dotfile repo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211029T185549Z","end":"20211029T195434Z","tags":["linux","linux_config","taskwarrior add config to dotfile repo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211030T044626Z","tags":["compsci_461","homework 4","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211030T044626Z","tags":["compsci_461","homework 4","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211030T044626Z","end":"20211030T173347Z","tags":["compsci_461","homework 4","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211030T044626Z","end":"20211030T173347Z","tags":["compsci_461","homework 4","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211030T044626Z","end":"20211030T053347Z","tags":["compsci_461","homework 4","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211030T180538Z","tags":["compsci_461","homework 4","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211030T180538Z","tags":["compsci_461","homework 4","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211030T180538Z","end":"20211030T191834Z","tags":["compsci_461","homework 4","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211030T224133Z","tags":["compsci_514","lecture recording oct 26","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211030T224133Z","tags":["compsci_514","lecture recording oct 26","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211030T224133Z","end":"20211030T224214Z","tags":["compsci_514","lecture recording oct 26","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211031T153831Z","tags":["linux","linux_config.nvim","setup bufferline"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211031T153831Z","tags":["linux","linux_config.nvim","setup bufferline"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211031T153831Z","end":"20211031T153837Z","tags":["linux","linux_config.nvim","setup bufferline"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211031T153831Z","end":"20211031T153837Z","tags":["linux","linux_config.nvim","setup bufferline"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211031T153831Z","end":"20211031T170837Z","tags":["linux","linux_config.nvim","setup bufferline"]}

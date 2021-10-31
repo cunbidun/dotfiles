@@ -1,6 +1,6 @@
 #!/bin/bash
 
-xset r rate 200 40 &
+xset r rate 200 50 &
 feh --bg-fill ~/.wallpapers/others/QgdxHBX.jpeg &
 killall skippy-xd; skippy-xd --start-daemon &
 # nm-applet &

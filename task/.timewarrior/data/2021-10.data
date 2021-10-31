@@ -1,0 +1,85 @@
+inc 20211012T020138Z - 20211012T020159Z # "linux configuration" "linux_config"
+inc 20211012T020210Z - 20211012T020211Z # "linux configuration" "linux_config"
+inc 20211012T020245Z - 20211012T020316Z # "compsci_514" "quiz 6"
+inc 20211012T025209Z - 20211012T025230Z # "compsci_514" "quiz 6"
+inc 20211012T025232Z - 20211012T032106Z # "compsci_514" "quiz 6"
+inc 20211012T032915Z - 20211012T032916Z # "compsci_590" depends "programming_assignment"
+inc 20211012T033451Z - 20211012T035238Z # "linux configuration" "linux_config"
+inc 20211012T035321Z - 20211012T042907Z # "linux configuration" "linux_config"
+inc 20211012T124707Z - 20211012T131219Z # "competitive programming" cp
+inc 20211012T202525Z - 20211012T204400Z # "linux configuration" "linux_config"
+inc 20211012T223007Z - 20211012T223017Z # "compsci_514.pset2" "problem 2"
+inc 20211012T224809Z - 20211012T225611Z # "linux configuration" "linux_config"
+inc 20211012T225722Z - 20211012T225730Z # "compsci_590.programming_assignment" "part 1"
+inc 20211012T225809Z - 20211012T225812Z # "compsci_590.programming_assignment" "part 1" todo
+inc 20211013T010134Z - 20211013T012858Z # "linux configuration" "linux_config"
+inc 20211013T013030Z - 20211013T040640Z # "compsci_590.programming_assignment" "part 1" todo
+inc 20211013T045000Z - 20211013T054334Z # "compsci_590.programming_assignment" "part 1" todo
+inc 20211013T054940Z - 20211013T063917Z # "compsci_590.programming_assignment" "part 1" todo
+inc 20211013T153817Z - 20211013T161810Z # "compsci_590.programming_assignment" "part 1" todo
+inc 20211013T163030Z - 20211013T180000Z # "compsci_590.programming_assignment" "part 1" todo
+inc 20211014T002217Z - 20211014T003522Z # "competitive programming" cp
+inc 20211014T015702Z - 20211014T020047Z # "compsci_514.pset2" "problem 1" todo written
+inc 20211014T020429Z - 20211014T024043Z # "compsci_514.pset2" "problem 1" todo written
+inc 20211014T024426Z - 20211014T033309Z # "compsci_514.pset2" "problem 2" todo written
+inc 20211014T171002Z - 20211014T182604Z # "compsci_514.pset2" "problem 3" todo written
+inc 20211014T212119Z - 20211014T222527Z # "compsci_514.pset2" "problem 4" todo written
+inc 20211014T233848Z - 20211015T000815Z # "compsci_514.pset2" "problem 4" todo written
+inc 20211015T001045Z - 20211015T004329Z # "compsci_514.pset2" "problem 4" todo written
+inc 20211015T004334Z - 20211015T010126Z # "compsci_514.pset2" "problem 5" todo written
+inc 20211015T014730Z - 20211015T034346Z # "compsci_514.pset2" "problem 4" todo written
+inc 20211015T034350Z - 20211015T041723Z # "compsci_514.pset2" "problem 5" todo written
+inc 20211015T142611Z - 20211015T144848Z # "compsci_514.pset2" "problem 2" todo written
+inc 20211015T145113Z - 20211015T154240Z # "compsci_514.pset2" "problem 3" todo written
+inc 20211015T171800Z - 20211015T201322Z # "compsci_514.pset2" "problem 4" todo written
+inc 20211016T133208Z - 20211016T143841Z # "linux_config.nvim" "neovim setup formatter"
+inc 20211016T144856Z - 20211016T160835Z # "linux_config.nvim" "neovim setup formatter"
+inc 20211016T203434Z - 20211016T204401Z # "compsci_590.homework3" "problem 1" written
+inc 20211016T204446Z - 20211016T205633Z # "linux_config.nvim" "neovim fix pwd"
+inc 20211016T205648Z - 20211016T205918Z # "compsci_590.homework3" "problem 1" written
+inc 20211016T212512Z - 20211016T221714Z # "compsci_590.homework3" "problem 1" written
+inc 20211017T192403Z - 20211017T204811Z # "compsci_590.homework3" "problem 1" written
+inc 20211017T212632Z - 20211017T221311Z # "compsci_590.homework3" "problem 3" written
+inc 20211018T002349Z - 20211018T005819Z # "compsci_590.homework3" "problem 3" written
+inc 20211018T011522Z - 20211018T014334Z # "compsci_590.homework3" "problem 3" written
+inc 20211018T031323Z - 20211018T041704Z # "design robinhood" "interview_prep" swe2022
+inc 20211018T142326Z - 20211018T153804Z # "compsci_514" "compsci_514 midterm prep" exam
+inc 20211018T154130Z - 20211018T171253Z # "compsci_514" "compsci_514 S21 midterm" exam
+inc 20211018T182724Z - 20211018T193932Z # "compsci_514" "compsci_514 F20 midterm" exam
+inc 20211018T214059Z - 20211018T230505Z # "compsci_461" "prepare cheatsheet"
+inc 20211019T005720Z - 20211019T031911Z # "compsci_461" "prepare cheatsheet"
+inc 20211019T204029Z - 20211019T213051Z # "compsci_590.homework3" "problem 3" written
+inc 20211020T001603Z - 20211020T002550Z # "compsci_590.homework3" "problem 3" written
+inc 20211020T005201Z - 20211020T010808Z # "compsci_590.homework3" "problem 3" written
+inc 20211020T015100Z - 20211020T034556Z # "compsci_590.homework3" "problem 3" written
+inc 20211021T000454Z - 20211021T003131Z # "compsci_590" "compsci_590 review homeworks"
+inc 20211021T003144Z - 20211021T020132Z # "compsci_590" "compsci_590 read chapter 8"
+inc 20211022T141530Z - 20211022T155400Z # vi "write fb email"
+inc 20211022T220811Z - 20211022T220830Z # "IOI09 P7 - Regions" cp
+inc 20211023T013926Z - 20211023T015617Z # "IOI09 P7 - Regions" cp
+inc 20211023T213734Z - 20211023T215637Z # "linux_config.awesomewm" "setup awesome wm tile/window mode"
+inc 20211024T040113Z - 20211024T043123Z # "IOI09 P7 - Regions" cp
+inc 20211024T142313Z - 20211024T144507Z # "IOI09 P7 - Regions" cp
+inc 20211024T164029Z - 20211024T174720Z # "IOI09 P7 - Regions" cp
+inc 20211024T184733Z - 20211024T185158Z # "IOI09 P7 - Regions" cp
+inc 20211024T192504Z - 20211024T201528Z # "IOI09 P7 - Regions" cp
+inc 20211025T011752Z - 20211025T012051Z # "IOI09 P7 - Regions" cp
+inc 20211025T031942Z - 20211025T041924Z # "IOI09 P7 - Regions" cp
+inc 20211025T135913Z - 20211025T150124Z # "IOI09 P7 - Regions" cp
+inc 20211025T152658Z - 20211025T160128Z # "compsci_305" "compsci_305 homework"
+inc 20211025T215657Z - 20211025T215721Z # "C. Optimal Insertion" cp
+inc 20211025T223050Z - 20211025T230106Z # "C. Optimal Insertion" cp
+inc 20211025T235213Z - 20211026T012109Z # "compsci_514" "lecture recording"
+inc 20211027T153040Z - 20211027T162710Z # "compsci_305" "thesis statement"
+inc 20211028T001046Z - 20211028T012649Z # coding "compsci_590.programming_assignment" "part 2"
+inc 20211028T152340Z - 20211028T175123Z # coding "compsci_590.programming_assignment" "part 2"
+inc 20211028T190653Z - 20211028T190728Z # coding "compsci_590.programming_assignment" "part 2"
+inc 20211028T192546Z - 20211028T193833Z # coding "compsci_590.programming_assignment" "part 2"
+inc 20211028T211125Z - 20211028T221318Z # coding "compsci_590.programming_assignment" "part 2"
+inc 20211029T014016Z - 20211029T030821Z # coding "compsci_590.programming_assignment" "part 2"
+inc 20211029T042617Z - 20211029T052531Z # coding "compsci_590.programming_assignment" "part 2"
+inc 20211029T185549Z - 20211029T195434Z # linux "linux_config" "taskwarrior add config to dotfile repo"
+inc 20211030T044626Z - 20211030T053347Z # "compsci_461" "homework 4" todo
+inc 20211030T180538Z - 20211030T191834Z # "compsci_461" "homework 4" todo
+inc 20211030T224133Z - 20211030T224214Z # "compsci_514" "lecture recording oct 26" todo
+inc 20211031T153831Z - 20211031T170837Z # linux "linux_config.nvim" "setup bufferline"

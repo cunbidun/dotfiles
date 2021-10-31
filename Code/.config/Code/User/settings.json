@@ -86,8 +86,10 @@
   "terminal.integrated.shell.linux": "/bin/zsh",
   "cSpell.userWords": [
     "compsci",
+    "merkle",
     "subreddit",
-    "upvotes"
+    "upvotes",
+    "UTXO"
   ],
   "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.clang_format_style": "{}",
@@ -121,5 +123,7 @@
   "leetcode.hint.commandShortcut": false,
   "leetcode.hint.configWebviewMarkdown": false,
   "leetcode.defaultLanguage": "cpp",
-  "leetcode.hint.commentDescription": false
+  "leetcode.hint.commentDescription": false,
+  "workbench.colorTheme": "Nord",
+  "files.autoSave": "afterDelay"
 }
