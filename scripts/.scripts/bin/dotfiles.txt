@@ -1,6 +1,7 @@
 /home/cunbidun/.config/awesome/rc.lua
 /home/cunbidun/.config/awesome
 /home/cunbidun/.config/nvim
+/home/cunbidun/.config/nvim/lua/core/settings.lua
 /home/cunbidun/.config/nvim/lua/plugins/init.lua
 /home/cunbidun/.scripts/bin
 /home/cunbidun/.scripts/bin/dotfiles_picker

@@ -117,6 +117,12 @@ require("packer").startup(function(use)
 			require("plugins.configs.trouble").setup()
 		end,
 	})
+	use({
+		"simrat39/symbols-outline.nvim",
+		config = function()
+			require("plugins.configs.symbols-outline").setup()
+		end,
+	})
 
 	-- motions
 	use({
@@ -160,6 +166,14 @@ require("packer").startup(function(use)
 		end,
 	})
 	use("christoomey/vim-tmux-navigator")
+
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("plugins.configs.todo-comments").setup()
+		end,
+	})
 
 	-- git
 	use({ "lewis6991/gitsigns.nvim", require("plugins.configs.gitsigns").setup() })
