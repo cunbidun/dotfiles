@@ -2073,3 +2073,96 @@ time 1635696162
 old [description:"setup trouble.nvim" entry:"1635694772" modified:"1635694778" project:"linux_config.nvim" start:"1635694778" status:"pending" tags:"linux" tags_linux:"x" uuid:"fc067cf9-d19a-4cac-a2f6-5a87411b2ef4"]
 new [description:"setup trouble.nvim" end:"1635696162" entry:"1635694772" modified:"1635696162" project:"linux_config.nvim" status:"completed" tags:"linux" tags_linux:"x" uuid:"fc067cf9-d19a-4cac-a2f6-5a87411b2ef4"]
 ---
+time 1635697624
+old [annotation_1634848976:"vscode java extension could be more than enough" description:"neovim setup java lsp" entry:"1634150335" modified:"1634848998" project:"linux_config.nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+new [annotation_1634848976:"vscode java extension could be more than enough" description:"neovim setup java lsp" entry:"1634150335" modified:"1635697624" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+---
+time 1635697625
+old [annotation_1634498516:"telescope might be slow for the large project" description:"neovim setup telescope" entry:"1634156614" modified:"1634498585" project:"linux_config.nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+new [annotation_1634498516:"telescope might be slow for the large project" description:"neovim setup telescope" entry:"1634156614" modified:"1635697625" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+---
+time 1635697639
+old [annotation_1634848976:"vscode java extension could be more than enough" description:"neovim setup java lsp" entry:"1634150335" modified:"1635697624" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+new [annotation_1634848976:"vscode java extension could be more than enough" description:"setup java lsp" entry:"1634150335" modified:"1635697639" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+---
+time 1635697646
+old [annotation_1634498516:"telescope might be slow for the large project" description:"neovim setup telescope" entry:"1634156614" modified:"1635697625" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+new [annotation_1634498516:"telescope might be slow for the large project" description:"setup telescope" entry:"1634156614" modified:"1635697646" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+---
+time 1635697655
+old [annotation_1634848976:"vscode java extension could be more than enough" description:"setup java lsp" entry:"1634150335" modified:"1635697639" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+new [annotation_1634848976:"vscode java extension could be more than enough" description:"setup java lsp" entry:"1634150335" modified:"1635697655" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+---
+time 1635697655
+old [annotation_1634498516:"telescope might be slow for the large project" description:"setup telescope" entry:"1634156614" modified:"1635697646" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+new [annotation_1634498516:"telescope might be slow for the large project" description:"setup telescope" entry:"1634156614" modified:"1635697655" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+---
+time 1635697686
+new [description:"fix nvim-tree error" entry:"1635697686" modified:"1635697686" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"4dd1f201-bcd4-4928-b7e9-897464a753fd"]
+---
+time 1635697701
+new [description:"fix lualine startup error" entry:"1635697701" modified:"1635697701" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"241176dc-050c-44bd-b3df-c8c780b55847"]
+---
+time 1635697716
+old [description:"fix nvim-tree error" entry:"1635697686" modified:"1635697686" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"4dd1f201-bcd4-4928-b7e9-897464a753fd"]
+new [description:"fix nvim-tree startup warning" entry:"1635697686" modified:"1635697716" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"4dd1f201-bcd4-4928-b7e9-897464a753fd"]
+---
+time 1635703276
+new [description:"setup todo-comments.nvim" entry:"1635703276" modified:"1635703276" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"ea9d45ae-8e0b-4379-b455-aa50068c8db8"]
+---
+time 1635703280
+old [description:"setup todo-comments.nvim" entry:"1635703276" modified:"1635703276" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"ea9d45ae-8e0b-4379-b455-aa50068c8db8"]
+new [description:"setup todo-comments.nvim" entry:"1635703276" modified:"1635703280" project:"nvim" start:"1635703280" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"ea9d45ae-8e0b-4379-b455-aa50068c8db8"]
+---
+time 1635706718
+old [description:"setup todo-comments.nvim" entry:"1635703276" modified:"1635703280" project:"nvim" start:"1635703280" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"ea9d45ae-8e0b-4379-b455-aa50068c8db8"]
+new [description:"setup todo-comments.nvim" end:"1635706718" entry:"1635703276" modified:"1635706718" project:"nvim" status:"completed" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"ea9d45ae-8e0b-4379-b455-aa50068c8db8"]
+---
+time 1635728183
+old [description:"peer review" due:"1635739200" entry:"1634848951" modified:"1635485301" project:"compsci_305" status:"pending" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+new [description:"peer review" due:"1635739200" entry:"1634848951" modified:"1635728183" project:"compsci_305" start:"1635728183" status:"pending" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+---
+time 1635730005
+new [description:"command mode next\/previous key bind" entry:"1635730005" modified:"1635730005" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"198ab140-0cc9-497e-b8b1-f25de6ad4492"]
+---
+time 1635730662
+old [description:"peer review" due:"1635739200" entry:"1634848951" modified:"1635728183" project:"compsci_305" start:"1635728183" status:"pending" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+new [description:"peer review" due:"1635739200" entry:"1634848951" modified:"1635730662" project:"compsci_305" status:"pending" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+---
+time 1635737031
+old [description:"peer review" due:"1635739200" entry:"1634848951" modified:"1635730662" project:"compsci_305" status:"pending" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+new [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635737031" project:"compsci_305" status:"pending" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+---
+time 1635737076
+old [description:"lecture recording oct 26" due:"1635566400" entry:"1635292113" modified:"1635633734" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"24cb53e2-6a40-4b63-914a-e9c1b1991559"]
+new [description:"lecture recording oct 26" due:"1635872400" entry:"1635292113" modified:"1635737076" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"24cb53e2-6a40-4b63-914a-e9c1b1991559"]
+---
+time 1635737087
+old [description:"lecture recording oct 28" due:"1635566400" entry:"1635485167" modified:"1635616090" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"ef28eb51-05fc-4779-93c5-e6432884adeb"]
+new [description:"lecture recording oct 28" due:"1635872400" entry:"1635485167" modified:"1635737087" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"ef28eb51-05fc-4779-93c5-e6432884adeb"]
+---
+time 1635737741
+new [description:"quiz 9" due:"1635739200" entry:"1635737741" modified:"1635737741" project:"compsci_514" status:"pending" uuid:"79ef38a6-0afe-48c8-a3d7-6067f8e383aa"]
+---
+time 1635737753
+old [description:"quiz 9" due:"1635739200" entry:"1635737741" modified:"1635737741" project:"compsci_514" status:"pending" uuid:"79ef38a6-0afe-48c8-a3d7-6067f8e383aa"]
+new [description:"quiz 9" due:"1635812100" entry:"1635737741" modified:"1635737753" project:"compsci_514" status:"pending" uuid:"79ef38a6-0afe-48c8-a3d7-6067f8e383aa"]
+---
+time 1635737766
+old [description:"quiz 9" due:"1635812100" entry:"1635737741" modified:"1635737753" project:"compsci_514" status:"pending" uuid:"79ef38a6-0afe-48c8-a3d7-6067f8e383aa"]
+new [description:"quiz 9" due:"1635812100" entry:"1635737741" modified:"1635737766" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"79ef38a6-0afe-48c8-a3d7-6067f8e383aa"]
+---
+time 1635774441
+old [description:"command mode next\/previous key bind" entry:"1635730005" modified:"1635730005" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"198ab140-0cc9-497e-b8b1-f25de6ad4492"]
+new [description:"command mode next\/previous key bind" end:"1635774441" entry:"1635730005" modified:"1635774441" project:"nvim" status:"completed" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"198ab140-0cc9-497e-b8b1-f25de6ad4492"]
+---
+time 1635774459
+old [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635737031" project:"compsci_305" status:"pending" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+new [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635774459" project:"compsci_305" status:"pending" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+---
+time 1635774711
+new [description:"rofi scroll with ctrl j\/k" entry:"1635774711" modified:"1635774711" project:"linux_config" status:"pending" tags:"linux,rofi" tags_linux:"x" tags_rofi:"x" uuid:"cfed151b-06cc-4a98-8f60-98258259e314"]
+---
+time 1635774769
+new [description:"dotfiles picker ignore line starts with space or comment" entry:"1635774769" modified:"1635774769" project:"linux_config" status:"pending" tags:"dotfiles_picker,linux" tags_dotfiles_picker:"x" tags_linux:"x" uuid:"b46fe2df-d788-4ef0-a335-c767be8819ce"]
+---
