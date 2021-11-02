@@ -2166,3 +2166,46 @@ new [description:"rofi scroll with ctrl j\/k" entry:"1635774711" modified:"16357
 time 1635774769
 new [description:"dotfiles picker ignore line starts with space or comment" entry:"1635774769" modified:"1635774769" project:"linux_config" status:"pending" tags:"dotfiles_picker,linux" tags_dotfiles_picker:"x" tags_linux:"x" uuid:"b46fe2df-d788-4ef0-a335-c767be8819ce"]
 ---
+time 1635785072
+old [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635774459" project:"compsci_305" status:"pending" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+new [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635785072" project:"compsci_305" start:"1635785072" status:"pending" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+---
+time 1635788137
+old [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635785072" project:"compsci_305" start:"1635785072" status:"pending" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+new [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635788137" project:"compsci_305" status:"pending" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+---
+time 1635788147
+old [description:"homework 4" due:"1635822000" entry:"1634848816" modified:"1635621514" project:"compsci_461" status:"pending" tags:"todo" tags_todo:"x" uuid:"aeb1a0e1-5e90-4886-897e-879521962141"]
+new [description:"homework 4" due:"1636167600" entry:"1634848816" modified:"1635788147" project:"compsci_461" status:"pending" tags:"todo" tags_todo:"x" uuid:"aeb1a0e1-5e90-4886-897e-879521962141"]
+---
+time 1635794209
+old [description:"peer review" due:"1635791400" entry:"1634848951" modified:"1635788137" project:"compsci_305" status:"pending" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+new [description:"peer review" due:"1635791400" end:"1635794209" entry:"1634848951" modified:"1635794209" project:"compsci_305" status:"completed" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
+---
+time 1635794260
+old [description:"rsm and paxos reading" due:"1635825600" entry:"1635292301" modified:"1635485498" project:"compsci_590" status:"pending" tags:"todo" tags_todo:"x" uuid:"b665a41f-ca79-41f6-9747-a1aa9071375c"]
+new [description:"rsm and paxos reading" due:"1635867000" entry:"1635292301" modified:"1635794260" project:"compsci_590" status:"pending" tags:"todo" tags_todo:"x" uuid:"b665a41f-ca79-41f6-9747-a1aa9071375c"]
+---
+time 1635794326
+new [description:"Week 9: Byzantine Generals Problem" due:"1635825600" entry:"1635794326" modified:"1635794326" project:"compsci_461" status:"pending" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1635794339
+old [description:"Week 9: Byzantine Generals Problem" due:"1635825600" entry:"1635794326" modified:"1635794326" project:"compsci_461" status:"pending" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+new [description:"Week 9: Byzantine Generals Problem" due:"1635877800" entry:"1635794326" modified:"1635794339" project:"compsci_461" status:"pending" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1635794363
+old [description:"Week 8: Blockchain Voting" due:"1635983447" entry:"1635292247" modified:"1635292264" project:"compsci_461" status:"pending" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+new [description:"Week 8: Blockchain Voting" due:"1635877800" entry:"1635292247" modified:"1635794363" project:"compsci_461" status:"pending" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+---
+time 1635815176
+old [description:"taskwarrior setup nord theme" entry:"1634498454" modified:"1634498454" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"a5c5ad1d-b01d-4e8e-9f22-6986c9c1770c"]
+new [description:"taskwarrior setup nord theme" entry:"1634498454" modified:"1635815176" project:"linux_config" start:"1635815176" status:"pending" tags:"linux" tags_linux:"x" uuid:"a5c5ad1d-b01d-4e8e-9f22-6986c9c1770c"]
+---
+time 1635815739
+old [description:"taskwarrior setup nord theme" entry:"1634498454" modified:"1635815176" project:"linux_config" start:"1635815176" status:"pending" tags:"linux" tags_linux:"x" uuid:"a5c5ad1d-b01d-4e8e-9f22-6986c9c1770c"]
+new [description:"taskwarrior setup nord theme" entry:"1634498454" modified:"1635815739" priority:"H" project:"linux_config" start:"1635815176" status:"pending" tags:"linux" tags_linux:"x" uuid:"a5c5ad1d-b01d-4e8e-9f22-6986c9c1770c"]
+---
+time 1635815824
+old [description:"lecture recording oct 26" due:"1635872400" entry:"1635292113" modified:"1635737076" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"24cb53e2-6a40-4b63-914a-e9c1b1991559"]
+new [description:"lecture recording oct 26" due:"1635872400" entry:"1635292113" modified:"1635815824" priority:"H" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"24cb53e2-6a40-4b63-914a-e9c1b1991559"]
+---

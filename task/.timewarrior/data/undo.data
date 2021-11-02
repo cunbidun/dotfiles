@@ -1182,3 +1182,18 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20211101T005623Z","end":"20211101T013742Z","tags":["compsci_305","peer review"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211101T164432Z","tags":["compsci_305","peer review","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211101T164432Z","tags":["compsci_305","peer review","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211101T164432Z","end":"20211101T173537Z","tags":["compsci_305","peer review","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211102T010616Z","tags":["linux","linux_config","taskwarrior setup nord theme"]}

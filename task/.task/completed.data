@@ -1,3 +1,4 @@
+[description:"peer review" due:"1635791400" end:"1635794209" entry:"1634848951" modified:"1635794209" project:"compsci_305" status:"completed" tags:"todo" tags_todo:"x" uuid:"cfc670be-50db-41c9-ab4b-60f34dc988ff"]
 [description:"command mode next\/previous key bind" end:"1635774441" entry:"1635730005" modified:"1635774441" project:"nvim" status:"completed" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"198ab140-0cc9-497e-b8b1-f25de6ad4492"]
 [description:"setup todo-comments.nvim" end:"1635706718" entry:"1635703276" modified:"1635706718" project:"nvim" status:"completed" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"ea9d45ae-8e0b-4379-b455-aa50068c8db8"]
 [description:"setup trouble.nvim" end:"1635696162" entry:"1635694772" modified:"1635696162" project:"linux_config.nvim" status:"completed" tags:"linux" tags_linux:"x" uuid:"fc067cf9-d19a-4cac-a2f6-5a87411b2ef4"]
