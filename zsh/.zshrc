@@ -93,6 +93,11 @@ alias cpf='f() { xclip -sel clip < $1 }; f'
 
 alias ls="exa -la"
 
+alias ut="task +umass"
+alias ct="task +cp"
+alias lt="task +linux"
+alias tt="task +today"
+
 unsetopt PROMPT_SP
 
 export PATH="/home/cunbidun/.pyenv/bin:$PATH"

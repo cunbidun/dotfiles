@@ -10,5 +10,7 @@
 /home/cunbidun/dwm
 /home/cunbidun/.config/alacritty/alacritty.yml
 /home/cunbidun/.config/alacritty/README.md
+/home/cunbidun/.config/rofi/config.rasi
+/home/cunbidun/.config/rofi/nord.rasi
 /home/cunbidun/dotfiles/TODO.md
 /home/cunbidun/dotfiles/installation_note.md

@@ -61,6 +61,14 @@ local servers = {
 			},
 		},
 	},
+	hls = {
+		capabilities = capabilities,
+		cmd = { DATA_PATH .. "/lspinstall/haskell/haskell-language-server-wrapper", "--lsp" },
+		on_attach = function(client)
+			client.resolved_capabilities.document_formatting = true
+			client.resolved_capabilities.document_range_formatting = true
+		end,
+	},
 	sumneko_lua = {
 		capabilities = capabilities,
 		cmd = {
