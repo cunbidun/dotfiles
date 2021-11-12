@@ -1,4 +1,8 @@
 #!/bin/bash
 pamixer -i 5 --allow-boost; pkill -RTMIN+10 dwmblocks
 vol=$(get_volume)
-notify-send "volume $vol" -t 1000 -a "System"
+
+# Arbitrary but unique message id
+msgId="jfasvmvi"
+
+notify-send --hint=string:x-dunst-stack-tag:volume "volume $vol" -t 1000 -a "System"

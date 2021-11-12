@@ -13,9 +13,3 @@ if [ $lang = $VN_ibus ];then
 fi
 
 pkill -RTMIN+11 dwmblocks
-
-# ps cax | grep slstatus > /dev/null
-# if [ $? -eq 0 ]; then
-#   killall slstatus; slstatus &
-# fi
-

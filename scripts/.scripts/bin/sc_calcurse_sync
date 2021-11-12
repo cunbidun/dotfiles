@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+import os
+from pathlib import Path
+
+import requests
+
+base_dir = Path.home() / ".calcurse"
+apts_path = base_dir / "apts"
+old_apts = base_dir / "__apts"
+
+online_dir = base_dir / "online_ical"
+cal_dir = online_dir / "cals"
+cal_list = online_dir / "list.txt"
+cal_dir.mkdir(parents=True, exist_ok=True)
+
+if not apts_path.is_file():
+    apts_path.touch(exist_ok=True)
+apts_path.rename(old_apts)
+
+for f in os.listdir(cal_dir.resolve()):
+    os.system(f"calcurse -i {(cal_dir / f).resolve()}")
+
+command = (
+    "awk 'NR==FNR{a[$0];next} !($0 in a)'"
+    + " "
+    + str(apts_path.absolute())
+    + " "
+    + str(old_apts.absolute())
+    + " > "
+    + str((base_dir / "tmp").absolute())
+)
+
+os.system(command=command)
+
+os.remove(old_apts)
+(base_dir / "tmp").rename(apts_path)
+
+for f in os.listdir(cal_dir.resolve()):
+    os.remove(cal_dir / f)
+
+with open(cal_list) as f:
+    for line in f:
+        token = line.split()
+        r = requests.get(token[0])
+        with open((cal_dir / token[1]).resolve(), "wb") as cal:
+            cal.write(r.content)
+
+
+for f in os.listdir(cal_dir.resolve()):
+    os.system(f"calcurse -i {(cal_dir / f).resolve()}")
+
+os.system("sc_remove_calcurse_dup")

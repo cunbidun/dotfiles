@@ -50,6 +50,7 @@ xrandr --output HDMI-0 --primary --output eDP-1-1 --below HDMI-0 --auto
 xrandr --dpi 96 
 
 # exec awesome 
+# exec xmonad 
 while type dwm >/dev/null ; do dwm && continue || break ; done 
 # exec bspwm
 # exec i3

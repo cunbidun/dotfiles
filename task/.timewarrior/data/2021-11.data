@@ -1,2 +1,48 @@
 inc 20211101T164432Z - 20211101T173537Z # "compsci_305" "peer review" todo
-inc 20211102T010616Z # linux "linux_config" "taskwarrior setup nord theme"
+inc 20211102T010616Z - 20211102T011914Z # linux "linux_config" "taskwarrior setup nord theme"
+inc 20211102T023305Z - 20211102T051555Z # "compsci_514" "lecture recording oct 26" todo
+inc 20211102T142833Z - 20211102T145022Z # "compsci_514" "lecture recording oct 26" todo
+inc 20211102T194414Z - 20211102T195701Z # "compsci_461" "homework 4" todo
+inc 20211102T234220Z - 20211103T013911Z # "compsci_461" "homework 4" todo
+inc 20211103T023600Z - 20211103T023936Z # "compsci_514.homework3" "problem 1" todo
+inc 20211103T024407Z - 20211103T025103Z # "compsci_514.homework3" "problem 1" todo
+inc 20211103T043116Z - 20211103T044754Z # linux "linux_config" rofi "rofi scroll with ctrl j/k"
+inc 20211103T163754Z - 20211103T165501Z # 1.1 "compsci_514.homework3.problem1" todo
+inc 20211103T165509Z - 20211103T170346Z # 1.2 "compsci_514.homework3.problem1" todo
+inc 20211103T171010Z - 20211103T171255Z # 2.1 "compsci_514.homework3.problem2" todo
+inc 20211103T171257Z - 20211103T171307Z # 2.1 "compsci_514.homework3.problem2" todo
+inc 20211103T171314Z - 20211103T174620Z # 2.2 "compsci_514.homework3.problem2" todo
+inc 20211103T181335Z - 20211103T183646Z # "compsci_514.homework3" "problem 4"
+inc 20211104T162109Z - 20211104T163735Z # "compsci_305.unit3" opening
+inc 20211104T185454Z - 20211104T200655Z # "compsci_514.homework3" "problem 4" todo
+inc 20211105T002908Z - 20211105T012553Z # "compsci_305.unit3" opening
+inc 20211105T012559Z - 20211105T012602Z # "compsci_305.unit3" ending
+inc 20211105T012608Z - 20211105T020929Z # "compsci_305.unit3" stereotype
+inc 20211105T182652Z - 20211105T192809Z # "compsci_305" todo "unit 3"
+inc 20211106T012857Z - 20211106T025422Z # "compsci_305" todo "unit 3"
+inc 20211106T050508Z - 20211106T052414Z # cpcli "use C++ for gen.sh"
+inc 20211106T052737Z - 20211106T054100Z # dunst "setup dunst with images"
+inc 20211106T151143Z - 20211106T154146Z # dunst "dunst repeated noti"
+inc 20211106T203408Z - 20211106T203415Z # "C. Extreme Extension" cp
+inc 20211106T203423Z - 20211106T210429Z # "Week 10: Ethereum" "compsci_461"
+inc 20211106T212243Z - 20211106T215443Z # "Week 10: Ethereum" "compsci_461"
+inc 20211107T023810Z - 20211107T024319Z # 5.1 "compsci_514.homework3.problem5"
+inc 20211107T143829Z - 20211107T145033Z # 5.2 "compsci_514.homework3.problem5"
+inc 20211107T145040Z - 20211107T151047Z # 5.3 "compsci_514.homework3.problem5"
+inc 20211107T151217Z - 20211107T155034Z # 4.1 "compsci_514.homework3.problem4"
+inc 20211107T195848Z - 20211107T202337Z # 5.4 "compsci_514.homework3.problem5"
+inc 20211107T230500Z - 20211107T230509Z # 5.4 "compsci_514.homework3.problem5"
+inc 20211107T230523Z - 20211107T232140Z # 4.3 "compsci_514.homework3.problem4"
+inc 20211108T170626Z - 20211108T171925Z # "compsci_590" "rsm and paxos reading" umass
+inc 20211108T174323Z - 20211108T175739Z # "compsci_590" "rsm and paxos reading" umass
+inc 20211108T185008Z - 20211108T194503Z # 5.5 "compsci_514.homework3.problem5" todo umass
+inc 20211109T001514Z - 20211109T004458Z # 5.3 "compsci_514.homework3.problem5" todo umass
+inc 20211109T005136Z - 20211109T011819Z # "compsci_590" "lecture oct 14" umass
+inc 20211109T034119Z - 20211109T041159Z # "compsci_590" "lecture oct 19" umass
+inc 20211110T003753Z - 20211110T020444Z # "add xmobar" xmonad
+inc 20211110T051252Z - 20211110T061634Z # "HW 5: Ethereum Nim game" "compsci_461" umass
+inc 20211110T164013Z - 20211110T165210Z # "HW 5: Ethereum Nim game" "compsci_461" umass
+inc 20211110T171904Z - 20211110T183215Z # "HW 5: Ethereum Nim game" "compsci_461" umass
+inc 20211111T032214Z - 20211111T041426Z # "compsci_590" "lecture oct 19" umass
+inc 20211111T164813Z - 20211111T175638Z # "compsci_590" "rsm and paxos reading" umass
+inc 20211111T184844Z - 20211111T191751Z # "compsci_590" "lecture oct 26" umass

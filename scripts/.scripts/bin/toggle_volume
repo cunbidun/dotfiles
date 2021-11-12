@@ -1,4 +1,4 @@
 #!/bin/bash
 pamixer -t; pkill -RTMIN+10 dwmblocks
 vol=$(get_volume)
-notify-send "volume $vol" -t 1000 -a "System"
+notify-send --hint=string:x-dunst-stack-tag:volume "volume $vol" -t 1000 -a "System"

@@ -604,8 +604,17 @@ awful.rules.rules = {
 			screen = awful.screen.preferred,
 			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
 		},
-	}, ------------------------------ pop-up ------------------------------
-	{ rule_any = { role = { "pop-up" } }, properties = { floating = true } },
+	},
+
+	------------------------------ pop-up ------------------------------
+	------------------------------ center floating window -------------------------------
+	{
+		rule_any = { role = { "pop-up" } },
+		properties = {
+			floating = true,
+			placement = awful.placement.centered,
+		},
+	},
 
 	------------------------------ to titlebar rule ------------------------------
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
@@ -616,8 +625,8 @@ awful.rules.rules = {
 	------------------------------ slack rule ------------------------------
 	{ rule = { instance = "slack" }, properties = { tag = "9:workspace" } },
 
-	------------------------------ chromium ------------------------------
-	{ rule = { instance = "chromium" }, properties = { tag = "3:web" } },
+	------------------------------ chrome ------------------------------
+	{ rule = { instance = "google-chrome" }, properties = { tag = "web" } },
 
 	------------------------------ zoom ------------------------------
 	{ rule = { instance = "zoom" }, properties = { tag = "8:meeting" } },
@@ -702,7 +711,9 @@ end)
 
 -- Auto start applications
 awful.spawn.with_shell("xset r rate 200 50")
-awful.spawn.with_shell("feh --bg-fill --randomize ~/.wallpapers/nord/*")
+awful.spawn.with_shell("killall dunst; dunst &")
+-- awful.spawn.with_shell("feh --bg-fill --randomize ~/.wallpapers/nord/*")
+awful.spawn.with_shell("feh --bg-fill ~/.wallpapers/others/ign-colorful.png")
 -- awful.spawn.with_shell("picom --experimental-backends")
 -- awful.spawn.with_shell('nm-applet')
 awful.spawn.with_shell("ibus-daemon -drx")

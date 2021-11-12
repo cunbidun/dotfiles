@@ -13,6 +13,7 @@
   idle_threshold = 120
   font = Source Code Pro 11 
   line_height = 4
+  hide_duplicates_count = true
 
   # The format of the message.  Possible variables are:
   #   %a  appname

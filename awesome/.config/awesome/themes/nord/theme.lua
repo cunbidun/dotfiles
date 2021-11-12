@@ -82,7 +82,7 @@ theme.flash_focus_step = 0.01 -- the step of animation
 -- window switcher
 theme.flash_focus_start_opacity = 1 -- the starting opacity
 theme.flash_focus_step = 0.01 -- the step of animation
-theme.window_switcher_widget_bg = "#4C566A" -- The bg color of the widget
+theme.window_switcher_widget_bg = theme.nord1 -- The bg color of the widget
 theme.window_switcher_widget_border_width = 3 -- The border width of the widget
 theme.window_switcher_widget_border_radius = 0 -- The border radius of the widget
 theme.window_switcher_widget_border_color = theme.border_focus -- The border color of the widget
