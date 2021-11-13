@@ -1793,3 +1793,58 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20211111T184844Z","end":"20211111T191751Z","tags":["compsci_590","lecture oct 26","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211112T205724Z","tags":["compsci_590","lecture nov 2","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211112T205724Z","tags":["compsci_590","lecture nov 2","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211112T205724Z","end":"20211112T205736Z","tags":["compsci_590","lecture nov 2","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211112T205802Z","tags":["compsci_590","lecture nov 2","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211112T205802Z","tags":["compsci_590","lecture nov 2","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211112T205802Z","end":"20211112T205826Z","tags":["compsci_590","lecture nov 2","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211112T205919Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211112T205919Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211112T205919Z","end":"20211112T210000Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211112T210848Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211112T210848Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211112T210848Z","end":"20211112T210920Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211113T051122Z","tags":["compsci_590","zoo keeper"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211113T051122Z","tags":["compsci_590","zoo keeper"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211113T051122Z","end":"20211113T052435Z","tags":["compsci_590","zoo keeper"]}

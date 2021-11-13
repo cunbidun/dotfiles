@@ -15,3 +15,4 @@
 - [14] dwm-6.2-urg-border.diff
 - [15] dwm-pertag-6.2.diff
 - [16] dwm-pertag-monitorrules-6.2.diff
+- [17] dwm-scratchpad-6.2.diff

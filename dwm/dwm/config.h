@@ -63,9 +63,9 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "[\\]",     dwindle },
 	{ "|M|",      centeredmaster },
-	{ "HHH",      grid }    ,
+	// { "HHH",      grid }    ,
 	// { "[@]",      spiral },
-	// { "H[]",      deck },
+	{ "H[]",      deck },
 	// { "TTT",      bstack },
 	// { "===",      bstackhoriz },
 	// { "###",      nrowgrid },
@@ -99,12 +99,15 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", nord9, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 #include "movestack.c"
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "alacritty", "-t", scratchpadname,  NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ ALTKEY,                       XK_Tab,    spawn,          SHCMD("skippy-xd-runner --toggle") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
