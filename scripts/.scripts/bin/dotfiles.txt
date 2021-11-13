@@ -14,3 +14,4 @@
 /home/cunbidun/.config/rofi/nord.rasi
 /home/cunbidun/dotfiles/TODO.md
 /home/cunbidun/dotfiles/installation_note.md
+/home/cunbidun/.xmonad/xmonad.hs

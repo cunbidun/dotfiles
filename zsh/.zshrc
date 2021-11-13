@@ -96,7 +96,7 @@ alias ls="exa -la"
 alias ut="task +umass"
 alias ct="task +cp"
 alias lt="task +linux"
-alias tt="task +today"
+alias tt="task +todo"
 
 unsetopt PROMPT_SP
 
