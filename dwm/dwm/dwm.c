@@ -41,6 +41,7 @@
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
+#include <Imlib2.h>
 
 #include "drw.h"
 #include "util.h"
@@ -77,7 +78,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeUrg, SchemeSym }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -133,6 +134,9 @@ typedef struct {
 } Layout;
 
 typedef struct Pertag Pertag;
+/* We only move this here to get the length of the `tags` array, which probably
+ * will generate compatibility issues with other patches. To avoid it, I
+ * reccomend patching this at the end or continue with the comment below */
 struct Monitor {
 	char ltsymbol[16];
 	float mfact;
@@ -148,6 +152,7 @@ struct Monitor {
 	unsigned int seltags;
 	unsigned int sellt;
 	unsigned int tagset[2];
+	int previewshow;
 	int showbar;
 	int topbar;
 	Client *clients;
@@ -155,6 +160,11 @@ struct Monitor {
 	Client *stack;
 	Monitor *next;
 	Window barwin;
+	Window tagwin;
+	//change 'LENGTH(tags)' to the actual number of tags you have (9 by def)
+	//if you wish to move this below config.h
+	/* Pixmap tagmap[LENGTH(tags)]; */
+	Pixmap tagmap[9];
 	const Layout *lt[2];
 	Pertag *pertag;
 };
@@ -260,10 +270,12 @@ static void setup(void);
 static void setviewport(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
+static void showtagpreview(int tag);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
 static void swapfocus();
 static Monitor *systraytomon(Monitor *m);
+static void switchtag(void);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
@@ -288,6 +300,7 @@ static void updatesystray(void);
 static void updatesystrayicongeom(Client *i, int w, int h);
 static void updatesystrayiconstate(Client *i, XPropertyEvent *ev);
 static void updatetitle(Client *c);
+static void updatepreview(void);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
 static void view(const Arg *arg);
@@ -354,6 +367,7 @@ struct Pertag {
 };
 
 static unsigned int scratchtag = 1 << LENGTH(tags);
+
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
@@ -523,6 +537,10 @@ buttonpress(XEvent *e)
 		focus(NULL);
 	}
 	if (ev->window == selmon->barwin) {
+		if (selmon->previewshow) {
+			XUnmapWindow(dpy, selmon->tagwin);
+				selmon->previewshow = 0;
+		}
 		i = x = 0;
 		for (c = m->clients; c; c = c->next)
 			occ |= c->tags == 255 ? 0 : c->tags;
@@ -600,6 +618,7 @@ void
 cleanupmon(Monitor *mon)
 {
 	Monitor *m;
+	size_t i;
 
 	if (mon == mons)
 		mons = mons->next;
@@ -607,8 +626,13 @@ cleanupmon(Monitor *mon)
 		for (m = mons; m && m->next != mon; m = m->next);
 		m->next = mon->next;
 	}
+	for (i = 0; i < LENGTH(tags); i++)
+		if (mon->tagmap[i])
+			XFreePixmap(dpy, mon->tagmap[i]);
 	XUnmapWindow(dpy, mon->barwin);
 	XDestroyWindow(dpy, mon->barwin);
+	XUnmapWindow(dpy, mon->tagwin);
+	XDestroyWindow(dpy, mon->tagwin);
 	free(mon);
 }
 
@@ -972,7 +996,7 @@ drawbar(Monitor *m)
 		x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, scheme[SchemeNorm]);
+	drw_setscheme(drw, scheme[SchemeSym]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
 	if ((w = m->ww - sw - stw - x) > bh) {
@@ -1405,16 +1429,46 @@ motionnotify(XEvent *e)
 {
 	static Monitor *mon = NULL;
 	Monitor *m;
+  Client *c;
 	XMotionEvent *ev = &e->xmotion;
+	unsigned int i, x, occ = 0;
 
-	if (ev->window != root)
-		return;
 	if ((m = recttomon(ev->x_root, ev->y_root, 1, 1)) != mon && mon) {
 		unfocus(selmon->sel, 1);
 		selmon = m;
 		focus(NULL);
 	}
 	mon = m;
+
+	if (ev->window == selmon->barwin) {
+		i = x = 0;
+		for (c = m->clients; c; c = c->next)
+			occ |= c->tags == 255 ? 0 : c->tags;
+		do {
+			/* do not reserve space for vacant tags */
+			if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+				continue;
+      x += TEXTW(tags[i]);
+    } while (ev->x >= x && ++i < LENGTH(tags));
+
+		if (i < LENGTH(tags)) {
+			if ((i + 1) != selmon->previewshow && !(selmon->tagset[selmon->seltags] & 1 << i)) {
+				selmon->previewshow = i + 1;
+				showtagpreview(i);
+			} else if (selmon->tagset[selmon->seltags] & 1 << i) {
+				selmon->previewshow = 0;
+				showtagpreview(0);
+			}
+		} else if (selmon->previewshow != 0) {
+			selmon->previewshow = 0;
+			showtagpreview(0);
+		}
+	} else if (selmon->previewshow != 0) {
+		selmon->previewshow = 0;
+		showtagpreview(0);
+	}
+	if (ev->window != root)
+		return;
 }
 
 void
@@ -2049,6 +2103,7 @@ setup(void)
 	/* init bars */
 	updatebars();
 	updatestatus();
+	updatepreview();
 	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
@@ -2114,6 +2169,23 @@ showhide(Client *c)
 }
 
 void
+showtagpreview(int tag)
+{
+	if (!selmon->previewshow) {
+		XUnmapWindow(dpy, selmon->tagwin);
+		return;
+	}
+
+  if (selmon->tagmap[tag]) {
+		XSetWindowBackgroundPixmap(dpy, selmon->tagwin, selmon->tagmap[tag]);
+		XCopyArea(dpy, selmon->tagmap[tag], selmon->tagwin, drw->gc, 0, 0, selmon->mw / scalepreview, selmon->mh / scalepreview, 0, 0);
+		XSync(dpy, False);
+		XMapWindow(dpy, selmon->tagwin);
+	} else
+		XUnmapWindow(dpy, selmon->tagwin);
+}
+
+void
 sigchld(int unused)
 {
 	if (signal(SIGCHLD, sigchld) == SIG_ERR)
@@ -2146,6 +2218,40 @@ swapfocus()
 	if(c == prevclient) {
 		focus(prevclient);
 		restack(prevclient->mon);
+	}
+}
+
+void
+switchtag(void)
+{
+	int i;
+	unsigned int occ = 0;
+	Client *c;
+	Imlib_Image image;
+
+	for (c = selmon->clients; c; c = c->next)
+		occ |= c->tags;
+	for (i = 0; i < LENGTH(tags); i++) {
+		if (selmon->tagset[selmon->seltags] & 1 << i) {
+			if (selmon->tagmap[i] != 0) {
+				XFreePixmap(dpy, selmon->tagmap[i]);
+				selmon->tagmap[i] = 0;
+			}
+			if (occ & 1 << i) {
+				image = imlib_create_image(sw, sh);
+				imlib_context_set_image(image);
+				imlib_context_set_display(dpy);
+				imlib_context_set_visual(DefaultVisual(dpy, screen));
+				imlib_context_set_drawable(RootWindow(dpy, screen));
+				//uncomment the following line and comment the other imlin_copy.. line if you don't want the bar showing on the preview
+				//imlib_copy_drawable_to_image(0, selmon->wx, selmon->wy, selmon->ww ,selmon->wh, 0, 0, 1);
+				imlib_copy_drawable_to_image(0, selmon->mx, selmon->my, selmon->mw ,selmon->mh, 0, 0, 1);
+				selmon->tagmap[i] = XCreatePixmap(dpy, selmon->tagwin, selmon->mw / scalepreview, selmon->mh / scalepreview, DefaultDepth(dpy, screen));
+				imlib_context_set_drawable(selmon->tagmap[i]);
+				imlib_render_image_part_on_drawable_at_size(0, 0, selmon->mw, selmon->mh, 0, 0, selmon->mw / scalepreview, selmon->mh / scalepreview);
+				imlib_free_image();
+			}
+		}
 	}
 }
 
@@ -2254,6 +2360,7 @@ toggleview(const Arg *arg)
 	int i;
 
 	if (newtagset) {
+		switchtag();
 		selmon->tagset[selmon->seltags] = newtagset;
 
 		if (newtagset == ~0) {
@@ -2352,7 +2459,7 @@ updatebars(void)
 	XSetWindowAttributes wa = {
 		.override_redirect = True,
 		.background_pixmap = ParentRelative,
-		.event_mask = ButtonPressMask|ExposureMask
+		.event_mask = ButtonPressMask|ExposureMask|PointerMotionMask
 	};
 	XClassHint ch = {"dwm", "dwm"};
 	for (m = mons; m; m = m->next) {
@@ -2678,6 +2785,26 @@ updatetitle(Client *c)
 }
 
 void
+updatepreview(void)
+{
+	Monitor *m;
+
+	XSetWindowAttributes wa = {
+		.override_redirect = True,
+		.background_pixmap = ParentRelative,
+		.event_mask = ButtonPressMask|ExposureMask
+	};
+	for (m = mons; m; m = m->next) {
+		m->tagwin = XCreateWindow(dpy, root, m->wx, m->by + bh, m->mw / scalepreview, m->mh / scalepreview, 0,
+				DefaultDepth(dpy, screen), CopyFromParent, DefaultVisual(dpy, screen),
+				CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
+		XDefineCursor(dpy, m->tagwin, cursor[CurNormal]->cursor);
+		XMapRaised(dpy, m->tagwin);
+		XUnmapWindow(dpy, m->tagwin);
+	}
+}
+
+void
 updatewindowtype(Client *c)
 {
 	Atom state = getatomprop(c, netatom[NetWMState]);
@@ -2719,6 +2846,7 @@ view(const Arg *arg)
 
 	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
+	switchtag();
 	selmon->seltags ^= 1; /* toggle sel tagset */
 	if (arg->ui & TAGMASK) {
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
