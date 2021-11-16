@@ -3,6 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int scalepreview       = 4;        /* tag preview scaling */
 static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
@@ -27,12 +28,14 @@ static const char nord4[]           = "#D8DEE9";
 static const char nord8[]           = "#88c0d0";
 static const char nord9[]           = "#81A1C1";
 static const char nord12[]          = "#D08770";
+static const char nord14[]          = "#A3BE8C";
 
 static const char *colors[][3]      = {
 	/*               fg           bg            border   */
 	[SchemeNorm] = { nord4,       nord0,       nord3},
 	[SchemeSel]  = { nord0,       nord9,       nord9},
 	[SchemeUrg]  = { nord0,      nord12,      nord12},
+	[SchemeSym]  = { nord0,      nord14,      nord14},
 };
 
 
