@@ -25,6 +25,7 @@ static const char col_gray4[]       = "#ECEFF4";
 static const char nord0[]           = "#2E3440";
 static const char nord3[]           = "#4C566A";
 static const char nord4[]           = "#D8DEE9";
+static const char nord7[]           = "#8FBCBB";
 static const char nord8[]           = "#88c0d0";
 static const char nord9[]           = "#81A1C1";
 static const char nord12[]          = "#D08770";
@@ -35,21 +36,22 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { nord4,       nord0,       nord3},
 	[SchemeSel]  = { nord0,       nord9,       nord9},
 	[SchemeUrg]  = { nord0,      nord12,      nord12},
-	[SchemeSym]  = { nord0,      nord14,      nord14},
+	[SchemeSym]  = { nord0,       nord7,       nord7},
 };
 
 
 /* tagging */
-static const char *tags[] = { "sys", "dev","web","school","590cc","461", "7", "8", "vi" };
+static const char *tags[] = { "sys", "dev","web","school","590cc","461", "7", "chat", "vi" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class                  instance               title       tags mask     isfloating   monitor */
-	{ "firefox",                 NULL,               NULL,       1 << 2,       0,           -1 },
-	{ "Google-chrome",     "google-chrome",          NULL,       1 << 2,       0,           -1 }, // tag 3
+	/* class                  instance                    title       tags mask     isfloating   monitor */
+	{ "firefox",                 NULL,                    NULL,       1 << 2,       0,           -1 },
+	{ "Google-chrome",     "google-chrome",               NULL,       1 << 2,       0,           -1 }, // tag 3
+	{ "Google-chrome",           NULL     ,    "chat - reddit",       1 << 7,       0,           -1 }, // tag 3
 	// { "Alacritty",          "Alacritty",       "calcurse",       1 << 0,       0,           -1 }, 
 };
 
@@ -155,19 +157,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-
-  // monitor 
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-
-  // volume key
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("decrease_volume") },
 	{ 0,                            XF86XK_AudioMute,        spawn, SHCMD("toggle_volume") } ,
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("increase_volume") },
-
-  // tag key
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
