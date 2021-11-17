@@ -17,7 +17,7 @@ pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo
 
 ### Install utilities
 ```
-yay -S fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow acpi pamixer apulse alsa-utils network-manager-applet
+yay -S imlib2 fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow acpi pamixer apulse alsa-utils network-manager-applet
 ```
 1. fzf: fuzzy finder
 2. acpi: battery status

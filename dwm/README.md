@@ -16,3 +16,5 @@
 - [15] dwm-pertag-6.2.diff
 - [16] dwm-pertag-monitorrules-6.2.diff
 - [17] dwm-scratchpad-6.2.diff
+- [18] dwm-actualfullscreen-20211013-cb3f58a.diff
+- [19] dwm-tag-preview-6.2.diff

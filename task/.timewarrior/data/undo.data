@@ -1848,3 +1848,283 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20211113T051122Z","end":"20211113T052435Z","tags":["compsci_590","zoo keeper"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211113T174858Z","tags":["compsci_590","rsm and paxos reading","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211113T174858Z","tags":["compsci_590","rsm and paxos reading","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211113T174858Z","end":"20211113T175331Z","tags":["compsci_590","rsm and paxos reading","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211113T175354Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211113T175354Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211113T175354Z","end":"20211113T185047Z","tags":["compsci_590","lecture oct 26","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211113T203508Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211113T203508Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211113T203508Z","end":"20211113T210317Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211113T214627Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211113T214627Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211113T214627Z","end":"20211113T220353Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211113T222110Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211113T222110Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211113T222110Z","end":"20211113T224117Z","tags":["compsci_590","lecture oct 28","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211114T000006Z","tags":["compsci_590","lecture nov 2","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211114T000006Z","tags":["compsci_590","lecture nov 2","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211114T000006Z","end":"20211114T002816Z","tags":["compsci_590","lecture nov 2","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211114T151115Z","tags":["compsci_590","lecture nov 2","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211114T151115Z","tags":["compsci_590","lecture nov 2","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211114T151115Z","end":"20211114T155140Z","tags":["compsci_590","lecture nov 2","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211114T160222Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211114T160222Z","tags":["compsci_590","pa3","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211114T160222Z","end":"20211114T160427Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211114T164719Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211114T164719Z","tags":["compsci_590","pa3","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211114T164719Z","end":"20211114T175141Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211114T210647Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211114T210647Z","tags":["compsci_590","pa3","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211114T210647Z","end":"20211114T222504Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211115T040551Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211115T040551Z","tags":["compsci_590","pa3","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211115T040551Z","end":"20211115T065251Z","tags":["compsci_590","pa3","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211115T210444Z","tags":["homework 9","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211115T210444Z","tags":["homework 9","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211115T210444Z","end":"20211115T233301Z","tags":["homework 9","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211115T210444Z","end":"20211115T233301Z","tags":["homework 9","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211115T210444Z","end":"20211115T233301Z","tags":["homework 9","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211115T210444Z","end":"20211115T233301Z","tags":["homework 9","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211115T210444Z","end":"20211115T223301Z","tags":["homework 9","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211115T233459Z","tags":["2s rejection email","swe2022","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211115T233459Z","tags":["2s rejection email","swe2022","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211115T233459Z","end":"20211116T000041Z","tags":["2s rejection email","swe2022","todo"]}
+txn:
+  type: interval
+  before: {"id":2,"start":"20211115T210444Z","end":"20211115T223301Z","tags":["homework 9","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":2,"start":"20211115T210444Z","end":"20211115T223301Z","tags":["homework 9","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":2,"start":"20211115T210444Z","end":"20211115T223301Z","tags":["homework 9","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":2,"start":"20211115T210444Z","end":"20211115T220301Z","tags":["homework 9","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211116T020331Z","tags":["compsci_590","lecture nov 4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T020331Z","tags":["compsci_590","lecture nov 4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T020331Z","end":"20211116T022643Z","tags":["compsci_590","lecture nov 4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211116T025752Z","tags":["compsci_590","lecture nov 4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T025752Z","tags":["compsci_590","lecture nov 4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T025752Z","end":"20211116T035233Z","tags":["compsci_590","lecture nov 4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211116T151457Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T151457Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T151457Z","end":"20211116T191052Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T151457Z","end":"20211116T191052Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T151457Z","end":"20211116T161052Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T151457Z","end":"20211116T161052Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T151457Z","end":"20211116T160052Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211116T195949Z","tags":["dwm","linux","preview tag patch"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T195949Z","tags":["dwm","linux","preview tag patch"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T195949Z","end":"20211116T210225Z","tags":["dwm","linux","preview tag patch"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211116T210943Z","tags":["dwm","task symbol color"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T210943Z","tags":["dwm","task symbol color"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T210943Z","end":"20211116T213138Z","tags":["dwm","task symbol color"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211116T213146Z","tags":["citadel survey","swe2022","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211116T213146Z","tags":["citadel survey","swe2022","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211116T213146Z","end":"20211116T215911Z","tags":["citadel survey","swe2022","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211117T043307Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211117T043307Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211117T043307Z","end":"20211117T045124Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211117T171034Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211117T171034Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211117T171034Z","end":"20211117T222222Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211117T171034Z","end":"20211117T222222Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211117T171034Z","end":"20211117T192222Z","tags":["compsci_305","todo","umass","unit 4 peers review"]}
