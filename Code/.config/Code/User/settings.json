@@ -124,6 +124,6 @@
   "leetcode.hint.configWebviewMarkdown": false,
   "leetcode.defaultLanguage": "cpp",
   "leetcode.hint.commentDescription": false,
-  "workbench.colorTheme": "Nord",
+  "workbench.colorTheme": "Visual Studio Dark",
   "files.autoSave": "afterDelay"
 }

@@ -23,20 +23,32 @@ static const char col_gray2[]       = "#4C566A";
 static const char col_gray3[]       = "#D8DEE9";
 static const char col_gray4[]       = "#ECEFF4";
 static const char nord0[]           = "#2E3440";
+static const char nord1[]           = "#3B4252";
+static const char nord2[]           = "#434C5E";
 static const char nord3[]           = "#4C566A";
 static const char nord4[]           = "#D8DEE9";
+static const char nord5[]           = "#E5E9F0";
+static const char nord6[]           = "#ECEFF4";
 static const char nord7[]           = "#8FBCBB";
 static const char nord8[]           = "#88c0d0";
 static const char nord9[]           = "#81A1C1";
+static const char nord10[]          = "#5E81AC";
+static const char nord11[]          = "#BF616A";
 static const char nord12[]          = "#D08770";
+static const char nord13[]          = "#EBCB8B";
 static const char nord14[]          = "#A3BE8C";
+static const char nord15[]          = "#B48EAD";
 
 static const char *colors[][3]      = {
 	/*               fg           bg            border   */
 	[SchemeNorm] = { nord4,       nord0,       nord3},
+	[NordRed]    = { nord11,      nord0,       nord0},
+	[NordGreen]  = { nord14,      nord0,       nord0},
+	[NordYellow] = { nord13,      nord0,       nord0},
+	[NordBlue]   = { nord9,       nord0,       nord0},
 	[SchemeSel]  = { nord0,       nord9,       nord9},
-	[SchemeUrg]  = { nord0,      nord12,      nord12},
-	[SchemeSym]  = { nord0,       nord7,       nord7},
+	[SchemeUrg]  = { nord0,      nord12,      nord12},  
+	[SchemeSym]  = { nord0,       nord7,       nord7},  // symbol color nord 7
 };
 
 

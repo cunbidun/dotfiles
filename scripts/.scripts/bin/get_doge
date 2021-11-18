@@ -8,5 +8,5 @@ res = requests.get(
 dogePrice = Decimal(res['prices'][1]['price'])
 
 getcontext().prec = 7
-print(dogePrice * Decimal(100))
+print(f"^c#81A1C1^DOGE: ^d^{dogePrice * Decimal(100)}")
 
