@@ -1,11 +1,11 @@
 #!/bin/bash
 EN_ibus="xkb:us::eng"
 VN_ibus="Bamboo"
-lang=`ibus engine`
+lang=$(ibus engine)
 
 if [ "$lang" = "$EN_ibus" ];then
-  echo "EN"
+  echo "^c#81A1C1^EN^d^"
 fi
 if [ "$lang" = "$VN_ibus" ];then
-  echo "VI"
+  echo "^c#EBCB8B^VI^d^"
 fi
