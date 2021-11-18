@@ -59,12 +59,13 @@ static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
+   *  WM_WINDOW_ROLE(STRING) = role
 	 */
-	/* class                  instance                    title       tags mask     isfloating   monitor */
-	{ "firefox",                 NULL,                    NULL,       1 << 2,       0,           -1 },
-	{ "Google-chrome",     "google-chrome",               NULL,       1 << 2,       0,           -1 }, // tag 3
-	{ "Google-chrome",           NULL     ,    "chat - reddit",       1 << 7,       0,           -1 }, // tag 3
-	// { "Alacritty",          "Alacritty",       "calcurse",       1 << 0,       0,           -1 }, 
+	/* class              role          instance               title       tags mask     isfloating   monitor */
+	{ "firefox",          NULL,             NULL,               NULL,       1 << 2,       0,           -1 },
+	{ "Google-chrome",    NULL,  "google-chrome",               NULL,       1 << 2,       0,           -1 }, // tag 3
+	{ "Google-chrome",    NULL,             NULL,    "chat - reddit",       1 << 7,       0,           -1 }, // tag 3
+	{        NULL,    "pop-up",             NULL,               NULL,            0,       1,           -1 }, // tag 3
 };
 
 /* layout(s) */

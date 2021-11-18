@@ -2154,3 +2154,21 @@ txn:
   type: interval
   before: 
   after: {"id":0,"start":"20211118T212142Z","tags":["dwm","dwmblock async"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211118T212142Z","tags":["dwm","dwmblock async"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211118T212142Z","end":"20211118T214010Z","tags":["dwm","dwmblock async"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211118T214219Z","tags":["add wmrole to rule","dwm"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211118T214219Z","tags":["add wmrole to rule","dwm"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211118T214219Z","end":"20211118T214932Z","tags":["add wmrole to rule","dwm"]}
