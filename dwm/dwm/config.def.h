@@ -87,7 +87,7 @@ static const Layout layouts[] = {
 	{ "H[]",      deck },
 	// { "TTT",      bstack },
 	// { "===",      bstackhoriz },
-	// { "###",      nrowgrid },
+	{ "###",      nrowgrid },
 	// { "---",      horizgrid },
 	// { ":::",      gaplessgrid },
 	// { ">M>",      centeredfloatingmaster },
