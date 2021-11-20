@@ -1,8 +1,13 @@
 #include <X11/XF86keysym.h>
 
+/* Constants */
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
+
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int scalepreview       = 4;        /* tag preview scaling */
 static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
@@ -61,11 +66,13 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
    *  WM_WINDOW_ROLE(STRING) = role
 	 */
-	/* class              role          instance               title       tags mask     isfloating   monitor */
-	{ "firefox",          NULL,             NULL,               NULL,       1 << 2,       0,           -1 },
-	{ "Google-chrome",    NULL,  "google-chrome",               NULL,       1 << 2,       0,           -1 }, // tag 3
-	{ "Google-chrome",    NULL,             NULL,    "chat - reddit",       1 << 7,       0,           -1 }, // tag 3
-	{        NULL,    "pop-up",             NULL,               NULL,            0,       1,           -1 }, // tag 3
+	/* class              role          instance         title            tags mask     isfloating    isterminal      noswallow       monitor */
+	{ "firefox",          NULL,         NULL,            NULL,            1 << 2,       0,            0,              0,              -1 },
+	{ "Google-chrome",    NULL,         "google-chrome", NULL,            1 << 2,       0,            0,              0,              -1 }, // tag 3
+	{ "Google-chrome",    NULL,         NULL,            "chat - reddit", 1 << 7,       0,            0,              0,              -1 }, // tag 3
+	{ NULL,               "pop-up",     NULL,            NULL,            0,            1,            0,              0,              -1 }, // tag 3
+	{ TERMCLASS,          NULL,         NULL,            0,               0,            0,            1,              0,              -1 },
+	{ NULL,               NULL,         NULL,            "Event Tester",  0,            0,            0,              1,              -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -117,10 +124,10 @@ static const MonitorRule monrules[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", nord9, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 #include "movestack.c"
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "alacritty", "-t", scratchpadname, "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", NULL };
+static const char *scratchpadcmd[] = { TERMINAL, "-t", scratchpadname, "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -142,7 +149,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("import png:- | xclip -selection clipboard -t image/png") },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("nord_color_picker") },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("alacritty -e dotfiles_picker") },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD(TERMINAL " -e dotfiles_picker") },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
@@ -195,7 +202,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD(TERMINAL " -e nvim ~/dwmblocks-async/config.h") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

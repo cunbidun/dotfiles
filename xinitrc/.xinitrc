@@ -40,8 +40,8 @@ xset r rate 200 30 &
 
 # xrandr --output eDP-1 --primary --auto
 # xrandr --output eDP-1-1 --primary --auto
-# xrandr --output HDMI-0 --primary --output eDP-1-1 --below HDMI-0 --mode 1920x1080 --rate 144.00 
-xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
+xrandr --output HDMI-0 --primary --rate 144.00 --output eDP-1-1 --below HDMI-0 --mode 1920x1080 --rate 144.00 
+# xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
 # xrandr --output eDP-1-1 --primary --output HDMI-0 --above eDP-1-1 --auto
 # xrandr --output HDMI-0 --primary --output eDP-1-1 --left-of HDMI-0 --auto
 # xrandr --output eDP-1-1 --primary --auto

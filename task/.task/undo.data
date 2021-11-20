@@ -3885,3 +3885,266 @@ time 1637272172
 old [description:"add wmrole to rule" entry:"1637268788" modified:"1637271739" project:"dwm" start:"1637271739" status:"pending" uuid:"31b6ef48-3395-403a-9738-282361629292"]
 new [description:"add wmrole to rule" end:"1637272172" entry:"1637268788" modified:"1637272172" project:"dwm" status:"completed" uuid:"31b6ef48-3395-403a-9738-282361629292"]
 ---
+time 1637296604
+new [description:"Tokens" entry:"1637296604" modified:"1637296604" project:"compsci_461" status:"pending" uuid:"379f6d63-2474-45ce-b818-84fab77ef433"]
+---
+time 1637296635
+new [description:"Nov 16-30: Bitcoin Scripting And Lightning" entry:"1637296635" modified:"1637296635" project:"compsci_461" status:"pending" uuid:"a8b12233-11bb-4b7c-9a24-6a1e32be8c1f"]
+---
+time 1637296694
+new [description:"HW 6, 461 programming Ethereum tokens" entry:"1637296694" modified:"1637296694" project:"compsci_461" status:"pending" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1637296750
+old [description:"lecture nov 9" due:"1637078400" entry:"1636509921" modified:"1637089852" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638334800" entry:"1636509921" modified:"1637296750" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1637296750
+old [description:"lecture nov 9" due:"1637085600" entry:"1636569158" modified:"1637043189" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3326a92b-9e3d-4133-ad93-3398ed7f37ae"]
+new [description:"lecture nov 9" due:"1638334800" entry:"1636569158" modified:"1637296750" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3326a92b-9e3d-4133-ad93-3398ed7f37ae"]
+---
+time 1637296751
+old [description:"Tokens" entry:"1637296604" modified:"1637296604" project:"compsci_461" status:"pending" uuid:"379f6d63-2474-45ce-b818-84fab77ef433"]
+new [description:"Tokens" due:"1638334800" entry:"1637296604" modified:"1637296751" project:"compsci_461" status:"pending" uuid:"379f6d63-2474-45ce-b818-84fab77ef433"]
+---
+time 1637296751
+old [description:"Nov 16-30: Bitcoin Scripting And Lightning" entry:"1637296635" modified:"1637296635" project:"compsci_461" status:"pending" uuid:"a8b12233-11bb-4b7c-9a24-6a1e32be8c1f"]
+new [description:"Nov 16-30: Bitcoin Scripting And Lightning" due:"1638334800" entry:"1637296635" modified:"1637296751" project:"compsci_461" status:"pending" uuid:"a8b12233-11bb-4b7c-9a24-6a1e32be8c1f"]
+---
+time 1637296751
+old [description:"HW 6, 461 programming Ethereum tokens" entry:"1637296694" modified:"1637296694" project:"compsci_461" status:"pending" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638334800" entry:"1637296694" modified:"1637296751" project:"compsci_461" status:"pending" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1637296822
+old [description:"unit 4 paper" due:"1637380800" entry:"1636905609" modified:"1636905626" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"1846adac-0d8f-40c7-9779-a1c6e00dceb9"]
+new [description:"unit 4 paper" due:"1637557200" entry:"1636905609" modified:"1637296822" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"1846adac-0d8f-40c7-9779-a1c6e00dceb9"]
+---
+time 1637296843
+old [description:"Week 8: Blockchain Voting" due:"1637643600" entry:"1635292247" modified:"1637043666" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+new [description:"Week 8: Blockchain Voting" due:"1638334800" entry:"1635292247" modified:"1637296843" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+---
+time 1637296843
+old [description:"Week 9: Byzantine Generals Problem" due:"1637643600" entry:"1635794326" modified:"1637043666" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+new [description:"Week 9: Byzantine Generals Problem" due:"1638334800" entry:"1635794326" modified:"1637296843" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1637296843
+old [description:"zab paper" due:"1637643600" entry:"1637034821" modified:"1637077884" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a0c744ed-6833-4a23-8afa-96ec792dc059"]
+new [description:"zab paper" due:"1638334800" entry:"1637034821" modified:"1637296843" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a0c744ed-6833-4a23-8afa-96ec792dc059"]
+---
+time 1637296843
+old [description:"lecture nov 16" due:"1637643600" entry:"1637043703" modified:"1637043746" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7fd0780-d328-4d16-b4c5-6a57c6a19027"]
+new [description:"lecture nov 16" due:"1638334800" entry:"1637043703" modified:"1637296843" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7fd0780-d328-4d16-b4c5-6a57c6a19027"]
+---
+time 1637296854
+old [description:"google spanner" due:"1637643600" entry:"1637078121" modified:"1637078121" project:"compsci_590" status:"pending" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+new [description:"google spanner" due:"1638334800" entry:"1637078121" modified:"1637296854" project:"compsci_590" status:"pending" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+---
+time 1637296868
+old [annotation_1634848976:"vscode java extension could be more than enough" description:"setup java lsp" entry:"1634150335" modified:"1635871508" priority:"L" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+new [annotation_1634848976:"vscode java extension could be more than enough" description:"setup java lsp" end:"1637296866" entry:"1634150335" modified:"1637296868" priority:"L" project:"nvim" status:"deleted" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"12fa9a49-ed8e-4ce0-9d8e-62cd461d8117"]
+---
+time 1637296904
+old [description:"Tokens" due:"1638334800" entry:"1637296604" modified:"1637296751" project:"compsci_461" status:"pending" uuid:"379f6d63-2474-45ce-b818-84fab77ef433"]
+new [description:"Tokens" due:"1638334800" entry:"1637296604" modified:"1637296904" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"379f6d63-2474-45ce-b818-84fab77ef433"]
+---
+time 1637296904
+old [description:"Nov 16-30: Bitcoin Scripting And Lightning" due:"1638334800" entry:"1637296635" modified:"1637296751" project:"compsci_461" status:"pending" uuid:"a8b12233-11bb-4b7c-9a24-6a1e32be8c1f"]
+new [description:"Nov 16-30: Bitcoin Scripting And Lightning" due:"1638334800" entry:"1637296635" modified:"1637296904" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"a8b12233-11bb-4b7c-9a24-6a1e32be8c1f"]
+---
+time 1637296904
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638334800" entry:"1637296694" modified:"1637296751" project:"compsci_461" status:"pending" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638334800" entry:"1637296694" modified:"1637296904" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1637296913
+old [description:"lecture nov 9" due:"1638334800" entry:"1636509921" modified:"1637296750" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638334800" entry:"1636509921" modified:"1637296913" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1637296914
+old [description:"lecture nov 9" due:"1638334800" entry:"1636569158" modified:"1637296750" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3326a92b-9e3d-4133-ad93-3398ed7f37ae"]
+new [description:"lecture nov 9" due:"1638334800" entry:"1636569158" modified:"1637296914" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"3326a92b-9e3d-4133-ad93-3398ed7f37ae"]
+---
+time 1637296914
+old [description:"zab paper" due:"1638334800" entry:"1637034821" modified:"1637296843" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a0c744ed-6833-4a23-8afa-96ec792dc059"]
+new [description:"zab paper" due:"1638334800" entry:"1637034821" modified:"1637296914" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"a0c744ed-6833-4a23-8afa-96ec792dc059"]
+---
+time 1637296922
+old [description:"google spanner" due:"1638334800" entry:"1637078121" modified:"1637296854" project:"compsci_590" status:"pending" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+new [description:"google spanner" due:"1638334800" entry:"1637078121" modified:"1637296922" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+---
+time 1637297119
+new [description:"lecture nov 16" entry:"1637297119" modified:"1637297119" project:"compsci_514" status:"pending" uuid:"52602cf5-eb39-42cc-ac72-69313266b5d0"]
+---
+time 1637297128
+new [description:"pset 4" entry:"1637297128" modified:"1637297128" project:"compsci_514" status:"pending" uuid:"eae2f753-7721-44cb-9238-3a2007321aa6"]
+---
+time 1637297172
+old [description:"lecture nov 16" entry:"1637297119" modified:"1637297119" project:"compsci_514" status:"pending" uuid:"52602cf5-eb39-42cc-ac72-69313266b5d0"]
+new [description:"lecture nov 16" entry:"1637297119" modified:"1637297172" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"52602cf5-eb39-42cc-ac72-69313266b5d0"]
+---
+time 1637297172
+old [description:"pset 4" entry:"1637297128" modified:"1637297128" project:"compsci_514" status:"pending" uuid:"eae2f753-7721-44cb-9238-3a2007321aa6"]
+new [description:"pset 4" entry:"1637297128" modified:"1637297172" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"eae2f753-7721-44cb-9238-3a2007321aa6"]
+---
+time 1637297185
+old [description:"lecture nov 16" entry:"1637297119" modified:"1637297172" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"52602cf5-eb39-42cc-ac72-69313266b5d0"]
+new [description:"lecture nov 16" due:"1638334800" entry:"1637297119" modified:"1637297185" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"52602cf5-eb39-42cc-ac72-69313266b5d0"]
+---
+time 1637297185
+old [description:"pset 4" entry:"1637297128" modified:"1637297172" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"eae2f753-7721-44cb-9238-3a2007321aa6"]
+new [description:"pset 4" due:"1638334800" entry:"1637297128" modified:"1637297185" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"eae2f753-7721-44cb-9238-3a2007321aa6"]
+---
+time 1637297340
+new [description:"http:\/\/ccr.sigcomm.org\/online\/files\/p63-alfares.pdf" due:"1638334800" entry:"1637297340" modified:"1637297340" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"54e3b966-f476-4398-9175-7a0c97ced7fd"]
+---
+time 1637297403
+new [description:"lecture nov 18" due:"1638334800" entry:"1637297403" modified:"1637297403" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1637297448
+new [description:"hw4" due:"1638334800" entry:"1637297448" modified:"1637297448" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1637297537
+old [description:"hw4" due:"1638334800" entry:"1637297448" modified:"1637297448" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1637297537" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1637297574
+new [description:"PA3.2" due:"1638334800" entry:"1637297574" modified:"1637297574" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1637297609
+old [description:"google spanner" due:"1638334800" entry:"1637078121" modified:"1637296922" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+new [description:"google spanner paper" due:"1638334800" entry:"1637078121" modified:"1637297609" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+---
+time 1637297652
+old [description:"http:\/\/ccr.sigcomm.org\/online\/files\/p63-alfares.pdf" due:"1638334800" entry:"1637297340" modified:"1637297340" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"54e3b966-f476-4398-9175-7a0c97ced7fd"]
+new [annotation_1637297630:"http:\/\/ccr.sigcomm.org\/online\/files\/p63-alfares.pdf" description:"Datacenter networking notes" due:"1638334800" entry:"1637297340" modified:"1637297652" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"54e3b966-f476-4398-9175-7a0c97ced7fd"]
+---
+time 1637297701
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638334800" entry:"1637296694" modified:"1637296904" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1637297701" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1637297802
+new [description:"dwmblock click" entry:"1637297802" modified:"1637297802" project:"dwm" status:"pending" uuid:"1db311d2-7397-41ca-8842-9cefd57b76ec"]
+---
+time 1637297995
+old [description:"lecture nov 16" due:"1638334800" entry:"1637043703" modified:"1637296843" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7fd0780-d328-4d16-b4c5-6a57c6a19027"]
+new [description:"lecture nov 18" due:"1638334800" entry:"1637043703" modified:"1637297995" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7fd0780-d328-4d16-b4c5-6a57c6a19027"]
+---
+time 1637298048
+old [description:"unit 4 paper" due:"1637557200" entry:"1636905609" modified:"1637296822" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"1846adac-0d8f-40c7-9779-a1c6e00dceb9"]
+new [description:"unit 4 paper" due:"1637557200" entry:"1636905609" modified:"1637298048" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1846adac-0d8f-40c7-9779-a1c6e00dceb9"]
+---
+time 1637298066
+old [annotation_1635616050:"https:\/\/codeforces.com\/problemset\/problem\/1601\/C" description:"C. Optimal Insertion" entry:"1635199011" modified:"1636228307" project:"cp" status:"pending" tags:"cp" tags_cp:"x" uuid:"884e9417-a117-4e41-9232-46aac1715242"]
+new [annotation_1635616050:"https:\/\/codeforces.com\/problemset\/problem\/1601\/C" description:"C. Optimal Insertion" end:"1637298064" entry:"1635199011" modified:"1637298066" project:"cp" status:"deleted" tags:"cp" tags_cp:"x" uuid:"884e9417-a117-4e41-9232-46aac1715242"]
+---
+time 1637298066
+old [annotation_1635615769:"https:\/\/codeforces.com\/problemset\/problem\/1603\/C" description:"C. Extreme Extension" entry:"1635615672" modified:"1636230855" project:"cp" status:"pending" tags:"cp" tags_cp:"x" uuid:"6470c864-e7c6-490b-93f8-718aa8e028a4"]
+new [annotation_1635615769:"https:\/\/codeforces.com\/problemset\/problem\/1603\/C" description:"C. Extreme Extension" end:"1637298066" entry:"1635615672" modified:"1637298066" project:"cp" status:"deleted" tags:"cp" tags_cp:"x" uuid:"6470c864-e7c6-490b-93f8-718aa8e028a4"]
+---
+time 1637298067
+old [annotation_1635615706:"https:\/\/codeforces.com\/problemset\/problem\/1606\/E" description:"E. Arena" entry:"1635615699" modified:"1636902665" project:"cp" status:"pending" tags:"cp" tags_cp:"x" uuid:"5b7df736-19e0-4f33-95c2-9d756104eddc"]
+new [annotation_1635615706:"https:\/\/codeforces.com\/problemset\/problem\/1606\/E" description:"E. Arena" end:"1637298066" entry:"1635615699" modified:"1637298067" project:"cp" status:"deleted" tags:"cp" tags_cp:"x" uuid:"5b7df736-19e0-4f33-95c2-9d756104eddc"]
+---
+time 1637298067
+old [annotation_1636869386:"https:\/\/codingcompetitions.withgoogle.com\/kickstart\/round\/0000000000435914\/00000000008d9970" description:"Dependent Events" entry:"1636869383" modified:"1636869401" project:"cp" status:"pending" tags:"cp" tags_cp:"x" uuid:"5ebeccc9-0460-4a97-81ed-7770332e72fc"]
+new [annotation_1636869386:"https:\/\/codingcompetitions.withgoogle.com\/kickstart\/round\/0000000000435914\/00000000008d9970" description:"Dependent Events" end:"1637298067" entry:"1636869383" modified:"1637298067" project:"cp" status:"deleted" tags:"cp" tags_cp:"x" uuid:"5ebeccc9-0460-4a97-81ed-7770332e72fc"]
+---
+time 1637298214
+old [description:"add xmobar" entry:"1636504666" modified:"1636693952" project:"xmonad" status:"pending" tags:"linux" tags_linux:"x" uuid:"8cf6ef2a-752b-4557-9713-b4bf1943bf9b"]
+new [description:"add xmobar" end:"1637298210" entry:"1636504666" modified:"1637298214" project:"xmonad" status:"deleted" tags:"linux" tags_linux:"x" uuid:"8cf6ef2a-752b-4557-9713-b4bf1943bf9b"]
+---
+time 1637298217
+old [description:"setup awesome wm tile\/window mode" entry:"1635024706" modified:"1635819386" priority:"L" project:"linux_config.awesomewm" status:"pending" tags:"linux" tags_linux:"x" uuid:"eded1221-50c7-4dea-8f59-56fe6554106a"]
+new [description:"setup awesome wm tile\/window mode" end:"1637298214" entry:"1635024706" modified:"1637298217" priority:"L" project:"linux_config.awesomewm" status:"deleted" tags:"linux" tags_linux:"x" uuid:"eded1221-50c7-4dea-8f59-56fe6554106a"]
+---
+time 1637298225
+old [description:"dwmblock click" entry:"1637297802" modified:"1637297802" project:"dwm" status:"pending" uuid:"1db311d2-7397-41ca-8842-9cefd57b76ec"]
+new [description:"dwmblock click" entry:"1637297802" modified:"1637298225" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"1db311d2-7397-41ca-8842-9cefd57b76ec"]
+---
+time 1637298865
+old [description:"dwmblock click" entry:"1637297802" modified:"1637298225" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"1db311d2-7397-41ca-8842-9cefd57b76ec"]
+new [description:"dwmblock click" entry:"1637297802" modified:"1637298865" project:"dwm" status:"pending" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"1db311d2-7397-41ca-8842-9cefd57b76ec"]
+---
+time 1637298917
+new [description:"weather script" entry:"1637298917" modified:"1637298917" project:"dwm" status:"pending" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+---
+time 1637298923
+old [description:"weather script" entry:"1637298917" modified:"1637298917" project:"dwm" status:"pending" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+new [description:"weather script" entry:"1637298917" modified:"1637298923" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+---
+time 1637298935
+old [description:"weather script" entry:"1637298917" modified:"1637298923" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+new [description:"weather script" entry:"1637298917" modified:"1637298935" project:"dwm" status:"pending" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+---
+time 1637299111
+new [description:"H. Road Problem" entry:"1637299111" modified:"1637299111" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"540d4a1b-dd41-4712-b41c-cba8b0b07f0e"]
+---
+time 1637299133
+new [description:"D. Mr. Kitayutas Technology" entry:"1637299133" modified:"1637299133" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"818fbb93-f37a-4ba6-8228-2b8d6f41a916"]
+---
+time 1637299203
+old [description:"H. Road Problem" entry:"1637299111" modified:"1637299111" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"540d4a1b-dd41-4712-b41c-cba8b0b07f0e"]
+new [description:"2100 rated problem" entry:"1637299111" modified:"1637299203" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"540d4a1b-dd41-4712-b41c-cba8b0b07f0e"]
+---
+time 1637299234
+old [description:"D. Mr. Kitayutas Technology" entry:"1637299133" modified:"1637299133" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"818fbb93-f37a-4ba6-8228-2b8d6f41a916"]
+new [description:"2000 rated problem" entry:"1637299133" modified:"1637299234" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"818fbb93-f37a-4ba6-8228-2b8d6f41a916"]
+---
+time 1637340310
+new [description:"introduction" due:"1637384400" entry:"1637340310" modified:"1637340310" project:"compsci_305.unit4" status:"pending" uuid:"57e4520b-24b3-460b-b08d-6d0b17be9a4f"]
+---
+time 1637340324
+new [description:"cryptography primitives" due:"1637384400" entry:"1637340324" modified:"1637340324" project:"compsci_305.unit4" status:"pending" uuid:"8a323c14-103f-45ee-b590-d91d166775b6"]
+---
+time 1637340391
+old [description:"introduction" due:"1637384400" entry:"1637340310" modified:"1637340310" project:"compsci_305.unit4" status:"pending" uuid:"57e4520b-24b3-460b-b08d-6d0b17be9a4f"]
+new [description:"introduction" due:"1637384400" entry:"1637340310" modified:"1637340391" project:"compsci_305.unit4" start:"1637340391" status:"pending" uuid:"57e4520b-24b3-460b-b08d-6d0b17be9a4f"]
+---
+time 1637343234
+old [description:"introduction" due:"1637384400" entry:"1637340310" modified:"1637340391" project:"compsci_305.unit4" start:"1637340391" status:"pending" uuid:"57e4520b-24b3-460b-b08d-6d0b17be9a4f"]
+new [description:"introduction" due:"1637384400" end:"1637343234" entry:"1637340310" modified:"1637343234" project:"compsci_305.unit4" status:"completed" uuid:"57e4520b-24b3-460b-b08d-6d0b17be9a4f"]
+---
+time 1637343261
+new [description:"what is bitcoin" entry:"1637343261" modified:"1637343261" project:"compsci_305.unit4" status:"pending" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+---
+time 1637343326
+new [description:"what is bitcoin" entry:"1637343326" modified:"1637343326" project:"compsci_305.unit4" status:"pending" uuid:"f3c2076e-1bc7-4b5e-9f87-1ae79a126790"]
+---
+time 1637343360
+old [description:"what is bitcoin" entry:"1637343261" modified:"1637343261" project:"compsci_305.unit4" status:"pending" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+new [description:"what is bitcoin" entry:"1637343261" modified:"1637343360" project:"compsci_305.unit4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+---
+time 1637343379
+old [description:"what is bitcoin" entry:"1637343261" modified:"1637343360" project:"compsci_305.unit4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+new [description:"what is bitcoin" due:"1637384400" entry:"1637343261" modified:"1637343379" project:"compsci_305.unit4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+---
+time 1637343393
+old [description:"what is bitcoin" entry:"1637343326" modified:"1637343326" project:"compsci_305.unit4" status:"pending" uuid:"f3c2076e-1bc7-4b5e-9f87-1ae79a126790"]
+new [description:"what is bitcoin" end:"1637343391" entry:"1637343326" modified:"1637343393" project:"compsci_305.unit4" status:"deleted" uuid:"f3c2076e-1bc7-4b5e-9f87-1ae79a126790"]
+---
+time 1637349706
+old [description:"what is bitcoin" due:"1637384400" entry:"1637343261" modified:"1637343379" project:"compsci_305.unit4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+new [description:"what is bitcoin" due:"1637384400" entry:"1637343261" modified:"1637349706" project:"compsci_305.unit4" start:"1637349706" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+---
+time 1637352711
+old [description:"what is bitcoin" due:"1637384400" entry:"1637343261" modified:"1637349706" project:"compsci_305.unit4" start:"1637349706" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+new [description:"what is bitcoin" due:"1637384400" end:"1637352710" entry:"1637343261" modified:"1637352711" project:"compsci_305.unit4" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"cc5550a4-1439-4383-b67f-17bbf581f456"]
+---
+time 1637370153
+old [description:"shallow patch" entry:"1637091768" modified:"1637091768" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"1fee8257-4c8a-4084-ad84-72d6bbd961c3"]
+new [description:"shallow patch" entry:"1637091768" modified:"1637370153" project:"dwm" start:"1637370153" status:"pending" tags:"linux" tags_linux:"x" uuid:"1fee8257-4c8a-4084-ad84-72d6bbd961c3"]
+---
+time 1637372616
+old [description:"shallow patch" entry:"1637091768" modified:"1637370153" project:"dwm" start:"1637370153" status:"pending" tags:"linux" tags_linux:"x" uuid:"1fee8257-4c8a-4084-ad84-72d6bbd961c3"]
+new [description:"shallow patch" entry:"1637091768" modified:"1637372616" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"1fee8257-4c8a-4084-ad84-72d6bbd961c3"]
+---
+time 1637373395
+old [description:"pset 4" due:"1638334800" entry:"1637297128" modified:"1637297185" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"eae2f753-7721-44cb-9238-3a2007321aa6"]
+new [description:"pset 4" due:"1638334800" end:"1637373395" entry:"1637297128" modified:"1637373395" project:"compsci_514" status:"completed" tags:"umass" tags_umass:"x" uuid:"eae2f753-7721-44cb-9238-3a2007321aa6"]
+---
+time 1637381230
+old [description:"shallow patch" entry:"1637091768" modified:"1637372616" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"1fee8257-4c8a-4084-ad84-72d6bbd961c3"]
+new [description:"shallow patch" end:"1637381230" entry:"1637091768" modified:"1637381230" project:"dwm" status:"completed" tags:"linux" tags_linux:"x" uuid:"1fee8257-4c8a-4084-ad84-72d6bbd961c3"]
+---
+time 1637381240
+old [description:"dwmblock click" entry:"1637297802" modified:"1637298865" project:"dwm" status:"pending" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"1db311d2-7397-41ca-8842-9cefd57b76ec"]
+new [description:"dwmblock click" entry:"1637297802" modified:"1637381240" project:"dwm" start:"1637381239" status:"pending" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"1db311d2-7397-41ca-8842-9cefd57b76ec"]
+---

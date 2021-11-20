@@ -2172,3 +2172,40 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20211118T214219Z","end":"20211118T214932Z","tags":["add wmrole to rule","dwm"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211119T164631Z","tags":["compsci_305.unit4","introduction"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211119T164631Z","tags":["compsci_305.unit4","introduction"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211119T164631Z","end":"20211119T173354Z","tags":["compsci_305.unit4","introduction"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211119T192146Z","tags":["compsci_305.unit4","todo","umass","what is bitcoin"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211119T192146Z","tags":["compsci_305.unit4","todo","umass","what is bitcoin"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211119T192146Z","end":"20211119T201151Z","tags":["compsci_305.unit4","todo","umass","what is bitcoin"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211120T010233Z","tags":["dwm","linux","shallow patch"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211120T010233Z","tags":["dwm","linux","shallow patch"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211120T010233Z","end":"20211120T014336Z","tags":["dwm","linux","shallow patch"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211120T040720Z","tags":["dwm","dwmblock click","linux","todo"]}
