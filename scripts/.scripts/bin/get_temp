@@ -1,4 +1,4 @@
 #!/bin/bash
 
 temp=$(sensors | awk '/Core 0/ {print substr($3, 2) }')
-echo "^c#81A1C1^TEMP: ^d^$temp%"
+echo "^c#81A1C1^TEMP: ^d^$temp"

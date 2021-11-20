@@ -19,3 +19,4 @@
 - [18] dwm-actualfullscreen-20211013-cb3f58a.diff
 - [19] dwm-tag-preview-6.2.diff
 - [20] dwm-status2d-6.2.diff
+- [21] dwm-swallow-6.2.diff
