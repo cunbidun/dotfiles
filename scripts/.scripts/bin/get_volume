@@ -1,5 +1,9 @@
 #!/bin/sh
 
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
 if [ "$(pamixer --get-mute)" = true ]; then
 	icon="^c#BF616A^"
 fi

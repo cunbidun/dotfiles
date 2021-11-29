@@ -68,10 +68,10 @@ static const Rule rules[] = {
 	 */
 	/* class              role          instance         title            tags mask     isfloating    isterminal      noswallow       monitor */
 	{ "firefox",          NULL,         NULL,            NULL,            1 << 2,       0,            0,              0,              -1 },
-	{ "Google-chrome",    NULL,         "google-chrome", NULL,            1 << 2,       0,            0,              0,              -1 }, // tag 3
-	{ "Google-chrome",    NULL,         NULL,            "chat - reddit", 1 << 7,       0,            0,              0,              -1 }, // tag 3
+	// { "Google-chrome",    NULL,         "google-chrome", NULL,            1 << 2,       0,            0,              0,              -1 }, // tag 3
+	// { "Google-chrome",    NULL,         NULL,            "chat - reddit", 1 << 7,       0,            0,              0,              -1 }, // tag 3
 	{ NULL,               "pop-up",     NULL,            NULL,            0,            1,            0,              0,              -1 }, // tag 3
-	{ TERMCLASS,          NULL,         NULL,            0,               0,            0,            1,              0,              -1 },
+	{ TERMCLASS,          NULL,         NULL,            NULL,            0,            0,            1,              0,              -1 },
 	{ NULL,               NULL,         NULL,            "Event Tester",  0,            0,            0,              1,              -1 }, /* xev */
 };
 
@@ -120,6 +120,8 @@ static const MonitorRule monrules[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+
+#define STATUSBAR "dwmblocks"
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -203,6 +205,10 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD(TERMINAL " -e nvim ~/dwmblocks-async/config.h") },
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        ShiftMask,      Button1,        sigstatusbar,   {.i = 6} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

@@ -6,7 +6,7 @@
 /home/cunbidun/.scripts/bin
 /home/cunbidun/.scripts/bin/dotfiles_picker
 /home/cunbidun/.scripts/bin/dotfiles.txt
-/home/cunbidun/dwmblocks
+/home/cunbidun/dwmblocks-async/config.h
 /home/cunbidun/dwm
 /home/cunbidun/.config/alacritty/alacritty.yml
 /home/cunbidun/.config/alacritty/README.md
