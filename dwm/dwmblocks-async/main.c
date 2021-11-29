@@ -142,10 +142,12 @@ void setRoot() {
 void signalHandler() {
 	struct signalfd_siginfo info;
 	read(signalFD, &info, sizeof(info));
-
+  printf("block %d got signal\n", info.ssi_signo - SIGRTMIN);
 	for (int j = 0; j < LEN(blocks); j++) {
+    printf("block %d signal %d\n", j, blocks[j].signal);
 		if (blocks[j].signal == info.ssi_signo - SIGRTMIN) {
 			char button[] = {'0' + info.ssi_int & 0xff, 0};
+      printf("sending button %s to block %d\n", button, j);
 			execBlock(j, button);
 			break;
 		}

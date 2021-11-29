@@ -1,4 +1,9 @@
 #!/bin/bash
+
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
 EN_ibus="xkb:us::eng"
 VN_ibus="Bamboo"
 lang=$(ibus engine)

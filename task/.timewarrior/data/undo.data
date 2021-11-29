@@ -2209,3 +2209,677 @@ txn:
   type: interval
   before: 
   after: {"id":0,"start":"20211120T040720Z","tags":["dwm","dwmblock click","linux","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211120T040720Z","tags":["dwm","dwmblock click","linux","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211120T040720Z","end":"20211120T063129Z","tags":["dwm","dwmblock click","linux","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211120T153546Z","tags":["dwm","dwmblock click","linux","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211120T153546Z","tags":["dwm","dwmblock click","linux","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211120T153546Z","end":"20211120T162959Z","tags":["dwm","dwmblock click","linux","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211120T153546Z","end":"20211120T162959Z","tags":["dwm","dwmblock click","linux","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211120T153546Z","end":"20211120T165959Z","tags":["dwm","dwmblock click","linux","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211120T200535Z","tags":["2000 rated problem","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211120T200535Z","tags":["2000 rated problem","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211120T200535Z","end":"20211120T224317Z","tags":["2000 rated problem","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211120T200535Z","end":"20211120T224317Z","tags":["2000 rated problem","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211120T200535Z","end":"20211120T214317Z","tags":["2000 rated problem","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211121T182717Z","tags":["compsci_305.unit4","double-spending attack","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211121T182717Z","tags":["compsci_305.unit4","double-spending attack","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211121T182717Z","end":"20211121T184419Z","tags":["compsci_305.unit4","double-spending attack","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211121T203423Z","tags":["compsci_305.unit4","double-spending attack","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211121T203423Z","tags":["compsci_305.unit4","double-spending attack","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211121T203423Z","end":"20211121T210801Z","tags":["compsci_305.unit4","double-spending attack","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211122T191948Z","tags":["compsci_305","todo","umass","unit 4 paper"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211122T191948Z","tags":["compsci_305","todo","umass","unit 4 paper"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211122T191948Z","end":"20211122T192949Z","tags":["compsci_305","todo","umass","unit 4 paper"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211122T192953Z","tags":["compsci_305.unit4","mining","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211122T192953Z","tags":["compsci_305.unit4","mining","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211122T192953Z","end":"20211122T205804Z","tags":["compsci_305.unit4","mining","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211122T214250Z","tags":["compsci_305.unit4","mining","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211122T214250Z","tags":["compsci_305.unit4","mining","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211122T214250Z","end":"20211122T231430Z","tags":["compsci_305.unit4","mining","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T014113Z","tags":["compsci_305.unit4","hash function","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T014113Z","tags":["compsci_305.unit4","hash function","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T014113Z","end":"20211123T030618Z","tags":["compsci_305.unit4","hash function","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T041359Z","tags":["hrt response","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T041359Z","tags":["hrt response","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T041359Z","end":"20211123T054155Z","tags":["hrt response","vi"]}
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T054155Z","tags":["2000 rated problems","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T054155Z","tags":["2000 rated problems","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T054155Z","end":"20211123T070250Z","tags":["2000 rated problems","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T173219Z","tags":["Codeforces Global Round 17","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T173219Z","tags":["Codeforces Global Round 17","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T173219Z","end":"20211123T173228Z","tags":["Codeforces Global Round 17","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T173219Z","end":"20211123T173228Z","tags":["Codeforces Global Round 17","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T173219Z","end":"20211123T193228Z","tags":["Codeforces Global Round 17","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T173219Z","end":"20211123T193228Z","tags":["Codeforces Global Round 17","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T173219Z","end":"20211123T201728Z","tags":["Codeforces Global Round 17","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T203634Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T203634Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T203634Z","end":"20211123T203637Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T203634Z","end":"20211123T203637Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T203634Z","end":"20211123T211137Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T203634Z","end":"20211123T211137Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T203634Z","end":"20211123T214637Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T203634Z","end":"20211123T214637Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T203634Z","end":"20211123T211137Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T203634Z","end":"20211123T211137Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T210000Z","end":"20211123T213503Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T210000Z","end":"20211123T213503Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T230000Z","end":"20211123T233503Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T230000Z","end":"20211123T233503Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T202000Z","end":"20211123T205503Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: {"id":2,"start":"20211123T173219Z","end":"20211123T201728Z","tags":["Codeforces Global Round 17","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":2,"start":"20211123T143500Z","end":"20211123T172009Z","tags":["Codeforces Global Round 17","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T202000Z","end":"20211123T205503Z","tags":["2100 rated problem","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T200000Z","end":"20211123T203503Z","tags":["2100 rated problem","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T205031Z","tags":["rofi","timepicker rofi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T205031Z","tags":["rofi","timepicker rofi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T205031Z","end":"20211123T210731Z","tags":["rofi","timepicker rofi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T211217Z","tags":["rofi","timepicker rofi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z","tags":["rofi","timepicker rofi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z"}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z"}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z","tags":["rofi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z","tags":["rofi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z"}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z"}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z","tags":["rofi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z","tags":["rofi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z"}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z"}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z","tags":["rofi","rofi timepicker"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z","tags":["rofi","rofi timepicker"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z"}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z"}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z","tags":["rofi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z","tags":["rofi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z"}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z"}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z","tags":["rofi","rofi timepicker"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T211217Z","tags":["rofi","rofi timepicker"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T211217Z","end":"20211123T213702Z","tags":["rofi","rofi timepicker"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211123T214137Z","tags":["Tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211123T214137Z","tags":["Tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211123T214137Z","end":"20211123T214439Z","tags":["Tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T170124Z","tags":["compsci_514","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T170124Z","tags":["compsci_514","lecture nov 9","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T170124Z","end":"20211124T175807Z","tags":["compsci_514","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T180038Z","tags":["dwm","task script","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T180038Z","tags":["dwm","task script","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T180038Z","end":"20211124T190043Z","tags":["dwm","task script","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T192048Z","tags":["dwm","task script","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T192048Z","tags":["dwm","task script","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T192048Z","end":"20211124T192101Z","tags":["dwm","task script","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T192352Z","tags":["Datacenter networking notes","compsci_590","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T192352Z","tags":["Datacenter networking notes","compsci_590","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T192352Z","end":"20211124T192354Z","tags":["Datacenter networking notes","compsci_590","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T193648Z","tags":["Revisions to Unit 3","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T193648Z","tags":["Revisions to Unit 3","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T193648Z","end":"20211124T193704Z","tags":["Revisions to Unit 3","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T194027Z","tags":["task","task sorting","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T194027Z","tags":["task","task sorting","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T194027Z","end":"20211124T194033Z","tags":["task","task sorting","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T194122Z","tags":["task","task sorting","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T194122Z","tags":["task","task sorting","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T194122Z","end":"20211124T194127Z","tags":["task","task sorting","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T195834Z","tags":["compsci_514","lecture nov 16","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T195834Z","tags":["compsci_514","lecture nov 16","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T195834Z","end":"20211124T201546Z","tags":["compsci_514","lecture nov 16","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211124T204105Z","tags":["compsci_514","lecture nov 16","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211124T204105Z","tags":["compsci_514","lecture nov 16","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211124T204105Z","end":"20211124T212847Z","tags":["compsci_514","lecture nov 16","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211125T024939Z","tags":["prep amz","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T024939Z","tags":["prep amz","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T024939Z","end":"20211125T035659Z","tags":["prep amz","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211125T180049Z","tags":["amz mock","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T180049Z","tags":["amz mock","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T180049Z","end":"20211125T201100Z","tags":["amz mock","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T180049Z","end":"20211125T201100Z","tags":["amz mock","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T180049Z","end":"20211125T191100Z","tags":["amz mock","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211125T201202Z","tags":["call with li chen"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T201202Z","tags":["call with li chen"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T201202Z","end":"20211125T201206Z","tags":["call with li chen"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T201202Z","end":"20211125T201206Z","tags":["call with li chen"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T150000Z","end":"20211125T150004Z","tags":["call with li chen"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T180049Z","end":"20211125T191100Z","tags":["amz mock","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T180049Z","end":"20211125T203100Z","tags":["amz mock","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T180049Z","end":"20211125T203100Z","tags":["amz mock","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T180049Z","end":"20211125T191100Z","tags":["amz mock","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":2,"start":"20211125T150000Z","end":"20211125T150004Z","tags":["call with li chen"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":2,"start":"20211125T150000Z","end":"20211125T162004Z","tags":["call with li chen"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211125T212433Z","tags":["compsci_514","lecture nov 18","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211125T212433Z","tags":["compsci_514","lecture nov 18","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211125T212433Z","end":"20211125T230052Z","tags":["compsci_514","lecture nov 18","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211127T000133Z","tags":["compsci_514","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211127T000133Z","tags":["compsci_514","lecture nov 23","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211127T000133Z","end":"20211127T002133Z","tags":["compsci_514","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211127T011944Z","tags":["compsci_514","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211127T011944Z","tags":["compsci_514","lecture nov 23","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211127T011944Z","end":"20211127T021347Z","tags":["compsci_514","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211127T153752Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211127T153752Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211127T153752Z","end":"20211127T161555Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211127T164726Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211127T164726Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211127T164726Z","end":"20211127T171630Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211127T202944Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211127T202944Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211127T202944Z","end":"20211127T212120Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211127T213406Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211127T213406Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211127T213406Z","end":"20211127T230250Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211127T230253Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211127T230253Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211127T230253Z","end":"20211128T010207Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211128T040158Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T040158Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T040158Z","end":"20211128T040200Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T040158Z","end":"20211128T040200Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T040158Z","end":"20211128T043200Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T040158Z","end":"20211128T043200Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T033000Z","end":"20211128T040002Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211128T040250Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T040250Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T040250Z","end":"20211128T041852Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211128T150555Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T150555Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T133000Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T133000Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T133000Z","end":"20211128T203854Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T133000Z","end":"20211128T203854Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T133000Z","end":"20211128T163854Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211128T233014Z","tags":["nvim","vimtex"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211128T233014Z","tags":["nvim","vimtex"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211128T233014Z","end":"20211129T000947Z","tags":["nvim","vimtex"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T001721Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T001721Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T001721Z","end":"20211129T002407Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T003423Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T003423Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T003423Z","end":"20211129T004038Z","tags":["compsci_590","hw4","todo","umass"]}

@@ -61,6 +61,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 
+export TERMINAL='alacritty'
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
