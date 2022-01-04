@@ -53,7 +53,8 @@ export UPDATE_ZSH_DAYS=3
 HIST_STAMPS="mm/dd/yyyy"
 
 
-plugins=(git timewarrior docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=(git timewarrior docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git timewarrior zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,6 +95,7 @@ alias cpf='f() { xclip -sel clip < $1 }; f'
 
 alias ls="exa -la"
 
+# alias task="task ls"
 alias ut="task +umass"
 alias ct="task +cp"
 alias lt="task +linux"
@@ -101,12 +103,11 @@ alias tt="task +todo"
 
 unsetopt PROMPT_SP
 
-export PATH="/home/cunbidun/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
+
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
 
 test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 

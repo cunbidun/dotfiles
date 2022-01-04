@@ -1,5 +1,4 @@
 configuration {
-  /* theme: "nord-oneline"; */
-  theme: "nord";
   terminal: "alacritty";
 }
+@theme "nord"

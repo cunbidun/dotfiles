@@ -9,10 +9,10 @@ static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int scalepreview       = 4;        /* tag preview scaling */
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 20;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 15;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 15;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 15;       /* vert outer gap between windows and screen edge */
 static int smartgaps                = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 1;   	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -58,7 +58,7 @@ static const char *colors[][3]      = {
 
 
 /* tagging */
-static const char *tags[] = { "sys", "dev","web","school","590cc","461", "7", "chat", "vi" };
+static const char *tags[] = { "sys", "dev","web","4","5","6", "7", "chat", "vi" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -68,11 +68,13 @@ static const Rule rules[] = {
 	 */
 	/* class              role          instance         title            tags mask     isfloating    isterminal      noswallow       monitor */
 	{ "firefox",          NULL,         NULL,            NULL,            1 << 2,       0,            0,              0,              -1 },
-	// { "Google-chrome",    NULL,         "google-chrome", NULL,            1 << 2,       0,            0,              0,              -1 }, // tag 3
-	// { "Google-chrome",    NULL,         NULL,            "chat - reddit", 1 << 7,       0,            0,              0,              -1 }, // tag 3
-	{ NULL,               "pop-up",     NULL,            NULL,            0,            1,            0,              0,              -1 }, // tag 3
+	{ "Arandr",           NULL,         "arandr",        NULL,            0,            1,            0,              0,              -1 }, // center this
+	{ NULL,               "pop-up",     NULL,            NULL,            0,            1,            0,              0,              -1 },
 	{ TERMCLASS,          NULL,         NULL,            NULL,            0,            0,            1,              0,              -1 },
 	{ NULL,               NULL,         NULL,            "Event Tester",  0,            0,            0,              1,              -1 }, /* xev */
+
+	// { "Google-chrome",    NULL,         "google-chrome", NULL,            1 << 2,       0,            0,              0,              -1 }, // tag 3
+	// { "Google-chrome",    NULL,         NULL,            "chat - reddit", 1 << 7,       0,            0,              0,              -1 }, // tag 3
 };
 
 /* layout(s) */
@@ -133,6 +135,9 @@ static const char *scratchpadcmd[] = { TERMINAL, "-t", scratchpadname, "-o", "wi
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ MODKEY,                       XK_x,      spawn,          SHCMD("arandr") },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD("nautilus ~") },
+	{ MODKEY,                 XK_backslash,    spawn,          SHCMD("dunstctl close-all") },
 	{ ALTKEY,                       XK_Tab,    spawn,          SHCMD("skippy-xd-runner --toggle") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
