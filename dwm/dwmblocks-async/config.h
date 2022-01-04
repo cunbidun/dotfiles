@@ -8,7 +8,7 @@ const Block blocks[] = {
   BLOCK("get_cpu",                      10,                   1)
   BLOCK("get_memory",                   10,                   2)
   BLOCK("get_internet",                 10,                   3)
-  BLOCK("get_doge",                     10,                   4)
+  // BLOCK("get_doge",                     10,                   4)
   BLOCK("get_battery",                   5,                  12)
   BLOCK("get_volume",                    0,                  10)
   BLOCK("get_temp",                     10,                  13)

@@ -13,6 +13,10 @@ M.setup = function()
 
 	vim.cmd([[au VimEnter * highlight Error guifg=#BF616A guibg=NONE]])
 
+	vim.cmd([[au VimEnter * highlight LSPDiagnosticsWarning guifg=#EBCB8B guibg=NONE]])
+	vim.cmd([[au VimEnter * highlight LSPDiagnosticsError guifg=#BF616A guibg=NONE]])
+
+
 	vim.cmd([[au VimEnter * highlight QuickScopePrimary guifg=#2E3440 guibg=#88C0D0 gui=bold ctermfg=155 cterm=underline]])
 	vim.cmd([[au VimEnter * highlight QuickScopeSecondary guifg=#2E3440 guibg=#EBCB8B gui=bold ctermfg=81 cterm=underline]])
 

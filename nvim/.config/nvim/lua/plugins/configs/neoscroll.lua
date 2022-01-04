@@ -20,8 +20,8 @@ M.setup = function()
 		post_hook = nil, -- Function to run after the scrolling animation ends
 	})
 	local t = {}
-	t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
-	t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
+	t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
+	t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
 	t["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
 	t["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
 	t["zt"] = { "zt", { "250" } }

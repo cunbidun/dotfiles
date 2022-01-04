@@ -4872,3 +4872,1613 @@ time 1638146438
 old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638146063" priority:"H" project:"compsci_590" start:"1638146063" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
 new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638146438" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
 ---
+time 1638156231
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638146438" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638156231" priority:"H" project:"compsci_590" start:"1638156231" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638159118
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638156231" priority:"H" project:"compsci_590" start:"1638156231" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638159118" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638161851
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638159118" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638161851" priority:"H" project:"compsci_590" start:"1638161850" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638168245
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638161851" priority:"H" project:"compsci_590" start:"1638161850" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638168245" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638198495
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638168245" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638198495" priority:"H" project:"compsci_590" start:"1638198495" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638204544
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638198495" priority:"H" project:"compsci_590" start:"1638198495" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638204544" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638204762
+old [description:"Nov 22: Emerging Tech" due:"1638244800" entry:"1637637083" modified:"1638145002" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b7da6b9f-9aac-42aa-be4f-457237a2c7e7"]
+new [description:"Nov 22: Emerging Tech" due:"1638244800" entry:"1637637083" modified:"1638204762" priority:"H" project:"compsci_305" start:"1638204762" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b7da6b9f-9aac-42aa-be4f-457237a2c7e7"]
+---
+time 1638212356
+old [description:"Nov 22: Emerging Tech" due:"1638244800" entry:"1637637083" modified:"1638204762" priority:"H" project:"compsci_305" start:"1638204762" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b7da6b9f-9aac-42aa-be4f-457237a2c7e7"]
+new [description:"Nov 22: Emerging Tech" due:"1638244800" end:"1638212356" entry:"1637637083" modified:"1638212356" priority:"H" project:"compsci_305" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b7da6b9f-9aac-42aa-be4f-457237a2c7e7"]
+---
+time 1638214805
+new [description:"Reflection projectcompsci_305" entry:"1638214805" modified:"1638214805" status:"pending" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1638214845
+old [description:"Reflection projectcompsci_305" entry:"1638214805" modified:"1638214805" status:"pending" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection projectcompsci_305" due:"1639673940" entry:"1638214805" modified:"1638214845" status:"pending" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1638214885
+old [description:"Reflection projectcompsci_305" due:"1639673940" entry:"1638214805" modified:"1638214845" status:"pending" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639673940" entry:"1638214805" modified:"1638214885" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1638214894
+old [description:"Reflection project" due:"1639673940" entry:"1638214805" modified:"1638214885" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639673940" entry:"1638214805" modified:"1638214894" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1638215414
+new [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638215414" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+---
+time 1638215538
+old [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638215414" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+new [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638215538" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+---
+time 1638215833
+new [description:"Unit 5 essay" due:"1638334800" entry:"1638215833" modified:"1638215833" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1638215847
+old [description:"Unit 5 essay" due:"1638334800" entry:"1638215833" modified:"1638215833" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639155540" entry:"1638215833" modified:"1638215847" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1638215869
+old [description:"zab paper" due:"1638334800" entry:"1637034821" modified:"1638025118" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a0c744ed-6833-4a23-8afa-96ec792dc059"]
+new [description:"zab paper" due:"1638334800" end:"1638215869" entry:"1637034821" modified:"1638215869" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a0c744ed-6833-4a23-8afa-96ec792dc059"]
+---
+time 1638215876
+old [description:"google spanner paper" due:"1638334800" entry:"1637078121" modified:"1638133190" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+new [description:"google spanner paper" due:"1638334800" end:"1638215876" entry:"1637078121" modified:"1638215876" project:"compsci_590" status:"completed" tags:"umass" tags_umass:"x" uuid:"9bd095a4-941e-497a-beb4-f14bde832b19"]
+---
+time 1638215902
+old [description:"PA3.2" due:"1638334800" entry:"1637297574" modified:"1638025202" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638334800" entry:"1637297574" modified:"1638215902" priority:"H" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638216666
+old [description:"lecture nov 18" due:"1638334800" entry:"1637297403" modified:"1637732694" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+new [description:"lecture nov 18" due:"1638334800" entry:"1637297403" modified:"1638216666" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1638216845
+old [description:"PA3.2" due:"1638334800" entry:"1637297574" modified:"1638215902" priority:"H" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638334800" entry:"1637297574" modified:"1638216845" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638216845
+old [description:"pset 4" due:"1638334800" entry:"1637732189" modified:"1638133292" priority:"H" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"293cb09f-0d49-4939-9ceb-b79eb81a1aba"]
+new [description:"pset 4" due:"1638334800" entry:"1637732189" modified:"1638216845" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"293cb09f-0d49-4939-9ceb-b79eb81a1aba"]
+---
+time 1638216962
+old [description:"pset 4" due:"1638334800" entry:"1637732189" modified:"1638216845" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"293cb09f-0d49-4939-9ceb-b79eb81a1aba"]
+new [description:"pset 4" due:"1638334800" entry:"1637732189" modified:"1638216962" priority:"H" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"293cb09f-0d49-4939-9ceb-b79eb81a1aba"]
+---
+time 1638217758
+new [description:"problem 1" due:"1638248399" entry:"1638217758" modified:"1638217758" project:"compsci_514.pset4" status:"pending" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+---
+time 1638217792
+old [description:"problem 1" due:"1638248399" entry:"1638217758" modified:"1638217758" project:"compsci_514.pset4" status:"pending" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+new [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217792" project:"compsci_514.pset4" status:"pending" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+---
+time 1638217820
+old [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217792" project:"compsci_514.pset4" status:"pending" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+new [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217820" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+---
+time 1638217855
+new [description:"problem 2" due:"1638421199" entry:"1638217855" modified:"1638217855" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"01381827-4c55-4bba-abdb-83c79cee8048"]
+---
+time 1638217859
+new [description:"problem 3" due:"1638421199" entry:"1638217859" modified:"1638217859" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"6cb15b5f-7f05-4e4f-b88a-5148e3dc1d3f"]
+---
+time 1638217863
+new [description:"problem 4" due:"1638421199" entry:"1638217863" modified:"1638217863" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"0a0d6ca0-e6d7-478b-bcf8-4cce4fc56b70"]
+---
+time 1638217873
+old [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217820" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+new [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217873" project:"compsci_514.pset4" status:"pending" tags:"toto,umass" tags_toto:"x" tags_umass:"x" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+---
+time 1638217920
+old [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217873" project:"compsci_514.pset4" status:"pending" tags:"toto,umass" tags_toto:"x" tags_umass:"x" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+new [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217920" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+---
+time 1638222100
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638204544" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638222100" priority:"H" project:"compsci_590" start:"1638222100" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638224437
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638222100" priority:"H" project:"compsci_590" start:"1638222100" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638224437" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638225749
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638224437" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638225749" priority:"H" project:"compsci_590" start:"1638225749" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638226892
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638225749" priority:"H" project:"compsci_590" start:"1638225749" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638226892" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638228844
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638226892" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638228844" priority:"H" project:"compsci_590" start:"1638228844" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638233188
+old [description:"hw4" due:"1638244800" entry:"1637297448" modified:"1638228844" priority:"H" project:"compsci_590" start:"1638228844" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+new [description:"hw4" due:"1638244800" end:"1638233188" entry:"1637297448" modified:"1638233188" priority:"H" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"59c4b7bd-c3fa-4e6d-875e-b5f212969d61"]
+---
+time 1638245119
+old [description:"PA3.2" due:"1638334800" entry:"1637297574" modified:"1638216845" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638245119" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638245946
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638245119" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638245946" priority:"H" project:"compsci_590" start:"1638245946" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638245960
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638245946" priority:"H" project:"compsci_590" start:"1638245946" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638245960" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638246026
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638245960" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638246026" priority:"H" project:"compsci_590" start:"1638246026" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638246946
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638246026" priority:"H" project:"compsci_590" start:"1638246026" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638246946" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638246963
+old [description:"problem 2" due:"1638421199" entry:"1638217855" modified:"1638217855" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"01381827-4c55-4bba-abdb-83c79cee8048"]
+new [description:"problem 2" due:"1638421199" entry:"1638217855" modified:"1638246963" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"01381827-4c55-4bba-abdb-83c79cee8048"]
+---
+time 1638246964
+old [description:"problem 3" due:"1638421199" entry:"1638217859" modified:"1638217859" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"6cb15b5f-7f05-4e4f-b88a-5148e3dc1d3f"]
+new [description:"problem 3" due:"1638421199" entry:"1638217859" modified:"1638246964" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"6cb15b5f-7f05-4e4f-b88a-5148e3dc1d3f"]
+---
+time 1638246964
+old [description:"problem 4" due:"1638421199" entry:"1638217863" modified:"1638217863" project:"compsci_514.pset4" status:"pending" tags:"umass" tags_umass:"x" uuid:"0a0d6ca0-e6d7-478b-bcf8-4cce4fc56b70"]
+new [description:"problem 4" due:"1638421199" entry:"1638217863" modified:"1638246964" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"0a0d6ca0-e6d7-478b-bcf8-4cce4fc56b70"]
+---
+time 1638246989
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638246946" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638246989" priority:"H" project:"compsci_590" start:"1638246989" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638247512
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638246989" priority:"H" project:"compsci_590" start:"1638246989" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638247512" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638282296
+old [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638215538" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+new [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638282296" priority:"H" project:"compsci_305" start:"1638282295" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+---
+time 1638286768
+new [description:"unit 5 presentation rehearsal" due:"1638421199" entry:"1638286768" modified:"1638286768" project:"compsci_305" status:"pending" uuid:"9f84626f-3673-4734-89a8-d153e7103ac0"]
+---
+time 1638286786
+old [description:"unit 5 presentation rehearsal" due:"1638421199" entry:"1638286768" modified:"1638286768" project:"compsci_305" status:"pending" uuid:"9f84626f-3673-4734-89a8-d153e7103ac0"]
+new [description:"unit 5 presentation rehearsal" due:"1638385200" entry:"1638286768" modified:"1638286786" priority:"H" project:"compsci_305" status:"pending" uuid:"9f84626f-3673-4734-89a8-d153e7103ac0"]
+---
+time 1638286800
+old [description:"lecture nov 23" due:"1638248400" entry:"1637703491" modified:"1638025132" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+new [description:"lecture nov 23" due:"1638853200" entry:"1637703491" modified:"1638286800" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+---
+time 1638286800
+old [description:"discussion nov 16" due:"1638248400" entry:"1637711764" modified:"1638025148" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"ac98ec3f-a078-4479-88d8-32fc80144c76"]
+new [description:"discussion nov 16" due:"1638853200" entry:"1637711764" modified:"1638286800" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"ac98ec3f-a078-4479-88d8-32fc80144c76"]
+---
+time 1638286834
+old [description:"unit 5 presentation rehearsal" due:"1638385200" entry:"1638286768" modified:"1638286786" priority:"H" project:"compsci_305" status:"pending" uuid:"9f84626f-3673-4734-89a8-d153e7103ac0"]
+new [description:"unit 5 presentation rehearsal" due:"1638385200" entry:"1638286768" modified:"1638286834" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"9f84626f-3673-4734-89a8-d153e7103ac0"]
+---
+time 1638287787
+old [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638282296" priority:"H" project:"compsci_305" start:"1638282295" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+new [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638287787" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+---
+time 1638290716
+old [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638287787" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+new [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638290716" priority:"H" project:"compsci_305" start:"1638290716" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+---
+time 1638293801
+old [description:"Unit 5 presentations" due:"1638334800" entry:"1638215414" modified:"1638290716" priority:"H" project:"compsci_305" start:"1638290716" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+new [description:"Unit 5 presentations" due:"1638334800" end:"1638293801" entry:"1638215414" modified:"1638293801" priority:"H" project:"compsci_305" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"51b0875c-03e9-4db6-8e98-fe96d2c27a0d"]
+---
+time 1638369192
+new [description:"amz mock" entry:"1638369192" modified:"1638369192" project:"vi" status:"pending" uuid:"66f2e111-731b-48aa-975c-98705815f68f"]
+---
+time 1638369198
+old [description:"amz mock" entry:"1638369192" modified:"1638369192" project:"vi" status:"pending" uuid:"66f2e111-731b-48aa-975c-98705815f68f"]
+new [description:"amz mock" entry:"1638369192" modified:"1638369198" project:"vi" start:"1638369198" status:"pending" uuid:"66f2e111-731b-48aa-975c-98705815f68f"]
+---
+time 1638371783
+old [description:"amz mock" entry:"1638369192" modified:"1638369198" project:"vi" start:"1638369198" status:"pending" uuid:"66f2e111-731b-48aa-975c-98705815f68f"]
+new [description:"amz mock" end:"1638371783" entry:"1638369192" modified:"1638371783" project:"vi" status:"completed" uuid:"66f2e111-731b-48aa-975c-98705815f68f"]
+---
+time 1638371797
+old [description:"amz mock" entry:"1638048844" modified:"1638131934" project:"vi" status:"pending" uuid:"d389be0f-f760-446f-8928-59292a6c2930"]
+new [description:"amz mock" end:"1638371797" entry:"1638048844" modified:"1638371797" project:"vi" status:"completed" uuid:"d389be0f-f760-446f-8928-59292a6c2930"]
+---
+time 1638403311
+old [description:"problem 1" due:"1638421199" entry:"1638217758" modified:"1638217920" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+new [description:"problem 1" due:"1638421199" end:"1638403309" entry:"1638217758" modified:"1638403311" project:"compsci_514.pset4" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"2e096278-e84d-45a7-a438-c839a9208018"]
+---
+time 1638403311
+old [description:"problem 2" due:"1638421199" entry:"1638217855" modified:"1638246963" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"01381827-4c55-4bba-abdb-83c79cee8048"]
+new [description:"problem 2" due:"1638421199" end:"1638403311" entry:"1638217855" modified:"1638403311" project:"compsci_514.pset4" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"01381827-4c55-4bba-abdb-83c79cee8048"]
+---
+time 1638403311
+old [description:"problem 3" due:"1638421199" entry:"1638217859" modified:"1638246964" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"6cb15b5f-7f05-4e4f-b88a-5148e3dc1d3f"]
+new [description:"problem 3" due:"1638421199" end:"1638403311" entry:"1638217859" modified:"1638403311" project:"compsci_514.pset4" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"6cb15b5f-7f05-4e4f-b88a-5148e3dc1d3f"]
+---
+time 1638403311
+old [description:"unit 5 presentation rehearsal" due:"1638385200" entry:"1638286768" modified:"1638286834" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"9f84626f-3673-4734-89a8-d153e7103ac0"]
+new [description:"unit 5 presentation rehearsal" due:"1638385200" end:"1638403311" entry:"1638286768" modified:"1638403311" priority:"H" project:"compsci_305" status:"completed" tags:"umass" tags_umass:"x" uuid:"9f84626f-3673-4734-89a8-d153e7103ac0"]
+---
+time 1638403409
+old [description:"problem 4" due:"1638421199" entry:"1638217863" modified:"1638246964" project:"compsci_514.pset4" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"0a0d6ca0-e6d7-478b-bcf8-4cce4fc56b70"]
+new [description:"problem 4" due:"1638421199" entry:"1638217863" modified:"1638403409" project:"compsci_514.pset4" start:"1638403408" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"0a0d6ca0-e6d7-478b-bcf8-4cce4fc56b70"]
+---
+time 1638418716
+old [description:"problem 4" due:"1638421199" entry:"1638217863" modified:"1638403409" project:"compsci_514.pset4" start:"1638403408" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"0a0d6ca0-e6d7-478b-bcf8-4cce4fc56b70"]
+new [description:"problem 4" due:"1638421199" end:"1638418716" entry:"1638217863" modified:"1638418716" project:"compsci_514.pset4" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"0a0d6ca0-e6d7-478b-bcf8-4cce4fc56b70"]
+---
+time 1638461278
+old [description:"pset 4" due:"1638334800" entry:"1637732189" modified:"1638216962" priority:"H" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"293cb09f-0d49-4939-9ceb-b79eb81a1aba"]
+new [description:"pset 4" due:"1638334800" end:"1638461278" entry:"1637732189" modified:"1638461278" priority:"H" project:"compsci_514" status:"completed" tags:"umass" tags_umass:"x" uuid:"293cb09f-0d49-4939-9ceb-b79eb81a1aba"]
+---
+time 1638462379
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638133292" priority:"H" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638462379" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638474012
+new [description:"amz mock" entry:"1638474012" modified:"1638474012" project:"vi" status:"pending" uuid:"a89d8e2e-55a5-4b21-9417-ebafb7ecf30e"]
+---
+time 1638474016
+old [description:"amz mock" entry:"1638474012" modified:"1638474012" project:"vi" status:"pending" uuid:"a89d8e2e-55a5-4b21-9417-ebafb7ecf30e"]
+new [description:"amz mock" entry:"1638474012" modified:"1638474016" project:"vi" start:"1638474016" status:"pending" uuid:"a89d8e2e-55a5-4b21-9417-ebafb7ecf30e"]
+---
+time 1638476748
+old [description:"amz mock" entry:"1638474012" modified:"1638474016" project:"vi" start:"1638474016" status:"pending" uuid:"a89d8e2e-55a5-4b21-9417-ebafb7ecf30e"]
+new [description:"amz mock" end:"1638476748" entry:"1638474012" modified:"1638476748" project:"vi" status:"completed" uuid:"a89d8e2e-55a5-4b21-9417-ebafb7ecf30e"]
+---
+time 1638477308
+new [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1638477308" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1638477314
+new [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1638477314" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+---
+time 1638485259
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638247512" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638485259" priority:"H" project:"compsci_590" start:"1638485259" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638491625
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638485259" priority:"H" project:"compsci_590" start:"1638485259" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638491625" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638501120
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638462379" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638501120" priority:"H" project:"compsci_461" start:"1638501120" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638502375
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638501120" priority:"H" project:"compsci_461" start:"1638501120" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638502375" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638503654
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638502375" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638503654" priority:"H" project:"compsci_461" start:"1638503654" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638506713
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638503654" priority:"H" project:"compsci_461" start:"1638503654" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638506713" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638506882
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638506713" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638506882" priority:"H" project:"compsci_461" start:"1638506882" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638546394
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638506882" priority:"H" project:"compsci_461" start:"1638506882" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638546394" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638549504
+new [description:"networking hardware eng" entry:"1638549503" modified:"1638549503" project:"citadel" status:"pending" uuid:"2eb79363-487d-4296-988b-64af24dea6bc"]
+---
+time 1638549506
+old [description:"networking hardware eng" entry:"1638549503" modified:"1638549503" project:"citadel" status:"pending" uuid:"2eb79363-487d-4296-988b-64af24dea6bc"]
+new [description:"networking hardware eng" entry:"1638549503" modified:"1638549506" project:"citadel" start:"1638549506" status:"pending" uuid:"2eb79363-487d-4296-988b-64af24dea6bc"]
+---
+time 1638549530
+old [description:"networking hardware eng" entry:"1638549503" modified:"1638549506" project:"citadel" start:"1638549506" status:"pending" uuid:"2eb79363-487d-4296-988b-64af24dea6bc"]
+new [description:"networking hardware eng" end:"1638549530" entry:"1638549503" modified:"1638549530" project:"citadel" status:"completed" uuid:"2eb79363-487d-4296-988b-64af24dea6bc"]
+---
+time 1638562265
+old [description:"Revisions to Unit 3" due:"1638507600" entry:"1637636902" modified:"1638133274" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"f55733ba-8549-4850-8a42-349057a187b1"]
+new [description:"Revisions to Unit 3" due:"1638507600" end:"1638562264" entry:"1637636902" modified:"1638562265" priority:"H" project:"compsci_305" status:"deleted" tags:"umass" tags_umass:"x" uuid:"f55733ba-8549-4850-8a42-349057a187b1"]
+---
+time 1638562272
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638546394" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638562272" priority:"H" project:"compsci_461" start:"1638562272" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638565708
+old [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" entry:"1637296694" modified:"1638562272" priority:"H" project:"compsci_461" start:"1638562272" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+new [description:"HW 6, 461 programming Ethereum tokens" due:"1638590400" end:"1638565708" entry:"1637296694" modified:"1638565708" priority:"H" project:"compsci_461" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f7465bd7-cfeb-426c-a3fc-b4c6a9935685"]
+---
+time 1638565803
+new [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1638565803" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1638565810
+new [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638565810" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+---
+time 1638565824
+old [description:"lecture nov 9" due:"1638334800" entry:"1636509921" modified:"1637296913" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638565824" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638565831
+old [annotation_1637297630:"http:\/\/ccr.sigcomm.org\/online\/files\/p63-alfares.pdf" description:"Datacenter networking notes" due:"1638334800" entry:"1637297340" modified:"1637781834" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"54e3b966-f476-4398-9175-7a0c97ced7fd"]
+new [annotation_1637297630:"http:\/\/ccr.sigcomm.org\/online\/files\/p63-alfares.pdf" description:"Datacenter networking notes" due:"1638853200" entry:"1637297340" modified:"1638565831" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"54e3b966-f476-4398-9175-7a0c97ced7fd"]
+---
+time 1638565831
+old [description:"lecture nov 18" due:"1638334800" entry:"1637297403" modified:"1638216666" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+new [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638565831" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1638565935
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638565935" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638565941
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638565935" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638565941" priority:"H" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638565990
+new [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638565990" project:"compsci_514" status:"pending" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638566014
+new [description:"discussion nov 23" due:"1638853200" entry:"1638566014" modified:"1638566014" project:"compsci_461" status:"pending" uuid:"b2a8f513-7800-4c16-9a81-c58281eba8cb"]
+---
+time 1638566019
+new [description:"discussion nov 30" due:"1638853200" entry:"1638566019" modified:"1638566019" project:"compsci_461" status:"pending" uuid:"2bf201c5-6aef-4c2f-831a-d1d00edf83a5"]
+---
+time 1638566043
+old [description:"Week 8: Blockchain Voting" due:"1638334800" entry:"1635292247" modified:"1637296843" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+new [description:"Week 8: Blockchain Voting" due:"1638853200" entry:"1635292247" modified:"1638566043" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+---
+time 1638566043
+old [description:"Week 9: Byzantine Generals Problem" due:"1638334800" entry:"1635794326" modified:"1637296843" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+new [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1638566043" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1638567539
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638491625" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638567539" priority:"H" project:"compsci_590" start:"1638567539" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638568342
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638567539" priority:"H" project:"compsci_590" start:"1638567539" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638568342" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638568385
+new [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638568385" priority:"H" project:"citadel" status:"pending" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+---
+time 1638568393
+old [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638568385" priority:"H" project:"citadel" status:"pending" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+new [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638568393" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+---
+time 1638568426
+new [description:"tax return email from umass" due:"1638766799" entry:"1638568426" modified:"1638568426" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1638568448
+old [description:"tax return email from umass" due:"1638766799" entry:"1638568426" modified:"1638568426" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1638766799" entry:"1638568426" modified:"1638568448" priority:"M" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1638568477
+old [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638565990" project:"compsci_514" status:"pending" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+new [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638568477" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638568477
+old [description:"discussion nov 23" due:"1638853200" entry:"1638566014" modified:"1638566014" project:"compsci_461" status:"pending" uuid:"b2a8f513-7800-4c16-9a81-c58281eba8cb"]
+new [description:"discussion nov 23" due:"1638853200" entry:"1638566014" modified:"1638568477" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"b2a8f513-7800-4c16-9a81-c58281eba8cb"]
+---
+time 1638568477
+old [description:"discussion nov 30" due:"1638853200" entry:"1638566019" modified:"1638566019" project:"compsci_461" status:"pending" uuid:"2bf201c5-6aef-4c2f-831a-d1d00edf83a5"]
+new [description:"discussion nov 30" due:"1638853200" entry:"1638566019" modified:"1638568477" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"2bf201c5-6aef-4c2f-831a-d1d00edf83a5"]
+---
+time 1638580554
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638568342" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638580554" priority:"H" project:"compsci_590" start:"1638580554" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638587168
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638580554" priority:"H" project:"compsci_590" start:"1638580554" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638587168" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638591072
+new [description:"citadel relocation" entry:"1638591072" modified:"1638591072" priority:"H" project:"citadel" status:"pending" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638591097
+old [description:"citadel relocation" entry:"1638591072" modified:"1638591072" priority:"H" project:"citadel" status:"pending" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"citadel relocation" due:"1638680399" entry:"1638591072" modified:"1638591097" priority:"H" project:"citadel" status:"pending" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638645102
+old [description:"PA3.2" due:"1638593940" entry:"1637297574" modified:"1638587168" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+new [description:"PA3.2" due:"1638593940" end:"1638645102" entry:"1637297574" modified:"1638645102" priority:"H" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"afbaaad8-0342-433f-bbf7-70f17c9779a8"]
+---
+time 1638645137
+old [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638568393" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+new [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638645137" priority:"H" project:"citadel" start:"1638645137" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+---
+time 1638646344
+old [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638645137" priority:"H" project:"citadel" start:"1638645137" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+new [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638646344" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+---
+time 1638646403
+old [description:"citadel relocation" due:"1638680399" entry:"1638591072" modified:"1638591097" priority:"H" project:"citadel" status:"pending" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638680399" entry:"1638591072" modified:"1638646403" priority:"H" project:"citadel" status:"pending" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638647066
+old [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638646344" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+new [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638647066" priority:"H" project:"citadel" start:"1638647066" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+---
+time 1638647799
+new [description:"drug screening" entry:"1638647799" modified:"1638647799" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1638647816
+old [description:"drug screening" entry:"1638647799" modified:"1638647799" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639198799" entry:"1638647799" modified:"1638647816" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1638649976
+old [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638647066" priority:"H" project:"citadel" start:"1638647066" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+new [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638649976" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+---
+time 1638651005
+new [description:"review hw4 solution" entry:"1638651005" modified:"1638651005" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"d60b9bf7-32e5-45d9-be30-96a2c4ff9303"]
+---
+time 1638651016
+old [description:"review hw4 solution" entry:"1638651005" modified:"1638651005" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"d60b9bf7-32e5-45d9-be30-96a2c4ff9303"]
+new [description:"review hw4 solution" due:"1638680399" entry:"1638651005" modified:"1638651016" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"d60b9bf7-32e5-45d9-be30-96a2c4ff9303"]
+---
+time 1638651024
+old [description:"complete cit background check" due:"1638593999" entry:"1638568385" modified:"1638649976" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+new [description:"complete cit background check" due:"1638593999" end:"1638651024" entry:"1638568385" modified:"1638651024" priority:"H" project:"citadel" status:"completed" tags:"todo" tags_todo:"x" uuid:"147a31eb-3000-4052-84e1-2efbc7daba04"]
+---
+time 1638651037
+old [description:"reply to Karen Christenson for relocation" due:"1638680399" entry:"1638591072" modified:"1638646403" priority:"H" project:"citadel" status:"pending" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638680399" entry:"1638591072" modified:"1638651037" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638652700
+new [description:"compsci198c project 11" entry:"1638652699" modified:"1638652699" project:"vi" status:"pending" uuid:"240dc4b6-cb2c-4a06-a9c5-abcfdb4d3cb3"]
+---
+time 1638652712
+old [description:"compsci198c project 11" entry:"1638652699" modified:"1638652699" project:"vi" status:"pending" uuid:"240dc4b6-cb2c-4a06-a9c5-abcfdb4d3cb3"]
+new [description:"compsci198c project 11" end:"1638652709" entry:"1638652699" modified:"1638652712" project:"vi" status:"deleted" uuid:"240dc4b6-cb2c-4a06-a9c5-abcfdb4d3cb3"]
+---
+time 1638652737
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1638652737" priority:"M" project:"vi" status:"pending" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1638652742
+new [description:"compsci198c project 12a" due:"1639198799" entry:"1638652742" modified:"1638652742" priority:"M" project:"vi" status:"pending" uuid:"e52f5dbc-e8d7-40a6-b2f0-316a5bce8d9c"]
+---
+time 1638652744
+new [description:"compsci198c project 12b" due:"1639198799" entry:"1638652744" modified:"1638652744" priority:"M" project:"vi" status:"pending" uuid:"904f9755-7176-480b-841c-d84568bcdeca"]
+---
+time 1638652807
+old [description:"review hw4 solution" due:"1638680399" entry:"1638651005" modified:"1638651016" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"d60b9bf7-32e5-45d9-be30-96a2c4ff9303"]
+new [description:"review hw4 solution" due:"1638680399" entry:"1638651005" modified:"1638652807" project:"compsci_590" start:"1638652807" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"d60b9bf7-32e5-45d9-be30-96a2c4ff9303"]
+---
+time 1638653794
+old [description:"review hw4 solution" due:"1638680399" entry:"1638651005" modified:"1638652807" project:"compsci_590" start:"1638652807" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"d60b9bf7-32e5-45d9-be30-96a2c4ff9303"]
+new [description:"review hw4 solution" due:"1638680399" end:"1638653794" entry:"1638651005" modified:"1638653794" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"d60b9bf7-32e5-45d9-be30-96a2c4ff9303"]
+---
+time 1638653901
+new [description:"homework 7" due:"1639025999" entry:"1638653901" modified:"1638653901" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1638653921
+old [description:"homework 7" due:"1639025999" entry:"1638653901" modified:"1638653901" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1638653921" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1638654235
+new [description:"pset5" entry:"1638654235" modified:"1638654235" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+---
+time 1638654272
+old [description:"pset5" entry:"1638654235" modified:"1638654235" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+new [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638654272" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+---
+time 1638654283
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1638653921" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1638654283" priority:"H" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1638654283
+old [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638654272" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+new [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638654283" priority:"H" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+---
+time 1638654309
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638565941" priority:"H" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638654309" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638654573
+old [description:"tax return email from umass" due:"1638766799" entry:"1638568426" modified:"1638568448" priority:"M" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1638766799" entry:"1638568426" modified:"1638654573" priority:"L" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1638654652
+new [description:"hrt mock interview" due:"1638680399" entry:"1638654652" modified:"1638654652" project:"vi" status:"pending" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+---
+time 1638654666
+old [description:"hrt mock interview" due:"1638680399" entry:"1638654652" modified:"1638654652" project:"vi" status:"pending" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+new [description:"hrt mock interview" due:"1638680399" entry:"1638654652" modified:"1638654666" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+---
+time 1638665716
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638654309" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638665716" priority:"H" project:"compsci_590" start:"1638665716" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638665763
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638665716" priority:"H" project:"compsci_590" start:"1638665716" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638665763" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638665785
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638565824" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638665785" project:"compsci_590" start:"1638665785" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638666632
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638665785" project:"compsci_590" start:"1638665785" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638666632" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638667764
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638666632" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638667764" project:"compsci_590" start:"1638667764" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638668696
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638667764" project:"compsci_590" start:"1638667764" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638668696" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638678023
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638668696" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638678023" project:"compsci_590" start:"1638678023" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638680238
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638678023" project:"compsci_590" start:"1638678023" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638680238" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638681956
+old [description:"reply to Karen Christenson for relocation" due:"1638680399" entry:"1638591072" modified:"1638651037" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638681956" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638681956
+old [description:"hrt mock interview" due:"1638680399" entry:"1638654652" modified:"1638654666" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+new [description:"hrt mock interview" due:"1638766799" entry:"1638654652" modified:"1638681956" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+---
+time 1638681967
+old [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638681956" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638681967" priority:"H" project:"citadel" start:"1638681967" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638683179
+old [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638681967" priority:"H" project:"citadel" start:"1638681967" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638683179" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638685290
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638680238" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638685290
+old [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638565831" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+new [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1638685290
+old [description:"lecture nov 23" due:"1638853200" entry:"1637703491" modified:"1638286800" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+new [description:"lecture nov 23" due:"1638853200" entry:"1637703491" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+---
+time 1638685290
+old [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1638565803" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1638685290
+old [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638565810" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+---
+time 1638685300
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638685300" project:"compsci_590" start:"1638685300" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638687988
+old [description:"lecture nov 9" due:"1638853200" entry:"1636509921" modified:"1638685300" project:"compsci_590" start:"1638685300" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+new [description:"lecture nov 9" due:"1638853200" end:"1638687988" entry:"1636509921" modified:"1638687988" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"e46b2ac7-fbcf-42ba-ba24-de6ce3fceed9"]
+---
+time 1638688645
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638665763" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638688645" priority:"H" project:"compsci_590" start:"1638688645" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638725598
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638688645" priority:"H" project:"compsci_590" start:"1638688645" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638725598" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638725645
+new [description:"hrt prep" entry:"1638725645" modified:"1638725645" project:"vi" status:"pending" uuid:"311dbf5c-31a6-4ffa-b915-a9a71b60bf12"]
+---
+time 1638736218
+old [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638568477" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+new [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638736218" project:"compsci_514" start:"1638736218" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638745748
+old [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638736218" project:"compsci_514" start:"1638736218" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+new [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638745748" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638755978
+old [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638683179" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638755978" priority:"H" project:"citadel" start:"1638755978" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638756044
+old [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638755978" priority:"H" project:"citadel" start:"1638755978" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638756044" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638756051
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638725598" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638756051" priority:"H" project:"compsci_590" start:"1638756050" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638756062
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638756051" priority:"H" project:"compsci_590" start:"1638756050" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638756062" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638756925
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638756062" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638756925" priority:"H" project:"compsci_590" start:"1638756925" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638758330
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638756925" priority:"H" project:"compsci_590" start:"1638756925" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638758330" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638761120
+new [description:"hrt prep" entry:"1638761120" modified:"1638761120" project:"vi" status:"pending" uuid:"cb159b02-1413-4bfa-ac34-1cd327728739"]
+---
+time 1638761123
+old [description:"hrt prep" entry:"1638761120" modified:"1638761120" project:"vi" status:"pending" uuid:"cb159b02-1413-4bfa-ac34-1cd327728739"]
+new [description:"hrt prep" entry:"1638761120" modified:"1638761123" project:"vi" start:"1638761123" status:"pending" uuid:"cb159b02-1413-4bfa-ac34-1cd327728739"]
+---
+time 1638761126
+old [description:"hrt prep" entry:"1638761120" modified:"1638761123" project:"vi" start:"1638761123" status:"pending" uuid:"cb159b02-1413-4bfa-ac34-1cd327728739"]
+new [description:"hrt prep" end:"1638761126" entry:"1638761120" modified:"1638761126" project:"vi" status:"completed" uuid:"cb159b02-1413-4bfa-ac34-1cd327728739"]
+---
+time 1638762971
+old [description:"hrt mock interview" due:"1638766799" entry:"1638654652" modified:"1638681956" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+new [description:"hrt mock interview" due:"1638766799" entry:"1638654652" modified:"1638762971" project:"vi" start:"1638762971" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+---
+time 1638767367
+old [description:"hrt mock interview" due:"1638766799" entry:"1638654652" modified:"1638762971" project:"vi" start:"1638762971" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+new [description:"hrt mock interview" due:"1638766799" entry:"1638654652" modified:"1638767367" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+---
+time 1638775275
+old [description:"reply to Karen Christenson for relocation" due:"1638766799" entry:"1638591072" modified:"1638756044" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+new [description:"reply to Karen Christenson for relocation" due:"1638766799" end:"1638775275" entry:"1638591072" modified:"1638775275" priority:"H" project:"citadel" status:"completed" tags:"todo" tags_todo:"x" uuid:"468532db-13c0-4ea3-b006-1dd3cc5eb0b0"]
+---
+time 1638775289
+old [description:"hrt mock interview" due:"1638766799" entry:"1638654652" modified:"1638767367" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+new [description:"hrt mock interview" due:"1638766799" end:"1638775289" entry:"1638654652" modified:"1638775289" project:"vi" status:"completed" tags:"todo" tags_todo:"x" uuid:"e99433d0-b641-41cc-99d2-19277ab1aeb6"]
+---
+time 1638775590
+old [description:"tax return email from umass" due:"1638766799" entry:"1638568426" modified:"1638654573" priority:"L" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1639371600" entry:"1638568426" modified:"1638775590" priority:"L" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1638775603
+old [description:"quiz 14" due:"1638766800" entry:"1638565990" modified:"1638745748" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+new [description:"quiz 14" due:"1638839700" entry:"1638565990" modified:"1638775603" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638775631
+old [description:"quiz 14" due:"1638839700" entry:"1638565990" modified:"1638775603" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+new [description:"quiz 14" due:"1638839700" entry:"1638565990" modified:"1638775631" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638775642
+old [description:"quiz 14" due:"1638839700" entry:"1638565990" modified:"1638775631" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+new [description:"quiz 14" due:"1638839700" entry:"1638565990" modified:"1638775642" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638821364
+new [description:"unit 4 revisions" due:"1639371600" entry:"1638821364" modified:"1638821364" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1638821388
+old [description:"unit 4 revisions" due:"1639371600" entry:"1638821364" modified:"1638821364" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+new [description:"unit 4 revisions" due:"1639713600" entry:"1638821364" modified:"1638821388" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1638821823
+old [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1638477314" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1638821823" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+---
+time 1638821823
+old [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638654283" priority:"H" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+new [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638821823" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+---
+time 1638822254
+old [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638821823" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+new [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638822254" priority:"H" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+---
+time 1638822270
+old [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1638477308" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1638822270" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1638823072
+old [description:"quiz 14" due:"1638839700" entry:"1638565990" modified:"1638775642" priority:"H" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+new [description:"quiz 14" due:"1638839700" end:"1638823072" entry:"1638565990" modified:"1638823072" priority:"H" project:"compsci_514" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8508deee-33d4-4804-805b-0530255e25dd"]
+---
+time 1638823608
+new [description:"Programming assignment 4 projectcompsci_590" due:"1639630799" entry:"1638823608" modified:"1638823608" priority:"H" status:"pending" tags:"umasss" tags_umasss:"x" uuid:"327de5d0-d332-40ed-ad6a-1195e04e804a"]
+---
+time 1638825517
+old [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+new [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638825517" project:"compsci_590" start:"1638825517" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1638826484
+old [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638825517" project:"compsci_590" start:"1638825517" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+new [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638826484" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1638829672
+old [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638826484" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+new [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638829672" project:"compsci_590" start:"1638829672" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1638831517
+old [description:"lecture nov 18" due:"1638853200" entry:"1637297403" modified:"1638829672" project:"compsci_590" start:"1638829672" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+new [description:"lecture nov 18" due:"1638853200" end:"1638831517" entry:"1637297403" modified:"1638831517" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"8a1b7fdd-a3da-4a47-8177-9f90e28d44b4"]
+---
+time 1638832148
+new [description:"compsci 230 project" entry:"1638832148" modified:"1638832148" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e6293e0f-fd8c-47b8-ace1-5682375e329c"]
+---
+time 1638832153
+old [description:"compsci 230 project" entry:"1638832148" modified:"1638832148" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e6293e0f-fd8c-47b8-ace1-5682375e329c"]
+new [description:"compsci 230 project" entry:"1638832148" modified:"1638832153" project:"vi" start:"1638832153" status:"pending" tags:"todo" tags_todo:"x" uuid:"e6293e0f-fd8c-47b8-ace1-5682375e329c"]
+---
+time 1638835065
+old [description:"compsci 230 project" entry:"1638832148" modified:"1638832153" project:"vi" start:"1638832153" status:"pending" tags:"todo" tags_todo:"x" uuid:"e6293e0f-fd8c-47b8-ace1-5682375e329c"]
+new [description:"compsci 230 project" end:"1638835065" entry:"1638832148" modified:"1638835065" project:"vi" status:"completed" tags:"todo" tags_todo:"x" uuid:"e6293e0f-fd8c-47b8-ace1-5682375e329c"]
+---
+time 1638849343
+old [description:"lecture nov 23" due:"1638853200" entry:"1637703491" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+new [description:"lecture nov 23" due:"1638853200" entry:"1637703491" modified:"1638849343" project:"compsci_590" start:"1638849343" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+---
+time 1638849347
+old [description:"lecture nov 23" due:"1638853200" entry:"1637703491" modified:"1638849343" project:"compsci_590" start:"1638849343" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+new [description:"lecture nov 23" due:"1638853200" end:"1638849347" entry:"1637703491" modified:"1638849347" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"f9529d4c-abf9-4585-a797-b4ea5eb5d79c"]
+---
+time 1638855673
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638758330" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638855673" priority:"H" project:"compsci_590" start:"1638855673" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638858959
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638855673" priority:"H" project:"compsci_590" start:"1638855673" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638858959" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638903420
+new [description:"add cinnamon HR info" due:"1638939599" entry:"1638903420" modified:"1638903420" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"f1d4eee0-39b5-4715-8940-323972b01518"]
+---
+time 1638906126
+new [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1638906126" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+---
+time 1638911539
+old [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1638822270" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1638911539" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1638911539
+old [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1638821823" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1638911539" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+---
+time 1638911657
+old [description:"unit 4 revisions" due:"1639713600" entry:"1638821364" modified:"1638821388" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+new [description:"unit 4 revisions" due:"1639713600" entry:"1638821364" modified:"1638911657" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1638911686
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1638652737" priority:"M" project:"vi" status:"pending" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1638911686" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1638911701
+old [description:"Week 8: Blockchain Voting" due:"1638853200" entry:"1635292247" modified:"1638566043" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+new [description:"Week 8: Blockchain Voting" due:"1638853200" entry:"1635292247" modified:"1638911701" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+---
+time 1638911701
+old [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1638566043" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+new [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1638911701" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1638918196
+old [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638918196" project:"compsci_590" start:"1638918196" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+---
+time 1638918852
+old [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638918196" project:"compsci_590" start:"1638918196" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638918852" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+---
+time 1638920391
+old [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638918852" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638920391" project:"compsci_590" start:"1638920391" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+---
+time 1638925051
+old [description:"lecture nov 30" due:"1638853200" entry:"1638565810" modified:"1638920391" project:"compsci_590" start:"1638920391" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+new [description:"lecture nov 30" due:"1638853200" end:"1638925051" entry:"1638565810" modified:"1638925051" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"4a8268ec-a377-49b9-9b52-98caa0a8eb60"]
+---
+time 1638925778
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638858959" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638925778" priority:"H" project:"compsci_590" start:"1638925778" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638929292
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638925778" priority:"H" project:"compsci_590" start:"1638925778" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638929292" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638931480
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638929292" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638931480" priority:"H" project:"compsci_590" start:"1638931480" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638935135
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638931480" priority:"H" project:"compsci_590" start:"1638931480" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638935135" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638937634
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638935135" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638937634" priority:"H" project:"compsci_590" start:"1638937634" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638937882
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638937634" priority:"H" project:"compsci_590" start:"1638937634" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638937882" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1638938047
+old [description:"add cinnamon HR info" due:"1638939599" entry:"1638903420" modified:"1638903420" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"f1d4eee0-39b5-4715-8940-323972b01518"]
+new [description:"add cinnamon HR info" due:"1638939599" entry:"1638903420" modified:"1638938047" project:"citadel" start:"1638938047" status:"pending" tags:"todo" tags_todo:"x" uuid:"f1d4eee0-39b5-4715-8940-323972b01518"]
+---
+time 1638938183
+old [description:"add cinnamon HR info" due:"1638939599" entry:"1638903420" modified:"1638938047" project:"citadel" start:"1638938047" status:"pending" tags:"todo" tags_todo:"x" uuid:"f1d4eee0-39b5-4715-8940-323972b01518"]
+new [description:"add cinnamon HR info" due:"1638939599" end:"1638938183" entry:"1638903420" modified:"1638938183" project:"citadel" status:"completed" tags:"todo" tags_todo:"x" uuid:"f1d4eee0-39b5-4715-8940-323972b01518"]
+---
+time 1638938198
+old [annotation_1637297630:"http:\/\/ccr.sigcomm.org\/online\/files\/p63-alfares.pdf" description:"Datacenter networking notes" due:"1638853200" entry:"1637297340" modified:"1638565831" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"54e3b966-f476-4398-9175-7a0c97ced7fd"]
+new [annotation_1637297630:"http:\/\/ccr.sigcomm.org\/online\/files\/p63-alfares.pdf" description:"Datacenter networking notes" due:"1638853200" end:"1638938198" entry:"1637297340" modified:"1638938198" project:"compsci_590" status:"completed" tags:"umass" tags_umass:"x" uuid:"54e3b966-f476-4398-9175-7a0c97ced7fd"]
+---
+time 1638938235
+old [description:"Programming assignment 4 projectcompsci_590" due:"1639630799" entry:"1638823608" modified:"1638823608" priority:"H" status:"pending" tags:"umasss" tags_umasss:"x" uuid:"327de5d0-d332-40ed-ad6a-1195e04e804a"]
+new [description:"Programming assignment 4" due:"1639630799" entry:"1638823608" modified:"1638938235" priority:"H" project:"compsci_590" status:"pending" tags:"umas" tags_umas:"x" uuid:"327de5d0-d332-40ed-ad6a-1195e04e804a"]
+---
+time 1638938275
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1638654283" priority:"H" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1638938275" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1638973967
+new [description:"wayfair hw" entry:"1638973967" modified:"1638973967" project:"vi" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+---
+time 1638973971
+old [description:"wayfair hw" entry:"1638973967" modified:"1638973967" project:"vi" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+new [description:"wayfair hw" entry:"1638973967" modified:"1638973971" project:"vi" start:"1638973971" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+---
+time 1638973996
+old [description:"wayfair hw" entry:"1638973967" modified:"1638973971" project:"vi" start:"1638973971" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+new [description:"wayfair hw" entry:"1638973967" modified:"1638973996" project:"vi" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+---
+time 1638976844
+old [description:"wayfair hw" entry:"1638973967" modified:"1638973996" project:"vi" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+new [description:"wayfair hw" entry:"1638973967" modified:"1638976844" project:"vi" start:"1638976844" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+---
+time 1638976896
+old [description:"wayfair hw" entry:"1638973967" modified:"1638976844" project:"vi" start:"1638976844" status:"pending" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+new [description:"wayfair hw" end:"1638976896" entry:"1638973967" modified:"1638976896" project:"vi" status:"completed" uuid:"fce818f5-fb9e-42b4-89cc-e96515e98334"]
+---
+time 1639001954
+old [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1638685290" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639001954" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1639002692
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1638911686" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639002692" priority:"M" project:"vi" start:"1639002692" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1639002696
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639002692" priority:"M" project:"vi" start:"1639002692" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639002696" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1639002709
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1638937882" priority:"H" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1639002709" priority:"H" project:"compsci_590" start:"1639002709" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1639003441
+old [description:"Homework 5" due:"1639025999" entry:"1638565935" modified:"1639002709" priority:"H" project:"compsci_590" start:"1639002709" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+new [description:"Homework 5" due:"1639025999" end:"1639003441" entry:"1638565935" modified:"1639003441" priority:"H" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"a550bf8c-1cf1-44e8-a4c5-8467b3f38ddf"]
+---
+time 1639005127
+new [description:"hrt prep" entry:"1639005127" modified:"1639005127" project:"vi" status:"pending" uuid:"0b21e42b-3f3c-4fe6-ba24-cca9540a4b54"]
+---
+time 1639005141
+old [description:"hrt prep" entry:"1639005127" modified:"1639005127" project:"vi" status:"pending" uuid:"0b21e42b-3f3c-4fe6-ba24-cca9540a4b54"]
+new [description:"hrt prep" entry:"1639005127" modified:"1639005141" project:"vi" start:"1639005141" status:"pending" uuid:"0b21e42b-3f3c-4fe6-ba24-cca9540a4b54"]
+---
+time 1639006905
+old [description:"hrt prep" entry:"1639005127" modified:"1639005141" project:"vi" start:"1639005141" status:"pending" uuid:"0b21e42b-3f3c-4fe6-ba24-cca9540a4b54"]
+new [description:"hrt prep" entry:"1639005127" modified:"1639006905" project:"vi" status:"pending" uuid:"0b21e42b-3f3c-4fe6-ba24-cca9540a4b54"]
+---
+time 1639022232
+old [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1638911701" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+new [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1639022232" project:"compsci_461" start:"1639022232" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1639022311
+old [description:"Unit 5 essay" due:"1639155540" entry:"1638215833" modified:"1638215847" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639155540" entry:"1638215833" modified:"1639022311" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639022311
+old [description:"drug screening" due:"1639198799" entry:"1638647799" modified:"1638647816" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639198799" entry:"1638647799" modified:"1639022311" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1639023335
+old [description:"hrt prep" entry:"1638725645" modified:"1638725645" project:"vi" status:"pending" uuid:"311dbf5c-31a6-4ffa-b915-a9a71b60bf12"]
+new [description:"hrt prep" end:"1639023335" entry:"1638725645" modified:"1639023335" project:"vi" status:"completed" uuid:"311dbf5c-31a6-4ffa-b915-a9a71b60bf12"]
+---
+time 1639023338
+old [description:"hrt prep" entry:"1639005127" modified:"1639006905" project:"vi" status:"pending" uuid:"0b21e42b-3f3c-4fe6-ba24-cca9540a4b54"]
+new [description:"hrt prep" end:"1639023338" entry:"1639005127" modified:"1639023338" project:"vi" status:"completed" uuid:"0b21e42b-3f3c-4fe6-ba24-cca9540a4b54"]
+---
+time 1639025310
+old [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1639022232" project:"compsci_461" start:"1639022232" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+new [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1639025310" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1639025330
+old [description:"Week 9: Byzantine Generals Problem" due:"1638853200" entry:"1635794326" modified:"1639025310" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+new [description:"Week 9: Byzantine Generals Problem" due:"1638853200" end:"1639025330" entry:"1635794326" modified:"1639025330" project:"compsci_461" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"b27d674c-4477-4d87-b7b1-e09ef98d943f"]
+---
+time 1639028550
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1638938275" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639028550" priority:"H" project:"compsci_461" start:"1639028550" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1639062380
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639028550" priority:"H" project:"compsci_461" start:"1639028550" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639062380" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1639062445
+old [description:"Week 8: Blockchain Voting" due:"1638853200" entry:"1635292247" modified:"1638911701" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+new [description:"Week 8: Blockchain Voting" due:"1638853200" end:"1639062445" entry:"1635292247" modified:"1639062445" project:"compsci_461" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"da4af451-d8f6-48f1-b88a-aa16551a98cf"]
+---
+time 1639062474
+old [description:"discussion nov 16" due:"1638853200" entry:"1637711764" modified:"1638286800" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"ac98ec3f-a078-4479-88d8-32fc80144c76"]
+new [description:"discussion nov 16" due:"1638853200" end:"1639062473" entry:"1637711764" modified:"1639062474" project:"compsci_461" status:"completed" tags:"umass" tags_umass:"x" uuid:"ac98ec3f-a078-4479-88d8-32fc80144c76"]
+---
+time 1639062474
+old [description:"discussion nov 23" due:"1638853200" entry:"1638566014" modified:"1638568477" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"b2a8f513-7800-4c16-9a81-c58281eba8cb"]
+new [description:"discussion nov 23" due:"1638853200" end:"1639062474" entry:"1638566014" modified:"1639062474" project:"compsci_461" status:"completed" tags:"umass" tags_umass:"x" uuid:"b2a8f513-7800-4c16-9a81-c58281eba8cb"]
+---
+time 1639062474
+old [description:"discussion nov 30" due:"1638853200" entry:"1638566019" modified:"1638568477" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"2bf201c5-6aef-4c2f-831a-d1d00edf83a5"]
+new [description:"discussion nov 30" due:"1638853200" end:"1639062474" entry:"1638566019" modified:"1639062474" project:"compsci_461" status:"completed" tags:"umass" tags_umass:"x" uuid:"2bf201c5-6aef-4c2f-831a-d1d00edf83a5"]
+---
+time 1639064332
+old [description:"Reflection project" due:"1639673940" entry:"1638214805" modified:"1638214894" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639630799" entry:"1638214805" modified:"1639064332" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1639064332
+old [description:"Unit 5 essay" due:"1639155540" entry:"1638215833" modified:"1639022311" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639630799" entry:"1638215833" modified:"1639064332" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639064332
+old [description:"unit 4 revisions" due:"1639713600" entry:"1638821364" modified:"1638911657" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+new [description:"unit 4 revisions" due:"1639630799" entry:"1638821364" modified:"1639064332" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1639064342
+old [description:"Reflection project" due:"1639630799" entry:"1638214805" modified:"1639064332" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639717199" entry:"1638214805" modified:"1639064342" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1639064342
+old [description:"Unit 5 essay" due:"1639630799" entry:"1638215833" modified:"1639064332" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717199" entry:"1638215833" modified:"1639064342" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639064342
+old [description:"unit 4 revisions" due:"1639630799" entry:"1638821364" modified:"1639064332" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+new [description:"unit 4 revisions" due:"1639717199" entry:"1638821364" modified:"1639064342" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1639064372
+old [description:"Reflection project" due:"1639717199" entry:"1638214805" modified:"1639064342" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639717140" entry:"1638214805" modified:"1639064372" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1639064372
+old [description:"Unit 5 essay" due:"1639717199" entry:"1638215833" modified:"1639064342" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639064372" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639064372
+old [description:"unit 4 revisions" due:"1639717199" entry:"1638821364" modified:"1639064342" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+new [description:"unit 4 revisions" due:"1639717140" entry:"1638821364" modified:"1639064372" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1639065171
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639062380" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639065171" priority:"H" project:"compsci_461" start:"1639065171" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1639066119
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639065171" priority:"H" project:"compsci_461" start:"1639065171" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639066119" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1639072664
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639066119" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639072664" priority:"H" project:"compsci_461" start:"1639072664" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1639078796
+old [description:"homework 7" due:"1639198799" entry:"1638653901" modified:"1639072664" priority:"H" project:"compsci_461" start:"1639072664" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+new [description:"homework 7" due:"1639198799" end:"1639078796" entry:"1638653901" modified:"1639078796" priority:"H" project:"compsci_461" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"32c971da-c20a-40ea-ad8a-bf86a3cbc2c0"]
+---
+time 1639103077
+new [description:"E. Arena" entry:"1639103076" modified:"1639103076" project:"cp" status:"pending" uuid:"d1f6b4b7-1d11-435d-95ea-21759feed010"]
+---
+time 1639103080
+old [description:"E. Arena" entry:"1639103076" modified:"1639103076" project:"cp" status:"pending" uuid:"d1f6b4b7-1d11-435d-95ea-21759feed010"]
+new [description:"E. Arena" entry:"1639103076" modified:"1639103080" project:"cp" start:"1639103079" status:"pending" uuid:"d1f6b4b7-1d11-435d-95ea-21759feed010"]
+---
+time 1639106878
+old [description:"E. Arena" entry:"1639103076" modified:"1639103080" project:"cp" start:"1639103079" status:"pending" uuid:"d1f6b4b7-1d11-435d-95ea-21759feed010"]
+new [description:"E. Arena" end:"1639106878" entry:"1639103076" modified:"1639106878" project:"cp" status:"completed" uuid:"d1f6b4b7-1d11-435d-95ea-21759feed010"]
+---
+time 1639155424
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639002696" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639155424" priority:"M" project:"vi" start:"1639155424" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1639157620
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639155424" priority:"M" project:"vi" start:"1639155424" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639157620" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1639165539
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639165539" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639165542
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639165539" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639165542" project:"cp" start:"1639165542" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639168395
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639165542" project:"cp" start:"1639165542" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639168395" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639170385
+old [description:"drug screening" due:"1639198799" entry:"1638647799" modified:"1639022311" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639170385" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1639171287
+old [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639170385" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639171287" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1639171290
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639157620" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639171290" priority:"M" project:"vi" status:"pending" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1639171313
+old [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1638911539" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639171313" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1639172051
+old [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639171313" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639172051" project:"compsci_514" start:"1639172050" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1639176593
+old [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639172051" project:"compsci_514" start:"1639172050" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639176593" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1639201190
+new [description:"compsci 397s" entry:"1639201190" modified:"1639201190" project:"vi" status:"pending" uuid:"6e2fa431-39d0-4188-adc3-e423e6fbfdd4"]
+---
+time 1639201193
+old [description:"compsci 397s" entry:"1639201190" modified:"1639201190" project:"vi" status:"pending" uuid:"6e2fa431-39d0-4188-adc3-e423e6fbfdd4"]
+new [description:"compsci 397s" entry:"1639201190" modified:"1639201193" project:"vi" start:"1639201193" status:"pending" uuid:"6e2fa431-39d0-4188-adc3-e423e6fbfdd4"]
+---
+time 1639201202
+old [description:"compsci 397s" entry:"1639201190" modified:"1639201193" project:"vi" start:"1639201193" status:"pending" uuid:"6e2fa431-39d0-4188-adc3-e423e6fbfdd4"]
+new [description:"compsci 397s" end:"1639201202" entry:"1639201190" modified:"1639201202" project:"vi" status:"completed" uuid:"6e2fa431-39d0-4188-adc3-e423e6fbfdd4"]
+---
+time 1639246028
+old [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639176593" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+new [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639246028" project:"compsci_514" start:"1639246028" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1639247006
+old [description:"lecture nov 30" due:"1638853200" entry:"1638477308" modified:"1639246028" project:"compsci_514" start:"1639246028" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+new [description:"lecture nov 30" due:"1638853200" end:"1639247006" entry:"1638477308" modified:"1639247006" project:"compsci_514" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"3f89973e-085f-4498-acf5-c7c3ed52456e"]
+---
+time 1639247885
+old [description:"tax return email from umass" due:"1639371600" entry:"1638568426" modified:"1638775590" priority:"L" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1639371600" entry:"1638568426" modified:"1639247885" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1639247910
+old [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1638911539" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1639247910" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+---
+time 1639247911
+old [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1638906126" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+new [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1639247911" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+---
+time 1639247938
+old [description:"tax return email from umass" due:"1639371600" entry:"1638568426" modified:"1639247885" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1638334800" entry:"1638568426" modified:"1639247938" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1639247953
+old [description:"tax return email from umass" due:"1638334800" entry:"1638568426" modified:"1639247938" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1639630800" entry:"1638568426" modified:"1639247953" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1639248354
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639171290" priority:"M" project:"vi" status:"pending" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639248354" priority:"M" project:"vi" start:"1639248354" status:"pending" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1639251760
+old [description:"compsci198c project 11" due:"1639198799" entry:"1638652737" modified:"1639248354" priority:"M" project:"vi" start:"1639248354" status:"pending" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+new [description:"compsci198c project 11" due:"1639198799" end:"1639251760" entry:"1638652737" modified:"1639251760" priority:"M" project:"vi" status:"completed" uuid:"4ef4f4fe-20e5-4125-9737-0112eafda768"]
+---
+time 1639274250
+old [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1639247910" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1639274250" project:"compsci_514" start:"1639274250" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+---
+time 1639280432
+old [description:"lecture dec 2" due:"1638853200" entry:"1638477314" modified:"1639274250" project:"compsci_514" start:"1639274250" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+new [description:"lecture dec 2" due:"1638853200" end:"1639280431" entry:"1638477314" modified:"1639280432" project:"compsci_514" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"be8adcdd-fd52-48bf-ab06-2bd5607b4960"]
+---
+time 1639351856
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639168395" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639351856" project:"cp" status:"pending" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639351872
+old [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1638822254" priority:"H" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+new [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1639351872" priority:"L" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+---
+time 1639351884
+old [description:"unit 4 revisions" due:"1639717140" entry:"1638821364" modified:"1639064372" priority:"M" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+new [description:"unit 4 revisions" due:"1639717140" entry:"1638821364" modified:"1639351884" priority:"L" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1639351902
+old [description:"Programming assignment 4" due:"1639630799" entry:"1638823608" modified:"1638938235" priority:"H" project:"compsci_590" status:"pending" tags:"umas" tags_umas:"x" uuid:"327de5d0-d332-40ed-ad6a-1195e04e804a"]
+new [description:"Programming assignment 4" due:"1639630799" entry:"1638823608" modified:"1639351902" priority:"L" project:"compsci_590" status:"pending" tags:"umas" tags_umas:"x" uuid:"327de5d0-d332-40ed-ad6a-1195e04e804a"]
+---
+time 1639352122
+old [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639001954" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639352122" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1639361210
+old [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639352122" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639361210" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1639363421
+new [description:"review hw5 solution" entry:"1639363421" modified:"1639363421" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"5209ad22-e15a-4462-8cf2-9e65a7933bbc"]
+---
+time 1639363425
+old [description:"review hw5 solution" entry:"1639363421" modified:"1639363421" project:"compsci_590" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"5209ad22-e15a-4462-8cf2-9e65a7933bbc"]
+new [description:"review hw5 solution" entry:"1639363421" modified:"1639363425" project:"compsci_590" start:"1639363425" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"5209ad22-e15a-4462-8cf2-9e65a7933bbc"]
+---
+time 1639363623
+old [description:"review hw5 solution" entry:"1639363421" modified:"1639363425" project:"compsci_590" start:"1639363425" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"5209ad22-e15a-4462-8cf2-9e65a7933bbc"]
+new [description:"review hw5 solution" end:"1639363623" entry:"1639363421" modified:"1639363623" project:"compsci_590" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"5209ad22-e15a-4462-8cf2-9e65a7933bbc"]
+---
+time 1639364669
+old [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639361210" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639364669" project:"compsci_590" start:"1639364669" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1639365780
+old [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639364669" project:"compsci_590" start:"1639364669" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+new [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639365780" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1639368090
+old [description:"lecture dec 2" due:"1638853200" entry:"1638565803" modified:"1639365780" project:"compsci_590" status:"pending" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+new [description:"lecture dec 2" due:"1638853200" end:"1639368090" entry:"1638565803" modified:"1639368090" project:"compsci_590" status:"completed" tags:"umass" tags_umass:"x" uuid:"c112bc80-70fe-4b52-8cfd-d8f2281b74fd"]
+---
+time 1639381719
+old [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1639247911" project:"compsci_514" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+new [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1639381719" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+---
+time 1639384621
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639064372" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639384621" priority:"H" project:"compsci_305" start:"1639384621" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639384629
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639384621" priority:"H" project:"compsci_305" start:"1639384621" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639384629" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639423821
+new [description:"final exam" entry:"1639423821" modified:"1639423821" project:"compsci_590" status:"pending" uuid:"08a090af-2979-4f43-99ce-55375ee4c8d1"]
+---
+time 1639423823
+old [description:"final exam" entry:"1639423821" modified:"1639423821" project:"compsci_590" status:"pending" uuid:"08a090af-2979-4f43-99ce-55375ee4c8d1"]
+new [description:"final exam" entry:"1639423821" modified:"1639423823" project:"compsci_590" start:"1639423823" status:"pending" uuid:"08a090af-2979-4f43-99ce-55375ee4c8d1"]
+---
+time 1639446001
+old [description:"final exam" entry:"1639423821" modified:"1639423823" project:"compsci_590" start:"1639423823" status:"pending" uuid:"08a090af-2979-4f43-99ce-55375ee4c8d1"]
+new [description:"final exam" end:"1639446000" entry:"1639423821" modified:"1639446001" project:"compsci_590" status:"completed" uuid:"08a090af-2979-4f43-99ce-55375ee4c8d1"]
+---
+time 1639458631
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639458631" priority:"H" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639458667
+old [description:"pset5" due:"1639414799" entry:"1638654235" modified:"1639351872" priority:"L" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+new [description:"pset5" due:"1639414799" end:"1639458665" entry:"1638654235" modified:"1639458667" priority:"L" project:"compsci_514" status:"deleted" tags:"umass" tags_umass:"x" uuid:"1cbffbd7-28ae-4a0b-a284-23b6b4af3de5"]
+---
+time 1639458836
+old [description:"unit 4 revisions" due:"1639717140" entry:"1638821364" modified:"1639351884" priority:"L" project:"compsci_305" status:"pending" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+new [description:"unit 4 revisions" due:"1639717140" end:"1639458833" entry:"1638821364" modified:"1639458836" priority:"L" project:"compsci_305" status:"deleted" uuid:"8ce53e8e-feab-49cd-abb0-bf5738194d09"]
+---
+time 1639459584
+new [description:"461 review final" entry:"1639459584" modified:"1639459584" status:"pending" uuid:"a9a97ade-de8b-40dc-a5a5-45fa75b52d92"]
+---
+time 1639459596
+old [description:"461 review final" entry:"1639459584" modified:"1639459584" status:"pending" uuid:"a9a97ade-de8b-40dc-a5a5-45fa75b52d92"]
+new [description:"461 review final" entry:"1639459584" modified:"1639459596" project:"compsci_461" status:"pending" uuid:"a9a97ade-de8b-40dc-a5a5-45fa75b52d92"]
+---
+time 1639459599
+old [description:"461 review final" entry:"1639459584" modified:"1639459596" project:"compsci_461" status:"pending" uuid:"a9a97ade-de8b-40dc-a5a5-45fa75b52d92"]
+new [description:"461 review final" entry:"1639459584" modified:"1639459599" project:"compsci_461" start:"1639459599" status:"pending" uuid:"a9a97ade-de8b-40dc-a5a5-45fa75b52d92"]
+---
+time 1639465530
+old [description:"461 review final" entry:"1639459584" modified:"1639459599" project:"compsci_461" start:"1639459599" status:"pending" uuid:"a9a97ade-de8b-40dc-a5a5-45fa75b52d92"]
+new [description:"461 review final" end:"1639465530" entry:"1639459584" modified:"1639465530" project:"compsci_461" status:"completed" uuid:"a9a97ade-de8b-40dc-a5a5-45fa75b52d92"]
+---
+time 1639493253
+old [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639171287" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639493253" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1639493269
+old [description:"compsci198c project 12a" due:"1639198799" entry:"1638652742" modified:"1638652742" priority:"M" project:"vi" status:"pending" uuid:"e52f5dbc-e8d7-40a6-b2f0-316a5bce8d9c"]
+new [description:"compsci198c project 12a" due:"1639198799" entry:"1638652742" modified:"1639493269" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e52f5dbc-e8d7-40a6-b2f0-316a5bce8d9c"]
+---
+time 1639493269
+old [description:"compsci198c project 12b" due:"1639198799" entry:"1638652744" modified:"1638652744" priority:"M" project:"vi" status:"pending" uuid:"904f9755-7176-480b-841c-d84568bcdeca"]
+new [description:"compsci198c project 12b" due:"1639198799" entry:"1638652744" modified:"1639493269" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"904f9755-7176-480b-841c-d84568bcdeca"]
+---
+time 1639502782
+old [description:"compsci198c project 12a" due:"1639198799" entry:"1638652742" modified:"1639493269" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"e52f5dbc-e8d7-40a6-b2f0-316a5bce8d9c"]
+new [description:"compsci198c project 12a" due:"1639198799" entry:"1638652742" modified:"1639502782" priority:"M" project:"vi" start:"1639502782" status:"pending" tags:"todo" tags_todo:"x" uuid:"e52f5dbc-e8d7-40a6-b2f0-316a5bce8d9c"]
+---
+time 1639504423
+old [description:"compsci198c project 12a" due:"1639198799" entry:"1638652742" modified:"1639502782" priority:"M" project:"vi" start:"1639502782" status:"pending" tags:"todo" tags_todo:"x" uuid:"e52f5dbc-e8d7-40a6-b2f0-316a5bce8d9c"]
+new [description:"compsci198c project 12a" due:"1639198799" end:"1639504423" entry:"1638652742" modified:"1639504423" priority:"M" project:"vi" status:"completed" tags:"todo" tags_todo:"x" uuid:"e52f5dbc-e8d7-40a6-b2f0-316a5bce8d9c"]
+---
+time 1639506379
+old [description:"compsci198c project 12b" due:"1639198799" entry:"1638652744" modified:"1639493269" priority:"M" project:"vi" status:"pending" tags:"todo" tags_todo:"x" uuid:"904f9755-7176-480b-841c-d84568bcdeca"]
+new [description:"compsci198c project 12b" due:"1639198799" entry:"1638652744" modified:"1639506379" priority:"M" project:"vi" start:"1639506379" status:"pending" tags:"todo" tags_todo:"x" uuid:"904f9755-7176-480b-841c-d84568bcdeca"]
+---
+time 1639509159
+old [description:"compsci198c project 12b" due:"1639198799" entry:"1638652744" modified:"1639506379" priority:"M" project:"vi" start:"1639506379" status:"pending" tags:"todo" tags_todo:"x" uuid:"904f9755-7176-480b-841c-d84568bcdeca"]
+new [description:"compsci198c project 12b" due:"1639198799" end:"1639509159" entry:"1638652744" modified:"1639509159" priority:"M" project:"vi" status:"completed" tags:"todo" tags_todo:"x" uuid:"904f9755-7176-480b-841c-d84568bcdeca"]
+---
+time 1639515155
+old [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639493253" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639515155" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1639536943
+old [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1639381719" project:"compsci_514" status:"pending" tags:"umass" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+new [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1639536943" project:"compsci_514" start:"1639536943" status:"pending" tags:"umass" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+---
+time 1639536952
+old [description:"lecture dec 7" due:"1639458000" entry:"1638906126" modified:"1639536943" project:"compsci_514" start:"1639536943" status:"pending" tags:"umass" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+new [description:"lecture dec 7" due:"1639458000" end:"1639536952" entry:"1638906126" modified:"1639536952" project:"compsci_514" status:"completed" tags:"umass" tags_umass:"x" uuid:"ce566d75-cb3b-4238-8c78-51a265f9e96d"]
+---
+time 1639536990
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639458631" priority:"H" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639536990" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639537533
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639384629" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639537533" priority:"H" project:"compsci_305" start:"1639537533" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639538266
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639537533" priority:"H" project:"compsci_305" start:"1639537533" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639538266" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639542727
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639538266" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639542727" priority:"H" project:"compsci_305" start:"1639542727" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639546639
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639542727" priority:"H" project:"compsci_305" start:"1639542727" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639546639" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639551385
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639546639" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639551385" priority:"H" project:"compsci_305" start:"1639551385" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639553366
+old [description:"Unit 5 essay" due:"1639717140" entry:"1638215833" modified:"1639551385" priority:"H" project:"compsci_305" start:"1639551385" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+new [description:"Unit 5 essay" due:"1639717140" end:"1639553366" entry:"1638215833" modified:"1639553366" priority:"H" project:"compsci_305" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"66235d9d-53c3-4109-a13b-6be6c2ad6cae"]
+---
+time 1639553384
+old [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639515155" priority:"H" project:"citadel" status:"pending" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639553384" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1639590182
+old [description:"drug screening" due:"1639605600" entry:"1638647799" modified:"1639553384" priority:"H" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+new [description:"drug screening" due:"1639605600" end:"1639590182" entry:"1638647799" modified:"1639590182" priority:"H" project:"citadel" status:"completed" tags:"todo" tags_todo:"x" uuid:"140bd61b-cce9-4fcc-94a0-6c37b7d88a4b"]
+---
+time 1639590310
+new [description:"practice exam" entry:"1639590310" modified:"1639590310" project:"compsci_514" status:"pending" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639590330
+new [description:"practice questions" entry:"1639590330" modified:"1639590330" project:"compsci_514" status:"pending" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+---
+time 1639590337
+old [description:"practice exam" entry:"1639590310" modified:"1639590310" project:"compsci_514" status:"pending" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" entry:"1639590310" modified:"1639590337" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639590338
+old [description:"practice questions" entry:"1639590330" modified:"1639590330" project:"compsci_514" status:"pending" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+new [description:"practice questions" entry:"1639590330" modified:"1639590338" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+---
+time 1639590354
+old [description:"tax return email from umass" due:"1639630800" entry:"1638568426" modified:"1639247953" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1639976400" entry:"1638568426" modified:"1639590354" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1639592858
+old [description:"practice questions" entry:"1639590330" modified:"1639590338" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+new [description:"practice questions" entry:"1639590330" modified:"1639592858" project:"compsci_514" start:"1639592858" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+---
+time 1639593465
+old [description:"practice questions" entry:"1639590330" modified:"1639592858" project:"compsci_514" start:"1639592858" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+new [description:"practice questions" entry:"1639590330" modified:"1639593465" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+---
+time 1639593469
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639536990" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639593469" priority:"H" project:"compsci_461" start:"1639593469" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639594572
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639593469" priority:"H" project:"compsci_461" start:"1639593469" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639594572" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639600409
+old [description:"practice questions" entry:"1639590330" modified:"1639593465" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+new [description:"practice questions" entry:"1639590330" modified:"1639600409" project:"compsci_514" start:"1639600409" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+---
+time 1639607187
+old [description:"practice questions" entry:"1639590330" modified:"1639600409" project:"compsci_514" start:"1639600409" status:"pending" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+new [description:"practice questions" end:"1639607187" entry:"1639590330" modified:"1639607187" project:"compsci_514" status:"completed" tags:"todo" tags_todo:"x" uuid:"2e5ad610-ddaa-4096-b858-3b0f8dcb3d54"]
+---
+time 1639627168
+old [description:"practice exam" entry:"1639590310" modified:"1639590337" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" entry:"1639590310" modified:"1639627168" project:"compsci_514" start:"1639627168" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639627200
+old [description:"practice exam" entry:"1639590310" modified:"1639627168" project:"compsci_514" start:"1639627168" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" entry:"1639590310" modified:"1639627200" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639627233
+old [description:"practice exam" entry:"1639590310" modified:"1639627200" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" entry:"1639590310" modified:"1639627233" project:"compsci_514" start:"1639627232" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639628529
+old [description:"practice exam" entry:"1639590310" modified:"1639627233" project:"compsci_514" start:"1639627232" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" entry:"1639590310" modified:"1639628529" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639629730
+old [description:"practice exam" entry:"1639590310" modified:"1639628529" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" entry:"1639590310" modified:"1639629730" project:"compsci_514" start:"1639629730" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639631915
+old [description:"practice exam" entry:"1639590310" modified:"1639629730" project:"compsci_514" start:"1639629730" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" entry:"1639590310" modified:"1639631915" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639637964
+old [description:"practice exam" entry:"1639590310" modified:"1639631915" project:"compsci_514" status:"pending" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+new [description:"practice exam" end:"1639637964" entry:"1639590310" modified:"1639637964" project:"compsci_514" status:"completed" tags:"todo" tags_todo:"x" uuid:"dc6b20d4-19e5-4a2d-bc9a-5f9f69fdd6a9"]
+---
+time 1639637972
+old [description:"Programming assignment 4" due:"1639630799" entry:"1638823608" modified:"1639351902" priority:"L" project:"compsci_590" status:"pending" tags:"umas" tags_umas:"x" uuid:"327de5d0-d332-40ed-ad6a-1195e04e804a"]
+new [description:"Programming assignment 4" due:"1639630799" end:"1639637971" entry:"1638823608" modified:"1639637972" priority:"L" project:"compsci_590" status:"deleted" tags:"umas" tags_umas:"x" uuid:"327de5d0-d332-40ed-ad6a-1195e04e804a"]
+---
+time 1639637981
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639351856" project:"cp" status:"pending" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639637981" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639690080
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639637981" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639690080" project:"cp" status:"pending" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639690080
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639594572" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639690080" priority:"H" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639690085
+old [description:"Reflection project" due:"1639717140" entry:"1638214805" modified:"1639064372" priority:"H" project:"compsci_305" status:"pending" tags:"umass" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639717140" entry:"1638214805" modified:"1639690085" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1639691276
+new [description:"reply to Wiley Lepore H1B email" due:"1639976399" entry:"1639691276" modified:"1639691276" project:"citadel" status:"pending" uuid:"8e722e8e-956c-4bd4-abb9-c834d334536c"]
+---
+time 1639691331
+new [description:"reply to Hope Raney on team matching" due:"1639976399" entry:"1639691331" modified:"1639691331" project:"citadel" status:"pending" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+---
+time 1639708372
+old [description:"Reflection project" due:"1639717140" entry:"1638214805" modified:"1639690085" priority:"H" project:"compsci_305" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639717140" entry:"1638214805" modified:"1639708372" priority:"H" project:"compsci_305" start:"1639708372" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1639712685
+old [description:"Reflection project" due:"1639717140" entry:"1638214805" modified:"1639708372" priority:"H" project:"compsci_305" start:"1639708372" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+new [description:"Reflection project" due:"1639717140" end:"1639712685" entry:"1638214805" modified:"1639712685" priority:"H" project:"compsci_305" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"47bb5ba4-a733-4fde-ae94-77ed41189d8f"]
+---
+time 1639712691
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639690080" priority:"H" project:"compsci_461" status:"pending" tags:"umass" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639712691" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639763552
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639712691" priority:"H" project:"compsci_461" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639763552" priority:"H" project:"compsci_461" start:"1639763551" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639774976
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639763552" priority:"H" project:"compsci_461" start:"1639763551" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" end:"1639774976" entry:"1639458631" modified:"1639774976" priority:"H" project:"compsci_461" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639774993
+old [description:"Final, 461, programming portion" due:"1639800000" end:"1639774976" entry:"1639458631" modified:"1639774976" priority:"H" project:"compsci_461" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639774993" priority:"H" project:"compsci_461" start:"1639774993" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639789370
+old [description:"Final, 461, programming portion" due:"1639800000" entry:"1639458631" modified:"1639774993" priority:"H" project:"compsci_461" start:"1639774993" status:"pending" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+new [description:"Final, 461, programming portion" due:"1639800000" end:"1639789370" entry:"1639458631" modified:"1639789370" priority:"H" project:"compsci_461" status:"completed" tags:"todo,umass" tags_todo:"x" tags_umass:"x" uuid:"1d56298b-561d-4d27-9142-be25b9b92a19"]
+---
+time 1639798084
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639690080" project:"cp" status:"pending" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639798084" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639798128
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639798084" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639798128" project:"cp" start:"1639798128" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639805112
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639798128" project:"cp" start:"1639798128" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1639805112" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1639966530
+old [description:"reply to Wiley Lepore H1B email" due:"1639976399" entry:"1639691276" modified:"1639691276" project:"citadel" status:"pending" uuid:"8e722e8e-956c-4bd4-abb9-c834d334536c"]
+new [description:"reply to Wiley Lepore H1B email" due:"1639976399" entry:"1639691276" modified:"1639966530" project:"citadel" start:"1639966529" status:"pending" uuid:"8e722e8e-956c-4bd4-abb9-c834d334536c"]
+---
+time 1639966923
+old [description:"reply to Wiley Lepore H1B email" due:"1639976399" entry:"1639691276" modified:"1639966530" project:"citadel" start:"1639966529" status:"pending" uuid:"8e722e8e-956c-4bd4-abb9-c834d334536c"]
+new [description:"reply to Wiley Lepore H1B email" due:"1639976399" end:"1639966923" entry:"1639691276" modified:"1639966923" project:"citadel" status:"completed" uuid:"8e722e8e-956c-4bd4-abb9-c834d334536c"]
+---
+time 1639967039
+new [description:"Citadel and Citadel Securities Offer Trip 2022" entry:"1639967039" modified:"1639967039" project:"citadel" status:"pending" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+---
+time 1639967048
+old [description:"tax return email from umass" due:"1639976400" entry:"1638568426" modified:"1639590354" project:"general" status:"pending" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1639976400" entry:"1638568426" modified:"1639967048" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1639967049
+old [description:"Citadel and Citadel Securities Offer Trip 2022" entry:"1639967039" modified:"1639967039" project:"citadel" status:"pending" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+new [description:"Citadel and Citadel Securities Offer Trip 2022" entry:"1639967039" modified:"1639967049" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+---
+time 1640100833
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1639805112" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" entry:"1639165539" modified:"1640100833" project:"cp" start:"1640100832" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1640100855
+old [description:"D. Treelabeling" entry:"1639165539" modified:"1640100833" project:"cp" start:"1640100832" status:"pending" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+new [description:"D. Treelabeling" end:"1640100854" entry:"1639165539" modified:"1640100855" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"e8c3c499-0f86-4b45-b7b6-e26316106ac4"]
+---
+time 1640100911
+old [description:"Citadel and Citadel Securities Offer Trip 2022" entry:"1639967039" modified:"1639967049" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+new [description:"Citadel and Citadel Securities Offer Trip 2022" due:"1641867839" entry:"1639967039" modified:"1640100911" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+---
+time 1640100924
+old [description:"tax return email from umass" due:"1639976400" entry:"1638568426" modified:"1639967048" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+new [description:"tax return email from umass" due:"1639976400" end:"1640100923" entry:"1638568426" modified:"1640100924" project:"general" status:"deleted" tags:"todo" tags_todo:"x" uuid:"be9dbe8d-b1ef-458e-9a62-8aa7b65f2888"]
+---
+time 1640100952
+old [description:"reply to Hope Raney on team matching" due:"1639976399" entry:"1639691331" modified:"1639691331" project:"citadel" status:"pending" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+new [annotation_1640100928:"asking about location and the offer trip" description:"reply to Hope Raney on team matching" due:"1640321999" entry:"1639691331" modified:"1640100952" project:"citadel" status:"pending" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+---
+time 1640100970
+old [annotation_1640100928:"asking about location and the offer trip" description:"reply to Hope Raney on team matching" due:"1640321999" entry:"1639691331" modified:"1640100952" project:"citadel" status:"pending" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+new [annotation_1640100928:"asking about location and the offer trip" description:"reply to Hope Raney on team matching" due:"1640321999" entry:"1639691331" modified:"1640100970" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+---
+time 1640101227
+new [description:"look for add better terminal for nvim" entry:"1640101227" modified:"1640101227" project:"nvim" status:"pending" uuid:"1484fff4-9f15-4387-bd79-bc608d1944b0"]
+---
+time 1640101233
+old [description:"look for add better terminal for nvim" entry:"1640101227" modified:"1640101227" project:"nvim" status:"pending" uuid:"1484fff4-9f15-4387-bd79-bc608d1944b0"]
+new [description:"look for add better terminal for nvim" entry:"1640101227" modified:"1640101233" project:"nvim" status:"pending" tags:"todo" tags_todo:"x" uuid:"1484fff4-9f15-4387-bd79-bc608d1944b0"]
+---
+time 1640101241
+old [annotation_1640100928:"asking about location and the offer trip" description:"reply to Hope Raney on team matching" due:"1640321999" entry:"1639691331" modified:"1640100970" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+new [annotation_1640100928:"asking about location and the offer trip" description:"reply to Hope Raney on team matching" due:"1640321999" entry:"1639691331" modified:"1640101241" project:"citadel" status:"pending" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+---
+time 1640101241
+old [description:"Citadel and Citadel Securities Offer Trip 2022" due:"1641867839" entry:"1639967039" modified:"1640100911" project:"citadel" status:"pending" tags:"todo" tags_todo:"x" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+new [description:"Citadel and Citadel Securities Offer Trip 2022" due:"1641867839" entry:"1639967039" modified:"1640101241" project:"citadel" status:"pending" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+---
+time 1640794755
+new [description:"change to mint mobile" due:"1640754000" entry:"1640794755" modified:"1640794755" project:"general" status:"pending" uuid:"40670b94-0d9c-43c8-9eb7-39afa65d6e97"]
+---
+time 1640794767
+old [description:"change to mint mobile" due:"1640754000" entry:"1640794755" modified:"1640794755" project:"general" status:"pending" uuid:"40670b94-0d9c-43c8-9eb7-39afa65d6e97"]
+new [description:"change to mint mobile" due:"1640840399" entry:"1640794755" modified:"1640794767" project:"general" status:"pending" uuid:"40670b94-0d9c-43c8-9eb7-39afa65d6e97"]
+---
+time 1640796936
+old [description:"change to mint mobile" due:"1640840399" entry:"1640794755" modified:"1640794767" project:"general" status:"pending" uuid:"40670b94-0d9c-43c8-9eb7-39afa65d6e97"]
+new [description:"change to mint mobile" due:"1640840399" end:"1640796935" entry:"1640794755" modified:"1640796936" project:"general" status:"deleted" uuid:"40670b94-0d9c-43c8-9eb7-39afa65d6e97"]
+---
+time 1640798793
+old [description:"fix nvim-tree startup warning" entry:"1635697686" modified:"1635697716" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"4dd1f201-bcd4-4928-b7e9-897464a753fd"]
+new [description:"fix nvim-tree startup warning" end:"1640798793" entry:"1635697686" modified:"1640798793" project:"nvim" status:"completed" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"4dd1f201-bcd4-4928-b7e9-897464a753fd"]
+---
+time 1640798793
+old [description:"fix lualine startup error" entry:"1635697701" modified:"1635697701" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"241176dc-050c-44bd-b3df-c8c780b55847"]
+new [description:"fix lualine startup error" end:"1640798793" entry:"1635697701" modified:"1640798793" project:"nvim" status:"completed" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"241176dc-050c-44bd-b3df-c8c780b55847"]
+---
+time 1640929128
+new [description:"E. Staircases" entry:"1640929128" modified:"1640929128" status:"pending" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640929147
+old [description:"E. Staircases" entry:"1640929128" modified:"1640929128" status:"pending" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929147" status:"pending" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640929162
+old [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929147" status:"pending" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929162" status:"pending" tags:"todo" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640929172
+old [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929162" status:"pending" tags:"todo" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929172" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640929181
+old [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929172" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929181" project:"cp" start:"1640929180" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640930194
+old [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640929181" project:"cp" start:"1640929180" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640930194" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640964981
+old [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640930194" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640964981" project:"cp" start:"1640964981" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640968663
+old [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640964981" project:"cp" start:"1640964981" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640968663" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1640973768
+old [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" entry:"1640929128" modified:"1640968663" project:"cp" status:"pending" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+new [annotation_1640929138:"https:\/\/codeforces.com\/problemset\/problem\/1598\/E" description:"E. Staircases" end:"1640973768" entry:"1640929128" modified:"1640973768" project:"cp" status:"completed" tags:"cp,todo" tags_cp:"x" tags_todo:"x" uuid:"b82b5ef2-9e8e-4fe3-a754-63b8490fc0d8"]
+---
+time 1641075734
+new [description:"practice problems jan 1" entry:"1641075734" modified:"1641075734" project:"cp" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+---
+time 1641075737
+old [description:"practice problems jan 1" entry:"1641075734" modified:"1641075734" project:"cp" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+new [description:"practice problems jan 1" entry:"1641075734" modified:"1641075737" project:"cp" start:"1641075736" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+---
+time 1641151546
+old [description:"practice problems jan 1" entry:"1641075734" modified:"1641075737" project:"cp" start:"1641075736" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+new [description:"practice problems jan 1" entry:"1641075734" modified:"1641151546" project:"cp" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+---
+time 1641151856
+old [description:"practice problems jan 1" entry:"1641075734" modified:"1641151546" project:"cp" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+new [description:"practice problems jan 1" entry:"1641075734" modified:"1641151856" project:"cp" start:"1641151856" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+---
+time 1641155856
+old [description:"practice problems jan 1" entry:"1641075734" modified:"1641151856" project:"cp" start:"1641151856" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+new [description:"practice problems jan 1" entry:"1641075734" modified:"1641155856" project:"cp" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+---
+time 1641159232
+new [description:"request instacart jan 2" due:"1641185999" entry:"1641159232" modified:"1641159232" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"bafa6742-6177-4efd-bb2e-f8881bc52324"]
+---
+time 1641159240
+old [description:"look for add better terminal for nvim" entry:"1640101227" modified:"1640101233" project:"nvim" status:"pending" tags:"todo" tags_todo:"x" uuid:"1484fff4-9f15-4387-bd79-bc608d1944b0"]
+new [description:"look for add better terminal for nvim" end:"1641159240" entry:"1640101227" modified:"1641159240" project:"nvim" status:"completed" tags:"todo" tags_todo:"x" uuid:"1484fff4-9f15-4387-bd79-bc608d1944b0"]
+---
+time 1641186503
+old [description:"practice problems jan 1" entry:"1641075734" modified:"1641155856" project:"cp" status:"pending" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+new [description:"practice problems jan 1" end:"1641186503" entry:"1641075734" modified:"1641186503" project:"cp" status:"completed" uuid:"775d91da-18df-4086-9176-34a88f774d67"]
+---
+time 1641187223
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641187223" project:"cp" status:"pending" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641187237
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641187223" project:"cp" status:"pending" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641187237" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641189031
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641187237" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641189031" project:"cp" start:"1641189031" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641190470
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641189031" project:"cp" start:"1641189031" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641190470" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641240815
+old [description:"Citadel and Citadel Securities Offer Trip 2022" due:"1641867839" entry:"1639967039" modified:"1640101241" project:"citadel" status:"pending" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+new [description:"Citadel and Citadel Securities Offer Trip 2022" due:"1641867839" end:"1641240815" entry:"1639967039" modified:"1641240815" project:"citadel" status:"completed" uuid:"106e457e-9e0a-45e5-87f5-f7c8f2bd1ea9"]
+---
+time 1641240827
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641190470" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641240827" project:"cp" start:"1641240827" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641250596
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641240827" project:"cp" start:"1641240827" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641250596" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641260996
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641250596" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641260996" project:"cp" start:"1641260996" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641270909
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641260996" project:"cp" start:"1641260996" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641270909" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---
+time 1641273007
+old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641270909" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+new [description:"E. Extreme Extension" due:"1641272399" end:"1641273007" entry:"1641187223" modified:"1641273007" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
+---

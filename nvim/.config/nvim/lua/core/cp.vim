@@ -1,18 +1,23 @@
 tnoremap <Esc> <C-\><C-n>
 
+let g:cpTermSize = '100'
+
 function! TermWrapper(command) 
-  exec 'wa'
-  exec 'silent! only'
-	let g:current_window = win_getid()
-	exec 'mkview'
-	exec 'vnew'
-	exec 'vertical resize 100'
-	set nonu
-	set nornu
-	exec 'term ' . a:command
-	exec '$'
-	exec printf('exec win_gotoid(%s)', g:current_window) 
-  exec 'loadview'
+	exec 'wa'
+	" exec 'silent! only'
+	" let g:current_window = win_getid()
+	" exec 'mkview'
+	" exec 'vnew'
+	" exec 'vertical resize ' . g:cpTermSize
+	" set nonu
+	" set nornu
+	" exec 'term ' . a:command
+	" exec '$'
+	" exec printf('exec win_gotoid(%s)', g:current_window) 
+	" exec 'loadview'
+	exec "TermExec direction=vertical cmd='clear' go_back=0" 
+  exec "bdelete!"
+	exec printf("TermExec direction=vertical cmd='%s'", a:command) 
 endfunction
 
 command! -nargs=0 Runscript call TermWrapper(printf('"$CPCLI_PATH/main.sh" "%s" 0', expand('%:p:h')))

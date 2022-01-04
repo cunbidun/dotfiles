@@ -86,6 +86,7 @@
   "terminal.integrated.shell.linux": "/bin/zsh",
   "cSpell.userWords": [
     "compsci",
+    "imshow",
     "merkle",
     "subreddit",
     "upvotes",
@@ -124,6 +125,6 @@
   "leetcode.hint.configWebviewMarkdown": false,
   "leetcode.defaultLanguage": "cpp",
   "leetcode.hint.commentDescription": false,
-  "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.colorTheme": "Nord",
   "files.autoSave": "afterDelay"
 }

@@ -2883,3 +2883,1532 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20211129T003423Z","end":"20211129T004038Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T032351Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T032351Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T032351Z","end":"20211129T041158Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T045731Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T045731Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T045731Z","end":"20211129T064405Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T150815Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T150815Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T150815Z","end":"20211129T164904Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T150815Z","end":"20211129T164904Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T150815Z","end":"20211129T153904Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T165242Z","tags":["Nov 22: Emerging Tech","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T165242Z","tags":["Nov 22: Emerging Tech","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T165242Z","end":"20211129T185916Z","tags":["Nov 22: Emerging Tech","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T214140Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T214140Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T214140Z","end":"20211129T222037Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T224229Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T224229Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T224229Z","end":"20211129T230132Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211129T233404Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211129T233404Z","tags":["compsci_590","hw4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211129T233404Z","end":"20211130T004628Z","tags":["compsci_590","hw4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211130T041906Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211130T041906Z","tags":["PA3.2","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211130T041906Z","end":"20211130T041920Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211130T042026Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211130T042026Z","tags":["PA3.2","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211130T042026Z","end":"20211130T043546Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211130T043629Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211130T043629Z","tags":["PA3.2","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211130T043629Z","end":"20211130T044512Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211130T142456Z","tags":["Unit 5 presentations","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211130T142456Z","tags":["Unit 5 presentations","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211130T142456Z","end":"20211130T155627Z","tags":["Unit 5 presentations","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211130T164516Z","tags":["Unit 5 presentations","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211130T164516Z","tags":["Unit 5 presentations","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211130T164516Z","end":"20211130T173641Z","tags":["Unit 5 presentations","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211201T143318Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211201T143318Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211201T143318Z","end":"20211201T151623Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211202T000329Z","tags":["compsci_514.pset4","problem 4","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211202T000329Z","tags":["compsci_514.pset4","problem 4","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211202T000329Z","end":"20211202T041836Z","tags":["compsci_514.pset4","problem 4","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211202T194016Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211202T194016Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211202T194016Z","end":"20211202T202548Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211202T194016Z","end":"20211202T202548Z","tags":["amz mock","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211202T194016Z","end":"20211202T204048Z","tags":["amz mock","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211202T224739Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211202T224739Z","tags":["PA3.2","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211202T224739Z","end":"20211203T003345Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211203T031200Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T031200Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T031200Z","end":"20211203T033255Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211203T035414Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T035414Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T035414Z","end":"20211203T044513Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211203T044802Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T044802Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T044802Z","end":"20211203T154634Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T044802Z","end":"20211203T154634Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T044802Z","end":"20211203T084634Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T044802Z","end":"20211203T084634Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T044802Z","end":"20211203T083134Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211203T163826Z","tags":["citadel","networking hardware eng"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T163826Z","tags":["citadel","networking hardware eng"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T163826Z","end":"20211203T163850Z","tags":["citadel","networking hardware eng"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T163826Z","end":"20211203T163850Z","tags":["citadel","networking hardware eng"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T163826Z","end":"20211203T170850Z","tags":["citadel","networking hardware eng"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T163826Z","end":"20211203T170850Z","tags":["citadel","networking hardware eng"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T160000Z","end":"20211203T163024Z","tags":["citadel","networking hardware eng"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211203T201112Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T201112Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T201112Z","end":"20211203T210828Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T201112Z","end":"20211203T210828Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T201112Z","end":"20211203T212328Z","tags":["HW 6, 461 programming Ethereum tokens","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211203T213859Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211203T213859Z","tags":["PA3.2","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211203T213859Z","end":"20211203T215222Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211204T011554Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211204T011554Z","tags":["PA3.2","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211204T011554Z","end":"20211204T030608Z","tags":["PA3.2","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211204T191217Z","tags":["citadel","complete cit background check","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211204T191217Z","tags":["citadel","complete cit background check","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211204T191217Z","end":"20211204T193224Z","tags":["citadel","complete cit background check","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211204T194426Z","tags":["citadel","complete cit background check","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211204T194426Z","tags":["citadel","complete cit background check","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211204T194426Z","end":"20211204T203256Z","tags":["citadel","complete cit background check","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211204T212007Z","tags":["compsci_590","review hw4 solution","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211204T212007Z","tags":["compsci_590","review hw4 solution","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211204T212007Z","end":"20211204T213634Z","tags":["compsci_590","review hw4 solution","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T005516Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T005516Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T005516Z","end":"20211205T005603Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T005625Z","tags":["compsci_590","lecture nov 9","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T005625Z","tags":["compsci_590","lecture nov 9","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T005625Z","end":"20211205T011032Z","tags":["compsci_590","lecture nov 9","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T012924Z","tags":["compsci_590","lecture nov 9","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T012924Z","tags":["compsci_590","lecture nov 9","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T012924Z","end":"20211205T014456Z","tags":["compsci_590","lecture nov 9","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T042023Z","tags":["compsci_590","lecture nov 9","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T042023Z","tags":["compsci_590","lecture nov 9","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T042023Z","end":"20211205T045718Z","tags":["compsci_590","lecture nov 9","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T052607Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T052607Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T052607Z","end":"20211205T054619Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T062140Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T062140Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T062140Z","end":"20211205T070628Z","tags":["compsci_590","lecture nov 9","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T071725Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T071725Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T071725Z","end":"20211205T173317Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T071725Z","end":"20211205T173317Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T071725Z","end":"20211205T083317Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T071725Z","end":"20211205T083317Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T071725Z","end":"20211205T080017Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211205T203018Z","tags":["compsci_514","quiz 14","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T203018Z","tags":["compsci_514","quiz 14","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T203018Z","end":"20211205T230908Z","tags":["compsci_514","quiz 14","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T203018Z","end":"20211205T230908Z","tags":["compsci_514","quiz 14","umass"]}
+  after: 
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T015938Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T015938Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T015938Z","end":"20211206T015946Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T015938Z","end":"20211206T015946Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T200000Z","end":"20211205T200008Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T200000Z","end":"20211205T200008Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T200000Z","end":"20211205T220008Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T200000Z","end":"20211205T220008Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T200000Z","end":"20211205T224508Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T020031Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T020031Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+  after: 
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T020051Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T020051Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T020051Z","end":"20211206T020102Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":2,"start":"20211205T200000Z","end":"20211205T224508Z","tags":["citadel","reply to Karen Christenson for relocation","todo"]}
+  after: 
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T020051Z","end":"20211206T020102Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T220000Z","end":"20211205T220011Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T220000Z","end":"20211205T220011Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T220000Z","end":"20211206T000011Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211205T220000Z","end":"20211206T000011Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211205T220000Z","end":"20211206T004511Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T021525Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T021525Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T021525Z","end":"20211206T023850Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T032523Z","tags":["hrt prep","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T032523Z","tags":["hrt prep","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T032523Z","end":"20211206T032526Z","tags":["hrt prep","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T032523Z","end":"20211206T032526Z","tags":["hrt prep","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T032523Z","end":"20211206T034026Z","tags":["hrt prep","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T032523Z","end":"20211206T034026Z","tags":["hrt prep","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T032000Z","end":"20211206T033503Z","tags":["hrt prep","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T035611Z","tags":["hrt mock interview","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T035611Z","tags":["hrt mock interview","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T035611Z","end":"20211206T050927Z","tags":["hrt mock interview","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T035611Z","end":"20211206T050927Z","tags":["hrt mock interview","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T035611Z","end":"20211206T043927Z","tags":["hrt mock interview","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T211837Z","tags":["compsci_590","lecture nov 18","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T211837Z","tags":["compsci_590","lecture nov 18","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T211837Z","end":"20211206T213444Z","tags":["compsci_590","lecture nov 18","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T222752Z","tags":["compsci_590","lecture nov 18","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T222752Z","tags":["compsci_590","lecture nov 18","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T222752Z","end":"20211206T225837Z","tags":["compsci_590","lecture nov 18","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211206T230913Z","tags":["compsci 230 project","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211206T230913Z","tags":["compsci 230 project","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211206T230913Z","end":"20211206T235745Z","tags":["compsci 230 project","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211207T035543Z","tags":["compsci_590","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211207T035543Z","tags":["compsci_590","lecture nov 23","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211207T035543Z","end":"20211207T035547Z","tags":["compsci_590","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211207T035543Z","end":"20211207T035547Z","tags":["compsci_590","lecture nov 23","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211207T035543Z","end":"20211207T055547Z","tags":["compsci_590","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211207T035543Z","end":"20211207T055547Z","tags":["compsci_590","lecture nov 23","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211207T010000Z","end":"20211207T030004Z","tags":["compsci_590","lecture nov 23","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211207T054113Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211207T054113Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211207T054113Z","end":"20211207T063559Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211207T230316Z","tags":["compsci_590","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211207T230316Z","tags":["compsci_590","lecture nov 30","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211207T230316Z","end":"20211207T231412Z","tags":["compsci_590","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211207T233951Z","tags":["compsci_590","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211207T233951Z","tags":["compsci_590","lecture nov 30","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211207T233951Z","end":"20211208T005731Z","tags":["compsci_590","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T010938Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T010938Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T010938Z","end":"20211208T020812Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T024440Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T024440Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T024440Z","end":"20211208T034535Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T042714Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T042714Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T042714Z","end":"20211208T043122Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T043407Z","tags":["add cinnamon HR info","citadel","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T043407Z","tags":["add cinnamon HR info","citadel","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T043407Z","end":"20211208T043623Z","tags":["add cinnamon HR info","citadel","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T143251Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T143251Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T143251Z","end":"20211208T143316Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T143251Z","end":"20211208T143316Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T143251Z","end":"20211208T163316Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T143251Z","end":"20211208T163316Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T062000Z","end":"20211208T082025Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T062000Z","end":"20211208T082025Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T052000Z","end":"20211208T072025Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T152044Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T152044Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T144500Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T144500Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T144500Z","end":"20211208T152136Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T144500Z","end":"20211208T152136Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T144500Z","end":"20211208T160236Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T144500Z","end":"20211208T160236Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T144500Z","end":"20211208T153236Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T144500Z","end":"20211208T153236Z","tags":["vi","wayfair hw"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T143000Z","end":"20211208T151736Z","tags":["vi","wayfair hw"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T223132Z","tags":["compsci198c project 11","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T223132Z","tags":["compsci198c project 11","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T223132Z","end":"20211208T223136Z","tags":["compsci198c project 11","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T223132Z","end":"20211208T223136Z","tags":["compsci198c project 11","todo","vi"]}
+  after: 
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T223149Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T223149Z","tags":["Homework 5","compsci_590","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T223149Z","end":"20211208T224401Z","tags":["Homework 5","compsci_590","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211208T231221Z","tags":["hrt prep","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T231221Z","tags":["hrt prep","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T231221Z","end":"20211208T234145Z","tags":["hrt prep","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211208T231221Z","end":"20211208T234145Z","tags":["hrt prep","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211208T231221Z","end":"20211208T232745Z","tags":["hrt prep","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211209T035712Z","tags":["Week 9: Byzantine Generals Problem","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211209T035712Z","tags":["Week 9: Byzantine Generals Problem","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211209T035712Z","end":"20211209T044830Z","tags":["Week 9: Byzantine Generals Problem","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211209T035712Z","end":"20211209T044830Z","tags":["Week 9: Byzantine Generals Problem","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211209T035712Z","end":"20211209T043630Z","tags":["Week 9: Byzantine Generals Problem","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211209T054230Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211209T054230Z","tags":["compsci_461","homework 7","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211209T054230Z","end":"20211209T150620Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211209T054230Z","end":"20211209T150620Z","tags":["compsci_461","homework 7","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211209T054230Z","end":"20211209T144020Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211209T054230Z","end":"20211209T144020Z","tags":["compsci_461","homework 7","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211209T054230Z","end":"20211209T074020Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211209T155251Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211209T155251Z","tags":["compsci_461","homework 7","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211209T155251Z","end":"20211209T160839Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211209T175744Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211209T175744Z","tags":["compsci_461","homework 7","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211209T175744Z","end":"20211209T193956Z","tags":["compsci_461","homework 7","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211210T022439Z","tags":["E. Arena","cp"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211210T022439Z","tags":["E. Arena","cp"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211210T022439Z","end":"20211210T032758Z","tags":["E. Arena","cp"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211210T165704Z","tags":["compsci198c project 11","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211210T165704Z","tags":["compsci198c project 11","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211210T165704Z","end":"20211210T173340Z","tags":["compsci198c project 11","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211210T194542Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211210T194542Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211210T194542Z","end":"20211210T203315Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211210T213411Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211210T213411Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211210T213411Z","end":"20211210T224953Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211210T213411Z","end":"20211210T224953Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211210T213411Z","end":"20211210T223453Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211211T053953Z","tags":["compsci 397s","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211211T053953Z","tags":["compsci 397s","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211211T053953Z","end":"20211211T054002Z","tags":["compsci 397s","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211211T053953Z","end":"20211211T054002Z","tags":["compsci 397s","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211211T053953Z","end":"20211211T084002Z","tags":["compsci 397s","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211211T053953Z","end":"20211211T084002Z","tags":["compsci 397s","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211212T034000Z","end":"20211212T064009Z","tags":["compsci 397s","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211212T034000Z","end":"20211212T064009Z","tags":["compsci 397s","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211211T034000Z","end":"20211211T064009Z","tags":["compsci 397s","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211211T034000Z","end":"20211211T064009Z","tags":["compsci 397s","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211211T024000Z","end":"20211211T054009Z","tags":["compsci 397s","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211211T180708Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211211T180708Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211211T180708Z","end":"20211211T182326Z","tags":["compsci_514","lecture nov 30","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211211T184554Z","tags":["compsci198c project 11","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211211T184554Z","tags":["compsci198c project 11","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211211T184554Z","end":"20211211T194240Z","tags":["compsci198c project 11","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211212T015730Z","tags":["compsci_514","lecture dec 2","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211212T015730Z","tags":["compsci_514","lecture dec 2","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211212T015730Z","end":"20211212T034032Z","tags":["compsci_514","lecture dec 2","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211212T015730Z","end":"20211212T034032Z","tags":["compsci_514","lecture dec 2","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211212T015730Z","end":"20211212T031032Z","tags":["compsci_514","lecture dec 2","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211213T024345Z","tags":["compsci_590","review hw5 solution","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T024345Z","tags":["compsci_590","review hw5 solution","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T023000Z","tags":["compsci_590","review hw5 solution","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T023000Z","tags":["compsci_590","review hw5 solution","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T021500Z","tags":["compsci_590","review hw5 solution","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T021500Z","tags":["compsci_590","review hw5 solution","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T021500Z","end":"20211213T024703Z","tags":["compsci_590","review hw5 solution","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211213T030429Z","tags":["compsci_590","lecture dec 2","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T030429Z","tags":["compsci_590","lecture dec 2","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T030429Z","end":"20211213T032300Z","tags":["compsci_590","lecture dec 2","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211213T083701Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T083701Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T083701Z","end":"20211213T083709Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T083701Z","end":"20211213T083709Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T083701Z","end":"20211213T092209Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T083701Z","end":"20211213T092209Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T074500Z","end":"20211213T083008Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211213T193023Z","tags":["compsci_590","final exam"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T193023Z","tags":["compsci_590","final exam"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T193023Z","end":"20211214T014001Z","tags":["compsci_590","final exam"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211213T193023Z","end":"20211214T014001Z","tags":["compsci_590","final exam"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211213T193023Z","end":"20211214T004001Z","tags":["compsci_590","final exam"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211214T052639Z","tags":["461 review final","compsci_461"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211214T052639Z","tags":["461 review final","compsci_461"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211214T052639Z","end":"20211214T070530Z","tags":["461 review final","compsci_461"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211214T052639Z","end":"20211214T070530Z","tags":["461 review final","compsci_461"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211214T052639Z","end":"20211214T063530Z","tags":["461 review final","compsci_461"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211214T172622Z","tags":["compsci198c project 12a","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211214T172622Z","tags":["compsci198c project 12a","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211214T172622Z","end":"20211214T175343Z","tags":["compsci198c project 12a","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211214T182619Z","tags":["compsci198c project 12b","todo","vi"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211214T182619Z","tags":["compsci198c project 12b","todo","vi"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211214T182619Z","end":"20211214T191239Z","tags":["compsci198c project 12b","todo","vi"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211215T025543Z","tags":["compsci_514","lecture dec 7","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T025543Z","tags":["compsci_514","lecture dec 7","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T025543Z","end":"20211215T025552Z","tags":["compsci_514","lecture dec 7","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T025543Z","end":"20211215T025552Z","tags":["compsci_514","lecture dec 7","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T025543Z","end":"20211215T040552Z","tags":["compsci_514","lecture dec 7","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T025543Z","end":"20211215T040552Z","tags":["compsci_514","lecture dec 7","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T000000Z","end":"20211215T011009Z","tags":["compsci_514","lecture dec 7","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211215T030533Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T030533Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T030533Z","end":"20211215T031746Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T030533Z","end":"20211215T031746Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T030533Z","end":"20211215T033246Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211215T043207Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T043207Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T043207Z","end":"20211215T053719Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211215T065625Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T065625Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T061000Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T061000Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T061000Z","end":"20211215T072926Z","tags":["Unit 5 essay","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211215T182738Z","tags":["compsci_514","practice questions","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T182738Z","tags":["compsci_514","practice questions","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T182738Z","end":"20211215T183745Z","tags":["compsci_514","practice questions","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211215T183749Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T183749Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T183749Z","end":"20211215T185612Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211215T203329Z","tags":["compsci_514","practice questions","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T203329Z","tags":["compsci_514","practice questions","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T203329Z","end":"20211215T222627Z","tags":["compsci_514","practice questions","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211215T203329Z","end":"20211215T222627Z","tags":["compsci_514","practice questions","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211215T203329Z","end":"20211215T215627Z","tags":["compsci_514","practice questions","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211216T035928Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211216T035928Z","tags":["compsci_514","practice exam","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211216T013000Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211216T013000Z","tags":["compsci_514","practice exam","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211216T013000Z","end":"20211216T040000Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211216T013000Z","end":"20211216T040000Z","tags":["compsci_514","practice exam","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211216T013000Z","end":"20211216T033000Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211216T013000Z","end":"20211216T033000Z","tags":["compsci_514","practice exam","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211216T013000Z","end":"20211216T031500Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211216T040033Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211216T040033Z","tags":["compsci_514","practice exam","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211216T040033Z","end":"20211216T042209Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211216T044210Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211216T044210Z","tags":["compsci_514","practice exam","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211216T044210Z","end":"20211216T051835Z","tags":["compsci_514","practice exam","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211217T023252Z","tags":["Reflection project","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211217T023252Z","tags":["Reflection project","compsci_305","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211217T023252Z","end":"20211217T034445Z","tags":["Reflection project","compsci_305","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211217T175232Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211217T175232Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211217T175232Z","end":"20211217T210256Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211217T175232Z","end":"20211217T210256Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211217T175232Z","end":"20211217T180256Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211217T175232Z","end":"20211217T180256Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211217T175232Z","end":"20211217T180756Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211217T210313Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211217T210313Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211217T210313Z","end":"20211218T010250Z","tags":["Final, 461, programming portion","compsci_461","todo","umass"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211218T032848Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211218T032848Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211218T032848Z","end":"20211218T052421Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211218T052427Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211218T052427Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211218T052427Z","end":"20211218T052441Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211218T052446Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211218T052446Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211218T052446Z","end":"20211218T052512Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211218T052446Z","end":"20211218T052512Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: {"id":2,"start":"20211218T052427Z","end":"20211218T052441Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: {"id":3,"start":"20211218T032848Z","end":"20211218T052421Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211220T021530Z","tags":["citadel","reply to Wiley Lepore H1B email"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211220T021530Z","tags":["citadel","reply to Wiley Lepore H1B email"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211220T021530Z","end":"20211220T022203Z","tags":["citadel","reply to Wiley Lepore H1B email"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211221T153353Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211221T153353Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211221T130000Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211221T130000Z","tags":["D. Treelabeling","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211221T130000Z","end":"20211221T153415Z","tags":["D. Treelabeling","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211231T053941Z","tags":["E. Staircases","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211231T053941Z","tags":["E. Staircases","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211231T053941Z","end":"20211231T055634Z","tags":["E. Staircases","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20211231T153621Z","tags":["E. Staircases","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211231T153621Z","tags":["E. Staircases","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211231T153621Z","end":"20211231T163743Z","tags":["E. Staircases","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20211231T153621Z","end":"20211231T163743Z","tags":["E. Staircases","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20211231T153621Z","end":"20211231T164243Z","tags":["E. Staircases","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220101T222217Z","tags":["cp","practice problems jan 1"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220101T222217Z","tags":["cp","practice problems jan 1"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220101T222217Z","end":"20220102T192546Z","tags":["cp","practice problems jan 1"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220101T222217Z","end":"20220102T192546Z","tags":["cp","practice problems jan 1"]}
+  after: 
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220102T193056Z","tags":["cp","practice problems jan 1"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220102T193056Z","tags":["cp","practice problems jan 1"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220102T193056Z","end":"20220102T203736Z","tags":["cp","practice problems jan 1"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220103T055031Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220103T055031Z","tags":["E. Extreme Extension","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220103T055031Z","end":"20220103T061430Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220103T055031Z","end":"20220103T061430Z","tags":["E. Extreme Extension","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220103T055031Z","end":"20220103T060430Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220103T201347Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220103T201347Z","tags":["E. Extreme Extension","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220103T201347Z","end":"20220103T225636Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220103T201347Z","end":"20220103T225636Z","tags":["E. Extreme Extension","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220103T201347Z","end":"20220103T212636Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220103T201347Z","end":"20220103T212636Z","tags":["E. Extreme Extension","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220103T201347Z","end":"20220103T211136Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220104T014956Z","tags":["E. Extreme Extension","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220104T014956Z","tags":["E. Extreme Extension","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220104T014956Z","end":"20220104T043509Z","tags":["E. Extreme Extension","cp","todo"]}

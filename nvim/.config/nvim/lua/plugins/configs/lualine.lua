@@ -114,7 +114,7 @@ local components = {
 	},
 	diagnostics = {
 		"diagnostics",
-		sources = { "nvim_lsp" },
+		sources = { "nvim_diagnostic" },
 		symbols = { error = " ", warn = " ", info = " ", hint = " " },
 		color = {},
 		cond = conditions.hide_in_width,
