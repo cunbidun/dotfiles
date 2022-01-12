@@ -13,3 +13,10 @@
 - [12] dwm-6.2-attachbottom.diff
 - [13] dwm-warp-6.2.diff
 - [14] dwm-6.2-urg-border.diff
+- [15] dwm-pertag-6.2.diff
+- [16] dwm-pertag-monitorrules-6.2.diff
+- [17] dwm-scratchpad-6.2.diff
+- [18] dwm-actualfullscreen-20211013-cb3f58a.diff
+- [19] dwm-tag-preview-6.2.diff
+- [20] dwm-status2d-6.2.diff
+- [21] dwm-swallow-6.2.diff

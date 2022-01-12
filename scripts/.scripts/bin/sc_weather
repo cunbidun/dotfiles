@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	# 1) setsid -f "$TERMINAL" -e "htop" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+data=$(curl https://wttr.in/\?format\=j1 | jq '.current_condition[0]')
+t=$(echo "$data" | jq -r '.temp_C')
+f=$(echo "$data" | jq -r '.FeelsLikeC')
+desc=$(echo "$data" | jq -r '.weatherDesc[0].value')
+echo "$desc $t°C($f°C)"

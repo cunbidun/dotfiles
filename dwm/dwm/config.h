@@ -1,13 +1,18 @@
-
 #include <X11/XF86keysym.h>
+
+/* Constants */
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 20;       /* vert outer gap between windows and screen edge */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const int scalepreview       = 4;        /* tag preview scaling */
+static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 15;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 15;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 15;       /* vert outer gap between windows and screen edge */
 static int smartgaps                = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 1;   	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -23,32 +28,53 @@ static const char col_gray2[]       = "#4C566A";
 static const char col_gray3[]       = "#D8DEE9";
 static const char col_gray4[]       = "#ECEFF4";
 static const char nord0[]           = "#2E3440";
+static const char nord1[]           = "#3B4252";
+static const char nord2[]           = "#434C5E";
 static const char nord3[]           = "#4C566A";
 static const char nord4[]           = "#D8DEE9";
+static const char nord5[]           = "#E5E9F0";
+static const char nord6[]           = "#ECEFF4";
+static const char nord7[]           = "#8FBCBB";
 static const char nord8[]           = "#88c0d0";
 static const char nord9[]           = "#81A1C1";
+static const char nord10[]          = "#5E81AC";
+static const char nord11[]          = "#BF616A";
 static const char nord12[]          = "#D08770";
+static const char nord13[]          = "#EBCB8B";
+static const char nord14[]          = "#A3BE8C";
+static const char nord15[]          = "#B48EAD";
 
 static const char *colors[][3]      = {
 	/*               fg           bg            border   */
 	[SchemeNorm] = { nord4,       nord0,       nord3},
+	[NordRed]    = { nord11,      nord0,       nord0},
+	[NordGreen]  = { nord14,      nord0,       nord0},
+	[NordYellow] = { nord13,      nord0,       nord0},
+	[NordBlue]   = { nord9,       nord0,       nord0},
 	[SchemeSel]  = { nord0,       nord9,       nord9},
-	[SchemeUrg]  = { nord0,      nord12,      nord12},
+	[SchemeUrg]  = { nord0,      nord12,      nord12},  
+	[SchemeSym]  = { nord0,       nord7,       nord7},  // symbol color nord 7
 };
 
 
 /* tagging */
-static const char *tags[] = { "sys", "dev","web","4","5","6", "7", "8", "9" };
+static const char *tags[] = { "sys", "dev","web","4","5","6", "7", "chat", "vi" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
+   *  WM_WINDOW_ROLE(STRING) = role
 	 */
-	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           0,           -1 },
-	{ "Chromium",  NULL,       NULL,      1 << 2,       0,           0,           -1 }, // tag 3
+	/* class              role          instance         title            tags mask     isfloating    isterminal      noswallow       monitor */
+	// { "firefox",          NULL,         "Navigator",     NULL,            0,            1,            0,              0,              -1 },
+	{ "Arandr",           NULL,         "arandr",        NULL,            0,            1,            0,              0,              -1 }, // center this
+	{ NULL,               "pop-up",     NULL,            NULL,            0,            1,            0,              0,              -1 },
+	{ TERMCLASS,          NULL,         NULL,            NULL,            0,            0,            1,              0,              -1 },
+	{ NULL,               NULL,         NULL,            "Event Tester",  0,            0,            0,              1,              -1 }, /* xev */
+
+	// { "Google-chrome",    NULL,         "google-chrome", NULL,            1 << 2,       0,            0,              0,              -1 }, // tag 3
+	// { "Google-chrome",    NULL,         NULL,            "chat - reddit", 1 << 7,       0,            0,              0,              -1 }, // tag 3
 };
 
 /* layout(s) */
@@ -65,17 +91,24 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "[\\]",     dwindle },
 	{ "|M|",      centeredmaster },
-	{ "HHH",      grid }    ,
+	// { "HHH",      grid }    ,
 	// { "[@]",      spiral },
-	// { "H[]",      deck },
+	{ "H[]",      deck },
 	// { "TTT",      bstack },
 	// { "===",      bstackhoriz },
-	// { "###",      nrowgrid },
+	{ "###",      nrowgrid },
 	// { "---",      horizgrid },
 	// { ":::",      gaplessgrid },
 	// { ">M>",      centeredfloatingmaster },
-	// { "><>",      NULL },    /* no layout function means floating behavior */
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
+};
+
+static const MonitorRule monrules[] = {
+	/* monitor  tag  layout  mfact  nmaster  showbar  topbar */
+	{   0,       4,  3,      -1,    -1,      -1,      -1     }, // use a different layout for the second monitor
+	{   1,       1,  1,      -1,    -1,      -1,      -1     }, // use a different layout for the second monitor
+	{  -1,      -1,  0,      -1,    -1,      -1,      -1     }, // default
 };
 
 /* key definitions */
@@ -90,17 +123,25 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define STATUSBAR "dwmblocks"
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", nord9, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 #include "movestack.c"
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { TERMINAL, "-t", scratchpadname, "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ MODKEY,                       XK_x,      spawn,          SHCMD("arandr") },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD("nautilus ~") },
+	{ MODKEY,                 XK_backslash,    spawn,          SHCMD("dunstctl close-all") },
 	{ ALTKEY,                       XK_Tab,    spawn,          SHCMD("skippy-xd-runner --toggle") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -115,7 +156,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("import png:- | xclip -selection clipboard -t image/png") },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("nord_color_picker") },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("alacritty -e dotfiles_picker") },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD(TERMINAL " -e dotfiles_picker") },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
@@ -135,14 +176,12 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    swapfocus,      {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0] } },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1] } },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2] } },
 	{ MODKEY,                       XK_space,  spawn,          SHCMD("set_language") },
 	{ MODKEY|ControlMask,           XK_space,  togglefloating, {0} },
 	{ MODKEY|ControlMask,	  	      XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
+	{ MODKEY,                       XK_m,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -170,7 +209,11 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD(TERMINAL " -e nvim ~/dwmblocks-async/config.h") },
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        ShiftMask,      Button1,        sigstatusbar,   {.i = 6} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

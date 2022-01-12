@@ -21,6 +21,7 @@
   },
   "vim.useSystemClipboard": true,
   "vim.vimrc.enable": true,
+
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -76,7 +77,6 @@
   "[lua]": {
     "editor.tabSize": 2
   },
-  "workbench.colorTheme": "Nord",
   "files.autoSaveDelay": 500,
   "glassit.alpha": 255,
   "[typescript]": {
@@ -86,11 +86,14 @@
   "terminal.integrated.shell.linux": "/bin/zsh",
   "cSpell.userWords": [
     "compsci",
+    "imshow",
+    "merkle",
     "subreddit",
-    "upvotes"
+    "upvotes",
+    "UTXO"
   ],
   "C_Cpp.default.cppStandard": "c++17",
-  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, AllowShortIfStatementsOnASingleLine: false, ColumnLimit: 0}",
+  "C_Cpp.clang_format_style": "{}",
   "settingsSync.ignoredSettings": [
     "-C_Cpp.clang_format_style"
   ],
@@ -115,6 +118,13 @@
     "[x]"
   ],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "files.autoSave": "afterDelay",
-  "output.smartScroll.enabled": false
+  "output.smartScroll.enabled": false,
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "leetcode.workspaceFolder": "/home/cunbidun/.leetcode",
+  "leetcode.hint.commandShortcut": false,
+  "leetcode.hint.configWebviewMarkdown": false,
+  "leetcode.defaultLanguage": "cpp",
+  "leetcode.hint.commentDescription": false,
+  "workbench.colorTheme": "Nord",
+  "files.autoSave": "afterDelay"
 }

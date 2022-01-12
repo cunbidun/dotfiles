@@ -1,3 +1,8 @@
 #!/bin/bash
 
-free -h | awk '/^Mem/ { print $3" / "$2 }' | sed s/i//g
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+mem=$(free -h | awk '/^Mem/ { print $3" / "$2 }' | sed s/i//g)
+echo "^c#81A1C1^MEM:^d^ $mem"

@@ -1,9 +1,13 @@
 #!/bin/sh
 
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
 if [ "$(pamixer --get-mute)" = true ]; then
-	icon="[M] "
+	icon="^c#BF616A^"
 fi
 
 vol="$(pamixer --get-volume)"
 
-echo "$icon$vol%"
+echo "^c#81A1C1^VOL: ^d^$icon$vol%^d^"

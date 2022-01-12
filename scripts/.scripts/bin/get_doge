@@ -1,12 +1,8 @@
-#!/usr/bin/env python3
-import requests
-from decimal import *
+#!/bin/sh
 
-res = requests.get(
-    "https://sochain.com//api/v2/get_price/DOGE/USD").json()['data']
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
 
-dogePrice = Decimal(res['prices'][1]['price'])
-
-getcontext().prec = 7
-print(dogePrice * Decimal(100))
+get_doge_python
 
