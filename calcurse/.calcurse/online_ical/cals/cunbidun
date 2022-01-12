@@ -1,0 +1,1338 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:cunbidun@gmail.com
+X-WR-TIMEZONE:America/New_York
+BEGIN:VTIMEZONE
+TZID:Asia/Ho_Chi_Minh
+X-LIC-LOCATION:Asia/Ho_Chi_Minh
+BEGIN:STANDARD
+TZOFFSETFROM:+0700
+TZOFFSETTO:+0700
+TZNAME:+07
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VTIMEZONE
+TZID:America/New_York
+X-LIC-LOCATION:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART:20211216T153000Z
+DTEND:20211216T173000Z
+DTSTAMP:20220105T020823Z
+UID:Ical0ab91eb6dbf297516f91e12eb759d216
+CREATED:19000101T120000Z
+DESCRIPTION:
+LAST-MODIFIED:20211207T201422Z
+LOCATION:Goessmann Laboratory room 20 *
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:COMPSCI 514-01 (12533)         *
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211214T153000Z
+DTEND:20211214T173000Z
+DTSTAMP:20220105T020823Z
+UID:Icalf1fad651612bc5527fa83d53716feaf8
+CREATED:19000101T120000Z
+DESCRIPTION:
+LAST-MODIFIED:20211207T201422Z
+LOCATION:Goessmann Lab Addtn rm 151   *
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:COMPSCI 461-01 (12615)         *
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211208T170000Z
+DTEND:20211208T173000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN="Potempa, Jessica":mailto:jessica.potempa@citadel.com
+UID:040000008200E00074C5B7101A82E00800000000E00302BBCBE6D701000000000000000
+ 010000000BD96236204D025469AFD590C4EEEE779
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=cu
+ nbidun@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN="K
+ ahley, Kevin";X-NUM-GUESTS=0:mailto:kevin.kahley@citadelsecurities.com
+CREATED:20211201T215432Z
+DESCRIPTION:When: Wednesday\, December 8\, 2021 11:00 AM-11:30 AM (UTC-06:0
+ 0) Central Time (US & Canada).\nWhere: https://citadel.zoom.us/j/9452797439
+ 1?pwd=ZnVzcHFzaUdYV0VnRDhLdHhRWlRyUT09\n\nNote: The GMT offset above does n
+ ot reflect daylight saving time adjustments.\n\n*~*~*~*~*~*~*~*~*~*\n\n[cid
+ :image001.jpg@01D7E6CB.BAF5A7D0]\n\n\nNetworking Chat\n\nWe would like to i
+ nvite you for an introductory chat with Kevin Kahley\, CES Technology\, on 
+ Wednesday\, December 8th. The purpose of this chat is to learn more about C
+ ES Technology before submitting final rankings for your full-time placement
+ . We will be in touch with a quick survey to submit rankings by 12/10.\n\nJ
+ oin Zoom Meeting<https://citadel.zoom.us/j/94527974391?pwd=ZnVzcHFzaUdYV0Vn
+ RDhLdHhRWlRyUT09>\nMeeting ID: 945 2797 4391\nPassword: 080048\n\nTime: 11:
+ 00 AM – 11:30 AM CT // 12:00 PM – 12:30 PM ET\n\n\n\nQUESTIONS?\nContact SE
+ Campus@Citadel.com<mailto:SECampus@Citadel.com>\n\n\n\n\n\nJoin Zoom Meetin
+ g\nhttps://citadel.zoom.us/j/94527974391?pwd=ZnVzcHFzaUdYV0VnRDhLdHhRWlRyUT
+ 09\n\nMeeting ID: 945 2797 4391\nPassword: 080048\n\nOne tap mobile\n+13126
+ 266799\,\,94527974391# US (Chicago)\n+19294362866\,\,94527974391# US (New Y
+ ork)\n\nDial by your location\n        +1 312 626 6799 US (Chicago)\n      
+   +1 929 436 2866 US (New York)\n        +1 301 715 8592 US (Washington DC)
+ \n        +1 253 215 8782 US (Tacoma)\n        +1 346 248 7799 US (Houston)
+ \n        +1 669 900 6833 US (San Jose)\n        +44 208 080 6591 United Ki
+ ngdom\n        +44 208 080 6592 United Kingdom\n        +44 330 088 5830 Un
+ ited Kingdom\n        +44 131 460 1196 United Kingdom\n        +44 203 481 
+ 5237 United Kingdom\n        +44 203 481 5240 United Kingdom\n        +852 
+ 5803 3730 Hong Kong SAR\n        +852 5803 3731 Hong Kong SAR\n        +852
+  5808 6088 Hong Kong SAR\nMeeting ID: 945 2797 4391\nFind your local number
+ : https://citadel.zoom.us/u/ab54XoodlG\n\nJoin by Citadel Phone\nx3000\n\nJ
+ oin by Videoconference System (SIP)\n94527974391.080048@zoomcrc.com<mailto:
+ 94527974391.080048@zoomcrc.com>\n\n\n\n________________________________\n\n
+ \nCONFIDENTIALITY AND SECURITY NOTICE\n\nThe contents of this message and a
+ ny attachments may be confidential and proprietary. If you are not an inten
+ ded recipient\, please inform the sender of the transmission error and dele
+ te this message immediately without reading\, distributing or copying the c
+ ontents.\n
+LAST-MODIFIED:20211201T215440Z
+LOCATION:https://citadel.zoom.us/j/94527974391?pwd=ZnVzcHFzaUdYV0VnRDhLdHhR
+ WlRyUT09
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Winter '22 Starts Networking Chats - Duy Pham
+TRANSP:OPAQUE
+ATTACH;FILENAME=image001.jpg:?view=att&th=17d77fe0f446e0ed&attid=0.1&disp=a
+ ttd&zw
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:390186981
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211208T173000Z
+DTEND:20211208T180000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN="Potempa, Jessica":mailto:jessica.potempa@citadel.com
+UID:040000008200E00074C5B7101A82E0080000000060A82735CBE6D701000000000000000
+ 0100000007E12126A981D464185E793387AC83AF5
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=cu
+ nbidun@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN="V
+ an Zant, Matt";X-NUM-GUESTS=0:mailto:matt.vanzant@citadelsecurities.com
+CREATED:20211201T215047Z
+DESCRIPTION:When: Wednesday\, December 8\, 2021 11:30 AM-12:00 PM (UTC-06:0
+ 0) Central Time (US & Canada).\nWhere: https://citadel.zoom.us/j/9650327221
+ 7?pwd=S3NXekJCQks3ZkhoaVl2cEdZMVBQUT09\n\nNote: The GMT offset above does n
+ ot reflect daylight saving time adjustments.\n\n*~*~*~*~*~*~*~*~*~*\n\n[cid
+ :image001.jpg@01D7E6CB.351B4C50]\n\n\nNetworking Chat\n\nWe would like to i
+ nvite you for an introductory chat with Matt Van Zant\, CS Tech: Job Orches
+ tration\, on Wednesday\, December 8th. The purpose of this chat is to learn
+  more about CS Tech: Job Orchestration before submitting final rankings for
+  your full-time placement. We will be in touch with a quick survey to submi
+ t rankings by 12/10.\n\nJoin Zoom Meeting<https://citadel.zoom.us/j/9650327
+ 2217?pwd=S3NXekJCQks3ZkhoaVl2cEdZMVBQUT09>\nMeeting ID: 965 0327 2217\nPass
+ word: 835360\n\nTime: 11:30 AM – 12:00 PM CT // 12:30 PM – 1:00 PM ET\n\n\n
+ \nQUESTIONS?\nContact SECampus@Citadel.com<mailto:SECampus@Citadel.com>\n\n
+ \n\n\n\nJoin Zoom Meeting\nhttps://citadel.zoom.us/j/96503272217?pwd=S3NXek
+ JCQks3ZkhoaVl2cEdZMVBQUT09\n\nMeeting ID: 965 0327 2217\nPassword: 835360\n
+ \nOne tap mobile\n+13126266799\,\,96503272217# US (Chicago)\n+19294362866\,
+ \,96503272217# US (New York)\n\nDial by your location\n        +1 312 626 6
+ 799 US (Chicago)\n        +1 929 436 2866 US (New York)\n        +1 301 715
+  8592 US (Washington DC)\n        +1 346 248 7799 US (Houston)\n        +1 
+ 669 900 6833 US (San Jose)\n        +1 253 215 8782 US (Tacoma)\n        +4
+ 4 203 481 5237 United Kingdom\n        +44 203 481 5240 United Kingdom\n   
+      +44 208 080 6591 United Kingdom\n        +44 208 080 6592 United Kingd
+ om\n        +44 330 088 5830 United Kingdom\n        +44 131 460 1196 Unite
+ d Kingdom\n        +852 5803 3731 Hong Kong SAR\n        +852 5808 6088 Hon
+ g Kong SAR\n        +852 5803 3730 Hong Kong SAR\nMeeting ID: 965 0327 2217
+ \nFind your local number: https://citadel.zoom.us/u/abwgo57DE\n\nJoin by Ci
+ tadel Phone\nx3000\n\nJoin by Videoconference System (SIP)\n96503272217.835
+ 360@zoomcrc.com<mailto:96503272217.835360@zoomcrc.com>\n\n\n\n_____________
+ ___________________\n\n\nCONFIDENTIALITY AND SECURITY NOTICE\n\nThe content
+ s of this message and any attachments may be confidential and proprietary. 
+ If you are not an intended recipient\, please inform the sender of the tran
+ smission error and delete this message immediately without reading\, distri
+ buting or copying the contents.\n
+LAST-MODIFIED:20211201T215054Z
+LOCATION:https://citadel.zoom.us/j/96503272217?pwd=S3NXekJCQks3ZkhoaVl2cEdZ
+ MVBQUT09
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Winter '22 Starts Networking Chats - Duy Pham
+TRANSP:OPAQUE
+ATTACH;FILENAME=image001.jpg:?view=att&th=17d77fa9d710e5a8&attid=0.1&disp=a
+ ttd&zw
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:381798373
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211203T160000Z
+DTEND:20211203T163000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN="Raney, Hope":mailto:hope.raney@citadel.com
+UID:040000008200E00074C5B7101A82E0080000000060E683A7B4E6D701000000000000000
+ 0100000002D6AF01F041B6649B7DB2C7E66E3FD0B
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=cu
+ nbidun@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN="K
+ iran, Ravi";X-NUM-GUESTS=0:mailto:ravi.kiran@citadelsecurities.com
+CREATED:20211201T181109Z
+DESCRIPTION:When: Friday\, December 3\, 2021 11:00 AM-11:30 AM (UTC-05:00) 
+ Eastern Time (US & Canada).\nWhere: https://citadel.zoom.us/j/98077366116?p
+ wd=SFA4MEJWOXVjcDl6aDVtYXhuaVhEUT09\n\nNote: The GMT offset above does not 
+ reflect daylight saving time adjustments.\n\n*~*~*~*~*~*~*~*~*~*\n\n\n\n[ci
+ d:image001.jpg@01D7E6B4.A76F4CF0]\n\n\nNetworking Chat\n\nWe would like to 
+ invite you for an introductory chat with Ravi Kiran\, Hardware Engineering\
+ , on December 3rd. The purpose of this chat is to learn more about the Hard
+ ware Engineering before submitting final rankings for your winter internshi
+ p placement. We will be in touch with a quick survey to submit rankings by 
+ 12/10.\n\n\nJoin Zoom Meeting\nhttps://citadel.zoom.us/j/98077366116?pwd=SF
+ A4MEJWOXVjcDl6aDVtYXhuaVhEUT09\n\nMeeting ID: 980 7736 6116\nPassword: 5645
+ 42\n\nTime: 11:00 – 11:30 AM ET\n\n\nQUESTIONS?\nContact SECampus@Citadel.c
+ om<mailto:SECampus@Citadel.com>\n\n\n\n\n\n\n\n____________________________
+ ____\n\n\nCONFIDENTIALITY AND SECURITY NOTICE\n\nThe contents of this messa
+ ge and any attachments may be confidential and proprietary. If you are not 
+ an intended recipient\, please inform the sender of the transmission error 
+ and delete this message immediately without reading\, distributing or copyi
+ ng the contents.\n
+LAST-MODIFIED:20211201T181120Z
+LOCATION:https://citadel.zoom.us/j/98077366116?pwd=SFA4MEJWOXVjcDl6aDVtYXhu
+ aVhEUT09
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Winter 2022 Networking Chat - Duy Pham
+TRANSP:OPAQUE
+ATTACH;FILENAME=image001.jpg:?view=att&th=17d773196a3cdc3d&attid=0.1&disp=a
+ ttd&zw
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:48351205
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211112T180000Z
+DTEND:20211112T183000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN="Johnson, Eleanor":mailto:eleanor.johnson@citadel.com
+UID:040000008200E00074C5B7101A82E00800000000E0C983A116D7D701000000000000000
+ 010000000ADEBB2E82D826E4FBECB074301281358
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=cu
+ nbidun@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN="D
+ unkley, Oliver";X-NUM-GUESTS=0:mailto:oliver.dunkley@citadelsecurities.com
+CREATED:20211111T211022Z
+DESCRIPTION:When: Friday\, November 12\, 2021 1:00 PM-1:30 PM (UTC-05:00) E
+ astern Time (US & Canada).\nWhere: https://citadel.zoom.us/j/99364778087?pw
+ d=UlV0OExzM1hubDU2cE04RTFrQTdtQT09\n\nNote: The GMT offset above does not r
+ eflect daylight saving time adjustments.\n\n*~*~*~*~*~*~*~*~*~*\n\nHi Olive
+ r\,\n\nThanks for taking the time to talk to Duy! Duy has an offer to join 
+ Two Sigma’s Options Market Making team so I wanted to set him up with time 
+ to learn about your team and the work you do 😊\n\nThank you!\nEleanor\n\n\
+ nJoin Zoom Meeting\nhttps://citadel.zoom.us/j/99364778087?pwd=UlV0OExzM1hub
+ DU2cE04RTFrQTdtQT09\n\nMeeting ID: 993 6477 8087\nPassword: 459828\n\nOne t
+ ap mobile\n+19294362866\,\,99364778087# US (New York)\n+13126266799\,\,9936
+ 4778087# US (Chicago)\n\nDial by your location\n        +1 929 436 2866 US 
+ (New York)\n        +1 312 626 6799 US (Chicago)\n        +1 301 715 8592 U
+ S (Washington DC)\n        +1 346 248 7799 US (Houston)\n        +1 669 900
+  6833 US (San Jose)\n        +1 253 215 8782 US (Tacoma)\n        +44 203 4
+ 81 5237 United Kingdom\n        +44 203 481 5240 United Kingdom\n        +4
+ 4 208 080 6591 United Kingdom\n        +44 208 080 6592 United Kingdom\n   
+      +44 330 088 5830 United Kingdom\n        +44 131 460 1196 United Kingd
+ om\n        +852 5803 3731 Hong Kong SAR\n        +852 5808 6088 Hong Kong 
+ SAR\n        +852 5803 3730 Hong Kong SAR\nMeeting ID: 993 6477 8087\nFind 
+ your local number: https://citadel.zoom.us/u/asPzxHtXH\n\nJoin by Citadel P
+ hone\nx3000\n\nJoin by Videoconference System (SIP)\n99364778087.459828@zoo
+ mcrc.com<mailto:99364778087.459828@zoomcrc.com>\n\n\n\n____________________
+ ____________\n\n\nCONFIDENTIALITY AND SECURITY NOTICE\n\nThe contents of th
+ is message and any attachments may be confidential and proprietary. If you 
+ are not an intended recipient\, please inform the sender of the transmissio
+ n error and delete this message immediately without reading\, distributing 
+ or copying the contents.\n
+LAST-MODIFIED:20211111T211030Z
+LOCATION:https://citadel.zoom.us/j/99364778087?pwd=UlV0OExzM1hubDU2cE04RTFr
+ QTdtQT09
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Duy + Oliver - CitSec Options Team
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:155957221
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211110T190000Z
+DTEND:20211110T200000Z
+DTSTAMP:20220105T020823Z
+UID:c9hj8e9mccr68b9l70qj6b9k60r30bb26cr6cbb5coo36e9hc4q3gp9m6c@google.com
+X-GOOGLE-CONFERENCE:https://meet.google.com/ssh-hiyd-ftb
+CREATED:20211105T195224Z
+DESCRIPTION:This event has a video call.\nJoin: https://meet.google.com/ssh
+ -hiyd-ftb
+LAST-MODIFIED:20211105T195224Z
+LOCATION:Bank of America Financial Center\, 1 S Pleasant St\, Amherst\, MA 
+ 01002\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Add SSN to bank account
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211105T105000Z
+DTEND:20211105T133800Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9ttk0781h4qbdh3l5ersvf0ocrrbrerhpeivvq0fe15ffcboifo8lg
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CLASS:PRIVATE
+CREATED:20211102T144252Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DNUSIGq6GJp58fIkvyas08sDmKPRIDXscs\n
+LAST-MODIFIED:20211102T164439Z
+LOCATION:Boston BOS
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Flight to Chicago (DL 5708)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211106T180000Z
+DTEND:20211106T202300Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9tahikmg7o91b1p92i8likuoq32m9r5cjg5ug61rdket2rgpkhq5og
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CLASS:PRIVATE
+CREATED:20211102T164439Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DMDFolj0vOEtPnrO9y9sP4DsKcH5O_Sg70\n
+LAST-MODIFIED:20211102T164439Z
+LOCATION:Chicago ORD
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Flight to Boston (DL 2413)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211106T190400Z
+DTEND:20211106T212400Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9t6p1hen60ga6hob2h45kc797gv5galbn463kn0evovfdtru2ekh6g
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CLASS:PRIVATE
+CREATED:20211102T144252Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DNUSIGq6GJp58fIkvyas08sDmKPRIDXscs\n
+LAST-MODIFIED:20211102T144252Z
+LOCATION:Chicago ORD
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Flight to Boston (UA 2654)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211029T143000Z
+DTEND:20211029T150000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN="Johnson, Eleanor":mailto:eleanor.johnson@citadel.com
+UID:040000008200E00074C5B7101A82E0080000000020FFBBD625CCD701000000000000000
+ 0100000009D42FF851DA04F4793E9D03479A9087F
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CREATED:20211028T220131Z
+DESCRIPTION:When: Friday\, October 29\, 2021 10:30 AM-11:00 AM (UTC-05:00) 
+ Eastern Time (US & Canada).\nWhere: https://citadel.zoom.us/j/92216546547?p
+ wd=citXMjUxaTh0cUxiRm9UTWNZakhkdz09\n\nNote: The GMT offset above does not 
+ reflect daylight saving time adjustments.\n\n*~*~*~*~*~*~*~*~*~*\n\n\nJoin 
+ Zoom Meeting\nhttps://citadel.zoom.us/j/92216546547?pwd=citXMjUxaTh0cUxiRm9
+ UTWNZakhkdz09\n\nMeeting ID: 922 1654 6547\nPassword: 179497\n\nOne tap mob
+ ile\n+19294362866\,\,92216546547# US (New York)\n+13126266799\,\,9221654654
+ 7# US (Chicago)\n\nDial by your location\n        +1 929 436 2866 US (New Y
+ ork)\n        +1 312 626 6799 US (Chicago)\n        +1 301 715 8592 US (Was
+ hington DC)\n        +1 253 215 8782 US (Tacoma)\n        +1 346 248 7799 U
+ S (Houston)\n        +1 669 900 6833 US (San Jose)\n        +44 208 080 659
+ 1 United Kingdom\n        +44 208 080 6592 United Kingdom\n        +44 330 
+ 088 5830 United Kingdom\n        +44 131 460 1196 United Kingdom\n        +
+ 44 203 481 5237 United Kingdom\n        +44 203 481 5240 United Kingdom\n  
+       +852 5803 3730 Hong Kong SAR\n        +852 5803 3731 Hong Kong SAR\n 
+        +852 5808 6088 Hong Kong SAR\nMeeting ID: 922 1654 6547\nFind your l
+ ocal number: https://citadel.zoom.us/u/abM6BObRln\n\nJoin by Citadel Phone\
+ nx3000\n\nJoin by Videoconference System (SIP)\n92216546547.179497@zoomcrc.
+ com<mailto:92216546547.179497@zoomcrc.com>\n\n\n\n_________________________
+ _______\n\n\nCONFIDENTIALITY AND SECURITY NOTICE\n\nThe contents of this me
+ ssage and any attachments may be confidential and proprietary. If you are n
+ ot an intended recipient\, please inform the sender of the transmission err
+ or and delete this message immediately without reading\, distributing or co
+ pying the contents.\n
+LAST-MODIFIED:20211029T002317Z
+LOCATION:https://citadel.zoom.us/j/92216546547?pwd=citXMjUxaTh0cUxiRm9UTWNZ
+ akhkdz09
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Duy + Eleanor CitSec Offer
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:1060939749
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210922T140000Z
+DTEND:20210922T150000Z
+DTSTAMP:20220105T020823Z
+UID:0dlii67jo0k6jv9kb4c35dq3ua@google.com
+CREATED:20210916T172257Z
+DESCRIPTION:<p><a href="https://citadel.zoom.us/j/96599171691?pwd=dlB5bmZKM
+ kE2QjFkUHplWllpQzZZUT09">https://citadel.zoom.us/j/<wbr>96599171691?pwd=<wb
+ r>dlB5bmZKMkE2QjFkUHplWllpQzZZUT<wbr>09</a><u></u><u></u></p><p><u></u>&nbs
+ p\;<u></u></p><p>Meeting ID: 965 9917 1691<u></u><u></u></p><p>Password: 91
+ 5493</p>
+LAST-MODIFIED:20210916T172257Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Citadel interview
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210914T021500Z
+DTEND:20210914T031500Z
+DTSTAMP:20220105T020823Z
+UID:6peakmc0c7c6ufl6pbfaa53qv9@google.com
+CREATED:20210913T210620Z
+DESCRIPTION:
+LAST-MODIFIED:20210914T021735Z
+LOCATION:1001 N Pleasant St\, Amherst\, MA 01002\, USA
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:OPT!
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210914T010000Z
+DTEND:20210914T013000Z
+DTSTAMP:20220105T020823Z
+UID:45evg1l8bi4ot89sc9ck90ou68@google.com
+CREATED:20210913T210644Z
+DESCRIPTION:
+LAST-MODIFIED:20210913T210647Z
+LOCATION:1001 N Pleasant St\, Amherst\, MA 01002\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:new shoe!
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210914T170000Z
+DTEND:20210914T190000Z
+DTSTAMP:20220105T020823Z
+UID:667BAB6F-F470-4BDE-8C7A-E47093E4D0BD
+CREATED:20210910T162319Z
+DESCRIPTION:Join us for the September Apple Event broadcasting from Apple P
+ ark. Watch it online at apple.com.
+LAST-MODIFIED:20210910T162319Z
+LOCATION:apple.com/apple-events/event-stream/
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Apple Event
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210920T120000Z
+DTEND:20210920T124500Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN="Candidate Calendar: GoodTime":mailto:c_fpdgg0qtgihd38lv7j6nl3
+ 7rj8@group.calendar.google.com
+UID:rkrltgm31594d0km243t93ekv4@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=GoodTi
+ me Sync;X-NUM-GUESTS=0:mailto:c_595d9349f7jb6c8ae5ope6ogrg@group.calendar.g
+ oogle.com
+CLASS:PRIVATE
+CREATED:20210908T214128Z
+DESCRIPTION:Thank you for signing up for an interview with HRT! Your interv
+ iew will be conducted via Zoom Conferencing. Please join the interview via 
+ the Zoom Conferencing link below and keep your <strong>video turned OFF</st
+ rong> for the duration of the interview.<br/><br/><strong>Zoom details:</st
+ rong><br />Join Zoom Meeting<br />https://hudson-trading.zoom.us/j/92465830
+ 989?pwd=eUJuemllZmFCQzVqdGlsOTdIaDdQUT09<br />One tap mobile<br />+1 646876
+ 9923\,\,92465830989# US (New York)<br />+1 3126266799\,\,92465830989# US (C
+ hicago)<br />+1 3462487799\,\,92465830989# US (Houston)<br />+44 2080806591
+ \,\,92465830989# GB<br />+44 2034815237\,\,92465830989# GB<br />Dial by you
+ r location<br />+1 6468769923 US (New York)<br />+1 3126266799 US (Chicago)
+ <br />+1 3462487799 US (Houston)<br />+44 2080806591 GB<br />+44 2034815237
+  GB<br />Meeting ID 92465830989<br />Meeting Password: L_2<em>IX1a<br />Pas
+ sword for phone users: 48205331<br /><strong>Zoom password:</strong> L_2</e
+ m>IX1a (for phone users: 48205331)<br/><br/>If you need to reschedule your 
+ interview you may do so via the event confirmation link below. Please reach
+  out to interview@hudson-trading.com for any day-of scheduling issues.<br/>
+ <br/>Good luck!<br/><br/> Here's your event confirmation.<br />https://a.go
+ odtime.io/m/Xk8bgaeAsNc5apR1 <br/><br/> &lt\;&lt\;&lt\;&lt\;&lt\;&gt\;&gt\;
+ &gt\;&gt\;&gt\; 
+LAST-MODIFIED:20210908T214232Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:HRT Interview
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210807T164500Z
+DTEND:20210807T181500Z
+DTSTAMP:20220105T020823Z
+UID:30tutl2r25q9do8gln0al88td4@google.com
+CREATED:20210807T115116Z
+DESCRIPTION:<div>Join us on August 7 at 16:45 UTC for the Code Jam 2021 Wor
+ ld Finals Livestream. The scoreboard reveal and announcement of winners wil
+ l start at 17:30 UTC.</div><br/><a href="https://codingcompetitionsonair.wi
+ thgoogle.com/events/cj-2021?talk=cj-2021-livestream">https://codingcompetit
+ ionsonair.withgoogle.com/events/cj-2021?talk=cj-2021-livestream</a>
+LAST-MODIFIED:20210807T115116Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Code Jam 2021 World Finals Livestream
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210729T185000Z
+DTEND:20210730T021500Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9tnh6ul18c7t4btefjkgvvrch83kuqqu07v076k34pt0d9k613eefg
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CLASS:PRIVATE
+CREATED:20210714T141743Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DPEMmfPC_RnbT8t1RY1Mrcht2HZNjDFqH0\n
+LAST-MODIFIED:20210714T141743Z
+LOCATION:Hanoi HAN
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Flight to Doha (QR 977)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210730T045500Z
+DTEND:20210730T183000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9t79alhfun2am2fvqkmjf03toifvbhsq03ugl9o2lrkm7tv2pgc7sg
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CLASS:PRIVATE
+CREATED:20210714T141743Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DPEMmfPC_RnbT8t1RY1Mrcht2HZNjDFqH0\n
+LAST-MODIFIED:20210714T141743Z
+LOCATION:Doha DOH
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Flight to Boston (QR 743)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210609T210000Z
+DTEND:20210609T223000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=Intern Calendar:mailto:intern-calendar@twosigma.com
+UID:040000008200E00074C5B7101A82E00800000000D03BCEB83338D701000000000000000
+ 010000000DF76953474F2CA42B5D72EA5996573FB
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=cu
+ nbidun@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CREATED:20210603T181756Z
+DESCRIPTION:\n\n-----Original Appointment-----\nFrom: Intern Calendar <Inte
+ rn-Calendar@twosigma.com>\nSent: Wednesday\, May 26\, 2021 2:08 PM\nTo: Int
+ ern Calendar\; Engineering NYC Interns\; Houston Interns\nSubject: Eng Inte
+ rn Event: Virtual Code Break\nWhen: Wednesday\, June 9\, 2021 5:00 PM-6:30 
+ PM (UTC-05:00) Eastern Time (US & Canada).\nWhere: Meeting ID: 970 5958 551
+ 1\; Passcode: 591684\n\nWork in teams to solve puzzles\, riddles\, etc! Ple
+ ase plan to join from a personal device (laptop recommended).\n\n\nJoin Zoo
+ m Meeting\nhttps://outbackteambuilding.zoom.us/j/97059585511?pwd=clB4bXZNZl
+ FFT21ONklHbFNtaHpnQT09&from=addon\n\nMeeting ID: 970 5958 5511\nPasscode: 5
+ 91684\n\n
+LAST-MODIFIED:20210609T212328Z
+LOCATION:Meeting ID: 970 5958 5511\; Passcode: 591684
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:FW: Eng Intern Event: Virtual Code Break
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:1
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:639260645
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210623T161200Z
+DTSTAMP:20220105T020823Z
+UID:7q06rnudt1jrvtpn59u9nds14c@google.com
+CREATED:20210601T163544Z
+DESCRIPTION:
+LAST-MODIFIED:20210601T163544Z
+LOCATION:1350 Tremont St\, Boston\, MA 02120\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:second dose of the COVID-19 vaccine
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210603T163000Z
+DTEND:20210603T170000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=Intern Calendar:mailto:intern-calendar@twosigma.com
+UID:040000008200E00074C5B7101A82E00800000000F0B39D1DA653D701000000000000000
+ 010000000809DA2EA8C24D84D843E40E9238F221F
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=aj
+ liang@andrew.cmu.edu;X-NUM-GUESTS=0:mailto:ajliang@andrew.cmu.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=al
+ exsloanedouglas@gmail.com;X-NUM-GUESTS=0:mailto:alexsloanedouglas@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=al
+ lanxu@berkeley.edu;X-NUM-GUESTS=0:mailto:allanxu@berkeley.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=am
+ li@mit.edu;X-NUM-GUESTS=0:mailto:amli@mit.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=an
+ up.bottu@yale.edu;X-NUM-GUESTS=0:mailto:anup.bottu@yale.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ca
+ lebhar@umich.edu;X-NUM-GUESTS=0:mailto:calebhar@umich.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ch
+ 78@rice.edu;X-NUM-GUESTS=0:mailto:ch78@rice.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ch
+ arumathibadrinath@college.harvard.edu;X-NUM-GUESTS=0:mailto:charumathibadri
+ nath@college.harvard.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=cl
+ airezhou@college.harvard.edu;X-NUM-GUESTS=0:mailto:clairezhou@college.harva
+ rd.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=da
+ widjk2@illinois.edu;X-NUM-GUESTS=0:mailto:dawidjk2@illinois.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ee
+ zike@college.harvard.edu;X-NUM-GUESTS=0:mailto:eezike@college.harvard.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=El
+ len Markman;X-NUM-GUESTS=0:mailto:ellen.parsons@twosigma.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=em
+ malinbarron@gmail.com;X-NUM-GUESTS=0:mailto:emmalinbarron@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Ha
+ ley Baxter;X-NUM-GUESTS=0:mailto:haley.baxter@twosigma.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=he
+ lenkw@mit.edu;X-NUM-GUESTS=0:mailto:helenkw@mit.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ja
+ yvish@seas.upenn.edu;X-NUM-GUESTS=0:mailto:jayvish@seas.upenn.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=je
+ ffrey_zhu@brown.edu;X-NUM-GUESTS=0:mailto:jeffrey_zhu@brown.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=jo
+ ellexl@andrew.cmu.edu;X-NUM-GUESTS=0:mailto:joellexl@andrew.cmu.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ju
+ stinvyu@berkeley.edu;X-NUM-GUESTS=0:mailto:justinvyu@berkeley.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ka
+ leab.s.gebremichael@vanderbilt.edu;X-NUM-GUESTS=0:mailto:kaleab.s.gebremich
+ ael@vanderbilt.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ka
+ thrynzhou@college.harvard.edu;X-NUM-GUESTS=0:mailto:kathrynzhou@college.har
+ vard.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ke
+ lechiu10@gmail.com;X-NUM-GUESTS=0:mailto:kelechiu10@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ke
+ llyho7@mit.edu;X-NUM-GUESTS=0:mailto:kellyho7@mit.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ka
+ therine.g.he@gmail.com;X-NUM-GUESTS=0:mailto:khe@mit.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ku
+ shagp@berkeley.edu;X-NUM-GUESTS=0:mailto:kushagp@berkeley.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ky
+ lin.feng@berkeley.edu;X-NUM-GUESTS=0:mailto:kylin.feng@berkeley.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Li
+ sa Vance;X-NUM-GUESTS=0:mailto:lisa.vance@twosigma.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ls
+ a4@rice.edu;X-NUM-GUESTS=0:mailto:lsa4@rice.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Me
+ lissa Brown;X-NUM-GUESTS=0:mailto:melissa.brown@twosigma.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ol
+ ivialu46@gmail.com;X-NUM-GUESTS=0:mailto:olivialu46@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=pa
+ blof300@gmail.com;X-NUM-GUESTS=0:mailto:pablof300@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=pa
+ rthchonkar@gmail.com;X-NUM-GUESTS=0:mailto:parthchonkar@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=rs
+ iu05@gmail.com;X-NUM-GUESTS=0:mailto:rsiu05@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=rw
+ 525@cornell.edu;X-NUM-GUESTS=0:mailto:rw525@cornell.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=sa
+ chinkonan480@gmail.com;X-NUM-GUESTS=0:mailto:sachinkonan480@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=se
+ anlin2000@berkeley.edu;X-NUM-GUESTS=0:mailto:seanlin2000@berkeley.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=su
+ hasdara@utexas.edu;X-NUM-GUESTS=0:mailto:suhasdara@utexas.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=te
+ r9hb@virginia.edu;X-NUM-GUESTS=0:mailto:ter9hb@virginia.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=Th
+ andar Pena;X-NUM-GUESTS=0:mailto:thandar.pena@twosigma.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ti
+ fanytong1234@gmail.com;X-NUM-GUESTS=0:mailto:tifanytong1234@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=to
+ bechikeluba@gmail.com;X-NUM-GUESTS=0:mailto:tobechikeluba@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=to
+ ni.oshikanlu9@gmail.com;X-NUM-GUESTS=0:mailto:toni.oshikanlu9@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=vi
+ llarreallevi@gmail.com;X-NUM-GUESTS=0:mailto:villarreallevi@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=wi
+ snia@usc.edu;X-NUM-GUESTS=0:mailto:wisnia@usc.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=za
+ urbek@wustl.edu;X-NUM-GUESTS=0:mailto:zaurbek@wustl.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=zh
+ enlu2000@gmail.com;X-NUM-GUESTS=0:mailto:zhenlu2000@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=zi
+ yangx@princeton.edu;X-NUM-GUESTS=0:mailto:ziyangx@princeton.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ah
+ anda@gatech.edu;X-NUM-GUESTS=0:mailto:ahanda@gatech.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=al
+ ena.zhang@duke.edu;X-NUM-GUESTS=0:mailto:alena.zhang@duke.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=am
+ yhu@mit.edu;X-NUM-GUESTS=0:mailto:amyhu@mit.edu
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=st
+ ong@gatech.edu;X-NUM-GUESTS=0:mailto:stong@gatech.edu
+CREATED:20210528T134931Z
+DESCRIPTION:Please join us to run through some details ahead of your first 
+ day! If you can’t make it\, don’t worry as all necessary information will b
+ e emailed to you as well.\n\nTo join the video meeting\, click this link: h
+ ttps://meet.google.com/kcb-egvs-nmu\nOtherwise\, to join by phone\, dial +1
+  929-329-2023 and enter this PIN: 898 459 132#\nTo view more phone numbers\
+ , click this link: https://tel.meet/kcb-egvs-nmu?hs=5\n
+LAST-MODIFIED:20210601T111753Z
+LOCATION:Google Meet
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Two Sigma: Pre-Orientation Call
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:1841059813
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210601T141800Z
+DTEND:20210601T142300Z
+DTSTAMP:20220105T020823Z
+UID:4uh10kr11h57ve46obq0tsdmit@google.com
+CREATED:20210601T020952Z
+DESCRIPTION:Please show up at Reggie Lewis Center at this time. Please reme
+ mber to bring your photo ID so that the staff member can check you in.\n\nT
+ o reschedule or cancel this appointment\, use the link in the appointment d
+ etails email or text you received.\n\nFor vaccination and site questions\, 
+ check out CIC Health's Vaccination FAQ <a href="https://support.cic-health.
+ com/knowledge/vaccinations" target="_blank" rel="noopener noreferrer">here<
+ /a>. For additional support\, call (888) 623-3830 or email vaccine-support@
+ cic-health.com.
+LAST-MODIFIED:20210601T020952Z
+LOCATION:1350 Tremont Street
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Vaccination appointment
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210414T144500Z
+DTEND:20210414T150000Z
+DTSTAMP:20220105T020823Z
+UID:76nsaladfegnitefp4n0rgsadb@google.com
+CREATED:20210412T115728Z
+DESCRIPTION:<p>Google Meet information:<u></u><u></u></p><p>To join the vid
+ eo meeting\, click this link:&nbsp\;<a href="https://meet.google.com/kwf-bg
+ dw-cor" id="ow718" __is_owner="true">https://meet.google.com/kwf-<wbr>bgdw-
+ cor</a></p>
+LAST-MODIFIED:20210412T115728Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:meeting with Li
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210405T123000Z
+DTEND:20210405T130000Z
+DTSTAMP:20220105T020823Z
+UID:18vbqpdqqvbju1cm7rodinnpg6@google.com
+CREATED:20210405T042536Z
+DESCRIPTION:
+LAST-MODIFIED:20210405T122624Z
+LOCATION:
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:select class
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210405T043000Z
+DTEND:20210405T054500Z
+DTSTAMP:20220105T020823Z
+UID:38ngnn3qk6hhdqtethqnemafsb@google.com
+CREATED:20210405T042528Z
+DESCRIPTION:
+LAST-MODIFIED:20210405T052026Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:fill in ds-160
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210203T160000Z
+DTEND:20210203T163000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=Leily Torson:mailto:leily@twosigma.com
+UID:040000008200E00074C5B7101A82E00800000000E0F82AB794F5D601000000000000000
+ 0100000009DE85F5E4DB3B34599A1F2CC8E43AAAF
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CREATED:20210128T214333Z
+DESCRIPTION:Join Skype Meeting<https://meet.twosigma.com/leily.torson/RZCCT
+ 21N>\nTrouble Joining? Try Skype Web App<https://meet.twosigma.com/leily.to
+ rson/RZCCT21N?sl=1>\nJoin by phone\n\n+1 (212) 625-5710<tel:+1%20(212)%2062
+ 5-5710> (Global)                                English (United States)\n+1
+  (832) 548-6600<tel:+1%20(832)%20548-6600> (Global)                        
+         English (United States)\n+44 (20) 3870 7200<tel:+44%20(20)%203870%2
+ 07200> (Global)                              English (United Kingdom)\n+81 
+   3-4572-9190<tel:+81%20%20%203-4572-9190> (Global)                        
+         Japanese (Japan)\n\nFind a local number<https://dialin.twosigma.com
+ >\n\nConference ID: 2947016\n Forgot your dial-in PIN?<https://dialin.twosi
+ gma.com> |Help<https://o15.officeredir.microsoft.com/r/rlidLync15?clid=1033
+ &p1=5&p2=2009>\n\n[!OC([1033])!]\n.........................................
+ ...........................................................................
+ .....................\n\n\n
+LAST-MODIFIED:20210130T044823Z
+LOCATION:Skype Meeting
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Call with Andrew Peng (Platform Engineering)
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:1098651621
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210203T163000Z
+DTEND:20210203T170000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=Leily Torson:mailto:leily@twosigma.com
+UID:040000008200E00074C5B7101A82E00800000000E072D4CF94F5D601000000000000000
+ 0100000006F7B0D4CB2E2B64F92824DDFD99F6498
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CREATED:20210128T214414Z
+DESCRIPTION:...............................................................
+ ..........................................................................\
+ nJoin Skype Meeting<https://meet.twosigma.com/leily.torson/T5ZPQG8T>\nTroub
+ le Joining? Try Skype Web App<https://meet.twosigma.com/leily.torson/T5ZPQG
+ 8T?sl=1>\nJoin by phone\n\n+1 (212) 625-5710<tel:+1%20(212)%20625-5710> (Gl
+ obal)                                English (United States)\n+1 (832) 548-
+ 6600<tel:+1%20(832)%20548-6600> (Global)                                Eng
+ lish (United States)\n+44 (20) 3870 7200<tel:+44%20(20)%203870%207200> (Glo
+ bal)                              English (United Kingdom)\n+81   3-4572-91
+ 90<tel:+81%20%20%203-4572-9190> (Global)                                Jap
+ anese (Japan)\n\nFind a local number<https://dialin.twosigma.com>\n\nConfer
+ ence ID: 5195838\n Forgot your dial-in PIN?<https://dialin.twosigma.com> |H
+ elp<https://o15.officeredir.microsoft.com/r/rlidLync15?clid=1033&p1=5&p2=20
+ 09>\n\n[!OC([1033])!]\n....................................................
+ ...........................................................................
+ ..........\n\n\n
+LAST-MODIFIED:20210129T034353Z
+LOCATION:Skype Meeting
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Call with Raunak Gupta (Trading Engineering)
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:1100748773
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210107T180000Z
+DTEND:20210107T183000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN="Ha, Stephanie":mailto:stha@ea.com
+UID:040000008200E00074C5B7101A82E0080000000080D0656630E4D601000000000000000
+ 010000000199D8AB3FFD4E0479D8331D9A662D500
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=cu
+ nbidun@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+CREATED:20210107T174754Z
+DESCRIPTION:\n[https://zoom.us/account/branding/p/c5744779-cf26-45c1-a040-7
+ dd6eac47139.png]\n\n[https://zoom.us/account/branding/p/5ba78fd9-de1b-4081-
+ b6e8-f2e3346d66ef.png]\nMeeting ID: 937 7631 4178\nPassword: 253672\n\nCLIC
+ K TO JOIN<https://ea.zoom.us/j/93776314178?pwd=MkswcU8xTnNDOEM4azdiMGJJYlN2
+ UT09>\nPHONE\nUS +1 253 215 8782 <tel:+12532158782\,\,93776314178%23>\nUS 8
+ 55 880 1246 <tel:8558801246\,\,93776314178%23>\nCA +1 647 558 0588 <tel:+16
+ 475580588\,\,93776314178%23>\nSE +46 8 5052 0017 <tel:+46850520017\,\,93776
+ 314178%23>\nSE 0 200 123 514 <tel:0200123514\,\,93776314178%23>\nGB +44 330
+  088 5830 <tel:+443300885830\,\,93776314178%23>\nGB 0 800 260 5801 <tel:080
+ 02605801\,\,93776314178%23>\nCH +41 43 210 71 08 <tel:+41432107108\,\,93776
+ 314178%23>\nCH 0 800 002 622 <tel:0800002622\,\,93776314178%23>\nRO +40 31 
+ 630 1088 <tel:+40316301088\,\,93776314178%23>\nRO 0 800 672 631 <tel:080067
+ 2631\,\,93776314178%23>\nAU +61 7 3185 3730 <tel:+61731853730\,\,9377631417
+ 8%23>\nAU 1800 893 423 <tel:1800893423\,\,93776314178%23>\nOther Countries 
+ <https://ea.zoom.us/u/aWNalAjlc>\nROOM\nJoin using the Zoom button or in ro
+ om directory\, then enter meeting ID.\nNeed help or have feedback? Join us<
+ https://electronic-arts.slack.com/app_redirect?channel=CET2U0FFT> in EA Sla
+ ck\n\nHi Duy\,\n\nI will give you a call at this time.\n\nThanks\,\nStephan
+ ie\n\n
+LAST-MODIFIED:20210107T174802Z
+LOCATION:https://ea.zoom.us/j/93776314178?pwd=MkswcU8xTnNDOEM4azdiMGJJYlN2U
+ T09
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:EA Intern Offer - Duy Pham
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:1
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:-1314514971
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+X-MICROSOFT-LOCATIONS:[ { "DisplayName" : "https://ea.zoom.us/j/93776314178
+ ?pwd=MkswcU8xTnNDOEM4azdiMGJJYlN2UT09"\, "LocationAnnotation" : ""\, "Locat
+ ionSource" : 0\, "Unresolved" : false\, "LocationUri" : "" } ]
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20210108T143000Z
+DTEND:20210108T213000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=Interview Scheduler:mailto:candidateconnect@twosigma.com
+UID:040000008200E00074C5B7101A82E0080000000096BD1018AED7D601000000000000000
+ 0100000004807C0079A266C4EAD7725D87D83981E
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=OPT-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=dr
+ opbox@twosigma.avature.net;X-NUM-GUESTS=0:mailto:dropbox@twosigma.avature.n
+ et
+CREATED:20201221T152938Z
+DESCRIPTION:Hi Duy\,\n\nWe are confirmed for your virtual interview on Janu
+ ary 08\, 2021 at 09:30 AM\, New York time. If this time no longer works for
+  you\, please email me as soon as possible at Troy.Pepicelli@twosigma.com. 
+ Also\, please keep in mind that the exact duration of your interview is sub
+ ject to change based on the Two Sigma team's availability.\n\nVideo Intervi
+ ew Details\n\n   *   Details on how to access the video interview session w
+ ill be sent the evening before your interview.\n\nVirtual Interviewing\n\n 
+   *   Please enter the video interview session 10 minutes ahead of your sch
+ eduled interview to allow time for any troubleshooting.\n   *   Your interv
+ iewers will enter and exit the meeting for each session.\n   *   Please ens
+ ure that you utilize a device\, ideally a personal computer\, with reliable
+  internet access for this virtual interview. We encourage you to avoid usin
+ g your mobile device or work computer due to connectivity and access issues
+ .\n\nHackerRank CodePair\n\n   *   Details on accessing a HackerRank CodePa
+ ir environment will accompany the video platform information the day before
+  your interview. Please explore this HackerRank user guide <https://support
+ .hackerrank.com/hc/en-us/articles/360016528573--Understanding-the-CodePair-
+ interface> if you have any further questions ahead of your meetings.\n\nFee
+ l free to check out our interview tips page for FAQs and some additional in
+ fo here: Interview Tips | Two Sigma<http://www.twosigma.com/careers/intervi
+ ew-tips>.\n\nPlease let me know if you have any questions - we look forward
+  to meeting you!\n\nThanks\,\n\nTroy\n\nTroy.Pepicelli@twosigma.com\n
+LAST-MODIFIED:20210107T075810Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Two Sigma Remote Interview Confirmation
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:2118953622
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20201222T174500Z
+DTEND:20201222T183000Z
+DTSTAMP:20220105T020823Z
+UID:17kmp00kvmigc8hb3qvpbs158b@google.com
+CREATED:20201222T073527Z
+DESCRIPTION:<ul><li>Meeting ID: 958 5591 6696</li><li>Online:&nbsp\;<a href
+ ="https://ea.zoom.us/j/95855916696?pwd=cit2MGF5Y1lRQjZ0T3pzMmFKTnZIdz09">ht
+ tps://ea.zoom.us/j/<wbr>95855916696?pwd=<wbr>cit2MGF5Y1lRQjZ0T3pzMmFKTnZIdz
+ <wbr>09</a></li><li>Password: 965689</li></ul>
+LAST-MODIFIED:20201222T073605Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:EA Final Interview
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20201211T164500Z
+DTEND:20201211T180000Z
+DTSTAMP:20220105T020823Z
+UID:6khgob4eie065tn78invprisco@google.com
+CREATED:20201211T041339Z
+DESCRIPTION:
+LAST-MODIFIED:20201211T041339Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:EA Interview Sidekick
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20201215T150000Z
+DTEND:20201215T153000Z
+DTSTAMP:20220105T020823Z
+ORGANIZER;CN=Interview Scheduler:mailto:candidateconnect@twosigma.com
+UID:040000008200E00074C5B7101A82E008000000005FE8D43F6CCFD601000000000000000
+ 0100000000B0AE71603C90E4DA66F6BBA13A81C62
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=cunbid
+ un@gmail.com;X-NUM-GUESTS=0:mailto:cunbidun@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=OPT-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=dr
+ opbox@twosigma.avature.net;X-NUM-GUESTS=0:mailto:dropbox@twosigma.avature.n
+ et
+CREATED:20201211T031808Z
+DESCRIPTION:Hi Duy\,\n\nYour 30 minute phone interview is confirmed! The in
+ terviewer will call you at the scheduled time at 413-313-9462. As a reminde
+ r\, the coding phone interview will focus on computer science knowledge and
+  coding experience. There will be a segment of the interview that includes 
+ a codepair exercise\, so having a computer available is crucial. The link t
+ o the codepair portal will be sent within one business day of the interview
+ . It may take our interviewer a few minutes to set up\, so please be patien
+ t if they do not call until a few minutes after the scheduled time.\n\nIf t
+ his time no longer works for you\, please email me\, Troy Pepicelli\, at Tr
+ oy.Pepicelli@twosigma.com.\n\nIn advance of your interview\, feel free to c
+ heck out our website<https://www.twosigma.com/> to learn more about Two Sig
+ ma. If you have any questions\, please don't hesitate to reach out!\n\nThan
+ ks\,\n\nTroy\n\nTroy.Pepicelli@twosigma.com\n
+LAST-MODIFIED:20201211T032256Z
+LOCATION:Phone: 413-313-9462
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Two Sigma: Coding Phone Interview Confirmed
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-OWNERAPPTID:2118933855
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20201204T170000Z
+DTEND:20201204T180000Z
+DTSTAMP:20220105T020823Z
+UID:3a7ed2im27cmp9v3qm57kcgk4f@google.com
+CREATED:20201126T151029Z
+DESCRIPTION:
+LAST-MODIFIED:20201126T151029Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:EA Interview
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20201106T170000Z
+DTEND:20201106T173000Z
+DTSTAMP:20220105T020823Z
+UID:5vmr8evr8ijumqck9rgsl4qj6c@google.com
+CREATED:20201103T030342Z
+DESCRIPTION:Hi Duy\,\n\nThanks for submitting your availability for the Sum
+ mer Internship - Trading Systems Developer position.\n\nYou're confirmed fo
+ r your interview on:\n\nNov 6\, 2020 11:00am-11:30am CST: Sy Broumley\n\nI'
+ ll be calling by phone during the scheduled interview time.\n\nLet us know 
+ if you have any other questions before your interview.\n\nBest\,\nSy
+LAST-MODIFIED:20201103T030342Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Interview with VIRTU
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20201109T153000Z
+DTEND:20201109T163000Z
+DTSTAMP:20220105T020823Z
+UID:0ho0gnq1paiaukc1m042doo079@google.com
+CREATED:20201103T025650Z
+DESCRIPTION:<p>Hi Duy\,<br><br>Your phone interview&nbsp\;is confirmed for 
+ Monday\, November 9th at 10:30am Eastern. We will use zoom (audio only) for
+  this interview. Please use the following to connect with Sarah Wulk:</p><p
+ >Zoom Meeting ID: 815 032 1572</p><p>Passcode: 877836</p><p>&nbsp\;</p><p>T
+ his call will be in part to review your background and interests. There wil
+ l also be technical questions involving probability\, statisicts\, logical 
+ reasoning\, ect.&nbsp\; Due to the unique nature of the interview\, we enco
+ urage you to have a pen and paper handy.&nbsp\;Should&nbsp\;a conflict aris
+ e with your interview\, contact me as soon as possible. &nbsp\;</p><p>&nbsp
+ \;</p><p>Prior to your interivew\, please complete this brief&nbsp\;<a href
+ ="https://tracking.icims.com/f/a/lZfT-Ao1mj7XmtozrXTxcg~~/AAIB5gA~/RgRhgwD7
+ P0QqaHR0cHM6Ly9zaWdzdXJ2ZXkudHlwZWZvcm0uY29tL3RvL0p6c1VoU0pRVwNzcGNCCgAe-3u
+ gXy9n5rpSEmN1bmJpZHVuQGdtYWlsLmNvbVgEAAABSA~~">survey</a>.</p><p>&nbsp\;</p
+ ><br>We are looking forward to speaking with you!&nbsp\;<p>Take Care\,<br>K
+ ylie&nbsp\;</p>
+LAST-MODIFIED:20201103T025650Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SIG Phone Interview
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20200916T171500Z
+DTEND:20200916T174500Z
+DTSTAMP:20220105T020823Z
+UID:083faj4rmc3dqfdafnlpcirdgh@google.com
+CREATED:20200913T134549Z
+DESCRIPTION:
+LAST-MODIFIED:20200913T134549Z
+LOCATION:41 Hồng Hà\, Phúc xá\, Ba Đình\, Hà Nội\, Vietnam
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Microsoft Online Interview
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Ho_Chi_Minh:20200831T073000
+DTEND;TZID=Asia/Ho_Chi_Minh:20200831T081500
+RRULE:FREQ=WEEKLY;UNTIL=20200901T165959Z;BYDAY=FR,MO,TH,TU,WE
+DTSTAMP:20220105T020823Z
+UID:rv1lq08r5n5ri1jl5cdl3c94ad_R20200831T003000@google.com
+CREATED:20200816T102036Z
+DESCRIPTION:
+LAST-MODIFIED:20200901T052826Z
+LOCATION:41 Hồng Hà\, Phúc xá\, Ba Đình\, Hà Nội\, Vietnam
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Networking && Apply
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Ho_Chi_Minh:20200824T073000
+DTEND;TZID=Asia/Ho_Chi_Minh:20200824T081500
+DTSTAMP:20220105T020823Z
+UID:rv1lq08r5n5ri1jl5cdl3c94ad@google.com
+RECURRENCE-ID;TZID=Asia/Ho_Chi_Minh:20200824T073000
+CREATED:20200816T102036Z
+DESCRIPTION:
+LAST-MODIFIED:20200901T052826Z
+LOCATION:41 Hồng Hà\, Phúc xá\, Ba Đình\, Hà Nội\, Vietnam
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:Networking
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Ho_Chi_Minh:20200821T073000
+DTEND;TZID=Asia/Ho_Chi_Minh:20200821T081500
+RRULE:FREQ=WEEKLY;UNTIL=20200830T165959Z;BYDAY=FR,MO,TH,TU,WE
+DTSTAMP:20220105T020823Z
+UID:rv1lq08r5n5ri1jl5cdl3c94ad@google.com
+CREATED:20200816T102036Z
+DESCRIPTION:
+LAST-MODIFIED:20200901T052826Z
+LOCATION:41 Hồng Hà\, Phúc xá\, Ba Đình\, Hà Nội\, Vietnam
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Networking
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20200822T001500Z
+DTEND:20200822T013000Z
+DTSTAMP:20220105T020823Z
+UID:1a7jk1gf3b7oeu4j9fsiqk1uau@google.com
+CREATED:20200822T013253Z
+DESCRIPTION:
+LAST-MODIFIED:20200822T013310Z
+LOCATION:41 Hồng Hà\, Phúc xá\, Ba Đình\, Hà Nội\, Vietnam
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Apply!!!
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Ho_Chi_Minh:20200817T070000
+DTEND;TZID=Asia/Ho_Chi_Minh:20200817T074500
+RRULE:FREQ=WEEKLY;UNTIL=20200820T165959Z;BYDAY=FR,MO,TH,TU,WE
+EXDATE;TZID=Asia/Ho_Chi_Minh:20200817T070000
+DTSTAMP:20220105T020823Z
+UID:59kfiog7gdg060d0jie3ltlj7m@google.com
+CREATED:20200816T102036Z
+DESCRIPTION:
+LAST-MODIFIED:20200820T234114Z
+LOCATION:41 Hồng Hà\, Phúc xá\, Ba Đình\, Hà Nội\, Vietnam
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Networking
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20200807T230000Z
+DTEND:20200808T000000Z
+DTSTAMP:20220105T020823Z
+UID:7nqdgi78ojs2l6ispap2vn9gqu@google.com
+CREATED:20200807T140038Z
+DESCRIPTION:
+LAST-MODIFIED:20200807T140038Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Morning Workout
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20200731T230000Z
+DTEND:20200801T000000Z
+DTSTAMP:20220105T020823Z
+UID:7j09pe00jh1l6145f19795tu7j@google.com
+CREATED:20200731T141658Z
+DESCRIPTION:
+LAST-MODIFIED:20200731T142226Z
+LOCATION:41 Hồng Hà\, Phúc xá\, Ba Đình\, Hà Nội\, Vietnam
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Moring Workout
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20200102T174000Z
+DTEND:20200102T183000Z
+DTSTAMP:20220105T020823Z
+UID:3ghjmbbpd33itdqm3p84grqlor@google.com
+CREATED:20200517T135931Z
+DESCRIPTION:<ul><li>ANH NHO EM KHONG?</li><li>EM YEU ANH</li></ul>
+LAST-MODIFIED:20200517T140045Z
+LOCATION:JFK Terminal 8\, Queens\, NY 11430\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Tiễn Vi Về Vn
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20200103T220000
+DTEND;TZID=America/New_York:20200103T230000
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20200122T045959Z;BYDAY=FR,MO,SA,SU,TH,TU,WE
+DTSTAMP:20220105T020823Z
+UID:50qmnjpt13h9mt95qn0jorb725@google.com
+CREATED:20200517T135931Z
+DESCRIPTION:<ul><li>EM NHO ANH LAM</li></ul>
+LAST-MODIFIED:20200517T140045Z
+LOCATION:Johnson Hall\, 380 Thatcher Rd\, Amherst\, MA 01003\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Gọi Vi
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20170506
+DTEND;VALUE=DATE:20170507
+DTSTAMP:20220105T020823Z
+UID:040000008200E00074C5B7101A82E00800000000DA91758CD8B43E4699305A4715E18DB
+ 01000000057EBDA0083B4EB43AECE867EDB1EFBF3
+CLASS:PUBLIC
+CREATED:20170407T122608Z
+DESCRIPTION:thi SAT
+LAST-MODIFIED:20170407T122608Z
+LOCATION:
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Sat
+TRANSP:TRANSPARENT
+X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20161127
+DTEND;VALUE=DATE:20161128
+DTSTAMP:20220105T020823Z
+UID:040000008200E00074C5B7101A82E008000000000D9F9A1FAF41604A88D7916D6F4D430
+ 2100000005826FA560C200542A6745DD15DC536A9
+CLASS:PUBLIC
+CREATED:20161120T152052Z
+DESCRIPTION:
+LAST-MODIFIED:20161120T152052Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:On-matsuri
+TRANSP:TRANSPARENT
+X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+END:VEVENT
+END:VCALENDAR

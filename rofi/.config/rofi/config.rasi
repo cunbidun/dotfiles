@@ -1,3 +1,4 @@
 configuration {
-  theme: "nord";
+  terminal: "alacritty";
 }
+@theme "nord"

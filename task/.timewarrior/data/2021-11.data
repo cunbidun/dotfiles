@@ -1,0 +1,135 @@
+inc 20211101T164432Z - 20211101T173537Z # "compsci_305" "peer review" todo
+inc 20211102T010616Z - 20211102T011914Z # linux "linux_config" "taskwarrior setup nord theme"
+inc 20211102T023305Z - 20211102T051555Z # "compsci_514" "lecture recording oct 26" todo
+inc 20211102T142833Z - 20211102T145022Z # "compsci_514" "lecture recording oct 26" todo
+inc 20211102T194414Z - 20211102T195701Z # "compsci_461" "homework 4" todo
+inc 20211102T234220Z - 20211103T013911Z # "compsci_461" "homework 4" todo
+inc 20211103T023600Z - 20211103T023936Z # "compsci_514.homework3" "problem 1" todo
+inc 20211103T024407Z - 20211103T025103Z # "compsci_514.homework3" "problem 1" todo
+inc 20211103T043116Z - 20211103T044754Z # linux "linux_config" rofi "rofi scroll with ctrl j/k"
+inc 20211103T163754Z - 20211103T165501Z # 1.1 "compsci_514.homework3.problem1" todo
+inc 20211103T165509Z - 20211103T170346Z # 1.2 "compsci_514.homework3.problem1" todo
+inc 20211103T171010Z - 20211103T171255Z # 2.1 "compsci_514.homework3.problem2" todo
+inc 20211103T171257Z - 20211103T171307Z # 2.1 "compsci_514.homework3.problem2" todo
+inc 20211103T171314Z - 20211103T174620Z # 2.2 "compsci_514.homework3.problem2" todo
+inc 20211103T181335Z - 20211103T183646Z # "compsci_514.homework3" "problem 4"
+inc 20211104T162109Z - 20211104T163735Z # "compsci_305.unit3" opening
+inc 20211104T185454Z - 20211104T200655Z # "compsci_514.homework3" "problem 4" todo
+inc 20211105T002908Z - 20211105T012553Z # "compsci_305.unit3" opening
+inc 20211105T012559Z - 20211105T012602Z # "compsci_305.unit3" ending
+inc 20211105T012608Z - 20211105T020929Z # "compsci_305.unit3" stereotype
+inc 20211105T182652Z - 20211105T192809Z # "compsci_305" todo "unit 3"
+inc 20211106T012857Z - 20211106T025422Z # "compsci_305" todo "unit 3"
+inc 20211106T050508Z - 20211106T052414Z # cpcli "use C++ for gen.sh"
+inc 20211106T052737Z - 20211106T054100Z # dunst "setup dunst with images"
+inc 20211106T151143Z - 20211106T154146Z # dunst "dunst repeated noti"
+inc 20211106T203408Z - 20211106T203415Z # "C. Extreme Extension" cp
+inc 20211106T203423Z - 20211106T210429Z # "Week 10: Ethereum" "compsci_461"
+inc 20211106T212243Z - 20211106T215443Z # "Week 10: Ethereum" "compsci_461"
+inc 20211107T023810Z - 20211107T024319Z # 5.1 "compsci_514.homework3.problem5"
+inc 20211107T143829Z - 20211107T145033Z # 5.2 "compsci_514.homework3.problem5"
+inc 20211107T145040Z - 20211107T151047Z # 5.3 "compsci_514.homework3.problem5"
+inc 20211107T151217Z - 20211107T155034Z # 4.1 "compsci_514.homework3.problem4"
+inc 20211107T195848Z - 20211107T202337Z # 5.4 "compsci_514.homework3.problem5"
+inc 20211107T230500Z - 20211107T230509Z # 5.4 "compsci_514.homework3.problem5"
+inc 20211107T230523Z - 20211107T232140Z # 4.3 "compsci_514.homework3.problem4"
+inc 20211108T170626Z - 20211108T171925Z # "compsci_590" "rsm and paxos reading" umass
+inc 20211108T174323Z - 20211108T175739Z # "compsci_590" "rsm and paxos reading" umass
+inc 20211108T185008Z - 20211108T194503Z # 5.5 "compsci_514.homework3.problem5" todo umass
+inc 20211109T001514Z - 20211109T004458Z # 5.3 "compsci_514.homework3.problem5" todo umass
+inc 20211109T005136Z - 20211109T011819Z # "compsci_590" "lecture oct 14" umass
+inc 20211109T034119Z - 20211109T041159Z # "compsci_590" "lecture oct 19" umass
+inc 20211110T003753Z - 20211110T020444Z # "add xmobar" xmonad
+inc 20211110T051252Z - 20211110T061634Z # "HW 5: Ethereum Nim game" "compsci_461" umass
+inc 20211110T164013Z - 20211110T165210Z # "HW 5: Ethereum Nim game" "compsci_461" umass
+inc 20211110T171904Z - 20211110T183215Z # "HW 5: Ethereum Nim game" "compsci_461" umass
+inc 20211111T032214Z - 20211111T041426Z # "compsci_590" "lecture oct 19" umass
+inc 20211111T164813Z - 20211111T175638Z # "compsci_590" "rsm and paxos reading" umass
+inc 20211111T184844Z - 20211111T191751Z # "compsci_590" "lecture oct 26" umass
+inc 20211112T205724Z - 20211112T205736Z # "compsci_590" "lecture nov 2" umass
+inc 20211112T205802Z - 20211112T205826Z # "compsci_590" "lecture nov 2" umass
+inc 20211112T205919Z - 20211112T210000Z # "compsci_590" "lecture oct 26" todo umass
+inc 20211112T210848Z - 20211112T210920Z # "compsci_590" "lecture oct 26" todo umass
+inc 20211113T051122Z - 20211113T052435Z # "compsci_590" "zoo keeper"
+inc 20211113T174858Z - 20211113T175331Z # "compsci_590" "rsm and paxos reading" umass
+inc 20211113T175354Z - 20211113T185047Z # "compsci_590" "lecture oct 26" todo umass
+inc 20211113T203508Z - 20211113T210317Z # "compsci_590" "lecture oct 28" todo umass
+inc 20211113T214627Z - 20211113T220353Z # "compsci_590" "lecture oct 28" todo umass
+inc 20211113T222110Z - 20211113T224117Z # "compsci_590" "lecture oct 28" todo umass
+inc 20211114T000006Z - 20211114T002816Z # "compsci_590" "lecture nov 2" umass
+inc 20211114T151115Z - 20211114T155140Z # "compsci_590" "lecture nov 2" todo umass
+inc 20211114T160222Z - 20211114T160427Z # "compsci_590" pa3 todo umass
+inc 20211114T164719Z - 20211114T175141Z # "compsci_590" pa3 todo umass
+inc 20211114T210647Z - 20211114T222504Z # "compsci_590" pa3 todo umass
+inc 20211115T040551Z - 20211115T065251Z # "compsci_590" pa3 todo umass
+inc 20211115T210444Z - 20211115T220301Z # "homework 9" todo vi
+inc 20211115T233459Z - 20211116T000041Z # "2s rejection email" swe2022 todo
+inc 20211116T020331Z - 20211116T022643Z # "compsci_590" "lecture nov 4" todo umass
+inc 20211116T025752Z - 20211116T035233Z # "compsci_590" "lecture nov 4" todo umass
+inc 20211116T151457Z - 20211116T160052Z # "compsci_590" "lecture nov 9" todo umass
+inc 20211116T195949Z - 20211116T210225Z # dwm linux "preview tag patch"
+inc 20211116T210943Z - 20211116T213138Z # dwm "task symbol color"
+inc 20211116T213146Z - 20211116T215911Z # "citadel survey" swe2022 todo
+inc 20211117T043307Z - 20211117T045124Z # "compsci_305" todo umass "unit 4 peers review"
+inc 20211117T171034Z - 20211117T192222Z # "compsci_305" todo umass "unit 4 peers review"
+inc 20211118T010334Z - 20211118T033333Z # "homework 9" todo vi
+inc 20211118T164758Z - 20211118T205231Z # dwm "dwmblock with color" linux
+inc 20211118T212142Z - 20211118T214010Z # dwm "dwmblock async"
+inc 20211118T214219Z - 20211118T214932Z # "add wmrole to rule" dwm
+inc 20211119T164631Z - 20211119T173354Z # "compsci_305.unit4" introduction
+inc 20211119T192146Z - 20211119T201151Z # "compsci_305.unit4" todo umass "what is bitcoin"
+inc 20211120T010233Z - 20211120T014336Z # dwm linux "shallow patch"
+inc 20211120T040720Z - 20211120T063129Z # dwm "dwmblock click" linux todo
+inc 20211120T153546Z - 20211120T165959Z # dwm "dwmblock click" linux todo
+inc 20211120T200535Z - 20211120T214317Z # "2000 rated problem" cp todo
+inc 20211121T182717Z - 20211121T184419Z # "compsci_305.unit4" "double-spending attack" todo
+inc 20211121T203423Z - 20211121T210801Z # "compsci_305.unit4" "double-spending attack" todo
+inc 20211122T191948Z - 20211122T192949Z # "compsci_305" todo umass "unit 4 paper"
+inc 20211122T192953Z - 20211122T205804Z # "compsci_305.unit4" mining todo
+inc 20211122T214250Z - 20211122T231430Z # "compsci_305.unit4" mining todo
+inc 20211123T014113Z - 20211123T030618Z # "compsci_305.unit4" "hash function" todo
+inc 20211123T041359Z - 20211123T054155Z # "hrt response" vi
+inc 20211123T054155Z - 20211123T070250Z # "2000 rated problems" cp
+inc 20211123T143500Z - 20211123T172009Z # "Codeforces Global Round 17" cp
+inc 20211123T200000Z - 20211123T203503Z # "2100 rated problem" cp
+inc 20211123T205031Z - 20211123T210731Z # rofi "timepicker rofi"
+inc 20211123T211217Z - 20211123T213702Z # rofi "rofi timepicker"
+inc 20211123T214137Z - 20211123T214439Z # Tokens "compsci_461" todo umass
+inc 20211124T170124Z - 20211124T175807Z # "compsci_514" "lecture nov 9" todo umass
+inc 20211124T180038Z - 20211124T190043Z # dwm "task script" todo
+inc 20211124T192048Z - 20211124T192101Z # dwm "task script" todo
+inc 20211124T192352Z - 20211124T192354Z # "Datacenter networking notes" "compsci_590" umass
+inc 20211124T193648Z - 20211124T193704Z # "Revisions to Unit 3" "compsci_305" todo umass
+inc 20211124T194027Z - 20211124T194033Z # task "task sorting" todo
+inc 20211124T194122Z - 20211124T194127Z # task "task sorting" todo
+inc 20211124T195834Z - 20211124T201546Z # "compsci_514" "lecture nov 16" todo umass
+inc 20211124T204105Z - 20211124T212847Z # "compsci_514" "lecture nov 16" todo umass
+inc 20211125T024939Z - 20211125T035659Z # "prep amz" todo vi
+inc 20211125T150000Z - 20211125T162004Z # "call with li chen"
+inc 20211125T180049Z - 20211125T191100Z # "amz mock" todo vi
+inc 20211125T212433Z - 20211125T230052Z # "compsci_514" "lecture nov 18" todo umass
+inc 20211127T000133Z - 20211127T002133Z # "compsci_514" "lecture nov 23" todo umass
+inc 20211127T011944Z - 20211127T021347Z # "compsci_514" "lecture nov 23" todo umass
+inc 20211127T153752Z - 20211127T161555Z # "compsci_590" hw4 todo umass
+inc 20211127T164726Z - 20211127T171630Z # "compsci_590" hw4 todo umass
+inc 20211127T202944Z - 20211127T212120Z # "compsci_590" hw4 todo umass
+inc 20211127T213406Z - 20211127T230250Z # "amz mock" vi
+inc 20211127T230253Z - 20211128T010207Z # "compsci_590" hw4 todo umass
+inc 20211128T033000Z - 20211128T040002Z # "amz mock" vi
+inc 20211128T040250Z - 20211128T041852Z # "amz mock" vi
+inc 20211128T133000Z - 20211128T163854Z # "amz mock" vi
+inc 20211128T233014Z - 20211129T000947Z # nvim vimtex
+inc 20211129T001721Z - 20211129T002407Z # "compsci_590" hw4 todo umass
+inc 20211129T003423Z - 20211129T004038Z # "compsci_590" hw4 todo umass
+inc 20211129T032351Z - 20211129T041158Z # "compsci_590" hw4 todo umass
+inc 20211129T045731Z - 20211129T064405Z # "compsci_590" hw4 todo umass
+inc 20211129T150815Z - 20211129T153904Z # "compsci_590" hw4 todo umass
+inc 20211129T165242Z - 20211129T185916Z # "Nov 22: Emerging Tech" "compsci_305" todo umass
+inc 20211129T214140Z - 20211129T222037Z # "compsci_590" hw4 todo umass
+inc 20211129T224229Z - 20211129T230132Z # "compsci_590" hw4 todo umass
+inc 20211129T233404Z - 20211130T004628Z # "compsci_590" hw4 todo umass
+inc 20211130T041906Z - 20211130T041920Z # PA3.2 "compsci_590" todo umass
+inc 20211130T042026Z - 20211130T043546Z # PA3.2 "compsci_590" todo umass
+inc 20211130T043629Z - 20211130T044512Z # PA3.2 "compsci_590" todo umass
+inc 20211130T142456Z - 20211130T155627Z # "Unit 5 presentations" "compsci_305" todo umass
+inc 20211130T164516Z - 20211130T173641Z # "Unit 5 presentations" "compsci_305" todo umass
