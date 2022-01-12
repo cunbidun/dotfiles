@@ -15,3 +15,5 @@
 /home/cunbidun/dotfiles/TODO.md
 /home/cunbidun/dotfiles/installation_note.md
 /home/cunbidun/.xmonad/xmonad.hs
+/home/cunbidun/.config/lvim/config.lua
+/home/cunbidun/.vsnip/cpp.json

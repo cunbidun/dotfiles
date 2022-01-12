@@ -187,9 +187,11 @@ git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custo
 ```
 ---
 
-### Java applet topcoder
+### Java applet topcoder 
+
 Disable security by deleting "MD5" from the line that starts with "jdk.jar.disabledAlgorithms" in the following file:
 ```
+sudo archlinux-java set java-8-openjdk
 sudo nvim /usr/lib/jvm/default/jre/lib/security/java.security
 
 Before: jdk.jar.disabledAlgorithms=MD2, MD5, RSA keySize < 1024, \

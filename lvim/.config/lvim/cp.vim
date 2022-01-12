@@ -1,0 +1,1 @@
+/home/cunbidun/.config/nvim/lua/core/cp.vim

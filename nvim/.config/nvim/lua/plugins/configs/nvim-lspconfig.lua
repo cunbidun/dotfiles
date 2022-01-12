@@ -18,13 +18,13 @@ local servers = {
 		on_attach = function(client)
 			client.resolved_capabilities.document_formatting = false
 		end,
-		cmd = { DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server", "start" },
+		cmd = { DATA_PATH .. "/lsp_servers/bash/node_modules/.bin/bash-language-server", "start" },
 		filetypes = { "sh", "zsh" },
 	},
 	clangd = {
 		capabilities = capabilities,
 		cmd = {
-			DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
+			DATA_PATH .. "/lsp_servers/clangd/clangd/bin/clangd",
 			"--background-index",
 			"--header-insertion=never",
 			"--cross-file-rename",
@@ -47,7 +47,7 @@ local servers = {
 		capabilities = capabilities,
 		cmd = {
 			"node",
-			DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
+			DATA_PATH .. "/lsp_servers/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
 			"--stdio",
 		},
 		on_attach = function(client)
@@ -61,20 +61,10 @@ local servers = {
 			},
 		},
 	},
-	hls = {
-		capabilities = capabilities,
-		cmd = { DATA_PATH .. "/lspinstall/haskell/haskell-language-server-wrapper", "--lsp" },
-		on_attach = function(client)
-			client.resolved_capabilities.document_formatting = true
-			client.resolved_capabilities.document_range_formatting = true
-		end,
-	},
 	sumneko_lua = {
 		capabilities = capabilities,
 		cmd = {
-			DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
-			"-E",
-			DATA_PATH .. "/lspinstall/lua/main.lua",
+			DATA_PATH .. "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server",
 		},
 		on_attach = function(client)
 			client.resolved_capabilities.document_formatting = false
@@ -104,7 +94,7 @@ local servers = {
 	},
 	pyright = {
 		capabilities = capabilities,
-		cmd = { DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver", "--stdio" },
+		cmd = { DATA_PATH .. "/lsp_servers/python/node_modules/.bin/pyright-langserver", "--stdio" },
 		on_attach = function(client)
 			client.resolved_capabilities.document_formatting = false
 			client.resolved_capabilities.document_range_formatting = false
@@ -112,11 +102,11 @@ local servers = {
 	},
 	vimls = {
 		capabilities = capabilities,
-		cmd = { DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server", "--stdio" },
+		cmd = { DATA_PATH .. "/lsp_servers/vim/node_modules/.bin/vim-language-server", "--stdio" },
 	},
 	texlab = {
 		capabilities = capabilities,
-		cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
+		cmd = { DATA_PATH .. "/lsp_servers/latex/texlab" },
 		on_attach = function(client)
 			client.resolved_capabilities.document_formatting = true
 		end,
