@@ -67,7 +67,7 @@ static const Rule rules[] = {
    *  WM_WINDOW_ROLE(STRING) = role
 	 */
 	/* class              role          instance         title            tags mask     isfloating    isterminal      noswallow       monitor */
-	{ "firefox",          NULL,         NULL,            NULL,            1 << 2,       0,            0,              0,              -1 },
+	// { "firefox",          NULL,         "Navigator",     NULL,            0,            1,            0,              0,              -1 },
 	{ "Arandr",           NULL,         "arandr",        NULL,            0,            1,            0,              0,              -1 }, // center this
 	{ NULL,               "pop-up",     NULL,            NULL,            0,            1,            0,              0,              -1 },
 	{ TERMCLASS,          NULL,         NULL,            NULL,            0,            0,            1,              0,              -1 },

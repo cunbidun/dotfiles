@@ -6482,3 +6482,218 @@ time 1641273007
 old [description:"E. Extreme Extension" due:"1641272399" entry:"1641187223" modified:"1641270909" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
 new [description:"E. Extreme Extension" due:"1641272399" end:"1641273007" entry:"1641187223" modified:"1641273007" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"e7700f84-7d92-41e7-ab59-c7406814df5f"]
 ---
+time 1641408219
+old [annotation_1640100928:"asking about location and the offer trip" description:"reply to Hope Raney on team matching" due:"1640321999" entry:"1639691331" modified:"1640101241" project:"citadel" status:"pending" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+new [annotation_1640100928:"asking about location and the offer trip" description:"reply to Hope Raney on team matching" due:"1640321999" end:"1641408219" entry:"1639691331" modified:"1641408219" project:"citadel" status:"completed" uuid:"45a417df-15e4-4c76-87f5-759b2becf708"]
+---
+time 1641408219
+old [description:"request instacart jan 2" due:"1641185999" entry:"1641159232" modified:"1641159232" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"bafa6742-6177-4efd-bb2e-f8881bc52324"]
+new [description:"request instacart jan 2" due:"1641185999" end:"1641408219" entry:"1641159232" modified:"1641408219" project:"general" status:"completed" tags:"todo" tags_todo:"x" uuid:"bafa6742-6177-4efd-bb2e-f8881bc52324"]
+---
+time 1641433581
+new [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641433581" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+---
+time 1641433638
+old [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641433581" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+new [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641433638" project:"cp" start:"1641433638" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+---
+time 1641438633
+old [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641433638" project:"cp" start:"1641433638" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+new [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641438633" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+---
+time 1641439023
+old [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641438633" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+new [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641439023" project:"cp" start:"1641439023" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+---
+time 1641439361
+old [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641439023" project:"cp" start:"1641439023" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+new [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641439361" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+---
+time 1641443709
+new [description:"abc201_e" entry:"1641443709" modified:"1641443709" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"b50994f7-decf-4484-83dc-ced8af70efde"]
+---
+time 1641443714
+old [description:"abc201_e" entry:"1641443709" modified:"1641443709" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"b50994f7-decf-4484-83dc-ced8af70efde"]
+new [description:"abc201_e" entry:"1641443709" modified:"1641443714" project:"cp" start:"1641443714" status:"pending" tags:"todo" tags_todo:"x" uuid:"b50994f7-decf-4484-83dc-ced8af70efde"]
+---
+time 1641447115
+old [description:"abc201_e" entry:"1641443709" modified:"1641443714" project:"cp" start:"1641443714" status:"pending" tags:"todo" tags_todo:"x" uuid:"b50994f7-decf-4484-83dc-ced8af70efde"]
+new [description:"abc201_e" end:"1641447115" entry:"1641443709" modified:"1641447115" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"b50994f7-decf-4484-83dc-ced8af70efde"]
+---
+time 1641448746
+old [description:"weather script" entry:"1637298917" modified:"1637711957" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+new [description:"weather script" entry:"1637298917" modified:"1641448746" project:"dwm" start:"1641448746" status:"pending" tags:"linux" tags_linux:"x" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+---
+time 1641451330
+old [description:"weather script" entry:"1637298917" modified:"1641448746" project:"dwm" start:"1641448746" status:"pending" tags:"linux" tags_linux:"x" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+new [description:"weather script" end:"1641451330" entry:"1637298917" modified:"1641451330" project:"dwm" status:"completed" tags:"linux" tags_linux:"x" uuid:"535d62f4-7b11-482d-92d2-3e128c134776"]
+---
+time 1641500346
+new [description:"consider lvim as new nvim" due:"1641531599" entry:"1641500346" modified:"1641500346" project:"nvim" status:"pending" uuid:"aaf68aab-1ccf-4c1f-a2e9-b9a61b785bcd"]
+---
+time 1641500349
+old [description:"consider lvim as new nvim" due:"1641531599" entry:"1641500346" modified:"1641500346" project:"nvim" status:"pending" uuid:"aaf68aab-1ccf-4c1f-a2e9-b9a61b785bcd"]
+new [description:"consider lvim as new nvim" due:"1641531599" entry:"1641500346" modified:"1641500349" project:"nvim" start:"1641500349" status:"pending" uuid:"aaf68aab-1ccf-4c1f-a2e9-b9a61b785bcd"]
+---
+time 1641518141
+old [description:"consider lvim as new nvim" due:"1641531599" entry:"1641500346" modified:"1641500349" project:"nvim" start:"1641500349" status:"pending" uuid:"aaf68aab-1ccf-4c1f-a2e9-b9a61b785bcd"]
+new [description:"consider lvim as new nvim" due:"1641531599" entry:"1641500346" modified:"1641518141" project:"nvim" status:"pending" uuid:"aaf68aab-1ccf-4c1f-a2e9-b9a61b785bcd"]
+---
+time 1641518189
+new [description:"arc061_b" entry:"1641518189" modified:"1641518189" project:"cp" status:"pending" uuid:"afe84bc5-34ac-47b2-9a07-b22002d879ce"]
+---
+time 1641518194
+old [description:"arc061_b" entry:"1641518189" modified:"1641518189" project:"cp" status:"pending" uuid:"afe84bc5-34ac-47b2-9a07-b22002d879ce"]
+new [description:"arc061_b" entry:"1641518189" modified:"1641518194" project:"cp" start:"1641518194" status:"pending" uuid:"afe84bc5-34ac-47b2-9a07-b22002d879ce"]
+---
+time 1641518943
+old [description:"arc061_b" entry:"1641518189" modified:"1641518194" project:"cp" start:"1641518194" status:"pending" uuid:"afe84bc5-34ac-47b2-9a07-b22002d879ce"]
+new [description:"arc061_b" end:"1641518943" entry:"1641518189" modified:"1641518943" project:"cp" status:"completed" uuid:"afe84bc5-34ac-47b2-9a07-b22002d879ce"]
+---
+time 1641532025
+new [description:"agc054_c" entry:"1641532025" modified:"1641532025" project:"cp" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641532028
+old [description:"agc054_c" entry:"1641532025" modified:"1641532025" project:"cp" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" entry:"1641532025" modified:"1641532028" project:"cp" start:"1641532028" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641533019
+old [description:"agc054_c" entry:"1641532025" modified:"1641532028" project:"cp" start:"1641532028" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" entry:"1641532025" modified:"1641533019" project:"cp" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641535339
+new [description:"abc168_e" entry:"1641535339" modified:"1641535339" project:"cp" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+---
+time 1641535344
+old [description:"abc168_e" entry:"1641535339" modified:"1641535339" project:"cp" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+new [description:"abc168_e" entry:"1641535339" modified:"1641535344" project:"cp" start:"1641535344" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+---
+time 1641536857
+old [description:"abc168_e" entry:"1641535339" modified:"1641535344" project:"cp" start:"1641535344" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+new [description:"abc168_e" entry:"1641535339" modified:"1641536857" project:"cp" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+---
+time 1641578208
+old [description:"abc168_e" entry:"1641535339" modified:"1641536857" project:"cp" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+new [description:"abc168_e" entry:"1641535339" modified:"1641578208" project:"cp" start:"1641578208" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+---
+time 1641579687
+old [description:"abc168_e" entry:"1641535339" modified:"1641578208" project:"cp" start:"1641578208" status:"pending" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+new [description:"abc168_e" end:"1641579687" entry:"1641535339" modified:"1641579687" project:"cp" status:"completed" uuid:"6c2b7d64-891e-4960-a102-4e0a7783ea8b"]
+---
+time 1641663209
+old [description:"E. Math Test" due:"1641445199" entry:"1641433581" modified:"1641439361" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+new [description:"E. Math Test" due:"1642309199" entry:"1641433581" modified:"1641663209" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"fd75decf-cf81-45b1-9a5c-b96d0cbb2617"]
+---
+time 1641663209
+old [description:"agc054_c" entry:"1641532025" modified:"1641533019" project:"cp" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641663209" project:"cp" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641663225
+old [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641663209" project:"cp" status:"pending" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641663225" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641663276
+new [description:"CEOIPractice 17-Museum" due:"1642309199" entry:"1641663276" modified:"1641663276" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+---
+time 1641663289
+new [description:"COCI 07-Cestarine" due:"1642309199" entry:"1641663289" modified:"1641663289" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+---
+time 1641663300
+new [description:"COCI 08-Trezor" due:"1642309199" entry:"1641663300" modified:"1641663300" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+---
+time 1641663310
+new [description:"COCI 16-mag" due:"1642309199" entry:"1641663310" modified:"1641663310" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+---
+time 1641663321
+new [description:"COCI 17-ceste" due:"1642309199" entry:"1641663321" modified:"1641663321" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"f36296b4-2520-4404-93ad-2652ccf50e31"]
+---
+time 1641663767
+new [description:"arc089_b" due:"1642309199" entry:"1641663767" modified:"1641663767" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"87515527-1992-466a-8d49-87ef03d670cb"]
+---
+time 1641663777
+new [description:"abc216_g" due:"1642309199" entry:"1641663777" modified:"1641663777" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"0b9b1fbe-fb51-4c73-97a2-7ef28c2a2919"]
+---
+time 1641663784
+new [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641663784" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+---
+time 1641670392
+old [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641663225" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641670392" project:"cp" start:"1641670391" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641671482
+old [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641670392" project:"cp" start:"1641670391" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641671482" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641712500
+old [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641671482" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641712500" project:"cp" start:"1641712500" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641713290
+old [description:"agc054_c" due:"1642309199" entry:"1641532025" modified:"1641712500" project:"cp" start:"1641712500" status:"pending" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+new [description:"agc054_c" due:"1642309199" end:"1641713290" entry:"1641532025" modified:"1641713290" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"5841e5d2-b878-44fd-81f9-35bf8d7755c7"]
+---
+time 1641835676
+old [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641663784" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+new [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641835676" project:"cp" start:"1641835676" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+---
+time 1641836565
+new [description:"request Long jan housing" due:"1643000400" entry:"1641836565" modified:"1641836565" project:"general" status:"pending" uuid:"49478920-39fc-4f1c-bf23-5ff8a982b2c5"]
+---
+time 1641836756
+old [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641835676" project:"cp" start:"1641835676" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+new [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641836756" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+---
+time 1641847190
+old [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641836756" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+new [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641847190" project:"cp" start:"1641847190" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+---
+time 1641853984
+old [description:"aising2019_d" due:"1642309199" entry:"1641663784" modified:"1641847190" project:"cp" start:"1641847190" status:"pending" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+new [description:"aising2019_d" due:"1642309199" end:"1641853983" entry:"1641663784" modified:"1641853984" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"10421af3-80fa-485d-a992-7daaee583671"]
+---
+time 1641915859
+old [description:"arc089_b" due:"1642309199" entry:"1641663767" modified:"1641663767" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"87515527-1992-466a-8d49-87ef03d670cb"]
+new [description:"arc089_b" due:"1642309199" entry:"1641663767" modified:"1641915859" project:"cp" start:"1641915859" status:"pending" tags:"todo" tags_todo:"x" uuid:"87515527-1992-466a-8d49-87ef03d670cb"]
+---
+time 1641926712
+old [description:"arc089_b" due:"1642309199" entry:"1641663767" modified:"1641915859" project:"cp" start:"1641915859" status:"pending" tags:"todo" tags_todo:"x" uuid:"87515527-1992-466a-8d49-87ef03d670cb"]
+new [description:"arc089_b" due:"1642309199" entry:"1641663767" modified:"1641926712" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"87515527-1992-466a-8d49-87ef03d670cb"]
+---
+time 1641936506
+new [description:"disable nvim notify lvim" entry:"1641936506" modified:"1641936506" project:"nvim" status:"pending" uuid:"1b6022d3-226d-43bc-808c-84e600484c41"]
+---
+time 1641936509
+old [description:"disable nvim notify lvim" entry:"1641936506" modified:"1641936506" project:"nvim" status:"pending" uuid:"1b6022d3-226d-43bc-808c-84e600484c41"]
+new [description:"disable nvim notify lvim" entry:"1641936506" modified:"1641936509" project:"nvim" start:"1641936509" status:"pending" uuid:"1b6022d3-226d-43bc-808c-84e600484c41"]
+---
+time 1641938751
+old [description:"disable nvim notify lvim" entry:"1641936506" modified:"1641936509" project:"nvim" start:"1641936509" status:"pending" uuid:"1b6022d3-226d-43bc-808c-84e600484c41"]
+new [description:"disable nvim notify lvim" end:"1641938751" entry:"1641936506" modified:"1641938751" project:"nvim" status:"completed" uuid:"1b6022d3-226d-43bc-808c-84e600484c41"]
+---
+time 1641938765
+new [description:"setup bashls lvim" entry:"1641938765" modified:"1641938765" project:"nvim" status:"pending" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+---
+time 1641938768
+old [description:"setup bashls lvim" entry:"1641938765" modified:"1641938765" project:"nvim" status:"pending" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+new [description:"setup bashls lvim" entry:"1641938765" modified:"1641938768" project:"nvim" start:"1641938768" status:"pending" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+---
+time 1641938782
+old [description:"setup bashls lvim" entry:"1641938765" modified:"1641938768" project:"nvim" start:"1641938768" status:"pending" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+new [description:"setup bashls lvim" entry:"1641938765" modified:"1641938782" project:"nvim" status:"pending" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+---
+time 1641938787
+old [description:"setup bashls lvim" entry:"1641938765" modified:"1641938782" project:"nvim" status:"pending" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+new [description:"setup bashls lvim" entry:"1641938765" modified:"1641938787" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+---
+time 1641938912
+old [annotation_1634498516:"telescope might be slow for the large project" annotation_1635870687:"consider using telescope with native fzf" description:"setup telescope" entry:"1634156614" modified:"1635870701" project:"nvim" status:"pending" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+new [annotation_1634498516:"telescope might be slow for the large project" annotation_1635870687:"consider using telescope with native fzf" description:"setup telescope" end:"1641938910" entry:"1634156614" modified:"1641938912" project:"nvim" status:"deleted" tags:"linux,nvim" tags_linux:"x" tags_nvim:"x" uuid:"789d020a-3d85-43bc-8563-3736a0a87ccf"]
+---
+time 1641938929
+old [description:"setup bashls lvim" entry:"1641938765" modified:"1641938787" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+new [description:"setup bashls lvim" entry:"1641938765" modified:"1641938929" project:"nvim" start:"1641938929" status:"pending" tags:"linux" tags_linux:"x" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+---
+time 1641941276
+old [description:"setup bashls lvim" entry:"1641938765" modified:"1641938929" project:"nvim" start:"1641938929" status:"pending" tags:"linux" tags_linux:"x" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+new [description:"setup bashls lvim" end:"1641941276" entry:"1641938765" modified:"1641941276" project:"nvim" status:"completed" tags:"linux" tags_linux:"x" uuid:"7b090b4f-ec3f-4769-a19c-e29668e1fca8"]
+---

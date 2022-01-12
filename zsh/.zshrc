@@ -1,4 +1,5 @@
 export PATH=$PATH:~/.scripts/bin
+export PATH=$PATH:~/.local/bin
 export PATH=$PATH:/home/cunbidun/.cargo/bin
 export ZSH="/home/cunbidun/.oh-my-zsh"
 export TERM="xterm-256color"
@@ -62,22 +63,22 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 
+MY_EDITOR='lvim'
 export TERMINAL='alacritty'
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='nvim'
-  export VISUAL='nvim'
+  export EDITOR=$MY_EDITOR
+  export VISUAL=$MY_EDITOR
 fi
 
-alias zshconfig="nvim ~/.zshrc"
-alias vconfig="cd ~/.config/nvim/ && nvim"
+alias zshconfig="$MY_EDITOR ~/.zshrc"
 
 alias CP="~/competitive_programming/"
 alias b="set_brightness"
 alias r="ranger"
-alias v="nvim"
+alias nvim="lvim"
 alias s="source ~/.zshrc"
 alias x="nvim ~/.xinitrc"
 

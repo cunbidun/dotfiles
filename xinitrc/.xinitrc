@@ -40,13 +40,12 @@ xset r rate 200 30 &
 
 # with HDMI, nvidia
 # xrandr --output HDMI-0 --primary --mode 3440x1440 --pos 0x0 --rotate normal --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 760x1440 --rotate normal --output DP-1-1 --off
-# xrandr --output HDMI-0 --primary --rate 144.00 --output eDP-1-1 --below HDMI-0 --mode 1920x1080 --rate 144.00 
 
 # built-in, nvida
-# xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
+xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
 
 # built-in, intel 
-xrandr --output eDP-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
+# xrandr --output eDP-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
 
 # with thunderbolt, nvidia
 # xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 320x1440 --rotate normal --output DP-1-1 --primary --mode 2560x1440 --rate 144.00 --pos 0x0 --rotate normal

@@ -4,19 +4,10 @@ let g:cpTermSize = '100'
 
 function! TermWrapper(command) 
 	exec 'wa'
-	" exec 'silent! only'
-	" let g:current_window = win_getid()
-	" exec 'mkview'
-	" exec 'vnew'
-	" exec 'vertical resize ' . g:cpTermSize
-	" set nonu
-	" set nornu
-	" exec 'term ' . a:command
-	" exec '$'
-	" exec printf('exec win_gotoid(%s)', g:current_window) 
-	" exec 'loadview'
-	exec "TermExec direction=vertical cmd='clear' go_back=0" 
-  exec "bdelete!"
+  let l:buf_id = uniq(map(filter(getwininfo(), 'v:val.terminal'), 'v:val.bufnr'))
+  if len(l:buf_id) > 0
+    exec printf("%sbdelete!", l:buf_id[0]) 
+  endif
 	exec printf("TermExec direction=vertical cmd='%s'", a:command) 
 endfunction
 
