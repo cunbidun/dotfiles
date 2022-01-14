@@ -1,19 +1,39 @@
-/home/cunbidun/.config/awesome/rc.lua
+# dotfiles.txt contains list of dotfiles for faster accessiblity.
+# the dotfiles_picker will ignore blank lines or lines starting with a pound sign.
+
+# dotfiles list
+/home/cunbidun/.scripts/bin/dotfiles.txt
+
+# awesome wm
 /home/cunbidun/.config/awesome
+/home/cunbidun/.config/awesome/rc.lua
+
+# nvim 
 /home/cunbidun/.config/nvim
 /home/cunbidun/.config/nvim/lua/core/settings.lua
 /home/cunbidun/.config/nvim/lua/plugins/init.lua
+
+# lvim
+/home/cunbidun/.config/lvim/config.lua
+
+# snippet
+/home/cunbidun/.vsnip/cpp.json
+
+# scripts
 /home/cunbidun/.scripts/bin
+/home/cunbidun/.scripts/bin/sc_weather
+/home/cunbidun/.scripts/bin/sc_printscreen
+/home/cunbidun/.scripts/bin/sc_calcurse_sync
 /home/cunbidun/.scripts/bin/dotfiles_picker
-/home/cunbidun/.scripts/bin/dotfiles.txt
-/home/cunbidun/dwmblocks-async/config.h
+
+# dwm
 /home/cunbidun/dwm
+/home/cunbidun/dwm/config.def.h
+/home/cunbidun/dwmblocks-async/config.h
+
+# alacritty
 /home/cunbidun/.config/alacritty/alacritty.yml
-/home/cunbidun/.config/alacritty/README.md
-/home/cunbidun/.config/rofi/config.rasi
-/home/cunbidun/.config/rofi/nord.rasi
+
+# general TODO and note 
 /home/cunbidun/dotfiles/TODO.md
 /home/cunbidun/dotfiles/installation_note.md
-/home/cunbidun/.xmonad/xmonad.hs
-/home/cunbidun/.config/lvim/config.lua
-/home/cunbidun/.vsnip/cpp.json

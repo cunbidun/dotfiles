@@ -1,16 +1,9 @@
 #!/bin/bash
 
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 dotfiles="$DIR/dotfiles.txt"
 
-path=$(rofi -dmenu -i -p "select dotfiles: " < "$dotfiles")
-
+path=$(grep -v "^\#" $dotfiles | grep . | dmenu -i -l 10 -p "select dotfile: ")
 if [ -n "$path" ]; then
-	if [[ -d "$path" ]]; then
-    cd "$path"
-		$EDITOR  
-	else
-		$EDITOR "$path"
-	fi
+	"$TERMINAL" -e "$EDITOR" "$path"
 fi

@@ -155,7 +155,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("sc_printscreen") },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("nord_color_picker") },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD(TERMINAL " -e dotfiles_picker") },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("dotfiles_picker") },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
