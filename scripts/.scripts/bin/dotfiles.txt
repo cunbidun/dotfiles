@@ -1,39 +1,47 @@
 # dotfiles.txt contains list of dotfiles for faster accessiblity.
 # the dotfiles_picker will ignore blank lines or lines starting with a pound sign.
 
+# NOTE: don't use the tilde sign (~) for the home directory. Instead, use $HOME
+
 # dotfiles list
-/home/cunbidun/.scripts/bin/dotfiles.txt
+$HOME/.scripts/bin/dotfiles.txt
 
 # awesome wm
-/home/cunbidun/.config/awesome
-/home/cunbidun/.config/awesome/rc.lua
+$HOME/.config/awesome
+$HOME/.config/awesome/rc.lua
 
 # nvim 
-/home/cunbidun/.config/nvim
-/home/cunbidun/.config/nvim/lua/core/settings.lua
-/home/cunbidun/.config/nvim/lua/plugins/init.lua
+$HOME/.config/nvim
+$HOME/.config/nvim/lua/core/settings.lua
+$HOME/.config/nvim/lua/plugins/init.lua
 
 # lvim
-/home/cunbidun/.config/lvim/config.lua
+$HOME/.config/lvim/config.lua
 
 # snippet
-/home/cunbidun/.vsnip/cpp.json
+$HOME/.vsnip/cpp.json
 
 # scripts
-/home/cunbidun/.scripts/bin
-/home/cunbidun/.scripts/bin/sc_weather
-/home/cunbidun/.scripts/bin/sc_printscreen
-/home/cunbidun/.scripts/bin/sc_calcurse_sync
-/home/cunbidun/.scripts/bin/dotfiles_picker
+$HOME/.scripts/bin
+$HOME/.scripts/bin/sc_weather
+$HOME/.scripts/bin/sc_printscreen
+$HOME/.scripts/bin/sc_calcurse_sync
+$HOME/.scripts/bin/dotfiles_picker
 
 # dwm
-/home/cunbidun/dwm
-/home/cunbidun/dwm/config.def.h
-/home/cunbidun/dwmblocks-async/config.h
+$HOME/dwm
+$HOME/dwm/config.def.h
+$HOME/dwmblocks-async/config.h
+
+# dmenu
+$HOME/dmenu/
+$HOME/dmenu/dmenu.c
+$HOME/dmenu/config.def.h
+
 
 # alacritty
-/home/cunbidun/.config/alacritty/alacritty.yml
+$HOME/.config/alacritty/alacritty.yml
 
 # general TODO and note 
-/home/cunbidun/dotfiles/TODO.md
-/home/cunbidun/dotfiles/installation_note.md
+$HOME/dotfiles/TODO.md
+$HOME/dotfiles/installation_note.md

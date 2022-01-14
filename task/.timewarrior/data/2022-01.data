@@ -28,3 +28,6 @@ inc 20220114T175003Z - 20220114T175127Z # "G - 01Sequence" cp todo
 inc 20220114T182051Z - 20220114T183031Z # "G - 01Sequence" cp todo
 inc 20220114T190246Z - 20220114T194947Z # "G - 01Sequence" cp todo
 inc 20220114T211643Z - 20220114T215855Z # dmenu linux "move to dmenu as file picker"
+inc 20220114T220249Z - 20220114T221328Z # "disable format_on_save for config.def.h" linux nvim
+inc 20220114T222048Z - 20220114T224204Z # dmenu linux "use /home/cunbidun in dotfiles.txt"
+inc 20220114T224500Z - 20220114T225707Z # dmenu linux "use vimkey in dmenu"

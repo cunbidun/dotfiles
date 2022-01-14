@@ -4783,3 +4783,43 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20220114T211643Z","end":"20220114T215855Z","tags":["dmenu","linux","move to dmenu as file picker"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T220249Z","tags":["disable format_on_save for config.def.h","linux","nvim"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T220249Z","tags":["disable format_on_save for config.def.h","linux","nvim"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T220249Z","end":"20220114T221328Z","tags":["disable format_on_save for config.def.h","linux","nvim"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T222048Z","tags":["dmenu","linux","use \/home\/cunbidun in dotfiles.txt"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T222048Z","tags":["dmenu","linux","use \/home\/cunbidun in dotfiles.txt"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T222048Z","end":"20220114T224204Z","tags":["dmenu","linux","use \/home\/cunbidun in dotfiles.txt"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T225654Z","tags":["dmenu","linux","use vimkey in dmenu"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T225654Z","tags":["dmenu","linux","use vimkey in dmenu"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T224500Z","tags":["dmenu","linux","use vimkey in dmenu"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T224500Z","tags":["dmenu","linux","use vimkey in dmenu"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T224500Z","end":"20220114T225707Z","tags":["dmenu","linux","use vimkey in dmenu"]}

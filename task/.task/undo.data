@@ -6888,3 +6888,33 @@ new [description:"move to dmenu as file picker" end:"1642197535" entry:"16421950
 time 1642197590
 new [description:"reply to Chicago Rental Assistance" due:"1642222799" entry:"1642197590" modified:"1642197590" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
 ---
+time 1642197769
+old [description:"disable format_on_save for config.def.h" entry:"1642197429" modified:"1642197429" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"cc382c39-304e-49ce-95ba-71b7c07513c9"]
+new [description:"disable format_on_save for config.def.h" entry:"1642197429" modified:"1642197769" project:"nvim" start:"1642197769" status:"pending" tags:"linux" tags_linux:"x" uuid:"cc382c39-304e-49ce-95ba-71b7c07513c9"]
+---
+time 1642198408
+old [description:"disable format_on_save for config.def.h" entry:"1642197429" modified:"1642197769" project:"nvim" start:"1642197769" status:"pending" tags:"linux" tags_linux:"x" uuid:"cc382c39-304e-49ce-95ba-71b7c07513c9"]
+new [description:"disable format_on_save for config.def.h" end:"1642198408" entry:"1642197429" modified:"1642198408" project:"nvim" status:"completed" tags:"linux" tags_linux:"x" uuid:"cc382c39-304e-49ce-95ba-71b7c07513c9"]
+---
+time 1642198844
+new [description:"use \/home\/cunbidun in dotfiles.txt" entry:"1642198844" modified:"1642198844" project:"dmenu" status:"pending" tags:"linux" tags_linux:"x" uuid:"20300dee-0113-4279-9fac-d693465c00d6"]
+---
+time 1642198848
+old [description:"use \/home\/cunbidun in dotfiles.txt" entry:"1642198844" modified:"1642198844" project:"dmenu" status:"pending" tags:"linux" tags_linux:"x" uuid:"20300dee-0113-4279-9fac-d693465c00d6"]
+new [description:"use \/home\/cunbidun in dotfiles.txt" entry:"1642198844" modified:"1642198848" project:"dmenu" start:"1642198848" status:"pending" tags:"linux" tags_linux:"x" uuid:"20300dee-0113-4279-9fac-d693465c00d6"]
+---
+time 1642200124
+old [description:"use \/home\/cunbidun in dotfiles.txt" entry:"1642198844" modified:"1642198848" project:"dmenu" start:"1642198848" status:"pending" tags:"linux" tags_linux:"x" uuid:"20300dee-0113-4279-9fac-d693465c00d6"]
+new [description:"use \/home\/cunbidun in dotfiles.txt" end:"1642200124" entry:"1642198844" modified:"1642200124" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"20300dee-0113-4279-9fac-d693465c00d6"]
+---
+time 1642201010
+new [description:"use vimkey in dmenu" entry:"1642201010" modified:"1642201010" project:"dmenu" status:"pending" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
+---
+time 1642201014
+old [description:"use vimkey in dmenu" entry:"1642201010" modified:"1642201010" project:"dmenu" status:"pending" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
+new [description:"use vimkey in dmenu" entry:"1642201010" modified:"1642201014" project:"dmenu" start:"1642201014" status:"pending" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
+---
+time 1642201027
+old [description:"use vimkey in dmenu" entry:"1642201010" modified:"1642201014" project:"dmenu" start:"1642201014" status:"pending" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
+new [description:"use vimkey in dmenu" end:"1642201026" entry:"1642201010" modified:"1642201027" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
+---

@@ -430,6 +430,9 @@ lvim.autocommands.custom_groups = {
 	{ "VimEnter", "*", "highlight Nord13 guibg=#EBCB8B" },
 	{ "VimEnter", "*", "highlight Nord14 guibg=#A3BE8C" },
 	{ "VimEnter", "*", "highlight Nord15 guibg=#B48EAD" },
+
+	-- dwm, disable format_on_save
+	{ "VimEnter", "config.def.h", "lua require('lvim.core.autocmds').disable_format_on_save()" },
 }
 
 -- CP
