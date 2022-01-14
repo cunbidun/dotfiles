@@ -1,6 +1,6 @@
 export PATH=$PATH:~/.scripts/bin
 export PATH=$PATH:~/.local/bin
-export PATH=$PATH:/home/cunbidun/.cargo/bin
+export PATH=$PATH:~/.cargo/bin
 export ZSH="/home/cunbidun/.oh-my-zsh"
 export TERM="xterm-256color"
 export FZF_DEFAULT_OPTS="
@@ -78,9 +78,8 @@ alias zshconfig="$MY_EDITOR ~/.zshrc"
 alias CP="~/competitive_programming/"
 alias b="set_brightness"
 alias r="ranger"
-alias nvim="lvim"
 alias s="source ~/.zshrc"
-alias x="nvim ~/.xinitrc"
+alias x="$MY_EDITOR ~/.xinitrc"
 
 # Umass
 alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"

@@ -4663,3 +4663,112 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20220111T220849Z","end":"20220111T224756Z","tags":["linux","nvim","setup bashls lvim"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220112T180134Z","tags":["dwm","linux","setup dmenu"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220112T180134Z","tags":["dwm","linux","setup dmenu"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220112T180134Z","end":"20220112T181122Z","tags":["dwm","linux","setup dmenu"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220112T185300Z","tags":["arc089_b","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220112T185300Z","tags":["arc089_b","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220112T185300Z","end":"20220112T201705Z","tags":["arc089_b","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220112T185300Z","end":"20220112T201705Z","tags":["arc089_b","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220112T185300Z","end":"20220112T194705Z","tags":["arc089_b","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220113T200830Z","tags":["abc216_g","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220113T200830Z","tags":["abc216_g","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220113T200830Z","end":"20220113T202339Z","tags":["abc216_g","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T015439Z","tags":["COCI 17-ceste","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T015439Z","tags":["COCI 17-ceste","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T015439Z","end":"20220114T023016Z","tags":["COCI 17-ceste","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T151320Z","tags":["general","todo","update the installation note"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T151320Z","tags":["general","todo","update the installation note"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T151320Z","end":"20220114T164219Z","tags":["general","todo","update the installation note"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T151320Z","end":"20220114T164219Z","tags":["general","todo","update the installation note"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T151320Z","end":"20220114T164219Z","tags":["general","linux","todo","update the installation note"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T175003Z","tags":["G - 01Sequence","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T175003Z","tags":["G - 01Sequence","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T175003Z","end":"20220114T175127Z","tags":["G - 01Sequence","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T182051Z","tags":["G - 01Sequence","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T182051Z","tags":["G - 01Sequence","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T182051Z","end":"20220114T183031Z","tags":["G - 01Sequence","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T190246Z","tags":["G - 01Sequence","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T190246Z","tags":["G - 01Sequence","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T190246Z","end":"20220114T200447Z","tags":["G - 01Sequence","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T190246Z","end":"20220114T200447Z","tags":["G - 01Sequence","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T190246Z","end":"20220114T194947Z","tags":["G - 01Sequence","cp","todo"]}

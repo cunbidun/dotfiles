@@ -20,6 +20,9 @@ lvim.keys.normal_mode["<S-x>"] = ":BufferClose<CR>"
 -- unmap a default keymapping
 lvim.keys.normal_mode["<S-l>"] = false
 lvim.keys.normal_mode["<S-h>"] = false
+lvim.keys.insert_mode["jk"] = false
+lvim.keys.insert_mode["kj"] = false
+lvim.keys.insert_mode["jj"] = false
 
 -- lsp
 lvim.keys.normal_mode["<C-M-l>"] = "<cmd>lua vim.lsp.buf.formatting()<CR>"
@@ -87,7 +90,11 @@ lvim.builtin.terminal.size = function(term)
 	if term.direction == "horizontal" then
 		return 15
 	elseif term.direction == "vertical" then
-		return vim.o.columns * 0.4
+		if vim.o.columns < 150 then
+			return vim.o.columns * 0.35
+		else
+			return vim.o.columns * 0.4
+		end
 	else
 		return 20
 	end
@@ -128,6 +135,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
+	{ exe = "markdownlint", filetypes = { "markdown" } },
 	{ exe = "black", filetypes = { "python" } },
 	{ exe = "isort", filetypes = { "python" } },
 	{ exe = "stylua", filetypes = { "lua" } },
@@ -145,6 +153,8 @@ formatters.setup({
 -- set additional linters
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
+	{ exe = "write-good", filetypes = { "markdown", "txt" } },
+	{ exe = "markdownlint", filetypes = { "markdown" } },
 	{ exe = "flake8", filetypes = { "python" } },
 	{
 		exe = "shellcheck",
@@ -340,12 +350,21 @@ lvim.plugins = {
 	},
 	{ "tpope/vim-surround" },
 	{ "tzachar/cmp-tabnine", run = "./install.sh" },
+	{
+		-- markdown
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && yarn install",
+		config = function()
+			vim.cmd([[source $HOME/.config/nvim/lua/plugins/configs/markdown-preview.vim]])
+		end,
+	},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
 	{ "BufWinEnter", "*.lua", "setlocal ts=2 sw=2" },
-	-- no signcolumn and background
+
+	-- bar bar nord color scheme
 	{ "VimEnter", "*", "highlight Error guifg=#BF616A guibg=NONE" },
 	{ "VimEnter", "*", "highlight LSPDiagnosticsWarning guifg=#EBCB8B guibg=NONE" },
 	{ "VimEnter", "*", "highlight LSPDiagnosticsError guifg=#BF616A guibg=NONE" },
@@ -366,14 +385,8 @@ lvim.autocommands.custom_groups = {
 	{ "VimEnter", "*", "highlight BufferVisibleMod guifg=#EBCB8B guibg=NONE" },
 	{ "VimEnter", "*", "highlight BufferOffset guifg=NONE guibg=NONE" },
 	{ "VimEnter", "*", "highlight BufferTabpages guifg=NONE guibg=NONE" },
-	{ "VimEnter", "*", "highlight TabLine guifg=#4C566A guibg=#3B4252 ctermfg=254 ctermbg=238 gui=NONE cterm=NONE" },
-	{
-		"VimEnter",
-		"*",
-		"highlight TabLineFill guifg=#4C566A guibg=#3B4252 ctermfg=254 ctermbg=NONE gui=NONE cterm=NONE",
-	},
-	{ "VimEnter", "*", "highlight TabLineSel guifg=#88c0d0 guibg=NONE ctermfg=110 ctermbg=240 gui=NONE cterm=NONE" },
 
+	-- nvim-notify
 	{ "VimEnter", "*", "highlight NotifyERRORBorder guifg=#BF616A" },
 	{ "VimEnter", "*", "highlight NotifyWARNBorder guifg=#EBCB8B" },
 	{ "VimEnter", "*", "highlight NotifyINFOBorder guifg=#A3BE8C" },
@@ -397,6 +410,9 @@ lvim.autocommands.custom_groups = {
 	{ "VimEnter", "*", "highlight link NotifyINFOBody Normal" },
 	{ "VimEnter", "*", "highlight link NotifyDEBUGBody Normal" },
 	{ "VimEnter", "*", "highlight link NotifyTRACEBody Normal" },
+
+	-- trouble.nvim
+	{ "VimEnter", "*", "highlight  TroubleCount guifg=#EBCB8B guibg=#434C5E" },
 
 	{ "VimEnter", "*", "highlight Nord0 guibg=#2E3440" },
 	{ "VimEnter", "*", "highlight Nord1 guibg=#3B4252" },

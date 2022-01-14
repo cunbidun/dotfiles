@@ -1,148 +1,192 @@
 # Installation note
 
+## Core packages
+
 ### Install [yay](https://github.com/Jguer/yay)
-```
+
+```bash
 pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 ```
+
 ---
 
 ### Install dev tool
-```
+
+```bash
 pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo
 ```
+
+* `nodejs`, `npm`, `yarn`: for javascript
+* `go`: golang
+* `cargo`: for rust
+* `pyenv`,`pyenv-virtualenv`: for python
+
 ---
 
-### Install utilities
+## Install utilities
+
+```bash
+yay -S imlib2 fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow acpi pamixer apulse alsa-utils network-manager-applet maim
 ```
-yay -S imlib2 fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow acpi pamixer apulse alsa-utils network-manager-applet
-```
-1. fzf: fuzzy finder
-2. acpi: battery status
+
+* `fzf`: fuzzy finder
+* `acpi`: battery status
+* `maim`: screenshot
+
 ---
 
 ### Install utilities for neomutt
-```
+
+```bash
 yay -S abook lynx
 ```
+
 ---
 
-### Install ibus and ibus-bamboo
-1. install ibus and ibus-bamboo
-```
+### Keyboards
+
+#### Install ibus and ibus-bamboo
+
+```bash
 yay -S ibus ibus-bambooz
 ```
-2. execute `ibus-setup` to setup `ibus-bamboo`
-3. change color of ibus icon
-```
-gsettings set org.freedesktop.ibus.panel xkb-icon-rgba '#81A1C1' 
-```
+
+#### Remove `ibus` icon from the systrace
+
+Execute `ibus-setup`
+
 ---
 
 ### NVIDIA driver and optimus manager
-1. install optimus-manager
-```
+
+  1. install optimus-manager  
+
+```bash
 yay -S nvidia optimus-manager
 cp /usr/share/optimus-manager.conf /etc/optimus-manger/
 ```
-2. edit file /etc/optimus-manager/optimus-manager.conf as follow
-```
-[intel]
-DRI=3
-accel=
-driver=modesetting
-modeset=yes
-tearfree=
 
-[nvidia]
-DPI=96
-PAT=yes
-allow_external_gpus=no
-ignore_abi=no
-modeset=yes
-options=overclocking
+  2. edit file /etc/optimus-manager/optimus-manager.conf as follow  
 
-[optimus]
-switching=nouveau
-pci_power_control=yes
-auto_logout=no
-pci_remove=no
-pci_reset=no
-startup_auto_battery_mode=intel
-startup_auto_extpower_mode=nvidia
-startup_mode=auto
-```
+  ```txt
+  [intel]
+  DRI=3
+  accel=
+  driver=modesetting
+  modeset=yes
+  tearfree=
+
+  [nvidia]
+  DPI=96
+  PAT=yes
+  allow_external_gpus=no
+  ignore_abi=no
+  modeset=yes
+  options=overclocking
+
+  [optimus]
+  switching=nouveau
+  pci_power_control=yes
+  auto_logout=no
+  pci_remove=no
+  pci_reset=no
+  startup_auto_battery_mode=intel
+  startup_auto_extpower_mode=nvidia
+  startup_mode=auto
+  ```
+
 ---
 
 ### Install fonts
 
-```
+```bash
 yay -S adobe-source-code-pro-fonts ttf-weather-icons 
 ```
+
 ---
 
 ### Install picom-git for blurring effect
-```
+
+```bash
 yay -S picom-git 
 ```
+
 ---
 
-### Install lxappearance
-1. install lxappearance
-    ```
-    yay -S lxappearance papirus-folders-nordic
-    ```
-2. install [Nordic GTK theme](https://www.gnome-look.org/p/1267246/)
-3. setup in the GUI
----
+### Lxappearance
 
-### Install Arc icon (for status bar)
+#### Install lxappearance
+
+```bash
+yay -S lxappearance papirus-folders-nordic
 ```
-git clone [https://github.com/horst3180/arc-icon-theme](https://github.com/horst3180/arc-icon-theme) --depth 1 && cd arc-icon-theme
-./autogen.sh --prefix=/usr
-sudo make install
-```
+
+#### Nord GTK theme
+
+Install [Nordic GTK theme](https://www.gnome-look.org/p/1267246/)
+
+#### Enable the theme
+
+1. Run `lxappearance`
+2. Setup in the GUI
+
 ---
 
 ### Bluetooth
-[https://wiki.archlinux.org/index.php/bluetooth](https://wiki.archlinux.org/index.php/bluetooth)
 
-By default, the Bluetooth adapter does not power on after a reboot, you need to add the line `AutoEnable=true` in the configuration file `/etc/bluetooth/main.conf` at the bottom in the `[Policy]` section:
+[wiki](https://wiki.archlinux.org/index.php/bluetooth)
 
-    ```
-    [Policy]
-    AutoEnable=true
-    ```
+By default, the Bluetooth adapter does not power on after a reboot,
+you need to add the line `AutoEnable=true`
+in the configuration file `/etc/bluetooth/main.conf`
+at the bottom in the `[Policy]` section:
+
+  ```txt
+  [Policy]
+  AutoEnable=true
+  ```
+
 ---
 
-### Neovim
-1. copy config
-```
-cd dotfiles && stow nvim 
+### Neovim (Lunarvim)
+
+#### Copy configuration
+
+```bash
+cd dotfiles && stow lvim 
 ```
 
-2. install plug-in manager and formatter 
-```
-yay -S nvim-packer-git
+#### Install plug-in manager and formatter
+
+```bash
 cargo install stylua
+pip install flake8 black isort --upgrade # for python
 sudo npm install -g prettier
-npm install -g write-good
-pip install flake8 black isort --upgrade
+sudo npm install -g write-good
 sudo cpan -i YAML::Tiny Unicode::GCString File::HomeDir # for latex formatter
+yay -S nvim-packer-git
+yay -S nodejs-markdownlint-cli # for markdownlint
 ```
 
-3. Lsp install
-```
-:LspInstall cpp json
-```
+#### Install language servers
+
+1. Open a buffer in lvim
+
+2. `<leader>Li` to see which supported language servers, linters and formatters.
+
+3. Run :LspInstall with appropriate servers
+
 ---
 
 ### Discord
-1. install discord and BetterDiscord
+
+#### Install discord and BetterDiscord
+
 ```bash
-yay -S discord
+yay -S discord # install discord
 
 curl -O https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterdiscordctl
 chmod +x betterdiscordctl
@@ -150,21 +194,27 @@ sudo mv betterdiscordctl /usr/local/bin
 
 betterdiscordctl install
 ```
+
 2. copy config
+
 ```bash
 cd dotfiles
 stow BetterDiscord
 ```
+
 3. set up in discord
     1. go to discord client at `User Settings > Bandaged BD > Themes`
     2. turn on nord theme
+
 ---
 
 ### Zsh
 
-#### true color check
+#### True color check
+
 Run this on terminal and see if the color line break or not:
-```
+
+```bash
 awk 'BEGIN{
     s="/\\\\/\\\\/\\\\/\\\\/\\\\"; s=s s s s s s s s;
     for (colnum = 0; colnum<77; colnum++) {
@@ -179,22 +229,38 @@ awk 'BEGIN{
     printf "\\n";
 }'
 ```
+
 #### Install zsh plugins
+
 ```
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/timewarrior
 ```
+
 ---
 
-### Java applet topcoder 
+### Java applet Topcoder
 
-Disable security by deleting "MD5" from the line that starts with "jdk.jar.disabledAlgorithms" in the following file:
-```
+1. Make sure Java 8 is installed.
+`yay -S jre8-openjdk-headless  jre8-openjdk  jdk8-openjdk  openjdk8-doc  openjdk8-src`
+
+2. Disable security by deleting "MD5" from the line that starts with
+"jdk.jar.disabledAlgorithms" in with the following commands:
+
+```bash
 sudo archlinux-java set java-8-openjdk
-sudo nvim /usr/lib/jvm/default/jre/lib/security/java.security
+sudo $EDITOR /usr/lib/jvm/default/jre/lib/security/java.security
 
 Before: jdk.jar.disabledAlgorithms=MD2, MD5, RSA keySize < 1024, \
 After:  jdk.jar.disabledAlgorithms=MD2, RSA keySize < 1024, \
 ```
-[Source](https://codeforces.cc/blog/entry/90503?#comment-789564)
+
+**Learn more**: [Source](https://codeforces.cc/blog/entry/90503?#comment-789564)
+
+### DWM
+
+#### dwm swallow patch work around
+
+* For `MarkdownPreview` extension, the browser need to open before running
+`:MarkdownPreview`.
