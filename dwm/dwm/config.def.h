@@ -5,7 +5,7 @@
 #define TERMCLASS "Alacritty"
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int scalepreview       = 4;        /* tag preview scaling */
@@ -138,7 +138,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_x,      spawn,          SHCMD("arandr") },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD("nautilus ~") },
 	{ MODKEY,                 XK_backslash,    spawn,          SHCMD("dunstctl close-all") },
-	{ ALTKEY,                       XK_Tab,    spawn,          SHCMD("skippy-xd-runner --toggle") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
@@ -154,7 +153,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask|Mod1Mask,    XK_j,      setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask|Mod1Mask,    XK_r,      setcfact,       {.f =  0.00} },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("import png:- | xclip -selection clipboard -t image/png") },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("sc_printscreen") },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("nord_color_picker") },
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD(TERMINAL " -e dotfiles_picker") },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
