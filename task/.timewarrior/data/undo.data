@@ -4772,3 +4772,14 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20220114T190246Z","end":"20220114T194947Z","tags":["G - 01Sequence","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220114T211643Z","tags":["dmenu","linux","move to dmenu as file picker"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220114T211643Z","tags":["dmenu","linux","move to dmenu as file picker"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220114T211643Z","end":"20220114T215855Z","tags":["dmenu","linux","move to dmenu as file picker"]}

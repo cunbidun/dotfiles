@@ -4,7 +4,6 @@
 [description:"setup nord theme for neomutt" entry:"1634919016" modified:"1637700275" project:"neomutt" status:"pending" tags:"linux" tags_linux:"x" uuid:"e79f2481-4ff8-4c0d-b5c4-6bd8e55df995"]
 [description:"use C++ for gen.sh" entry:"1635002545" modified:"1636228307" project:"cpcli" status:"pending" tags:"cp" tags_cp:"x" uuid:"1813fc13-9395-49ce-b7b2-a69e9b4a831f"]
 [description:"rofi scroll with ctrl j\/k" entry:"1635774711" modified:"1637700230" project:"rofi" status:"pending" tags:"linux,rofi" tags_linux:"x" tags_rofi:"x" uuid:"cfed151b-06cc-4a98-8f60-98258259e314"]
-[description:"dotfiles picker ignore line starts with space or comment" entry:"1635774769" modified:"1637700230" project:"rofi" status:"pending" tags:"dotfiles_picker,linux" tags_dotfiles_picker:"x" tags_linux:"x" uuid:"b46fe2df-d788-4ef0-a335-c767be8819ce"]
 [description:"setup dunst with images" entry:"1636176449" modified:"1636228289" project:"dunst" status:"pending" tags:"linux" tags_linux:"x" uuid:"408f9626-f82b-49ce-9785-dd631acbc22e"]
 [description:"rofi timepicker" entry:"1637700219" modified:"1642179148" project:"rofi" status:"pending" tags:"linux" tags_linux:"x" uuid:"bff2b1f3-ab53-4633-a530-c3ef145da4e7"]
 [description:"task sorting" entry:"1637782576" modified:"1637800512" project:"task" status:"pending" tags:"linux" tags_linux:"x" uuid:"c1181ecc-c8e4-4038-9d76-79004c7ee528"]
@@ -15,3 +14,5 @@
 [description:"setup everforest lvim" entry:"1642178700" modified:"1642179148" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
 [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642222799" entry:"1642179293" modified:"1642179317" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
 [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642222799" entry:"1642179421" modified:"1642179444" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+[description:"disable format_on_save for config.def.h" entry:"1642197429" modified:"1642197429" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"cc382c39-304e-49ce-95ba-71b7c07513c9"]
+[description:"reply to Chicago Rental Assistance" due:"1642222799" entry:"1642197590" modified:"1642197590" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]

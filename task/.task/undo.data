@@ -6867,3 +6867,24 @@ time 1642190687
 old [annotation_1642179387:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"G - 01Sequence" due:"1642222799" entry:"1642179373" modified:"1642186966" project:"cp" start:"1642186966" status:"pending" tags:"todo" tags_todo:"x" uuid:"b06d1be7-6abe-4ff8-9f6b-cf53dc7d3d31"]
 new [annotation_1642179387:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"G - 01Sequence" due:"1642222799" end:"1642190687" entry:"1642179373" modified:"1642190687" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"b06d1be7-6abe-4ff8-9f6b-cf53dc7d3d31"]
 ---
+time 1642195000
+new [description:"move to dmenu as file picker" entry:"1642195000" modified:"1642195000" project:"dmenu" status:"pending" tags:"linux" tags_linux:"x" uuid:"b10f1b9d-d5e5-426a-899c-fd949d5d9456"]
+---
+time 1642195003
+old [description:"move to dmenu as file picker" entry:"1642195000" modified:"1642195000" project:"dmenu" status:"pending" tags:"linux" tags_linux:"x" uuid:"b10f1b9d-d5e5-426a-899c-fd949d5d9456"]
+new [description:"move to dmenu as file picker" entry:"1642195000" modified:"1642195003" project:"dmenu" start:"1642195003" status:"pending" tags:"linux" tags_linux:"x" uuid:"b10f1b9d-d5e5-426a-899c-fd949d5d9456"]
+---
+time 1642196903
+old [description:"dotfiles picker ignore line starts with space or comment" entry:"1635774769" modified:"1637700230" project:"rofi" status:"pending" tags:"dotfiles_picker,linux" tags_dotfiles_picker:"x" tags_linux:"x" uuid:"b46fe2df-d788-4ef0-a335-c767be8819ce"]
+new [description:"dotfiles picker ignore line starts with space or comment" end:"1642196903" entry:"1635774769" modified:"1642196903" project:"rofi" status:"completed" tags:"dotfiles_picker,linux" tags_dotfiles_picker:"x" tags_linux:"x" uuid:"b46fe2df-d788-4ef0-a335-c767be8819ce"]
+---
+time 1642197429
+new [description:"disable format_on_save for config.def.h" entry:"1642197429" modified:"1642197429" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"cc382c39-304e-49ce-95ba-71b7c07513c9"]
+---
+time 1642197535
+old [description:"move to dmenu as file picker" entry:"1642195000" modified:"1642195003" project:"dmenu" start:"1642195003" status:"pending" tags:"linux" tags_linux:"x" uuid:"b10f1b9d-d5e5-426a-899c-fd949d5d9456"]
+new [description:"move to dmenu as file picker" end:"1642197535" entry:"1642195000" modified:"1642197535" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"b10f1b9d-d5e5-426a-899c-fd949d5d9456"]
+---
+time 1642197590
+new [description:"reply to Chicago Rental Assistance" due:"1642222799" entry:"1642197590" modified:"1642197590" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+---
