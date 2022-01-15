@@ -38,10 +38,14 @@ $HOME/dmenu/
 $HOME/dmenu/dmenu.c
 $HOME/dmenu/config.def.h
 
-
 # alacritty
 $HOME/.config/alacritty/alacritty.yml
+
+# cron jobs
+$HOME/cron/jobs
+$HOME/cron/root_jobs
 
 # general TODO and note 
 $HOME/dotfiles/TODO.md
 $HOME/dotfiles/installation_note.md
+
