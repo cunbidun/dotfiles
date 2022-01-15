@@ -14,6 +14,6 @@ const Block blocks[] = {
   BLOCK("get_temp",                     10,                  13)
   BLOCK("get_language",                  0,                  11)
 	BLOCK("sc_task",                       0,                  15)
-  BLOCK("sc_weather",                 1200,                  20)
+  BLOCK("sc_weather",                 1800,                  20)
 	BLOCK("clock",                         1,                  14)
 };
