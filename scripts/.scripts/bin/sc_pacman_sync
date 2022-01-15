@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Syncs repositories and downloads updates, meant to be run as a cronjob.
+
+# make sure user and user_id is correct
+user="cunbidun"
+user_id="1000"
+env="sudo -u $user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$user_id/bus"
+
+$env notify-send "Repository Sync" "Checking for package updates..."
+
+sudo pacman -Syyuw --noconfirm || notify-send "Repository Sync" "Error downloading updates.
+Check your internet connection, if pacman is already running, or run update manually to see errors."
+
+new_package="$(pacman -Qu | grep -v "\[ignored\]" | wc -l)"
+$env notify-send -t 10000 "Repository Sync" "Finished. $new_package new package(s)"

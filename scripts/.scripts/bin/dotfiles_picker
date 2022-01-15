@@ -3,8 +3,8 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 dotfiles="$DIR/dotfiles.txt"
 
-sed "s|\$HOME|${HOME}|g" $dotfiles >/tmp/dotfile-picker.tmp
-dotfiles="/tmp/dotfile-picker.tmp"
+sed "s|\$HOME|${HOME}|g" $dotfiles >$HOME/.cache/dotfile-picker.tmp
+dotfiles="$HOME/.cache/dotfile-picker.tmp"
 
 path=$(grep -v "^\#" $dotfiles | grep . | dmenu -i -l 10 -p "select dotfile: ")
 

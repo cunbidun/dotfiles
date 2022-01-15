@@ -6918,3 +6918,25 @@ time 1642201027
 old [description:"use vimkey in dmenu" entry:"1642201010" modified:"1642201014" project:"dmenu" start:"1642201014" status:"pending" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
 new [description:"use vimkey in dmenu" end:"1642201026" entry:"1642201010" modified:"1642201027" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
 ---
+time 1642209721
+new [description:"setup cron jobs" entry:"1642209721" modified:"1642209721" project:"cron" status:"pending" tags:"linux" tags_linux:"x" uuid:"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6"]
+---
+time 1642209723
+old [description:"setup cron jobs" entry:"1642209721" modified:"1642209721" project:"cron" status:"pending" tags:"linux" tags_linux:"x" uuid:"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6"]
+new [description:"setup cron jobs" entry:"1642209721" modified:"1642209723" project:"cron" start:"1642209723" status:"pending" tags:"linux" tags_linux:"x" uuid:"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6"]
+---
+time 1642214201
+old [description:"setup cron jobs" entry:"1642209721" modified:"1642209723" project:"cron" start:"1642209723" status:"pending" tags:"linux" tags_linux:"x" uuid:"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6"]
+new [description:"setup cron jobs" end:"1642214201" entry:"1642209721" modified:"1642214201" project:"cron" status:"completed" tags:"linux" tags_linux:"x" uuid:"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6"]
+---
+time 1642214235
+new [description:"weather script" entry:"1642214235" modified:"1642214235" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
+---
+time 1642214237
+old [description:"weather script" entry:"1642214235" modified:"1642214235" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
+new [description:"weather script" entry:"1642214235" modified:"1642214237" project:"dwm" start:"1642214237" status:"pending" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
+---
+time 1642214985
+old [description:"weather script" entry:"1642214235" modified:"1642214237" project:"dwm" start:"1642214237" status:"pending" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
+new [description:"weather script" end:"1642214985" entry:"1642214235" modified:"1642214985" project:"dwm" status:"completed" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
+---

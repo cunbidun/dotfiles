@@ -1,3 +1,6 @@
+[description:"weather script" end:"1642214985" entry:"1642214235" modified:"1642214985" project:"dwm" status:"completed" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
+[description:"setup cron jobs" end:"1642214201" entry:"1642209721" modified:"1642214201" project:"cron" status:"completed" tags:"linux" tags_linux:"x" uuid:"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6"]
+[description:"use vimkey in dmenu" end:"1642201026" entry:"1642201010" modified:"1642201027" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
 [description:"use \/home\/cunbidun in dotfiles.txt" end:"1642200124" entry:"1642198844" modified:"1642200124" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"20300dee-0113-4279-9fac-d693465c00d6"]
 [description:"disable format_on_save for config.def.h" end:"1642198408" entry:"1642197429" modified:"1642198408" project:"nvim" status:"completed" tags:"linux" tags_linux:"x" uuid:"cc382c39-304e-49ce-95ba-71b7c07513c9"]
 [description:"move to dmenu as file picker" end:"1642197535" entry:"1642195000" modified:"1642197535" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"b10f1b9d-d5e5-426a-899c-fd949d5d9456"]

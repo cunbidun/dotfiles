@@ -31,3 +31,5 @@ inc 20220114T211643Z - 20220114T215855Z # dmenu linux "move to dmenu as file pic
 inc 20220114T220249Z - 20220114T221328Z # "disable format_on_save for config.def.h" linux nvim
 inc 20220114T222048Z - 20220114T224204Z # dmenu linux "use /home/cunbidun in dotfiles.txt"
 inc 20220114T224500Z - 20220114T225707Z # dmenu linux "use vimkey in dmenu"
+inc 20220115T012203Z - 20220115T022141Z # cron linux "setup cron jobs"
+inc 20220115T023717Z - 20220115T024945Z # dwm linux "weather script"

@@ -1,12 +1,22 @@
 #!/bin/bash
 
+weatherreport=$HOME/.cache/weatherreport
+
+showweather() {
+	temp="$(awk 'NR==4' $weatherreport | awk '{ print $4 }' | sed 's/\x1b\[[0-9;]*m//g')"
+	desc="$(awk 'NR==3' $weatherreport | awk '{ print $5 }' | sed 's/\x1b\[[0-9;]*m//g')"
+	echo "$desc $temp°C"
+}
+
 case $BLOCK_BUTTON in
-	# 1) setsid -f "$TERMINAL" -e "htop" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
+2) sc_weather_sync && showweather ;;
+6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-data=$(curl https://wttr.in/\?format\=j1 | jq '.current_condition[0]')
-t=$(echo "$data" | jq -r '.temp_C')
-f=$(echo "$data" | jq -r '.FeelsLikeC')
-desc=$(echo "$data" | jq -r '.weatherDesc[0].value')
-echo "$desc $t°C($f°C)"
+# The test if our forcecast is updated to the day. If it isn't download a new
+# weather report from wttr.in with the above function.
+[ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
+	sc_weather_sync
+
+showweather

@@ -985,3 +985,9 @@ d011bb79-7b56-4725-a2f0-b3fc4e42c7d3
 {"description":"use vimkey in dmenu","entry":"20220114T225650Z","modified":"20220114T225650Z","project":"dmenu","status":"pending","uuid":"d7de2689-76ff-42bd-9132-0dda0a494372","tags":["linux"]}
 {"description":"use vimkey in dmenu","entry":"20220114T225650Z","modified":"20220114T225654Z","project":"dmenu","start":"20220114T225654Z","status":"pending","uuid":"d7de2689-76ff-42bd-9132-0dda0a494372","tags":["linux"]}
 {"description":"use vimkey in dmenu","end":"20220114T225706Z","entry":"20220114T225650Z","modified":"20220114T225707Z","project":"dmenu","status":"completed","uuid":"d7de2689-76ff-42bd-9132-0dda0a494372","tags":["linux"]}
+{"description":"setup cron jobs","entry":"20220115T012201Z","modified":"20220115T012201Z","project":"cron","status":"pending","uuid":"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6","tags":["linux"]}
+{"description":"setup cron jobs","entry":"20220115T012201Z","modified":"20220115T012203Z","project":"cron","start":"20220115T012203Z","status":"pending","uuid":"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6","tags":["linux"]}
+{"description":"setup cron jobs","end":"20220115T023641Z","entry":"20220115T012201Z","modified":"20220115T023641Z","project":"cron","status":"completed","uuid":"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6","tags":["linux"]}
+{"description":"weather script","entry":"20220115T023715Z","modified":"20220115T023715Z","project":"dwm","status":"pending","uuid":"97540586-504e-4f94-8160-fd7f29139e69","tags":["linux"]}
+{"description":"weather script","entry":"20220115T023715Z","modified":"20220115T023717Z","project":"dwm","start":"20220115T023717Z","status":"pending","uuid":"97540586-504e-4f94-8160-fd7f29139e69","tags":["linux"]}
+{"description":"weather script","end":"20220115T024945Z","entry":"20220115T023715Z","modified":"20220115T024945Z","project":"dwm","status":"completed","uuid":"97540586-504e-4f94-8160-fd7f29139e69","tags":["linux"]}
