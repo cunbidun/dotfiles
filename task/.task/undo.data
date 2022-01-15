@@ -6940,3 +6940,40 @@ time 1642214985
 old [description:"weather script" entry:"1642214235" modified:"1642214237" project:"dwm" start:"1642214237" status:"pending" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
 new [description:"weather script" end:"1642214985" entry:"1642214235" modified:"1642214985" project:"dwm" status:"completed" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
 ---
+time 1642256899
+new [description:"weather script check if the report is within 30 mins" entry:"1642256899" modified:"1642256899" project:"dwm" status:"pending" tags:"todo" tags_todo:"x" uuid:"512b13d5-cd3b-473f-b9f1-6e45b5e3a687"]
+---
+time 1642256911
+old [description:"weather script check if the report is within 30 mins" entry:"1642256899" modified:"1642256899" project:"dwm" status:"pending" tags:"todo" tags_todo:"x" uuid:"512b13d5-cd3b-473f-b9f1-6e45b5e3a687"]
+new [description:"weather script check if the report is within 30 mins" entry:"1642256899" modified:"1642256911" project:"dwm" status:"pending" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"512b13d5-cd3b-473f-b9f1-6e45b5e3a687"]
+---
+time 1642265592
+new [description:"Codeforces Round" entry:"1642265592" modified:"1642265592" status:"pending" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
+---
+time 1642267067
+old [description:"Codeforces Round" entry:"1642265592" modified:"1642265592" status:"pending" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
+new [description:"Codeforces Round 766" entry:"1642265592" modified:"1642267067" project:"cp" status:"pending" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
+---
+time 1642267072
+old [description:"Codeforces Round 766" entry:"1642265592" modified:"1642267067" project:"cp" status:"pending" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
+new [description:"Codeforces Round 766" entry:"1642265592" modified:"1642267072" project:"cp" start:"1642267071" status:"pending" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
+---
+time 1642267084
+old [description:"Codeforces Round 766" entry:"1642265592" modified:"1642267072" project:"cp" start:"1642267071" status:"pending" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
+new [description:"Codeforces Round 766" end:"1642267084" entry:"1642265592" modified:"1642267084" project:"cp" status:"completed" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
+---
+time 1642268180
+old [description:"weather script check if the report is within 30 mins" entry:"1642256899" modified:"1642256911" project:"dwm" status:"pending" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"512b13d5-cd3b-473f-b9f1-6e45b5e3a687"]
+new [description:"weather script check if the report is within 30 mins" end:"1642268180" entry:"1642256899" modified:"1642268180" project:"dwm" status:"completed" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"512b13d5-cd3b-473f-b9f1-6e45b5e3a687"]
+---
+time 1642269883
+new [description:"powerhook" entry:"1642269883" modified:"1642269883" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
+---
+time 1642269885
+old [description:"powerhook" entry:"1642269883" modified:"1642269883" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
+new [description:"powerhook" entry:"1642269883" modified:"1642269885" project:"dwm" start:"1642269885" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
+---
+time 1642274071
+old [description:"powerhook" entry:"1642269883" modified:"1642269885" project:"dwm" start:"1642269885" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
+new [description:"powerhook" entry:"1642269883" modified:"1642274071" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
+---

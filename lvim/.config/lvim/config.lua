@@ -433,6 +433,9 @@ lvim.autocommands.custom_groups = {
 
 	-- dwm, disable format_on_save
 	{ "VimEnter", "config.def.h", "lua require('lvim.core.autocmds').disable_format_on_save()" },
+	{ "VimEnter", "config.h", "lua require('lvim.core.autocmds').disable_format_on_save()" },
+	{ "VimEnter", "dwm.c", "lua require('lvim.core.autocmds').disable_format_on_save()" },
+	{ "VimEnter", "dmenu.c", "lua require('lvim.core.autocmds').disable_format_on_save()" },
 }
 
 -- CP

@@ -19,4 +19,8 @@ esac
 [ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
 	sc_weather_sync
 
+# check if the report is within 30 minutes
+[ $((($(date +%s) - $(stat -L --format %Y .cache/weatherreport)) > (30 * 60))) ] ||
+	sc_weather_sync
+
 showweather

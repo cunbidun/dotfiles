@@ -33,3 +33,5 @@ inc 20220114T222048Z - 20220114T224204Z # dmenu linux "use /home/cunbidun in dot
 inc 20220114T224500Z - 20220114T225707Z # dmenu linux "use vimkey in dmenu"
 inc 20220115T012203Z - 20220115T022141Z # cron linux "setup cron jobs"
 inc 20220115T023717Z - 20220115T024945Z # dwm linux "weather script"
+inc 20220115T143500Z - 20220115T161804Z # "Codeforces Round 766" cp
+inc 20220115T180445Z - 20220115T191431Z # dwm linux powerhook

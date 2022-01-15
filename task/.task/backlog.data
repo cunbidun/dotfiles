@@ -991,3 +991,13 @@ d011bb79-7b56-4725-a2f0-b3fc4e42c7d3
 {"description":"weather script","entry":"20220115T023715Z","modified":"20220115T023715Z","project":"dwm","status":"pending","uuid":"97540586-504e-4f94-8160-fd7f29139e69","tags":["linux"]}
 {"description":"weather script","entry":"20220115T023715Z","modified":"20220115T023717Z","project":"dwm","start":"20220115T023717Z","status":"pending","uuid":"97540586-504e-4f94-8160-fd7f29139e69","tags":["linux"]}
 {"description":"weather script","end":"20220115T024945Z","entry":"20220115T023715Z","modified":"20220115T024945Z","project":"dwm","status":"completed","uuid":"97540586-504e-4f94-8160-fd7f29139e69","tags":["linux"]}
+{"description":"weather script check if the report is within 30 mins","entry":"20220115T142819Z","modified":"20220115T142819Z","project":"dwm","status":"pending","uuid":"512b13d5-cd3b-473f-b9f1-6e45b5e3a687","tags":["todo"]}
+{"description":"weather script check if the report is within 30 mins","entry":"20220115T142819Z","modified":"20220115T142831Z","project":"dwm","status":"pending","uuid":"512b13d5-cd3b-473f-b9f1-6e45b5e3a687","tags":["linux","todo"]}
+{"description":"Codeforces Round","entry":"20220115T165312Z","modified":"20220115T165312Z","status":"pending","uuid":"e141b599-501a-4f37-a4d7-5894872e5634"}
+{"description":"Codeforces Round 766","entry":"20220115T165312Z","modified":"20220115T171747Z","project":"cp","status":"pending","uuid":"e141b599-501a-4f37-a4d7-5894872e5634"}
+{"description":"Codeforces Round 766","entry":"20220115T165312Z","modified":"20220115T171752Z","project":"cp","start":"20220115T171751Z","status":"pending","uuid":"e141b599-501a-4f37-a4d7-5894872e5634"}
+{"description":"Codeforces Round 766","end":"20220115T171804Z","entry":"20220115T165312Z","modified":"20220115T171804Z","project":"cp","status":"completed","uuid":"e141b599-501a-4f37-a4d7-5894872e5634"}
+{"description":"weather script check if the report is within 30 mins","end":"20220115T173620Z","entry":"20220115T142819Z","modified":"20220115T173620Z","project":"dwm","status":"completed","uuid":"512b13d5-cd3b-473f-b9f1-6e45b5e3a687","tags":["linux","todo"]}
+{"description":"powerhook","entry":"20220115T180443Z","modified":"20220115T180443Z","project":"dwm","status":"pending","uuid":"11f2a749-410c-4951-8825-93244fdbdb5b","tags":["linux"]}
+{"description":"powerhook","entry":"20220115T180443Z","modified":"20220115T180445Z","project":"dwm","start":"20220115T180445Z","status":"pending","uuid":"11f2a749-410c-4951-8825-93244fdbdb5b","tags":["linux"]}
+{"description":"powerhook","entry":"20220115T180443Z","modified":"20220115T191431Z","project":"dwm","status":"pending","uuid":"11f2a749-410c-4951-8825-93244fdbdb5b","tags":["linux"]}

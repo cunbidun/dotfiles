@@ -1,3 +1,5 @@
+[description:"weather script check if the report is within 30 mins" end:"1642268180" entry:"1642256899" modified:"1642268180" project:"dwm" status:"completed" tags:"linux,todo" tags_linux:"x" tags_todo:"x" uuid:"512b13d5-cd3b-473f-b9f1-6e45b5e3a687"]
+[description:"Codeforces Round 766" end:"1642267084" entry:"1642265592" modified:"1642267084" project:"cp" status:"completed" uuid:"e141b599-501a-4f37-a4d7-5894872e5634"]
 [description:"weather script" end:"1642214985" entry:"1642214235" modified:"1642214985" project:"dwm" status:"completed" tags:"linux" tags_linux:"x" uuid:"97540586-504e-4f94-8160-fd7f29139e69"]
 [description:"setup cron jobs" end:"1642214201" entry:"1642209721" modified:"1642214201" project:"cron" status:"completed" tags:"linux" tags_linux:"x" uuid:"cf24f6f3-2490-4bd9-b0eb-b644d15f0aa6"]
 [description:"use vimkey in dmenu" end:"1642201026" entry:"1642201010" modified:"1642201027" project:"dmenu" status:"completed" tags:"linux" tags_linux:"x" uuid:"d7de2689-76ff-42bd-9132-0dda0a494372"]
