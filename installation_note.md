@@ -264,3 +264,23 @@ After:  jdk.jar.disabledAlgorithms=MD2, RSA keySize < 1024, \
 
 * For `MarkdownPreview` extension, the browser need to open before running
 `:MarkdownPreview`.
+
+### Cronjobs
+
+#### Installation
+
+```bash
+yay -S cronie
+sudo systemctl enable cronie.service
+sudo systemctl start cronie.service
+```
+
+#### Install cronjob
+
+1. `cd dotfiles && stow cron`
+2. `cd $HOME/cron`
+3. `crontab jobs` for user jobs
+4. check the command in `root_jobs` to make sure the `user` and `user_id` are correct.
+5. check `$HOME/.scripts/bin/sc_pacman_sync`
+to make sure the `user` and `user_id` are correct.
+6. `sudo crontab root_jobs` for root jobs

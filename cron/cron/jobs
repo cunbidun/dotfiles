@@ -1,0 +1,1 @@
+0,30 * * * * export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u $USER)/bus; export DISPLAY=:0; . $HOME/.zshenv; sc_weather_sync
