@@ -1,3 +1,8 @@
 #!/bin/sh
 
-curl -sf "https://wttr.in/?m" >$HOME/.cache/weatherreport
+notify-send -t 3000 "Sync weather report" "Updating report..."
+
+curl -sf "https://wttr.in/?m" >$HOME/.cache/weatherreport ||
+	"Something went wrong. Check your internet connection and try again."
+
+notify-send -t 3000 "Sync weather report" "Sync complete!"

@@ -35,3 +35,9 @@ inc 20220115T012203Z - 20220115T022141Z # cron linux "setup cron jobs"
 inc 20220115T023717Z - 20220115T024945Z # dwm linux "weather script"
 inc 20220115T143500Z - 20220115T161804Z # "Codeforces Round 766" cp
 inc 20220115T180445Z - 20220115T191431Z # dwm linux powerhook
+inc 20220116T170752Z - 20220116T172255Z # alacritty linux "setup mulitple themes for alacritty"
+inc 20220116T222746Z - 20220116T225228Z # alacritty "implement auto completion for alacritty theme changer" linux
+inc 20220116T225557Z - 20220117T001250Z # linux nvim "setup everforest lvim"
+inc 20220117T020422Z - 20220117T021745Z # "debug weather scripts" dwm linux
+inc 20220117T034536Z - 20220117T034615Z # "debug weather scripts" dwm linux
+inc 20220117T034622Z - 20220117T035345Z # alacritty "investigate sc_alacritty_update_theme" linux

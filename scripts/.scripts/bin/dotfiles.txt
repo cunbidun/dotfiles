@@ -26,7 +26,9 @@ $HOME/.scripts/bin
 $HOME/.scripts/bin/sc_weather
 $HOME/.scripts/bin/sc_printscreen
 $HOME/.scripts/bin/sc_calcurse_sync
+$HOME/.scripts/bin/sc_weather_sync
 $HOME/.scripts/bin/dotfiles_picker
+$HOME/.scripts/bin/sc_alacritty_change_theme
 
 # dwm
 $HOME/dwm
@@ -40,6 +42,9 @@ $HOME/dmenu/config.def.h
 
 # alacritty
 $HOME/.config/alacritty/alacritty.yml
+$HOME/.config/alacritty/themes
+$HOME/.config/alacritty/themes/nord.yaml
+$HOME/.config/alacritty/themes/solarized_light.yaml
 
 # cron jobs
 $HOME/cron/jobs

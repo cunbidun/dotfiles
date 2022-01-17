@@ -4909,3 +4909,83 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20220115T180445Z","end":"20220115T191431Z","tags":["dwm","linux","powerhook"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220116T170752Z","tags":["alacritty","linux","setup mulitple themes for alacritty"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220116T170752Z","tags":["alacritty","linux","setup mulitple themes for alacritty"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220116T170752Z","end":"20220116T172255Z","tags":["alacritty","linux","setup mulitple themes for alacritty"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220116T222746Z","tags":["alacritty","implement auto completion for alacritty theme changer","linux"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220116T222746Z","tags":["alacritty","implement auto completion for alacritty theme changer","linux"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220116T222746Z","end":"20220116T225228Z","tags":["alacritty","implement auto completion for alacritty theme changer","linux"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220116T225557Z","tags":["linux","nvim","setup everforest lvim"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220116T225557Z","tags":["linux","nvim","setup everforest lvim"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220116T225557Z","end":"20220117T001250Z","tags":["linux","nvim","setup everforest lvim"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T020422Z","tags":["debug weather scripts","dwm","linux"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T020422Z","tags":["debug weather scripts","dwm","linux"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T020422Z","end":"20220117T024745Z","tags":["debug weather scripts","dwm","linux"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T020422Z","end":"20220117T024745Z","tags":["debug weather scripts","dwm","linux"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T020422Z","end":"20220117T023245Z","tags":["debug weather scripts","dwm","linux"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T020422Z","end":"20220117T023245Z","tags":["debug weather scripts","dwm","linux"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T020422Z","end":"20220117T021745Z","tags":["debug weather scripts","dwm","linux"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T034536Z","tags":["debug weather scripts","dwm","linux"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T034536Z","tags":["debug weather scripts","dwm","linux"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T034536Z","end":"20220117T034615Z","tags":["debug weather scripts","dwm","linux"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T034622Z","tags":["alacritty","investigate sc_alacritty_update_theme","linux"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T034622Z","tags":["alacritty","investigate sc_alacritty_update_theme","linux"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T034622Z","end":"20220117T035345Z","tags":["alacritty","investigate sc_alacritty_update_theme","linux"]}

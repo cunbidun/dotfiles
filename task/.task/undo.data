@@ -6977,3 +6977,75 @@ time 1642274071
 old [description:"powerhook" entry:"1642269883" modified:"1642269885" project:"dwm" start:"1642269885" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
 new [description:"powerhook" entry:"1642269883" modified:"1642274071" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
 ---
+time 1642291438
+old [description:"rofi scroll with ctrl j\/k" entry:"1635774711" modified:"1637700230" project:"rofi" status:"pending" tags:"linux,rofi" tags_linux:"x" tags_rofi:"x" uuid:"cfed151b-06cc-4a98-8f60-98258259e314"]
+new [description:"rofi scroll with ctrl j\/k" end:"1642291436" entry:"1635774711" modified:"1642291438" project:"rofi" status:"deleted" tags:"linux,rofi" tags_linux:"x" tags_rofi:"x" uuid:"cfed151b-06cc-4a98-8f60-98258259e314"]
+---
+time 1642291465
+old [description:"powerhook" entry:"1642269883" modified:"1642274071" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
+new [description:"powerhook" end:"1642291463" entry:"1642269883" modified:"1642291465" project:"dwm" status:"deleted" tags:"linux" tags_linux:"x" uuid:"11f2a749-410c-4951-8825-93244fdbdb5b"]
+---
+time 1642352536
+new [description:"setup mulitple theme for alacritty" entry:"1642352536" modified:"1642352536" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"ac9a122d-a64c-4cad-9d42-1b52e16bff4c"]
+---
+time 1642352549
+old [description:"setup mulitple theme for alacritty" entry:"1642352536" modified:"1642352536" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"ac9a122d-a64c-4cad-9d42-1b52e16bff4c"]
+new [description:"setup mulitple themes for alacritty" entry:"1642352536" modified:"1642352549" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"ac9a122d-a64c-4cad-9d42-1b52e16bff4c"]
+---
+time 1642352872
+old [description:"setup mulitple themes for alacritty" entry:"1642352536" modified:"1642352549" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"ac9a122d-a64c-4cad-9d42-1b52e16bff4c"]
+new [description:"setup mulitple themes for alacritty" entry:"1642352536" modified:"1642352872" project:"alacritty" start:"1642352872" status:"pending" tags:"linux" tags_linux:"x" uuid:"ac9a122d-a64c-4cad-9d42-1b52e16bff4c"]
+---
+time 1642353775
+old [description:"setup mulitple themes for alacritty" entry:"1642352536" modified:"1642352872" project:"alacritty" start:"1642352872" status:"pending" tags:"linux" tags_linux:"x" uuid:"ac9a122d-a64c-4cad-9d42-1b52e16bff4c"]
+new [description:"setup mulitple themes for alacritty" end:"1642353775" entry:"1642352536" modified:"1642353775" project:"alacritty" status:"completed" tags:"linux" tags_linux:"x" uuid:"ac9a122d-a64c-4cad-9d42-1b52e16bff4c"]
+---
+time 1642372063
+new [description:"implement auto completion for alacritty theme changer" entry:"1642372063" modified:"1642372063" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"7e9bbfc9-17c0-417a-8a78-c9359f53ece3"]
+---
+time 1642372066
+old [description:"implement auto completion for alacritty theme changer" entry:"1642372063" modified:"1642372063" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"7e9bbfc9-17c0-417a-8a78-c9359f53ece3"]
+new [description:"implement auto completion for alacritty theme changer" entry:"1642372063" modified:"1642372066" project:"alacritty" start:"1642372066" status:"pending" tags:"linux" tags_linux:"x" uuid:"7e9bbfc9-17c0-417a-8a78-c9359f53ece3"]
+---
+time 1642373548
+old [description:"implement auto completion for alacritty theme changer" entry:"1642372063" modified:"1642372066" project:"alacritty" start:"1642372066" status:"pending" tags:"linux" tags_linux:"x" uuid:"7e9bbfc9-17c0-417a-8a78-c9359f53ece3"]
+new [description:"implement auto completion for alacritty theme changer" end:"1642373547" entry:"1642372063" modified:"1642373548" project:"alacritty" status:"completed" tags:"linux" tags_linux:"x" uuid:"7e9bbfc9-17c0-417a-8a78-c9359f53ece3"]
+---
+time 1642373757
+old [description:"setup everforest lvim" entry:"1642178700" modified:"1642179148" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+new [description:"setup everforest lvim" entry:"1642178700" modified:"1642373757" project:"nvim" start:"1642373757" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+---
+time 1642378370
+old [description:"setup everforest lvim" entry:"1642178700" modified:"1642373757" project:"nvim" start:"1642373757" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+new [description:"setup everforest lvim" entry:"1642178700" modified:"1642378370" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+---
+time 1642384131
+new [description:"investigate sc_alacritty_update_theme" entry:"1642384131" modified:"1642384131" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"39583a3f-e06b-416a-b7ad-469cf42ed3ea"]
+---
+time 1642385059
+new [description:"debug weather scripts" entry:"1642385059" modified:"1642385059" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+---
+time 1642385062
+old [description:"debug weather scripts" entry:"1642385059" modified:"1642385059" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+new [description:"debug weather scripts" entry:"1642385059" modified:"1642385062" project:"dwm" start:"1642385062" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+---
+time 1642387665
+old [description:"debug weather scripts" entry:"1642385059" modified:"1642385062" project:"dwm" start:"1642385062" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+new [description:"debug weather scripts" entry:"1642385059" modified:"1642387665" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+---
+time 1642391136
+old [description:"debug weather scripts" entry:"1642385059" modified:"1642387665" project:"dwm" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+new [description:"debug weather scripts" entry:"1642385059" modified:"1642391136" project:"dwm" start:"1642391136" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+---
+time 1642391175
+old [description:"debug weather scripts" entry:"1642385059" modified:"1642391136" project:"dwm" start:"1642391136" status:"pending" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+new [description:"debug weather scripts" end:"1642391175" entry:"1642385059" modified:"1642391175" project:"dwm" status:"completed" tags:"linux" tags_linux:"x" uuid:"95cadf9c-c6d2-44f3-8a78-caa22d08a437"]
+---
+time 1642391182
+old [description:"investigate sc_alacritty_update_theme" entry:"1642384131" modified:"1642384131" project:"alacritty" status:"pending" tags:"linux" tags_linux:"x" uuid:"39583a3f-e06b-416a-b7ad-469cf42ed3ea"]
+new [description:"investigate sc_alacritty_update_theme" entry:"1642384131" modified:"1642391182" project:"alacritty" start:"1642391182" status:"pending" tags:"linux" tags_linux:"x" uuid:"39583a3f-e06b-416a-b7ad-469cf42ed3ea"]
+---
+time 1642391625
+old [description:"investigate sc_alacritty_update_theme" entry:"1642384131" modified:"1642391182" project:"alacritty" start:"1642391182" status:"pending" tags:"linux" tags_linux:"x" uuid:"39583a3f-e06b-416a-b7ad-469cf42ed3ea"]
+new [description:"investigate sc_alacritty_update_theme" end:"1642391625" entry:"1642384131" modified:"1642391625" project:"alacritty" status:"completed" tags:"linux" tags_linux:"x" uuid:"39583a3f-e06b-416a-b7ad-469cf42ed3ea"]
+---
