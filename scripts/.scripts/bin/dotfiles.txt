@@ -10,13 +10,9 @@ $HOME/.scripts/bin/dotfiles.txt
 $HOME/.config/awesome
 $HOME/.config/awesome/rc.lua
 
-# nvim 
-$HOME/.config/nvim
-$HOME/.config/nvim/lua/core/settings.lua
-$HOME/.config/nvim/lua/plugins/init.lua
-
 # lvim
 $HOME/.config/lvim/config.lua
+$HOME/.config/lvim/cp.vim
 
 # snippet
 $HOME/.vsnip/cpp.json
@@ -29,14 +25,16 @@ $HOME/.scripts/bin/sc_calcurse_sync
 $HOME/.scripts/bin/sc_weather_sync
 $HOME/.scripts/bin/dotfiles_picker
 $HOME/.scripts/bin/sc_alacritty_change_theme
+$HOME/.scripts/bin/sc_create_today_note
+$HOME/.scripts/bin/sc_open_today_note
 
 # dwm
 $HOME/dwm
 $HOME/dwm/config.def.h
 $HOME/dwmblocks-async/config.h
 
-# dmenu
 $HOME/dmenu/
+# dmenu
 $HOME/dmenu/dmenu.c
 $HOME/dmenu/config.def.h
 
@@ -46,6 +44,10 @@ $HOME/.config/alacritty/themes
 $HOME/.config/alacritty/themes/nord.yaml
 $HOME/.config/alacritty/themes/solarized_light.yaml
 
+# zsh
+$HOME/.zshenv
+$HOME/.zshrc
+
 # cron jobs
 $HOME/cron/jobs
 $HOME/cron/root_jobs
@@ -54,3 +56,8 @@ $HOME/cron/root_jobs
 $HOME/dotfiles/TODO.md
 $HOME/dotfiles/installation_note.md
 
+# cp stuff
+$HOME/competitive_programming/topcoder.md
+
+# note
+$HOME/note/template/today.template

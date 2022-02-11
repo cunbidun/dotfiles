@@ -2,6 +2,8 @@
 -- | general |
 -- +---------+
 
+vim.opt.relativenumber = true -- show line numbers relatively
+
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "nord"
@@ -51,16 +53,22 @@ lvim.builtin.telescope.defaults.path_display = { shorten = 20 }
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["t"] = {
-	name = "+Trouble",
-	r = { "<cmd>Trouble lsp_references<cr>", "References" },
-	f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-	d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
-	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-	w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep<CR>", "Live Grep" }
+lvim.builtin.which_key.mappings["n"] = {
+	name = "+Note",
+	p = {
+		"<cmd>lua require'telescope.builtin'.grep_string{ word_match = '-w', only_sort_text = true, search = '[ ]'} <cr>",
+		"Pending task",
+	},
+	t = {
+		"<cmd>lua require'telescope.builtin'.grep_string{  only_sort_text = true, search = '[ ].*@today', use_regex = true} <cr>",
+		"Today task",
+	},
+	a = {
+		"<cmd>lua require'telescope.builtin'.grep_string{ only_sort_text = true, search = '[*]', use_regex = true}<cr>",
+		"All task",
+	},
 }
-
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
@@ -69,6 +77,61 @@ lvim.builtin.notify.active = true
 -- +---------------+
 -- | plugin config |
 -- +---------------+
+
+-- Telescope
+lvim.builtin.telescope.pickers = { find_files = { find_command = { "rg", "--files", "--follow", "--hidden" } } }
+
+-- bufferline
+vim.g.bufferline = {
+	-- Enable/disable animations
+	animation = false,
+
+	-- If set, the icon color will follow its corresponding buffer
+	-- highlight group. By default, the Buffer*Icon group is linked to the
+	-- Buffer* group (see Highlighting below). Otherwise, it will take its
+	-- default value as defined by devicons.
+	icon_custom_colors = true,
+
+	-- Enable/disable auto-hiding the tab bar when there is a single buffer
+	auto_hide = false,
+
+	-- Enable/disable current/total tabpages indicator (top right corner)
+	tabpages = true,
+
+	-- Enable/disable close button
+	closable = false,
+
+	-- Enables/disable clickable tabs
+	--  - left-click: go to buffer
+	--  - middle-click: delete buffer
+	clickable = true,
+
+	-- Enable/disable icons
+	-- if set to 'numbers', will show buffer index in the tabline
+	-- if set to 'both', will show buffer index and icons in the tabline
+	icons = true,
+
+	-- Sets the maximum padding width with which to surround each tab
+	maximum_padding = 1,
+
+	-- Sets the maximum buffer name length.
+	maximum_length = 30,
+}
+
+lvim.builtin.dashboard.custom_section.a = {
+	description = { "  Recent Projects    " },
+	command = "Telescope projects",
+}
+
+lvim.builtin.dashboard.custom_section.b = {
+	description = { "  Find File          " },
+	command = "Telescope find_files",
+}
+
+lvim.builtin.dashboard.custom_section.c = {
+	description = { "  New File           " },
+	command = ":ene!",
+}
 
 -- load vsnip
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.vsnip/" } })
@@ -146,7 +209,7 @@ formatters.setup({
 		-- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
 		args = { "--print-with", "100" },
 		---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-		filetypes = { "typescript", "typescriptreact" },
+		filetypes = { "typescript", "typescriptreact", "css" },
 	},
 })
 
@@ -349,13 +412,12 @@ lvim.plugins = {
 		end,
 	},
 	{ "tpope/vim-surround" },
-	{ "tzachar/cmp-tabnine", run = "./install.sh" },
 	{
 		-- markdown
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && yarn install",
 		config = function()
-			vim.cmd([[source $HOME/.config/nvim/lua/plugins/configs/markdown-preview.vim]])
+			vim.cmd([[source $HOME/dotfiles/nvim/.config/nvim/lua/plugins/configs/markdown-preview.vim]])
 		end,
 	},
 }
@@ -363,6 +425,27 @@ lvim.plugins = {
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
 	{ "BufWinEnter", "*.lua", "setlocal ts=2 sw=2" },
+
+	{ "VimEnter", "*", "highlight Normal ctermbg=NONE guibg=NONE" },
+	{ "VimEnter", "*", "highlight SignColumn guibg=NONE" },
+
+	-- colorscheme
+	{ "VimEnter", "*", "highlight Nord0 guibg=#2E3440" },
+	{ "VimEnter", "*", "highlight Nord1 guibg=#3B4252" },
+	{ "VimEnter", "*", "highlight Nord2 guibg=#434C5E" },
+	{ "VimEnter", "*", "highlight Nord3 guibg=#4C566A" },
+	{ "VimEnter", "*", "highlight Nord4 guibg=#D8DEE9" },
+	{ "VimEnter", "*", "highlight Nord5 guibg=#E5E9F0" },
+	{ "VimEnter", "*", "highlight Nord6 guibg=#ECEFF4" },
+	{ "VimEnter", "*", "highlight Nord7 guibg=#8FBCBB" },
+	{ "VimEnter", "*", "highlight Nord8 guibg=#88C0D0" },
+	{ "VimEnter", "*", "highlight Nord9 guibg=#81A1C1" },
+	{ "VimEnter", "*", "highlight Nord10 guibg=#5E81AC" },
+	{ "VimEnter", "*", "highlight Nord11 guibg=#BF616A" },
+	{ "VimEnter", "*", "highlight Nord12 guibg=#D08770" },
+	{ "VimEnter", "*", "highlight Nord13 guibg=#EBCB8B" },
+	{ "VimEnter", "*", "highlight Nord14 guibg=#A3BE8C" },
+	{ "VimEnter", "*", "highlight Nord15 guibg=#B48EAD" },
 
 	-- bar bar nord color scheme
 	{ "VimEnter", "*", "highlight Error guifg=#BF616A guibg=NONE" },
@@ -405,35 +488,17 @@ lvim.autocommands.custom_groups = {
 	{ "VimEnter", "*", "highlight NotifyDEBUGTitle  guifg=#81A1C1" },
 	{ "VimEnter", "*", "highlight NotifyTRACETitle  guifg=#B48EAD" },
 
-	{ "VimEnter", "*", "highlight link NotifyERRORBody Normal" },
-	{ "VimEnter", "*", "highlight link NotifyWARNBody Normal" },
-	{ "VimEnter", "*", "highlight link NotifyINFOBody Normal" },
-	{ "VimEnter", "*", "highlight link NotifyDEBUGBody Normal" },
-	{ "VimEnter", "*", "highlight link NotifyTRACEBody Normal" },
+	{ "VimEnter", "*", "highlight link NotifyERRORBody Nord1" },
+	{ "VimEnter", "*", "highlight link NotifyWARNBody Nord1" },
+	{ "VimEnter", "*", "highlight link NotifyINFOBody Nord1" },
+	{ "VimEnter", "*", "highlight link NotifyDEBUGBody Nord1" },
+	{ "VimEnter", "*", "highlight link NotifyTRACEBody Nord1" },
 
 	-- trouble.nvim
 	{ "VimEnter", "*", "highlight  TroubleCount guifg=#EBCB8B guibg=#434C5E" },
 
-	{ "VimEnter", "*", "highlight Nord0 guibg=#2E3440" },
-	{ "VimEnter", "*", "highlight Nord1 guibg=#3B4252" },
-	{ "VimEnter", "*", "highlight Nord2 guibg=#434C5E" },
-	{ "VimEnter", "*", "highlight Nord3 guibg=#4C566A" },
-	{ "VimEnter", "*", "highlight Nord4 guibg=#D8DEE9" },
-	{ "VimEnter", "*", "highlight Nord5 guibg=#E5E9F0" },
-	{ "VimEnter", "*", "highlight Nord6 guibg=#ECEFF4" },
-	{ "VimEnter", "*", "highlight Nord7 guibg=#8FBCBB" },
-	{ "VimEnter", "*", "highlight Nord8 guibg=#88C0D0" },
-	{ "VimEnter", "*", "highlight Nord9 guibg=#81A1C1" },
-	{ "VimEnter", "*", "highlight Nord10 guibg=#5E81AC" },
-	{ "VimEnter", "*", "highlight Nord11 guibg=#BF616A" },
-	{ "VimEnter", "*", "highlight Nord12 guibg=#D08770" },
-	{ "VimEnter", "*", "highlight Nord13 guibg=#EBCB8B" },
-	{ "VimEnter", "*", "highlight Nord14 guibg=#A3BE8C" },
-	{ "VimEnter", "*", "highlight Nord15 guibg=#B48EAD" },
-
 	-- dwm, disable format_on_save
-	{ "VimEnter", "config.def.h", "lua require('lvim.core.autocmds').disable_format_on_save()" },
-	{ "VimEnter", "config.h", "lua require('lvim.core.autocmds').disable_format_on_save()" },
+	{ "VimEnter", "config.*", "lua require('lvim.core.autocmds').disable_format_on_save()" },
 	{ "VimEnter", "dwm.c", "lua require('lvim.core.autocmds').disable_format_on_save()" },
 	{ "VimEnter", "dmenu.c", "lua require('lvim.core.autocmds').disable_format_on_save()" },
 }

@@ -4989,3 +4989,295 @@ txn:
   type: interval
   before: 
   after: {"id":1,"start":"20220117T034622Z","end":"20220117T035345Z","tags":["alacritty","investigate sc_alacritty_update_theme","linux"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T050034Z","tags":["reply to Chicago Rental Assistance","swe2022","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T050034Z","tags":["reply to Chicago Rental Assistance","swe2022","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T050034Z","end":"20220117T051654Z","tags":["reply to Chicago Rental Assistance","swe2022","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T185829Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T185829Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T185829Z","end":"20220117T191418Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T202508Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T202508Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T202508Z","end":"20220117T224614Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T202508Z","end":"20220117T224614Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T202508Z","end":"20220117T211614Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T202508Z","end":"20220117T211614Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T202508Z","end":"20220117T210114Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T230623Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T230623Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T230623Z","end":"20220117T230913Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220117T232025Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220117T232025Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220117T232025Z","end":"20220118T000136Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220118T044734Z","tags":["cp","setup topcoder and add to note"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T044734Z","tags":["cp","setup topcoder and add to note"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T044734Z","end":"20220118T054516Z","tags":["cp","setup topcoder and add to note"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T044734Z","end":"20220118T054516Z","tags":["cp","setup topcoder and add to note"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T044734Z","end":"20220118T053316Z","tags":["cp","setup topcoder and add to note"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220118T172411Z","tags":["SRM 822","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T172411Z","tags":["SRM 822","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T161100Z","tags":["SRM 822","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T161100Z","tags":["SRM 822","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T161100Z","end":"20220118T172427Z","tags":["SRM 822","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220118T185138Z","tags":["RedGreenBlueLight","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T185138Z","tags":["RedGreenBlueLight","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T185138Z","end":"20220118T191758Z","tags":["RedGreenBlueLight","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220118T200258Z","tags":["call greyhound for moving","general","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T200258Z","tags":["call greyhound for moving","general","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T200258Z","end":"20220118T205734Z","tags":["call greyhound for moving","general","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220118T213303Z","tags":["RedGreenBlueLight","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T213303Z","tags":["RedGreenBlueLight","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T213303Z","end":"20220118T215126Z","tags":["RedGreenBlueLight","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220118T224758Z","tags":["linux","nvim","telescope show hidden files"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T224758Z","tags":["linux","nvim","telescope show hidden files"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T224300Z","tags":["linux","nvim","telescope show hidden files"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T224300Z","tags":["linux","nvim","telescope show hidden files"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T224300Z","end":"20220118T225238Z","tags":["linux","nvim","telescope show hidden files"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220118T231027Z","tags":["general","request visa for graduation"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220118T231027Z","tags":["general","request visa for graduation"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220118T231027Z","end":"20220118T231202Z","tags":["general","request visa for graduation"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220126T051231Z","tags":["implement add system-wide file searcher","linux","linux_config"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220126T051231Z","tags":["implement add system-wide file searcher","linux","linux_config"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220126T051231Z","end":"20220126T052013Z","tags":["implement add system-wide file searcher","linux","linux_config"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220126T202810Z","tags":["research google task API","task-manager","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220126T202810Z","tags":["research google task API","task-manager","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220126T202810Z","end":"20220126T205019Z","tags":["research google task API","task-manager","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220126T212427Z","tags":["research google task API","task-manager","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220126T212427Z","tags":["research google task API","task-manager","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220126T212427Z","end":"20220126T212435Z","tags":["research google task API","task-manager","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220126T220524Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220126T220524Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220126T220524Z","end":"20220126T222723Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220127T015925Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220127T015925Z","tags":["E. Not Escaping","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220127T015925Z","end":"20220127T023924Z","tags":["E. Not Escaping","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220127T223215Z","tags":["install sportify","linux","sportify"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220127T223215Z","tags":["install sportify","linux","sportify"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220127T223215Z","end":"20220127T224959Z","tags":["install sportify","linux","sportify"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220128T023632Z","tags":["install sportify","linux","sportify"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220128T023632Z","tags":["install sportify","linux","sportify"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220128T023632Z","end":"20220128T032030Z","tags":["install sportify","linux","sportify"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220129T020010Z","tags":["cp","thtrook"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220129T020010Z","tags":["cp","thtrook"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220129T020010Z","end":"20220129T020153Z","tags":["cp","thtrook"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220130T165239Z","tags":["COCI17 - Ceste","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220130T165239Z","tags":["COCI17 - Ceste","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220130T165239Z","end":"20220131T024541Z","tags":["COCI17 - Ceste","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220130T165239Z","end":"20220131T024541Z","tags":["COCI17 - Ceste","cp","todo"]}
+  after: 
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220131T054327Z","tags":["E. Math Test","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220131T054327Z","tags":["E. Math Test","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220131T054327Z","end":"20220131T062121Z","tags":["E. Math Test","cp","todo"]}
+txn:
+  type: interval
+  before: 
+  after: {"id":0,"start":"20220201T031722Z","tags":["E. Math Test","cp","todo"]}
+txn:
+  type: interval
+  before: {"id":1,"start":"20220201T031722Z","tags":["E. Math Test","cp","todo"]}
+  after: 
+  type: interval
+  before: 
+  after: {"id":1,"start":"20220201T031722Z","end":"20220201T034954Z","tags":["E. Math Test","cp","todo"]}

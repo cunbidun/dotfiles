@@ -1,0 +1,15 @@
+#!/bin/sh
+
+BASE_DIR="$HOME/note"
+NOTE_DIR="$BASE_DIR/note"
+
+sc_create_today_note
+
+mkdir -p "$NOTE_DIR"
+
+cd "$NOTE_DIR" || echo "could not be created"
+
+today=$(date +"%Y %B %d")
+path="$(echo "$today" | sed 's/ /\//g')"
+
+lvim "$path/today.md"

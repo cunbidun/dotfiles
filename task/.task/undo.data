@@ -7049,3 +7049,486 @@ time 1642391625
 old [description:"investigate sc_alacritty_update_theme" entry:"1642384131" modified:"1642391182" project:"alacritty" start:"1642391182" status:"pending" tags:"linux" tags_linux:"x" uuid:"39583a3f-e06b-416a-b7ad-469cf42ed3ea"]
 new [description:"investigate sc_alacritty_update_theme" end:"1642391625" entry:"1642384131" modified:"1642391625" project:"alacritty" status:"completed" tags:"linux" tags_linux:"x" uuid:"39583a3f-e06b-416a-b7ad-469cf42ed3ea"]
 ---
+time 1642395428
+new [description:"E. Not Escaping" entry:"1642395428" modified:"1642395428" project:"cp" status:"pending" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642395448
+old [description:"E. Not Escaping" entry:"1642395428" modified:"1642395428" project:"cp" status:"pending" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" entry:"1642395428" modified:"1642395448" project:"cp" status:"pending" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642395484
+old [description:"COCI 16-mag" due:"1642309199" entry:"1641663310" modified:"1642011419" project:"cp" status:"pending" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+new [description:"COCI 16-mag" due:"1642395601" entry:"1641663310" modified:"1642395484" project:"cp" status:"pending" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+---
+time 1642395484
+old [description:"COCI 08-Trezor" due:"1642309199" entry:"1641663300" modified:"1642011419" project:"cp" status:"pending" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+new [description:"COCI 08-Trezor" due:"1642395601" entry:"1641663300" modified:"1642395484" project:"cp" status:"pending" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+---
+time 1642395484
+old [description:"COCI 07-Cestarine" due:"1642309199" entry:"1641663289" modified:"1642011419" project:"cp" status:"pending" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+new [description:"COCI 07-Cestarine" due:"1642395601" entry:"1641663289" modified:"1642395484" project:"cp" status:"pending" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+---
+time 1642395484
+old [description:"CEOIPractice 17-Museum" due:"1642309199" entry:"1641663276" modified:"1642011419" project:"cp" status:"pending" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+new [description:"CEOIPractice 17-Museum" due:"1642395601" entry:"1641663276" modified:"1642395484" project:"cp" status:"pending" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+---
+time 1642395484
+old [description:"setup everforest lvim" entry:"1642178700" modified:"1642378370" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+new [description:"setup everforest lvim" due:"1642395601" entry:"1642178700" modified:"1642395484" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+---
+time 1642395484
+old [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642222799" entry:"1642179293" modified:"1642179317" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+new [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642395601" entry:"1642179293" modified:"1642395484" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+---
+time 1642395484
+old [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642222799" entry:"1642179421" modified:"1642179444" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+new [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642395601" entry:"1642179421" modified:"1642395484" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+---
+time 1642395484
+old [description:"reply to Chicago Rental Assistance" due:"1642222799" entry:"1642197590" modified:"1642197590" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+new [description:"reply to Chicago Rental Assistance" due:"1642395601" entry:"1642197590" modified:"1642395484" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+---
+time 1642395496
+old [description:"COCI 16-mag" due:"1642395601" entry:"1641663310" modified:"1642395484" project:"cp" status:"pending" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+new [description:"COCI 16-mag" due:"1642482000" entry:"1641663310" modified:"1642395496" project:"cp" status:"pending" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+---
+time 1642395496
+old [description:"COCI 08-Trezor" due:"1642395601" entry:"1641663300" modified:"1642395484" project:"cp" status:"pending" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+new [description:"COCI 08-Trezor" due:"1642482000" entry:"1641663300" modified:"1642395496" project:"cp" status:"pending" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+---
+time 1642395496
+old [description:"COCI 07-Cestarine" due:"1642395601" entry:"1641663289" modified:"1642395484" project:"cp" status:"pending" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+new [description:"COCI 07-Cestarine" due:"1642482000" entry:"1641663289" modified:"1642395496" project:"cp" status:"pending" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+---
+time 1642395496
+old [description:"CEOIPractice 17-Museum" due:"1642395601" entry:"1641663276" modified:"1642395484" project:"cp" status:"pending" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+new [description:"CEOIPractice 17-Museum" due:"1642482000" entry:"1641663276" modified:"1642395496" project:"cp" status:"pending" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+---
+time 1642395497
+old [description:"setup everforest lvim" due:"1642395601" entry:"1642178700" modified:"1642395484" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+new [description:"setup everforest lvim" due:"1642482000" entry:"1642178700" modified:"1642395497" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+---
+time 1642395497
+old [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642395601" entry:"1642179293" modified:"1642395484" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+new [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642482000" entry:"1642179293" modified:"1642395497" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+---
+time 1642395497
+old [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642395601" entry:"1642179421" modified:"1642395484" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+new [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642482000" entry:"1642179421" modified:"1642395497" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+---
+time 1642395497
+old [description:"reply to Chicago Rental Assistance" due:"1642395601" entry:"1642197590" modified:"1642395484" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+new [description:"reply to Chicago Rental Assistance" due:"1642482000" entry:"1642197590" modified:"1642395497" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+---
+time 1642395553
+old [description:"setup everforest lvim" due:"1642482000" entry:"1642178700" modified:"1642395497" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+new [description:"setup everforest lvim" entry:"1642178700" modified:"1642395553" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+---
+time 1642395559
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" entry:"1642395428" modified:"1642395448" project:"cp" status:"pending" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" entry:"1642395428" modified:"1642395559" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642395570
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" entry:"1642395428" modified:"1642395559" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642395601" entry:"1642395428" modified:"1642395570" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642395577
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642395601" entry:"1642395428" modified:"1642395570" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642395577" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642395612
+old [description:"COCI 16-mag" due:"1642482000" entry:"1641663310" modified:"1642395496" project:"cp" status:"pending" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+new [description:"COCI 16-mag" due:"1643086800" entry:"1641663310" modified:"1642395612" project:"cp" status:"pending" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+---
+time 1642395612
+old [description:"COCI 08-Trezor" due:"1642482000" entry:"1641663300" modified:"1642395496" project:"cp" status:"pending" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+new [description:"COCI 08-Trezor" due:"1643086800" entry:"1641663300" modified:"1642395612" project:"cp" status:"pending" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+---
+time 1642395612
+old [description:"COCI 07-Cestarine" due:"1642482000" entry:"1641663289" modified:"1642395496" project:"cp" status:"pending" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+new [description:"COCI 07-Cestarine" due:"1643086800" entry:"1641663289" modified:"1642395612" project:"cp" status:"pending" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+---
+time 1642395612
+old [description:"CEOIPractice 17-Museum" due:"1642482000" entry:"1641663276" modified:"1642395496" project:"cp" status:"pending" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+new [description:"CEOIPractice 17-Museum" due:"1643086800" entry:"1641663276" modified:"1642395612" project:"cp" status:"pending" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+---
+time 1642395634
+old [description:"reply to Chicago Rental Assistance" due:"1642482000" entry:"1642197590" modified:"1642395497" project:"swe2022" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+new [description:"reply to Chicago Rental Assistance" due:"1642482000" entry:"1642197590" modified:"1642395634" project:"swe2022" start:"1642395634" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+---
+time 1642396614
+old [description:"reply to Chicago Rental Assistance" due:"1642482000" entry:"1642197590" modified:"1642395634" project:"swe2022" start:"1642395634" status:"pending" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+new [description:"reply to Chicago Rental Assistance" due:"1642482000" end:"1642396613" entry:"1642197590" modified:"1642396614" project:"swe2022" status:"completed" tags:"todo" tags_todo:"x" uuid:"9d6952ec-ed9d-44d2-ad6a-c1daed231615"]
+---
+time 1642438192
+old [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642482000" entry:"1642179421" modified:"1642395497" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+new [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642482000" entry:"1642179421" modified:"1642438192" project:"cp" status:"pending" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+---
+time 1642438485
+new [description:"Mastering Eth chapter 1 2 3" entry:"1642438485" modified:"1642438485" project:"ethereum" status:"pending" tags:"todo" tags_todo:"x" uuid:"228ec3d7-44ea-4be0-b2ac-0ecda15be01d"]
+---
+time 1642445910
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642395577" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642445910" project:"cp" start:"1642445909" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642446858
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642445910" project:"cp" start:"1642445909" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642446858" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642451108
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642446858" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642451108" project:"cp" start:"1642451108" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642459575
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642451108" project:"cp" start:"1642451108" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642459575" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642460783
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642459575" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642460783" project:"cp" start:"1642460783" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642460953
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642460783" project:"cp" start:"1642460783" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642460953" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642461480
+new [description:"implement add full-text searcher" entry:"1642461480" modified:"1642461480" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"e3650090-31b1-4112-8450-8dea882d0cce"]
+---
+time 1642461493
+new [description:"implement add system-wide file searcher" entry:"1642461493" modified:"1642461493" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"d682700e-2ab2-4c0b-b91e-2bfd53b508c5"]
+---
+time 1642461625
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642460953" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642461625" project:"cp" start:"1642461625" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642464031
+new [description:"c++ increase line limit" entry:"1642464031" modified:"1642464031" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"d2061a64-a0e5-4607-90de-7f3f69e8eb2d"]
+---
+time 1642464096
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642461625" project:"cp" start:"1642461625" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642464096" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1642480952
+new [description:"setup topcoder and add to note" entry:"1642480952" modified:"1642480952" project:"cp" status:"pending" uuid:"2d3a816a-4661-4989-b0ca-c029f25bfc5c"]
+---
+time 1642481141
+old [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642482000" entry:"1642179293" modified:"1642395497" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+new [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642482000" entry:"1642179293" modified:"1642481141" project:"cp" status:"pending" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+---
+time 1642481233
+new [description:"SRM 822" entry:"1642481233" modified:"1642481233" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ce3a428c-f802-47ea-aa92-a51ad3253f2a"]
+---
+time 1642481254
+old [description:"setup topcoder and add to note" entry:"1642480952" modified:"1642480952" project:"cp" status:"pending" uuid:"2d3a816a-4661-4989-b0ca-c029f25bfc5c"]
+new [description:"setup topcoder and add to note" entry:"1642480952" modified:"1642481254" project:"cp" start:"1642481253" status:"pending" uuid:"2d3a816a-4661-4989-b0ca-c029f25bfc5c"]
+---
+time 1642484716
+old [description:"setup topcoder and add to note" entry:"1642480952" modified:"1642481254" project:"cp" start:"1642481253" status:"pending" uuid:"2d3a816a-4661-4989-b0ca-c029f25bfc5c"]
+new [description:"setup topcoder and add to note" end:"1642484716" entry:"1642480952" modified:"1642484716" project:"cp" status:"completed" uuid:"2d3a816a-4661-4989-b0ca-c029f25bfc5c"]
+---
+time 1642526651
+old [description:"SRM 822" entry:"1642481233" modified:"1642481233" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ce3a428c-f802-47ea-aa92-a51ad3253f2a"]
+new [description:"SRM 822" entry:"1642481233" modified:"1642526651" project:"cp" start:"1642526651" status:"pending" tags:"todo" tags_todo:"x" uuid:"ce3a428c-f802-47ea-aa92-a51ad3253f2a"]
+---
+time 1642526667
+old [description:"SRM 822" entry:"1642481233" modified:"1642526651" project:"cp" start:"1642526651" status:"pending" tags:"todo" tags_todo:"x" uuid:"ce3a428c-f802-47ea-aa92-a51ad3253f2a"]
+new [description:"SRM 822" entry:"1642481233" modified:"1642526667" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ce3a428c-f802-47ea-aa92-a51ad3253f2a"]
+---
+time 1642526672
+old [description:"SRM 822" entry:"1642481233" modified:"1642526667" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ce3a428c-f802-47ea-aa92-a51ad3253f2a"]
+new [description:"SRM 822" end:"1642526672" entry:"1642481233" modified:"1642526672" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"ce3a428c-f802-47ea-aa92-a51ad3253f2a"]
+---
+time 1642528597
+new [description:"call greyhound for moving" due:"1642568399" entry:"1642528597" modified:"1642528597" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"233f544d-6371-421f-945d-1008116b49a2"]
+---
+time 1642528649
+new [description:"call penske for moving" due:"1642568399" entry:"1642528649" modified:"1642528649" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"9f31824c-85cb-4044-be03-a0a68738c621"]
+---
+time 1642529816
+new [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642529816" project:"cp" status:"pending" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+---
+time 1642529835
+old [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642529816" project:"cp" status:"pending" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+new [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642529835" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+---
+time 1642529857
+old [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642482000" entry:"1642179293" modified:"1642481141" project:"cp" status:"pending" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+new [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642741200" entry:"1642179293" modified:"1642529857" project:"cp" status:"pending" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+---
+time 1642529857
+old [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642482000" entry:"1642179421" modified:"1642438192" project:"cp" status:"pending" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+new [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642741200" entry:"1642179421" modified:"1642529857" project:"cp" status:"pending" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+---
+time 1642531898
+old [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642529835" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+new [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642531898" project:"cp" start:"1642531898" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+---
+time 1642533478
+old [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642531898" project:"cp" start:"1642531898" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+new [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642533478" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+---
+time 1642536178
+old [description:"call greyhound for moving" due:"1642568399" entry:"1642528597" modified:"1642528597" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"233f544d-6371-421f-945d-1008116b49a2"]
+new [description:"call greyhound for moving" due:"1642568399" entry:"1642528597" modified:"1642536178" project:"general" start:"1642536178" status:"pending" tags:"todo" tags_todo:"x" uuid:"233f544d-6371-421f-945d-1008116b49a2"]
+---
+time 1642539454
+old [description:"call greyhound for moving" due:"1642568399" entry:"1642528597" modified:"1642536178" project:"general" start:"1642536178" status:"pending" tags:"todo" tags_todo:"x" uuid:"233f544d-6371-421f-945d-1008116b49a2"]
+new [description:"call greyhound for moving" due:"1642568399" end:"1642539454" entry:"1642528597" modified:"1642539454" project:"general" status:"completed" tags:"todo" tags_todo:"x" uuid:"233f544d-6371-421f-945d-1008116b49a2"]
+---
+time 1642541273
+old [description:"call penske for moving" due:"1642568399" entry:"1642528649" modified:"1642528649" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"9f31824c-85cb-4044-be03-a0a68738c621"]
+new [description:"call penske for moving" due:"1642568399" end:"1642541272" entry:"1642528649" modified:"1642541273" project:"general" status:"deleted" tags:"todo" tags_todo:"x" uuid:"9f31824c-85cb-4044-be03-a0a68738c621"]
+---
+time 1642541318
+new [description:"request visa for graduation" entry:"1642541318" modified:"1642541318" project:"general" status:"pending" uuid:"5f1a64a8-0525-4d9d-9dfb-5e7b6f0c1380"]
+---
+time 1642541326
+old [description:"request visa for graduation" entry:"1642541318" modified:"1642541318" project:"general" status:"pending" uuid:"5f1a64a8-0525-4d9d-9dfb-5e7b6f0c1380"]
+new [description:"request visa for graduation" entry:"1642541318" modified:"1642541326" priority:"H" project:"general" status:"pending" uuid:"5f1a64a8-0525-4d9d-9dfb-5e7b6f0c1380"]
+---
+time 1642541583
+old [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642533478" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+new [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642541583" project:"cp" start:"1642541583" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+---
+time 1642542686
+old [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642541583" project:"cp" start:"1642541583" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+new [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642542686" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+---
+time 1642542877
+old [description:"RedGreenBlueLight" due:"1642568399" entry:"1642529816" modified:"1642542686" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+new [description:"RedGreenBlueLight" due:"1642568399" end:"1642542877" entry:"1642529816" modified:"1642542877" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"307d6458-4058-40b8-9c70-30bec7b604bf"]
+---
+time 1642546071
+new [description:"telescope show hidden files" entry:"1642546071" modified:"1642546071" project:"nvim" status:"pending" uuid:"a86f323a-cc05-4896-bf30-a6692118e6e9"]
+---
+time 1642546076
+old [description:"telescope show hidden files" entry:"1642546071" modified:"1642546071" project:"nvim" status:"pending" uuid:"a86f323a-cc05-4896-bf30-a6692118e6e9"]
+new [description:"telescope show hidden files" entry:"1642546071" modified:"1642546076" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"a86f323a-cc05-4896-bf30-a6692118e6e9"]
+---
+time 1642546078
+old [description:"telescope show hidden files" entry:"1642546071" modified:"1642546076" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"a86f323a-cc05-4896-bf30-a6692118e6e9"]
+new [description:"telescope show hidden files" entry:"1642546071" modified:"1642546078" project:"nvim" start:"1642546078" status:"pending" tags:"linux" tags_linux:"x" uuid:"a86f323a-cc05-4896-bf30-a6692118e6e9"]
+---
+time 1642546358
+old [description:"telescope show hidden files" entry:"1642546071" modified:"1642546078" project:"nvim" start:"1642546078" status:"pending" tags:"linux" tags_linux:"x" uuid:"a86f323a-cc05-4896-bf30-a6692118e6e9"]
+new [description:"telescope show hidden files" end:"1642546358" entry:"1642546071" modified:"1642546358" project:"nvim" status:"completed" tags:"linux" tags_linux:"x" uuid:"a86f323a-cc05-4896-bf30-a6692118e6e9"]
+---
+time 1642547427
+old [description:"request visa for graduation" entry:"1642541318" modified:"1642541326" priority:"H" project:"general" status:"pending" uuid:"5f1a64a8-0525-4d9d-9dfb-5e7b6f0c1380"]
+new [description:"request visa for graduation" entry:"1642541318" modified:"1642547427" priority:"H" project:"general" start:"1642547427" status:"pending" uuid:"5f1a64a8-0525-4d9d-9dfb-5e7b6f0c1380"]
+---
+time 1642547522
+old [description:"request visa for graduation" entry:"1642541318" modified:"1642547427" priority:"H" project:"general" start:"1642547427" status:"pending" uuid:"5f1a64a8-0525-4d9d-9dfb-5e7b6f0c1380"]
+new [description:"request visa for graduation" end:"1642547522" entry:"1642541318" modified:"1642547522" priority:"H" project:"general" status:"completed" uuid:"5f1a64a8-0525-4d9d-9dfb-5e7b6f0c1380"]
+---
+time 1643129557
+new [description:"message Khoa" entry:"1643129557" modified:"1643129557" priority:"M" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"a25b7411-ef01-4e11-892d-3726f2fc1deb"]
+---
+time 1643133576
+old [description:"message Khoa" entry:"1643129557" modified:"1643129557" priority:"M" project:"general" status:"pending" tags:"todo" tags_todo:"x" uuid:"a25b7411-ef01-4e11-892d-3726f2fc1deb"]
+new [description:"message Khoa" end:"1643133574" entry:"1643129557" modified:"1643133576" priority:"M" project:"general" status:"deleted" tags:"todo" tags_todo:"x" uuid:"a25b7411-ef01-4e11-892d-3726f2fc1deb"]
+---
+time 1643144224
+old [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642741200" entry:"1642179421" modified:"1642529857" project:"cp" status:"pending" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+new [annotation_1642179432:"https:\/\/atcoder.jp\/contests\/abc216\/tasks\/abc216_g" description:"COCI17 - Ceste" due:"1642741200" end:"1643144223" entry:"1642179421" modified:"1643144224" project:"cp" status:"deleted" uuid:"239e8b5d-f20f-46cf-911a-0ce1b62b9f0b"]
+---
+time 1643144233
+old [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642741200" entry:"1642179293" modified:"1642529857" project:"cp" status:"pending" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+new [annotation_1642179302:"https:\/\/codeforces.com\/problemset\/problem\/1622\/E" description:"E. Math Test" due:"1642741200" end:"1643144231" entry:"1642179293" modified:"1643144233" project:"cp" status:"deleted" uuid:"67053f46-1444-4d25-816e-f87c21a00dec"]
+---
+time 1643144233
+old [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" entry:"1642395428" modified:"1642464096" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+new [annotation_1642395431:"https:\/\/codeforces.com\/problemset\/problem\/1627\/E" description:"E. Not Escaping" due:"1642482000" end:"1643144233" entry:"1642395428" modified:"1643144233" project:"cp" status:"deleted" tags:"todo" tags_todo:"x" uuid:"38e38b8e-f7b0-41e1-a5bd-5533377cfbcc"]
+---
+time 1643173575
+old [description:"Mastering Eth chapter 1 2 3" entry:"1642438485" modified:"1642438485" project:"ethereum" status:"pending" tags:"todo" tags_todo:"x" uuid:"228ec3d7-44ea-4be0-b2ac-0ecda15be01d"]
+new [description:"Mastering Eth chapter 1 2 3" end:"1643173574" entry:"1642438485" modified:"1643173575" project:"ethereum" status:"deleted" tags:"todo" tags_todo:"x" uuid:"228ec3d7-44ea-4be0-b2ac-0ecda15be01d"]
+---
+time 1643173588
+old [description:"COCI 16-mag" due:"1643086800" entry:"1641663310" modified:"1642395612" project:"cp" status:"pending" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+new [description:"COCI 16-mag" due:"1643086800" end:"1643173586" entry:"1641663310" modified:"1643173588" project:"cp" status:"deleted" uuid:"57b99598-ba02-4093-ac17-9e43764757ed"]
+---
+time 1643173588
+old [description:"COCI 08-Trezor" due:"1643086800" entry:"1641663300" modified:"1642395612" project:"cp" status:"pending" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+new [description:"COCI 08-Trezor" due:"1643086800" end:"1643173588" entry:"1641663300" modified:"1643173588" project:"cp" status:"deleted" uuid:"5b5d1e70-ef9f-459b-a0b7-3f0e3231c43b"]
+---
+time 1643173588
+old [description:"COCI 07-Cestarine" due:"1643086800" entry:"1641663289" modified:"1642395612" project:"cp" status:"pending" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+new [description:"COCI 07-Cestarine" due:"1643086800" end:"1643173588" entry:"1641663289" modified:"1643173588" project:"cp" status:"deleted" uuid:"1ac60cae-eb83-47df-8e70-7ae4bf35ea55"]
+---
+time 1643173588
+old [description:"CEOIPractice 17-Museum" due:"1643086800" entry:"1641663276" modified:"1642395612" project:"cp" status:"pending" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+new [description:"CEOIPractice 17-Museum" due:"1643086800" end:"1643173588" entry:"1641663276" modified:"1643173588" project:"cp" status:"deleted" uuid:"5286a95f-b36e-49d6-a525-312c7826fe88"]
+---
+time 1643173742
+old [description:"use C++ for gen.sh" entry:"1635002545" modified:"1636228307" project:"cpcli" status:"pending" tags:"cp" tags_cp:"x" uuid:"1813fc13-9395-49ce-b7b2-a69e9b4a831f"]
+new [description:"use C++ for gen.sh" end:"1643173741" entry:"1635002545" modified:"1643173742" project:"cpcli" status:"deleted" tags:"cp" tags_cp:"x" uuid:"1813fc13-9395-49ce-b7b2-a69e9b4a831f"]
+---
+time 1643173847
+old [description:"ranger setup in-place pdf view" entry:"1634482232" modified:"1637700253" project:"ranger" status:"pending" tags:"linux" tags_linux:"x" uuid:"8b01abbc-c430-41f8-9a24-6f1b31da754a"]
+new [description:"ranger setup in-place pdf view" entry:"1634482232" modified:"1643173847" priority:"L" project:"ranger" status:"pending" tags:"linux" tags_linux:"x" uuid:"8b01abbc-c430-41f8-9a24-6f1b31da754a"]
+---
+time 1643173847
+old [description:"setup nord theme for neomutt" entry:"1634919016" modified:"1637700275" project:"neomutt" status:"pending" tags:"linux" tags_linux:"x" uuid:"e79f2481-4ff8-4c0d-b5c4-6bd8e55df995"]
+new [description:"setup nord theme for neomutt" entry:"1634919016" modified:"1643173847" priority:"L" project:"neomutt" status:"pending" tags:"linux" tags_linux:"x" uuid:"e79f2481-4ff8-4c0d-b5c4-6bd8e55df995"]
+---
+time 1643173847
+old [description:"setup dunst with images" entry:"1636176449" modified:"1636228289" project:"dunst" status:"pending" tags:"linux" tags_linux:"x" uuid:"408f9626-f82b-49ce-9785-dd631acbc22e"]
+new [description:"setup dunst with images" entry:"1636176449" modified:"1643173847" priority:"L" project:"dunst" status:"pending" tags:"linux" tags_linux:"x" uuid:"408f9626-f82b-49ce-9785-dd631acbc22e"]
+---
+time 1643173847
+old [description:"task sorting" entry:"1637782576" modified:"1637800512" project:"task" status:"pending" tags:"linux" tags_linux:"x" uuid:"c1181ecc-c8e4-4038-9d76-79004c7ee528"]
+new [description:"task sorting" entry:"1637782576" modified:"1643173847" priority:"L" project:"task" status:"pending" tags:"linux" tags_linux:"x" uuid:"c1181ecc-c8e4-4038-9d76-79004c7ee528"]
+---
+time 1643173873
+old [description:"general hdmi sound" entry:"1634170483" modified:"1634498477" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"089cab95-0af3-4e67-a097-e52edbe3ff8b"]
+new [description:"general hdmi sound" entry:"1634170483" modified:"1643173873" priority:"M" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"089cab95-0af3-4e67-a097-e52edbe3ff8b"]
+---
+time 1643173873
+old [description:"general setup battery hook" entry:"1634434305" modified:"1634498489" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"e7ac5ede-768e-445f-9059-d41548203faa"]
+new [description:"general setup battery hook" entry:"1634434305" modified:"1643173873" priority:"M" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"e7ac5ede-768e-445f-9059-d41548203faa"]
+---
+time 1643173902
+old [description:"setup everforest lvim" entry:"1642178700" modified:"1642395553" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+new [description:"setup everforest lvim" entry:"1642178700" modified:"1643173902" priority:"H" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+---
+time 1643173902
+old [description:"implement add full-text searcher" entry:"1642461480" modified:"1642461480" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"e3650090-31b1-4112-8450-8dea882d0cce"]
+new [description:"implement add full-text searcher" entry:"1642461480" modified:"1643173902" priority:"H" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"e3650090-31b1-4112-8450-8dea882d0cce"]
+---
+time 1643173921
+old [description:"setup everforest lvim" entry:"1642178700" modified:"1643173902" priority:"H" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+new [description:"setup everforest lvim" entry:"1642178700" modified:"1643173921" priority:"M" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"c3dc46e7-0492-4a53-87f9-2e99d7619cbc"]
+---
+time 1643173921
+old [description:"c++ increase line limit" entry:"1642464031" modified:"1642464031" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"d2061a64-a0e5-4607-90de-7f3f69e8eb2d"]
+new [description:"c++ increase line limit" entry:"1642464031" modified:"1643173921" priority:"M" project:"nvim" status:"pending" tags:"linux" tags_linux:"x" uuid:"d2061a64-a0e5-4607-90de-7f3f69e8eb2d"]
+---
+time 1643173934
+old [description:"rofi timepicker" entry:"1637700219" modified:"1642179148" project:"rofi" status:"pending" tags:"linux" tags_linux:"x" uuid:"bff2b1f3-ab53-4633-a530-c3ef145da4e7"]
+new [description:"rofi timepicker" entry:"1637700219" modified:"1643173934" priority:"L" project:"rofi" status:"pending" tags:"linux" tags_linux:"x" uuid:"bff2b1f3-ab53-4633-a530-c3ef145da4e7"]
+---
+time 1643173940
+old [description:"implement add system-wide file searcher" entry:"1642461493" modified:"1642461493" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"d682700e-2ab2-4c0b-b91e-2bfd53b508c5"]
+new [description:"implement add system-wide file searcher" entry:"1642461493" modified:"1643173940" priority:"H" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"d682700e-2ab2-4c0b-b91e-2bfd53b508c5"]
+---
+time 1643173951
+old [description:"implement add system-wide file searcher" entry:"1642461493" modified:"1643173940" priority:"H" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"d682700e-2ab2-4c0b-b91e-2bfd53b508c5"]
+new [description:"implement add system-wide file searcher" entry:"1642461493" modified:"1643173951" priority:"H" project:"linux_config" start:"1643173951" status:"pending" tags:"linux" tags_linux:"x" uuid:"d682700e-2ab2-4c0b-b91e-2bfd53b508c5"]
+---
+time 1643174413
+old [description:"implement add system-wide file searcher" entry:"1642461493" modified:"1643173951" priority:"H" project:"linux_config" start:"1643173951" status:"pending" tags:"linux" tags_linux:"x" uuid:"d682700e-2ab2-4c0b-b91e-2bfd53b508c5"]
+new [description:"implement add system-wide file searcher" entry:"1642461493" modified:"1643174413" priority:"H" project:"linux_config" status:"pending" tags:"linux" tags_linux:"x" uuid:"d682700e-2ab2-4c0b-b91e-2bfd53b508c5"]
+---
+time 1643174801
+new [description:"init project" entry:"1643174801" modified:"1643174801" project:"task-manager" status:"pending" uuid:"49fb21ef-533c-499c-9160-bafca77f8d6d"]
+---
+time 1643228813
+new [description:"research google task API" entry:"1643228813" modified:"1643228813" project:"task-manager" status:"pending" tags:"todo" tags_todo:"x" uuid:"c6afda8b-02d7-476d-80da-0f2ae1995a80"]
+---
+time 1643228830
+old [description:"init project" entry:"1643174801" modified:"1643174801" project:"task-manager" status:"pending" uuid:"49fb21ef-533c-499c-9160-bafca77f8d6d"]
+new [description:"init project, write some todos" entry:"1643174801" modified:"1643228830" project:"task-manager" status:"pending" uuid:"49fb21ef-533c-499c-9160-bafca77f8d6d"]
+---
+time 1643228890
+old [description:"research google task API" entry:"1643228813" modified:"1643228813" project:"task-manager" status:"pending" tags:"todo" tags_todo:"x" uuid:"c6afda8b-02d7-476d-80da-0f2ae1995a80"]
+new [description:"research google task API" entry:"1643228813" modified:"1643228890" project:"task-manager" start:"1643228890" status:"pending" tags:"todo" tags_todo:"x" uuid:"c6afda8b-02d7-476d-80da-0f2ae1995a80"]
+---
+time 1643232275
+old [description:"research google task API" entry:"1643228813" modified:"1643228890" project:"task-manager" start:"1643228890" status:"pending" tags:"todo" tags_todo:"x" uuid:"c6afda8b-02d7-476d-80da-0f2ae1995a80"]
+new [description:"research google task API" entry:"1643228813" modified:"1643232275" project:"task-manager" status:"pending" tags:"todo" tags_todo:"x" uuid:"c6afda8b-02d7-476d-80da-0f2ae1995a80"]
+---
+time 1643232286
+old [description:"init project, write some todos" entry:"1643174801" modified:"1643228830" project:"task-manager" status:"pending" uuid:"49fb21ef-533c-499c-9160-bafca77f8d6d"]
+new [description:"init project, write some todos" end:"1643232284" entry:"1643174801" modified:"1643232286" project:"task-manager" status:"deleted" uuid:"49fb21ef-533c-499c-9160-bafca77f8d6d"]
+---
+time 1643232286
+old [description:"research google task API" entry:"1643228813" modified:"1643232275" project:"task-manager" status:"pending" tags:"todo" tags_todo:"x" uuid:"c6afda8b-02d7-476d-80da-0f2ae1995a80"]
+new [description:"research google task API" end:"1643232286" entry:"1643228813" modified:"1643232286" project:"task-manager" status:"deleted" tags:"todo" tags_todo:"x" uuid:"c6afda8b-02d7-476d-80da-0f2ae1995a80"]
+---
+time 1643234661
+new [description:"E. Not Escaping" entry:"1643234661" modified:"1643234661" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+---
+time 1643234724
+old [description:"E. Not Escaping" entry:"1643234661" modified:"1643234661" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+new [description:"E. Not Escaping" entry:"1643234661" modified:"1643234724" project:"cp" start:"1643234724" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+---
+time 1643236043
+old [description:"E. Not Escaping" entry:"1643234661" modified:"1643234724" project:"cp" start:"1643234724" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+new [description:"E. Not Escaping" entry:"1643234661" modified:"1643236043" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+---
+time 1643248765
+old [description:"E. Not Escaping" entry:"1643234661" modified:"1643236043" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+new [description:"E. Not Escaping" entry:"1643234661" modified:"1643248765" project:"cp" start:"1643248765" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+---
+time 1643251164
+old [description:"E. Not Escaping" entry:"1643234661" modified:"1643248765" project:"cp" start:"1643248765" status:"pending" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+new [description:"E. Not Escaping" end:"1643251164" entry:"1643234661" modified:"1643251164" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"ab2dcee9-ed5d-418e-b08d-0464f8374453"]
+---
+time 1643322732
+new [description:"install sportify" entry:"1643322732" modified:"1643322732" project:"sportify" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+---
+time 1643322735
+old [description:"install sportify" entry:"1643322732" modified:"1643322732" project:"sportify" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+new [description:"install sportify" entry:"1643322732" modified:"1643322735" project:"sportify" start:"1643322735" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+---
+time 1643323799
+old [description:"install sportify" entry:"1643322732" modified:"1643322735" project:"sportify" start:"1643322735" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+new [description:"install sportify" entry:"1643322732" modified:"1643323799" project:"sportify" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+---
+time 1643337392
+old [description:"install sportify" entry:"1643322732" modified:"1643323799" project:"sportify" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+new [description:"install sportify" entry:"1643322732" modified:"1643337392" project:"sportify" start:"1643337392" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+---
+time 1643340030
+old [description:"install sportify" entry:"1643322732" modified:"1643337392" project:"sportify" start:"1643337392" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+new [description:"install sportify" entry:"1643322732" modified:"1643340030" project:"sportify" status:"pending" tags:"linux" tags_linux:"x" uuid:"35865119-2ec8-40d1-b449-21b7ef037f43"]
+---
+time 1643421608
+new [description:"thtrook" entry:"1643421608" modified:"1643421608" project:"cp" status:"pending" uuid:"18f8e83e-fcbe-4eb9-89c3-d4cd22fef2d5"]
+---
+time 1643421610
+old [description:"thtrook" entry:"1643421608" modified:"1643421608" project:"cp" status:"pending" uuid:"18f8e83e-fcbe-4eb9-89c3-d4cd22fef2d5"]
+new [description:"thtrook" entry:"1643421608" modified:"1643421610" project:"cp" start:"1643421610" status:"pending" uuid:"18f8e83e-fcbe-4eb9-89c3-d4cd22fef2d5"]
+---
+time 1643421713
+old [description:"thtrook" entry:"1643421608" modified:"1643421610" project:"cp" start:"1643421610" status:"pending" uuid:"18f8e83e-fcbe-4eb9-89c3-d4cd22fef2d5"]
+new [description:"thtrook" entry:"1643421608" modified:"1643421713" project:"cp" status:"pending" uuid:"18f8e83e-fcbe-4eb9-89c3-d4cd22fef2d5"]
+---
+time 1643561550
+new [description:"COCI17 - Ceste" due:"1643605199" entry:"1643561550" modified:"1643561550" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"17eaa738-ebe0-4654-ba7e-594b2ba524dd"]
+---
+time 1643561559
+old [description:"COCI17 - Ceste" due:"1643605199" entry:"1643561550" modified:"1643561550" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"17eaa738-ebe0-4654-ba7e-594b2ba524dd"]
+new [description:"COCI17 - Ceste" due:"1643605199" entry:"1643561550" modified:"1643561559" project:"cp" start:"1643561559" status:"pending" tags:"todo" tags_todo:"x" uuid:"17eaa738-ebe0-4654-ba7e-594b2ba524dd"]
+---
+time 1643597141
+old [description:"COCI17 - Ceste" due:"1643605199" entry:"1643561550" modified:"1643561559" project:"cp" start:"1643561559" status:"pending" tags:"todo" tags_todo:"x" uuid:"17eaa738-ebe0-4654-ba7e-594b2ba524dd"]
+new [description:"COCI17 - Ceste" due:"1643605199" entry:"1643561550" modified:"1643597141" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"17eaa738-ebe0-4654-ba7e-594b2ba524dd"]
+---
+time 1643607804
+new [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643607804" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+---
+time 1643607807
+old [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643607804" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+new [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643607807" project:"cp" start:"1643607807" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+---
+time 1643610081
+old [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643607807" project:"cp" start:"1643607807" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+new [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643610081" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+---
+time 1643685442
+old [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643610081" project:"cp" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+new [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643685442" project:"cp" start:"1643685442" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+---
+time 1643687394
+old [description:"E. Math Test" due:"1643691599" entry:"1643607804" modified:"1643685442" project:"cp" start:"1643685442" status:"pending" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+new [description:"E. Math Test" due:"1643691599" end:"1643687394" entry:"1643607804" modified:"1643687394" project:"cp" status:"completed" tags:"todo" tags_todo:"x" uuid:"358cdae2-f2fd-4f67-b32c-32bc758f2d07"]
+---
+time 1643687402
+old [description:"thtrook" entry:"1643421608" modified:"1643421713" project:"cp" status:"pending" uuid:"18f8e83e-fcbe-4eb9-89c3-d4cd22fef2d5"]
+new [description:"thtrook" end:"1643687401" entry:"1643421608" modified:"1643687402" project:"cp" status:"deleted" uuid:"18f8e83e-fcbe-4eb9-89c3-d4cd22fef2d5"]
+---
+time 1644360903
+new [description:"add namedscratchpads patch" entry:"1644360903" modified:"1644360903" project:"dwm" status:"pending" uuid:"9b6cd65e-d186-425b-b2ca-ae5eba9989f2"]
+---

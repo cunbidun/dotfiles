@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ $- == *i* ]]; then
+	echo "interactive"
+else
+	echo "not interactive"
+fi

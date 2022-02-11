@@ -73,6 +73,7 @@ alias 461="~/Documents/Umass/Fall2021/COMPSCI\ 461"
 alias 590="~/Documents/Umass/Fall2021/COMPSCI\ 590CC"
 alias 305="~/Documents/Umass/Fall2021/COMPSCI\ 305"
 
+alias bd="~/dotfiles/scripts/.scripts/bin"
 alias cpf='f() { xclip -sel clip < $1 }; f'
 
 alias ls="exa -la"
@@ -92,6 +93,5 @@ eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 
 test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
-
 # colorscript -e 19
 # source /usr/share/nvm/init-nvm.sh

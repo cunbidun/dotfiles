@@ -21,7 +21,7 @@ command! -nargs=0 DeleteTask call TermWrapper(printf('mv "%s" ~/.local/share/Tra
 
 " VIM
 autocmd filetype cpp nnoremap <C-M-b> :w <bar> :Runscript<CR>
-autocmd filetype cpp nnoremap <leader><C-M-b> :w <bar> :RunWithTerm<CR>
+autocmd filetype cpp nnoremap <C-M-r> :w <bar> :RunWithTerm<CR>
 autocmd filetype cpp nnoremap <C-M-e> :w <bar> :RunWithDebug<CR>
 autocmd filetype cpp nnoremap <C-M-t> :w <bar> :TaskConfig<CR>
 autocmd filetype cpp nnoremap <C-M-a> :w <bar> :ArchiveTask<CR>

@@ -29,12 +29,18 @@ pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo
 ## Install utilities
 
 ```bash
-yay -S imlib2 fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow acpi pamixer apulse alsa-utils network-manager-applet maim
+yay -S imlib2 fzf lazygit skippy-xd-git xclip sysstat 
+ripgrep bat exa gnome-keyring imagemagick unzip stow 
+acpi pamixer apulse alsa-utils network-manager-applet maim
+zathura zathura-pdf-mupdf xcursor-osx-elcap
+
 ```
 
 * `fzf`: fuzzy finder
 * `acpi`: battery status
 * `maim`: screenshot
+* `zathura`, `zathura-pdf-mupdf`: pdf reader
+* `xcursor-osx-elcap`: cursor theme
 
 ---
 
@@ -240,23 +246,24 @@ git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custo
 
 ---
 
-### Java applet Topcoder
-
-1. Make sure Java 8 is installed.
-`yay -S jre8-openjdk-headless  jre8-openjdk  jdk8-openjdk  openjdk8-doc  openjdk8-src`
-
-2. Disable security by deleting "MD5" from the line that starts with
-"jdk.jar.disabledAlgorithms" in with the following commands:
+### Spotify (still error)
 
 ```bash
-sudo archlinux-java set java-8-openjdk
-sudo $EDITOR /usr/lib/jvm/default/jre/lib/security/java.security
-
-Before: jdk.jar.disabledAlgorithms=MD2, MD5, RSA keySize < 1024, \
-After:  jdk.jar.disabledAlgorithms=MD2, RSA keySize < 1024, \
+yay -S spotify # installing Spotify
+yay -S spicetify-cli # installing Spicetify cli
+yay -S spicetify-themes-git # installing the themes
+sudo chmod a+wr /usr/share/spotify # gain write permission on Spotify files
+sudo chmod a+wr /usr/share/spotify/Apps -R # gain write permission on Spotify files
+suto rm -rf ~/config/spotify # delete config folder 
+spicetify config current_theme Dreary # setting theme
+spicetify config color_scheme nord # setting color scheme
+sudo -E spicetify backup apply # applying the change
 ```
 
-**Learn more**: [Source](https://codeforces.cc/blog/entry/90503?#comment-789564)
+Note:
+[Why do we need to delete config folder?](https://forum.manjaro.org/t/spotify-error-needs-usr-lib-libcurl-gnutls-so-4-but-libcurl-gnutls-installed/19260/5)
+
+---
 
 ### DWM
 
@@ -264,6 +271,8 @@ After:  jdk.jar.disabledAlgorithms=MD2, RSA keySize < 1024, \
 
 * For `MarkdownPreview` extension, the browser need to open before running
 `:MarkdownPreview`.
+
+---
 
 ### Cronjobs
 
