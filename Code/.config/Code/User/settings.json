@@ -62,7 +62,7 @@
   "workbench.list.smoothScrolling": true,
   "editor.largeFileOptimizations": false,
   "python.showStartPage": false,
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "vscode-icons",
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

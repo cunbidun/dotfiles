@@ -3,14 +3,14 @@
 weatherreport=$HOME/.cache/weatherreport
 
 showweather() {
+	desc="$(awk 'NR==3' $weatherreport | sed 's/\x1b\[[0-9;]*m//g' | tr -cd '[:alnum:] ' | xargs)"
 	temp="$(awk 'NR==4' $weatherreport | awk '{ print $(NF-1) }' | sed 's/\x1b\[[0-9;]*m//g')"
-	desc="$(awk 'NR==3' $weatherreport | awk '{ print $(NF-1) }' | xargs | sed 's/\x1b\[[0-9;]*m//g')"
 	echo "$desc $temp°C"
 }
 
 case $BLOCK_BUTTON in
 1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
-2) sc_weather_sync && showweather ;;
+3) sc_weather_sync && showweather ;;
 6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
