@@ -68,18 +68,19 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
    *  WM_WINDOW_ROLE(STRING) = role
 	 */
-	/* class              role          instance         title            tags mask     isfloating    isterminal      noswallow       monitor */
-//{ "firefox",          NULL,         "Navigator",     NULL,            0,            1,            0,              0,              -1 },
-	{ "Arandr",           NULL,         "arandr",        NULL,            0,            1,            0,              0,              -1 }, // center this
-	{ NULL,               "pop-up",     NULL,            NULL,            0,            1,            0,              0,              -1 },
-	{ TERMCLASS,          NULL,         NULL,            NULL,            0,            0,            1,              0,              -1 },
-	{ NULL,               NULL,         NULL,            "Event Tester",  0,            0,            0,              1,              -1 }, /* xev */
+	/* class         role          instance       title               tags mask   isfloating   isterminal   noswallow   monitor   scratch key*/
+	{ "Arandr",      NULL,         "arandr",      NULL,               0,          1,           0,           0,          -1,       0          }, // center this
+	{ NULL,          "pop-up",     NULL,          NULL,               0,          1,           0,           0,          -1,       0          },
+	{ TERMCLASS,     NULL,         NULL,          NULL,               0,          0,           1,           0,          -1,       0          },
+	{ NULL,          NULL,         NULL,          "Event Tester",     0,          0,           0,           1,          -1,       0          }, /* xev */
+	{ NULL,          NULL,         NULL,          "scratchpad",       0,          1,           0,           0,          -1,       's'        },
+	{ NULL,          NULL,         NULL,          "scratchpad_note",  0,          1,           0,           0,          -1,       'n'        },
 };
 
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -129,18 +130,19 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", nord9, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 #include "movestack.c"
-static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { TERMINAL, "-t", scratchpadname, "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", NULL };
+
+static const char *scratchpadcmd[] = { "s", TERMINAL, "-t", "scratchpad", "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", NULL };
+static const char *scratchpadcmd_note[] = { "n", TERMINAL, "-t", "scratchpad_note", "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", "-e", "sc_open_today_note", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_x,      spawn,          SHCMD("arandr") },
-	{ MODKEY,                       XK_n,      spawn,          SHCMD(TERMINAL " -e sc_open_today_note") },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD("nautilus ~") },
 	{ MODKEY,                 XK_backslash,    spawn,          SHCMD("dunstctl close-all") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_n,      togglescratch,  {.v = scratchpadcmd_note }  },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
