@@ -34,6 +34,7 @@ ripgrep bat exa gnome-keyring imagemagick unzip stow
 acpi pamixer apulse alsa-utils network-manager-applet maim
 zathura zathura-pdf-mupdf xcursor-osx-elcap
 
+xdg-mime default org.pwmt.zathura.desktop application/pdf # set zathura as default
 ```
 
 * `fzf`: fuzzy finder
@@ -110,6 +111,9 @@ cp /usr/share/optimus-manager.conf /etc/optimus-manger/
 
 ```bash
 yay -S adobe-source-code-pro-fonts ttf-weather-icons 
+yay -S adobe-source-han-sans-kr-fonts ttf-baekmuk # korean font
+yay -S apple-fonts # korean font
+yay -S adobe-base-14-fonts
 ```
 
 ---

@@ -1,15 +1,9 @@
 #!/bin/sh
 
-BASE_DIR="$HOME/note"
-NOTE_DIR="$BASE_DIR/note"
-
 sc_create_today_note
 
-mkdir -p "$NOTE_DIR"
+BASE_DIR="$HOME/zettelkasten"
+cd "$BASE_DIR" || notify-send "Could not open $NOTE_DIR"
 
-cd "$NOTE_DIR" || echo "could not be created"
-
-today=$(date +"%Y %B %d")
-path="$(echo "$today" | sed 's/ /\//g')"
-
-lvim "$path/today.md"
+file_name=$(date +"%Y-%m-%d.md")
+lvim "daily/$file_name"
