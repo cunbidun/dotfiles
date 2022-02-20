@@ -7,8 +7,8 @@
 $HOME/.scripts/bin/dotfiles.txt
 
 # awesome wm
-$HOME/.config/awesome
-$HOME/.config/awesome/rc.lua
+# $HOME/.config/awesome
+# $HOME/.config/awesome/rc.lua
 
 # lvim
 $HOME/.config/lvim/config.lua
@@ -25,8 +25,9 @@ $HOME/.scripts/bin/sc_calcurse_sync
 $HOME/.scripts/bin/sc_weather_sync
 $HOME/.scripts/bin/dotfiles_picker
 $HOME/.scripts/bin/sc_alacritty_change_theme
-$HOME/.scripts/bin/sc_create_today_note
+# $HOME/.scripts/bin/sc_create_today_note
 $HOME/.scripts/bin/sc_open_today_note
+$HOME/.scripts/bin/sc_open_man_page_dmenu
 
 # dwm
 $HOME/dwm

@@ -13,67 +13,76 @@ matches:
   # - trigger: ":address"
   #   replace: "27 Chestnut Ave, Apartment 2, Jamaica Plain MA 02130"
 
+  # - trigger: ":address"
+  #   replace: "Apartment 12B, 1001 N Pleasant St, Amherst, MA 01002-1339"
+
+  # - trigger: ":zip"
+  #   replace: "01002"
+
   - trigger: ":address"
-    replace: "Apartment 12B, 1001 N Pleasant St, Amherst, MA 01002-1339"
+    replace: "Unit 1, 34 Anderson St, Boston, MA 02114"
 
   - trigger: ":zip"
-    replace: "01002"
+    replace: "02114"
 
   - trigger: ":uni"
     replace: "University of Massachusetts at Amherst"
 
   # class
-  - trigger: ":305"
-    replace: "compsci_305"
+  # - trigger: ":305"
+  #   replace: "compsci_305"
 
-  - trigger: ":461"
-    replace: "compsci_461"
+  # - trigger: ":461"
+  #   replace: "compsci_461"
 
-  - trigger: ":514"
-    replace: "compsci_514"
+  # - trigger: ":514"
+  #   replace: "compsci_514"
 
-  - trigger: ":590"
-    replace: "compsci_590"
+  # - trigger: ":590"
+  #   replace: "compsci_590"
 
-  #   - trigger: ":phone"
-  #     replace: "+1 617 396 6428"
-  #
-  #   - trigger: ":unimail"
-  #     replace: "dhpham@umass.edu"
-  #
-  #   - trigger: ":vinai"
-  #     replace: "VinAI Reasearch"
-  #
-  #   - trigger: ":air"
-  #     replace: "AI Reasearcher"
-  #
-  #   - trigger: ":swei"
-  #     replace: "Software Developer Intern"
-  #
-  #   - trigger: ":github"
-  #     replace: "https://github.com/cunbidun"
-  #
-  #   - trigger: ":zip"
-  #     replace: "02130"
-  #
-  #   - trigger: ":ts"
-  #     replace: "Two Sigma"
-  #
-  #   - trigger: ":linkedin"
-  #     replace: "https://www.linkedin.com/in/duy-pham-90652a152/"
-  #
+  - trigger: ":phone"
+    replace: "+1 617 396 6428"
+
+  - trigger: ":unimail"
+    replace: "dhpham@umass.edu"
+
+  - trigger: ":cit"
+    replace: "Citadel Securities, LLC"
+      
+  # - trigger: ":vinai"
+  #   replace: "VinAI Reasearch"
+
+  # - trigger: ":air"
+  #   replace: "AI Reasearcher"
+
+  - trigger: ":swe"
+    replace: "Software Engineer"
+
+  # - trigger: ":github"
+  #   replace: "https://github.com/cunbidun"
+
+  # - trigger: ":zip"
+  #   replace: "02130"
+
+  # - trigger: ":ts"
+  #   replace: "Two Sigma"
+
+  # - trigger: ":linkedin"
+  #   replace: "https://www.linkedin.com/in/duy-pham-90652a152/"
+
   - trigger: ":info"
     replace: "I'm always eager to learn ideas and concepts and love finding the most optimal solutions for any challenging problems, many requiring solid technique skills. And that also made me a fast-learner. When encountering a new or difficult concept, I could quickly locate the right resources, and by using those materials, I would be able to understand the intuitions behind the new idea as well as how to utilize them."
 
   # Vi
-  - trigger: ":phone"
-    replace: "+1 857 867 9242"
+  # - trigger: ":phone"
+  #   replace: "+1 857 867 9242"
 
-  - trigger: ":email"
-    replace: "maituongvii@gmail.com"
+  # - trigger: ":email"
+  #   replace: "maituongvii@gmail.com"
 
-  - trigger: ":github"
-    replace: "https://github.com/maituongvii"
+  # - trigger: ":github"
+  #   replace: "https://github.com/maituongvii"
 
-  - trigger: ":linkedin"
-    replace: "https://www.linkedin.com/in/vimaituong/"
+  # - trigger: ":linkedin"
+  #   replace: "https://www.linkedin.com/in/vimaituong/"
