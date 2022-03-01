@@ -58,7 +58,7 @@
     "**/.settings": true,
     "venv": true
   },
-  "python.formatting.provider": "autopep8",
+  "python.formatting.provider": "black",
   "workbench.list.smoothScrolling": true,
   "editor.largeFileOptimizations": false,
   "python.showStartPage": false,
@@ -69,7 +69,11 @@
   "terminal.integrated.fontWeight": "600",
   "editor.fontSize": 15,
   "[python]": {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   },
   "[js]": {
     "editor.tabSize": 4
@@ -94,9 +98,7 @@
   ],
   "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.clang_format_style": "{}",
-  "settingsSync.ignoredSettings": [
-    "-C_Cpp.clang_format_style"
-  ],
+  "settingsSync.ignoredSettings": ["-C_Cpp.clang_format_style"],
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

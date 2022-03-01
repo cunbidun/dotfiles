@@ -88,6 +88,10 @@ lvim.builtin.which_key.mappings["n"] = {
 		"<cmd>lua require('telekasten').goto_thisweek()<cr>",
 		"Go to this week's note",
 	},
+	y = {
+		"<cmd>lua require('telekasten').yank_notelink()<cr>",
+		"Copy this note's link",
+	},
 }
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -149,12 +153,6 @@ end
 -- terminal's shell
 lvim.builtin.terminal.shell = "sh"
 
--- +----------+
--- | nvimtree |
--- +----------+
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
-
 -- +------------+
 -- | treesitter |
 -- +------------+
@@ -203,16 +201,16 @@ local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
 	{ exe = "write-good", filetypes = { "markdown", "txt" } },
 	-- { exe = "markdownlint", filetypes = { "markdown" } },
-	{ exe = "flake8", filetypes = { "python" } },
+	-- { exe = "flake8", filetypes = { "python" } },
 	{ exe = "chktex", filetypes = { "tex" } },
 	{
 		exe = "shellcheck",
 		args = { "--severity", "warning" },
 	},
-	{
-		exe = "codespell",
-		filetypes = { "javascript", "python" },
-	},
+	-- {
+	-- 	exe = "codespell",
+	-- 	filetypes = { "javascript", "python" },
+	-- },
 })
 
 -- Additional Plugins

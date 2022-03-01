@@ -74,7 +74,9 @@ static const Rule rules[] = {
 	{ TERMCLASS,     NULL,         NULL,          NULL,               0,          0,           1,           0,          -1,       0          },
 	{ NULL,          NULL,         NULL,          "Event Tester",     0,          0,           0,           1,          -1,       0          }, /* xev */
 	{ NULL,          NULL,         NULL,          "scratchpad",       0,          1,           0,           0,          -1,       's'        },
-	{ NULL,          NULL,         NULL,          "scratchpad_note",  0,          1,           0,           0,          -1,       'n'        },
+//{ NULL,          NULL,         NULL,          "scratchpad_note",  0,          1,           0,           0,          -1,       'n'        },
+	{ "Logseq",      NULL,         "logseq",      NULL,               0,          1,           0,           0,          -1,       'n'        },
+	{ "Caprine",     NULL,         "caprine",     NULL,               0,          1,           0,           0,          -1,       'c'        },
 };
 
 /* layout(s) */
@@ -132,7 +134,9 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 #include "movestack.c"
 
 static const char *scratchpadcmd[] = { "s", TERMINAL, "-t", "scratchpad", "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", NULL };
-static const char *scratchpadcmd_note[] = { "n", TERMINAL, "-t", "scratchpad_note", "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", "-e", "sc_open_today_note", NULL };
+// static const char *scratchpadcmd_note[] = { "n", TERMINAL, "-t", "scratchpad_note", "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", "-e", "sc_open_today_note", NULL };
+static const char *scratchpadcmd_note[] = { "n", "logseq", NULL };
+static const char *scratchpadcmd_chat[] = { "c", "caprine", NULL };
 
 static Key keys[] = {
 	/* modifier                     key                               function                         argument */
@@ -143,6 +147,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return,                        spawn,                           {.v = termcmd } },
 	{ MODKEY,                       XK_grave,                         togglescratch,                   {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_n,                             togglescratch,                   {.v = scratchpadcmd_note }  },
+	{ MODKEY,                       XK_c,                             togglescratch,                   {.v = scratchpadcmd_chat }  },
 	{ MODKEY,                       XK_b,                             togglebar,                       {0} },
 	{ MODKEY,                       XK_j,                             focusstack,                      {.i = +1 } },
 	{ MODKEY,                       XK_k,                             focusstack,                      {.i = -1 } },
