@@ -26,8 +26,9 @@ $HOME/.scripts/bin/sc_weather_sync
 $HOME/.scripts/bin/dotfiles_picker
 $HOME/.scripts/bin/sc_alacritty_change_theme
 # $HOME/.scripts/bin/sc_create_today_note
-$HOME/.scripts/bin/sc_open_today_note
+# $HOME/.scripts/bin/sc_open_today_note
 $HOME/.scripts/bin/sc_open_man_page_dmenu
+$HOME/.scripts/bin/sc_connect_sony_speaker
 
 # dwm
 $HOME/dwm
@@ -60,5 +61,4 @@ $HOME/dotfiles/installation_note.md
 # cp stuff
 $HOME/competitive_programming/topcoder.md
 
-# note
-$HOME/note/template/today.template
+
