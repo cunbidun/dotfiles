@@ -1,18 +1,16 @@
 #!/bin/sh
 
-BASE_DIR="$HOME/note"
-NOTE_DIR="$BASE_DIR/note"
-TEMPLATE_DIR="$BASE_DIR/template"
+BASE_DIR="$HOME/zettelkasten"
+NOTE_DIR="$BASE_DIR/daily"
+TEMPLATE_PATH="$BASE_DIR/templates/daily.md"
 
 mkdir -p "$NOTE_DIR"
+cd "$NOTE_DIR" || notify-send "Could not create $NOTE_DIR"
 
-today=$(date +"%Y %B %d")
-path="$NOTE_DIR/$(echo "$today" | sed 's/ /\//g')"
-mkdir -p "$path"
-cd "$path" || echo "could not be created"
+file_name=$(date +"%Y-%m-%d.md")
 
-if [ ! -f "today.md" ]; then
-	cp "$TEMPLATE_DIR/today.template" today.md
-	today_date=$(date +"%B %d, %Y")
-	sed -i "s/%%today_date%%/$today_date/g" today.md
+if [ ! -f "$file_name" ]; then
+	cp "$TEMPLATE_PATH" "$file_name"
+	today_date=$(date +'%A, %B %eXX, %Y' | sed -e 's/11XX/11th/' -e 's/12XX/12th/' -e 's/13XX/13th/' -e 's/1XX/1st/' -e 's/2XX/2nd/' -e 's/3XX/3rd/' -e 's/XX/th/')
+	sed -i "s/{{hdate}}/$today_date/g" "$file_name"
 fi

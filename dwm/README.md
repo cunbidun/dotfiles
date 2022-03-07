@@ -1,4 +1,5 @@
 # Patches (In order)
+
 - [1] dwm-movestack-6.1.diff
 - [2] dwm-vanitygaps-6.2.diff
 - [3] dwm-alwayscenter-20200625-f04cac6.diff
@@ -20,3 +21,5 @@
 - [19] dwm-tag-preview-6.2.diff
 - [20] dwm-status2d-6.2.diff
 - [21] dwm-swallow-6.2.diff
+- [22] - dwm-scratchpad-6.2.diff
+- [23] dwm-namedscratchpads-6.2.diff

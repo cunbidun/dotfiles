@@ -15,9 +15,9 @@ lvim.colorscheme = "nord"
 lvim.leader = "space"
 
 -- bufferline
-lvim.keys.normal_mode["<TAB>"] = ":BufferNext<CR>"
-lvim.keys.normal_mode["<S-TAB>"] = ":BufferPrevious<CR>"
-lvim.keys.normal_mode["<S-x>"] = ":BufferClose<CR>"
+lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-x>"] = ":BufferKill<CR>"
 
 -- unmap a default keymapping
 lvim.keys.normal_mode["<S-l>"] = false
@@ -56,17 +56,41 @@ lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Project
 lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep<CR>", "Live Grep" }
 lvim.builtin.which_key.mappings["n"] = {
 	name = "+Note",
-	p = {
-		"<cmd>lua require'telescope.builtin'.grep_string{ word_match = '-w', only_sort_text = true, search = '[ ]'} <cr>",
-		"Pending task",
+	["#"] = {
+		"<cmd>lua require('telekasten').show_tags()<cr>",
+		"Search tag",
+	},
+	d = {
+		"<cmd>lua require('telekasten').goto_today()<cr>",
+		"Go to today's note",
+	},
+	f = {
+		"<cmd>lua require('telekasten').follow_link()<cr>",
+		"Find notes",
+	},
+	l = {
+		"<cmd>lua require('telekasten').insert_link()<cr>",
+		"Insert new link",
+	},
+	n = {
+		"<cmd>lua require('telekasten').new_note()<cr>",
+		"Create a new note",
+	},
+	r = {
+		"<cmd>lua require('telekasten').rename_note()<cr>",
+		"Rename note",
 	},
 	t = {
-		"<cmd>lua require'telescope.builtin'.grep_string{  only_sort_text = true, search = '[ ].*@today', use_regex = true} <cr>",
-		"Today task",
+		"<cmd>lua require('telekasten').toggle_todo()<cr>",
+		"Toggle todo",
 	},
-	a = {
-		"<cmd>lua require'telescope.builtin'.grep_string{ only_sort_text = true, search = '[*]', use_regex = true}<cr>",
-		"All task",
+	w = {
+		"<cmd>lua require('telekasten').goto_thisweek()<cr>",
+		"Go to this week's note",
+	},
+	y = {
+		"<cmd>lua require('telekasten').yank_notelink()<cr>",
+		"Copy this note's link",
 	},
 }
 -- TODO: User Config for predefined plugins
@@ -80,43 +104,6 @@ lvim.builtin.notify.active = true
 
 -- Telescope
 lvim.builtin.telescope.pickers = { find_files = { find_command = { "rg", "--files", "--follow", "--hidden" } } }
-
--- bufferline
-vim.g.bufferline = {
-	-- Enable/disable animations
-	animation = false,
-
-	-- If set, the icon color will follow its corresponding buffer
-	-- highlight group. By default, the Buffer*Icon group is linked to the
-	-- Buffer* group (see Highlighting below). Otherwise, it will take its
-	-- default value as defined by devicons.
-	icon_custom_colors = true,
-
-	-- Enable/disable auto-hiding the tab bar when there is a single buffer
-	auto_hide = false,
-
-	-- Enable/disable current/total tabpages indicator (top right corner)
-	tabpages = true,
-
-	-- Enable/disable close button
-	closable = false,
-
-	-- Enables/disable clickable tabs
-	--  - left-click: go to buffer
-	--  - middle-click: delete buffer
-	clickable = true,
-
-	-- Enable/disable icons
-	-- if set to 'numbers', will show buffer index in the tabline
-	-- if set to 'both', will show buffer index and icons in the tabline
-	icons = true,
-
-	-- Sets the maximum padding width with which to surround each tab
-	maximum_padding = 1,
-
-	-- Sets the maximum buffer name length.
-	maximum_length = 30,
-}
 
 lvim.builtin.dashboard.custom_section.a = {
 	description = { "  Recent Projects    " },
@@ -166,12 +153,6 @@ end
 -- terminal's shell
 lvim.builtin.terminal.shell = "sh"
 
--- +----------+
--- | nvimtree |
--- +----------+
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
-
 -- +------------+
 -- | treesitter |
 -- +------------+
@@ -188,6 +169,7 @@ lvim.builtin.treesitter.ensure_installed = {
 	"rust",
 	"java",
 	"yaml",
+	"latex",
 }
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
@@ -203,6 +185,7 @@ formatters.setup({
 	{ exe = "isort", filetypes = { "python" } },
 	{ exe = "stylua", filetypes = { "lua" } },
 	{ exe = "shfmt", filetypes = { "sh" } },
+	{ exe = "latexindent", filetypes = { "tex" } },
 	{
 		exe = "prettier",
 		---@usage arguments to pass to the formatter
@@ -217,16 +200,17 @@ formatters.setup({
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
 	{ exe = "write-good", filetypes = { "markdown", "txt" } },
-	{ exe = "markdownlint", filetypes = { "markdown" } },
-	{ exe = "flake8", filetypes = { "python" } },
+	-- { exe = "markdownlint", filetypes = { "markdown" } },
+	-- { exe = "flake8", filetypes = { "python" } },
+	{ exe = "chktex", filetypes = { "tex" } },
 	{
 		exe = "shellcheck",
 		args = { "--severity", "warning" },
 	},
-	{
-		exe = "codespell",
-		filetypes = { "javascript", "python" },
-	},
+	-- {
+	-- 	exe = "codespell",
+	-- 	filetypes = { "javascript", "python" },
+	-- },
 })
 
 -- Additional Plugins
@@ -420,7 +404,24 @@ lvim.plugins = {
 			vim.cmd([[source $HOME/dotfiles/nvim/.config/nvim/lua/plugins/configs/markdown-preview.vim]])
 		end,
 	},
+	{
+		"lervag/vimtex",
+		config = function()
+			vim.cmd([[
+        call vimtex#init()
+        let g:tex_flavor='latex'
+        let g:vimtex_view_method='zathura'
+        let g:vimtex_view_general_viewer = 'zathura'
+        let g:vimtex_quickfix_mode=0
+        let g:vimtex_view_automatic = 0
+      ]])
+		end,
+	},
 }
+
+vim.cmd([[
+  autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+]])
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
@@ -446,28 +447,6 @@ lvim.autocommands.custom_groups = {
 	{ "VimEnter", "*", "highlight Nord13 guibg=#EBCB8B" },
 	{ "VimEnter", "*", "highlight Nord14 guibg=#A3BE8C" },
 	{ "VimEnter", "*", "highlight Nord15 guibg=#B48EAD" },
-
-	-- bar bar nord color scheme
-	{ "VimEnter", "*", "highlight Error guifg=#BF616A guibg=NONE" },
-	{ "VimEnter", "*", "highlight LSPDiagnosticsWarning guifg=#EBCB8B guibg=NONE" },
-	{ "VimEnter", "*", "highlight LSPDiagnosticsError guifg=#BF616A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferCurrent guifg=#88c0d0 guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferCurrentIndex guifg=#88c0d0 guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferCurrentSign guifg=#88c0d0 guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferCurrentIcon guifg=#A3BE8C guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferVisible guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferVisibleIndex guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferVisibleIcon guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferVisibleSign guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferInactive guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferInactiveIndex guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferInactiveIcon guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferInactiveSign guifg=#4C566A guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferCurrentMod guifg=#EBCB8B guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferInactiveMod guifg=#EBCB8B guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferVisibleMod guifg=#EBCB8B guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferOffset guifg=NONE guibg=NONE" },
-	{ "VimEnter", "*", "highlight BufferTabpages guifg=NONE guibg=NONE" },
 
 	-- nvim-notify
 	{ "VimEnter", "*", "highlight NotifyERRORBorder guifg=#BF616A" },
