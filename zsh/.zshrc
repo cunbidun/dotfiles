@@ -34,8 +34,9 @@ export UPDATE_ZSH_DAYS=3
 # history timestamp
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(git timewarrior zsh-autosuggestions zsh-syntax-highlighting)
-export AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
+# plugins=(git timewarrior zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting)
+# plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 

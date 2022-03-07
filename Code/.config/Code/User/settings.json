@@ -58,10 +58,9 @@
     "**/.settings": true,
     "venv": true
   },
-  "python.formatting.provider": "autopep8",
+  "python.formatting.provider": "black",
   "workbench.list.smoothScrolling": true,
   "editor.largeFileOptimizations": false,
-  "python.showStartPage": false,
   "workbench.iconTheme": "vscode-icons",
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -69,7 +68,11 @@
   "terminal.integrated.fontWeight": "600",
   "editor.fontSize": 15,
   "[python]": {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   },
   "[js]": {
     "editor.tabSize": 4
@@ -78,7 +81,6 @@
     "editor.tabSize": 2
   },
   "files.autoSaveDelay": 500,
-  "glassit.alpha": 255,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -94,9 +96,7 @@
   ],
   "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.clang_format_style": "{}",
-  "settingsSync.ignoredSettings": [
-    "-C_Cpp.clang_format_style"
-  ],
+  "settingsSync.ignoredSettings": ["-C_Cpp.clang_format_style"],
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -119,12 +119,6 @@
   ],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "output.smartScroll.enabled": false,
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "leetcode.workspaceFolder": "/home/cunbidun/.leetcode",
-  "leetcode.hint.commandShortcut": false,
-  "leetcode.hint.configWebviewMarkdown": false,
-  "leetcode.defaultLanguage": "cpp",
-  "leetcode.hint.commentDescription": false,
   "workbench.colorTheme": "Nord",
   "files.autoSave": "afterDelay"
 }
