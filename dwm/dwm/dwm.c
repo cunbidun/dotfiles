@@ -2151,6 +2151,8 @@ sendmon(Client *c, Monitor *m)
 	detachstack(c);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
+  c->x = c->mon->mx + (c->mon->mw / 2 - WIDTH(c) / 2); /* center in x direction */
+  c->y = c->mon->my + (c->mon->mh / 2 - HEIGHT(c) / 2); /* center in y direction */
 	attachbottom(c);
 	attachstack(c);
 	focus(NULL);
@@ -2643,26 +2645,37 @@ togglesticky(const Arg *arg)
 void
 togglescratch(const Arg *arg)
 {
-	Client *c;
+	Client *c, *target;
 	unsigned int found = 0;
-	for (c = selmon->clients; c; c = c->next){
-    if (c->scratchkey == ((char**)arg->v)[0][0]) {
-      found = 1;
-      c->tags = ISVISIBLE(c) ? 0 : selmon->tagset[selmon->seltags];
-      focus(NULL);
-      arrange(selmon);
-      if (ISVISIBLE(c)) {
-        focus(c);
-        restack(selmon);
+  Monitor *m, *target_m;
+  for (m = mons; m; m = m->next) {
+    for (c = m->clients; c; c = c->next){
+      if (c->scratchkey == ((char**)arg->v)[0][0]) {
+        target = c;
+        target_m = m;
+        found = 1;
+      } else if (c->scratchkey) {
+        c->tags = 0; 
+        arrange(m);
       }
-    } else if (c->scratchkey) {
-       c->tags = 0; 
-      arrange(selmon);
     }
   }
 	if (!found) {
 		spawnscratch(arg);
-	}
+	} else {
+    if (ISVISIBLE(target) && target->mon == selmon) {
+      target->tags = 0; 
+    } else {
+      target->tags = selmon->tagset[selmon->seltags];
+    }
+    focus(NULL);
+    arrange(selmon);
+    if (ISVISIBLE(target)) {
+      sendmon(target, selmon);
+      focus(target);
+      restack(selmon);
+    }
+  }
 }
 
 void
