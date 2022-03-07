@@ -61,7 +61,6 @@
   "python.formatting.provider": "black",
   "workbench.list.smoothScrolling": true,
   "editor.largeFileOptimizations": false,
-  "python.showStartPage": false,
   "workbench.iconTheme": "vscode-icons",
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -82,7 +81,6 @@
     "editor.tabSize": 2
   },
   "files.autoSaveDelay": 500,
-  "glassit.alpha": 255,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -121,12 +119,6 @@
   ],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "output.smartScroll.enabled": false,
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "leetcode.workspaceFolder": "/home/cunbidun/.leetcode",
-  "leetcode.hint.commandShortcut": false,
-  "leetcode.hint.configWebviewMarkdown": false,
-  "leetcode.defaultLanguage": "cpp",
-  "leetcode.hint.commentDescription": false,
   "workbench.colorTheme": "Nord",
   "files.autoSave": "afterDelay"
 }
