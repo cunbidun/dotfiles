@@ -36,6 +36,7 @@ HIST_STAMPS="mm/dd/yyyy"
 
 # plugins=(git timewarrior zsh-autosuggestions zsh-syntax-highlighting)
 plugins=(git zsh-syntax-highlighting)
+# plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 

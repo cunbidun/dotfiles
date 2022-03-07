@@ -16,13 +16,14 @@ makepkg -si
 ### Install dev tool
 
 ```bash
-pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo
+pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo quickemu 
 ```
 
 * `nodejs`, `npm`, `yarn`: for javascript
 * `go`: golang
 * `cargo`: for rust
 * `pyenv`,`pyenv-virtualenv`: for python
+* `quickemu`: virtual environment
 
 ---
 
@@ -42,6 +43,15 @@ xdg-mime default org.pwmt.zathura.desktop application/pdf # set zathura as defau
 * `maim`: screenshot
 * `zathura`, `zathura-pdf-mupdf`: pdf reader
 * `xcursor-osx-elcap`: cursor theme
+
+---
+
+### Bottles
+
+```bash
+yay -S bottles-git cairo pkgconf gobject-introspection gtk3
+pip install PyGOject pyyaml markdown patool
+```
 
 ---
 
