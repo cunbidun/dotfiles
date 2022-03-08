@@ -2666,12 +2666,12 @@ togglescratch(const Arg *arg)
     if (ISVISIBLE(target) && target->mon == selmon) {
       target->tags = 0; 
     } else {
+      sendmon(target, selmon);
       target->tags = selmon->tagset[selmon->seltags];
     }
     focus(NULL);
     arrange(selmon);
     if (ISVISIBLE(target)) {
-      sendmon(target, selmon);
       focus(target);
       restack(selmon);
     }
