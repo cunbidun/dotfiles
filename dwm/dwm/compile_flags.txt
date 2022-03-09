@@ -1,2 +1,2 @@
--I.
+-Iinclude
 -I/usr/include/freetype2

@@ -1,51 +1,63 @@
-# dwm - dynamic window manager
-# See LICENSE file for copyright and license details.
+# dwm version
+VERSION = 6.3
 
-include config.mk
+# paths
+PREFIX = /usr/local
+MANPREFIX = ${PREFIX}/share/man
 
-SRC = drw.c dwm.c util.c
-OBJ = ${SRC:.c=.o}
+X11INC = /usr/X11R6/include
+X11LIB = /usr/X11R6/lib
 
-all: options dwm
+# Xinerama, comment if you don't want it
+XINERAMALIBS  = -lXinerama
+XINERAMAFLAGS = -DXINERAMA
 
-options:
-	@echo dwm build options:
-	@echo "CFLAGS   = ${CFLAGS}"
-	@echo "LDFLAGS  = ${LDFLAGS}"
-	@echo "CC       = ${CC}"
+# freetype
+FREETYPELIBS = -lfontconfig -lXft
+FREETYPEINC = /usr/include/freetype2
 
-.c.o:
-	${CC} -c ${CFLAGS} $<
+# This is needed for the swallow patch
+XCBLIBS = -lX11-xcb -lxcb -lxcb-res
 
-${OBJ}: config.h config.mk
+# Imlib2 (tag previews)
+IMLIB2LIBS = -lImlib2
 
-config.h:
-	cp config.def.h $@
+# includes and libs
+INCS = -I${X11INC} -I${FREETYPEINC} -Iinclude -I.
+LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} ${IMLIB2LIBS} ${XCBLIBS} ${KVMLIB}
+
+# flags
+CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS}
+LDFLAGS  = ${LIBS}
+
+# compiler and linker
+CC = cc
+
+SRC = $(wildcard src/*.c)
+OBJ = ${SRC:src/%.c=obj/%.o}
+
+all: dwm
 
 dwm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
-clean:
-	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
+obj/%.o: src/%.c $(wildcard include/*.h)
+	${CC} -c ${CFLAGS} $< -o $@
 
-dist: clean
-	mkdir -p dwm-${VERSION}
-	cp -R LICENSE Makefile README config.def.h config.mk\
-		dwm.1 drw.h util.h ${SRC} dwm.png transient.c dwm-${VERSION}
-	tar -cf dwm-${VERSION}.tar dwm-${VERSION}
-	gzip dwm-${VERSION}.tar
-	rm -rf dwm-${VERSION}
+clean:
+	rm -f dwm ${OBJ} 
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
-	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	sed "s/VERSION/${VERSION}/g" < docs/dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all clean install uninstall
