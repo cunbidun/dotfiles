@@ -2,12 +2,6 @@
 #define _DWM_CONST_H_
 
 /**
- *  Patches
- */
-#define FORCE_VSPLIT 1 // nrowgrid layout: force two clients to always split vertically
-#define STATUSBAR "dwmblocks"
-
-/**
  *  Variables 
  */
 #define TERMINAL "alacritty"

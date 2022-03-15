@@ -1,10 +1,9 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
-	1) setsid -f "$TERMINAL" -e "htop" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+1) setsid -f "$TERMINAL" -t "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e "htop" ;;
+6) "$TERMINAL" -t "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e "$EDITOR" "$0" ;;
 esac
 
 cpu=$(mpstat 1 1 | awk '$3 ~ /CPU/ { for(i=1;i<=NF;i++) { if ($i ~ /%idle/) field=i } } $3 ~ /all/ { print 100 - $field }')
 echo "^c#81A1C1^CPU: ^d^$cpu%"
-

@@ -5,13 +5,13 @@
 # Show [V] if a vpn connection is active
 
 case $BLOCK_BUTTON in
-	1) setsid -f "$TERMINAL" -e "nmtui" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+1) setsid -f "$TERMINAL" "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e "nmtui" ;;
+6) "$TERMINAL" -t "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e "$EDITOR" "$0" ;;
 esac
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
-	down) wifiicon="[NW] " ;;
-	up) wifiicon="$(awk '/^\s*w/ { print "[W]", int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
+down) wifiicon="[NW] " ;;
+up) wifiicon="$(awk '/^\s*w/ { print "[W]", int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
 esac
 
 printf "^c#81A1C1^NET: ^d^%s%s%s\n" "$wifiicon" "$(sed "s/down/[NE]/;s/up/[E]/" /sys/class/net/e*/operstate 2>/dev/null)" "$(sed "s/.*/[V]/" /sys/class/net/tun*/operstate 2>/dev/null)"

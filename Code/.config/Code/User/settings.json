@@ -95,7 +95,6 @@
     "UTXO"
   ],
   "C_Cpp.default.cppStandard": "c++17",
-  "C_Cpp.clang_format_style": "{}",
   "settingsSync.ignoredSettings": ["-C_Cpp.clang_format_style"],
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -120,5 +119,5 @@
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "output.smartScroll.enabled": false,
   "workbench.colorTheme": "Nord",
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "afterDelay",
 }

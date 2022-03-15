@@ -2,8 +2,8 @@
 
 xset r rate 200 50 &
 feh --bg-fill ~/.wallpapers/others/ign-colorful.png &
-killall skippy-xd
-skippy-xd --start-daemon &
+# killall skippy-xd
+# skippy-xd --start-daemon &
 # nm-applet &
 
 ibus-daemon -drx &
