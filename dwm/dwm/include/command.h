@@ -3,15 +3,12 @@
 
 #include <stdio.h>
 
-#include "constant.h"
 #include "appearance.h"
+#include "constant.h"
 
 /* commands */
-char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", nord9, "-sf", col_gray4, NULL };
-const char *termcmd[]  = { TERMINAL, NULL };
-const char *scratchpadcmd[] = { "s", TERMINAL, "-t", "scratchpad", "-o", "window.dimensions.columns=160", "-o", "window.dimensions.lines=40", NULL };
-const char *scratchpadnotecmd[] = { "n", "logseq", NULL };
-const char *scratchpadchatcmd[] = { "c", "caprine", NULL };
+char dmenumon[2]              = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[] = {"dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", nord0, "-nf", nord4, "-sb", nord9, "-sf", nord6, NULL};
+static const char *termcmd[]  = {TERMINAL, NULL};
 
 #endif

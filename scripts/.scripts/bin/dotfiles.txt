@@ -31,8 +31,8 @@ $HOME/.scripts/bin/sc_open_man_page_dmenu
 $HOME/.scripts/bin/sc_connect_sony_speaker
 
 # dwm
-$HOME/dwm
-$HOME/dwm/config.def.h
+$HOME/dwm/include/config.h
+$HOME/dwm/src/dwm.c
 $HOME/dwmblocks-async/config.h
 
 $HOME/dmenu/

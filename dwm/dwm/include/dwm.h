@@ -32,14 +32,14 @@
 
 /* macros */
 #define BUTTONMASK (ButtonPressMask | ButtonReleaseMask)
-#define CLEANMASK(mask)                                                   \
-  (mask & ~(numlockmask | LockMask) &                                     \
-   (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | Mod3Mask | Mod4Mask | \
+#define CLEANMASK(mask)                                                        \
+  (mask & ~(numlockmask | LockMask) &                                          \
+   (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | Mod3Mask | Mod4Mask |      \
     Mod5Mask))
-#define INTERSECT(x, y, w, h, m)                                   \
-  (MAX(0, MIN((x) + (w), (m)->wx + (m)->ww) - MAX((x), (m)->wx)) * \
+#define INTERSECT(x, y, w, h, m)                                               \
+  (MAX(0, MIN((x) + (w), (m)->wx + (m)->ww) - MAX((x), (m)->wx)) *             \
    MAX(0, MIN((y) + (h), (m)->wy + (m)->wh) - MAX((y), (m)->wy)))
-#define ISVISIBLE(C) \
+#define ISVISIBLE(C)                                                           \
   ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
 #define LENGTH(X) (sizeof X / sizeof X[0])
 #define MOUSEMASK (BUTTONMASK | PointerMotionMask)
@@ -66,30 +66,10 @@
 #define XEMBED_EMBEDDED_VERSION (VERSION_MAJOR << 16) | VERSION_MINOR
 
 /* Enums */
-enum
-{
-  CurNormal,
-  CurResize,
-  CurMove,
-  CurLast
-}; /* cursor */
-
-/* Color schemes */
-enum
-{
-  SchemeNorm,
-  NordRed,
-  NordGreen,
-  NordYellow,
-  NordBlue,
-  SchemeSel,
-  SchemeUrg,
-  SchemeSym
-};
+enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 
 /* EWMH atoms */
-enum
-{
+enum {
   NetSupported,
   NetWMName,
   NetWMState,
@@ -111,28 +91,13 @@ enum
 };
 
 /* Xembed atoms */
-enum
-{
-  Manager,
-  Xembed,
-  XembedInfo,
-  XLast
-};
+enum { Manager, Xembed, XembedInfo, XLast };
 
 /* Default atoms */
-enum
-{
-  WMProtocols,
-  WMDelete,
-  WMState,
-  WMTakeFocus,
-  WMWindowRole,
-  WMLast
-};
+enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMWindowRole, WMLast };
 
 /* Clicks */
-enum
-{
+enum {
   ClkTagBar,
   ClkLtSymbol,
   ClkStatusText,
@@ -147,16 +112,14 @@ typedef struct Client Client;
 typedef struct Pertag Pertag;
 typedef struct Systray Systray;
 
-typedef union
-{
+typedef union {
   int i;
   unsigned int ui;
   float f;
   const void *v;
 } Arg;
 
-typedef struct
-{
+typedef struct {
   unsigned int click;
   unsigned int mask;
   unsigned int button;
@@ -164,22 +127,19 @@ typedef struct
   const Arg arg;
 } Button;
 
-typedef struct
-{
+typedef struct {
   unsigned int mod;
   KeySym keysym;
   void (*func)(const Arg *);
   const Arg arg;
 } Key;
 
-typedef struct
-{
+typedef struct {
   const char *symbol;
   void (*arrange)(Monitor *);
 } Layout;
 
-typedef struct
-{
+typedef struct {
   const char *class;
   const char *role;
   const char *instance;
@@ -192,8 +152,7 @@ typedef struct
   const char scratchkey;
 } Rule;
 
-typedef struct
-{
+typedef struct {
   int monitor;
   int tag;
   int layout;
@@ -203,8 +162,7 @@ typedef struct
   int topbar;
 } MonitorRule;
 
-struct Client
-{
+struct Client {
   char name[256];
   float mina, maxa;
   float cfact;
@@ -228,8 +186,7 @@ struct Client
 /* We only move this here to get the length of the `tags` array, which probably
  * will generate compatibility issues with other patches. To avoid it, I
  * reccomend patching this at the end or continue with the comment below */
-struct Monitor
-{
+struct Monitor {
   char ltsymbol[16];
   float mfact;
   int nmaster;
@@ -258,19 +215,17 @@ struct Monitor
   Pertag *pertag;
 };
 
-struct Pertag
-{
+struct Pertag {
   unsigned int curtag, prevtag; /* current and previous tag */
   int nmasters[10];             /* number of windows in master area */
   float mfacts[10];             /* mfacts per tag */
   unsigned int sellts[10];      /* selected layouts */
   const Layout *ltidxs[10][2];  /* matrix of tags and layouts indexes  */
   int showbars[10];             /* display bar for the current tag */
-  int enablegaps[10];             /* display bar for the current tag */
+  int enablegaps[10];           /* display bar for the current tag */
 };
 
-struct Systray
-{
+struct Systray {
   Window win;
   Client *icons;
 };
@@ -307,7 +262,6 @@ void focusin(XEvent *e);
 void focusmon(const Arg *arg);
 void focusstack(const Arg *arg);
 Atom getatomprop(Client *c, Atom prop);
-int getbh();
 int getrootptr(int *x, int *y);
 long getstate(Window w);
 unsigned int getsystraywidth();
@@ -360,7 +314,6 @@ void showtagpreview(int tag);
 void sigchld(int unused);
 void sigstatusbar(const Arg *arg);
 void spawn(const Arg *arg);
-void spawnscratch(const Arg *arg);
 void swapfocus();
 Monitor *systraytomon(Monitor *m);
 void switchtag(void);
@@ -369,7 +322,6 @@ void tagmon(const Arg *arg);
 void togglebar(const Arg *arg);
 void togglefloating(const Arg *arg);
 void togglesticky(const Arg *arg);
-void togglescratch(const Arg *arg);
 void togglefullscr(const Arg *arg);
 void toggletag(const Arg *arg);
 void toggleview(const Arg *arg);

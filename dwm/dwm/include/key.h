@@ -3,18 +3,22 @@
 
 #include "dwm.h"
 #include "appearance.h"
+#include "scratchpad.h"
 #include "command.h"
 
-Key keys[] = {
+
+static const Key keys[] = {
 	/* modifier                     key                               function                         argument */
+	{ MODKEY,                       XK_grave,                         togglescratch,                   {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_n,                             togglescratch,                   {.v = scratchpadnotecmd } },
+	{ MODKEY,                       XK_c,                             togglescratch,                   {.v = scratchpadchatcmd } },
+	{ MODKEY,                       XK_s,                             togglescratch,                   {.v = scratchpadsignalcmd } },
+
 	{ MODKEY,                       XK_x,                             spawn,                           SHCMD("arandr") },
 	{ MODKEY,                       XK_e,                             spawn,                           SHCMD("nautilus ~") },
 	{ MODKEY,                       XK_backslash,                     spawn,                           SHCMD("dunstctl close-all") },
 	{ MODKEY,                       XK_p,                             spawn,                           {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                        spawn,                           {.v = termcmd } },
-	{ MODKEY,                       XK_grave,                         togglescratch,                   {.v = scratchpadcmd } },
-	{ MODKEY,                       XK_n,                             togglescratch,                   {.v = scratchpadnotecmd }  },
-	{ MODKEY,                       XK_c,                             togglescratch,                   {.v = scratchpadchatcmd }  },
 	{ MODKEY,                       XK_b,                             togglebar,                       {0} },
 	{ MODKEY,                       XK_j,                             focusstack,                      {.i = +1 } },
 	{ MODKEY,                       XK_k,                             focusstack,                      {.i = -1 } },
@@ -61,7 +65,7 @@ Key keys[] = {
 	{ MODKEY|ControlMask,           XK_space,                         togglefloating,                  {0} },
 	{ MODKEY|ControlMask,	  	      XK_comma,                         cyclelayout,                     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,                        cyclelayout,                     {.i = +1 } },
-	{ MODKEY,                       XK_s,                             togglesticky,                    {0} },
+	{ MODKEY|ALTKEY,                XK_s,                             togglesticky,                    {0} },
 	{ MODKEY,                       XK_m,                             togglefullscr,                   {0} },
 	{ MODKEY,                       XK_0,                             view,                            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                             tag,                             {.ui = ~0 } },
@@ -86,7 +90,7 @@ Key keys[] = {
 /* Button1 left click */
 /* Button2 middle click */
 /* Button3 right click */
-Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
