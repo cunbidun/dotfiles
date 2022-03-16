@@ -71,7 +71,7 @@ colors:
 
 # Font configuration (changes require restart)
 font:
-  size: 7.5
+  size: 14 
   normal:
     family: SauceCodePro Nerd Font Mono
 
@@ -80,8 +80,8 @@ window:
     #     x: 2
     #     y: 2
     dynamic_padding: true
-    decorations: none
-    opacity: 0.95
+    # decorations: none
+    # opacity: 0.95
 
 live_config_reload: true 
 
