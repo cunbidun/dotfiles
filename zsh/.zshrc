@@ -1,4 +1,4 @@
-export ZSH="/home/cunbidun/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export TERM="xterm-256color"
 export FZF_DEFAULT_OPTS="
   --color fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C,pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
@@ -9,7 +9,7 @@ export BAT_THEME="Nord"
 export BAT_OPTS="--color always"
 export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
 
-source ~/.zshenv
+source $HOME/.zshenv
 
 # set words split for zsh
 # why? for git integration to work correctly
@@ -17,11 +17,11 @@ source ~/.zshenv
 setopt shwordsplit
 
 # git stuff
-source ~/.git-prompt.sh
+source $HOME/.git-prompt.sh
 setopt PROMPT_SUBST ; PS1='[%n@%m %c$(__git_ps1 " (%s)")]\$ '
 
 # prompt
-fpath=(/home/cunbidun/.zprompts/ $fpath)
+fpath=($HOME/.zprompts/ $fpath)
 autoload -Uz promptinit
 promptinit
 prompt igloo
@@ -35,12 +35,12 @@ export UPDATE_ZSH_DAYS=3
 HIST_STAMPS="mm/dd/yyyy"
 
 # plugins=(git timewarrior zsh-autosuggestions zsh-syntax-highlighting)
-plugins=(git zsh-syntax-highlighting)
 # plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/.config/alacritty/changer_autocompletion # theme changer autocompletion
+source $HOME/.config/alacritty/changer_autocompletion # theme changer autocompletion
 
 # User configuration
 export LANG=en_US.UTF-8
@@ -56,25 +56,15 @@ else
   export VISUAL=$MY_EDITOR
 fi
 
-alias zshconfig="$MY_EDITOR ~/.zshrc"
+alias zshconfig="$MY_EDITOR $HOME/.zshrc"
 
-alias CP="~/competitive_programming/"
+alias CP="$HOME/competitive_programming/"
 alias b="set_brightness"
 alias r="ranger"
-alias s="source ~/.zshrc"
-alias x="$MY_EDITOR ~/.xinitrc"
+alias s="source $HOME/.zshrc"
+alias x="$MY_EDITOR $HOME/.xinitrc"
 
-# Umass
-alias 320="~/Documents/Umass/Spring2021/COMPSCI\ 320"
-alias 445="~/Documents/Umass/Spring2021/COMPSCI\ 445"
-alias 446="~/Documents/Umass/Spring2021/COMPSCI\ 446"
-alias 466="~/Documents/Umass/Spring2021/COMPSCI\ 466"
-alias 497="~/Documents/Umass/Spring2021/COMPSCI\ 497S"
-alias 461="~/Documents/Umass/Fall2021/COMPSCI\ 461"
-alias 590="~/Documents/Umass/Fall2021/COMPSCI\ 590CC"
-alias 305="~/Documents/Umass/Fall2021/COMPSCI\ 305"
-
-alias bd="~/dotfiles/scripts/.scripts/bin"
+alias bd="$HOME/dotfiles/scripts/.scripts/bin"
 alias cpf='f() { xclip -sel clip < $1 }; f'
 
 alias ls="exa -la"
@@ -87,12 +77,17 @@ alias tt="task +todo"
 
 unsetopt PROMPT_SP
 
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
-
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 
-test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 # colorscript -e 19
 # source /usr/share/nvm/init-nvm.sh
+
+if [ "$(uname)" = "Darwin" ]; then
+  [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+else
+  source /usr/share/fzf/completion.zsh
+  source /usr/share/fzf/key-bindings.zsh
+fi
+
+test -r $HOME/.dir_colors && eval $(dircolors $HOME/.dir_colors)
