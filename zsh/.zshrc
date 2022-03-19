@@ -85,9 +85,10 @@ eval "$(pyenv virtualenv-init -)"
 
 if [ "$(uname)" = "Darwin" ]; then
   [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+  test -r $HOME/.dir_colors && eval $(gdircolors $HOME/.dir_colors)
 else
   source /usr/share/fzf/completion.zsh
   source /usr/share/fzf/key-bindings.zsh
+  test -r $HOME/.dir_colors && eval $(dircolors $HOME/.dir_colors)
 fi
 
-test -r $HOME/.dir_colors && eval $(dircolors $HOME/.dir_colors)
