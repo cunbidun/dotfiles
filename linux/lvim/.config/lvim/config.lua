@@ -363,7 +363,7 @@ lvim.plugins = {
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && yarn install",
 		config = function()
-			vim.cmd([[source $HOME/dotfiles/nvim/.config/nvim/lua/plugins/configs/markdown-preview.vim]])
+			vim.cmd([[source $HOME/.config/lvim/markdown-preview.vim]])
 		end,
 	},
 	{
