@@ -57,38 +57,23 @@ else
 fi
 
 alias zshconfig="$MY_EDITOR $HOME/.zshrc"
+alias s="source $HOME/.zshrc"
 
 alias CP="$HOME/competitive_programming/"
-alias b="set_brightness"
-alias r="ranger"
-alias s="source $HOME/.zshrc"
-alias x="$MY_EDITOR $HOME/.xinitrc"
-
 alias bd="$HOME/dotfiles/scripts/.scripts/bin"
 alias cpf='f() { xclip -sel clip < $1 }; f'
 
 alias ls="exa -la"
-
-# alias task="task ls"
-alias ut="task +umass"
-alias ct="task +cp"
-alias lt="task +linux"
-alias tt="task +todo"
+alias note="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
 
 unsetopt PROMPT_SP
 
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-
-# colorscript -e 19
-# source /usr/share/nvm/init-nvm.sh
-
-
 if [ "$(uname)" = "Darwin" ]; then
   [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+  test -r $HOME/.dir_colors && eval $(gdircolors $HOME/.dir_colors)
 else
   source /usr/share/fzf/completion.zsh
   source /usr/share/fzf/key-bindings.zsh
+  test -r $HOME/.dir_colors && eval $(dircolors $HOME/.dir_colors)
 fi
 
-test -r $HOME/.dir_colors && eval $(dircolors $HOME/.dir_colors)
