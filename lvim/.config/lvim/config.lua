@@ -54,45 +54,7 @@ lvim.builtin.telescope.defaults.path_display = { shorten = 20 }
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep<CR>", "Live Grep" }
-lvim.builtin.which_key.mappings["n"] = {
-	name = "+Note",
-	["#"] = {
-		"<cmd>lua require('telekasten').show_tags()<cr>",
-		"Search tag",
-	},
-	d = {
-		"<cmd>lua require('telekasten').goto_today()<cr>",
-		"Go to today's note",
-	},
-	f = {
-		"<cmd>lua require('telekasten').follow_link()<cr>",
-		"Find notes",
-	},
-	l = {
-		"<cmd>lua require('telekasten').insert_link()<cr>",
-		"Insert new link",
-	},
-	n = {
-		"<cmd>lua require('telekasten').new_note()<cr>",
-		"Create a new note",
-	},
-	r = {
-		"<cmd>lua require('telekasten').rename_note()<cr>",
-		"Rename note",
-	},
-	t = {
-		"<cmd>lua require('telekasten').toggle_todo()<cr>",
-		"Toggle todo",
-	},
-	w = {
-		"<cmd>lua require('telekasten').goto_thisweek()<cr>",
-		"Go to this week's note",
-	},
-	y = {
-		"<cmd>lua require('telekasten').yank_notelink()<cr>",
-		"Copy this note's link",
-	},
-}
+
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
@@ -416,6 +378,13 @@ lvim.plugins = {
         let g:vimtex_view_automatic = 0
       ]])
 		end,
+	},
+	{
+		"danymat/neogen",
+		config = function()
+			require("neogen").setup({})
+		end,
+		requires = "nvim-treesitter/nvim-treesitter",
 	},
 }
 
