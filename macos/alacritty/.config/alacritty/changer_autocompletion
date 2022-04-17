@@ -1,4 +1,0 @@
-#!/bin/bash
-
-themes=$(ls $HOME/.config/alacritty/themes/ -1 | sed -e 's/\.yaml$//' | tr '\n' ' ')
-complete -W "$themes" sc_alacritty_change_theme

@@ -105,7 +105,7 @@ lvim.builtin.terminal.size = function(term)
 		if vim.o.columns < 150 then
 			return vim.o.columns * 0.35
 		else
-			return vim.o.columns * 0.4
+			return vim.o.columns * 0.35
 		end
 	else
 		return 20
