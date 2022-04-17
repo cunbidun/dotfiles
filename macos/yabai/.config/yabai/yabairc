@@ -39,16 +39,7 @@ yabai -m config normal_window_border_color    0xff4C566A
 yabai -m config insert_feedback_color         0xffd75f5f
 
 # Rules
-# Apple apps
-yabai -m rule --add app="^System Preferences$"          border=off manage=off
-yabai -m rule --add title="^Preferences$"               border=off manage=off
-yabai -m rule --add app="Finder"                        border=off manage=off
-yabai -m rule --add app="Preview"                       border=off manage=off
-yabai -m rule --add app="Python"                        border=off manage=off 
-yabai -m rule --add app="TestCase" title='Tests'        border=off manage=off 
-yabai -m rule --add app="Spotify"                       space=1 border=off manage=off
-yabai -m rule --add app="^Messenger$"                   space=1 border=off manage=off
-yabai -m rule --add app="Discord"                       space=1 border=off manage=off 
+yabai -m rule --add app!="^(Alacritty|Google Chrome|Code)$"   manage=off border=off
 
 # General space settings
 yabai -m config layout                        bsp

@@ -36,7 +36,7 @@ HIST_STAMPS="mm/dd/yyyy"
 
 # plugins=(git timewarrior zsh-autosuggestions zsh-syntax-highlighting)
 # plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -44,7 +44,6 @@ source $HOME/.config/alacritty/changer_autocompletion # theme changer autocomple
 
 # User configuration
 export LANG=en_US.UTF-8
-
 
 MY_EDITOR='lvim'
 export TERMINAL='alacritty'
@@ -58,10 +57,7 @@ fi
 
 alias zshconfig="$MY_EDITOR $HOME/.zshrc"
 alias s="source $HOME/.zshrc"
-
 alias CP="$HOME/competitive_programming/"
-alias bd="$HOME/dotfiles/scripts/.scripts/bin"
-alias cpf='f() { xclip -sel clip < $1 }; f'
 
 alias ls="exa -la"
 alias note="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
@@ -69,5 +65,26 @@ alias note="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logse
 unsetopt PROMPT_SP
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-# test -r $HOME/.dir_colors && eval $(gdircolors $HOME/.dir_colors)
+test -r $HOME/.dir_colors && eval $(gdircolors $HOME/.dir_colors)
+
+gitpush() {
+  CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
+  CURRENT_BRANCH="${1:-$CURRENT_BRANCH}"
+  git push origin --delete $CURRENT_BRANCH && git push --set-upstream origin $CURRENT_BRANCH
+}
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/cunbidun/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/cunbidun/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/cunbidun/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/cunbidun/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
