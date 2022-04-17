@@ -57,8 +57,12 @@ lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep<CR>", "Live G
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
+lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 0
 
 -- +---------------+
 -- | plugin config |
@@ -89,13 +93,9 @@ require("luasnip.loaders.from_vscode").load({ paths = { "~/.vsnip/" } })
 -- | terminal |
 -- +----------+
 lvim.builtin.terminal.active = true
--- lvim.builtin.terminal.float_opts = {
--- 	border = "single",
--- 	-- highlights = { border = "Nord9", background = "Nord0" },
--- }
 
 -- no shading
-lvim.builtin.terminal.shade_terminals = false
+lvim.builtin.terminal.shade_terminals = 1
 
 -- terminal's size as an functions
 lvim.builtin.terminal.size = function(term)
@@ -105,12 +105,30 @@ lvim.builtin.terminal.size = function(term)
 		if vim.o.columns < 150 then
 			return vim.o.columns * 0.35
 		else
-			return vim.o.columns * 0.35
+			return vim.o.columns * 0.4
 		end
 	else
 		return 20
 	end
 end
+
+lvim.builtin.terminal.highlights = {
+	-- highlights which map to a highlight group name and a table of it's values
+	-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+	Normal = {
+		link = "Normal",
+	},
+	NormalFloat = {
+		link = "Normal",
+	},
+	FloatBorder = {
+		guifg = "Nord9",
+		guibg = "Nord0",
+	},
+}
+lvim.builtin.terminal.float_opts = {
+	border = "single",
+}
 
 -- terminal's shell
 lvim.builtin.terminal.shell = "sh"
@@ -177,9 +195,10 @@ linters.setup({
 
 -- Additional Plugins
 lvim.plugins = {
-	{ "arcticicestudio/nord-vim" },
+	{ "shaunsingh/nord.nvim" },
+	-- { "arcticicestudio/nord-vim" },
 	{
-		"cunbidun/trouble.nvim",
+		"folke/trouble.nvim",
 		config = function()
 			local present, trouble = pcall(require, "trouble")
 			local M = { setup = function() end }
@@ -398,6 +417,8 @@ lvim.autocommands.custom_groups = {
 
 	{ "VimEnter", "*", "highlight Normal ctermbg=NONE guibg=NONE" },
 	{ "VimEnter", "*", "highlight SignColumn guibg=NONE" },
+	{ "BufEnter", "*", "highlight ToggleTerm1SignColumn guibg=NONE" },
+	{ "BufEnter", "*", "highlight BufferLineFill guibg=NONE" },
 
 	-- colorscheme
 	{ "VimEnter", "*", "highlight Nord0 guibg=#2E3440" },
