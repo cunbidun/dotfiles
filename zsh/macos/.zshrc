@@ -39,7 +39,9 @@ HIST_STAMPS="mm/dd/yyyy"
 plugins=(git zsh-syntax-highlighting docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.zshcommon
 
+# load common alias after loading oh-my-zsh
 source $HOME/.config/alacritty/changer_autocompletion # theme changer autocompletion
 
 # User configuration
@@ -55,11 +57,6 @@ else
   export VISUAL=$MY_EDITOR
 fi
 
-alias zshconfig="$MY_EDITOR $HOME/.zshrc"
-alias s="source $HOME/.zshrc"
-alias CP="$HOME/competitive_programming/"
-
-alias ls="exa -la"
 alias note="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
 
 unsetopt PROMPT_SP
@@ -88,3 +85,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

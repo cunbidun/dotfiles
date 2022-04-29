@@ -170,9 +170,9 @@ formatters.setup({
 		exe = "prettier",
 		---@usage arguments to pass to the formatter
 		-- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-		args = { "--print-with", "100" },
+		args = { "--print-with", "120" },
 		---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-		filetypes = { "typescript", "typescriptreact", "css" },
+		filetypes = { "typescript", "typescriptreact", "css", "html" },
 	},
 })
 
@@ -404,6 +404,22 @@ lvim.plugins = {
 			require("neogen").setup({})
 		end,
 		requires = "nvim-treesitter/nvim-treesitter",
+	},
+	{
+		"alexghergh/nvim-tmux-navigation",
+		config = function()
+			require("nvim-tmux-navigation").setup({
+				disable_when_zoomed = true, -- defaults to false
+				keybindings = {
+					left = "<C-h>",
+					down = "<C-j>",
+					up = "<C-k>",
+					right = "<C-l>",
+					last_active = "<C-\\>",
+					next = "<C-Space>",
+				},
+			})
+		end,
 	},
 }
 
