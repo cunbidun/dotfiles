@@ -72,7 +72,7 @@ colors:
 
 # Font configuration (changes require restart)
 font:
-  size: 13 
+  size: 16 
   normal:
     family: SauceCodePro Nerd Font Mono
 

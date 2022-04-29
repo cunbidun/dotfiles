@@ -1,0 +1,4 @@
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+set clipboard+=unnamed
