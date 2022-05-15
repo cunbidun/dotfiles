@@ -283,6 +283,10 @@ Note:
 
 #### dwm swallow patch work around
 
+``` bash
+yay -S imlib2
+```
+
 * For `MarkdownPreview` extension, the browser need to open before running
 `:MarkdownPreview`.
 
