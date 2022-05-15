@@ -7,7 +7,6 @@ export FZF_DEFAULT_OPTS="
 export BAT_STYLE="plain"
 export BAT_THEME="Nord"
 export BAT_OPTS="--color always"
-export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
 
 source $HOME/.zshenv
 
@@ -43,19 +42,6 @@ source $HOME/.zshcommon
 
 # load common alias after loading oh-my-zsh
 source $HOME/.config/alacritty/changer_autocompletion # theme changer autocompletion
-
-# User configuration
-export LANG=en_US.UTF-8
-
-MY_EDITOR='lvim'
-export TERMINAL='alacritty'
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR=$MY_EDITOR
-  export VISUAL=$MY_EDITOR
-fi
 
 alias note="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
 

@@ -433,8 +433,8 @@ lvim.autocommands.custom_groups = {
 
 	{ "VimEnter", "*", "highlight Normal ctermbg=NONE guibg=NONE" },
 	{ "VimEnter", "*", "highlight SignColumn guibg=NONE" },
-	{ "BufEnter", "*", "highlight ToggleTerm1SignColumn guibg=NONE" },
 	{ "BufEnter", "*", "highlight BufferLineFill guibg=NONE" },
+	{ "BufEnter", "*", "highlight ToggleTerm1SignColumn guibg=NONE" },
 
 	-- colorscheme
 	{ "VimEnter", "*", "highlight Nord0 guibg=#2E3440" },
