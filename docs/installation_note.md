@@ -68,7 +68,7 @@ yay -S abook lynx
 #### Install ibus and ibus-bamboo
 
 ```bash
-yay -S ibus ibus-bambooz
+yay -S ibus ibus-bamboo
 ```
 
 #### Remove `ibus` icon from the systrace
@@ -122,7 +122,7 @@ cp /usr/share/optimus-manager.conf /etc/optimus-manger/
 ```bash
 yay -S adobe-source-code-pro-fonts ttf-weather-icons 
 yay -S adobe-source-han-sans-kr-fonts ttf-baekmuk # korean font
-yay -S apple-fonts # korean font
+yay -S apple-fonts # apple font
 yay -S adobe-base-14-fonts
 ```
 

@@ -4,11 +4,7 @@
 # NOTE: don't use the tilde sign (~) for the home directory. Instead, use $HOME
 
 # dotfiles list
-$HOME/.scripts/bin/dotfiles.txt
-
-# awesome wm
-# $HOME/.config/awesome
-# $HOME/.config/awesome/rc.lua
+$HOME/.local/bin/dotfiles.txt
 
 # lvim
 $HOME/.config/lvim/config.lua
@@ -17,18 +13,16 @@ $HOME/.config/lvim/cp.vim
 # snippet
 $HOME/.vsnip/cpp.json
 
-# scripts
-$HOME/.scripts/bin
-$HOME/.scripts/bin/sc_weather
-$HOME/.scripts/bin/sc_printscreen
-$HOME/.scripts/bin/sc_calcurse_sync
-$HOME/.scripts/bin/sc_weather_sync
-$HOME/.scripts/bin/dotfiles_picker
-$HOME/.scripts/bin/sc_alacritty_change_theme
-# $HOME/.scripts/bin/sc_create_today_note
-# $HOME/.scripts/bin/sc_open_today_note
-$HOME/.scripts/bin/sc_open_man_page_dmenu
-$HOME/.scripts/bin/sc_connect_sony_speaker
+#.local
+$HOME/.local/bin
+$HOME/.local/bin/sc_weather
+$HOME/.local/bin/sc_printscreen
+$HOME/.local/bin/sc_calcurse_sync
+$HOME/.local/bin/sc_weather_sync
+$HOME/.local/bin/dotfiles_picker
+$HOME/.local/bin/sc_alacritty_change_theme
+$HOME/.local/bin/sc_open_man_page_dmenu
+$HOME/.local/bin/sc_connect_sony_speaker
 
 # dwm
 $HOME/dwm/include/config.h
