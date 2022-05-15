@@ -42,7 +42,8 @@ fi
 # xrandr --output HDMI-0 --primary --mode 2560x1440 --rate 144.00 --pos 0x0 --rotate normal --output eDP-1-1 --mode 1920x1080 --pos 320x1440 --rotate normal 
 
 # built-in, nvida
-xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
+# xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
+
 
 # built-in, intel 
 # xrandr --output eDP-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
@@ -50,19 +51,8 @@ xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 # 144hz
 # with thunderbolt, nvidia
 # xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 320x1440 --rotate normal --output DP-1-1 --primary --mode 2560x1440 --rate 144.00 --pos 0x0 --rotate normal
 
-# with thunderbolt, nvidia 3440x1440
-# xrandr --output DP-1-1 --primary --mode 3440x1440 --rate 144.00 --output eDP-1-1 --below DP-1-1 --mode 1920x1080 --rate 144.00
-
-# with thunderbolt, nvidia
-# xrandr --output DP-1-1 --primary --auto --output eDP-1-1 --left-of DP-1-1 --mode 1920x1080 --rate 144.00
-
-# xrandr --output eDP-1-1 --primary --mode 1920x1080 --rate 144.00 --output DP-1-1 --auto --left-of eDP-1-1 
-
-# xrandr --output eDP-1 --primary --auto
-# xrandr --output eDP-1-1 --primary --auto
-# xrandr --output eDP-1-1 --primary --output HDMI-0 --above eDP-1-1 --auto
-# xrandr --output HDMI-0 --primary --output eDP-1-1 --left-of HDMI-0 --auto
-# xrandr --output eDP-1-1 --primary --auto
+# 43 inch
+xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --pos 960x2160 --rotate normal --output DP-1-1 --primary --mode 3840x2160 --pos 0x0 --rotate normal
 
 xrandr --dpi 96 
 
