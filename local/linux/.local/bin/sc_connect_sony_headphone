@@ -3,5 +3,6 @@ mac="CC:98:8B:CE:DA:CE"
 sink="bluez_sink.CC_98_8B_CE_DA_CE.a2dp_sink"
 
 bluetoothctl power on
+bluetoothctl scan on
 bluetoothctl connect $mac
 pactl set-default-sink $sink

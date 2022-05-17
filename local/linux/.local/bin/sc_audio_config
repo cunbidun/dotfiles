@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$TERMINAL -t "audioconfig" -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e pulsemixer

@@ -52,7 +52,10 @@ fi
 # xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 320x1440 --rotate normal --output DP-1-1 --primary --mode 2560x1440 --rate 144.00 --pos 0x0 --rotate normal
 
 # 43 inch
-xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --pos 960x2160 --rotate normal --output DP-1-1 --primary --mode 3840x2160 --pos 0x0 --rotate normal
+# xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --pos 960x2160 --rotate normal --output DP-1-1 --primary --mode 3840x2160 --pos 0x0 --rotate normal
+
+# 43 inch side
+xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output eDP-1-1 --mode 1920x1080 --pos 416x2160 --rotate normal --output DP-1-1 --primary --mode 3840x2160 --pos 2336x1080 --rotate normal
 
 xrandr --dpi 96 
 

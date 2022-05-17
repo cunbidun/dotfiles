@@ -30,10 +30,8 @@ pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo quickemu
 ## Install utilities
 
 ```bash
-yay -S imlib2 fzf lazygit skippy-xd-git xclip sysstat 
-ripgrep bat exa gnome-keyring imagemagick unzip stow 
-acpi pamixer apulse alsa-utils network-manager-applet maim
-zathura zathura-pdf-mupdf xcursor-osx-elcap
+yay -S fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow 
+acpi network-manager-applet maim zathura zathura-pdf-mupdf xcursor-osx-elcap
 
 xdg-mime default org.pwmt.zathura.desktop application/pdf # set zathura as default
 ```
@@ -43,6 +41,18 @@ xdg-mime default org.pwmt.zathura.desktop application/pdf # set zathura as defau
 * `maim`: screenshot
 * `zathura`, `zathura-pdf-mupdf`: pdf reader
 * `xcursor-osx-elcap`: cursor theme
+
+---
+
+### Audio
+
+```bash
+yay -S pipewire wireplumber pipewire-pulse pulsemixer pamixer pavucontrol ddcutil apulse alsa-utils
+```
+
+To control monitor's volume and brightness, add `ic2-dev` kernal module.
+
+Set the default profile in `$HOME/.config/pulse/default.pa` (available in dotfiles folder)
 
 ---
 
@@ -156,6 +166,13 @@ Install [Nordic GTK theme](https://www.gnome-look.org/p/1267246/)
 ---
 
 ### Bluetooth
+
+Install:
+
+```bash
+yay -S  bluez bluez-utils
+sudo systemctl enable --now bluetooth.service
+```
 
 [wiki](https://wiki.archlinux.org/index.php/bluetooth)
 
@@ -304,10 +321,10 @@ sudo systemctl start cronie.service
 
 #### Install cronjob
 
-1. `cd dotfiles && stow cron`
+1. `cd dotfiles/cron && stow linux -t $HOME`
 2. `cd $HOME/cron`
 3. `crontab jobs` for user jobs
 4. check the command in `root_jobs` to make sure the `user` and `user_id` are correct.
-5. check `$HOME/.scripts/bin/sc_pacman_sync`
+5. check `$HOME/.local/bin/sc_pacman_sync`
 to make sure the `user` and `user_id` are correct.
 6. `sudo crontab root_jobs` for root jobs
