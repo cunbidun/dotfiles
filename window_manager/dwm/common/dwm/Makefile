@@ -1,38 +1,7 @@
-# dwm version
-VERSION = 6.3
+# dwm - dynamic window manager
+# See LICENSE file for copyright and license details.
 
-# paths
-PREFIX = /usr/local
-MANPREFIX = ${PREFIX}/share/man
-
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
-
-# Xinerama, comment if you don't want it
-XINERAMALIBS  = -lXinerama
-XINERAMAFLAGS = -DXINERAMA
-
-# freetype
-FREETYPELIBS = -lfontconfig -lXft
-FREETYPEINC = /usr/include/freetype2
-
-# This is needed for the swallow patch
-XCBLIBS = -lX11-xcb -lxcb -lxcb-res
-
-# Imlib2 (tag previews)
-IMLIB2LIBS = -lImlib2
-
-# includes and libs
-INCS = -I${X11INC} -I${FREETYPEINC} -Iinclude -I.
-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} ${IMLIB2LIBS} ${XCBLIBS} ${KVMLIB}
-
-# flags
-CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
-CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS}
-LDFLAGS  = ${LIBS}
-
-# compiler and linker
-CC = cc
+include config.mk
 
 SRC = $(wildcard src/*.c)
 OBJ = ${SRC:src/%.c=obj/%.o}

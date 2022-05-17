@@ -46,3 +46,8 @@ Configuration
 -------------
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
+
+
+Current commit 
+--------------
+sync latest drw.{c,h} changes from dmenu

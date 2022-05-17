@@ -49,8 +49,8 @@ $HOME/cron/jobs
 $HOME/cron/root_jobs
 
 # general TODO and note 
-$HOME/dotfiles/TODO.md
-$HOME/dotfiles/installation_note.md
+$HOME/dotfiles/docs/TODO.md
+$HOME/dotfiles/docs/installation_note.md
 
 # cp stuff
 $HOME/competitive_programming/topcoder.md
