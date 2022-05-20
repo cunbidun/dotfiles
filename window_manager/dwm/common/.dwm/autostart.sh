@@ -11,5 +11,5 @@ killall dwmblocks
 dwmblocks &
 killall dunst
 dunst &
-cd ~/competitive_programming/cc && npm start &
+cd ~/competitive_programming/cpcli/cc && npm start -- config=$HOME/competitive_programming/project_config.json &
 # picom --experimental-backends &
