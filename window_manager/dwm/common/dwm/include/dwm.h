@@ -336,6 +336,8 @@ void unmapnotify(XEvent *e);
 void updatecurrentdesktop(void);
 void updatebarpos(Monitor *m);
 void updatebars(void);
+void updateborderonfocus(Client *c);
+void updateborderonunfocus(Client *c);
 void updateclientlist(void);
 int updategeom(void);
 void updatenumlockmask(void);

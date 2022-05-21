@@ -96,16 +96,14 @@ void togglefakefullscreen(const Arg *arg) {
   if (c->fakefullscreen != 1 && c->isfullscreen) { // exit fullscreen --> fake fullscreen
     c->fakefullscreen = 2;
     setfullscreen(c, 0);
-    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
   } else if (c->fakefullscreen == 1) {
     setfullscreen(c, 0);
     c->fakefullscreen = 0;
-    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
   } else {
-    XSetWindowBorder(dpy, c->win, scheme[NordGreen][ColFg].pixel);
     c->fakefullscreen = 1;
     setfullscreen(c, 1);
   }
+  updateborderonfocus(c);
 }
 
 void togglefullscreen(const Arg *arg) {
