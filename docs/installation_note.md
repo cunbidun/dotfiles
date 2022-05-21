@@ -307,6 +307,8 @@ yay -S imlib2
 * For `MarkdownPreview` extension, the browser need to open before running
 `:MarkdownPreview`.
 
+#### [Patches](https://coggle.it/diagram/X9IiSSM6PTWOM9Wz/t/dwm-patches-last-tallied-2022-03-17/d3448968e2509321527c3864cd4eee651e5f55e525582fdbf33be764972d9aef)
+
 ---
 
 ### Cronjobs
