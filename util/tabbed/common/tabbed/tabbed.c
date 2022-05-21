@@ -168,7 +168,7 @@ static int (*xerrorxlib)(Display *, XErrorEvent *);
 static int cmd_append_pos;
 static char winid[64];
 static char **cmd;
-static char *wmname = "tabbed";
+static char *wmname       = "tabbed";
 static Bool barvisibility = True;
 static const char *geometry;
 
@@ -442,7 +442,6 @@ void focus(int c) {
 
   resize(c, ww, wh - bh);
   XRaiseWindow(dpy, clients[c]->win);
-  // XSetInputFocus(dpy, clients[c]->win, RevertToParent, CurrentTime);
   sendxembed(c, XEMBED_FOCUS_IN, XEMBED_FOCUS_CURRENT, 0, 0);
   sendxembed(c, XEMBED_WINDOW_ACTIVATE, 0, 0, 0);
   xsettitle(win, clients[c]->name);

@@ -4,7 +4,7 @@
 static const char font[]        = "Source Code Pro:size=11";
 static const char* normbgcolor  = "#2E3440";
 static const char* normfgcolor  = "#ECEFF4";
-static const char* selbgcolor   = "#88C0D0";
+static const char* selbgcolor   = "#81A1C1";
 static const char* selfgcolor   = "#2E3440";
 static const char* urgbgcolor   = "#2E3440";
 static const char* urgfgcolor   = "#BF616A";
