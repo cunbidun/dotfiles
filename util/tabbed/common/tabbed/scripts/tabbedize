@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Dependency: xwininfo, xdotool
+# Work without EWMH/NetWM
+
+rootid=$(printf '%d' "$(xwininfo -root | grep "Window id" | cut -d ' ' -f 4)")
+wid=$(xdotool getwindowfocus)
+wname=$(xwininfo -id "$wid" | grep 'Window id:' | cut -d ' ' -f 5-)
+[ "$wid" != "$rootid" ] && [ "$wname" != '(has no name)' ] && tabbed -c -d | xargs -I {} xdotool windowreparent "$wid" "{}"
+

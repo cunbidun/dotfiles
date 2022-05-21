@@ -1,6 +1,6 @@
-.TH TABBED 1 tabbed\-VERSION
+.TH TABBED\-HJC 1 tabbed\-hjc\-VERSION
 .SH NAME
-tabbed \- generic tabbed interface
+tabbed\-hjc \- generic tabbed interface (Hui-Jun Chen (https://huijunchen9260.github.io/)'s build)
 .SH SYNOPSIS
 .B tabbed
 .RB [ \-c ]
@@ -110,38 +110,103 @@ defines the urgent foreground color.
 prints version information to stderr, then exits.
 .SH USAGE
 .TP
-.B Ctrl\-Shift\-Return
+.B Super\-Shift
+show tabs
+.TP
+.B Super\-Shift\-Return
 open new tab
 .TP
-.B Ctrl\-Shift\-h
-previous tab
+.B Super\-Shift\-a
+attach window in current workspace. Require
+.BR wmctrl
+and windows manager / desktop environment supporting
+.BR EWMH
+to list windows in current workspace. Make sure you use
+.B -c
+argument for tabbed, i.e.,
+.B tabbed -c software -embedarg
+for every software.
 .TP
-.B Ctrl\-Shift\-l
-next tab
+.B Super\-Shift\-s
+attach window by mouse selection.
 .TP
-.B Ctrl\-Shift\-j
-move selected tab one to the left
+.B Super\-Shift\-plus
+attach all windows in current workspace. Require
+.BR wmctrl
+and windows manager / desktop environment supporting
+.BR EWMH
+to list windows in current workspace. Make sure you use
+.B -c
+argument for tabbed, i.e.,
+.B tabbed -c software -embedarg
+for every software.
 .TP
-.B Ctrl\-Shift\-k
-move selected tab one to the right
+.B Super\-Shift\-d
+detach child window from current tabbed window. Make sure you use
+.B -c
+argument for tabbed, i.e.,
+.B tabbed -c software -embedarg
+for every software.
 .TP
-.B Ctrl\-Shift\-u
-toggle autofocus of urgent tabs
+.B Super\-Shift\-minus
+detach all child windows from current tabbed window. Make sure you use
+.B -c
+argument for tabbed, i.e.,
+.B tabbed -c software -embedarg
+for every software.
 .TP
-.B Ctrl\-Tab
-toggle between the selected and last selected tab
+.B Super\-Shift\-[
+hide current tab in current tabbed window.
 .TP
-.B Ctrl\-`
+.B Super\-Shift\-]
+show hidden tab in current tabbed window by dmenu prompt.
+.TP
+.B Super\-Shift\-backslash
+show all hidden tabs in current tabbed window.
+.TP
+.B Super\-Shift\-,
 open dmenu to either create a new tab appending the entered string or select
 an already existing tab.
 .TP
-.B Ctrl\-q
+.B Super\-Shift\-.
+open dmenu to open terminal software. Modify function
+.BR OPENTERMSOFT
+in
+.BR config.h
+to fit your software and terminal
+.TP
+.B Super\-Shift\-slash
+open new terminal with $PWD based on existing tabs. Modify function
+.BR OPENTERM
+in
+.BR config.h
+to fit your terminal
+.TP
+.B Super\-Shift\-j
+previous tab
+.TP
+.B Super\-Shift\-k
+next tab
+.TP
+.B Super\-Shift\-h
+move selected tab one to the left
+.TP
+.B Super\-Shift\-l
+move selected tab one to the right
+.TP
+.B Super\-Shift\-u
+toggle autofocus of urgent tabs
+.TP
+.B Control\-Tab
+toggle between the selected and last selected tab
+.TP
+.B Super\-Shift\-q
 close tab
 .TP
 .B Ctrl\-u
 focus next urgent tab
 .TP
-.B Ctrl\-[0..9]
+.B Super\-Shift\-[0..9]
 jumps to nth tab
 .TP
 .B F11
