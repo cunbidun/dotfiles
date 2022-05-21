@@ -174,6 +174,7 @@ struct Client {
   int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen,
       issticky, isterminal, noswallow;
   int fakefullscreen;
+  int issteam;
   char scratchkey;
   int ignorecfgreqpos, ignorecfgreqsize;
   pid_t pid;
@@ -259,6 +260,7 @@ int drawstatusbar(Monitor *m, int bh, char *text, int stw);
 void enternotify(XEvent *e);
 void expose(XEvent *e);
 void focus(Client *c);
+void focusdir(const Arg *arg);
 void focusin(XEvent *e);
 void focusmon(const Arg *arg);
 void focusstack(const Arg *arg);
