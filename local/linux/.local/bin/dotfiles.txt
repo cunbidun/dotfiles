@@ -28,6 +28,8 @@ $HOME/.local/bin/sc_connect_sony_speaker
 $HOME/dwm/include/config.h
 $HOME/dwm/src/dwm.c
 $HOME/dwmblocks-async/config.h
+$HOME/tabbed/config.h
+$HOME/tabbed/tabbed.c
 
 $HOME/dmenu/
 # dmenu
