@@ -66,6 +66,9 @@ void applyrules(Client *c) {
   instance = ch.res_name ? ch.res_name : broken;
   gettextprop(c->win, wmatom[WMWindowRole], role, sizeof(role));
 
+  if (strstr(class, "Steam") || strstr(class, "steam_app_"))
+    c->issteam = 1;
+
   for (i = 0; i < LENGTH(rules); i++) {
     r = &rules[i];
     if ((!r->title || strstr(c->name, r->title)) && (!r->class || strstr(class, r->class)) && (!r->role || strstr(role, r->role)) &&
@@ -459,14 +462,16 @@ void configurerequest(XEvent *e) {
         return;
 
       m = c->mon;
-      if (!c->ignorecfgreqpos) {
-        if (ev->value_mask & CWX) {
-          c->oldx = c->x;
-          c->x    = m->mx + ev->x;
-        }
-        if (ev->value_mask & CWY) {
-          c->oldy = c->y;
-          c->y    = m->my + ev->y;
+      if (!c->issteam) {
+        if (!c->ignorecfgreqpos) {
+          if (ev->value_mask & CWX) {
+            c->oldx = c->x;
+            c->x    = m->mx + ev->x;
+          }
+          if (ev->value_mask & CWY) {
+            c->oldy = c->y;
+            c->y    = m->my + ev->y;
+          }
         }
       }
       if (!c->ignorecfgreqsize) {
@@ -1754,6 +1759,8 @@ void setfocus(Client *c) {
     XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
     XChangeProperty(dpy, root, netatom[NetActiveWindow], XA_WINDOW, 32, PropModeReplace, (unsigned char *)&(c->win), 1);
   }
+  if (c->issteam)
+    setclientstate(c, NormalState);
   sendevent(c->win, wmatom[WMTakeFocus], NoEventMask, wmatom[WMTakeFocus], CurrentTime, 0, 0, 0);
 }
 
