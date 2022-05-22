@@ -15,6 +15,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,                             togglescratch,                   {.v = scratchpadsignalcmd } },
 
 	{ MODKEY,                       XK_x,                             spawn,                           SHCMD("arandr") },
+	{ MODKEY,                       XK_t,                             spawn,                           SHCMD("tabbedize") },
 	{ MODKEY,                       XK_e,                             spawn,                           SHCMD("nautilus ~") },
 	{ MODKEY,                       XK_backslash,                     spawn,                           SHCMD("dunstctl close-all") },
 	{ MODKEY,                       XK_p,                             spawn,                           {.v = dmenucmd } },

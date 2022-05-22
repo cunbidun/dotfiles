@@ -32,15 +32,9 @@
 
 /* macros */
 #define BUTTONMASK (ButtonPressMask | ButtonReleaseMask)
-#define CLEANMASK(mask)                                                        \
-  (mask & ~(numlockmask | LockMask) &                                          \
-   (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | Mod3Mask | Mod4Mask |      \
-    Mod5Mask))
-#define INTERSECT(x, y, w, h, m)                                               \
-  (MAX(0, MIN((x) + (w), (m)->wx + (m)->ww) - MAX((x), (m)->wx)) *             \
-   MAX(0, MIN((y) + (h), (m)->wy + (m)->wh) - MAX((y), (m)->wy)))
-#define ISVISIBLE(C)                                                           \
-  ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
+#define CLEANMASK(mask) (mask & ~(numlockmask | LockMask) & (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | Mod3Mask | Mod4Mask | Mod5Mask))
+#define INTERSECT(x, y, w, h, m) (MAX(0, MIN((x) + (w), (m)->wx + (m)->ww) - MAX((x), (m)->wx)) * MAX(0, MIN((y) + (h), (m)->wy + (m)->wh) - MAX((y), (m)->wy)))
+#define ISVISIBLE(C) ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
 #define LENGTH(X) (sizeof X / sizeof X[0])
 #define MOUSEMASK (BUTTONMASK | PointerMotionMask)
 #define WIDTH(X) ((X)->w + 2 * (X)->bw)
@@ -97,15 +91,7 @@ enum { Manager, Xembed, XembedInfo, XLast };
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMWindowRole, WMLast };
 
 /* Clicks */
-enum {
-  ClkTagBar,
-  ClkLtSymbol,
-  ClkStatusText,
-  ClkWinTitle,
-  ClkClientWin,
-  ClkRootWin,
-  ClkLast
-};
+enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, ClkRootWin, ClkLast };
 
 typedef struct Monitor Monitor;
 typedef struct Client Client;
@@ -171,10 +157,10 @@ struct Client {
   int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
   int bw, oldbw;
   unsigned int tags;
-  int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen,
-      issticky, isterminal, noswallow;
+  int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, issticky, isterminal, noswallow;
   int fakefullscreen;
   int issteam;
+  int istabbed;
   char scratchkey;
   int ignorecfgreqpos, ignorecfgreqsize;
   pid_t pid;
@@ -298,8 +284,7 @@ void restack(Monitor *m);
 void run(void);
 void runautostart(void);
 void scan(void);
-int sendevent(Window w, Atom proto, int m, long d0, long d1, long d2, long d3,
-              long d4);
+int sendevent(Window w, Atom proto, int m, long d0, long d1, long d2, long d3, long d4);
 void sendmon(Client *c, Monitor *m);
 void setclientstate(Client *c, long state);
 void setcurrentdesktop(void);
@@ -383,8 +368,7 @@ void togglegaps(const Arg *arg);
 
 /* Internals */
 void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
-void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr,
-              int *sr);
+void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
 void setgaps(int oh, int ov, int ih, int iv);
 
 #endif
