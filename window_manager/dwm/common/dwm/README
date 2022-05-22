@@ -51,3 +51,27 @@ and (re)compiling the source code.
 Current commit 
 --------------
 sync latest drw.{c,h} changes from dmenu
+
+Patches
+-------
+- [1] dwm-movestack-6.1.diff
+- [2] dwm-vanitygaps-6.2.diff
+- [3] dwm-alwayscenter-20200625-f04cac6.diff
+- [4] dwm-hide_vacant_tags-6.2.diff
+- [5] dwm-sticky-6.1.diff
+- [6] dwm-autostart-20210120-cb3f58a.diff
+- [7] dwm-ewmhtags-6.2.diff
+- [8] dwm-focusonnetactive-6.2.diff
+- [9] dwm-swapfocus-20160731-56a31dc.diff
+- [10] dwm-systray-6.2.diff
+- [11] dwm-cyclelayouts-20180524-6.2.diff
+- [12] dwm-6.2-attachbottom.diff
+- [13] dwm-warp-6.2.diff
+- [14] dwm-6.2-urg-border.diff
+- [15] dwm-pertag-6.2.diff
+- [17] dwm-scratchpad-6.2.diff
+- [19] dwm-tag-preview-6.2.diff
+- [20] dwm-status2d-6.2.diff
+- [21] dwm-swallow-6.2.diff
+- [22] dwm-scratchpad-6.2.diff
+- [23] dwm-namedscratchpads-6.2.diff
