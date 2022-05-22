@@ -32,15 +32,9 @@
 
 /* macros */
 #define BUTTONMASK (ButtonPressMask | ButtonReleaseMask)
-#define CLEANMASK(mask)                                                        \
-  (mask & ~(numlockmask | LockMask) &                                          \
-   (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | Mod3Mask | Mod4Mask |      \
-    Mod5Mask))
-#define INTERSECT(x, y, w, h, m)                                               \
-  (MAX(0, MIN((x) + (w), (m)->wx + (m)->ww) - MAX((x), (m)->wx)) *             \
-   MAX(0, MIN((y) + (h), (m)->wy + (m)->wh) - MAX((y), (m)->wy)))
-#define ISVISIBLE(C)                                                           \
-  ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
+#define CLEANMASK(mask) (mask & ~(numlockmask | LockMask) & (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | Mod3Mask | Mod4Mask | Mod5Mask))
+#define INTERSECT(x, y, w, h, m) (MAX(0, MIN((x) + (w), (m)->wx + (m)->ww) - MAX((x), (m)->wx)) * MAX(0, MIN((y) + (h), (m)->wy + (m)->wh) - MAX((y), (m)->wy)))
+#define ISVISIBLE(C) ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
 #define LENGTH(X) (sizeof X / sizeof X[0])
 #define MOUSEMASK (BUTTONMASK | PointerMotionMask)
 #define WIDTH(X) ((X)->w + 2 * (X)->bw)
@@ -97,15 +91,7 @@ enum { Manager, Xembed, XembedInfo, XLast };
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMWindowRole, WMLast };
 
 /* Clicks */
-enum {
-  ClkTagBar,
-  ClkLtSymbol,
-  ClkStatusText,
-  ClkWinTitle,
-  ClkClientWin,
-  ClkRootWin,
-  ClkLast
-};
+enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, ClkRootWin, ClkLast };
 
 typedef struct Monitor Monitor;
 typedef struct Client Client;
@@ -171,8 +157,10 @@ struct Client {
   int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
   int bw, oldbw;
   unsigned int tags;
-  int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen,
-      issticky, isterminal, noswallow;
+  int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, issticky, isterminal, noswallow;
+  int fakefullscreen;
+  int issteam;
+  int istabbed;
   char scratchkey;
   int ignorecfgreqpos, ignorecfgreqsize;
   pid_t pid;
@@ -258,6 +246,7 @@ int drawstatusbar(Monitor *m, int bh, char *text, int stw);
 void enternotify(XEvent *e);
 void expose(XEvent *e);
 void focus(Client *c);
+void focusdir(const Arg *arg);
 void focusin(XEvent *e);
 void focusmon(const Arg *arg);
 void focusstack(const Arg *arg);
@@ -272,6 +261,7 @@ void grabkeys(void);
 void incnmaster(const Arg *arg);
 void keypress(XEvent *e);
 void killclient(const Arg *arg);
+void losefullscreen(Client *next);
 void manage(Window w, XWindowAttributes *wa);
 void mappingnotify(XEvent *e);
 void maprequest(XEvent *e);
@@ -294,8 +284,7 @@ void restack(Monitor *m);
 void run(void);
 void runautostart(void);
 void scan(void);
-int sendevent(Window w, Atom proto, int m, long d0, long d1, long d2, long d3,
-              long d4);
+int sendevent(Window w, Atom proto, int m, long d0, long d1, long d2, long d3, long d4);
 void sendmon(Client *c, Monitor *m);
 void setclientstate(Client *c, long state);
 void setcurrentdesktop(void);
@@ -314,15 +303,18 @@ void showtagpreview(int tag);
 void sigchld(int unused);
 void sigstatusbar(const Arg *arg);
 void spawn(const Arg *arg);
+int swallow(Client *p, Client *c);
 void swapfocus();
 Monitor *systraytomon(Monitor *m);
 void switchtag(void);
 void tag(const Arg *arg);
 void tagmon(const Arg *arg);
 void togglebar(const Arg *arg);
-void togglefloating(const Arg *arg);
 void togglesticky(const Arg *arg);
 void togglefullscr(const Arg *arg);
+void togglefakefullscreen(const Arg *arg);
+void togglefloating(const Arg *arg);
+void togglefullscreen(const Arg *arg);
 void toggletag(const Arg *arg);
 void toggleview(const Arg *arg);
 void unfocus(Client *c, int setfocus);
@@ -331,6 +323,8 @@ void unmapnotify(XEvent *e);
 void updatecurrentdesktop(void);
 void updatebarpos(Monitor *m);
 void updatebars(void);
+void updateborderonfocus(Client *c);
+void updateborderonunfocus(Client *c);
 void updateclientlist(void);
 int updategeom(void);
 void updatenumlockmask(void);
@@ -353,7 +347,6 @@ int xerrordummy(Display *dpy, XErrorEvent *ee);
 int xerrorstart(Display *dpy, XErrorEvent *ee);
 void zoom(const Arg *arg);
 
-int swallow(Client *p, Client *c);
 void unswallow(Client *c);
 pid_t getparentprocess(pid_t p);
 int isdescprocess(pid_t p, pid_t c);
@@ -375,8 +368,7 @@ void togglegaps(const Arg *arg);
 
 /* Internals */
 void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
-void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr,
-              int *sr);
+void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
 void setgaps(int oh, int ov, int ih, int iv);
 
 #endif

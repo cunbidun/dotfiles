@@ -15,6 +15,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,                             togglescratch,                   {.v = scratchpadsignalcmd } },
 
 	{ MODKEY,                       XK_x,                             spawn,                           SHCMD("arandr") },
+	{ MODKEY,                       XK_t,                             spawn,                           SHCMD("tabbedize") },
 	{ MODKEY,                       XK_e,                             spawn,                           SHCMD("nautilus ~") },
 	{ MODKEY,                       XK_backslash,                     spawn,                           SHCMD("dunstctl close-all") },
 	{ MODKEY,                       XK_p,                             spawn,                           {.v = dmenucmd } },
@@ -59,6 +60,10 @@ static const Key keys[] = {
 	{ MODKEY|ALTKEY|ShiftMask,      XK_9,                             incrovgaps,                      {.i = -1 } },
 	{ MODKEY|ALTKEY,                XK_0,                             togglegaps,                      {0} },
 	{ MODKEY|ALTKEY|ShiftMask,      XK_0,                             defaultgaps,                     {0} },
+	{ MODKEY|ControlMask,           XK_h,                             focusdir,                        {.i = 0 } }, // left
+	{ MODKEY|ControlMask,           XK_l,                             focusdir,                        {.i = 1 } }, // right
+	{ MODKEY|ControlMask,           XK_k,                             focusdir,                        {.i = 2 } }, // up
+	{ MODKEY|ControlMask,           XK_j,                             focusdir,                        {.i = 3 } }, // down
 	{ MODKEY,                       XK_Tab,                           swapfocus,                       {0} },
 	{ MODKEY|ShiftMask,             XK_c,                             killclient,                      {0} },
 	{ MODKEY,                       XK_space,                         spawn,                           SHCMD("set_language") },
@@ -66,7 +71,8 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,	  	      XK_comma,                         cyclelayout,                     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,                        cyclelayout,                     {.i = +1 } },
 	{ MODKEY|ALTKEY,                XK_s,                             togglesticky,                    {0} },
-	{ MODKEY,                       XK_m,                             togglefullscr,                   {0} },
+	{ MODKEY,                       XK_f,                             togglefullscreen,                {0} },
+	{ MODKEY|ShiftMask,             XK_f,                             togglefakefullscreen,            {0} },
 	{ MODKEY,                       XK_0,                             view,                            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                             tag,                             {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,                         focusmon,                        {.i = -1 } },
