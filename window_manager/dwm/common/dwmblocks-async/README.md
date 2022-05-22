@@ -1,6 +1,8 @@
 # dwmblocks-async
 A modular statusbar for `dwm` written in C. You may think of it as `i3blocks`, but for `dwm`.
 
+![A lean config of dwmblocks-async.](preview.png)
+
 ## Features
 - Modular
 - Lightweight
@@ -44,7 +46,7 @@ What's even better is that you can externally trigger updation of any specific b
 ## Why `dwmblocks-async`?
 Everything I have mentioned till now is offered by the vanilla `dwmblocks`, which is fine for most users. What sets `dwmblocks-async` apart from vanilla `dwmblocks` is the 'async' part. `dwmblocks` executes the commands of each blocks sequentially which means that the mail and date blocks, from above example, would be executed one after the other. This means that the date block won't update unless the mail block is done executing, or vice versa. This is bad for scenarios where one of the blocks takes seconds to execute, and is clearly visible when you first start `dwmblocks`.
 
-This is where the `dwmblocks-async` steps in tells the computer to execute each block asynchronously or simultaneously.
+This is where the async nature of `dwmblocks-async` steps in tells the computer to execute each block asynchronously or simultaneously.
 
 
 ## Installation
@@ -78,8 +80,8 @@ The syntax for defining a block is:
 ```c
 const Block blocks[] = {
     ...
-    BLOCK("volume", 0,    5)
-    BLOCK("date",   1800, 1)
+    BLOCK("volume", 0,    5),
+    BLOCK("date",   1800, 1),
     ...
 }
 ```
@@ -111,6 +113,8 @@ My volume block *never* updates on its own, instead I have this command run alon
 
 Note that all blocks must have different signal numbers.
 
+Apart from this, you can also refresh all the blocks by sending `SIGUSR1` to `dwmblocks-async` using either `pkill -SIGUSR1 dwmblocks` or `kill -10 $(pidof dwmblocks)`.
+
 ### Clickable blocks
 Like `i3blocks`, this build allows you to build in additional actions into your scripts in response to click events. You can check out [my statusbar scripts](https://github.com/UtkarshVerma/dotfiles/tree/main/.local/bin/statusbar) as references for using the `$BLOCK_BUTTON` variable.
 
@@ -121,22 +125,8 @@ To use this feature, define the `CLICKABLE_BLOCKS` feature macro in your `config
 
 Apart from that, you need `dwm` to be patched with [statuscmd](https://dwm.suckless.org/patches/statuscmd/).
 
-Because `dwmblocks-async` creates a child process, it messes up the way the original `statuscmd` patch gets the PID of statusbar. It is necessary to modify the following lines in the definition of `getstatusbarpid()`.
+> Earlier, `dwmblocks-async` used to require a patch to be applied to `dwm`. However, the code has been redone so there's no need to apply that patch anymore. 
 
-```diff
-				return statuspid;
-		}
-	}
--	if (!(fp = popen("pidof -s "STATUSBAR, "r")))
-+	if (!(fp = popen("pgrep -o "STATUSBAR, "r")))
-		return -1;
-	fgets(buf, sizeof(buf), fp);
-	pclose(fp);
-```
-
-This modification is backwards-compatible with other versions of `dwmblocks` as well.
-
-Please note that if you are using [`dwm-flexipatch`](https://github.com/bakkeby/dwm-flexipatch), then you only need to enable the `statuscmd` patch through `patches.h`. There is no need to edit change the definition of `getstatusbarpid()` as the changes have already been applied there through [dwm-flexipatch#190](https://github.com/bakkeby/dwm-flexipatch/pull/190).
 
 ## Credits
 This work would not have been possible without [Luke's build of dwmblocks](https://github.com/LukeSmithxyz/dwmblocks) and [Daniel Bylinka's statuscmd patch](https://dwm.suckless.org/patches/statuscmd/).
