@@ -69,6 +69,9 @@ void applyrules(Client *c) {
   if (strstr(class, "Steam") || strstr(class, "steam_app_"))
     c->issteam = 1;
 
+  if (strstr(class, "tabbed"))
+    c->istabbed = 1;
+
   for (i = 0; i < LENGTH(rules); i++) {
     r = &rules[i];
     if ((!r->title || strstr(c->name, r->title)) && (!r->class || strstr(class, r->class)) && (!r->role || strstr(role, r->role)) &&
@@ -1756,8 +1759,22 @@ void setnumdesktops(void) {
 
 void setfocus(Client *c) {
   if (!c->neverfocus) {
-    XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
-    XChangeProperty(dpy, root, netatom[NetActiveWindow], XA_WINDOW, 32, PropModeReplace, (unsigned char *)&(c->win), 1);
+    Bool needfocus = True;
+
+    if (c->istabbed) {
+      int dummy;
+      Window focused, root_return, parent_return, *ch;
+      unsigned int nch;
+      XGetInputFocus(dpy, &focused, &dummy);
+      XQueryTree(dpy, focused, &root_return, &parent_return, &ch, &nch);
+      if (parent_return == c->win) {
+        needfocus = False;
+      }
+    }
+    if (needfocus) {
+      XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
+      XChangeProperty(dpy, root, netatom[NetActiveWindow], XA_WINDOW, 32, PropModeReplace, (unsigned char *)&(c->win), 1);
+    }
   }
   if (c->issteam)
     setclientstate(c, NormalState);

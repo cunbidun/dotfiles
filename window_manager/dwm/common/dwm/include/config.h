@@ -26,7 +26,6 @@ static const Rule rules[] = {
 	{ NULL,          NULL,         NULL,          "audioconfig",      0,          1,           0,           0,          -1,       0          }, // center this
 	{ NULL,          NULL,         NULL,          "editdwmblock",     0,          1,           0,           0,          -1,       0          },
 
-	// { NULL,          NULL,         NULL,          "scratchpad",       0,          1,           0,           0,          -1,       'd'        },
 	{ "Logseq",      NULL,         "logseq",      NULL,               0,          1,           0,           0,          -1,       'n'        },
 	{ "Caprine",     NULL,         "caprine",     NULL,               0,          1,           0,           0,          -1,       'c'        },
 	{ "Signal",      NULL,         "signal",      NULL,               0,          1,           0,           0,          -1,       's'        },

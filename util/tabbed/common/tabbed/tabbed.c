@@ -440,8 +440,17 @@ void focus(int c) {
   if (c < 0 || c >= nclients)
     return;
 
+  // Window root_return, parent_return, *ch;
+  // unsigned int nch;
+  // XQueryTree(dpy, clients[c]->win, &root_return, &parent_return, &ch, &nch);
+  // fprintf(stderr, "Focusing to client number %d, last is number %d\n", c, sel);
+  // fprintf(stderr, "Window is %ld\n", clients[c]->win);
+  // fprintf(stderr, "Parent Window is %ld\n", parent_return);
+  // fprintf(stderr, "Outer Window is %ld\n", win);
+
   resize(c, ww, wh - bh);
   XRaiseWindow(dpy, clients[c]->win);
+  XSetInputFocus(dpy, clients[c]->win, RevertToParent, CurrentTime);
   sendxembed(c, XEMBED_FOCUS_IN, XEMBED_FOCUS_CURRENT, 0, 0);
   sendxembed(c, XEMBED_WINDOW_ACTIVATE, 0, 0, 0);
   xsettitle(win, clients[c]->name);
@@ -831,6 +840,7 @@ void run(void) {
   while (running) {
     XNextEvent(dpy, &ev);
     if (handler[ev.type]) {
+      // fprintf(stderr, "[run] got even %d\n", ev.type);
       (handler[ev.type])(&ev); /* call handler */
     }
   }
