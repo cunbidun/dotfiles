@@ -5,6 +5,9 @@
 #include "key.h"
 #include "util.h"
 
+/* appearance default values */
+unsigned int borderpx = 2;
+
 /* variables */
 const char autostartblocksh[] = "autostart_blocking.sh";
 const char autostartsh[]      = "autostart.sh";
@@ -2882,6 +2885,8 @@ int main(int argc, char *argv[]) {
   if (!(xcon = XGetXCBConnection(dpy)))
     die("dwm: cannot get xcb connection\n");
   checkotherwm();
+  XrmInitialize();
+  load_xresources();
   setup();
   scan();
   runautostart();
