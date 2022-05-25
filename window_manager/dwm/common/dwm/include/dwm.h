@@ -7,6 +7,7 @@
 #include <X11/Xproto.h>
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
+#include <X11/Xresource.h>
 #include <X11/keysym.h>
 #include <errno.h>
 #include <locale.h>
@@ -261,7 +262,7 @@ void grabkeys(void);
 void incnmaster(const Arg *arg);
 void keypress(XEvent *e);
 void killclient(const Arg *arg);
-void losefullscreen(Client *next);
+void load_xresources(void);
 void manage(Window w, XWindowAttributes *wa);
 void mappingnotify(XEvent *e);
 void maprequest(XEvent *e);
@@ -307,6 +308,7 @@ int swallow(Client *p, Client *c);
 void swapfocus();
 Monitor *systraytomon(Monitor *m);
 void switchtag(void);
+void resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst);
 void tag(const Arg *arg);
 void tagmon(const Arg *arg);
 void togglebar(const Arg *arg);

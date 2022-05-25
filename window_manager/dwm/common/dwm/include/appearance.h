@@ -3,7 +3,16 @@
 
 #define FORCE_VSPLIT 1 // nrowgrid layout: force two clients to always split vertically
 
-static const unsigned int borderpx       = 2;   /* border pixel of windows */
+/* Xresources preferences */
+enum resource_type { STRING = 0, INTEGER = 1, FLOAT = 2 };
+
+typedef struct {
+  char *name;
+  enum resource_type type;
+  void *dst;
+} ResourcePref;
+
+extern unsigned int borderpx;                          /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
 static const int scalepreview            = 4;   /* tag preview scaling */
