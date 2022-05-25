@@ -195,8 +195,8 @@ linters.setup({
 
 -- Additional Plugins
 lvim.plugins = {
-	-- { "shaunsingh/nord.nvim" },
-	{ "arcticicestudio/nord-vim" },
+	{ "shaunsingh/nord.nvim" },
+	-- { "arcticicestudio/nord-vim" },
 	{
 		"folke/trouble.nvim",
 		config = function()
