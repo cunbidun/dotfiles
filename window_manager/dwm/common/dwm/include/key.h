@@ -34,7 +34,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_r,                             spawn,                           SHCMD("sc_prompt 'Do you want to reboot?' 'reboot'") },
 	{ MODKEY|ShiftMask,             XK_e,                             spawn,                           SHCMD("sc_prompt 'Do you want to exit dwm?' 'pkill dwm'") },
 	{ MODKEY|ShiftMask,             XK_l,                             spawn,                           SHCMD(TERMINAL " -e lvim") },
-	{ MODKEY|ShiftMask,             XK_s,                             spawn,                           SHCMD("sc_printscreen") },
+	{ MODKEY|ShiftMask,             XK_s,                             spawn,                           SHCMD("sc_printscreen quick") },
+	{ 0,                            XK_Print,                         spawn,                           SHCMD("sc_printscreen") },
 	{ MODKEY|ShiftMask,             XK_n,                             spawn,                           SHCMD("nord_color_picker") },
 	{ MODKEY|ShiftMask,             XK_d,                             spawn,                           SHCMD("dotfiles_picker") },
 	{ MODKEY|ShiftMask,             XK_m,                             spawn,                           SHCMD("sc_open_man_page_dmenu") },
@@ -80,15 +81,15 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioLowerVolume,          spawn,                           SHCMD("decrease_volume") },
 	{ 0,                            XF86XK_AudioMute,                 spawn,                           SHCMD("toggle_volume") } ,
 	{ 0,                            XF86XK_AudioRaiseVolume,          spawn,                           SHCMD("increase_volume") },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(                        XK_1,                             0)
+	TAGKEYS(                        XK_2,                             1)
+	TAGKEYS(                        XK_3,                             2)
+	TAGKEYS(                        XK_4,                             3)
+	TAGKEYS(                        XK_5,                             4)
+	TAGKEYS(                        XK_6,                             5)
+	TAGKEYS(                        XK_7,                             6)
+	TAGKEYS(                        XK_8,                             7)
+	TAGKEYS(                        XK_9,                             8)
 };
 
 /* button definitions */

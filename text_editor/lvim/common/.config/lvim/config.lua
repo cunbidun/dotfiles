@@ -71,21 +71,6 @@ lvim.builtin.nvimtree.show_icons.git = 0
 -- Telescope
 lvim.builtin.telescope.pickers = { find_files = { find_command = { "rg", "--files", "--follow", "--hidden" } } }
 
-lvim.builtin.dashboard.custom_section.a = {
-	description = { "  Recent Projects    " },
-	command = "Telescope projects",
-}
-
-lvim.builtin.dashboard.custom_section.b = {
-	description = { "  Find File          " },
-	command = "Telescope find_files",
-}
-
-lvim.builtin.dashboard.custom_section.c = {
-	description = { "  New File           " },
-	command = ":ene!",
-}
-
 -- load vsnip
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.vsnip/" } })
 
@@ -419,70 +404,71 @@ lvim.plugins = {
 	},
 }
 
-vim.cmd([[
-  autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
-]])
-
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
-lvim.autocommands.custom_groups = {
-	{ "BufWinEnter", "*.lua", "setlocal ts=2 sw=2" },
 
-	{ "VimEnter", "*", "highlight Normal ctermbg=NONE guibg=NONE" },
-	{ "VimEnter", "*", "highlight SignColumn guibg=NONE" },
-	{ "BufEnter", "*", "highlight BufferLineFill guibg=NONE" },
-	{ "BufEnter", "*", "highlight ToggleTerm1SignColumn guibg=NONE" },
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = ':silent exec "!kill -s SIGWINCH $PPID"' })
 
-	-- colorscheme
-	{ "VimEnter", "*", "highlight Nord0 guibg=#2E3440" },
-	{ "VimEnter", "*", "highlight Nord1 guibg=#3B4252" },
-	{ "VimEnter", "*", "highlight Nord2 guibg=#434C5E" },
-	{ "VimEnter", "*", "highlight Nord3 guibg=#4C566A" },
-	{ "VimEnter", "*", "highlight Nord4 guibg=#D8DEE9" },
-	{ "VimEnter", "*", "highlight Nord5 guibg=#E5E9F0" },
-	{ "VimEnter", "*", "highlight Nord6 guibg=#ECEFF4" },
-	{ "VimEnter", "*", "highlight Nord7 guibg=#8FBCBB" },
-	{ "VimEnter", "*", "highlight Nord8 guibg=#88C0D0" },
-	{ "VimEnter", "*", "highlight Nord9 guibg=#81A1C1" },
-	{ "VimEnter", "*", "highlight Nord10 guibg=#5E81AC" },
-	{ "VimEnter", "*", "highlight Nord11 guibg=#BF616A" },
-	{ "VimEnter", "*", "highlight Nord12 guibg=#D08770" },
-	{ "VimEnter", "*", "highlight Nord13 guibg=#EBCB8B" },
-	{ "VimEnter", "*", "highlight Nord14 guibg=#A3BE8C" },
-	{ "VimEnter", "*", "highlight Nord15 guibg=#B48EAD" },
+-- lua indent
+vim.api.nvim_create_autocmd("BufWinEnter", { pattern = { "*.lua" }, command = "setlocal ts=2 sw=2" })
 
-	-- nvim-notify
-	{ "VimEnter", "*", "highlight NotifyERRORBorder guifg=#BF616A" },
-	{ "VimEnter", "*", "highlight NotifyWARNBorder guifg=#EBCB8B" },
-	{ "VimEnter", "*", "highlight NotifyINFOBorder guifg=#A3BE8C" },
-	{ "VimEnter", "*", "highlight NotifyDEBUGBorder guifg=#81A1C1" },
-	{ "VimEnter", "*", "highlight NotifyTRACEBorder guifg=#B48EAD" },
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Normal ctermbg=NONE guibg=NONE" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
+vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
+vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
 
-	{ "VimEnter", "*", "highlight NotifyERRORIcon guifg=#BF616A" },
-	{ "VimEnter", "*", "highlight NotifyWARNIcon guifg=#EBCB8B" },
-	{ "VimEnter", "*", "highlight NotifyINFOIcon guifg=#A3BE8C" },
-	{ "VimEnter", "*", "highlight NotifyDEBUGIcon guifg=#81A1C1" },
-	{ "VimEnter", "*", "highlight NotifyTRACEIcon guifg=#B48EAD" },
+-- nord colorscheme
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord0 guibg=#2E3440" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord1 guibg=#3B4252" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord2 guibg=#434C5E" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord3 guibg=#4C566A" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord4 guibg=#D8DEE9" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord5 guibg=#E5E9F0" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord6 guibg=#ECEFF4" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord7 guibg=#8FBCBB" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord8 guibg=#88C0D0" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord9 guibg=#81A1C1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord10 guibg=#5E81AC" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord11 guibg=#BF616A" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord12 guibg=#D08770" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord13 guibg=#EBCB8B" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord14 guibg=#A3BE8C" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord15 guibg=#B48EAD" })
 
-	{ "VimEnter", "*", "highlight NotifyERRORTitle  guifg=#BF616A" },
-	{ "VimEnter", "*", "highlight NotifyWARNTitle guifg=#EBCB8B" },
-	{ "VimEnter", "*", "highlight NotifyINFOTitle guifg=#A3BE8C" },
-	{ "VimEnter", "*", "highlight NotifyDEBUGTitle  guifg=#81A1C1" },
-	{ "VimEnter", "*", "highlight NotifyTRACETitle  guifg=#B48EAD" },
+-- notify
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyERRORBorder guifg=#BF616A" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyWARNBorder guifg=#EBCB8B" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyINFOBorder guifg=#A3BE8C" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyDEBUGBorder guifg=#81A1C1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyTRACEBorder guifg=#B48EAD" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyERRORIcon guifg=#BF616A" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyWARNIcon guifg=#EBCB8B" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyINFOIcon guifg=#A3BE8C" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyDEBUGIcon guifg=#81A1C1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyTRACEIcon guifg=#B48EAD" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyERRORTitle  guifg=#BF616A" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyWARNTitle guifg=#EBCB8B" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyINFOTitle guifg=#A3BE8C" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyDEBUGTitle  guifg=#81A1C1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyTRACETitle  guifg=#B48EAD" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyERRORBody Nord1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyWARNBody Nord1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyINFOBody Nord1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyDEBUGBody Nord1" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyTRACEBody Nord1" })
 
-	{ "VimEnter", "*", "highlight link NotifyERRORBody Nord1" },
-	{ "VimEnter", "*", "highlight link NotifyWARNBody Nord1" },
-	{ "VimEnter", "*", "highlight link NotifyINFOBody Nord1" },
-	{ "VimEnter", "*", "highlight link NotifyDEBUGBody Nord1" },
-	{ "VimEnter", "*", "highlight link NotifyTRACEBody Nord1" },
+-- nvim trouble
+vim.api.nvim_create_autocmd(
+	"VimEnter",
+	{ pattern = { "*" }, command = "highlight TroubleCount guifg=#EBCB8B guibg=#434C5E" }
+)
 
-	-- trouble.nvim
-	{ "VimEnter", "*", "highlight  TroubleCount guifg=#EBCB8B guibg=#434C5E" },
-
-	-- dwm, disable format_on_save
-	{ "VimEnter", "config.*", "lua require('lvim.core.autocmds').disable_format_on_save()" },
-	{ "VimEnter", "dwm.c", "lua require('lvim.core.autocmds').disable_format_on_save()" },
-	{ "VimEnter", "dmenu.c", "lua require('lvim.core.autocmds').disable_format_on_save()" },
-}
+-- suckless
+vim.api.nvim_create_autocmd("VimEnter", {
+	pattern = { "*.h" },
+	callback = function()
+		require("lvim.core.autocmds").disable_format_on_save()
+	end,
+})
 
 -- CP
 vim.cmd([[source $HOME/.config/lvim/cp.vim]])
