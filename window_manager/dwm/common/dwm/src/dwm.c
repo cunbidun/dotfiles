@@ -6,7 +6,18 @@
 #include "util.h"
 
 /* appearance default values */
-unsigned int borderpx = 2;
+unsigned int borderpx = 2; /* border pixel of windows */
+char scheme_bg[]      = "#2E3440";
+char scheme_fg[]      = "#ECEFF4";
+char scheme_norm[]    = "#4C566A";
+char scheme_sel[]     = "#81A1C1";
+char scheme_sym_bg[]  = "#8FBCBB";
+char scheme_sym_fg[]  = "#2E3440";
+char scheme_urg[]     = "#D08770";
+char schemered[]      = "#BF616A";
+char schemegreen[]    = "#A3BE8C";
+char schemeyellow[]   = "#EBCB8B";
+char schemeblue[]     = "#81A1C1";
 
 /* variables */
 const char autostartblocksh[] = "autostart_blocking.sh";

@@ -121,10 +121,6 @@ lvim.builtin.terminal.highlights = {
 	NormalFloat = {
 		link = "Normal",
 	},
-	FloatBorder = {
-		guifg = "Nord9",
-		guibg = "Nord0",
-	},
 }
 lvim.builtin.terminal.float_opts = {
 	border = "single",

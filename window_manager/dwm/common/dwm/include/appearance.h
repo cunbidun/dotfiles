@@ -12,7 +12,19 @@ typedef struct {
   void *dst;
 } ResourcePref;
 
-extern unsigned int borderpx;                          /* border pixel of windows */
+extern unsigned int borderpx; /* border pixel of windows */
+extern char scheme_fg[];
+extern char scheme_bg[];
+extern char scheme_norm[];
+extern char scheme_sym_bg[];
+extern char scheme_sym_fg[];
+extern char scheme_sel[];
+extern char scheme_urg[];
+extern char schemered[];
+extern char schemegreen[];
+extern char schemeyellow[];
+extern char schemeblue[];
+
 static const unsigned int snap           = 32;  /* snap pixel */
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
 static const int scalepreview            = 4;   /* tag preview scaling */
@@ -32,31 +44,23 @@ static const float mfact                 = 0.5; /* factor of master area size [0
 static const int nmaster                 = 1;   /* number of clients in master area */
 static const int resizehints             = 0;   /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen          = 1;   /* 1 will force focus on the fullscreen window */
-static const char nord0[]                = "#2E3440";
-static const char nord1[]                = "#3B4252";
-static const char nord2[]                = "#434C5E";
-static const char nord3[]                = "#4C566A";
-static const char nord4[]                = "#D8DEE9";
-static const char nord5[]                = "#E5E9F0";
-static const char nord6[]                = "#ECEFF4";
-static const char nord7[]                = "#8FBCBB";
-static const char nord8[]                = "#88c0d0";
-static const char nord9[]                = "#81A1C1";
-static const char nord10[]               = "#5E81AC";
-static const char nord11[]               = "#BF616A";
-static const char nord12[]               = "#D08770";
-static const char nord13[]               = "#EBCB8B";
-static const char nord14[]               = "#A3BE8C";
-static const char nord15[]               = "#B48EAD";
 static const char *fonts[]               = {"Source Code Pro:size=11"};
 static const char dmenufont[]            = "Source Code Pro:size=11";
 
 /* Color schemes */
-enum { SchemeNorm, NordRed, NordGreen, NordYellow, NordBlue, SchemeSel, SchemeUrg, SchemeSym };
+enum { SchemeNorm, SchemeRed, SchemeGreen, SchemeYellow, SchemeBlue, SchemeSel, SchemeUrg, SchemeSym };
+
+enum { ColFg, ColBg, ColBorder }; /* Clr scheme index */
 
 /* fg bg border */
 static const char *colors[][3] = {
-    [SchemeNorm] = {nord4, nord0, nord3}, [NordRed] = {nord11, nord0, nord0},  [NordGreen] = {nord14, nord0, nord0},  [NordYellow] = {nord13, nord0, nord0},
-    [NordBlue] = {nord9, nord0, nord0},   [SchemeSel] = {nord0, nord9, nord9}, [SchemeUrg] = {nord0, nord12, nord12}, [SchemeSym] = {nord0, nord7, nord7},
+    [SchemeNorm]   = {scheme_fg, scheme_bg, scheme_norm},        /* Normal color */
+    [SchemeSel]    = {scheme_bg, scheme_sel, scheme_sel},        /* Selected color */
+    [SchemeUrg]    = {scheme_bg, scheme_urg, scheme_urg},        /* Urgent color */
+    [SchemeSym]    = {scheme_sym_fg, scheme_sym_bg, 0},          /* Symbol color */
+    [SchemeRed]    = {schemered, schemered, schemered},          /* Red color */
+    [SchemeGreen]  = {schemegreen, schemegreen, schemegreen},    /* Green color */
+    [SchemeYellow] = {schemeyellow, schemeyellow, schemeyellow}, /* yellow color */
+    [SchemeBlue]   = {schemeblue, schemeblue, schemeblue},       /* Blue color */
 };
 #endif

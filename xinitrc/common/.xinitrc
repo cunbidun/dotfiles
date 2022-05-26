@@ -60,6 +60,6 @@ xrandr --dpi 96
 
 # exec awesome 
 # exec xmonad 
-while type dwm >/dev/null ; do dwm && continue || break ; done 
+while type dwm >/dev/null ; do xrdb ~/.Xresources && dwm && continue || break ; done 
 # exec bspwm
 # exec i3

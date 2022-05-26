@@ -23,7 +23,7 @@ void unfocus(Client *c, int setfocus) {
 
 void updateborderonunfocus(Client *c) {
   if (c->scratchkey != 0)
-    XSetWindowBorder(dpy, c->win, scheme[NordYellow][ColFg].pixel);
+    XSetWindowBorder(dpy, c->win, scheme[SchemeYellow][ColBorder].pixel);
   else
     XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
 }
@@ -56,9 +56,9 @@ void focus(Client *c) {
 
 void updateborderonfocus(Client *c) {
   if (c->fakefullscreen == 1)
-    XSetWindowBorder(dpy, c->win, scheme[NordGreen][ColFg].pixel);
+    XSetWindowBorder(dpy, c->win, scheme[SchemeGreen][ColBorder].pixel);
   else if (c->scratchkey != 0)
-    XSetWindowBorder(dpy, c->win, scheme[NordYellow][ColFg].pixel);
+    XSetWindowBorder(dpy, c->win, scheme[SchemeYellow][ColBorder].pixel);
   else
     XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 }
