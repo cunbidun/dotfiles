@@ -8,7 +8,7 @@
 
 /* commands */
 char dmenumon[2]              = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = {"dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", nord0, "-nf", nord4, "-sb", nord9, "-sf", nord6, NULL};
+static const char *dmenucmd[] = {"dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", scheme_bg, "-nf", scheme_fg, "-sb", scheme_sel, "-sf", scheme_fg, NULL};
 static const char *termcmd[]  = {TERMINAL, NULL};
 
 #endif

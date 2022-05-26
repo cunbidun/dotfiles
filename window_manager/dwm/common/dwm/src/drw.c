@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "drw.h"
+#include "appearance.h"
 #include "util.h"
 
 #define UTF_INVALID 0xFFFD

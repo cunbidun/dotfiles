@@ -2,13 +2,28 @@
 #include "config.h"
 #include "dwm.h"
 
+extern char scheme_fg[];
+extern char scheme_bg[];
+extern char scheme_norm[];
+extern char scheme_sym_bg[];
+extern char scheme_sel[];
+extern char scheme_urg[];
+
 ResourcePref resources[] = {
-    // { "normbordercolor",          STRING,             &normbordercolor },
-    // { "normbgcolor",              STRING,             &normbgcolor },
-    // { "normfgcolor",              STRING,             &normfgcolor },
-    // { "selbgcolor",               STRING,             &selbgcolor },
-    // { "selbordercolor",           STRING,             &selbordercolor },
-    // { "selfgcolor",               STRING,             &selfgcolor },
+    {"scheme_fg", STRING, &scheme_fg},
+    {"scheme_bg", STRING, &scheme_bg},
+    {"scheme_norm", STRING, &scheme_norm},
+    {"scheme_sym_bg", STRING, &scheme_sym_bg},
+    {"scheme_sym_fg", STRING, &scheme_sym_fg},
+    {"scheme_sel", STRING, &scheme_sel},
+    {"scheme_urg", STRING, &scheme_urg},
+
+    /* Color */
+    {"schemered", STRING, &schemered},
+    {"schemeyellow", STRING, &schemeyellow},
+    {"schemegreen", STRING, &schemegreen},
+    {"schemeblue", STRING, &schemeblue},
+
     {"borderpx", INTEGER, &borderpx},
     // { "snap",          		        INTEGER,            &snap },
     // { "showbar",          	      INTEGER,            &showbar },
