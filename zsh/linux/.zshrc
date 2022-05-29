@@ -39,56 +39,31 @@ HIST_STAMPS="mm/dd/yyyy"
 plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-
 source $HOME/.config/alacritty/changer_autocompletion # theme changer autocompletion
+source $HOME/.zshcommon
 
-# User configuration
-export LANG=en_US.UTF-8
-
-
-MY_EDITOR='lvim'
-export TERMINAL='alacritty'
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR=$MY_EDITOR
-  export VISUAL=$MY_EDITOR
-fi
-
-alias zshconfig="$MY_EDITOR $HOME/.zshrc"
-
-alias CP="$HOME/competitive_programming/"
-alias b="set_brightness"
-alias r="ranger"
-alias s="source $HOME/.zshrc"
-alias x="$MY_EDITOR $HOME/.xinitrc"
-
-alias bd="$HOME/dotfiles/scripts/.scripts/bin"
-alias cpf='f() { xclip -sel clip < $1 }; f'
-
-alias ls="exa -la"
-
-# alias task="task ls"
-alias ut="task +umass"
-alias ct="task +cp"
-alias lt="task +linux"
-alias tt="task +todo"
+alias x="$EDITOR $HOME/.xinitrc"
 
 unsetopt PROMPT_SP
 
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-
-# colorscript -e 19
 # source /usr/share/nvm/init-nvm.sh
 
-if [ "$(uname)" = "Darwin" ]; then
-  [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-  test -r $HOME/.dir_colors && eval $(gdircolors $HOME/.dir_colors)
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+test -r $HOME/.dir_colors && eval $(dircolors $HOME/.dir_colors)
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
 else
-  source /usr/share/fzf/completion.zsh
-  source /usr/share/fzf/key-bindings.zsh
-  test -r $HOME/.dir_colors && eval $(dircolors $HOME/.dir_colors)
+    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda/bin:$PATH"
+    fi
 fi
+unset __conda_setup
+# <<< conda initialize <<<
 
