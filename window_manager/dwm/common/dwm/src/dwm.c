@@ -1398,6 +1398,8 @@ void propertynotify(XEvent *e) {
     }
     if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
       updatetitle(c);
+      applyrules(c);
+      arrange(c->mon);
       if (c == c->mon->sel)
         drawbar(c->mon);
     }

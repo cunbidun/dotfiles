@@ -28,7 +28,6 @@ lvim.keys.insert_mode["jj"] = false
 
 -- lsp
 lvim.keys.normal_mode["<C-M-l>"] = "<cmd>lua vim.lsp.buf.formatting()<CR>"
-lvim.keys.normal_mode["<leader>rn"] = "<cmd>lua vim.lsp.buf.rename()<CR>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -414,8 +413,8 @@ vim.api.nvim_create_autocmd("BufWinEnter", { pattern = { "*.lua" }, command = "s
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Normal ctermbg=NONE guibg=NONE" })
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
-vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
 
+vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
 -- nord colorscheme
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord0 guibg=#2E3440" })
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord1 guibg=#3B4252" })
