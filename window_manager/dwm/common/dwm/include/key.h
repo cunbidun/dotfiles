@@ -13,6 +13,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_n,                             togglescratch,                   {.v = scratchpadnotecmd } },
 	{ MODKEY,                       XK_c,                             togglescratch,                   {.v = scratchpadchatcmd } },
 	{ MODKEY,                       XK_s,                             togglescratch,                   {.v = scratchpadsignalcmd } },
+	{ MODKEY,                       XK_m,                             togglescratch,                   {.v = scratchpadspotifycmd} },
 
 	{ MODKEY,                       XK_x,                             spawn,                           SHCMD("arandr") },
 	{ MODKEY,                       XK_t,                             spawn,                           SHCMD("tabbedize") },
