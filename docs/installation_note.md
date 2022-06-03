@@ -30,7 +30,7 @@ pacman -S nodejs npm go yarn pyenv pyenv-virtualenv cargo quickemu
 ## Install utilities
 
 ```bash
-yay -S fzf lazygit skippy-xd-git xclip sysstat ripgrep bat exa gnome-keyring imagemagick unzip stow 
+yay -S fzf lazygit ripgrep bat exa gnome-keyring imagemagick unzip stow 
 acpi network-manager-applet maim zathura zathura-pdf-mupdf xcursor-osx-elcap
 
 xdg-mime default org.pwmt.zathura.desktop application/pdf # set zathura as default
@@ -199,13 +199,9 @@ cd dotfiles && stow lvim
 #### Install plug-in manager and formatter
 
 ```bash
-cargo install stylua
 pip install flake8 black isort --upgrade # for python
-sudo npm install -g prettier
-sudo npm install -g write-good
 sudo cpan -i YAML::Tiny Unicode::GCString File::HomeDir # for latex formatter
-yay -S nvim-packer-git
-yay -S nodejs-markdownlint-cli # for markdownlint
+yay -S prettier stylua nodejs-markdownlint-cli shfmt shellcheck write-good
 ```
 
 #### Install language servers
@@ -298,11 +294,12 @@ Note:
 
 ### DWM
 
-#### dwm swallow patch work around
-
 ``` bash
-yay -S imlib2
+yay -S imlib2 libxft xorg-server xorg-apps xorg-xinit xclip
+yay -S main sysstat
 ```
+
+#### dwm swallow patch work around
 
 * For `MarkdownPreview` extension, the browser need to open before running
 `:MarkdownPreview`.
