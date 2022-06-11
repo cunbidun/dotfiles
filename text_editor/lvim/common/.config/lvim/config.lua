@@ -161,7 +161,7 @@ local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
 	{ exe = "write-good", filetypes = { "markdown", "txt" } },
 	-- { exe = "markdownlint", filetypes = { "markdown" } },
-	-- { exe = "flake8", filetypes = { "python" } },
+	{ exe = "flake8", filetypes = { "python" } },
 	{ exe = "chktex", filetypes = { "tex" } },
 	{
 		exe = "shellcheck",

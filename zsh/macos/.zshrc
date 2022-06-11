@@ -33,8 +33,6 @@ export UPDATE_ZSH_DAYS=3
 # history timestamp
 HIST_STAMPS="mm/dd/yyyy"
 
-# plugins=(git timewarrior zsh-autosuggestions zsh-syntax-highlighting)
-# plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 plugins=(git zsh-syntax-highlighting docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
@@ -43,18 +41,10 @@ source $HOME/.zshcommon
 # load common alias after loading oh-my-zsh
 source $HOME/.config/alacritty/changer_autocompletion # theme changer autocompletion
 
-alias note="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
-
-unsetopt PROMPT_SP
+alias cdnote="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 test -r $HOME/.dir_colors && eval $(gdircolors $HOME/.dir_colors)
-
-gitpush() {
-  CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
-  CURRENT_BRANCH="${1:-$CURRENT_BRANCH}"
-  git push origin --delete $CURRENT_BRANCH && git push --set-upstream origin $CURRENT_BRANCH
-}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -70,5 +60,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
