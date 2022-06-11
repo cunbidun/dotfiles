@@ -1,5 +1,6 @@
 # User configuration
 export LANG=en_US.UTF-8
+unsetopt PROMPT_SP
 
 MY_EDITOR='lvim'
 export TERMINAL='alacritty'
@@ -20,3 +21,10 @@ alias ls="exa -la"
 
 alias zshconfig="$MY_EDITOR $HOME/.zshrc"
 alias zshcommon="$MY_EDITOR $HOME/.zshcommon"
+
+gitpush() {
+  CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
+  CURRENT_BRANCH="${1:-$CURRENT_BRANCH}"
+  git push origin --delete $CURRENT_BRANCH && git push --set-upstream origin $CURRENT_BRANCH
+}
+
