@@ -295,8 +295,8 @@ Note:
 ### DWM
 
 ``` bash
-yay -S imlib2 libxft xorg-server xorg-apps xorg-xinit xclip
-yay -S main sysstat
+yay -S imlib2 libxft xorg-server xorg-apps xorg-xinit xclip xdotool
+yay -S main sysstat arandr
 ```
 
 #### dwm swallow patch work around
