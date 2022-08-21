@@ -1,5 +1,6 @@
 # Spawn terminal 
-alt - return : open -n -a Alacritty
+alt - return : open -n -a iTerm
+alt - v: open -n -a neovide 
 
 # Restart yabai and skhd
 shift + alt - q : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
