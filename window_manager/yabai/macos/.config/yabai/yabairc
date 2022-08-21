@@ -31,15 +31,17 @@ yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
 yabai -m config mouse_drop_action swap
 
-# Border
-yabai -m config window_border on
-yabai -m config window_border_width 1
+# +---------------+
+# |    border     |
+# +---------------+
+yabai -m config window_border off
+yabai -m config window_border_width 3
 yabai -m config active_window_border_color 0xff88C0D0
 yabai -m config normal_window_border_color 0xff4C566A
 yabai -m config insert_feedback_color 0xffd75f5f
 
 # Rules
-yabai -m rule --add app!="(Alacritty|Google Chrome|Code|RStudio)" manage=off border=off
+yabai -m rule --add app!="(Alacritty|iTerm2|Google Chrome|Code|Neovide|Firefox)" manage=off border=off
 yabai -m rule --add app="^IntelliJ IDEA$" title="( – )" manage=on border=on
 
 # General space settings

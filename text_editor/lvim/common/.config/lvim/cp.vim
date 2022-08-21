@@ -11,12 +11,12 @@ function! TermWrapper(command)
 	exec printf("TermExec direction=vertical cmd='%s'", a:command) 
 endfunction
 
-command! -nargs=0 Runscript call TermWrapper(printf('cpcli_app --root-dir="%s" --project-config=project_config.json --build', expand('%:p:h')))
-command! -nargs=0 RunWithDebug call TermWrapper(printf('cpcli_app --root-dir="%s" --project-config=project_config.json --build-with-debug', expand('%:p:h')))
-command! -nargs=0 RunWithTerm call TermWrapper(printf('cpcli_app --root-dir="%s" --project-config=project_config.json --build-with-term', expand('%:p:h')))
-command! -nargs=0 TaskConfig call TermWrapper(printf('cpcli_app --root-dir="%s" --project-config=project_config.json --edit-config', expand('%:p:h')))
-command! -nargs=0 ArchiveTask call TermWrapper(printf('cpcli_app --root-dir="%s" --project-config=project_config.json --archive', expand('%:p:h')))
-command! -nargs=0 NewTask call TermWrapper(printf('cpcli_app --new --project-config=project_config.json'))
+command! -nargs=0 Runscript call TermWrapper(printf('clear; cpcli_app --root-dir="%s" --project-config=project_config.json --build', expand('%:p:h')))
+command! -nargs=0 RunWithDebug call TermWrapper(printf('clear; cpcli_app --root-dir="%s" --project-config=project_config.json --build-with-debug', expand('%:p:h')))
+command! -nargs=0 RunWithTerm call TermWrapper(printf('clear; cpcli_app --root-dir="%s" --project-config=project_config.json --build-with-term', expand('%:p:h')))
+command! -nargs=0 TaskConfig call TermWrapper(printf('clear; cpcli_app --root-dir="%s" --project-config=project_config.json --edit-config', expand('%:p:h')))
+command! -nargs=0 ArchiveTask call TermWrapper(printf('clear; cpcli_app --root-dir="%s" --project-config=project_config.json --archive', expand('%:p:h')))
+command! -nargs=0 NewTask call TermWrapper(printf('clear; cpcli_app --new --project-config=project_config.json'))
 command! -nargs=0 DeleteTask call TermWrapper(printf('mv "%s" ~/.local/share/Trash/files/', expand('%:p:h')))
 
 " VIM

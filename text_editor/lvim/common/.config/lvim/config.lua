@@ -1,7 +1,6 @@
 -- +---------+
 -- | general |
 -- +---------+
-
 vim.opt.relativenumber = true -- show line numbers relatively
 
 lvim.log.level = "warn"
@@ -11,7 +10,6 @@ lvim.colorscheme = "nord"
 -- +------------------------------------------------------------+
 -- | keymappings [view all the defaults by pressing <leader>Lk] |
 -- +------------------------------------------------------------+
-
 lvim.leader = "space"
 
 -- bufferline
@@ -53,6 +51,7 @@ lvim.builtin.telescope.defaults.path_display = { shorten = 20 }
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep<CR>", "Live Grep" }
+lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files<CR>", "File File" }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -66,9 +65,6 @@ lvim.builtin.nvimtree.show_icons.git = 0
 -- +---------------+
 -- | plugin config |
 -- +---------------+
-
--- Telescope
-lvim.builtin.telescope.pickers = { find_files = { find_command = { "rg", "--files", "--follow", "--hidden" } } }
 
 -- load vsnip
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.vsnip/" } })
@@ -160,17 +156,18 @@ formatters.setup({
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
 	{ exe = "write-good", filetypes = { "markdown", "txt" } },
-	-- { exe = "markdownlint", filetypes = { "markdown" } },
+	{ exe = "markdownlint", filetypes = { "markdown" } },
 	{ exe = "flake8", filetypes = { "python" } },
 	{ exe = "chktex", filetypes = { "tex" } },
 	{
 		exe = "shellcheck",
 		args = { "--severity", "warning" },
+		filetypes = { "sh", "bash" },
 	},
-	-- {
-	-- 	exe = "codespell",
-	-- 	filetypes = { "javascript", "python" },
-	-- },
+	{
+		exe = "codespell",
+		filetypes = { "javascript", "python" },
+	},
 })
 
 -- Additional Plugins
@@ -296,6 +293,7 @@ lvim.plugins = {
 						"help",
 						"terminal",
 						"dashboard",
+						"alpha",
 						"packer",
 						"lspinfo",
 						"TelescopePrompt",
@@ -307,29 +305,6 @@ lvim.plugins = {
 					show_current_context = true,
 					use_treesitter = true,
 				})
-				vim.g.indent_blankline_context_patterns = {
-					"^for",
-					"^if",
-					"^object",
-					"^table",
-					"^while",
-					"arguments",
-					"block",
-					"catch_clause",
-					"class",
-					"else_clause",
-					"function",
-					"if_statement",
-					"import_statement",
-					"jsx_element",
-					"jsx_element",
-					"jsx_self_closing_element",
-					"method",
-					"operation_type",
-					"return",
-					"try_statement",
-				}
-				vim.g.indent_blankline_use_treesitter = true
 			end
 			M.setup()
 		end,
@@ -411,6 +386,7 @@ vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = ':silent 
 vim.api.nvim_create_autocmd("BufWinEnter", { pattern = { "*.lua" }, command = "setlocal ts=2 sw=2" })
 
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Normal ctermbg=NONE guibg=NONE" })
+vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight VertSplit guifg=#81A1C1" })
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
 
