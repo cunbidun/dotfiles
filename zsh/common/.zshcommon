@@ -2,7 +2,7 @@
 export LANG=en_US.UTF-8
 unsetopt PROMPT_SP
 
-MY_EDITOR='nvim'
+MY_EDITOR='lvim'
 export TERMINAL='alacritty'
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -18,6 +18,11 @@ alias s="source $HOME/.zshrc"
 alias CP="$HOME/competitive_programming/"
 alias r="ranger"
 alias ls="exa -la"
+
+# All the vim
+alias vi="lvim"
+alias nvim="lvim"
+alias vim="lvim"
 
 alias zshconfig="$MY_EDITOR $HOME/.zshrc"
 alias zshcommon="$MY_EDITOR $HOME/.zshcommon"

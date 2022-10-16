@@ -49,5 +49,4 @@ alt - 0x2F : yabai -m display --focus recent # alt + period
 shift + alt - 0x2F : yabai -m window --display recent # alt + period
 
 # Layout
-alt - f : yabai -m config layout float 
 alt - b : yabai -m config layout bsp 

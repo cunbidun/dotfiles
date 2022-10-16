@@ -1,11 +1,23 @@
+-- +-----+
+-- | gui |
+-- +-----+
+vim.opt.guifont = { "SauceCodePro Nerd Font Mono", ":h14" }
+vim.g.neovide_transparency = 0.80
+
 -- +---------+
 -- | general |
 -- +---------+
 vim.opt.relativenumber = true -- show line numbers relatively
-
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "nord"
+
+-- +-------+
+-- | theme |
+-- +-------+
+-- lvim.colorscheme = "vscode"
+-- vim.o.background = "light"
+-- vim.o.background = "dark"
+lvim.colorscheme = "darkplus"
 
 -- +------------------------------------------------------------+
 -- | keymappings [view all the defaults by pressing <leader>Lk] |
@@ -49,18 +61,25 @@ lvim.builtin.telescope.defaults.layout_config.width = 0.9
 lvim.builtin.telescope.defaults.path_display = { shorten = 20 }
 
 -- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep<CR>", "Live Grep" }
-lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files<CR>", "File File" }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects <<CR>", "Projects" }
+lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep <CR>", "Live Grep" }
+lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files <CR>", "File File" }
+
+lvim.builtin.which_key.mappings["c"] = {
+	name = "Competitive Programming",
+	b = { "<cmd>Runscript<cr>", "Build and Run" },
+	r = { "<cmd>RunWithTerm<cr>", "Build and Run in Terminal" },
+	d = { "<cmd>RunWithDebug<cr>", "Build and Run in Debug Mode" },
+	t = { "<cmd>TaskConfig<cr>", "Edit Task Info" },
+	a = { "<cmd>ArchiveTask<cr>", "Archive Task" },
+	n = { "<cmd>NewTask<cr>", "New Task" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.bufferline.options.close_command = "Bdelete! %d"
 
 -- +---------------+
 -- | plugin config |
@@ -82,11 +101,7 @@ lvim.builtin.terminal.size = function(term)
 	if term.direction == "horizontal" then
 		return 15
 	elseif term.direction == "vertical" then
-		if vim.o.columns < 150 then
-			return vim.o.columns * 0.35
-		else
-			return vim.o.columns * 0.4
-		end
+		return math.max(vim.o.columns - 160, 35)
 	else
 		return 20
 	end
@@ -134,6 +149,36 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- | lsp |
 -- +-----+
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
+
+-- +--------+
+-- | clangd |
+-- +--------+
+local capabilities = require("lvim.lsp").common_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
+local clangd_flags = {
+	capabilities = capabilities,
+	"--fallback-style=google",
+	"--background-index",
+	"-j=12",
+	"--all-scopes-completion",
+	"--pch-storage=disk",
+	"--clang-tidy",
+	"--log=error",
+	"--completion-style=detailed",
+	"--header-insertion=iwyu",
+	"--header-insertion-decorators",
+	"--enable-config",
+	"--offset-encoding=utf-16",
+	"--ranking-model=heuristics",
+	"--folding-ranges",
+}
+local clangd_bin = "clangd"
+local opts = {
+	cmd = { clangd_bin, unpack(clangd_flags) },
+}
+require("lvim.lsp.manager").setup("clangd", opts)
+
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
 	{ exe = "markdownlint", filetypes = { "markdown" } },
@@ -141,6 +186,7 @@ formatters.setup({
 	{ exe = "isort", filetypes = { "python" } },
 	{ exe = "stylua", filetypes = { "lua" } },
 	{ exe = "shfmt", filetypes = { "sh" } },
+	{ exe = "rustfmt", filetypes = { "rust" } },
 	{ exe = "latexindent", filetypes = { "tex" } },
 	{
 		exe = "prettier",
@@ -172,8 +218,25 @@ linters.setup({
 
 -- Additional Plugins
 lvim.plugins = {
-	{ "shaunsingh/nord.nvim" },
-	-- { "arcticicestudio/nord-vim" },
+	{
+		"zbirenbaum/copilot.lua",
+		event = { "VimEnter" },
+		config = function()
+			vim.defer_fn(function()
+				require("copilot").setup()
+			end, 100)
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
+	{ "martinsione/darkplus.nvim" },
+	{ "moll/vim-bbye" },
+	{ "Mofiqul/vscode.nvim" },
 	{
 		"folke/trouble.nvim",
 		config = function()
@@ -234,80 +297,6 @@ lvim.plugins = {
 			M.setup()
 		end,
 		cmd = "TroubleToggle",
-	},
-	{
-		"karb94/neoscroll.nvim",
-		config = function()
-			local present, neoscroll = pcall(require, "neoscroll")
-			local M = { setup = function() end }
-			if not present then
-				return M
-			end
-			M.setup = function()
-				neoscroll.setup({
-					-- All these keys will be mapped to their corresponding default scrolling animation
-					mappings = {
-						"<C-u>",
-						"<C-d>",
-						"<C-y>",
-						"<C-e>",
-						"zt",
-						"zz",
-						"zb",
-					},
-					hide_cursor = true, -- Hide cursor while scrolling
-					stop_eof = true, -- Stop at <EOF> when scrolling downwards
-					use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-					respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-					cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-					easing_function = nil, -- Default easing function
-					pre_hook = nil, -- Function to run before the scrolling animation starts
-					post_hook = nil, -- Function to run after the scrolling animation ends
-				})
-				local t = {}
-				t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
-				t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
-				t["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
-				t["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
-				t["zt"] = { "zt", { "250" } }
-				t["zz"] = { "zz", { "250" } }
-				t["zb"] = { "zb", { "250" } }
-				require("neoscroll.config").set_mappings(t)
-			end
-			M.setup()
-		end,
-	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			local present, indent_blankline = pcall(require, "indent_blankline")
-			local M = { setup = function() end }
-			if not present then
-				return M
-			end
-			M.setup = function()
-				indent_blankline.setup({
-					indentLine_enabled = 1,
-					char = "▏",
-					filetype_exclude = {
-						"help",
-						"terminal",
-						"dashboard",
-						"alpha",
-						"packer",
-						"lspinfo",
-						"TelescopePrompt",
-						"TelescopeResults",
-					},
-					buftype_exclude = { "terminal" },
-					show_trailing_blankline_indent = false,
-					show_first_indent_level = false,
-					show_current_context = true,
-					use_treesitter = true,
-				})
-			end
-			M.setup()
-		end,
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
@@ -379,63 +368,10 @@ lvim.plugins = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
-
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = ':silent exec "!kill -s SIGWINCH $PPID"' })
-
--- lua indent
-vim.api.nvim_create_autocmd("BufWinEnter", { pattern = { "*.lua" }, command = "setlocal ts=2 sw=2" })
-
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Normal ctermbg=NONE guibg=NONE" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight VertSplit guifg=#81A1C1" })
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
-
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
--- nord colorscheme
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord0 guibg=#2E3440" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord1 guibg=#3B4252" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord2 guibg=#434C5E" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord3 guibg=#4C566A" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord4 guibg=#D8DEE9" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord5 guibg=#E5E9F0" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord6 guibg=#ECEFF4" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord7 guibg=#8FBCBB" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord8 guibg=#88C0D0" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord9 guibg=#81A1C1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord10 guibg=#5E81AC" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord11 guibg=#BF616A" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord12 guibg=#D08770" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord13 guibg=#EBCB8B" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord14 guibg=#A3BE8C" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight Nord15 guibg=#B48EAD" })
-
--- notify
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyERRORBorder guifg=#BF616A" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyWARNBorder guifg=#EBCB8B" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyINFOBorder guifg=#A3BE8C" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyDEBUGBorder guifg=#81A1C1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyTRACEBorder guifg=#B48EAD" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyERRORIcon guifg=#BF616A" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyWARNIcon guifg=#EBCB8B" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyINFOIcon guifg=#A3BE8C" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyDEBUGIcon guifg=#81A1C1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyTRACEIcon guifg=#B48EAD" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyERRORTitle  guifg=#BF616A" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyWARNTitle guifg=#EBCB8B" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyINFOTitle guifg=#A3BE8C" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyDEBUGTitle  guifg=#81A1C1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight NotifyTRACETitle  guifg=#B48EAD" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyERRORBody Nord1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyWARNBody Nord1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyINFOBody Nord1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyDEBUGBody Nord1" })
-vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight link NotifyTRACEBody Nord1" })
-
--- nvim trouble
-vim.api.nvim_create_autocmd(
-	"VimEnter",
-	{ pattern = { "*" }, command = "highlight TroubleCount guifg=#EBCB8B guibg=#434C5E" }
-)
 
 -- suckless
 vim.api.nvim_create_autocmd("VimEnter", {
