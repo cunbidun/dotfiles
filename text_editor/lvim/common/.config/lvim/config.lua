@@ -1,22 +1,13 @@
--- +-----+
--- | gui |
--- +-----+
-vim.opt.guifont = { "SauceCodePro Nerd Font Mono", ":h14" }
-vim.g.neovide_transparency = 0.80
-
 -- +---------+
 -- | general |
 -- +---------+
-vim.opt.relativenumber = true -- show line numbers relatively
+vim.opt.relativenumber = true
 lvim.log.level = "warn"
 lvim.format_on_save = true
 
 -- +-------+
 -- | theme |
 -- +-------+
--- lvim.colorscheme = "vscode"
--- vim.o.background = "light"
--- vim.o.background = "dark"
 lvim.colorscheme = "darkplus"
 
 -- +------------------------------------------------------------+
@@ -24,23 +15,26 @@ lvim.colorscheme = "darkplus"
 -- +------------------------------------------------------------+
 lvim.leader = "space"
 
--- bufferline
+-- bufferline {{{
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["<S-x>"] = ":BufferKill<CR>"
+-- }}}
 
--- unmap a default keymapping
+-- unmap a default keymapping {{{
 lvim.keys.normal_mode["<S-l>"] = false
 lvim.keys.normal_mode["<S-h>"] = false
 lvim.keys.insert_mode["jk"] = false
 lvim.keys.insert_mode["kj"] = false
 lvim.keys.insert_mode["jj"] = false
+-- }}}
 
--- lsp
+-- lsp {{{
 lvim.keys.normal_mode["<C-M-l>"] = "<cmd>lua vim.lsp.buf.formatting()<CR>"
+-- }}}
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
+-- we use protected-mode (pcall) just in case the plugin wasn't loaded yet. {{{
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
 	-- for input mode
@@ -56,11 +50,9 @@ lvim.builtin.telescope.defaults.mappings = {
 		["<C-k>"] = actions.move_selection_previous,
 	},
 }
+-- }}}
 
-lvim.builtin.telescope.defaults.layout_config.width = 0.9
-lvim.builtin.telescope.defaults.path_display = { shorten = 20 }
-
--- Use which-key to add extra bindings with the leader-key prefix
+-- Use which-key to add extra bindings with the leader-key prefix {{{
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects <<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep <CR>", "Live Grep" }
 lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files <CR>", "File File" }
@@ -74,23 +66,25 @@ lvim.builtin.which_key.mappings["c"] = {
 	a = { "<cmd>ArchiveTask<cr>", "Archive Task" },
 	n = { "<cmd>NewTask<cr>", "New Task" },
 }
-
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.bufferline.options.close_command = "Bdelete! %d"
+-- }}}
 
 -- +---------------+
 -- | plugin config |
 -- +---------------+
+lvim.builtin.notify.active = true
+lvim.builtin.terminal.active = true
+lvim.builtin.bufferline.options.close_command = "Bdelete! %d"
 
--- load vsnip
+-- telescope{{{
+lvim.builtin.telescope.defaults.layout_config.width = 0.9
+lvim.builtin.telescope.defaults.path_display = { shorten = 20 }
+-- }}}
+
+-- vsnip {{{
 require("luasnip.loaders.from_vscode").load({ paths = { "~/.vsnip/" } })
+-- }}}
 
--- +----------+
--- | terminal |
--- +----------+
+-- terminal {{{
 lvim.builtin.terminal.active = true
 
 -- no shading
@@ -121,12 +115,10 @@ lvim.builtin.terminal.float_opts = {
 	border = "single",
 }
 
--- terminal's shell
 lvim.builtin.terminal.shell = "sh"
+-- }}}
 
--- +------------+
--- | treesitter |
--- +------------+
+-- treesitter {{{
 lvim.builtin.treesitter.ensure_installed = {
 	"bash",
 	"c",
@@ -144,15 +136,13 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+-- }}}
 
 -- +-----+
 -- | lsp |
 -- +-----+
--- set a formatter, this will override the language server formatting capabilities (if it exists)
 
--- +--------+
--- | clangd |
--- +--------+
+-- clangd {{{
 local capabilities = require("lvim.lsp").common_capabilities()
 capabilities.offsetEncoding = { "utf-16" }
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
@@ -178,7 +168,9 @@ local opts = {
 	cmd = { clangd_bin, unpack(clangd_flags) },
 }
 require("lvim.lsp.manager").setup("clangd", opts)
+-- }}}
 
+-- formatters {{{
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
 	{ exe = "markdownlint", filetypes = { "markdown" } },
@@ -197,8 +189,9 @@ formatters.setup({
 		filetypes = { "typescript", "typescriptreact", "css", "html" },
 	},
 })
+-- }}}
 
--- set additional linters
+-- linters {{{
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
 	{ exe = "write-good", filetypes = { "markdown", "txt" } },
@@ -215,8 +208,11 @@ linters.setup({
 		filetypes = { "javascript", "python" },
 	},
 })
+-- }}}
 
--- Additional Plugins
+-- +--------------------+
+-- | additional plugins |
+-- +--------------------+
 lvim.plugins = {
 	{
 		"zbirenbaum/copilot.lua",
@@ -236,7 +232,6 @@ lvim.plugins = {
 	},
 	{ "martinsione/darkplus.nvim" },
 	{ "moll/vim-bbye" },
-	{ "Mofiqul/vscode.nvim" },
 	{
 		"folke/trouble.nvim",
 		config = function()
@@ -367,19 +362,27 @@ lvim.plugins = {
 	},
 }
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- +--------------------------------------------------------+
+-- | autocommands (https://neovim.io/doc/user/autocmd.html) |
+-- +--------------------------------------------------------+
+
+-- general {{{
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = ':silent exec "!kill -s SIGWINCH $PPID"' })
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
+-- }}}
 
--- suckless
+-- suckless {{{
 vim.api.nvim_create_autocmd("VimEnter", {
 	pattern = { "*.h" },
 	callback = function()
 		require("lvim.core.autocmds").disable_format_on_save()
 	end,
 })
+-- }}}
 
--- CP
+-- +----+
+-- | cp |
+-- +----+
 vim.cmd([[source $HOME/.config/lvim/cp.vim]])
