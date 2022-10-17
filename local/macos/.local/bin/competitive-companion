@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd ~/competitive_programming/cc || terminal-notifier -title "Competitive Companion" -message "competitive-programming directory not found!"
-npm start
-
-
