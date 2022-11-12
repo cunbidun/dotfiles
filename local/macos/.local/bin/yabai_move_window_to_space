@@ -22,4 +22,5 @@ display=$(yabai -m query --spaces --space | jq .display)
 compute_space=$(((display - 1) * max_space + space))
 
 echo "Switching to space $compute_space"
-yabai -m space --focus $compute_space
+
+yabai -m window --space $compute_space

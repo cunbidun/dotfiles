@@ -2,6 +2,7 @@
 -- | general |
 -- +---------+
 vim.opt.relativenumber = true
+vim.opt.sidescrolloff = 2
 lvim.log.level = "warn"
 lvim.format_on_save = true
 
@@ -9,6 +10,8 @@ lvim.format_on_save = true
 -- | theme |
 -- +-------+
 lvim.colorscheme = "darkplus"
+-- lvim.colorscheme = "solarized"
+-- lvim.colorscheme = "github_light"
 
 -- +------------------------------------------------------------+
 -- | keymappings [view all the defaults by pressing <leader>Lk] |
@@ -19,6 +22,7 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["<S-x>"] = ":BufferKill<CR>"
+lvim.keys.normal_mode["<C-t>"] = ":ToggleTerm<CR>"
 -- }}}
 
 -- unmap a default keymapping {{{
@@ -35,6 +39,54 @@ lvim.keys.normal_mode["<C-M-l>"] = "<cmd>lua vim.lsp.buf.formatting()<CR>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet. {{{
+
+-- override default theme and show_previewer options
+local function get_pickers(actions)
+	return {
+		find_files = {
+			hidden = true,
+		},
+		live_grep = {
+			--@usage don't include the filename in the search results
+			only_sort_text = true,
+		},
+		grep_string = {
+			only_sort_text = true,
+		},
+		buffers = {
+			initial_mode = "normal",
+			mappings = {
+				i = {
+					["<C-d>"] = actions.delete_buffer,
+				},
+				n = {
+					["dd"] = actions.delete_buffer,
+				},
+			},
+		},
+		planets = {
+			show_pluto = true,
+			show_moon = true,
+		},
+		git_files = {
+			hidden = true,
+			show_untracked = true,
+		},
+		lsp_references = {
+			initial_mode = "normal",
+		},
+		lsp_definitions = {
+			initial_mode = "normal",
+		},
+		lsp_declarations = {
+			initial_mode = "normal",
+		},
+		lsp_implementations = {
+			initial_mode = "normal",
+		},
+	}
+end
+
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
 	-- for input mode
@@ -55,7 +107,8 @@ lvim.builtin.telescope.defaults.mappings = {
 -- Use which-key to add extra bindings with the leader-key prefix {{{
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects <<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = { "<cmd>Telescope live_grep <CR>", "Live Grep" }
-lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files <CR>", "File File" }
+lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope git_files <CR>", "Git File" }
+lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope file_files <CR>", "File File" }
 
 lvim.builtin.which_key.mappings["c"] = {
 	name = "Competitive Programming",
@@ -71,13 +124,13 @@ lvim.builtin.which_key.mappings["c"] = {
 -- +---------------+
 -- | plugin config |
 -- +---------------+
-lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.bufferline.options.close_command = "Bdelete! %d"
 
 -- telescope{{{
 lvim.builtin.telescope.defaults.layout_config.width = 0.9
 lvim.builtin.telescope.defaults.path_display = { shorten = 20 }
+lvim.builtin.telescope.pickers = get_pickers(actions)
 -- }}}
 
 -- vsnip {{{
@@ -95,7 +148,7 @@ lvim.builtin.terminal.size = function(term)
 	if term.direction == "horizontal" then
 		return 15
 	elseif term.direction == "vertical" then
-		return math.max(vim.o.columns - 160, 35)
+		return math.min(120, math.max(vim.o.columns - 130, 35))
 	else
 		return 20
 	end
@@ -214,6 +267,8 @@ linters.setup({
 -- | additional plugins |
 -- +--------------------+
 lvim.plugins = {
+	{ "projekt0n/github-nvim-theme" },
+	{ "shaunsingh/solarized.nvim" },
 	{
 		"zbirenbaum/copilot.lua",
 		event = { "VimEnter" },
