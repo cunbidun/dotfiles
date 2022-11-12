@@ -71,7 +71,6 @@ lvim.builtin.which_key.mappings["c"] = {
 -- +---------------+
 -- | plugin config |
 -- +---------------+
-lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.bufferline.options.close_command = "Bdelete! %d"
 
