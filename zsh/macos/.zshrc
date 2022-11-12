@@ -19,6 +19,7 @@ export BAT_THEME="Nord"
 export BAT_OPTS="--color always"
 
 source $HOME/.zshenv
+export TERMINAL='iterm2'
 
 # set words split for zsh
 # why? for git integration to work correctly
@@ -48,31 +49,21 @@ plugins=(git zsh-syntax-highlighting docker docker-compose)
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zshcommon
 
-# load common alias after loading oh-my-zsh
-source $HOME/.config/alacritty/changer_autocompletion # theme changer autocompletion
-
 alias cdnote="cd '/Users/cunbidun/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-# test -r $HOME/.dir_colors && eval $(gdircolors $HOME/.dir_colors)
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/cunbidun/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/cunbidun/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/cunbidun/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/cunbidun/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/cunbidun/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/cunbidun/opt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/cunbidun/opt/anaconda3/bin:$PATH"
+        export PATH="/Users/cunbidun/opt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
