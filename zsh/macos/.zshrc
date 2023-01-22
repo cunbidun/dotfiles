@@ -44,7 +44,8 @@ export UPDATE_ZSH_DAYS=3
 # history timestamp
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(git zsh-syntax-highlighting docker docker-compose)
+# plugins=(git zsh-syntax-highlighting docker docker-compose)
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zshcommon
