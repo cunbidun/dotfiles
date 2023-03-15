@@ -44,8 +44,8 @@ static const float mfact                 = 0.5; /* factor of master area size [0
 static const int nmaster                 = 1;   /* number of clients in master area */
 static const int resizehints             = 0;   /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen          = 1;   /* 1 will force focus on the fullscreen window */
-static const char *fonts[]               = {"Source Code Pro:size=11"};
-static const char dmenufont[]            = "Source Code Pro:size=11";
+static const char *fonts[]               = {"Source Code Pro:size=10"};
+static const char dmenufont[]            = "Source Code Pro:size=10";
 
 /* Color schemes */
 enum { SchemeNorm, SchemeRed, SchemeGreen, SchemeYellow, SchemeBlue, SchemeSel, SchemeUrg, SchemeSym };
