@@ -5,8 +5,8 @@ env:
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
-  WINIT_X11_SCALE_FACTOR: "1.5"
+  TERM: alacritty
+  # WINIT_X11_SCALE_FACTOR: "1.5"
 
 #+begin_theme
 # Copyright (c) 2017-present Arctic Ice Studio <development@arcticicestudio.com> 
@@ -71,7 +71,7 @@ colors:
 
 # Font configuration (changes require restart)
 font:
-  size: 7
+  size: 10 
   normal:
     family: SauceCodePro Nerd Font Mono
 
