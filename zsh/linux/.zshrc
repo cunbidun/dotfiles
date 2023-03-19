@@ -8,6 +8,7 @@ export BAT_STYLE="plain"
 export BAT_THEME="Nord"
 export BAT_OPTS="--color always"
 export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
+export TERMINAL=alacritty
 
 source $HOME/.zshenv
 
