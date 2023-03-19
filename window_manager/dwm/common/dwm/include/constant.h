@@ -7,6 +7,8 @@
 #define TERMINAL "alacritty"
 #define TERMCLASS "Alacritty"
 #define EDITOR "lvim"
+#define SESSION_FILE "/tmp/dwm-session"
+
 
 /**
  * Keys 
