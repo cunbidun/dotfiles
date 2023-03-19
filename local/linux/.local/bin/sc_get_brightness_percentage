@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $(uname -r) == *asahi* ]]; then
+	BASE_PATH="/sys/class/backlight/apple-panel-bl/"
+fi
+
+current_brightness=$(cat "$BASE_PATH/brightness")
+mx_brightness=$(cat "$BASE_PATH/max_brightness")
+percent=$((current_brightness * 100 / mx_brightness))
+echo $percent

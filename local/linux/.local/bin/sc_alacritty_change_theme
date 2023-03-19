@@ -23,6 +23,7 @@ change_theme() {
 		echo "err: file not found!"
 		exit 1
 	fi
+	notify-send -t 3000 "alacrity theme" "changing theme to $theme"
 	sed -e "/#+begin_theme/,/#+end_theme/c\#+begin_theme\n$(sed -e 's/$/ \\/' $THEME_DIR/$theme) \n#+end_theme" $BASE_DIR/alacritty.yml -i
 }
 

@@ -325,5 +325,5 @@ sudo systemctl start cronie.service
 3. `crontab jobs` for user jobs
 4. check the command in `root_jobs` to make sure the `user` and `user_id` are correct.
 5. check `$HOME/.local/bin/sc_pacman_sync`
-to make sure the `user` and `user_id` are correct.
+to make sure the `user` and `user_id` are correct. To check user id: `id -u $USER`
 6. `sudo crontab root_jobs` for root jobs

@@ -10,5 +10,5 @@ path=$(grep -v "^\#" $dotfiles | grep . | dmenu -i -l 10 -p "select dotfile: ")
 
 if [ -n "$path" ]; then
 	notify-send -t 3000 "dotfiles picker" "editing $path"
-	"$TERMINAL" -e "$EDITOR" "$path"
+  "$TERMINAL" -e "$EDITOR" "$path"
 fi
