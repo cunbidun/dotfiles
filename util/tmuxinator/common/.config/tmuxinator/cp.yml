@@ -1,0 +1,9 @@
+name: cp
+root: ~/competitive_programming/
+
+windows:
+  - editor:
+    - vi
+  - cc:  
+    - cpcli_cc --project-config project_config.json -o
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+dotfiles_path=(
+	"$HOME/.tmux.conf"
+	"$HOME/.config/lvim/config.lua"
+	"$HOME/.local/bin/tmux_edit_dotfiles"
+)
+
+selected=$(printf '%s\n' "${dotfiles_path[@]}" | fzf)
+tmux neww -n "Editing $selected" "$EDITOR $selected"
