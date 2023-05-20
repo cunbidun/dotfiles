@@ -1,24 +1,12 @@
 export ZSH="$HOME/.oh-my-zsh"
 export TERM="xterm-256color"
 
-# nord color FZF 
-# export FZF_DEFAULT_OPTS="
-#   --color fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C,pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
-#   --preview-window sharp
-# "
-
-# tokyo night color
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' 
-# 	--color=fg:#c0caf5,hl:#bb9af7
-# 	--color=fg+:#c0caf5,hl+:#7dcfff
-# 	--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff 
-# 	--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a'
-
 export BAT_STYLE="plain"
 export BAT_THEME="Nord"
 export BAT_OPTS="--color always"
 
 source $HOME/.zshenv
+export PATH=$PATH:$HOME/.local/share/flutter/bin
 export TERMINAL='iterm2'
 
 # set words split for zsh
