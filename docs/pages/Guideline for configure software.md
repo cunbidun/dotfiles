@@ -1,0 +1,24 @@
+- ## Goals for configurations
+	- Performance, highest priority. Software should be fast and responsive. If the configurations is resource-intensive, drop it.
+	- Flexibility. In many scenarios, accessibility to software is limited.
+	- Simplicity.
+	- Aesthetic.
+- ## Configuration guideline
+	- Stick to default setting. Something for configure should include:
+		- Fonts
+		- Themes
+	- Avoid using symbols in configurations. Configuration should contain plain text.
+- ## Softwares list
+	- ### Shell
+		- bash
+		- zsh
+	- ### Text Editor
+		- vim
+		- vscode
+		- neovim
+	- ### Browser
+		- google chrome
+		- firefox
+	- ### Utility
+		- tmux
+		- tmuxinator
