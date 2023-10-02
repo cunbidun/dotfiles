@@ -64,6 +64,9 @@ linters.setup({
 -- | additional plugins |
 -- +--------------------+
 lvim.plugins = {
+	{ "projekt0n/github-nvim-theme" },
+	{ "shaunsingh/nord.nvim" },
+	{ "Mofiqul/vscode.nvim" },
 	{ "martinsione/darkplus.nvim" },
 	{ "moll/vim-bbye" },
 	{ "tpope/vim-surround" },
