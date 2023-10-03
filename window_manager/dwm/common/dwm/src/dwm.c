@@ -3,6 +3,7 @@
 #include "config.h"
 #include "constant.h"
 #include "key.h"
+#include "log.h"
 #include "util.h"
 
 /* appearance default values */
@@ -32,9 +33,9 @@ int statussig;
 int statusw;
 pid_t statuspid = -1;
 int screen;
-int sw, sh;      /* X display screen geometry width, height */
+int sw, sh; /* X display screen geometry width, height */
 int bh = 0; /* bar geometry */
-int lrpad;       /* sum of left and right padding for text */
+int lrpad;  /* sum of left and right padding for text */
 int (*xerrorxlib)(Display *, XErrorEvent *);
 unsigned int numlockmask             = 0;
 void (*handler[LASTEvent])(XEvent *) = {[ButtonPress]      = buttonpress,
@@ -90,6 +91,7 @@ void applyrules(Client *c) {
   for (i = 0; i < LENGTH(rules); i++) {
     r = &rules[i];
     if ((!r->title || strstr(c->name, r->title)) && (!r->class || strstr(class, r->class)) && (!r->role || strstr(role, r->role)) &&
+
         (!r->instance || strstr(instance, r->instance))) {
       c->isterminal = r->isterminal;
       c->noswallow  = r->noswallow;
@@ -198,6 +200,7 @@ void arrangemon(Monitor *m) {
 void attach(Client *c) {
   c->next         = c->mon->clients;
   c->mon->clients = c;
+  log_info("[In attach] attaching client '%s'", c->name);
 }
 
 void attachbottom(Client *c) {
@@ -206,11 +209,13 @@ void attachbottom(Client *c) {
   for (tc = &c->mon->clients; *tc; tc = &(*tc)->next)
     ;
   *tc = c;
+  log_info("[In attachbottom] attaching client '%s'", c->name);
 }
 
 void attachstack(Client *c) {
   c->snext      = c->mon->stack;
   c->mon->stack = c;
+  log_info("[In attachstack] attaching client '%s'", c->name);
 }
 
 void buttonpress(XEvent *e) {
@@ -445,7 +450,6 @@ void configurenotify(XEvent *e) {
   Client *c;
   XConfigureEvent *ev = &e->xconfigure;
   int dirty;
-
   /* TODO: updategeom handling sucks, needs to be simplified */
   if (ev->window == root) {
     dirty = (sw != ev->width || sh != ev->height);
@@ -1037,26 +1041,23 @@ void grabbuttons(Client *c, int focused) {
 void grabkeys(void) {
   updatenumlockmask();
   {
-		unsigned int i, j, k;
-		unsigned int modifiers[] = { 0, LockMask, numlockmask, numlockmask|LockMask };
-		int start, end, skip;
-		KeySym *syms;
+    unsigned int i, j, k;
+    unsigned int modifiers[] = {0, LockMask, numlockmask, numlockmask | LockMask};
+    int start, end, skip;
+    KeySym *syms;
 
-		XUngrabKey(dpy, AnyKey, AnyModifier, root);
-		XDisplayKeycodes(dpy, &start, &end);
-		syms = XGetKeyboardMapping(dpy, start, end - start + 1, &skip);
-		if (!syms)
-			return;
-		for (k = start; k <= end; k++)
-			for (i = 0; i < LENGTH(keys); i++)
-				/* skip modifier codes, we do that ourselves */
-				if (keys[i].keysym == syms[(k - start) * skip])
-					for (j = 0; j < LENGTH(modifiers); j++)
-						XGrabKey(dpy, k,
-							 keys[i].mod | modifiers[j],
-							 root, True,
-							 GrabModeAsync, GrabModeAsync);
-		XFree(syms);
+    XUngrabKey(dpy, AnyKey, AnyModifier, root);
+    XDisplayKeycodes(dpy, &start, &end);
+    syms = XGetKeyboardMapping(dpy, start, end - start + 1, &skip);
+    if (!syms)
+      return;
+    for (k = start; k <= end; k++)
+      for (i = 0; i < LENGTH(keys); i++)
+        /* skip modifier codes, we do that ourselves */
+        if (keys[i].keysym == syms[(k - start) * skip])
+          for (j = 0; j < LENGTH(modifiers); j++)
+            XGrabKey(dpy, k, keys[i].mod | modifiers[j], root, True, GrabModeAsync, GrabModeAsync);
+    XFree(syms);
   }
 }
 
@@ -1079,8 +1080,10 @@ void keypress(XEvent *e) {
   KeySym keysym;
   XKeyEvent *ev;
 
+  log_info("[In keypress] Got keypress event");
   ev     = &e->xkey;
   keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
+  log_info("[In keypress] Got key code = %ld", keysym);
   for (i = 0; i < LENGTH(keys); i++)
     if (keysym == keys[i].keysym && CLEANMASK(keys[i].mod) == CLEANMASK(ev->state) && keys[i].func)
       keys[i].func(&(keys[i].arg));
@@ -1105,6 +1108,7 @@ void manage(Window w, XWindowAttributes *wa) {
   Window trans = None;
   XWindowChanges wc;
   int focusclient = 1;
+  log_info("[In manage] got request to manage windwow %ld", w); 
 
   c      = ecalloc(1, sizeof(Client));
   c->win = w;
@@ -1127,11 +1131,11 @@ void manage(Window w, XWindowAttributes *wa) {
     term = termforwin(c);
   }
   if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
-		c->x = c->mon->wx + c->mon->ww - WIDTH(c);
-	if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh)
-		c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
-	c->x = MAX(c->x, c->mon->wx);
- 	c->y = MAX(c->y, c->mon->wy);
+    c->x = c->mon->wx + c->mon->ww - WIDTH(c);
+  if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh)
+    c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
+  c->x  = MAX(c->x, c->mon->wx);
+  c->y  = MAX(c->y, c->mon->wy);
   c->bw = borderpx;
 
   wc.border_width = c->bw;
@@ -1418,65 +1422,59 @@ void propertynotify(XEvent *e) {
   }
 }
 
-void
-saveSession(void)
-{
-	FILE *fw = fopen(SESSION_FILE, "w");
-	for (Client *c = selmon->clients; c != NULL; c = c->next) { // get all the clients with their tags and write them to the file
-		fprintf(fw, "%lu %u\n", c->win, c->tags);
-	}
-	fclose(fw);
+void saveSession(void) {
+  FILE *fw = fopen(SESSION_FILE, "w");
+  for (Client *c = selmon->clients; c != NULL; c = c->next) { // get all the clients with their tags and write them to the file
+    fprintf(fw, "%lu %u\n", c->win, c->tags);
+  }
+  fclose(fw);
 }
 
-void
-restoreSession(void)
-{
-	// restore session
-	FILE *fr = fopen(SESSION_FILE, "r");
-	if (!fr)
-		return;
+void restoreSession(void) {
+  // restore session
+  FILE *fr = fopen(SESSION_FILE, "r");
+  if (!fr)
+    return;
 
-	char *str = malloc(23 * sizeof(char)); // allocate enough space for excepted input from text file
-	while (fscanf(fr, "%[^\n] ", str) != EOF) { // read file till the end
-		long unsigned int winId;
-		unsigned int tagsForWin;
-		int check = sscanf(str, "%lu %u", &winId, &tagsForWin); // get data
-		if (check != 2) // break loop if data wasn't read correctly
-			break;
-		
-		for (Client *c = selmon->clients; c ; c = c->next) { // add tags to every window by winId
-			if (c->win == winId) {
-				c->tags = tagsForWin;
-				break;
-			}
-		}
+  char *str = malloc(23 * sizeof(char));      // allocate enough space for excepted input from text file
+  while (fscanf(fr, "%[^\n] ", str) != EOF) { // read file till the end
+    long unsigned int winId;
+    unsigned int tagsForWin;
+    int check = sscanf(str, "%lu %u", &winId, &tagsForWin); // get data
+    if (check != 2)                                         // break loop if data wasn't read correctly
+      break;
+
+    for (Client *c = selmon->clients; c; c = c->next) { // add tags to every window by winId
+      if (c->win == winId) {
+        c->tags = tagsForWin;
+        break;
+      }
     }
+  }
 
-	for (Client *c = selmon->clients; c ; c = c->next) { // refocus on windows
-		focus(c);
-		restack(c->mon);
-	}
+  for (Client *c = selmon->clients; c; c = c->next) { // refocus on windows
+    focus(c);
+    restack(c->mon);
+  }
 
-	for (Monitor *m = selmon; m; m = m->next) // rearrange all monitors
-		arrange(m);
+  for (Monitor *m = selmon; m; m = m->next) // rearrange all monitors
+    arrange(m);
 
-	free(str);
-	fclose(fr);
-	
-	// delete a file
-	// remove(SESSION_FILE);
+  free(str);
+  fclose(fr);
+
+  // delete a file
+  // remove(SESSION_FILE);
 }
 
+void quit(const Arg *arg) {
+  if (arg->i)
+    restart = 1;
+  running = 0;
 
-void quit(const Arg *arg)
- {
- 	if(arg->i) restart = 1;
- 	running = 0;
-
-	if (restart == 1)
-		saveSession();
- }
- 
+  if (restart == 1)
+    saveSession();
+}
 
 Monitor *recttomon(int x, int y, int w, int h) {
   Monitor *m, *r = selmon;
@@ -1671,9 +1669,11 @@ void run(void) {
   XEvent ev;
   /* main event loop */
   XSync(dpy, False);
-  while (running && !XNextEvent(dpy, &ev))
-    if (handler[ev.type])
+  while (running && !XNextEvent(dpy, &ev)) {
+    if (handler[ev.type]) {
       handler[ev.type](&ev); /* call handler */
+    }
+  }
 }
 
 void runautostart(void) {
@@ -1913,14 +1913,15 @@ void setup(void) {
   Atom utf8string;
   struct sigaction sa;
 
-	/* do not transform children into zombies when they terminate */
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_NOCLDSTOP | SA_NOCLDWAIT | SA_RESTART;
-	sa.sa_handler = SIG_IGN;
-	sigaction(SIGCHLD, &sa, NULL);
+  /* do not transform children into zombies when they terminate */
+  sigemptyset(&sa.sa_mask);
+  sa.sa_flags   = SA_NOCLDSTOP | SA_NOCLDWAIT | SA_RESTART;
+  sa.sa_handler = SIG_IGN;
+  sigaction(SIGCHLD, &sa, NULL);
 
-	/* clean up any zombies (inherited from .xinitrc etc) immediately */
-	while (waitpid(-1, NULL, WNOHANG) > 0);
+  /* clean up any zombies (inherited from .xinitrc etc) immediately */
+  while (waitpid(-1, NULL, WNOHANG) > 0)
+    ;
 
   /* init screen */
   screen = DefaultScreen(dpy);
@@ -2342,7 +2343,7 @@ void updateclientlist() {
 void updatecurrentdesktop(void) {
   long rawdata[] = {selmon->tagset[selmon->seltags]};
   int i          = 0;
-  while (*rawdata >> i + 1) {
+  while (*rawdata >> (i + 1)) {
     i++;
   }
   long data[] = {i};
@@ -2953,8 +2954,11 @@ void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, i
   *sr = ssize - stotal; // the remainder (rest) of pixels after a cfacts stack split
 }
 
-
 int main(int argc, char *argv[]) {
+  FILE *log_file;
+  log_file = fopen("/tmp/dwm-log", "w+");
+  log_add_fp(log_file, 0);
+  log_info("Starting dwm");
   if (argc == 2 && !strcmp("-v", argv[1]))
     die("dwm-" VERSION);
   else if (argc != 1)
@@ -2970,10 +2974,13 @@ int main(int argc, char *argv[]) {
   load_xresources();
   setup();
   scan();
-	restoreSession();
+  restoreSession();
   runautostart();
   run();
   cleanup();
   XCloseDisplay(dpy);
+
+  // Close the log file
+  fclose(log_file);
   return EXIT_SUCCESS;
 }

@@ -59,4 +59,9 @@ $HOME/dotfiles/docs/installation_note.md
 # cp stuff
 $HOME/competitive_programming/topcoder.md
 
+# hyprland
+$HOME/.config/hypr/hyprland.conf
+$HOME/.config/hypr/hyprpaper.conf
+$HOME/.config/hypr/README.md
+
 
