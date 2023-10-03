@@ -5,4 +5,4 @@ export PATH=$PATH:$HOME/.cargo/bin
 
 
 [ -d "/snap/bin" ] && export PATH=$PATH:/snap/bin
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
