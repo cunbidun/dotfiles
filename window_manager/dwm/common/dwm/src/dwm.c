@@ -219,6 +219,7 @@ void attachstack(Client *c) {
 }
 
 void buttonpress(XEvent *e) {
+  log_info("[In buttonpress handler] got even num '%d' with button '%s", e->type, e->xbutton);
   unsigned int i, x, click, occ = 0;
   Arg arg = {0};
   Client *c;
@@ -467,6 +468,8 @@ void configurenotify(XEvent *e) {
       focus(NULL);
       arrange(NULL);
     }
+  } else {
+    log_info("[In configurenotify] got even num '%d' for none root window. Do nothing", e->type);
   }
 }
 
@@ -1108,7 +1111,7 @@ void manage(Window w, XWindowAttributes *wa) {
   Window trans = None;
   XWindowChanges wc;
   int focusclient = 1;
-  log_info("[In manage] got request to manage windwow %ld", w); 
+  log_info("[In manage] got request to manage windwow %ld", w);
 
   c      = ecalloc(1, sizeof(Client));
   c->win = w;
@@ -1380,6 +1383,9 @@ void propertynotify(XEvent *e) {
   Client *c;
   Window trans;
   XPropertyEvent *ev = &e->xproperty;
+  if (ev->window != root) {
+    log_info("[In propertynotifyhandler] got even num=%d for window=%d", e->type, ev->window, ev->window);
+  }
 
   if ((c = wintosystrayicon(ev->window))) {
     if (ev->atom == XA_WM_NORMAL_HINTS) {
@@ -1395,30 +1401,36 @@ void propertynotify(XEvent *e) {
   else if (ev->state == PropertyDelete)
     return; /* ignore */
   else if ((c = wintoclient(ev->window))) {
+    log_info("[In propertynotifyhandler] got even num=%d client name='%s'", e->type, c->name);
     switch (ev->atom) {
     default:
+      log_info("[In propertynotifyhandler] atom DEFAULT for client name='%s'", c->name);
       break;
     case XA_WM_TRANSIENT_FOR:
+      log_info("[In propertynotifyhandler] atom XA_WM_TRANSIENT_FOR for client name='%s'", c->name);
       if (!c->isfloating && (XGetTransientForHint(dpy, c->win, &trans)) && (c->isfloating = (wintoclient(trans)) != NULL))
         arrange(c->mon);
       break;
     case XA_WM_NORMAL_HINTS:
+      log_info("[In propertynotifyhandler] atom XA_WM_NORMAL_HINTS for client name='%s'", c->name);
       c->hintsvalid = 0;
       break;
     case XA_WM_HINTS:
+      log_info("[In propertynotifyhandler] atom XA_WM_HINTS for client name='%s'", c->name);
       updatewmhints(c);
       drawbars();
       break;
     }
     if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
+      log_info("[In propertynotifyhandler] atom XA_WM_NAME or NetWMName for client name='%s'", c->name);
       updatetitle(c);
-      applyrules(c);
-      arrange(c->mon);
       if (c == c->mon->sel)
         drawbar(c->mon);
     }
-    if (ev->atom == netatom[NetWMWindowType])
+    if (ev->atom == netatom[NetWMWindowType]) {
+      log_info("[In propertynotifyhandler] atom NetWMWindowType for client name='%s'", c->name);
       updatewindowtype(c);
+    }
   }
 }
 
@@ -2060,12 +2072,19 @@ void sigstatusbar(const Arg *arg) {
 }
 
 void spawn(const Arg *arg) {
+  struct sigaction sa;
+
   if (arg->v == dmenucmd)
     dmenumon[0] = '0' + selmon->num;
   if (fork() == 0) {
     if (dpy)
       close(ConnectionNumber(dpy));
     setsid();
+
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags   = 0;
+    sa.sa_handler = SIG_DFL;
+    sigaction(SIGCHLD, &sa, NULL);
     execvp(((char **)arg->v)[0], (char **)arg->v);
     die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
   }
@@ -2351,6 +2370,7 @@ void updatecurrentdesktop(void) {
 }
 
 int updategeom(void) {
+  log_info("[In updategeom] called");
   int dirty = 0;
 
 #ifdef XINERAMA
