@@ -81,7 +81,7 @@ window:
     #     y: 2
     dynamic_padding: true
     decorations: none
-    opacity: 0.95
+    opacity: 0.90
 
 live_config_reload: true 
 

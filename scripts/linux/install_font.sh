@@ -6,3 +6,4 @@ yay -S adobe-base-14-fonts
 yay -S nerd-fonts-complete
 yay -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 yay -S all-repository-fonts
+yay -S nerd-fonts

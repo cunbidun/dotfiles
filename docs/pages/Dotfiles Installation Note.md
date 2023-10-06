@@ -293,3 +293,11 @@ sudo systemctl start cronie.service
 5. check `$HOME/.local/bin/sc_pacman_sync`
 to make sure the `user` and `user_id` are correct. To check user id: `id -u $USER`
 6. `sudo crontab root_jobs` for root jobs
+
+---
+### Slow GTK applications
+The problem is fixed by forcefully removing xdg-desktop-portal xdg-desktop-portal-gtk
+The packages got installed as dependency for Gcolor3.
+
+sudo pacman -Rndd xdg-desktop-portal xdg-desktop-portal-gtk
+

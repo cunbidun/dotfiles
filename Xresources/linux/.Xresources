@@ -64,4 +64,4 @@ dwm.borderpx: 2
 dwm.scheme_sym_bg: nord4
 dwm.scheme_sym_fg: nord0
 
-Xft.dpi: 150 
+Xft.dpi: 100

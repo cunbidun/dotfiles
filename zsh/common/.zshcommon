@@ -15,7 +15,7 @@ alias tree="tree -a"
 alias cdnote="cd $HOME/note"
 alias s="source $HOME/.zshrc"
 alias CP="$HOME/competitive_programming/"
-# alias r="ranger"
+alias r="ranger"
 alias ls="exa -la"
 alias cat="bat"
 

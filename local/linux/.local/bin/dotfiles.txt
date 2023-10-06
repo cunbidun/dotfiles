@@ -25,6 +25,8 @@ $HOME/.local/bin/dotfiles_picker
 $HOME/.local/bin/sc_alacritty_change_theme
 $HOME/.local/bin/sc_open_man_page_dmenu
 $HOME/.local/bin/sc_connect_sony_speaker
+$HOME/.local/bin/get_volume
+$HOME/.local/bin/sc_get_brightness_percentage
 
 # dwm
 $HOME/dwm/include/config.h
@@ -32,6 +34,7 @@ $HOME/dwm/src/dwm.c
 $HOME/dwmblocks-async/config.h
 $HOME/tabbed/config.h
 $HOME/tabbed/tabbed.c
+$HOME/.dwm/autostart.sh
 
 $HOME/dmenu/
 # dmenu
@@ -53,8 +56,8 @@ $HOME/cron/jobs
 $HOME/cron/root_jobs
 
 # general TODO and note 
-$HOME/dotfiles/docs/TODO.md
-$HOME/dotfiles/docs/installation_note.md
+$HOME/dotfiles/docs/pages/TODO.md
+$HOME/dotfiles/docs/pages/Dotfiles Installation Note.md
 
 # cp stuff
 $HOME/competitive_programming/topcoder.md
