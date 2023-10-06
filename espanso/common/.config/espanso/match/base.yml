@@ -63,71 +63,71 @@ matches:
   # ############
   # # Vi
   # ############
-  # - trigger: ":address"
-  #   replace: "215 W Washington St, Chicago"
-
-  # - trigger: ":zip"
-  #   replace: "60606"
-
-  # - trigger: ":uni"
-  #   replace: "University of Massachusetts at Amherst"
-
-
-  # - trigger: ":wf"
-  #   replace: "Wayfair LLC"
-
-  # - trigger: ":title"
-  #   replace: "Data Engineer Co-op, Competitive Intelligence"
-
-  # - trigger: ":phone"
-  #   replace: "+1 857 867 9242"
-
-  # - trigger: ":email"
-  #   replace: "tuongvimai6868@gmail.com"
-
-  # - trigger: ":github"
-  #   replace: "https://github.com/maituongvii"
-
-  # - trigger: ":linkedin"
-  #   replace: "https://www.linkedin.com/in/vimaituong/"
-
-  # - trigger: ":major"
-  #   replace: "Math and Statistics"
-
-  # - trigger: ":grad"
-  #   replace: "December 2024"
-
-  ############
-  # Bi 
-  ############
   - trigger: ":address"
-    replace: "A Flint Village North Campus"
+    replace: "215 W Washington St, Chicago"
 
   - trigger: ":zip"
-    replace: "14260"
+    replace: "60606"
 
   - trigger: ":uni"
-    replace: "University at Buffalo - SUNY"
+    replace: "University of Massachusetts at Amherst"
+
+
+  - trigger: ":wf"
+    replace: "Wayfair LLC"
+
+  - trigger: ":title"
+    replace: "Data Engineer Co-op, Competitive Intelligence"
 
   - trigger: ":phone"
-    replace: "+1 857 376 9051"
+    replace: "+1 857 867 9242"
 
   - trigger: ":email"
-    replace: "tuanquan@buffalo.edu"
+    replace: "tuongvimai6868@gmail.com"
+
+  - trigger: ":github"
+    replace: "https://github.com/maituongvii"
 
   - trigger: ":linkedin"
-    replace: "https://www.linkedin.com/in/tuan-quang-pham/"
+    replace: "https://www.linkedin.com/in/vimaituong/"
+
+  - trigger: ":major"
+    replace: "Math and Statistics"
 
   - trigger: ":grad"
     replace: "December 2024"
 
-  - trigger: ":fn"
-    replace: "Tuan Quang"
+  ############
+  # Bi 
+  ############
+  # - trigger: ":address"
+  #   replace: "A Flint Village North Campus"
 
-  - trigger: ":ln"
-    replace: "Pham"
+  # - trigger: ":zip"
+  #   replace: "14260"
 
-  - trigger: ":title"
-    replace: "Technical Assistance"
+  # - trigger: ":uni"
+  #   replace: "University at Buffalo - SUNY"
+
+  # - trigger: ":phone"
+  #   replace: "+1 857 376 9051"
+
+  # - trigger: ":email"
+  #   replace: "tuanquan@buffalo.edu"
+
+  # - trigger: ":linkedin"
+  #   replace: "https://www.linkedin.com/in/tuan-quang-pham/"
+
+  # - trigger: ":grad"
+  #   replace: "December 2024"
+
+  # - trigger: ":fn"
+  #   replace: "Tuan Quang"
+
+  # - trigger: ":ln"
+  #   replace: "Pham"
+
+  # - trigger: ":title"
+  #   replace: "Technical Assistance"
 
 

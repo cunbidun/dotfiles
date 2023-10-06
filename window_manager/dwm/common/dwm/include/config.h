@@ -5,7 +5,7 @@
 #include "layout.h"
 
 /* tagging */
-static const char *tags[] = {"sys", "dev", "web", "cp", "5", "6", "7", "chat", "vi"};
+static const char *tags[] = {"sys", "dev", "web", "cp", "note", "vi", "7", "chat", "9"};
 
 static const Rule rules[] = {
 	/* xprop(1):

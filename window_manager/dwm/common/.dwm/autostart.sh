@@ -11,5 +11,6 @@ killall dwmblocks
 dwmblocks &
 killall dunst
 dunst &
+[[ $(pgrep 1password) ]] || 1password --silent &
 # cd ~/competitive_programming/cpcli/cc && npm start -- config=$HOME/competitive_programming/project_config.json &
-# picom --experimental-backend &
+killall picom; sleep 0.1; picom &

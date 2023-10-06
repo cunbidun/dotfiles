@@ -1,0 +1,4 @@
+#!/bin/bash
+
+brightness=$(sc_get_brightness_percentage)
+echo "^c#81A1C1^BRT: ^d^$brightness%^d^"
