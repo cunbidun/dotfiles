@@ -81,7 +81,10 @@ window:
     #     y: 2
     dynamic_padding: true
     decorations: none
-    opacity: 0.90
+    opacity: 0.85
 
 live_config_reload: true 
 
+# key_bindings:
+#   - { key: V, mods: Alt, action: Paste }
+#   - { key: C, mods: Alt, action: Copy }

@@ -23,7 +23,7 @@ cd
 yay -S neofetch --needed # for fun :)
 yay -S exa --needed # ls replacement
 yay -S fzf --needed # for fzf
-yay -S xcursor-osx-elcap --needed # MacOS cursor theme
+yay -S xcursor-osx-elcap mcmojave-cursors --needed # MacOS cursor theme
 yay -S brave-bin --needed # browser
 yay -S neovim --needed # text editor
 yay -S tmux tmuxinator --needed # tmux
@@ -32,8 +32,10 @@ yay -S ranger --needed # TUI file explorer
 yay -S wget --needed
 yay -S obsidian --needed # note application
 yay -S cargo --needed # rust
-yay -S lxappearance papirus-folders-nordic # gtk themes
-yay -S bat # cat replacement
+yay -S lxappearance papirus-folders-nordic --needed # gtk themes
+yay -S bat --needed # cat replacement
+yay -S ncdu --needed # check disk usage 
+yay -S visual-studio-code-bin --needed
 
 
 yay -S shellcheck
@@ -43,3 +45,4 @@ yay -S spotify-launcher
 yay -S bazel
 yay -S google-chrome
 yay -S espanso
+

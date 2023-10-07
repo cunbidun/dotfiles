@@ -1,0 +1,4 @@
+stat: cannot statx '.cache/weatherreport': No such file or directory
+/home/cunbidun/.local/bin/sc_weather: line 23: (1696566579 - ) > (30 * 60): syntax error: operand expected (error token is ") > (30 * 60)")
+stat: cannot statx '.cache/weatherreport': No such file or directory
+/home/cunbidun/.local/bin/sc_weather: line 23: (1696566601 - ) > (30 * 60): syntax error: operand expected (error token is ") > (30 * 60)")
