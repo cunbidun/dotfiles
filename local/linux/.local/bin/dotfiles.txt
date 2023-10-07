@@ -26,7 +26,10 @@ $HOME/.local/bin/sc_alacritty_change_theme
 $HOME/.local/bin/sc_open_man_page_dmenu
 $HOME/.local/bin/sc_connect_sony_speaker
 $HOME/.local/bin/get_volume
+$HOME/.local/bin/increase_volume
+$HOME/.local/bin/decrease_volume
 $HOME/.local/bin/sc_get_brightness_percentage
+$HOME/.local/bin/sc_brightness_change
 
 # dwm
 $HOME/dwm/include/config.h
@@ -67,4 +70,6 @@ $HOME/.config/hypr/hyprland.conf
 $HOME/.config/hypr/hyprpaper.conf
 $HOME/.config/hypr/README.md
 
+# install script
 
+$HOME/dotfiles/scripts/linux/install_utils.sh

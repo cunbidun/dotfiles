@@ -19,3 +19,6 @@ yay -S ibus-daemon ibus-bamboo --needed # VNese keyboard
 yay -S picom-git --needed # compositor
 yay -S calcurse --needed # tui calendar
 yay -S xf86-input-wacom --needed # for wacom
+yay -S xremap-x11-bin --needed # remapping
+
+sudo chmod u+s /usr/bin/xremap # setuid 0 for this program

@@ -6,7 +6,6 @@
 #include "scratchpad.h"
 #include "command.h"
 
-
 static const Key keys[] = {
 	/* modifier                     key                               function                         argument */
 	{ MODKEY,                       XK_grave,                         togglescratch,                   {.v = scratchpadcmd } },
@@ -42,27 +41,26 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_m,                             spawn,                           SHCMD("sc_open_man_page_dmenu") },
 	{ MODKEY|ShiftMask,             XK_comma,                         tagmon,                          {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,                        tagmon,                          {.i = +1 } },
-	// { MODKEY|ShiftMask,             XK_q,                             quit,                            {1} },
 	{ MODKEY|ShiftMask,             XK_q,                             quit,                            {1} },
-	{ MODKEY|ShiftMask|ALTKEY,      XK_k,                             setcfact,                        {.f = +0.25} },
-	{ MODKEY|ShiftMask|ALTKEY,      XK_j,                             setcfact,                        {.f = -0.25} },
-	{ MODKEY|ShiftMask|ALTKEY,      XK_r,                             setcfact,                        {.f =  0.00} },
-	{ MODKEY|ALTKEY,                XK_u,                             incrgaps,                        {.i = +1 } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_u,                             incrgaps,                        {.i = -1 } },
-	{ MODKEY|ALTKEY,                XK_i,                             incrigaps,                       {.i = +1 } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_i,                             incrigaps,                       {.i = -1 } },
-	{ MODKEY|ALTKEY,                XK_o,                             incrogaps,                       {.i = +1 } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_o,                             incrogaps,                       {.i = -1 } },
-	{ MODKEY|ALTKEY,                XK_6,                             incrihgaps,                      {.i = +1 } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_6,                             incrihgaps,                      {.i = -1 } },
-	{ MODKEY|ALTKEY,                XK_7,                             incrivgaps,                      {.i = +1 } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_7,                             incrivgaps,                      {.i = -1 } },
-	{ MODKEY|ALTKEY,                XK_8,                             incrohgaps,                      {.i = +1 } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_8,                             incrohgaps,                      {.i = -1 } },
-	{ MODKEY|ALTKEY,                XK_9,                             incrovgaps,                      {.i = +1 } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_9,                             incrovgaps,                      {.i = -1 } },
-	{ MODKEY|ALTKEY,                XK_0,                             togglegaps,                      {0} },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_0,                             defaultgaps,                     {0} },
+	// { MODKEY|ShiftMask|ALTKEY,      XK_k,                             setcfact,                        {.f = +0.25} },
+	// { MODKEY|ShiftMask|ALTKEY,      XK_j,                             setcfact,                        {.f = -0.25} },
+	// { MODKEY|ShiftMask|ALTKEY,      XK_r,                             setcfact,                        {.f =  0.00} },
+	// { MODKEY|ALTKEY,                XK_u,                             incrgaps,                        {.i = +1 } },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_u,                             incrgaps,                        {.i = -1 } },
+	// { MODKEY|ALTKEY,                XK_i,                             incrigaps,                       {.i = +1 } },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_i,                             incrigaps,                       {.i = -1 } },
+	// { MODKEY|ALTKEY,                XK_o,                             incrogaps,                       {.i = +1 } },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_o,                             incrogaps,                       {.i = -1 } },
+	// { MODKEY|ALTKEY,                XK_6,                             incrihgaps,                      {.i = +1 } },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_6,                             incrihgaps,                      {.i = -1 } },
+	// { MODKEY|ALTKEY,                XK_7,                             incrivgaps,                      {.i = +1 } },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_7,                             incrivgaps,                      {.i = -1 } },
+	// { MODKEY|ALTKEY,                XK_8,                             incrohgaps,                      {.i = +1 } },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_8,                             incrohgaps,                      {.i = -1 } },
+	// { MODKEY|ALTKEY,                XK_9,                             incrovgaps,                      {.i = +1 } },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_9,                             incrovgaps,                      {.i = -1 } },
+	// { MODKEY|ALTKEY,                XK_0,                             togglegaps,                      {0} },
+	// { MODKEY|ALTKEY|ShiftMask,      XK_0,                             defaultgaps,                     {0} },
 	{ MODKEY|ControlMask,           XK_h,                             focusdir,                        {.i = 0 } }, // left
 	{ MODKEY|ControlMask,           XK_l,                             focusdir,                        {.i = 1 } }, // right
 	{ MODKEY|ControlMask,           XK_k,                             focusdir,                        {.i = 2 } }, // up
@@ -83,13 +81,18 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioLowerVolume,          spawn,                           SHCMD("decrease_volume") },
 	{ 0,                            XF86XK_AudioMute,                 spawn,                           SHCMD("toggle_volume") } ,
 	{ 0,                            XF86XK_AudioRaiseVolume,          spawn,                           SHCMD("increase_volume") },
+	{ 0,                            XK_F10,                           spawn,                           SHCMD("toggle_volume") } ,
+	{ 0,                            XK_F11,                           spawn,                           SHCMD("decrease_volume") },
+	{ 0,                            XK_F12,                           spawn,                           SHCMD("increase_volume") },
+	{ 0,                            XK_F1,                            spawn,                           SHCMD("sc_brightness_change decrease 5") },
+	{ 0,                            XK_F2,                            spawn,                           SHCMD("sc_brightness_change increase 5") },
 	TAGKEYS(                        XK_1,                             0)
 	TAGKEYS(                        XK_2,                             1)
 	TAGKEYS(                        XK_3,                             2)
 	TAGKEYS(                        XK_4,                             3)
-	TAGKEYS(                        XK_5,                             4)
+	TAGKEYS(                        XK_w,                             4)
 	TAGKEYS(                        XK_v,                             5)
-	TAGKEYS(                        XK_7,                             6)
+	TAGKEYS(                        XK_a,                             6)
 	TAGKEYS(                        XK_8,                             7)
 	TAGKEYS(                        XK_9,                             8)
 };

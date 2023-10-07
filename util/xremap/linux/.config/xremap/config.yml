@@ -1,0 +1,15 @@
+keymap:
+  - name: terminal copy 
+    application:
+      only: Alacritty 
+    remap:
+      M-c: C-Shift-c
+      M-v: C-Shift-v
+
+modmap:
+  - name: Global
+    application:
+      not: [Alacritty, steam, dota2]
+    remap:
+      Alt_L: Ctrl_L 
+
