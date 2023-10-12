@@ -5,6 +5,7 @@
 #include "appearance.h"
 #include "scratchpad.h"
 #include "command.h"
+#include <X11/X.h>
 
 static const Key keys[] = {
 	/* modifier                     key                               function                         argument */
@@ -14,7 +15,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,                             togglescratch,                   {.v = scratchpadsignalcmd } },
 	{ MODKEY,                       XK_m,                             togglescratch,                   {.v = scratchpadspotifycmd} },
 
-  { MODKEY|Mod1Mask|ShiftMask,    XK_b,                             toggleborder,                    {0} },
+  { MODKEY|ControlMask|ShiftMask, XK_b,                             toggleborder,                    {0} },
 
 	{ MODKEY,                       XK_x,                             spawn,                           SHCMD("arandr") },
 	{ MODKEY,                       XK_t,                             spawn,                           SHCMD("tabbedize") },
@@ -73,7 +74,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_space,                         togglefloating,                  {0} },
 	{ MODKEY|ControlMask,	  	      XK_comma,                         cyclelayout,                     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,                        cyclelayout,                     {.i = +1 } },
-	// { MODKEY|ALTKEY,                XK_s,                             togglesticky,                    {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_s,                             togglesticky,                    {0} },
 	{ MODKEY,                       XK_f,                             togglefullscreen,                {0} },
 	{ MODKEY|ShiftMask,             XK_f,                             togglefakefullscreen,            {0} },
 	{ MODKEY,                       XK_0,                             view,                            {.ui = ~0 } },
