@@ -85,6 +85,11 @@ void applyrules(Client *c) {
   if (strstr(class, "Steam") || strstr(class, "steam_app_"))
     c->issteam = 1;
 
+  if (strstr(class, "dota2") || strstr(class, "dota2")) {
+    log_info("[In applyrules] got dota2 client. Setting to issteam");
+    c->issteam = 1;
+  }
+
   if (strstr(class, "tabbed"))
     c->istabbed = 1;
 
@@ -1140,6 +1145,9 @@ void manage(Window w, XWindowAttributes *wa) {
   c->x  = MAX(c->x, c->mon->wx);
   c->y  = MAX(c->y, c->mon->wy);
   c->bw = borderpx;
+  if (c->issteam) {
+    c->bw = 0;
+  }
 
   wc.border_width = c->bw;
   XConfigureWindow(dpy, w, CWBorderWidth, &wc);
@@ -2972,6 +2980,11 @@ void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, i
   *sf = sfacts;         // total factor of stack area
   *mr = msize - mtotal; // the remainder (rest) of pixels after a cfacts master split
   *sr = ssize - stotal; // the remainder (rest) of pixels after a cfacts stack split
+}
+
+void toggleborder(const Arg *arg) {
+  selmon->sel->bw = (selmon->sel->bw == borderpx ? 0 : borderpx);
+  arrange(selmon);
 }
 
 int main(int argc, char *argv[]) {

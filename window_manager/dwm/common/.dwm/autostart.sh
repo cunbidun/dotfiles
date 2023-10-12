@@ -13,7 +13,8 @@ dunst &
 [[ $(pgrep 1password) ]] || 1password --silent &
 # cd ~/competitive_programming/cpcli/cc && npm start -- config=$HOME/competitive_programming/project_config.json &
 killall picom; sleep 0.1; picom &
-
-killall xremap; xremap ~/.config/xremap/config.yml &
-sleep 1 
-xset r rate 200 50 &
+killall conky; conky
+xset r rate 200 50;
+killall xremap; xremap ~/.config/xremap/config.yml > /tmp/dwm-xremap &
+sleep 5 
+xset r rate 200 50 
