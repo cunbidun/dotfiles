@@ -74,6 +74,7 @@ enum {
   NetSystemTrayOrientation,
   NetSystemTrayOrientationHorz,
   NetWMFullscreen,
+  NetWMSticky,
   NetActiveWindow,
   NetWMWindowType,
   NetWMWindowTypeDialog,
@@ -312,6 +313,7 @@ void tag(const Arg *arg);
 void tagmon(const Arg *arg);
 void togglebar(const Arg *arg);
 void togglesticky(const Arg *arg);
+void setsticky(Client *c, int sticky);
 void togglefullscr(const Arg *arg);
 void togglefakefullscreen(const Arg *arg);
 void togglefloating(const Arg *arg);

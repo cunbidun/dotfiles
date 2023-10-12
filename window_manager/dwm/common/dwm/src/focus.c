@@ -21,6 +21,17 @@ void unfocus(Client *c, int setfocus) {
   updatecurrentdesktop();
 }
 
+void updateborderonfocus(Client *c) {
+  if (c->fakefullscreen == 1)
+    XSetWindowBorder(dpy, c->win, scheme[SchemeGreen][ColBorder].pixel);
+  else if (c->issticky == 1)
+    XSetWindowBorder(dpy, c->win, scheme[SchemeRed][ColBorder].pixel);
+  else if (c->scratchkey != 0)
+    XSetWindowBorder(dpy, c->win, scheme[SchemeYellow][ColBorder].pixel);
+  else
+    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+}
+
 void updateborderonunfocus(Client *c) {
   if (c->scratchkey != 0)
     XSetWindowBorder(dpy, c->win, scheme[SchemeYellow][ColBorder].pixel);
@@ -52,15 +63,6 @@ void focus(Client *c) {
   }
   selmon->sel = c;
   drawbars();
-}
-
-void updateborderonfocus(Client *c) {
-  if (c->fakefullscreen == 1)
-    XSetWindowBorder(dpy, c->win, scheme[SchemeGreen][ColBorder].pixel);
-  else if (c->scratchkey != 0)
-    XSetWindowBorder(dpy, c->win, scheme[SchemeYellow][ColBorder].pixel);
-  else
-    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 }
 
 void focusdir(const Arg *arg) {

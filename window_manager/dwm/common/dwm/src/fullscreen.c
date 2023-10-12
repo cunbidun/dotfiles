@@ -76,8 +76,10 @@ void setfullscreen(Client *c, int fullscreen) {
       restack(c->mon);
     } else
       arrange(c->mon);
-  } else
+  } else {
+    arrange(c->mon);
     resizeclient(c, c->x, c->y, c->w, c->h);
+  }
 
   /* Exception: if the client was in actual fullscreen and we exit out to fake fullscreen
    * mode, then the focus would sometimes drift to whichever window is under the mouse cursor
@@ -97,8 +99,8 @@ void togglefakefullscreen(const Arg *arg) {
     c->fakefullscreen = 2;
     setfullscreen(c, 0);
   } else if (c->fakefullscreen == 1) {
-    setfullscreen(c, 0);
     c->fakefullscreen = 0;
+    setfullscreen(c, 0);
   } else {
     c->fakefullscreen = 1;
     setfullscreen(c, 1);

@@ -421,6 +421,8 @@ void clientmessage(XEvent *e) {
       setfullscreen(c, (cme->data.l[0] == 1 /* _NET_WM_STATE_ADD    */
                         || (cme->data.l[0] == 2 /* _NET_WM_STATE_TOGGLE */ && !c->isfullscreen)));
     }
+    if (cme->data.l[1] == netatom[NetWMSticky] || cme->data.l[2] == netatom[NetWMSticky])
+      setsticky(c, (cme->data.l[0] == 1 || (cme->data.l[0] == 2 && !c->issticky)));
   } else if (cme->message_type == netatom[NetActiveWindow]) {
     for (i = 0; i < LENGTH(tags) && !((1 << i) & c->tags); i++)
       ;
@@ -1584,11 +1586,19 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
   c->oldh         = c->h;
   c->h = wc.height = h;
   wc.border_width  = c->bw;
+  log_info("Resize client %s", c->name);
   if (((nexttiled(c->mon->clients) == c && !nexttiled(c->next)) || &monocle == c->mon->lt[c->mon->sellt]->arrange) && !c->isfullscreen && !c->isfloating &&
       NULL != c->mon->lt[c->mon->sellt]->arrange) {
-    c->w            = wc.width += c->bw * 2;
-    c->h            = wc.height += c->bw * 2;
-    wc.border_width = 0;
+
+    log_info("Got single client %s", c->name);
+    if (!c->issticky && !c->fakefullscreen) {
+      log_info("Got single client %s. Client is not sticky nor fakefullscreen, removing border...", c->name);
+      c->w            = wc.width += c->bw * 2;
+      c->h            = wc.height += c->bw * 2;
+      wc.border_width = 0;
+    } else {
+      log_info("Got single client %s. Client is sticky or fakefullscreen, keeping border", c->name);
+    }
   }
   XConfigureWindow(dpy, c->win, CWX | CWY | CWWidth | CWHeight | CWBorderWidth, &wc);
   configure(c);
@@ -1971,6 +1981,7 @@ void setup(void) {
   netatom[NetWMState]                   = XInternAtom(dpy, "_NET_WM_STATE", False);
   netatom[NetWMCheck]                   = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", False);
   netatom[NetWMFullscreen]              = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
+  netatom[NetWMSticky]                  = XInternAtom(dpy, "_NET_WM_STATE_STICKY", False);
   netatom[NetWMWindowType]              = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
   netatom[NetWMWindowTypeDialog]        = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
   netatom[NetClientList]                = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
@@ -2220,11 +2231,25 @@ void togglefloating(const Arg *arg) {
   arrange(c->mon);
 }
 
+void setsticky(Client *c, int sticky) {
+  if (sticky && !c->issticky) {
+    XChangeProperty(dpy, c->win, netatom[NetWMState], XA_ATOM, 32, PropModeReplace, (unsigned char *)&netatom[NetWMSticky], 1);
+    c->issticky = 1;
+  } else if (!sticky && c->issticky) {
+    XChangeProperty(dpy, c->win, netatom[NetWMState], XA_ATOM, 32, PropModeReplace, (unsigned char *)0, 0);
+    c->issticky = 0;
+    arrange(c->mon);
+  }
+}
+
 void togglesticky(const Arg *arg) {
   if (!selmon->sel)
     return;
-  selmon->sel->issticky = !selmon->sel->issticky;
+  setsticky(selmon->sel, !selmon->sel->issticky);
   arrange(selmon);
+  Client *c = selmon->sel;
+  resizeclient(c, c->x, c->y, c->w, c->h);
+  updateborderonfocus(selmon->sel);
 }
 
 void toggletag(const Arg *arg) {
@@ -2650,6 +2675,11 @@ void updatewindowtype(Client *c) {
 
   if (state == netatom[NetWMFullscreen])
     setfullscreen(c, 1);
+  if (state == netatom[NetWMSticky]) {
+    setsticky(c, 1);
+  }
+  if (wtype == netatom[NetWMWindowTypeDialog])
+    c->isfloating = 1;
   if (wtype == netatom[NetWMWindowTypeDialog])
     c->isfloating = 1;
 }
