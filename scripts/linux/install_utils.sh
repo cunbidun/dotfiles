@@ -20,6 +20,7 @@ makepkg -si
 
 # =======================================================================
 cd
+yay -S pacman-contrib --needed  # extra script for pacman
 yay -S neofetch --needed # for fun :)
 yay -S exa --needed # ls replacement
 yay -S fzf --needed # for fzf
@@ -36,6 +37,8 @@ yay -S lxappearance papirus-folders-nordic --needed # gtk themes
 yay -S bat --needed # cat replacement
 yay -S ncdu --needed # check disk usage 
 yay -S visual-studio-code-bin --needed
+yay -S glxinfo hwinfoc --needed  # hardware info
+
 
 
 yay -S shellcheck

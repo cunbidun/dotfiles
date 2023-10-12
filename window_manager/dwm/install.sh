@@ -20,5 +20,6 @@ yay -S picom-git --needed # compositor
 yay -S calcurse --needed # tui calendar
 yay -S xf86-input-wacom --needed # for wacom
 yay -S xremap-x11-bin --needed # remapping
+yay -S rofi --needed # color picker 
 
 sudo chmod u+s /usr/bin/xremap # setuid 0 for this program

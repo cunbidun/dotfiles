@@ -14,9 +14,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,                             togglescratch,                   {.v = scratchpadsignalcmd } },
 	{ MODKEY,                       XK_m,                             togglescratch,                   {.v = scratchpadspotifycmd} },
 
+  { MODKEY|Mod1Mask|ShiftMask,    XK_b,                             toggleborder,                    {0} },
+
 	{ MODKEY,                       XK_x,                             spawn,                           SHCMD("arandr") },
 	{ MODKEY,                       XK_t,                             spawn,                           SHCMD("tabbedize") },
-	{ MODKEY,                       XK_e,                             spawn,                           SHCMD("nautilus ~") },
+	{ MODKEY,                       XK_e,                             spawn,                           SHCMD("thunar ~") },
 	{ MODKEY,                       XK_backslash,                     spawn,                           SHCMD("dunstctl close-all") },
 	{ MODKEY,                       XK_p,                             spawn,                           {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                        spawn,                           {.v = termcmd } },
@@ -71,7 +73,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_space,                         togglefloating,                  {0} },
 	{ MODKEY|ControlMask,	  	      XK_comma,                         cyclelayout,                     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,                        cyclelayout,                     {.i = +1 } },
-	{ MODKEY|ALTKEY,                XK_s,                             togglesticky,                    {0} },
+	// { MODKEY|ALTKEY,                XK_s,                             togglesticky,                    {0} },
 	{ MODKEY,                       XK_f,                             togglefullscreen,                {0} },
 	{ MODKEY|ShiftMask,             XK_f,                             togglefakefullscreen,            {0} },
 	{ MODKEY,                       XK_0,                             view,                            {.ui = ~0 } },

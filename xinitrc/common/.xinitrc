@@ -47,4 +47,4 @@ fi
 # built-in, Intel
 # xrandr --output None-1 --scale 0.66x0.66
 
-while type dwm >/dev/null ; do xrdb ~/.Xresources && dwm && continue || break ; done 
+while type dwm >/dev/null; do xrdb ~/.Xresources && rm -rf /tmp/dwm-log && dwm && continue || break ; done 

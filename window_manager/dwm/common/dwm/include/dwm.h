@@ -372,4 +372,6 @@ void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
 void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
 void setgaps(int oh, int ov, int ih, int iv);
 
+void toggleborder(const Arg *arg);
+
 #endif
