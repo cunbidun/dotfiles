@@ -41,11 +41,18 @@ void updateborderonunfocus(Client *c) {
 
 void focus(Client *c) {
   if (!c || !ISVISIBLE(c))
-    for (c = selmon->stack; c && !ISVISIBLE(c); c = c->snext)
+    for (c = selmon->stack; c && (!ISVISIBLE(c) || HIDDEN(c)); c = c->snext)
       ;
   if (selmon->sel && selmon->sel != c) {
     losefullscreen(c);
     unfocus(selmon->sel, 0);
+
+    if (selmon->hidsel) {
+      hidewin(selmon->sel);
+      if (c)
+        arrange(c->mon);
+      selmon->hidsel = 0;
+    }
   }
   if (c) {
     if (c->mon != selmon)

@@ -5,9 +5,9 @@
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
+#include <X11/Xresource.h>
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
-#include <X11/Xresource.h>
 #include <X11/keysym.h>
 #include <errno.h>
 #include <locale.h>
@@ -36,6 +36,7 @@
 #define CLEANMASK(mask) (mask & ~(numlockmask | LockMask) & (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | Mod3Mask | Mod4Mask | Mod5Mask))
 #define INTERSECT(x, y, w, h, m) (MAX(0, MIN((x) + (w), (m)->wx + (m)->ww) - MAX((x), (m)->wx)) * MAX(0, MIN((y) + (h), (m)->wy + (m)->wh) - MAX((y), (m)->wy)))
 #define ISVISIBLE(C) ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
+#define HIDDEN(C) ((getstate(C->win) == IconicState))
 #define LENGTH(X) (sizeof X / sizeof X[0])
 #define MOUSEMASK (BUTTONMASK | PointerMotionMask)
 #define WIDTH(X) ((X)->w + 2 * (X)->bw)
@@ -182,6 +183,8 @@ struct Monitor {
   int nmaster;
   int num;
   int by;             /* bar geometry */
+  int btw;            /* width of tasks portion of bar */
+  int bt;             /* number of tasks */
   int mx, my, mw, mh; /* screen size */
   int wx, wy, ww, wh; /* window area  */
   int gappih;         /* horizontal gap between windows */
@@ -194,6 +197,7 @@ struct Monitor {
   int previewshow;
   int showbar;
   int topbar;
+  int hidsel;
   Client *clients;
   Client *sel;
   Client *stack;
@@ -251,7 +255,9 @@ void focus(Client *c);
 void focusdir(const Arg *arg);
 void focusin(XEvent *e);
 void focusmon(const Arg *arg);
-void focusstack(const Arg *arg);
+void focusstackvis(const Arg *arg);
+void focusstackhid(const Arg *arg);
+void focusstack(int inc, int vis);
 Atom getatomprop(Client *c, Atom prop);
 int getrootptr(int *x, int *y);
 long getstate(Window w);
@@ -260,6 +266,8 @@ pid_t getstatusbarpid();
 int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 void grabbuttons(Client *c, int focused);
 void grabkeys(void);
+void hide(const Arg *arg);
+void hidewin(Client *c);
 void incnmaster(const Arg *arg);
 void keypress(XEvent *e);
 void killclient(const Arg *arg);
@@ -302,6 +310,9 @@ void setviewport(void);
 void seturgent(Client *c, int urg);
 void showhide(Client *c);
 void showtagpreview(int tag);
+void show(const Arg *arg);
+void showall(const Arg *arg);
+void showwin(Client *c);
 void sigstatusbar(const Arg *arg);
 void spawn(const Arg *arg);
 int swallow(Client *p, Client *c);
@@ -313,6 +324,7 @@ void tag(const Arg *arg);
 void tagmon(const Arg *arg);
 void togglebar(const Arg *arg);
 void togglesticky(const Arg *arg);
+void togglewin(const Arg *arg);
 void setsticky(Client *c, int sticky);
 void togglefullscr(const Arg *arg);
 void togglefakefullscreen(const Arg *arg);

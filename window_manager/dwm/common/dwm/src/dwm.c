@@ -257,7 +257,9 @@ void buttonpress(XEvent *e) {
       arg.ui = 1 << i;
     } else if (ev->x < x + TEXTW(selmon->ltsymbol))
       click = ClkLtSymbol;
-    else if (ev->x > selmon->ww - statusw) {
+    else if (ev->x > selmon->ww - statusw + lrpad - 2) {
+      /* 2px right padding */
+
       x     = selmon->ww - statusw;
       click = ClkStatusText;
 
@@ -285,8 +287,22 @@ void buttonpress(XEvent *e) {
           s--;
         }
       }
-    } else
-      click = ClkWinTitle;
+    } else {
+      x += TEXTW(selmon->ltsymbol);
+      c = m->clients;
+
+      if (c) {
+        do {
+          if (!ISVISIBLE(c))
+            continue;
+          else
+            x += (1.0 / (double)m->bt) * m->btw;
+        } while (ev->x > x && (c = c->next));
+
+        click = ClkWinTitle;
+        arg.v = c;
+      }
+    }
   } else if ((c = wintoclient(ev->window))) {
     focus(c);
     restack(selmon);
@@ -295,7 +311,7 @@ void buttonpress(XEvent *e) {
   }
   for (i = 0; i < LENGTH(buttons); i++)
     if (click == buttons[i].click && buttons[i].func && buttons[i].button == ev->button && CLEANMASK(buttons[i].mask) == CLEANMASK(ev->state))
-      buttons[i].func(click == ClkTagBar && buttons[i].arg.i == 0 ? &arg : &buttons[i].arg);
+      buttons[i].func((click == ClkTagBar || click == ClkWinTitle) && buttons[i].arg.i == 0 ? &arg : &buttons[i].arg);
 }
 
 void checkotherwm(void) {
@@ -795,29 +811,45 @@ int drawstatusbar(Monitor *m, int bh, char *stext, int stw) {
 }
 
 void drawbar(Monitor *m) {
-  int x, w, sw = 0, stw = 0;
+  // drw_text(
+  //    drw,        - the drawable
+  //    m->ww - tw, - the x position
+  //    0,          - the y position
+  //    tw,         - the width
+  //    bh,         - the height
+  //    0,          - left padding (typically lrpad / 2)
+  //    stext,      - the text to be drawn
+  //    0           - inverted (swaps foreground and background colours)
+  // );
+  
+  // system_tray_width or stw
+  int x, w, sw = 0, system_tray_width = 0, n = 0, scm;
   int boxs = drw->fonts->h / 9;
   int boxw = drw->fonts->h / 6 + 2;
+  int tab_pad = 20;
   unsigned int i, occ = 0, urg = 0;
   Client *c;
 
   if (showsystray && m == systraytomon(m))
-    stw = getsystraywidth();
+    system_tray_width = getsystraywidth();
 
   if (!m->showbar)
     return;
   /* draw status first so it can be overdrawn by tags later */
   if (m == selmon) { /* status is only drawn on selected monitor */
-    statusw = sw = m->ww - drawstatusbar(m, bh, stext, stw) - 1;
+    statusw = sw = m->ww - drawstatusbar(m, bh, stext, system_tray_width) - 1;
   }
 
   resizebarwin(m);
   for (c = m->clients; c; c = c->next) {
+    if (ISVISIBLE(c))
+      n++;
     occ |= c->tags == 255 ? 0 : c->tags;
     if (c->isurgent)
       urg |= c->tags;
   }
   x = 0;
+  // Draw tags
   for (i = 0; i < LENGTH(tags); i++) {
     /* do not draw vacant tags */
     if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
@@ -838,20 +870,49 @@ void drawbar(Monitor *m) {
   }
   w = TEXTW(m->ltsymbol);
   drw_setscheme(drw, scheme[SchemeSym]);
-  x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+  x = drw_text(drw, x, 0, w, bh, 0, m->ltsymbol, 0);
 
-  if ((w = m->ww - sw - stw - x) > bh) {
-    if (m->sel) {
-      drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-      drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-      if (m->sel->isfloating)
-        drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+  drw_setscheme(drw, scheme[SchemeNorm]);
+  drw_text(drw, x, 0, tab_pad, bh, lrpad / 2, "", 0);
+  x += tab_pad;
+
+  if ((w = m->ww - sw - system_tray_width - x) > bh) {
+    if (n > 0) {
+      int remainder = w % n;
+      int tabw      = (1.0 / (double)n) * w + 1;
+      tabw -= tab_pad;
+      for (c = m->clients; c; c = c->next) {
+        if (!ISVISIBLE(c))
+          continue;
+        if (m->sel == c)
+          scm = SchemeSel;
+        else if (HIDDEN(c))
+          scm = SchemeHid;
+        else
+          scm = SchemeTab;
+        drw_setscheme(drw, scheme[scm]);
+
+        if (remainder >= 0) {
+          if (remainder == 0) {
+            tabw--;
+          }
+          remainder--;
+        }
+        drw_text(drw, x, 0, tabw, bh, lrpad / 2, c->name, 0);
+        x += tabw;
+
+        drw_setscheme(drw, scheme[SchemeNorm]);
+        drw_text(drw, x, 0, tab_pad, bh, 0, "", 0);
+        x += tab_pad;
+      }
     } else {
       drw_setscheme(drw, scheme[SchemeNorm]);
       drw_rect(drw, x, 0, w, bh, 1, 1);
     }
   }
-  drw_map(drw, m->barwin, 0, 0, m->ww - stw, bh);
+  m->bt  = n;
+  m->btw = w;
+  drw_map(drw, m->barwin, 0, 0, m->ww - system_tray_width, bh);
 }
 
 void drawbars(void) {
@@ -910,29 +971,44 @@ void focusmon(const Arg *arg) {
   warp(selmon->sel);
 }
 
-void focusstack(const Arg *arg) {
+focusstackvis(const Arg *arg) { focusstack(arg->i, 0); }
+
+void focusstackhid(const Arg *arg) { focusstack(arg->i, 1); }
+
+void focusstack(int inc, int hid) {
   Client *c = NULL, *i;
 
-  if (!selmon->sel || (selmon->sel->isfullscreen && selmon->sel->fakefullscreen != 1))
+  // if no client selected AND exclude hidden client; if client selected but fullscreened
+  if ((!selmon->sel && !hid) || (selmon->sel && selmon->sel->isfullscreen && lockfullscreen))
     return;
-  if (arg->i > 0) {
-    for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next)
-      ;
+  if (!selmon->clients)
+    return;
+  if (inc > 0) {
+    if (selmon->sel)
+      for (c = selmon->sel->next; c && (!ISVISIBLE(c) || (!hid && HIDDEN(c))); c = c->next)
+        ;
     if (!c)
-      for (c = selmon->clients; c && !ISVISIBLE(c); c = c->next)
+      for (c = selmon->clients; c && (!ISVISIBLE(c) || (!hid && HIDDEN(c))); c = c->next)
         ;
   } else {
-    for (i = selmon->clients; i != selmon->sel; i = i->next)
-      if (ISVISIBLE(i))
-        c = i;
+    if (selmon->sel) {
+      for (i = selmon->clients; i != selmon->sel; i = i->next)
+        if (ISVISIBLE(i) && !(!hid && HIDDEN(i)))
+          c = i;
+    } else
+      c = selmon->clients;
     if (!c)
       for (; i; i = i->next)
-        if (ISVISIBLE(i))
+        if (ISVISIBLE(i) && !(!hid && HIDDEN(i)))
           c = i;
   }
   if (c) {
     focus(c);
     restack(selmon);
+    if (HIDDEN(c)) {
+      showwin(c);
+      c->mon->hidsel = 1;
+    }
   }
 }
 
@@ -1184,7 +1260,8 @@ void manage(Window w, XWindowAttributes *wa) {
 
   XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend, (unsigned char *)&(c->win), 1);
   XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
-  setclientstate(c, NormalState);
+  if (!HIDDEN(c))
+    setclientstate(c, NormalState);
   if (focusclient) {
     if (c->mon == selmon) {
       unfocus(selmon->sel, 0);
@@ -1193,7 +1270,8 @@ void manage(Window w, XWindowAttributes *wa) {
     c->mon->sel = c;
   }
   arrange(c->mon);
-  XMapWindow(dpy, c->win);
+  if (!HIDDEN(c))
+    XMapWindow(dpy, c->win);
   if (focusclient)
     focus(NULL);
 }
@@ -1377,7 +1455,7 @@ void movestack(const Arg *arg) {
 }
 
 Client *nexttiled(Client *c) {
-  for (; c && (c->isfloating || !ISVISIBLE(c)); c = c->next)
+  for (; c && (c->isfloating || !ISVISIBLE(c) || HIDDEN(c)); c = c->next)
     ;
   return c;
 }
@@ -1492,6 +1570,18 @@ void restoreSession(void) {
 void quit(const Arg *arg) {
   if (arg->i)
     restart = 1;
+
+  // fix: reloading dwm keeps all the hidden clients hidden
+  Monitor *m;
+  Client *c;
+  for (m = mons; m; m = m->next) {
+    if (m) {
+      for (c = m->stack; c; c = c->next)
+        if (c && HIDDEN(c))
+          showwin(c);
+    }
+  }
+
   running = 0;
 
   if (restart == 1)
