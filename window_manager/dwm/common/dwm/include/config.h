@@ -15,24 +15,25 @@ static const Rule rules[] = {
    *
    * Note that, rules will overwirte others. The below will overwrite the previous!
 	 */
-	/* class         role          instance       title               tags mask   isfloating   isterminal   noswallow   monitor   scratch key*/
-	{ "Arandr",      NULL,         "arandr",      NULL,               0,          1,           0,           0,          -1,       0          }, // center this
+	/* class         role          instance         title               tags mask   isfloating   isterminal   noswallow   monitor   scratch key*/
+	{ "Arandr",      NULL,         "arandr",        NULL,               0,          1,           0,           0,          -1,       0          }, // center this
 
-	{ NULL,          "pop-up",     NULL,          NULL,               0,          1,           0,           0,          -1,       0          },
+	{ NULL,          "pop-up",     NULL,            NULL,               0,          1,           0,           0,          -1,       0          },
 
   
-	{ TERMCLASS,     NULL,         NULL,          NULL,               0,          0,           1,           0,          -1,       0          },
+	{ TERMCLASS,     NULL,         NULL,            NULL,               0,          0,           1,           0,          -1,       0          },
 
-	{ NULL,          NULL,         NULL,          "audioconfig",      0,          1,           0,           0,          -1,       0          }, // center this
-	{ NULL,          NULL,         NULL,          "editdwmblock",     0,          1,           0,           0,          -1,       0          },
+	{ NULL,          NULL,         NULL,            "audioconfig",      0,          1,           0,           0,          -1,       0          }, // center this
+	{ NULL,          NULL,         NULL,            "editdwmblock",     0,          1,           0,           0,          -1,       0          },
 
-  { NULL,          NULL,         NULL,          "scratchpad",       0,          1,           0,           0,          -1,       'd'        },
-	{ "Spotify",     NULL,         "spotify",     NULL,               0,          1,           0,           0,          -1,       'm'        },
-	{ "Logseq",      NULL,         "logseq",      NULL,               0,          1,           0,           0,          -1,       'n'        },
-	{ "Caprine",     NULL,         "caprine",     NULL,               0,          1,           0,           0,          -1,       'c'        },
-	{ "Signal",      NULL,         "signal",      NULL,               0,          1,           0,           0,          -1,       's'        },
+  { NULL,          NULL,         NULL,            "scratchpad",       0,          1,           0,           0,          -1,       'd'        },
+	{ "Spotify",     NULL,         "spotify",       NULL,               0,          1,           0,           0,          -1,       'm'        },
+	{ "Logseq",      NULL,         "logseq",        NULL,               0,          1,           0,           0,          -1,       'n'        },
+	{ "obsidian",    NULL,         "obsidian",      NULL,               0,          1,           0,           0,          -1,       'n'        },
+	{ "Caprine",     NULL,         "caprine",       NULL,               0,          1,           0,           0,          -1,       'c'        },
+	{ "Signal",      NULL,         "signal",        NULL,               0,          1,           0,           0,          -1,       's'        },
 
-	{ NULL,          NULL,         NULL,          "Event Tester",     0,          0,           0,           1,          -1,       0          }, /* xev */
+	{ NULL,          NULL,         NULL,            "Event Tester",     0,          0,           0,           1,          -1,       0          }, /* xev */
 };
 
 

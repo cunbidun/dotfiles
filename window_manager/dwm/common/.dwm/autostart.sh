@@ -18,3 +18,4 @@ xset r rate 200 50;
 killall xremap; xremap ~/.config/xremap/config.yml > /tmp/dwm-xremap &
 sleep 5 
 xset r rate 200 50 
+xsetwacom set 9 MapToOutput 2560x2160+1280+0
