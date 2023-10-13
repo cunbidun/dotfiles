@@ -16,6 +16,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_m,                             togglescratch,                   {.v = scratchpadspotifycmd} },
 
   { MODKEY|ControlMask|ShiftMask, XK_b,                             toggleborder,                    {0} },
+	{ MODKEY|ShiftMask,             XK_p,                             spawn,                           SHCMD("sc_toggle_picom") },
 
 	{ MODKEY,                       XK_x,                             spawn,                           SHCMD("arandr") },
 	{ MODKEY,                       XK_t,                             spawn,                           SHCMD("tabbedize") },
