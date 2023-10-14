@@ -1,4 +1,5 @@
 #include "dwm.h"
+#include "appearance.h"
 #include "command.h"
 #include "config.h"
 #include "constant.h"
@@ -259,7 +260,6 @@ void buttonpress(XEvent *e) {
       click = ClkLtSymbol;
     else if (ev->x > selmon->ww - statusw + lrpad - 2) {
       /* 2px right padding */
-
       x     = selmon->ww - statusw;
       click = ClkStatusText;
 
@@ -821,11 +821,11 @@ void drawbar(Monitor *m) {
   //    stext,      - the text to be drawn
   //    0           - inverted (swaps foreground and background colours)
   // );
-  
+
   // system_tray_width or stw
   int x, w, sw = 0, system_tray_width = 0, n = 0, scm;
-  int boxs = drw->fonts->h / 9;
-  int boxw = drw->fonts->h / 6 + 2;
+  int boxs    = drw->fonts->h / 9;
+  int boxw    = drw->fonts->h / 6 + 2;
   int tab_pad = 20;
   unsigned int i, occ = 0, urg = 0;
   Client *c;
@@ -865,16 +865,11 @@ void drawbar(Monitor *m) {
     } else {
       drw_setscheme(drw, scheme[SchemeNorm]);
     }
-    drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], 0);
-    x += w;
+    x = drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], 0);
   }
   w = TEXTW(m->ltsymbol);
   drw_setscheme(drw, scheme[SchemeSym]);
-  x = drw_text(drw, x, 0, w, bh, 0, m->ltsymbol, 0);
-
-  drw_setscheme(drw, scheme[SchemeNorm]);
-  drw_text(drw, x, 0, tab_pad, bh, lrpad / 2, "", 0);
-  x += tab_pad;
+  x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
   if ((w = m->ww - sw - system_tray_width - x) > bh) {
     if (n > 0) {
@@ -899,13 +894,17 @@ void drawbar(Monitor *m) {
           remainder--;
         }
         drw_text(drw, x, 0, tabw, bh, lrpad / 2, c->name, 0);
+        if (c->isfloating) {
+          drw_setscheme(drw, scheme[m->sel == c ? SchemeSym : SchemeBlue]);
+          drw_rect(drw, x + boxs, boxs, boxw, boxw, c->isfixed, 0);
+        }
         x += tabw;
-
         drw_setscheme(drw, scheme[SchemeNorm]);
-        drw_text(drw, x, 0, tab_pad, bh, 0, "", 0);
-        x += tab_pad;
+        x = drw_text(drw, x, 0, tab_pad, bh, 0, "", 0);
       }
     } else {
+      /* If we do not have any clients then draw a blank space to clear anything that may
+       * have been drawn before (e.g. status text or a previous window title). */
       drw_setscheme(drw, scheme[SchemeNorm]);
       drw_rect(drw, x, 0, w, bh, 1, 1);
     }
