@@ -40,23 +40,23 @@ require("luasnip.loaders.from_vscode").load({ paths = { "~/.vsnip/" } })
 -- formatters {{{
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-	{ exe = "black", filetypes = { "python" } },
-	{ exe = "isort", filetypes = { "python" } },
-	{ exe = "stylua", filetypes = { "lua" } },
-	{ exe = "shfmt", filetypes = { "sh" } },
-	{ exe = "rustfmt", filetypes = { "rust" } },
+  { exe = "black",   filetypes = { "python" } },
+  { exe = "isort",   filetypes = { "python" } },
+  { exe = "stylua",  filetypes = { "lua" } },
+  { exe = "shfmt",   filetypes = { "sh" } },
+  { exe = "rustfmt", filetypes = { "rust" } },
 })
 -- }}}
 
 -- linters {{{
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
-	{ exe = "flake8", filetypes = { "python" } },
-	{
-		exe = "shellcheck",
-		args = { "--severity", "warning" },
-		filetypes = { "sh", "bash" },
-	},
+  { exe = "flake8", filetypes = { "python" } },
+  {
+    exe = "shellcheck",
+    args = { "--severity", "warning" },
+    filetypes = { "sh", "bash" },
+  },
 })
 -- }}}
 
@@ -64,13 +64,13 @@ linters.setup({
 -- | additional plugins |
 -- +--------------------+
 lvim.plugins = {
-	{ "projekt0n/github-nvim-theme" },
-	{ "shaunsingh/nord.nvim" },
-	{ "Mofiqul/vscode.nvim" },
-	{ "martinsione/darkplus.nvim" },
-	{ "moll/vim-bbye" },
-	{ "tpope/vim-surround" },
-	{ "axkirillov/easypick.nvim" },
+  { "shaunsingh/nord.nvim" },
+  { "projekt0n/github-nvim-theme" },
+  { "Mofiqul/vscode.nvim" },
+  { "martinsione/darkplus.nvim" },
+  { "moll/vim-bbye" },
+  { "tpope/vim-surround" },
+  { "axkirillov/easypick.nvim" },
 }
 
 -- +--------------------------------------------------------+
@@ -82,14 +82,17 @@ vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = ':silent 
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
+vim.api.nvim_create_autocmd("ColorScheme", { pattern = { "*" }, command = "highlight Normal guibg=NONE" })
+vim.api.nvim_create_autocmd("ColorScheme", { pattern = { "*" }, command = "highlight VertSplit guifg=#4C566A" })
+
 -- }}}
 
 -- suckless {{{
 vim.api.nvim_create_autocmd("VimEnter", {
-	pattern = { "*.h" },
-	callback = function()
-		require("lvim.core.autocmds").disable_format_on_save()
-	end,
+  pattern = { "*.h" },
+  callback = function()
+    require("lvim.core.autocmds").disable_format_on_save()
+  end,
 })
 -- }}}
 
