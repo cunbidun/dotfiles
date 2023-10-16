@@ -11,7 +11,7 @@ dwmblocks &
 killall dunst
 dunst &
 [[ $(pgrep 1password) ]] || 1password --silent &
-[[ $(pgrep aw-server) ]] || aw-server 
+[[ $(pgrep aw-qt) ]] || aw-qt &
 # cd ~/competitive_programming/cpcli/cc && npm start -- config=$HOME/competitive_programming/project_config.json &
 killall picom; sleep 0.1; picom &
 killall conky; conky

@@ -16,7 +16,7 @@ static const Key keys[] = {
 	{ MODKEY,                           XK_m,                             togglescratch,                    {.v = scratchpadspotifycmd} },
 
   { MODKEY|ControlMask|ShiftMask,     XK_b,                             toggleborder,                     {0} },
-	{ MODKEY|ShiftMask,                 XK_p,                             spawn,                            SHCMD("sc_toggle_picom") },
+	{ MODKEY|ShiftMask,                 XK_b,                             spawn,                            SHCMD("sc_toggle_picom") },
 
 	{ MODKEY,                           XK_o,                             show,                             {0} },
 	{ MODKEY|ShiftMask,                 XK_o,                             showall,                          {0} },
@@ -27,6 +27,7 @@ static const Key keys[] = {
 	{ MODKEY,                           XK_e,                             spawn,                            SHCMD("thunar ~") },
 	{ MODKEY,                           XK_backslash,                     spawn,                            SHCMD("dunstctl close-all") },
 	{ MODKEY,                           XK_p,                             spawn,                            {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,                 XK_p,                             spawn,                            SHCMD("sc_window_picker") },
 	{ MODKEY,                           XK_Return,                        spawn,                            {.v = termcmd } },
 	{ MODKEY,                           XK_b,                             togglebar,                        {0} },
 

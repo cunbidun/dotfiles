@@ -38,7 +38,7 @@ yay -S bat --needed # cat replacement
 yay -S ncdu --needed # check disk usage 
 yay -S visual-studio-code-bin --needed
 yay -S glxinfo hwinfoc --needed  # hardware info
-
+yay -S bluetuith bluez bluez-utils --needed
 
 
 yay -S shellcheck
@@ -49,3 +49,6 @@ yay -S bazel
 yay -S google-chrome
 yay -S espanso
 
+# ==========================================================================
+# Start services
+sudo systemctl enable --now bluetooth.service
