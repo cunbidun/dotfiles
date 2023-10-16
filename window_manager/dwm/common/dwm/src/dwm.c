@@ -225,14 +225,12 @@ void attachstack(Client *c) {
 }
 
 void buttonpress(XEvent *e) {
-  log_info("[In buttonpress handler] got even num '%d' with button '%s", e->type, e->xbutton);
   unsigned int i, x, click, occ = 0;
   Arg arg = {0};
   Client *c;
   Monitor *m;
   XButtonPressedEvent *ev = &e->xbutton;
-
-  click = ClkRootWin;
+  click                   = ClkRootWin;
   /* focus monitor if necessary */
   if ((m = wintomon(ev->window)) && m != selmon) {
     unfocus(selmon->sel, 1);
@@ -240,6 +238,11 @@ void buttonpress(XEvent *e) {
     focus(NULL);
   }
   if (ev->window == selmon->barwin) {
+    unsigned int system_tray_width = 0;
+    if (showsystray && m == systraytomon(m))
+      system_tray_width = getsystraywidth();
+
+    log_info("[In buttonpress handler] got click event at barwin location %d", ev->x);
     if (selmon->previewshow) {
       XUnmapWindow(dpy, selmon->tagwin);
       selmon->previewshow = 0;
@@ -256,12 +259,16 @@ void buttonpress(XEvent *e) {
     if (i < LENGTH(tags)) {
       click  = ClkTagBar;
       arg.ui = 1 << i;
-    } else if (ev->x < x + TEXTW(selmon->ltsymbol))
+      log_info("[In buttonpress handler] it's ClkTagBar event");
+    } else if (ev->x < x + TEXTW(selmon->ltsymbol)) {
       click = ClkLtSymbol;
-    else if (ev->x > selmon->ww - statusw + lrpad - 2) {
+      log_info("[In buttonpress handler] it's ClkLtSymbol event");
+    } else if (ev->x > selmon->ww - statusw - system_tray_width) {
       /* 2px right padding */
-      x     = selmon->ww - statusw;
+      x     = selmon->ww - statusw - system_tray_width;
       click = ClkStatusText;
+      log_info("[In buttonpress handler] it's ClkStatusText event. Current statusw is %d. Current system_tray_width is %d. statusbar start at %d", statusw,
+               system_tray_width, x);
 
       char *text, *s, ch;
       statussig = 0;
@@ -274,7 +281,11 @@ void buttonpress(XEvent *e) {
           text = s + 1;
           if (x >= ev->x)
             break;
-          statussig = ch;
+          if (statussig == ch) {
+            statussig = 0;
+          } else {
+            statussig = ch;
+          }
         } else if (*s == '^') {
           *s = '\0';
           x += TEXTW(text) - lrpad;
@@ -287,6 +298,7 @@ void buttonpress(XEvent *e) {
           s--;
         }
       }
+      log_info("[In buttonpress handler] it's ClkStatusText event. Current statussig is set to %d", statussig);
     } else {
       x += TEXTW(selmon->ltsymbol);
       c = m->clients;
@@ -300,6 +312,11 @@ void buttonpress(XEvent *e) {
         } while (ev->x > x && (c = c->next));
 
         click = ClkWinTitle;
+        log_info("[In buttonpress handler] it's ClkWinTitle event for %s", c->name);
+        if (c->name == NULL || c->name[0] == '\0') {
+          log_info("[In buttonpress handler] the client name is null, return...");
+          return;
+        }
         arg.v = c;
       }
     }
@@ -308,6 +325,7 @@ void buttonpress(XEvent *e) {
     restack(selmon);
     XAllowEvents(dpy, ReplayPointer, CurrentTime);
     click = ClkClientWin;
+    log_info("[In buttonpress handler] it's ClkClientWin event");
   }
   for (i = 0; i < LENGTH(buttons); i++)
     if (click == buttons[i].click && buttons[i].func && buttons[i].button == ev->button && CLEANMASK(buttons[i].mask) == CLEANMASK(ev->state))
@@ -695,7 +713,17 @@ Monitor *dirtomon(int dir) {
   return m;
 }
 
-int drawstatusbar(Monitor *m, int bh, char *stext, int stw) {
+int drawstatusbar(Monitor *m, int bh, char *stext, int system_tray_width) {
+  // drw_text(
+  //    drw,        - the drawable
+  //    m->ww - tw, - the x position
+  //    0,          - the y position
+  //    tw,         - the width
+  //    bh,         - the height
+  //    0,          - left padding (typically lrpad / 2)
+  //    stext,      - the text to be drawn
+  //    0           - inverted (swaps foreground and background colours)
+  // );
   int ret, i, j, w, x, len;
   short isCode = 0;
   char *text;
@@ -711,6 +739,7 @@ int drawstatusbar(Monitor *m, int bh, char *stext, int stw) {
     if ((unsigned char)stext[i] >= ' ')
       text[j++] = stext[i];
   text[j] = '\0';
+  // log_info("Drawing status bar: text = %s", text);
 
   /* compute width of the status text */
   w = 0;
@@ -754,7 +783,7 @@ int drawstatusbar(Monitor *m, int bh, char *stext, int stw) {
 
       text[i] = '\0';
       w       = TEXTW(text) - lrpad;
-      drw_text(drw, x - stw, 0, w, bh, 0, text, 0);
+      drw_text(drw, x - system_tray_width, 0, w, bh, 0, text, 0);
 
       x += w;
 
@@ -801,7 +830,7 @@ int drawstatusbar(Monitor *m, int bh, char *stext, int stw) {
 
   if (!isCode) {
     w = TEXTW(text) - lrpad;
-    drw_text(drw, x - stw, 0, w, bh, 0, text, 0);
+    drw_text(drw, x - system_tray_width, 0, w, bh, 0, text, 0);
   }
 
   drw_setscheme(drw, scheme[SchemeNorm]);

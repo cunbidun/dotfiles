@@ -46,7 +46,7 @@ static int epollFD;
 static int execLock = 0;
 
 // Longest UTF-8 character is 4 bytes long
-static char outputs[LEN(blocks)][CMDLENGTH * 4 + 1 + CLICKABLE_BLOCKS];
+static char outputs[LEN(blocks)][CMDLENGTH * 4 + 1 + 2 * CLICKABLE_BLOCKS];
 static char
     statusBar[2]
              [LEN(blocks) * (LEN(outputs[0]) - 1) +
@@ -111,7 +111,7 @@ int getStatus(char *new, char *old) {
 
 void updateBlock(int i) {
     char *output = outputs[i];
-    char buffer[LEN(outputs[0]) - CLICKABLE_BLOCKS];
+    char buffer[LEN(outputs[0]) - 2 * CLICKABLE_BLOCKS];
     int bytesRead = read(pipes[i][0], buffer, LEN(buffer));
 
     // Trim UTF-8 string to desired length
@@ -145,9 +145,13 @@ void updateBlock(int i) {
         output[0] = blocks[i].signal;
         output++;
     }
+    buffer[j + 1] = blocks[i].signal;
+    buffer[j + 2] =0;
 #endif
 
+
     strcpy(output, buffer);
+
 
     // Remove execution lock for the current block
     execLock &= ~(1 << i);
