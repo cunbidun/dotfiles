@@ -853,9 +853,8 @@ void drawbar(Monitor *m) {
 
   // system_tray_width or stw
   int x, w, sw = 0, system_tray_width = 0, n = 0, scm;
-  int boxs    = drw->fonts->h / 9;
-  int boxw    = drw->fonts->h / 6 + 2;
-  int tab_pad = 20;
+  int boxs = drw->fonts->h / 9;
+  int boxw = drw->fonts->h / 6 + 2;
   unsigned int i, occ = 0, urg = 0;
   Client *c;
 
@@ -904,7 +903,6 @@ void drawbar(Monitor *m) {
     if (n > 0) {
       int remainder = w % n;
       int tabw      = (1.0 / (double)n) * w + 1;
-      tabw -= tab_pad;
       for (c = m->clients; c; c = c->next) {
         if (!ISVISIBLE(c))
           continue;
@@ -929,7 +927,7 @@ void drawbar(Monitor *m) {
         }
         x += tabw;
         drw_setscheme(drw, scheme[SchemeNorm]);
-        x = drw_text(drw, x, 0, tab_pad, bh, 0, "", 0);
+        drw_text(drw, x - lrpad / 2, 0, lrpad / 2, bh, 0, "", 0);
       }
     } else {
       /* If we do not have any clients then draw a blank space to clear anything that may
