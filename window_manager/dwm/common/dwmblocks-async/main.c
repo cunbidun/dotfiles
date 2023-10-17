@@ -144,14 +144,12 @@ void updateBlock(int i) {
     if (bytesRead > 1 && blocks[i].signal > 0) {
         output[0] = blocks[i].signal;
         output++;
+        buffer[j + 1] = blocks[i].signal;
+        buffer[j + 2] = 0;
     }
-    buffer[j + 1] = blocks[i].signal;
-    buffer[j + 2] =0;
 #endif
 
-
     strcpy(output, buffer);
-
 
     // Remove execution lock for the current block
     execLock &= ~(1 << i);
