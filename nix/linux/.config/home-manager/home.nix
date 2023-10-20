@@ -11,13 +11,17 @@ in
   home.packages = [                               
     pkgs.htop
     pkgs.neovim
-    pkgs.git
     pkgs.zsh
     pkgs.neofetch
     pkgs.fzf
     pkgsUnstable._1password-gui
     pkgsUnstable._1password
   ];
+  programs.git = {
+    enable = true;
+    userName = "Duy Pham";
+    userEmail = "cunbidun@gmail.com";
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
