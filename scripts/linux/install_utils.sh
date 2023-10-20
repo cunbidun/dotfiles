@@ -29,7 +29,7 @@ yay -S brave-bin --needed # browser
 yay -S neovim --needed # text editor
 yay -S tmux tmuxinator --needed # tmux
 yay -S nautilus --needed # graphical file explorer
-yay -S ranger --needed # TUI file explorer
+yay -S ranger ueberzug --needed # TUI file explorer with image review
 yay -S wget --needed
 yay -S obsidian --needed # note application
 yay -S cargo --needed # rust
