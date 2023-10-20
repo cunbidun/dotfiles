@@ -1,6 +1,6 @@
 #!/bin/bash
 
-feh --bg-fill ~/.wallpapers/others/QgdxHBX.jpeg &
+feh --bg-fill ~/.wallpapers/nord/boat-nord.png &
 # killall skippy-xd
 # skippy-xd --start-daemon &
 # nm-applet &
