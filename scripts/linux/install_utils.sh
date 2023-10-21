@@ -11,33 +11,18 @@ cd yay
 makepkg -si
 
 # =======================================================================
-cd /tmp
-echo "Installing 1pass"
-curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-git clone https://aur.archlinux.org/1password.git
-cd 1password
-makepkg -si
-
-# =======================================================================
 cd
 yay -S pacman-contrib --needed  # extra script for pacman
+yay -S neovim
 yay -S zsh --needed
-yay -S  mcmojave-cursors --needed # MacOS cursor theme
 yay -S nautilus --needed # graphical file explorer
 yay -S ueberzug --needed # TUI file explorer with image review
-yay -S obsidian --needed # note application
 yay -S cargo --needed # rust
-yay -S lxappearance papirus-folders-nordic --needed # gtk themes
-yay -S visual-studio-code-bin --needed
-yay -S glxinfo hwinfoc --needed  # hardware info
 yay -S bluetuith bluez bluez-utils --needed
-
 
 yay -S caprine
 yay -S spotify-launcher
 yay -S bazel
-yay -S google-chrome
-yay -S espanso
 
 # =========================================================================
 # Install nix 

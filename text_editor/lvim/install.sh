@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yay -S neovim
+yay -S neovim 
 
 rm -rf ~/.config/lvim
 
