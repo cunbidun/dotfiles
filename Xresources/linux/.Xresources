@@ -56,8 +56,9 @@ rofi.kb-mode-next:                   Shift+Right,Control+Tab,Control+l
 rofi.kb-mode-previous:               Shift+Left,Control+Shift+Tab,Control+h
 rofi.kb-remove-char-back:            BackSpace
 
-Xcursor.size: 16 
-Xcursor.theme: mcmojave-cursors
+Xcursor.size: 24
+Xcursor.theme: macOS-Monterey-cursors
+
 ! dwm stuff 
 dwm.borderpx: 2
 ! dwm.scheme_sel: nord15 

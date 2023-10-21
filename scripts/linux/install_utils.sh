@@ -22,24 +22,17 @@ makepkg -si
 cd
 yay -S pacman-contrib --needed  # extra script for pacman
 yay -S zsh --needed
-yay -S xcursor-osx-elcap mcmojave-cursors --needed # MacOS cursor theme
-yay -S brave-bin --needed # browser
-yay -S neovim --needed # text editor
-yay -S tmux tmuxinator --needed # tmux
+yay -S  mcmojave-cursors --needed # MacOS cursor theme
 yay -S nautilus --needed # graphical file explorer
-yay -S ranger ueberzug --needed # TUI file explorer with image review
-yay -S wget --needed
+yay -S ueberzug --needed # TUI file explorer with image review
 yay -S obsidian --needed # note application
 yay -S cargo --needed # rust
 yay -S lxappearance papirus-folders-nordic --needed # gtk themes
-yay -S ncdu --needed # check disk usage 
 yay -S visual-studio-code-bin --needed
 yay -S glxinfo hwinfoc --needed  # hardware info
 yay -S bluetuith bluez bluez-utils --needed
 
 
-yay -S shellcheck
-yay -S signal-desktop
 yay -S caprine
 yay -S spotify-launcher
 yay -S bazel

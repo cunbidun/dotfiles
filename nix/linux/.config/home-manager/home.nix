@@ -11,6 +11,9 @@ in
   home.packages = [                               
     pkgs.neovim
 
+    # Messaging
+    pkgs.signal-desktop
+
     # Utils
     pkgs.bat
     pkgs.eza
@@ -19,10 +22,25 @@ in
     pkgs.ranger
     pkgs.neofetch
     pkgs.tree
+    pkgs.espanso
+    pkgs.tmux pkgs.tmuxinator
+    pkgs.wget
+    pkgs.wget
+    pkgs.ncdu
+    pkgs.xfce.thunar
+
+    # Theme
+    pkgs.lxappearance
+
+    # For vim
+    pkgs.shellcheck
 
     pkgsUnstable._1password-gui
     pkgsUnstable._1password
   ];
+
+  home.file.".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
+  home.file.".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
 
   programs.git = {
     enable = true;
@@ -78,5 +96,28 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+  };
+  gtk = {
+    enable = true;
+    gtk3 = {
+      extraConfig = {
+        gtk-xft-antialias = 1;
+        gtk-xft-hinting = 1;
+        gtk-xft-hintstyle = "hintmedium";
+      };
+    };
+    theme = {
+      name = "Nordic-darker-standard-buttons";
+      package = pkgs.nordic;
+    };
+    cursorTheme = {
+      package = pkgs.apple-cursor;
+      name = "macOS-Monterey";
+      size = 24;
+    };
+    iconTheme = {
+      package = pkgs.papirus-nord;
+      name = "Papirus-Dark";
+    };
   };
 }
