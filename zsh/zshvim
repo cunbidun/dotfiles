@@ -1,38 +1,3 @@
-# User configuration
-export LANG=en_US.UTF-8
-unsetopt PROMPT_SP
-
-MY_EDITOR='lvim'
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR=$MY_EDITOR
-  export VISUAL=$MY_EDITOR
-fi
-
-alias tree="tree -a"
-alias cdnote="cd $HOME/note"
-alias s="source $HOME/.zshrc"
-alias CP="$HOME/competitive_programming/"
-alias r="ranger"
-alias ls="exa -la"
-alias cat="bat"
-
-# All the vim
-alias vi="lvim"
-alias nvim="lvim"
-alias vim="lvim"
-
-alias zshconfig="$MY_EDITOR $HOME/.zshrc"
-alias zshcommon="$MY_EDITOR $HOME/.zshcommon"
-
-gitpush() {
-  CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
-  CURRENT_BRANCH="${1:-$CURRENT_BRANCH}"
-  git push origin --delete $CURRENT_BRANCH && git push --set-upstream origin $CURRENT_BRANCH
-}
-
 # vi mode taken from https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 bindkey -v
 export KEYTIMEOUT=1

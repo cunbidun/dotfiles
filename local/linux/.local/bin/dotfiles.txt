@@ -73,3 +73,6 @@ $HOME/.config/hypr/README.md
 # install script
 
 $HOME/dotfiles/scripts/linux/install_utils.sh
+
+# nix
+$HOME/.config/home-manager/home.nix

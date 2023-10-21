@@ -21,9 +21,7 @@ makepkg -si
 # =======================================================================
 cd
 yay -S pacman-contrib --needed  # extra script for pacman
-yay -S neofetch --needed # for fun :)
-yay -S exa --needed # ls replacement
-yay -S fzf --needed # for fzf
+yay -S zsh --needed
 yay -S xcursor-osx-elcap mcmojave-cursors --needed # MacOS cursor theme
 yay -S brave-bin --needed # browser
 yay -S neovim --needed # text editor
@@ -34,7 +32,6 @@ yay -S wget --needed
 yay -S obsidian --needed # note application
 yay -S cargo --needed # rust
 yay -S lxappearance papirus-folders-nordic --needed # gtk themes
-yay -S bat --needed # cat replacement
 yay -S ncdu --needed # check disk usage 
 yay -S visual-studio-code-bin --needed
 yay -S glxinfo hwinfoc --needed  # hardware info
@@ -48,6 +45,10 @@ yay -S spotify-launcher
 yay -S bazel
 yay -S google-chrome
 yay -S espanso
+
+# =========================================================================
+# Install nix 
+sh <(curl -L https://nixos.org/nix/install) --daemon
 
 # ==========================================================================
 # Start services

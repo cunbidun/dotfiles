@@ -1,0 +1,37 @@
+MY_EDITOR='lvim'
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR=$MY_EDITOR
+  export VISUAL=$MY_EDITOR
+fi
+
+export LANG=en_US.UTF-8
+export TERM="xterm-256color"
+export BAT_STYLE="plain"
+export BAT_THEME="Nord"
+export BAT_OPTS="--color always"
+export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
+
+# Linux
+if [[ "$(uname)" == "Linux" ]]; then
+  export PICKER=dmenu
+  export TERMINAL=alacritty
+  export FZF_DEFAULT_OPTS="
+    --color fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C,pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
+    --preview-window sharp
+  "
+fi
+
+# MacOS
+if [[ "$(uname)" == "Darwin" ]]; then
+  export TERMINAL=iterm2
+fi
+
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+theme_autocompletion_file="$HOME/.config/alacritty/changer_autocompletion"
+if [ -f "$theme_autocompletion_file" ]; then
+  source "$theme_autocompletion_file"
+fi

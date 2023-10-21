@@ -9,14 +9,21 @@ in
   home.username = "cunbidun";
   home.homeDirectory = "/home/cunbidun";
   home.packages = [                               
-    pkgs.htop
     pkgs.neovim
-    pkgs.zsh
-    pkgs.neofetch
+
+    # Utils
+    pkgs.bat
+    pkgs.eza
+    pkgs.htop
     pkgs.fzf
+    pkgs.ranger
+    pkgs.neofetch
+    pkgs.tree
+
     pkgsUnstable._1password-gui
     pkgsUnstable._1password
   ];
+
   programs.git = {
     enable = true;
     userName = "Duy Pham";
@@ -35,4 +42,41 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "robbyrussell";
+    };
+    shellAliases = {
+      cdnote="cd $HOME/note";
+      s="source $HOME/.zshrc";
+      CP="$HOME/competitive_programming/";
+      r="ranger";
+      ls="exa -la";
+      cat="bat";
+      tree="tree -a";
+
+      # vim;
+      vi="lvim";
+      nvim="lvim";
+      vim="lvim";
+    };
+    initExtra = ''
+      . $HOME/dotfiles/zsh/zshenv
+      . $HOME/dotfiles/zsh/zshfunctions
+      . $HOME/dotfiles/zsh/zshvim
+      . $HOME/dotfiles/zsh/zshpath
+      . $HOME/dotfiles/zsh/zshtheme
+      . $HOME/dotfiles/zsh/zshconda
+    '';
+  };
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
