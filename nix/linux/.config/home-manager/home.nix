@@ -3,7 +3,6 @@
 let
   pkgs = import <nixpkgs> {  config = { allowUnfree = true; }; };
   pkgsUnstable = import <nixpkgs-unstable> { config = { allowUnfree = true; }; };
-  apple-fonts = import ./apple-fonts.nix ;
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -19,7 +18,8 @@ in
     pkgsUnstable.firefox
 
     # Font
-    apple-fonts
+    pkgsUnstable.liberation_ttf
+    pkgsUnstable.cantarell-fonts
 
     # Messaging
     pkgs.signal-desktop
@@ -40,6 +40,7 @@ in
     pkgs.wget
     pkgs.ncdu
     pkgs.xfce.thunar
+    pkgs.evince
     pkgs.jq
     
     # Music player
@@ -63,7 +64,7 @@ in
 
   home.file.".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
   home.file.".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
-  home.file.".local/share/fonts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/usr/share/fonts";
+  home.file.".fonts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/fonts";
 
   programs.git = {
     enable = true;
@@ -198,10 +199,11 @@ in
     enable = true;
     gtk3 = {
       extraConfig = {
+        gtk-font-name = "Cantarell 11";
         gtk-xft-antialias = 1;
         gtk-xft-hinting = 1;
-        gtk-xft-hintstyle = "hintmedium";
-        gtk-font-name = "SF Pro 11";
+        gtk-xft-hintstyle = "hintfull";
+        gtk-xft-rgba = "none";
       };
     };
     theme = {
