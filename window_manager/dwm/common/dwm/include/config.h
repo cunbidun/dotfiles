@@ -59,7 +59,7 @@ static const Layout layouts[] = {
 
 static const MonitorRule monrules[] = {
 	/* monitor  tag  layout  mfact  nmaster  showbar  topbar */
-	{   0,       0,  2,      -1,    -1,      -1,      -1     }, // use centeredmaster different layout on tag 4 for first monitor
+	{   0,       1,  2,      -1,    -1,      -1,      -1     }, // use centeredmaster different layout on tag 4 for first monitor
 	{   0,       7,  4,      -1,    -1,      -1,      -1     }, // use centeredmaster different layout on tag 4 for first monitor
 	// {   1,       1,  1,      -1,    -1,      -1,      -1     }, // use monocle on tag 1 for second monitor
 	{  -1,      -1,  0,      -1,    -1,      -1,      -1     }, // default

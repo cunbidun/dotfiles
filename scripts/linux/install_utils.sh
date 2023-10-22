@@ -11,21 +11,17 @@ cd yay
 makepkg -si
 
 # =======================================================================
+# Install system packages
 cd
-yay -S pacman-contrib --needed  # extra script for pacman
+yay -S pacman-contrib --needed # extra script for pacman
 yay -S neovim
 yay -S zsh --needed
-yay -S nautilus --needed # graphical file explorer
-yay -S ueberzug --needed # TUI file explorer with image review
-yay -S cargo --needed # rust
-yay -S bluetuith bluez bluez-utils --needed
+yay -S bluetuith bluez bluez-utils --needed # bluetooth
 
-yay -S caprine
-yay -S spotify-launcher
-yay -S bazel
+yay -S caprine # ibus is not working with nix yet
 
 # =========================================================================
-# Install nix 
+# Install nix
 sh <(curl -L https://nixos.org/nix/install) --daemon
 
 # ==========================================================================

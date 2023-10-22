@@ -20,6 +20,10 @@ in
     # Font
     pkgsUnstable.liberation_ttf
     pkgsUnstable.cantarell-fonts
+    pkgsUnstable.noto-fonts-color-emoji
+
+    # Games
+    pkgsUnstable.minecraft
 
     # Messaging
     pkgs.signal-desktop
@@ -32,7 +36,7 @@ in
     pkgs.eza # ls
     pkgs.htop
     pkgs.fzf
-    pkgs.ranger
+    pkgs.ranger pkgsUnstable.ueberzugpp
     pkgs.neofetch
     pkgs.tree
     pkgs.espanso
@@ -42,12 +46,17 @@ in
     pkgs.xfce.thunar
     pkgs.evince
     pkgs.jq
+
+    # Programming
+    pkgsUnstable.cargo
+    pkgsUnstable.zulu # OpenJDK for Java
     
     # Music player
     pkgs.spotify
 
     # Theme
     pkgs.lxappearance
+    pkgsUnstable.bazel
 
     # For vim
     pkgs.shellcheck
