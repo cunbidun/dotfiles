@@ -15,7 +15,7 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["<S-x>"] = ":BufferKill<CR>"
-lvim.keys.normal_mode["<C-t>"] = ":ToggleTerm<CR>"
+lvim.keys.normal_mode["<C-\\>"] = ":ToggleTerm<CR>"
 -- }}}
 
 -- unmap a default keymapping {{{

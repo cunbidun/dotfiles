@@ -31,16 +31,22 @@ static const Key keys[] = {
 	{ MODKEY,                           XK_Return,                        spawn,                            {.v = termcmd } },
 	{ MODKEY,                           XK_b,                             togglebar,                        {0} },
 
-	{ MODKEY,                           XK_j,                             focusstackvis,                    {.i = +1 } },
-	{ MODKEY,                           XK_k,                             focusstackvis,                    {.i = -1 } },
 	{ MODKEY|ControlMask|ShiftMask,     XK_j,                             focusstackhid,                    {.i = +1 } },
 	{ MODKEY|ControlMask|ShiftMask,     XK_k,                             focusstackhid,                    {.i = -1 } },
+
+  // Window movement and swap
+	{ MODKEY,                           XK_h,                             focusdir,                         {.i = 0 } }, // left
+	{ MODKEY,                           XK_l,                             focusdir,                         {.i = 1 } }, // right
+	{ MODKEY,                           XK_k,                             focusdir,                         {.i = 2 } }, // up
+	{ MODKEY,                           XK_j,                             focusdir,                         {.i = 3 } }, // down
+	{ MODKEY|ControlMask,               XK_h,                             setmfact,                         {.f = -0.05} },
+	{ MODKEY|ControlMask,               XK_l,                             setmfact,                         {.f = +0.05} },
+	{ MODKEY|ControlMask,               XK_k,                             setcfact,                         {.f = +0.25} },
+	{ MODKEY|ControlMask,               XK_j,                             setcfact,                         {.f = -0.25} },
 
 	{ MODKEY,                           XK_i,                             incnmaster,                       {.i = +1 } },
 	{ MODKEY,                           XK_d,                             incnmaster,                       {.i = -1 } },
 	{ MODKEY,                           XK_z,                             zoom,                             {0} },
-	{ MODKEY,                           XK_h,                             setmfact,                         {.f = -0.05} },
-	{ MODKEY,                           XK_l,                             setmfact,                         {.f = +0.05} },
 	{ MODKEY|ShiftMask,                 XK_j,                             movestack,                        {.i = +1 } },
 	{ MODKEY|ShiftMask,                 XK_k,                             movestack,                        {.i = -1 } },
 	{ MODKEY|ShiftMask,                 XK_x,                             spawn,                            SHCMD("sc_prompt 'Do you want to shutdown?' 'shutdown -h now'") },
@@ -56,8 +62,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,                 XK_comma,                         tagmon,                           {.i = -1 } },
 	{ MODKEY|ShiftMask,                 XK_period,                        tagmon,                           {.i = +1 } },
 	{ MODKEY|ShiftMask,                 XK_q,                             quit,                             {1} },
-	// { MODKEY|ShiftMask|ALTKEY,          XK_k,                             setcfact,                         {.f = +0.25} },
-	// { MODKEY|ShiftMask|ALTKEY,          XK_j,                             setcfact,                         {.f = -0.25} },
 	// { MODKEY|ShiftMask|ALTKEY,          XK_r,                             setcfact,                         {.f =  0.00} },
 	// { MODKEY|ALTKEY,                    XK_u,                             incrgaps,                         {.i = +1 } },
 	// { MODKEY|ALTKEY|ShiftMask,          XK_u,                             incrgaps,                         {.i = -1 } },
@@ -75,10 +79,6 @@ static const Key keys[] = {
 	// { MODKEY|ALTKEY|ShiftMask,          XK_9,                             incrovgaps,                       {.i = -1 } },
 	// { MODKEY|ALTKEY,                    XK_0,                             togglegaps,                       {0} },
 	// { MODKEY|ALTKEY|ShiftMask,          XK_0,                             defaultgaps,                      {0} },
-	{ MODKEY|ControlMask,               XK_h,                             focusdir,                         {.i = 0 } }, // left
-	{ MODKEY|ControlMask,               XK_l,                             focusdir,                         {.i = 1 } }, // right
-	{ MODKEY|ControlMask,               XK_k,                             focusdir,                         {.i = 2 } }, // up
-	{ MODKEY|ControlMask,               XK_j,                             focusdir,                         {.i = 3 } }, // down
 	{ MODKEY,                           XK_Tab,                           swapfocus,                        {0} },
 	{ MODKEY|ShiftMask,                 XK_c,                             killclient,                       {0} },
 	{ MODKEY,                           XK_space,                         spawn,                            SHCMD("set_language") },

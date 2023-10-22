@@ -46,10 +46,17 @@ in
     pkgs.xfce.thunar
     pkgs.evince
     pkgs.jq
+    pkgsUnstable.rclone pkgsUnstable.rclone-browser
 
     # Programming
     pkgsUnstable.cargo
     pkgsUnstable.zulu # OpenJDK for Java
+
+    # Python package
+    pkgsUnstable.python311Packages.flake8
+    pkgsUnstable.black
+    pkgsUnstable.isort
+    pkgsUnstable.nodejs_20
     
     # Music player
     pkgs.spotify
