@@ -1,17 +1,20 @@
 #include "appearance.h"
 #include "dwm.h"
+#include "log.h"
 
 extern Atom netatom[NetLast], wmatom[WMLast], xatom[XLast];
 extern Display *dpy;
 extern Monitor *selmon;
 extern Clr **scheme;
-extern Client *prevclient;
 extern Window root;
 
 void unfocus(Client *c, int setfocus) {
   if (!c)
     return;
-  prevclient = c;
+  if (selmon->pertag->curtag == c->tags) {
+    log_info("Setting prevclient for tag %d to %s", c->tags, c->name);
+    selmon->pertag->prevclient[c->tags] = c;
+  }
   grabbuttons(c, 0);
   updateborderonunfocus(c);
   if (setfocus) {

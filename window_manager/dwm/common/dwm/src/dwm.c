@@ -24,7 +24,6 @@ char schemeblue[]     = "#81A1C1";
 /* variables */
 const char autostartblocksh[] = "autostart_blocking.sh";
 const char autostartsh[]      = "autostart.sh";
-Client *prevclient            = NULL;
 Systray *systray              = NULL;
 const char broken[]           = "broken";
 const char dwmdir[]           = "dwm";
@@ -2239,9 +2238,10 @@ void spawn(const Arg *arg) {
 
 void swapfocus() {
   Client *c;
+  Client *prevclient = selmon->pertag->prevclient[selmon->sel->tags];
   for (c = selmon->clients; c && c != prevclient; c = c->next)
     ;
-  if (c == prevclient) {
+  if (prevclient != NULL && c == prevclient) {
     focus(prevclient);
     restack(prevclient->mon);
   }
@@ -3049,13 +3049,13 @@ Monitor *systraytomon(Monitor *m) {
 }
 
 void zoom(const Arg *arg) {
-  Client *c  = selmon->sel;
-  prevclient = nexttiled(selmon->clients);
+  Client *c                           = selmon->sel;
+  selmon->pertag->prevclient[c->tags] = nexttiled(selmon->clients);
 
   if (!selmon->lt[selmon->sellt]->arrange || (selmon->sel && selmon->sel->isfloating))
     return;
   if (c == nexttiled(selmon->clients))
-    if (!c || !(c = prevclient = nexttiled(c->next)))
+    if (!c || !(c = selmon->pertag->prevclient[c->tags] = nexttiled(c->next)))
       return;
   pop(c);
 }

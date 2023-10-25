@@ -218,6 +218,7 @@ struct Pertag {
   const Layout *ltidxs[10][2];  /* matrix of tags and layouts indexes  */
   int showbars[10];             /* display bar for the current tag */
   int enablegaps[10];           /* display bar for the current tag */
+  Client *prevclient[10];       /* last client on this tag */
 };
 
 struct Systray {
