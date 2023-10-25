@@ -121,6 +121,7 @@ typedef struct {
   KeySym keysym;
   void (*func)(const Arg *);
   const Arg arg;
+  int submap;
 } Key;
 
 typedef struct {
@@ -240,6 +241,7 @@ void clientmessage(XEvent *e);
 void configure(Client *c);
 void configurenotify(XEvent *e);
 void configurerequest(XEvent *e);
+void change_submask(const Arg *arg);
 Monitor *createmon(void);
 void cyclelayout(const Arg *arg);
 void destroynotify(XEvent *e);
@@ -278,6 +280,7 @@ void maprequest(XEvent *e);
 void motionnotify(XEvent *e);
 void movemouse(const Arg *arg);
 void movestack(const Arg *arg);
+void movecenter(const Arg *arg);
 Client *nexttiled(Client *c);
 void pop(Client *c);
 void propertynotify(XEvent *e);

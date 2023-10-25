@@ -29,6 +29,7 @@ Systray *systray              = NULL;
 const char broken[]           = "broken";
 const char dwmdir[]           = "dwm";
 const char localshare[]       = ".local/share";
+int current_submap            = 0;
 char stext[1024];
 int statussig;
 int statusw;
@@ -1166,9 +1167,11 @@ void grabkeys(void) {
     for (k = start; k <= end; k++)
       for (i = 0; i < LENGTH(keys); i++)
         /* skip modifier codes, we do that ourselves */
-        if (keys[i].keysym == syms[(k - start) * skip])
+        if (keys[i].keysym == syms[(k - start) * skip] && keys[i].submap == current_submap) {
           for (j = 0; j < LENGTH(modifiers); j++)
             XGrabKey(dpy, k, keys[i].mod | modifiers[j], root, True, GrabModeAsync, GrabModeAsync);
+        }
+
     XFree(syms);
   }
 }
@@ -1187,18 +1190,27 @@ int isuniquegeom(XineramaScreenInfo *unique, size_t n, XineramaScreenInfo *info)
 }
 #endif /* XINERAMA */
 
+void change_submask(const Arg *arg) {
+  current_submap = arg->i;
+  log_info("Seting the current_submap to %d", current_submap);
+  grabkeys();
+}
+
 void keypress(XEvent *e) {
   unsigned int i;
   KeySym keysym;
   XKeyEvent *ev;
 
-  log_info("[In keypress] Got keypress event");
+  log_info("[In keypress] Got keypress event, current_submap is %d", current_submap);
   ev     = &e->xkey;
   keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
   log_info("[In keypress] Got key code = %ld", keysym);
   for (i = 0; i < LENGTH(keys); i++)
-    if (keysym == keys[i].keysym && CLEANMASK(keys[i].mod) == CLEANMASK(ev->state) && keys[i].func)
-      keys[i].func(&(keys[i].arg));
+    if (keysym == keys[i].keysym && CLEANMASK(keys[i].mod) == CLEANMASK(ev->state) && keys[i].func) {
+      if (current_submap == keys[i].submap) {
+        keys[i].func(&(keys[i].arg));
+      }
+    }
 }
 
 void killclient(const Arg *arg) {
@@ -3130,6 +3142,12 @@ void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, i
 
 void toggleborder(const Arg *arg) {
   selmon->sel->bw = (selmon->sel->bw == borderpx ? 0 : borderpx);
+  arrange(selmon);
+}
+
+void movecenter(const Arg *arg) {
+  selmon->sel->x = selmon->sel->mon->mx + (selmon->sel->mon->mw - WIDTH(selmon->sel)) / 2;
+  selmon->sel->y = selmon->sel->mon->my + (selmon->sel->mon->mh - HEIGHT(selmon->sel)) / 2;
   arrange(selmon);
 }
 
