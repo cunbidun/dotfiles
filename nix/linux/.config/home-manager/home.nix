@@ -46,7 +46,10 @@ in
     pkgs.xfce.thunar
     pkgs.evince
     pkgs.jq
+    pkgsUnstable.dunst
+    pkgsUnstable.conky pkgsUnstable.glxinfo pkgsUnstable.hwinfo # System monitoring
     pkgsUnstable.rclone pkgsUnstable.rclone-browser
+    pkgsUnstable.waybar pkgsUnstable.hyprpaper pkgsUnstable.wofi
 
     # Programming
     pkgsUnstable.cargo

@@ -6,12 +6,12 @@
   // "width": 1280, // Waybar width
   "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
-  "modules-left": ["wlr/workspaces", "wlr/mode", "wlr/scratchpad", "custom/media"],
-  "modules-center": ["wlr/window"],
+  "modules-left": ["hyprland/workspaces", "custom/media"],
+  "modules-center": ["hyprland/window"],
   "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "clock", "tray"],
 
   // Modules configuration
-  "wlr/workspaces": {
+  "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "format": "{icon}",
@@ -25,7 +25,6 @@
        "7": "7",
        "8": "8",
        "9": "9",
-       "10":10,
        "urgent": "",
        "focused": "",
        "default": ""
@@ -39,16 +38,6 @@
           "locked": "",
           "unlocked": ""
       }
-  },
-  "wlr/mode": {
-      "format": "<span style=\"italic\">{}</span>"
-  },
-  "wlr/scratchpad": {
-      "format": "{icon} {count}",
-      "show-empty": false,
-      "format-icons": ["", ""],
-      "tooltip": true,
-      "tooltip-format": "{app}: {title}"
   },
   "mpd": {
       "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
