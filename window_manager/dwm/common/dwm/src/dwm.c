@@ -1440,29 +1440,8 @@ void movemouse(const Arg *arg) {
   }
 }
 
-void movestack(const Arg *arg) {
-  if (!selmon->sel)
-    return;
-
-  Client *c = NULL, *p = NULL, *pc = NULL, *i;
-
-  if (arg->i > 0) {
-    /* find the client after selmon->sel */
-    for (c = selmon->sel->next; c && (!ISVISIBLE(c) || c->isfloating); c = c->next)
-      ;
-    if (!c)
-      for (c = selmon->clients; c && (!ISVISIBLE(c) || c->isfloating); c = c->next)
-        ;
-  } else {
-    /* find the client before selmon->sel */
-    for (i = selmon->clients; i != selmon->sel; i = i->next)
-      if (ISVISIBLE(i) && !i->isfloating)
-        c = i;
-    if (!c)
-      for (; i; i = i->next)
-        if (ISVISIBLE(i) && !i->isfloating)
-          c = i;
-  }
+void swap_current_with(Client *c) {
+  Client *p = NULL, *pc = NULL, *i;
   /* find the client before selmon->sel and c */
   for (i = selmon->clients; i && (!p || !pc); i = i->next) {
     if (i->next == selmon->sel)
@@ -1489,6 +1468,91 @@ void movestack(const Arg *arg) {
 
     arrange(selmon);
   }
+}
+
+Client *getdir(const Arg *arg) {
+  Client *s = selmon->sel, *f = NULL, *c, *next;
+  unsigned int score = -1;
+  unsigned int client_score;
+  int dist;
+  int dirweight  = 20;
+  int isfloating = s->isfloating;
+
+  next = s->next;
+  if (!next)
+    next = s->mon->clients;
+  for (c = next; c != s; c = next) {
+
+    next = c->next;
+    if (!next)
+      next = s->mon->clients;
+
+    if (!ISVISIBLE(c) || c->isfloating != isfloating) // || HIDDEN(c)
+      continue;
+
+    switch (arg->i) {
+    case 0: // left
+      dist         = s->x - c->x - c->w;
+      client_score = dirweight * MIN(abs(dist), abs(dist + s->mon->ww)) + abs(s->y - c->y);
+      break;
+    case 1: // right
+      dist         = c->x - s->x - s->w;
+      client_score = dirweight * MIN(abs(dist), abs(dist + s->mon->ww)) + abs(c->y - s->y);
+      break;
+    case 2: // up
+      dist         = s->y - c->y - c->h;
+      client_score = dirweight * MIN(abs(dist), abs(dist + s->mon->wh)) + abs(s->x - c->x);
+      break;
+    default:
+    case 3: // down
+      dist         = c->y - s->y - s->h;
+      client_score = dirweight * MIN(abs(dist), abs(dist + s->mon->wh)) + abs(c->x - s->x);
+      break;
+    }
+
+    if (((arg->i == 0 || arg->i == 2) && client_score <= score) || client_score < score) {
+      score = client_score;
+      f     = c;
+    }
+  }
+  return f;
+}
+
+void movestack(const Arg *arg) {
+  if (!selmon->sel)
+    return;
+
+  Client *c = NULL, *i;
+
+  if (arg->i > 0) {
+    /* find the client after selmon->sel */
+    for (c = selmon->sel->next; c && (!ISVISIBLE(c) || c->isfloating); c = c->next)
+      ;
+    if (!c)
+      for (c = selmon->clients; c && (!ISVISIBLE(c) || c->isfloating); c = c->next)
+        ;
+  } else {
+    /* find the client before selmon->sel */
+    for (i = selmon->clients; i != selmon->sel; i = i->next)
+      if (ISVISIBLE(i) && !i->isfloating)
+        c = i;
+    if (!c)
+      for (; i; i = i->next)
+        if (ISVISIBLE(i) && !i->isfloating)
+          c = i;
+  }
+  swap_current_with(c);
+}
+
+void swapdir(const Arg *arg) {
+  if (!selmon->sel)
+    return;
+
+  Client *c = getdir(arg);
+  if (!c)
+    return;
+
+  swap_current_with(c);
 }
 
 Client *nexttiled(Client *c) {
