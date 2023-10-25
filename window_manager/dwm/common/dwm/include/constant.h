@@ -22,9 +22,9 @@
 // #define ALTKEY Mod4Mask
 
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG}, 0 }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG}, 0 }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG}, 0 }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG}, 0 },
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG}, 1 }, \
+	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG}, 1 }, \
+	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG}, 1 }, \
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG}, 1 },
 
 #endif

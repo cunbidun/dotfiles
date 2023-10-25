@@ -28,7 +28,7 @@ Systray *systray              = NULL;
 const char broken[]           = "broken";
 const char dwmdir[]           = "dwm";
 const char localshare[]       = ".local/share";
-int current_submap            = 0;
+int current_submap_bit        = 0;
 char stext[1024];
 int statussig;
 int statusw;
@@ -1166,7 +1166,7 @@ void grabkeys(void) {
     for (k = start; k <= end; k++)
       for (i = 0; i < LENGTH(keys); i++)
         /* skip modifier codes, we do that ourselves */
-        if (keys[i].keysym == syms[(k - start) * skip] && keys[i].submap == current_submap) {
+        if (keys[i].keysym == syms[(k - start) * skip] && ((keys[i].submap >> current_submap_bit) & 1)) {
           for (j = 0; j < LENGTH(modifiers); j++)
             XGrabKey(dpy, k, keys[i].mod | modifiers[j], root, True, GrabModeAsync, GrabModeAsync);
         }
@@ -1190,8 +1190,8 @@ int isuniquegeom(XineramaScreenInfo *unique, size_t n, XineramaScreenInfo *info)
 #endif /* XINERAMA */
 
 void change_submask(const Arg *arg) {
-  current_submap = arg->i;
-  log_info("Seting the current_submap to %d", current_submap);
+  current_submap_bit = arg->i;
+  log_info("Seting the current_submap to %d", current_submap_bit);
   grabkeys();
 }
 
@@ -1200,13 +1200,13 @@ void keypress(XEvent *e) {
   KeySym keysym;
   XKeyEvent *ev;
 
-  log_info("[In keypress] Got keypress event, current_submap is %d", current_submap);
+  log_info("[In keypress] Got keypress event, current_submap is %d", current_submap_bit);
   ev     = &e->xkey;
   keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
   log_info("[In keypress] Got key code = %ld", keysym);
   for (i = 0; i < LENGTH(keys); i++)
     if (keysym == keys[i].keysym && CLEANMASK(keys[i].mod) == CLEANMASK(ev->state) && keys[i].func) {
-      if (current_submap == keys[i].submap) {
+      if ((keys[i].submap >> current_submap_bit) & 1) {
         keys[i].func(&(keys[i].arg));
       }
     }
