@@ -48,7 +48,7 @@ static const char *fonts[]               = {"Source Code Pro:size=10"};
 static const char dmenufont[]            = "Source Code Pro:size=10";
 
 /* Color schemes */
-enum { SchemeNorm, SchemeRed, SchemeGreen, SchemeYellow, SchemeBlue, SchemeSel, SchemeUrg, SchemeSym, SchemeHid, SchemeTab };
+enum { SchemeNorm, SchemeRed, SchemeGreen, SchemeYellow, SchemeBlue, SchemeSel, SchemeUrg, SchemeSym, SchemeHid, SchemeTab, SchemeSubmap };
 
 enum { ColFg, ColBg, ColBorder }; /* Clr scheme index */
 
@@ -56,15 +56,16 @@ enum { ColFg, ColBg, ColBorder }; /* Clr scheme index */
 static const char *colors[][3] = {
     [SchemeNorm]   = {scheme_fg, scheme_bg, scheme_norm},        /* Normal color */
     [SchemeSel]    = {scheme_bg, scheme_sel, scheme_sel},        /* Selected color */
-    [SchemeUrg]    = {scheme_norm, scheme_urg, scheme_urg},        /* Urgent color */
+    [SchemeUrg]    = {scheme_norm, scheme_urg, scheme_urg},      /* Urgent color */
     [SchemeSym]    = {scheme_sym_fg, scheme_sym_bg, 0},          /* Symbol color */
     [SchemeRed]    = {schemered, schemered, schemered},          /* Red color */
     [SchemeGreen]  = {schemegreen, schemegreen, schemegreen},    /* Green color */
     [SchemeYellow] = {schemeyellow, schemeyellow, schemeyellow}, /* yellow color */
     [SchemeBlue]   = {schemeblue, schemeblue, schemeblue},       /* Blue color */
-    
+    [SchemeSubmap] = {scheme_bg, schemegreen, schemegreen},
+
     // tab configs
-    [SchemeHid]    = {schemeblue, scheme_norm, schemeblue},
-    [SchemeTab]    = {scheme_fg, scheme_norm, scheme_norm},       /*Tab color*/
+    [SchemeHid] = {schemeblue, scheme_norm, schemeblue},
+    [SchemeTab] = {scheme_fg, scheme_norm, scheme_norm}, /*Tab color*/
 };
 #endif

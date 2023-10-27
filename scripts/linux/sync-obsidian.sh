@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while true; do
-	syncrclone "$HOME/dotfiles/scripts/linux/config.py"
-	sleep 10
-done
+syncrclone "$HOME/dotfiles/scripts/linux/config.py"
+# while true; do
+# 	sleep 10
+# done

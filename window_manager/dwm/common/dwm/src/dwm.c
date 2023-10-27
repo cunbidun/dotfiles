@@ -898,6 +898,28 @@ void drawbar(Monitor *m) {
   w = TEXTW(m->ltsymbol);
   drw_setscheme(drw, scheme[SchemeSym]);
   x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+  drw_setscheme(drw, scheme[SchemeSubmap]);
+
+  char current_submap_buffer[40];
+  char *submap_str = NULL;
+  if (current_submap_bit == 0) {
+    submap_str = "Normal";
+  }
+  if (current_submap_bit == 1) {
+    submap_str = "Resize";
+  }
+  if (current_submap_bit == 2) {
+    submap_str = "Gaps";
+  }
+  if (current_submap_bit == 3) {
+    submap_str = "Windows";
+  }
+  if (current_submap_bit == 4) {
+    submap_str = "Session";
+  }
+  sprintf(current_submap_buffer, "Submap: %s", submap_str);
+  w = TEXTW(current_submap_buffer);
+  x = drw_text(drw, x, 0, w, bh, lrpad / 2, current_submap_buffer, 0);
 
   if ((w = m->ww - sw - system_tray_width - x) > bh) {
     if (n > 0) {
@@ -1193,6 +1215,7 @@ void change_submask(const Arg *arg) {
   current_submap_bit = arg->i;
   log_info("Seting the current_submap to %d", current_submap_bit);
   grabkeys();
+  drawbars();
 }
 
 void keypress(XEvent *e) {

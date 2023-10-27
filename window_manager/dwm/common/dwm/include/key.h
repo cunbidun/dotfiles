@@ -79,6 +79,7 @@ static const Key keys[] = {
 	{ 0,                                XK_e,                             spawn,                            SHCMD("sc_prompt 'Do you want to exit dwm?' 'pkill dwm'"),                       16 },
 	{ 0,                                XK_l,                             spawn,                            SHCMD("slock"),                                                                  16 },
 	{ ShiftMask,                        XK_l,                             spawn,                            SHCMD("sc_prompt 'Do you want to suspend?' 'slock systemctl suspend -i'"),       16 },
+	{ MODKEY|ShiftMask,                 XK_q,                             quit,                             {1},                                          31 },
 
 	{ MODKEY|ShiftMask,                 XK_b,                             spawn,                            SHCMD("sc_toggle_picom"),                     1 },
 	{ MODKEY,                           XK_o,                             show,                             {0},                                          1 },
@@ -108,7 +109,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,                 XK_m,                             spawn,                            SHCMD("sc_open_man_page_dmenu"),              1 },
 	{ MODKEY|ShiftMask,                 XK_comma,                         tagmon,                           {.i = -1 },                                   1 },
 	{ MODKEY|ShiftMask,                 XK_period,                        tagmon,                           {.i = +1 },                                   1 },
-	{ MODKEY|ShiftMask,                 XK_q,                             quit,                             {1},                                          1 },
 	{ MODKEY,                           XK_Tab,                           swapfocus,                        {0},                                          1 },
 	{ MODKEY|ShiftMask,                 XK_c,                             killclient,                       {0},                                          1 },
 	{ MODKEY,                           XK_space,                         spawn,                            SHCMD("set_language"),                        1 },
