@@ -9,16 +9,14 @@ in {
     pkgs.eza # ls
     pkgs.htop
     pkgs.fzf
-    pkgs.ranger
-    pkgsUnstable.ueberzugpp
     pkgs.neofetch
     pkgs.tree
     pkgs.espanso
     pkgs.tmux
     pkgs.tmuxinator
     pkgs.wget
-    pkgs.ncdu
     pkgs.jq
+    pkgs.ncdu
 
     pkgsUnstable.nixfmt
     pkgsUnstable.bazel
@@ -49,6 +47,9 @@ in {
     # Note
     pkgsUnstable.obsidian
 
+    # Util
+    pkgs.ranger
+    pkgsUnstable.ueberzugpp
     pkgs.xfce.thunar
     pkgs.evince
     pkgsUnstable.dunst

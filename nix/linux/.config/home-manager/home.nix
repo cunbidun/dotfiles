@@ -5,12 +5,13 @@ let
   pkgsUnstable =
     import <nixpkgs-unstable> { config = { allowUnfree = true; }; };
   package_config = import ./packages.nix;
+  dircolors = import ./dircolors.nix;
 in with pkgs.stdenv;
 with lib; {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "cunbidun";
-  home.homeDirectory = if isDarwin then "/User/cunbidun" else "/home/cunbidun";
+  home.homeDirectory = if isDarwin then "/Users/cunbidun" else "/home/cunbidun";
 
   home.packages = if isDarwin then
     package_config.default_packages ++ package_config.mac_packages
@@ -107,7 +108,7 @@ with lib; {
       "${config.home.homeDirectory}/.nix-profile/share/fonts";
   } else {};
 
-  gtk = {
+  gtk = if isLinux then {
     enable = true;
     gtk3 = {
       extraConfig = {
@@ -131,7 +132,7 @@ with lib; {
       package = pkgs.papirus-nord;
       name = "Papirus-Dark";
     };
-  };
+  } else {};
 
   # +--------------------+
   # |    Common conifg   |
@@ -189,5 +190,10 @@ with lib; {
     enable = true;
     userName = "Duy Pham";
     userEmail = "cunbidun@gmail.com";
+  };
+  programs.dircolors = {
+    enable = true;
+    enableZshIntegration = true;
+    extraConfig = dircolors.settings;
   };
 }
