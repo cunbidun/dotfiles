@@ -332,8 +332,9 @@ prompt_igloo_setup() {
   if [[ $(typeset -f __git_ps1) && $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]]; then
     local git_commit_short="$(command git rev-parse HEAD 2> /dev/null)"
     local message="$(command git --no-pager show -s --format=%s 2> /dev/null)"
+    local commit_date="$(command git log  -1  --pretty="format:%ci" --date=local)"
     seg_git1=" ${nord3}${SPLITBAR_GIT}[${nord8}$(__git_ps1 "%s")${nord3}]${c_reset}${newline}"
-    seg_git2=" ${nord3}${SPLITBAR_GIT}[${nord8}${message}${nord3}]${SPLITBAR}[${nord8}${git_commit_short}${nord3}]${c_reset}${newline}"
+    seg_git2=" ${nord3}${SPLITBAR_GIT}[${nord8}${message}${nord3}]${SPLITBAR}[${nord8}${git_commit_short}${nord3}]${SPLITBAR}[${nord8}${commit_date}${nord3}]${c_reset}${newline}"
   fi
 
   PROMPT="${seg_connect_bar_down}${seg_user_host}${seg_jobs}${seg_exit_status}${seg_time}${seg_working_dir}${seg_git1}${seg_git2}${seg_arrow}"

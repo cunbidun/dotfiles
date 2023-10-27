@@ -51,8 +51,7 @@ $HOME/.config/alacritty/themes/nord.yaml
 $HOME/.config/alacritty/themes/solarized_light.yaml
 
 # zsh
-$HOME/.zshenv
-$HOME/.zshrc
+$HOME/dotfiles/zsh/
 
 # cron jobs
 $HOME/cron/jobs
@@ -62,16 +61,12 @@ $HOME/cron/root_jobs
 $HOME/dotfiles/docs/pages/TODO.md
 $HOME/dotfiles/docs/pages/Dotfiles Installation Note.md
 
-# cp stuff
-$HOME/competitive_programming/topcoder.md
-
 # hyprland
 $HOME/.config/hypr/hyprland.conf
 $HOME/.config/hypr/hyprpaper.conf
 $HOME/.config/hypr/README.md
 
 # install script
-
 $HOME/dotfiles/scripts/linux/install_utils.sh
 
 # nix
