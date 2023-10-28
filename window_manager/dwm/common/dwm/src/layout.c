@@ -583,8 +583,8 @@ void tile(Monitor *m) {
   sw = mw = m->ww - 2 * ov;
 
   if (m->nmaster && n > m->nmaster) {
-    sw = (mw - iv) * (1 - m->mfact);
-    mw = mw - iv - sw;
+    sw = (mw - iv) * (1 - m->mfact); // slave width
+    mw = mw - iv - sw;               // master width
     sx = mx + mw + iv;
   }
 

@@ -17,6 +17,7 @@ in {
     pkgs.wget
     pkgs.jq
     pkgs.ncdu
+    pkgsUnstable.newsboat
 
     pkgsUnstable.nixfmt
     pkgsUnstable.bazel
@@ -25,6 +26,7 @@ in {
     pkgs.shellcheck
     pkgsUnstable.shfmt
   ];
+
   linux_packages = [
     # Text editor
     pkgsUnstable.vscode
@@ -84,5 +86,6 @@ in {
     pkgsUnstable._1password-gui
     pkgsUnstable._1password
   ];
+
   mac_packages = [ ];
 }
