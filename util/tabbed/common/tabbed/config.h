@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]        = "Source Code Pro:size=11";
+static const char font[]        = "Source Code Pro:size=10";
 static const char* normbgcolor  = "#2E3440";
 static const char* normfgcolor  = "#ECEFF4";
 static const char* selbgcolor   = "#81A1C1";
@@ -45,22 +45,26 @@ static Bool npisrelative  = True;
 	} \
 }
 
-
-/* Modify the following line to match your terminal*/
 #define OPENTERM(p) { \
-	.v = (char *[]){ "/bin/sh", "-c", \
-		"term='alacritty' && embedarg='--embed' &&" \
-		"cd \"$(xwininfo -children -id $1 | grep '^     0x' |" \
-                "sed -e's@^ *\\(0x[0-9a-f]*\\) \"\\([^\"]*\\)\".*@\\1 \\2@' |" \
-		"dmenu -i -l 10 -p 'New term path based on: ' |" \
-		"cut -f 1 | xargs -I {} xprop -id \"{}\" | grep _NET_WM_PID |" \
-		"cut -d ' ' -f 3 | xargs -I {} pstree -p \"{}\" |" \
-		"cut -d '(' -f 3 | cut -d ')' -f 1 |" \
-		"xargs -I {} readlink -e /proc/\"{}\"/cwd/)\" &&" \
-		"$term $embedarg $1", \
-		p, winid, NULL \
-	} \
+	.v = (char *[]){ "/bin/sh", "-c", "term='alacritty' && titlearg='-t' && embedarg='--embed' && $term $embedarg $1", p, winid, NULL } \
 }
+
+
+// /* Modify the following line to match your terminal*/
+// #define OPENTERM(p) { \
+// 	.v = (char *[]){ "/bin/sh", "-c", \
+// 		"term='alacritty' && embedarg='--embed' &&" \
+// 		"cd \"$(xwininfo -children -id $1 | grep '^     0x' |" \
+//                 "sed -e's@^ *\\(0x[0-9a-f]*\\) \"\\([^\"]*\\)\".*@\\1 \\2@' |" \
+// 		"dmenu -i -l 10 -p 'New term path based on: ' |" \
+// 		"cut -f 1 | xargs -I {} xprop -id \"{}\" | grep _NET_WM_PID |" \
+// 		"cut -d ' ' -f 3 | xargs -I {} pstree -p \"{}\" |" \
+// 		"cut -d '(' -f 3 | cut -d ')' -f 1 |" \
+// 		"xargs -I {} readlink -e /proc/\"{}\"/cwd/)\" &&" \
+// 		"$term $embedarg $1", \
+// 		p, winid, NULL \
+// 	} \
+// }
 
 /* deskid: id for current workspace */
 /* rootid: id for root window */
@@ -68,24 +72,24 @@ static Bool npisrelative  = True;
 /* wid: chosen window's window id */
 /* wname: chosen window's name */
 /* cwid: chosen window's child window id (tabbed window only) */
-#define ATTACHWIN(p) { \
-	.v = (char *[]){ "/bin/sh", "-c", \
-		"deskid=$(xdotool get_desktop) &&" \
-		"rootid=\"$(xwininfo -root | grep \"Window id\" | cut -d ' ' -f 4)\" &&" \
-		"window=\"$(wmctrl -x -l | grep -E \" $deskid \" |" \
-		"grep -v $(printf '0x0%x' \"$1\") |" \
-		"cut -d ' ' -f 1,4 | dmenu -i -l 5 -p \"Attach: \")\" &&" \
-		"wid=$(printf '%s' \"$window\" | cut -d ' ' -f 1) &&" \
-		"wname=$(printf '%s' \"$window\" | cut -d ' ' -f 2) &&" \
-		"[ \"$wname\" = \"tabbed.tabbed\" ] &&" \
-		"cwid=$(xwininfo -children -id \"$wid\" | grep '^     0x' |" \
-                "sed -e 's@^ *\\(0x[0-9a-f]*\\) \"\\([^\"]*\\)\".*@\\1@') &&" \
-		"for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$rootid\"; done &&" \
-		"for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$1\"; done ||" \
-		"xdotool windowreparent \"$wid\" $1", \
-		p, winid, NULL \
-	} \
-}
+// #define ATTACHWIN(p) { \
+// 	.v = (char *[]){ "/bin/sh", "-c", \
+// 		"deskid=$(xdotool get_desktop) &&" \
+// 		"rootid=\"$(xwininfo -root | grep \"Window id\" | cut -d ' ' -f 4)\" &&" \
+// 		"window=\"$(wmctrl -x -l | grep -E \" $deskid \" |" \
+// 		"grep -v $(printf '0x0%x' \"$1\") |" \
+// 		"cut -d ' ' -f 1,4 | dmenu -i -l 5 -p \"Attach: \")\" &&" \
+// 		"wid=$(printf '%s' \"$window\" | cut -d ' ' -f 1) &&" \
+// 		"wname=$(printf '%s' \"$window\" | cut -d ' ' -f 2) &&" \
+// 		"[ \"$wname\" = \"tabbed.tabbed\" ] &&" \
+// 		"cwid=$(xwininfo -children -id \"$wid\" | grep '^     0x' |" \
+//                 "sed -e 's@^ *\\(0x[0-9a-f]*\\) \"\\([^\"]*\\)\".*@\\1@') &&" \
+// 		"for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$rootid\"; done &&" \
+// 		"for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$1\"; done ||" \
+// 		"xdotool windowreparent \"$wid\" $1", \
+// 		p, winid, NULL \
+// 	} \
+// }
 
 #define ATTACHSELECTWIN(p) { \
 	.v = (char *[]){ "/bin/sh", "-c", \
@@ -102,25 +106,25 @@ static Bool npisrelative  = True;
 	} \
 }
 
-#define ATTACHALL(p) { \
-	.v = (char *[]){ "/bin/sh", "-c", \
-		"deskid=$(xdotool get_desktop) &&" \
-		"rootid=\"$(xwininfo -root | grep \"Window id\" | cut -d ' ' -f 4)\" &&" \
-		"window=\"$(wmctrl -x -l | grep -E \" $deskid \" |" \
-		"grep -v $(printf '0x0%x' \"$1\") | cut -d ' ' -f 1,4)\" &&" \
-		"IFS=':' &&" \
-		"for win in $(printf '%s' \"$window\" | tr '\n' ':'); do unset IFS &&" \
-		    "wid=$(printf '%s' \"$win\" | cut -d ' ' -f 1) &&" \
-		    "wname=$(printf '%s' \"$win\" | cut -d ' ' -f 2) &&" \
-		    "[ \"$wname\" = \"tabbed.tabbed\" ] &&" \
-		    "{ cwid=$(xwininfo -children -id \"$wid\" | grep '^     0x' |" \
-		    "sed -e 's@^ *\\(0x[0-9a-f]*\\) \"\\([^\"]*\\)\".*@\\1@') &&" \
-		    "for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$rootid\"; done &&" \
-		    "for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$1\"; done; } ||" \
-		"xdotool windowreparent \"$wid\" $1; done", \
-		p, winid, NULL \
-	} \
-}
+// #define ATTACHALL(p) { \
+// 	.v = (char *[]){ "/bin/sh", "-c", \
+// 		"deskid=$(xdotool get_desktop) &&" \
+// 		"rootid=\"$(xwininfo -root | grep \"Window id\" | cut -d ' ' -f 4)\" &&" \
+// 		"window=\"$(wmctrl -x -l | grep -E \" $deskid \" |" \
+// 		"grep -v $(printf '0x0%x' \"$1\") | cut -d ' ' -f 1,4)\" &&" \
+// 		"IFS=':' &&" \
+// 		"for win in $(printf '%s' \"$window\" | tr '\n' ':'); do unset IFS &&" \
+// 		    "wid=$(printf '%s' \"$win\" | cut -d ' ' -f 1) &&" \
+// 		    "wname=$(printf '%s' \"$win\" | cut -d ' ' -f 2) &&" \
+// 		    "[ \"$wname\" = \"tabbed.tabbed\" ] &&" \
+// 		    "{ cwid=$(xwininfo -children -id \"$wid\" | grep '^     0x' |" \
+// 		    "sed -e 's@^ *\\(0x[0-9a-f]*\\) \"\\([^\"]*\\)\".*@\\1@') &&" \
+// 		    "for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$rootid\"; done &&" \
+// 		    "for id in $(printf '%s' \"$cwid\"); do xdotool windowreparent \"$id\" \"$1\"; done; } ||" \
+// 		"xdotool windowreparent \"$wid\" $1; done", \
+// 		p, winid, NULL \
+// 	} \
+// }
 
 
 #define DETACHWIN(p) { \
@@ -203,49 +207,49 @@ static Bool npisrelative  = True;
 }
 
 
-
-// #define MODKEY Mod4Mask
-// #define ALTKEY Mod1Mask
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
 
 static Key keys[] = {
-	/* modifier            key              function              argument */
-	{ MODKEY,              XK_b,            togglebar,            { 0 } },
-  { MODKEY|ShiftMask,    XK_q,            killclient,           { 0 } },
+	/* modifier                             key                              function                                       argument */
+	{ MODKEY,                               XK_b,                             togglebar,                                     { 0 } },
+  { MODKEY|ShiftMask,                     XK_c,                             killclient,                                    { 0 } },
 
-	{ MODKEY,              XK_k,            rotate,               { .i = +1 } },
-	{ MODKEY,              XK_j,            rotate,               { .i = -1 } },
-	{ MODKEY|ShiftMask,    XK_k,            movetab,              { .i = -1 } },
-	{ MODKEY|ShiftMask,    XK_j,            movetab,              { .i = +1 } },
-	{ ControlMask,         XK_Tab,          rotate,               { .i = 0 } },
+	{ MODKEY,                               XK_l,                             rotate,                                        { .i = +1 } },
+	{ MODKEY,                               XK_h,                             rotate,                                        { .i = -1 } },
+	{ MODKEY|ShiftMask,                     XK_l,                             movetab,                                       { .i = -1 } },
+	{ MODKEY|ShiftMask,                     XK_h,                             movetab,                                       { .i = +1 } },
 
-  /* Move between tabs */
-	{ MODKEY|ShiftMask,    XK_1,            move,                 { .i = 0 } },
-	{ MODKEY|ShiftMask,    XK_2,            move,                 { .i = 1 } },
-	{ MODKEY|ShiftMask,    XK_3,            move,                 { .i = 2 } },
-	{ MODKEY|ShiftMask,    XK_4,            move,                 { .i = 3 } },
-	{ MODKEY|ShiftMask,    XK_5,            move,                 { .i = 4 } },
-	{ MODKEY|ShiftMask,    XK_6,            move,                 { .i = 5 } },
-	{ MODKEY|ShiftMask,    XK_7,            move,                 { .i = 6 } },
-	{ MODKEY|ShiftMask,    XK_8,            move,                 { .i = 7 } },
-	{ MODKEY|ShiftMask,    XK_9,            move,                 { .i = 8 } },
-	{ MODKEY|ShiftMask,    XK_0,            move,                 { .i = 9 } },
+  // Switching between the last 2 terminal
+	{ MODKEY,                               XK_Tab,                           rotate,                                        { .i = 0 } },
 
-	{ MODKEY,              XK_u,            focusurgent,          { 0 } },
-	{ MODKEY|ShiftMask,    XK_u,            toggle,               { .v = (void*) &urgentswitch } },
+  /* Move between tabs */                 
+	{ MODKEY,                               XK_1,                             move,                                          { .i = 0 } },
+	{ MODKEY,                               XK_2,                             move,                                          { .i = 1 } },
+	{ MODKEY,                               XK_3,                             move,                                          { .i = 2 } },
+	{ MODKEY,                               XK_4,                             move,                                          { .i = 3 } },
+	{ MODKEY,                               XK_5,                             move,                                          { .i = 4 } },
+	{ MODKEY,                               XK_6,                             move,                                          { .i = 5 } },
+	{ MODKEY,                               XK_7,                             move,                                          { .i = 6 } },
+	{ MODKEY,                               XK_8,                             move,                                          { .i = 7 } },
+	{ MODKEY,                               XK_9,                             move,                                          { .i = 8 } },
+	{ MODKEY,                               XK_0,                             move,                                          { .i = 9 } },
 
-	{ MODKEY|ShiftMask,    XK_comma,        spawn,                SETPROP("_TABBED_SELECT_TAB") },
+	{ MODKEY,                               XK_u,                             focusurgent,                                   { 0 } },
+	{ MODKEY|ShiftMask,                     XK_u,                             toggle,                                        { .v = (void*) &urgentswitch } },
 
+  // Attacth and Detach
+	{ MODKEY,                               XK_Return,                        spawn,                                         OPENTERM("_TABBED_TERM") }, // Create new termminal
+	{ MODKEY,                               XK_p,                             spawn,                                         OPENTERMSOFT("_TABBED_SELECT_TERMAPP") }, // open term app
+	{ MODKEY|ShiftMask,                     XK_p,                             spawn,                                         SETPROP("_TABBED_SELECT_TAB") }, // dmenu picker for selecting other tab
+	// { MODKEY,                               XK_a,	                           spawn,                                         ATTACHWIN("_TABBED_ATTACH_WIN") },
+	// { MODKEY|ShiftMask,                     XK_a,                             spawn,                                         ATTACHALL("_TABBED_ATTACH_ALL") },
+	{ MODKEY,                               XK_d,	                            spawn,                                         DETACHWIN("_TABBED_DETACH_WIN") },
+	{ MODKEY|ShiftMask,                     XK_d,                             spawn,                                         DETACHALL("_TABBED_DETACH_ALL") },
+	{ MODKEY|ShiftMask,                     XK_s,	                            spawn,                                         ATTACHSELECTWIN("_TABBED_ATTACH_WIN") },
 
-	/* Unique functionality */
-	{ MODKEY|ShiftMask,    XK_period,       spawn,                OPENTERMSOFT("_TABBED_SELECT_TERMAPP") },
-	{ MODKEY|ShiftMask,    XK_Return,       spawn,                OPENTERM("_TABBED_TERM") },
-	{ MODKEY|ShiftMask,    XK_a,	          spawn,                ATTACHWIN("_TABBED_ATTACH_WIN") },
-	{ MODKEY|ShiftMask,    XK_s,	          spawn,                ATTACHSELECTWIN("_TABBED_ATTACH_WIN") },
-	{ MODKEY|ShiftMask,    XK_equal,        spawn,                ATTACHALL("_TABBED_ATTACH_ALL") },
-	{ MODKEY|ShiftMask,    XK_d,	          spawn,                DETACHWIN("_TABBED_DETACH_WIN") },
-	{ MODKEY|ShiftMask,    XK_minus,        spawn,                DETACHALL("_TABBED_DETACH_ALL") },
-	{ MODKEY|ShiftMask,    XK_bracketleft,  spawn,                HIDEWINDOW("_TABBED_HIDE_WINDOW") },
-	{ MODKEY|ShiftMask,    XK_bracketright, spawn,                SHOWHIDDEN("_TABBED_SHOW_HIDDEN") },
-	{ MODKEY|ShiftMask,    XK_backslash,    spawn,                SHOWHIDDENALL("_TABBED_SHOW_HIDDEN_ALL") },
+  // Hide and unhide
+	{ MODKEY|ShiftMask|ControlMask,         XK_c,                             spawn,                                         HIDEWINDOW("_TABBED_HIDE_WINDOW") },
+	{ MODKEY,                               XK_o,                             spawn,                                         SHOWHIDDEN("_TABBED_SHOW_HIDDEN") },
+	{ MODKEY|ShiftMask,                     XK_o,                             spawn,                                         SHOWHIDDENALL("_TABBED_SHOW_HIDDEN_ALL") },
 };

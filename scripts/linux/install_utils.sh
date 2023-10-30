@@ -19,7 +19,8 @@ yay -S zsh --needed
 yay -S bluetuith bluez bluez-utils --needed # bluetooth
 yay -S pipewire pipewire-pulse pulsemixer pipewire-media-session pactl --needed
 
-yay -S caprine # ibus is not working with nix yet
+yay -S caprine           # ibus is not working with nix yet
+yay -S quickemu --needed # ibus is not working with nix yet
 
 # =========================================================================
 # Install nix

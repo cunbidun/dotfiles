@@ -290,6 +290,7 @@ prompt_igloo_setup() {
   local nord8="%F{6}"
   local nord9="%F{4}"
   local nord11="%F{1}"
+  local purple="%F{13}"
 
   # +----------+
   # + Segments +
@@ -297,7 +298,11 @@ prompt_igloo_setup() {
   local seg_connect_bar_down="${newline}${nord3}${CONNECTBAR_DOWN}${c_reset}"
   local seg_exit_status="%(?..${nord3}[%(?.${nord9}.${nord11})%?${nord3}]${SPLITBAR}${c_reset})"
   local seg_jobs="%(1j.${nord3}[${nord9}%j${nord3}]${c_reset}%(?.${nord3}${SPLITBAR}${c_reset}.).)"
-  local seg_working_dir="${nord3}[${nord9}%~${nord3}]${c_reset}${newline}"
+  local seg_working_dir="${nord3}[${nord9}%~${nord3}]"
+  if [ "$IN_NIX_SHELL" ]; then
+    seg_working_dir+="${SPLITBAR}[${purple}nix-shell: $IN_NIX_SHELL${nord3}]"
+  fi
+  seg_working_dir+="${c_reset}${newline}"
   local seg_arrow="${nord3}${ARROW} ${c_reset}"
   
   if [ "$CONDA_DEFAULT_ENV" ]; then

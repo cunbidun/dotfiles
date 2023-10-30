@@ -8,7 +8,6 @@ else
 fi
 
 export LANG=en_US.UTF-8
-export TERM="xterm-256color"
 export BAT_STYLE="plain"
 export BAT_THEME="Nord"
 export BAT_OPTS="--color always"

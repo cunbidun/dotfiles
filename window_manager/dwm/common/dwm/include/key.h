@@ -14,7 +14,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,                 XK_g,                             change_submask,                   {.i = 2},                                     1 }, // submap 2: gaps
 	{ MODKEY,                           XK_q,                             change_submask,                   {.i = 3},                                     1 }, // submap 3: window property 
 	{ MODKEY|ControlMask,               XK_p,                             change_submask,                   {.i = 4},                                     1 }, // submap 4: power
-	{ 0,                                XK_Escape,                        change_submask,                   {.i = 0},                                     30 }, // 11110: all except of 0
+	{ MODKEY,                           XK_t,                             change_submask,                   {.i = 5},                                     1 }, // submap 5: tabbed 
+	{ 0,                                XK_Escape,                        change_submask,                   {.i = 0},                                     62 }, // 11110: all except of 0
 
   // +-------------------------------------------------+
   // | Window focus navigation, resize, move, and swap |
@@ -81,14 +82,18 @@ static const Key keys[] = {
 	{ ShiftMask,                        XK_l,                             spawn,                            SHCMD("sc_prompt 'Do you want to suspend?' 'slock systemctl suspend -i'"),       16 },
 	{ MODKEY|ShiftMask,                 XK_q,                             quit,                             {1},                                          31 },
 
+  // +--------+
+  // | Tabbed |
+  // +--------+
+	{MODKEY,                            XK_s,                             spawn,                            SHCMD("tabbedize"),                           32 },
+
 	{ MODKEY|ShiftMask,                 XK_b,                             spawn,                            SHCMD("sc_toggle_picom"),                     1 },
 	{ MODKEY,                           XK_o,                             show,                             {0},                                          1 },
 	{ MODKEY|ShiftMask,                 XK_o,                             showall,                          {0},                                          1 },
   { MODKEY|ControlMask|ShiftMask,     XK_c,                             hide,                             {0},                                          1 },
 
 	{ MODKEY,                           XK_x,                             spawn,                            SHCMD("arandr"),                              1 },
-	{ MODKEY,                           XK_t,                             spawn,                            SHCMD("tabbedize"),                           1 },
-	{ MODKEY,                           XK_e,                             spawn,                            SHCMD("thunar ~"),                            1 },
+	{ MODKEY,                           XK_e,                             spawn,                            SHCMD("nautilus ~"),                          1 },
 	{ MODKEY,                           XK_backslash,                     spawn,                            SHCMD("dunstctl close-all"),                  1 },
 	{ MODKEY,                           XK_p,                             spawn,                            {.v = dmenucmd },                             1 },
 	{ MODKEY|ShiftMask,                 XK_p,                             spawn,                            SHCMD("sc_window_picker"),                    1 },

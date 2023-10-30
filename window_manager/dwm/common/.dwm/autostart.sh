@@ -1,6 +1,6 @@
 #!/bin/bash
 
-feh --bg-fill ~/.wallpapers/others/green_forest.jpeg &
+feh --bg-fill ~/.wallpapers/nord/4.png &
 
 ibus-daemon -drx &
 killall dwmblocks

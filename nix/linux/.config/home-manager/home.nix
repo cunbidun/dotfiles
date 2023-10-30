@@ -118,9 +118,18 @@ with lib; {
         gtk-xft-hintstyle = "hintfull";
         gtk-xft-rgba = "none";
       };
+      bookmarks = [
+        "file:///home/cunbidun/competitive_programming/output"
+        "file:///home/cunbidun/Documents"
+        "file:///home/cunbidun/Music"
+        "file:///home/cunbidun/Pictures"
+        "file:///home/cunbidun/Videos"
+        "file:///home/cunbidun/Downloads"
+        "file:///home/cunbidun/.wallpapers"
+      ];
     };
     theme = {
-      name = "Nordic-darker-standard-buttons";
+      name = "Nordic-darker";
       package = pkgs.nordic;
     };
     cursorTheme = {
@@ -132,6 +141,21 @@ with lib; {
       package = pkgs.papirus-nord;
       name = "Papirus-Dark";
     };
+  } else {};
+
+  xdg.mimeApps = if isLinux then {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = ["org.gnome.Evince.desktop"];
+      "image/jpeg" = ["feh.desktop"];
+      "image/png" = ["feh.desktop"];
+      "text/plain" = ["lvim.desktop"];
+      "inode/directory" = ["thunar.desktop"];
+    };
+  } else {};
+
+  home.sessionVariables = if isLinux then {
+    XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   } else {};
 
   # +--------------------+

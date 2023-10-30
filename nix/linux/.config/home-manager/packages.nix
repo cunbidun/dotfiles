@@ -45,6 +45,7 @@ in {
 
     # Messaging
     pkgs.signal-desktop
+    pkgs.discord
 
     # Note
     pkgsUnstable.obsidian
@@ -52,7 +53,8 @@ in {
     # Util
     pkgs.ranger
     pkgsUnstable.ueberzugpp
-    pkgs.xfce.thunar
+    # pkgs.xfce.thunar pkgs.xfce.tumbler
+    pkgsUnstable.gnome.nautilus pkgsUnstable.gnome.sushi
     pkgs.evince
     pkgsUnstable.dunst
     pkgsUnstable.conky
@@ -63,6 +65,7 @@ in {
     pkgsUnstable.waybar
     pkgsUnstable.hyprpaper
     pkgsUnstable.wofi
+    pkgsUnstable.feh
 
     # Programming
     pkgsUnstable.cargo
@@ -79,9 +82,6 @@ in {
 
     # Theme
     pkgs.lxappearance
-
-    # WMs
-    pkgs.quickemu
 
     pkgsUnstable._1password-gui
     pkgsUnstable._1password

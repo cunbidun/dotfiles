@@ -917,6 +917,9 @@ void drawbar(Monitor *m) {
   if (current_submap_bit == 4) {
     submap_str = "Session";
   }
+  if (current_submap_bit == 5) {
+    submap_str = "Tabbed";
+  }
   sprintf(current_submap_buffer, "Submap: %s", submap_str);
   w = TEXTW(current_submap_buffer);
   x = drw_text(drw, x, 0, w, bh, lrpad / 2, current_submap_buffer, 0);

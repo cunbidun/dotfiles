@@ -1,5 +1,5 @@
 BasedOnStyle: LLVM
 AlignConsecutiveAssignments: Consecutive
-ColumnLimit: 160
+ColumnLimit: 120
 Cpp11BracedListStyle: true 
 BreakInheritanceList: AfterComma
