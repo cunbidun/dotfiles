@@ -1,6 +1,7 @@
 #!/bin/bash
 
-feh --bg-fill ~/.wallpapers/nord/4.png &
+feh --bg-fill ~/.wallpapers/others/Astronaut.png &
+[[ $(pgrep redshift) ]] || redshift -l 41.85003:-87.65005 &
 
 ibus-daemon -drx &
 killall dwmblocks
