@@ -66,6 +66,7 @@ in {
     pkgsUnstable.hyprpaper
     pkgsUnstable.wofi
     pkgsUnstable.feh
+    pkgsUnstable.imagemagick
 
     # Programming
     pkgsUnstable.cargo
