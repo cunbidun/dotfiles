@@ -1,4 +1,5 @@
 #include "scratchpad.h"
+#include "config.h"
 
 void spawnscratch(const Arg *arg);
 
@@ -12,7 +13,7 @@ void togglescratch(const Arg *arg) {
       if (c->scratchkey == ((char **)arg->v)[0][0]) {
         target = c;
       } else if (c->scratchkey) {
-        c->tags = 0;
+        c->tags = TAGMASK + 1;
         arrange(m);
       }
     }

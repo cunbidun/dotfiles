@@ -184,6 +184,7 @@ int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact) {
 }
 
 void arrange(Monitor *m) {
+  updatecurrentdesktop();
   if (m)
     showhide(m->stack);
   else
@@ -195,6 +196,17 @@ void arrange(Monitor *m) {
   } else
     for (m = mons; m; m = m->next)
       arrangemon(m);
+}
+
+void updateclientdesktop(Client *c) {
+  long rawdata = c->tags;
+  int i        = 0;
+  while (c->tags >> (i + 1)) {
+    i++;
+  }
+  long data[] = {i};
+  log_info("In [updateclientdesktop] update NetWMDesktop of '%s' to %d", c->name, i);
+  XChangeProperty(dpy, c->win, netatom[NetWMDesktop], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data, 1);
 }
 
 void arrangemon(Monitor *m) {
@@ -399,6 +411,7 @@ void clientmessage(XEvent *e) {
   XClientMessageEvent *cme = &e->xclient;
   Client *c                = wintoclient(cme->window);
   unsigned int i;
+  Arg arg;
 
   if (showsystray && cme->window == systray->win && cme->message_type == netatom[NetSystemTrayOP]) {
     /* add systray icons */
@@ -467,6 +480,12 @@ void clientmessage(XEvent *e) {
       focus(c);
       restack(selmon);
     }
+  } else if (cme->message_type == netatom[NetWMDesktop]) {
+    c->tags = cme->data.l[0];
+    arrange(c->mon);
+  } else if (cme->message_type == netatom[NetCloseWindow]) {
+    arg.v = (void *)c;
+    killclient(&arg);
   }
 }
 
@@ -1239,13 +1258,19 @@ void keypress(XEvent *e) {
 }
 
 void killclient(const Arg *arg) {
-  if (!selmon->sel)
+  Client *c;
+  if (arg->v) {
+    c = (Client *)arg->v;
+  } else {
+    c = selmon->sel;
+  }
+  if (!c)
     return;
-  if (!sendevent(selmon->sel->win, wmatom[WMDelete], NoEventMask, wmatom[WMDelete], CurrentTime, 0, 0, 0)) {
+  if (!sendevent(c->win, wmatom[WMDelete], NoEventMask, wmatom[WMDelete], CurrentTime, 0, 0, 0)) {
     XGrabServer(dpy);
     XSetErrorHandler(xerrordummy);
     XSetCloseDownMode(dpy, DestroyAll);
-    XKillClient(dpy, selmon->sel->win);
+    XKillClient(dpy, c->win);
     XSync(dpy, False);
     XSetErrorHandler(xerror);
     XUngrabServer(dpy);
@@ -1337,6 +1362,7 @@ void manage(Window w, XWindowAttributes *wa) {
     XMapWindow(dpy, c->win);
   if (focusclient)
     focus(NULL);
+  updateclientdesktop(c);
 }
 
 void mappingnotify(XEvent *e) {
@@ -1674,6 +1700,7 @@ void restoreSession(void) {
     for (Client *c = selmon->clients; c; c = c->next) { // add tags to every window by winId
       if (c->win == winId) {
         c->tags = tagsForWin;
+        updateclientdesktop(c);
         break;
       }
     }
@@ -2030,6 +2057,7 @@ void sendmon(Client *c, Monitor *m) {
   c->tags = m->tagset[m->seltags];                         /* assign tags of target monitor */
   c->x    = c->mon->mx + (c->mon->mw / 2 - WIDTH(c) / 2);  /* center in x direction */
   c->y    = c->mon->my + (c->mon->mh / 2 - HEIGHT(c) / 2); /* center in y direction */
+  updateclientdesktop(c);
   attachbottom(c);
   attachstack(c);
   focus(NULL);
@@ -2202,6 +2230,8 @@ void setup(void) {
   netatom[NetWMWindowType]              = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
   netatom[NetWMWindowTypeDialog]        = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
   netatom[NetClientList]                = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
+  netatom[NetCloseWindow]               = XInternAtom(dpy, "_NET_CLOSE_WINDOW", False);
+  netatom[NetWMDesktop]                 = XInternAtom(dpy, "_NET_WM_DESKTOP", False);
   xatom[Manager]                        = XInternAtom(dpy, "MANAGER", False);
   xatom[Xembed]                         = XInternAtom(dpy, "_XEMBED", False);
   xatom[XembedInfo]                     = XInternAtom(dpy, "_XEMBED_INFO", False);
@@ -2395,6 +2425,7 @@ void unswallow(Client *c) {
 void tag(const Arg *arg) {
   if (selmon->sel && arg->ui & TAGMASK) {
     selmon->sel->tags = arg->ui & TAGMASK;
+    updateclientdesktop(selmon->sel);
     focus(NULL);
     arrange(selmon);
   }

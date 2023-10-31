@@ -84,6 +84,8 @@ enum {
   NetDesktopViewport,
   NetNumberOfDesktops,
   NetCurrentDesktop,
+  NetWMDesktop,
+  NetCloseWindow,
   NetLast
 };
 
