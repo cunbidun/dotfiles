@@ -201,13 +201,43 @@ void arrange(Monitor *m) {
 void updateclientdesktop(Client *c) {
   long rawdata = c->tags;
   int i        = 0;
-  while (c->tags >> (i + 1)) {
-    i++;
+  int desk_id  = 0;
+  if (c->tags) {
+    while (c->tags >> (i + 1)) {
+      i++;
+    }
+    desk_id = i + 1;
   }
-  long data[] = {i};
-  log_info("In [updateclientdesktop] update NetWMDesktop of '%s' to %d", c->name, i);
+  long data[] = {desk_id};
+  log_info("In [updateclientdesktop] update NetWMDesktop of '%s' to %d", c->name, desk_id);
   XChangeProperty(dpy, c->win, netatom[NetWMDesktop], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data, 1);
 }
+
+void setnumdesktops(void) {
+  long data[] = {TAGSLENGTH + 1}; // +1 for scratchpad
+  XChangeProperty(dpy, root, netatom[NetNumberOfDesktops], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data, 1);
+}
+
+void setcurrentdesktop(void) {
+  long data[] = {0};
+  XChangeProperty(dpy, root, netatom[NetCurrentDesktop], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data, 1);
+}
+
+void setdesktopnames(void) {
+  XTextProperty text;
+  const char *newTags[TAGSLENGTH + 1];
+  newTags[0] = "0";
+  for (int i = 0; i < TAGSLENGTH; i++) {
+    newTags[i + 1] = tags[i];
+  }
+  for (int i = 0; i <= TAGSLENGTH; i++) {
+    log_info("tag %dth has name %s", i, newTags[i]);
+  }
+
+  Xutf8TextListToTextProperty(dpy, newTags, TAGSLENGTH + 1, XUTF8StringStyle, &text);
+  XSetTextProperty(dpy, root, &text, netatom[NetDesktopNames]);
+}
+
 
 void arrangemon(Monitor *m) {
   strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
@@ -481,6 +511,7 @@ void clientmessage(XEvent *e) {
       restack(selmon);
     }
   } else if (cme->message_type == netatom[NetWMDesktop]) {
+    log_info("Got netatom[NetWMDesktop] for client '%s', moving it to desktop %d", c->name, cme->data.l[0]);
     c->tags = (1 << (cme->data.l[0] - 1));
     arrange(c->mon);
     updateclientdesktop(c);
@@ -2067,17 +2098,7 @@ void sendmon(Client *c, Monitor *m) {
 
 void setclientstate(Client *c, long state) {
   long data[] = {state, None};
-
   XChangeProperty(dpy, c->win, wmatom[WMState], wmatom[WMState], 32, PropModeReplace, (unsigned char *)data, 2);
-}
-void setcurrentdesktop(void) {
-  long data[] = {0};
-  XChangeProperty(dpy, root, netatom[NetCurrentDesktop], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data, 1);
-}
-void setdesktopnames(void) {
-  XTextProperty text;
-  Xutf8TextListToTextProperty(dpy, tags, TAGSLENGTH, XUTF8StringStyle, &text);
-  XSetTextProperty(dpy, root, &text, netatom[NetDesktopNames]);
 }
 
 int sendevent(Window w, Atom proto, int mask, long d0, long d1, long d2, long d3, long d4) {
@@ -2110,11 +2131,6 @@ int sendevent(Window w, Atom proto, int mask, long d0, long d1, long d2, long d3
     XSendEvent(dpy, w, False, mask, &ev);
   }
   return exists;
-}
-
-void setnumdesktops(void) {
-  long data[] = {TAGSLENGTH};
-  XChangeProperty(dpy, root, netatom[NetNumberOfDesktops], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data, 1);
 }
 
 void setfocus(Client *c) {
@@ -2648,7 +2664,8 @@ void updatecurrentdesktop(void) {
   while (*rawdata >> (i + 1)) {
     i++;
   }
-  long data[] = {i};
+  int current_desktop = i + 1;
+  long data[]         = {current_desktop};
   XChangeProperty(dpy, root, netatom[NetCurrentDesktop], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data, 1);
 }
 

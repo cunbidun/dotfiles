@@ -345,6 +345,7 @@ void unfocus(Client *c, int setfocus);
 void unmanage(Client *c, int destroyed);
 void unmapnotify(XEvent *e);
 void updatecurrentdesktop(void);
+void updateclientdesktop(Client *c);
 void updatebarpos(Monitor *m);
 void updatebars(void);
 void updateborderonfocus(Client *c);

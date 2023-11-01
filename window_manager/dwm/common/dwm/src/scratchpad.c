@@ -13,7 +13,7 @@ void togglescratch(const Arg *arg) {
       if (c->scratchkey == ((char **)arg->v)[0][0]) {
         target = c;
       } else if (c->scratchkey) {
-        c->tags = TAGMASK + 1;
+        c->tags = 0;
         arrange(m);
       }
     }
@@ -27,6 +27,7 @@ void togglescratch(const Arg *arg) {
       sendmon(target, selmon);
       target->tags = selmon->tagset[selmon->seltags];
     }
+    updateclientdesktop(target);
     focus(NULL);
     arrange(selmon);
     if (ISVISIBLE(target)) {
