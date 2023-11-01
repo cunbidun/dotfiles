@@ -481,8 +481,9 @@ void clientmessage(XEvent *e) {
       restack(selmon);
     }
   } else if (cme->message_type == netatom[NetWMDesktop]) {
-    c->tags = cme->data.l[0];
+    c->tags = (1 << (cme->data.l[0] - 1));
     arrange(c->mon);
+    updateclientdesktop(c);
   } else if (cme->message_type == netatom[NetCloseWindow]) {
     arg.v = (void *)c;
     killclient(&arg);

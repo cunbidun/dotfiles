@@ -125,6 +125,10 @@ static Bool npisrelative  = True;
 	} \
 }
 
+/*
+  "wid=\"$(xwininfo -children -id $1 | grep '^     0x' | head -n 1 | sed -e 's@^ *\\(0x[0-9a-f]*\\) \"\\([^\"]*\\)\".*@\\1@')\" 
+  is the command to get the current active windows id in the tabbed group
+*/
 #define DETACHWIN(p) { \
         .v = (char *[]){ "/bin/sh", "-c", \
 		"rootid=\"$(xwininfo -root | grep \"Window id\" | cut -d ' ' -f 4)\" &&" \
