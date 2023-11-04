@@ -1,0 +1,40 @@
+{
+  "pyprland": {
+    "plugins": [
+      "scratchpads"
+    ]
+  },
+  "scratchpads": {
+    "term": {
+      "command": "alacritty -t __scratchpad",
+      "animation": "",
+      "lazy": "true",
+      "unfocus": "hide"
+    },
+    "messenger": {
+      "command": "caprine",
+      "animation": "",
+      "unfocus": "hide",
+      "lazy": "true",
+      "class": "Caprine"
+    },
+    "spotify": {
+      "command": "spotify",
+      "animation": "",
+      "lazy": "true",
+      "unfocus": "hide"
+    },
+    "signal": {
+      "command": "signal-desktop",
+      "animation": "",
+      "lazy": "true",
+      "unfocus": "hide"
+    },
+    "obsidian": {
+      "command": "obsidian",
+      "animation": "",
+      "lazy": "true",
+      "unfocus": ""
+    }
+  }
+}

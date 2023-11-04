@@ -6,6 +6,15 @@ let
     import <nixpkgs-unstable> { config = { allowUnfree = true; }; };
   package_config = import ./packages.nix;
   dircolors = import ./dircolors.nix;
+  bookmarks = [
+    "file:///home/cunbidun/Documents"
+    "file:///home/cunbidun/Music"
+    "file:///home/cunbidun/Pictures"
+    "file:///home/cunbidun/Videos"
+    "file:///home/cunbidun/Downloads"
+    "file:///home/cunbidun/competitive_programming/output"
+    "file:///home/cunbidun/.wallpapers"
+  ];
 in with pkgs.stdenv;
 with lib; {
   # Home Manager needs a bit of information about you and the
@@ -16,7 +25,7 @@ with lib; {
   home.packages = if isDarwin then
     package_config.default_packages ++ package_config.mac_packages
   else
-    package_config.default_packages ++ package_config.linux_packages;
+    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages;
 
   # +--------------------+
   # |    Linux Config    | 
@@ -108,6 +117,19 @@ with lib; {
       "${config.home.homeDirectory}/.nix-profile/share/fonts";
   } else {};
 
+  dconf = if isLinux then {
+    enable = true; 
+    settings =  {
+      # "org/nemo/preferences" = {
+      #   show-hidden-files = true;
+      # };
+      # "org/cinnamon/desktop/default-applications/terminal" = {
+      #   exec = "alacritty";
+      #   exec-arg = "-e";
+      # };
+    };
+  } else {};
+
   gtk = if isLinux then {
     enable = true;
     gtk3 = {
@@ -118,15 +140,16 @@ with lib; {
         gtk-xft-hintstyle = "hintfull";
         gtk-xft-rgba = "none";
       };
-      bookmarks = [
-        "file:///home/cunbidun/competitive_programming/output"
-        "file:///home/cunbidun/Documents"
-        "file:///home/cunbidun/Music"
-        "file:///home/cunbidun/Pictures"
-        "file:///home/cunbidun/Videos"
-        "file:///home/cunbidun/Downloads"
-        "file:///home/cunbidun/.wallpapers"
-      ];
+      bookmarks = bookmarks;    
+    };
+    gtk4 = {
+      extraConfig = {
+        gtk-font-name = "Cantarell 11";
+        gtk-xft-antialias = 1;
+        gtk-xft-hinting = 1;
+        gtk-xft-hintstyle = "hintfull";
+        gtk-xft-rgba = "none";
+      };
     };
     theme = {
       name = "Nordic-darker";
@@ -150,11 +173,12 @@ with lib; {
       "image/jpeg" = ["feh.desktop"];
       "image/png" = ["feh.desktop"];
       "text/plain" = ["lvim.desktop"];
-      "inode/directory" = ["thunar.desktop"];
+      "inode/directory" = ["org.gnome.nautilus.desktop"];
     };
   } else {};
 
   home.sessionVariables = if isLinux then {
+    # Setting this is to local the .desktop files
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   } else {};
 

@@ -17,6 +17,8 @@ in {
     pkgs.wget
     pkgs.jq
     pkgs.ncdu
+    pkgs.zip
+    pkgs.unzip
     pkgsUnstable.newsboat
 
     pkgsUnstable.nixfmt
@@ -25,6 +27,20 @@ in {
     # For vim
     pkgs.shellcheck
     pkgsUnstable.shfmt
+  ];
+
+  wayland_packages = [
+    # Hyprland
+    pkgsUnstable.waybar
+    pkgsUnstable.hyprpaper
+    pkgsUnstable.wofi
+    pkgs.gammastep
+  ];
+
+  x_packages = [
+    pkgsUnstable.feh
+    pkgs.redshift
+
   ];
 
   linux_packages = [
@@ -50,11 +66,16 @@ in {
     # Note
     pkgsUnstable.obsidian
 
+    ########
     # Util
+    ########
+
+    # GUI File manager
+    pkgsUnstable.gnome.dconf-editor
+
+    # CLI File manager
     pkgs.ranger
     pkgsUnstable.ueberzugpp
-    # pkgs.xfce.thunar pkgs.xfce.tumbler
-    pkgsUnstable.gnome.nautilus pkgsUnstable.gnome.sushi
     pkgs.evince
     pkgsUnstable.dunst
     pkgsUnstable.conky
@@ -62,15 +83,12 @@ in {
     pkgsUnstable.hwinfo # System monitoring
     pkgsUnstable.rclone
     pkgsUnstable.rclone-browser
-    pkgsUnstable.waybar
-    pkgsUnstable.hyprpaper
-    pkgsUnstable.wofi
-    pkgsUnstable.feh
     pkgsUnstable.imagemagick
-
+    
     # Programming
     pkgsUnstable.cargo
     pkgsUnstable.zulu # OpenJDK for Java
+    pkgs.texlive.combined.scheme-full
 
     # Python package
     pkgsUnstable.python311Packages.flake8
