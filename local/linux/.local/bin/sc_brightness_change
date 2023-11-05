@@ -2,16 +2,15 @@
 
 # Function to display usage instructions
 usage() {
-    echo "Usage: $0 [increase|decrease] [amount]"
-    echo "Example: $0 increase 10"
-    exit 1
+	echo "Usage: $0 [increase|decrease] [amount]"
+	echo "Example: $0 increase 10"
+	exit 1
 }
 
 # Check if at least one argument is provided
 if [ $# -lt 1 ]; then
-    usage
+	usage
 fi
-
 
 # Get the current brightness value
 current_b=$(sc_get_brightness_percentage)
@@ -19,54 +18,54 @@ echo "Current brightness: $current_b"
 
 # Calculate the new brightness value based on the argument
 if [ "$1" == "increase" ]; then
-    # Check if an amount argument is provided
-    if [ $# -lt 2 ]; then
-        usage
-    fi
-    amount="$2"
-    new_b=$((current_b + amount))
+	# Check if an amount argument is provided
+	if [ $# -lt 2 ]; then
+		usage
+	fi
+	amount="$2"
+	new_b=$((current_b + amount))
 elif [ "$1" == "decrease" ]; then
-    # Check if an amount argument is provided
-    if [ $# -lt 2 ]; then
-        usage
-    fi
-    amount="$2"
-    new_b=$((current_b - amount))
+	# Check if an amount argument is provided
+	if [ $# -lt 2 ]; then
+		usage
+	fi
+	amount="$2"
+	new_b=$((current_b - amount))
 else
-    usage
+	usage
 fi
 
 # Check if the new brightness value is within bounds
 if [ "$new_b" -lt 0 ]; then
-    new_b=0
+	new_b=0
 elif [ "$new_b" -gt 100 ]; then
-    new_b=100
+	new_b=100
 fi
-
 
 # Check if the brightness has changed
 if [ "$new_b" -ne "$current_b" ]; then
-    echo "Setting brightness to $new_b"
+	echo "Setting brightness to $new_b"
 
-    if [ -f /tmp/dwm-i2c-bus ]; then
-        bus_num=$(cat /tmp/dwm-i2c-bus)
-        if [ -z "$bus_num" ]; then
-            echo "Bus number is empty in /tmp/dwm-i2c-bus. Querying ddcutil..."
-            # Query ddcutil to get the bus number and save it to the file
-            bus_num=$(ddcutil detect --sleep-multiplier 0.01 | grep "/dev/i2c-" | awk -F- '{print $NF}')
-            echo "$bus_num" > /tmp/dwm-i2c-bus
-        fi
-    else
-        # If not, query ddcutil to get the bus number and save it to the file
-        bus_num=$(ddcutil detect --sleep-multiplier 0.01 | grep "/dev/i2c-" | awk -F- '{print $NF}')
-        echo "$bus_num" > /tmp/dwm-i2c-bus
-    fi
-    
-    ddcutil setvcp 10 "$new_b" --bus "$bus_num" --sleep-multiplier 0.01
+	if [ -f /tmp/dwm-i2c-bus ]; then
+		bus_num=$(cat /tmp/dwm-i2c-bus)
+		if [ -z "$bus_num" ]; then
+			echo "Bus number is empty in /tmp/dwm-i2c-bus. Querying ddcutil..."
+			# Query ddcutil to get the bus number and save it to the file
+			bus_num=$(ddcutil detect --sleep-multiplier 0.01 | grep "/dev/i2c-" | awk -F- '{print $NF}')
+			echo "$bus_num" >/tmp/dwm-i2c-bus
+		fi
+	else
+		# If not, query ddcutil to get the bus number and save it to the file
+		bus_num=$(ddcutil detect --sleep-multiplier 0.01 | grep "/dev/i2c-" | awk -F- '{print $NF}')
+		echo "$bus_num" >/tmp/dwm-i2c-bus
+	fi
 
-    pkill -RTMIN+16 dwmblocks
+	ddcutil setvcp 10 "$new_b" --bus "$bus_num" --sleep-multiplier 0.01
 
-    notify-send --hint=string:x-dunst-stack-tag:brightness_change "brightness: $new_b" -t 1000 -a "System"
+	pkill -RTMIN+16 dwmblocks
+	pkill -SIGRTMIN+16 waybar
+
+	notify-send --hint=string:x-dunst-stack-tag:brightness_change "brightness: $new_b" -t 1000 -a "System"
 else
-    echo "Brightness is already at the desired level ($current_b), no change needed."
+	echo "Brightness is already at the desired level ($current_b), no change needed."
 fi

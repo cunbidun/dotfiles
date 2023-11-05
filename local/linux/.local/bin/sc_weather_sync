@@ -7,3 +7,4 @@ curl -sf "https://wttr.in/?m" >$HOME/.cache/weatherreport || notify-send "Someth
 notify-send -t 3000 "Sync weather report" "Sync complete!"
 
 pkill -RTMIN+20 dwmblocks
+pkill -SIGRTMIN+20 waybar

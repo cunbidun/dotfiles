@@ -28,13 +28,14 @@
       "command": "signal-desktop",
       "animation": "",
       "lazy": "true",
-      "unfocus": "hide"
+      "unfocus": "hide",
+      "class": "Signal"
     },
     "obsidian": {
       "command": "obsidian",
       "animation": "",
       "lazy": "true",
-      "unfocus": ""
+      "unfocus": "hide"
     }
   }
 }

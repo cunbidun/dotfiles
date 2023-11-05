@@ -1,0 +1,35 @@
+#!/bin/bash
+
+trap -- '' SIGRTMIN+11 SIGRTMIN+20 SIGRTMIN+16
+
+waybar_pid=$(ps -fu $USER | grep "[[:space:]]waybar" | awk '{ print $2}' | xargs)
+echo "Killing $waybar_pid"
+kill -9 $waybar_pid
+waybar &
+
+# current checksums
+current_checksum_config=$(md5sum ~/.config/waybar/config)
+current_checksum_style=$(md5sum ~/.config/waybar/style.css)
+
+# loop forever
+while true; do
+	# new checksums
+	new_checksum_config=$(md5sum ~/.config/waybar/config)
+	new_checksum_style=$(md5sum ~/.config/waybar/style.css)
+
+	# if checksums are different
+	if [ "$current_checksum_config" != "$new_checksum_config" ] || [ "$current_checksum_style" != "$new_checksum_style" ]; then
+		# kill waybar
+		waybar_pid=$(ps -fu $USER | grep "[[:space:]]waybar" | awk '{ print $2}' | xargs)
+		echo "Killing $waybar_pid"
+		kill -9 $waybar_pid
+		# start waybar
+		waybar &
+
+		# update checksums
+		current_checksum_config=$new_checksum_config
+		current_checksum_style=$new_checksum_style
+	fi
+
+	sleep 0.2
+done

@@ -13,7 +13,7 @@ static const Key keys[] = {
     {MODKEY | ShiftMask,               XK_r,                    change_submask,       {.i = 1},                                                                  1 }, // submap 1: resize
     {MODKEY | ShiftMask,               XK_g,                    change_submask,       {.i = 2},                                                                  1 }, // submap 2: gaps
     {MODKEY,                           XK_q,                    change_submask,       {.i = 3},                                                                  1 }, // submap 3: window property
-    {MODKEY | ControlMask,             XK_p,                    change_submask,       {.i = 4},                                                                  1 }, // submap 4: power
+    {MODKEY | ControlMask,             XK_s,                    change_submask,       {.i = 4},                                                                  1 }, // submap 4: session
     {MODKEY,                           XK_t,                    change_submask,       {.i = 5},                                                                  1 }, // submap 5: tabbed
     {0,                                XK_Escape,               change_submask,       {.i = 0},                                                                  62}, // 11110: all except of 0
 

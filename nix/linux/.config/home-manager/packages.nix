@@ -1,8 +1,4 @@
-let
-  pkgs = import <nixpkgs> { config = { allowUnfree = true; }; };
-  pkgsUnstable =
-    import <nixpkgs-unstable> { config = { allowUnfree = true; }; };
-in {
+{pkgs, ...}: {
   default_packages = [
     # Utils
     pkgs.bat # cat
@@ -19,82 +15,83 @@ in {
     pkgs.ncdu
     pkgs.zip
     pkgs.unzip
-    pkgsUnstable.newsboat
+    pkgs.newsboat
 
-    pkgsUnstable.nixfmt
-    pkgsUnstable.bazel
+    pkgs.nixfmt
+    pkgs.bazel
 
     # For vim
     pkgs.shellcheck
-    pkgsUnstable.shfmt
+    pkgs.shfmt
   ];
 
   wayland_packages = [
     # Hyprland
-    pkgsUnstable.waybar
-    pkgsUnstable.hyprpaper
-    pkgsUnstable.wofi
+    pkgs.waybar
+    pkgs.hyprpaper
+    pkgs.wofi
     pkgs.gammastep
+    pkgs.wl-clipboard pkgs.slurp pkgs.grim
   ];
 
   x_packages = [
-    pkgsUnstable.feh
+    pkgs.feh
     pkgs.redshift
 
   ];
 
   linux_packages = [
     # Text editor
-    pkgsUnstable.vscode
+    pkgs.vscode
 
     # Broswer
-    pkgsUnstable.google-chrome
-    pkgsUnstable.firefox
+    pkgs.google-chrome
+    pkgs.firefox
 
     # Font
-    pkgsUnstable.liberation_ttf
-    pkgsUnstable.cantarell-fonts
-    pkgsUnstable.noto-fonts-color-emoji
+    pkgs.liberation_ttf
+    pkgs.cantarell-fonts
+    pkgs.noto-fonts-color-emoji
 
     # Games
-    pkgsUnstable.minecraft
+    pkgs.minecraft
 
     # Messaging
     pkgs.signal-desktop
     pkgs.discord
 
     # Note
-    pkgsUnstable.obsidian
+    pkgs.obsidian
 
     ########
     # Util
     ########
 
     # GUI File manager
-    pkgsUnstable.gnome.dconf-editor
+    pkgs.gnome.dconf-editor
 
     # CLI File manager
     pkgs.ranger
-    pkgsUnstable.ueberzugpp
+    pkgs.ueberzugpp
     pkgs.evince
-    pkgsUnstable.dunst
-    pkgsUnstable.conky
-    pkgsUnstable.glxinfo
-    pkgsUnstable.hwinfo # System monitoring
-    pkgsUnstable.rclone
-    pkgsUnstable.rclone-browser
-    pkgsUnstable.imagemagick
+    pkgs.dunst
+    pkgs.conky
+    pkgs.glxinfo
+    pkgs.hwinfo # System monitoring
+    pkgs.rclone
+    pkgs.rclone-browser
+    pkgs.imagemagick
     
     # Programming
-    pkgsUnstable.cargo
-    pkgsUnstable.zulu # OpenJDK for Java
+    pkgs.cargo
+    pkgs.zulu # OpenJDK for Java
     pkgs.texlive.combined.scheme-full
 
     # Python package
-    pkgsUnstable.python311Packages.flake8
-    pkgsUnstable.black
-    pkgsUnstable.isort
-    pkgsUnstable.nodejs_20
+    pkgs.python311Packages.flake8
+    pkgs.black
+    pkgs.isort
+    pkgs.nodejs_20
 
     # Music player
     pkgs.spotify
@@ -102,8 +99,8 @@ in {
     # Theme
     pkgs.lxappearance
 
-    pkgsUnstable._1password-gui
-    pkgsUnstable._1password
+    pkgs._1password-gui
+    pkgs._1password
   ];
 
   mac_packages = [ ];

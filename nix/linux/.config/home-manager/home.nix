@@ -1,10 +1,7 @@
-{ config, lib, ... }:
+{ pkgs, config, lib, pypr, ... }:
 
 let
-  pkgs = import <nixpkgs> { config = { allowUnfree = true; }; };
-  pkgsUnstable =
-    import <nixpkgs-unstable> { config = { allowUnfree = true; }; };
-  package_config = import ./packages.nix;
+  package_config = import ./packages.nix {pkgs = pkgs; };
   dircolors = import ./dircolors.nix;
   bookmarks = [
     "file:///home/cunbidun/Documents"
@@ -25,7 +22,7 @@ with lib; {
   home.packages = if isDarwin then
     package_config.default_packages ++ package_config.mac_packages
   else
-    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages;
+    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages ++ [ pypr.packages.x86_64-linux.pyprland ];
 
   # +--------------------+
   # |    Linux Config    | 

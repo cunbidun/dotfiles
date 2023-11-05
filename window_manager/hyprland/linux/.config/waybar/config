@@ -1,14 +1,11 @@
 {
   "name": "bar",
-  // "layer": "top", // Waybar at top layer
-  // "position": "bottom", // Waybar position (top|bottom|left|right)
   "height": 20, // Waybar height (to be removed for auto height)
-  // "width": 1280, // Waybar width
   "spacing": 4, // Gaps between modules (4px)
-  // Choose the order of the modules
-  "modules-left": ["hyprland/workspaces", "custom/media"],
+
+  "modules-left": ["hyprland/workspaces", "hyprland/submap"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "clock", "tray"],
+  "modules-right": ["network", "pulseaudio", "custom/brightness", "custom/weather", "custom/language", "tray", "clock"],
 
   // Modules configuration
   "hyprland/workspaces": {
@@ -25,116 +22,30 @@
        "7": "7",
        "8": "8",
        "9": "9",
-       "urgent": "",
-       "focused": "",
-       "default": ""
      },
   },
-  "keyboard-state": {
-      "numlock": true,
-      "capslock": true,
-      "format": "{name} {icon}",
-      "format-icons": {
-          "locked": "",
-          "unlocked": ""
-      }
+
+  "hyprland/submap": {
+    "format": "{}",
+    "max-length": 30,
+    "tooltip": false
   },
-  "mpd": {
-      "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-      "format-disconnected": "Disconnected ",
-      "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-      "unknown-tag": "N/A",
-      "interval": 2,
-      "consume-icons": {
-          "on": " "
-      },
-      "random-icons": {
-          "off": "<span color=\"#f53c3c\"></span> ",
-          "on": " "
-      },
-      "repeat-icons": {
-          "on": " "
-      },
-      "single-icons": {
-          "on": "1 "
-      },
-      "state-icons": {
-          "paused": "",
-          "playing": ""
-      },
-      "tooltip-format": "MPD (connected)",
-      "tooltip-format-disconnected": "MPD (disconnected)"
-  },
-  "idle_inhibitor": {
-      "format": "{icon}",
-      "format-icons": {
-          "activated": "",
-          "deactivated": ""
-      }
-  },
+
   "tray": {
-      // "icon-size": 21,
-      "spacing": 10
+    "spacing": 0
   },
+
   "clock": {
-      // "timezone": "America/New_York",
-      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "format-alt": "{:%Y-%m-%d}"
+    "format": "{:%a %b %d, %H:%M:%S}",
+    "on-click": "$TERMINAL -e 'calcurse'",
   },
-  "cpu": {
-      "format": "{usage}% ",
-      "tooltip": false
-  },
-  "memory": {
-      "format": "{}% "
-  },
-  "temperature": {
-      // "thermal-zone": 2,
-      // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-      "critical-threshold": 80,
-      // "format-critical": "{temperatureC}°C {icon}",
-      "format": "{temperatureC}°C {icon}",
-      "format-icons": ["", "", ""]
-  },
-  "backlight": {
-      // "device": "acpi_video1",
-      "format": "{percent}% {icon}",
-      "format-icons": ["", "", "", "", "", "", "", "", ""]
-  },
-  "battery": {
-      "states": {
-          // "good": 95,
-          "warning": 30,
-          "critical": 15
-      },
-      "format": "{capacity}% {icon}",
-      "format-charging": "{capacity}% ",
-      "format-plugged": "{capacity}% ",
-      "format-alt": "{time} {icon}",
-      // "format-good": "", // An empty format will hide the module
-      // "format-full": "",
-      "format-icons": ["", "", "", "", ""]
-  },
-  "battery#bat2": {
-      "bat": "BAT2"
-  },
-  "network": {
-      // "interface": "wlp2*", // (Optional) To force the use of this interface
-      "format-wifi": "{essid} ({signalStrength}%) ",
-      "format-ethernet": "{ipaddr}/{cidr} ",
-      "tooltip-format": "{ifname} via {gwaddr} ",
-      "format-linked": "{ifname} (No IP) ",
-      "format-disconnected": "Disconnected ⚠",
-      "format-alt": "{ifname}: {ipaddr}/{cidr}"
-  },
+
   "pulseaudio": {
-      // "scroll-step": 1, // %, can be a float
-      "format": "{volume}% {icon} {format_source}",
-      "format-bluetooth": "{volume}% {icon} {format_source}",
-      "format-bluetooth-muted": " {icon} {format_source}",
-      "format-muted": " {format_source}",
-      "format-source": "{volume}% ",
-      "format-source-muted": "",
+      "scroll-step": 5, // %, can be a float
+      "format": "{icon}: {volume}%",
+      "format-bluetooth": "{icon}: {volume}% ",
+      "format-bluetooth-muted": "{icon}: Muted ",
+      "format-muted": "{icon}: Muted",
       "format-icons": {
           "headphone": "",
           "hands-free": "",
@@ -142,21 +53,51 @@
           "phone": "",
           "portable": "",
           "car": "",
-          "default": ["", "", ""]
+          "default": ["[.]", "[v]", "[V]"]
       },
-      "on-click": "pavucontrol"
+      "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e pulsemixer"
   },
-  "custom/media": {
-      "format": "{icon} {}",
-      "return-type": "json",
-      "max-length": 40,
-      "format-icons": {
-          "spotify": "",
-          "default": "🎜"
-      },
-      "escape": true,
-      "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-      // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  // https://github.com/Alexays/Waybar/wiki/Module:-Network
+  "network": {
+    "interval": 60,
+    "interface": "wlp0s20f3", // (Optional) To force the use of this interface
+    "format-wifi": "{essid} ({signalStrength}%)",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui"
+  },
+
+  "custom/language": {
+    "interval": "once",
+    "exec-if": "which sc_language_get",
+    "exec": "sc_language_get",
+    "return-type":"json",
+    "signal": 11,
+    "tooltip": false,
+    "format":"{}",
+  },
+
+  "custom/weather": {
+    "interval": "once",
+    "exec-if": "which sc_weather",
+    "exec": "sc_weather",
+    "signal": 20,
+    "tooltip": false,
+    "format":"{}",
+    "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"",
+    "on-click-right": "sc_weather_sync",
+    "on-click-middle": "sc_weather_sync"
+  },
+
+  "custom/brightness": {
+    "interval": "once",
+    "exec-if": "which sc_get_brightness_percentage",
+    "exec": "sc_get_brightness_percentage",
+    "signal": 16,
+    "tooltip": false,
+    "format":"BRT: {}%",
   }
 }
 
