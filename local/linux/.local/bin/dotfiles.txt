@@ -30,6 +30,8 @@ $HOME/.local/bin/increase_volume
 $HOME/.local/bin/decrease_volume
 $HOME/.local/bin/sc_get_brightness_percentage
 $HOME/.local/bin/sc_brightness_change
+$HOME/.local/bin/sc_prompt
+$HOME/.local/bin/nord_color_picker
 
 # dwm
 $HOME/dwm/include/config.h
@@ -38,6 +40,12 @@ $HOME/dwmblocks-async/config.h
 $HOME/tabbed/config.h
 $HOME/tabbed/tabbed.c
 $HOME/.dwm/autostart.sh
+
+# hyprlnd
+$HOME/dotfiles/window_manager/hyprland/linux/hyprland_wrapped
+$HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/pyprland.json
+$HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
+$HOME/dotfiles/util/wofi/linux/.config/wofi/config
 
 $HOME/dmenu/
 # dmenu

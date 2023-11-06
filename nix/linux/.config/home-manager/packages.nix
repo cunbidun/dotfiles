@@ -7,7 +7,7 @@
     pkgs.fzf
     pkgs.neofetch
     pkgs.tree
-    pkgs.espanso
+    # pkgs.espanso
     pkgs.tmux
     pkgs.tmuxinator
     pkgs.wget
@@ -32,6 +32,7 @@
     pkgs.wofi
     pkgs.gammastep
     pkgs.wl-clipboard pkgs.slurp pkgs.grim
+    pkgs.espanso-wayland
   ];
 
   x_packages = [

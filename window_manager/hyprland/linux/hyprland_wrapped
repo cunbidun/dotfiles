@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cd $HOME
+
+export PICKER=wofi
+export TERMINAL=alacritty
+
+yay -R xremap-x11-bin
+yay -S xremap-wlroots-bin --needned
+
+pkill waybarwrapped
+
+exec Hyprland

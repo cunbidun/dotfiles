@@ -47,4 +47,10 @@ fi
 # built-in, Intel
 # xrandr --output None-1 --scale 0.66x0.66
 
+export PICKER=dmenu
+export TERMINAL=alacritty
+
+yay -R xremap-wlroots-bin
+yay -S xremap-x11-bin --needned
+
 while type dwm >/dev/null; do xrdb ~/.Xresources && rm -rf /tmp/dwm-log && dwm && continue || break ; done 

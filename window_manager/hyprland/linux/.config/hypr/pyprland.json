@@ -15,8 +15,7 @@
       "command": "caprine",
       "animation": "",
       "unfocus": "hide",
-      "lazy": "true",
-      "class": "Caprine"
+      "lazy": "true"
     },
     "spotify": {
       "command": "spotify",
@@ -28,8 +27,7 @@
       "command": "signal-desktop",
       "animation": "",
       "lazy": "true",
-      "unfocus": "hide",
-      "class": "Signal"
+      "unfocus": "hide"
     },
     "obsidian": {
       "command": "obsidian",

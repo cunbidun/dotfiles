@@ -3,8 +3,8 @@ keymap:
     application:
       only: Alacritty 
     remap:
-      M-c: C-Shift-c
-      M-v: C-Shift-v
+      Alt_L-c: C-Shift-c
+      Alt_L-v: C-Shift-v
 
 modmap:
   - name: Global
@@ -12,4 +12,3 @@ modmap:
       not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
     remap:
       Alt_L: Ctrl_L 
-

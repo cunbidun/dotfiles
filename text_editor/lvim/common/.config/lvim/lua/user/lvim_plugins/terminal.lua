@@ -32,5 +32,5 @@ lvim.builtin.terminal.float_opts = {
 	border = "single",
 }
 
-lvim.builtin.terminal.shell = "sh"
+lvim.builtin.terminal.shell = "zsh"
 -- }}}
