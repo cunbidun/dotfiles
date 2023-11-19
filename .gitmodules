@@ -1,3 +1,6 @@
 [submodule "calcurse/common/.calcurse"]
 	path = calcurse/common/.calcurse
 	url = git@github.com:cunbidun/calcurse.git
+[submodule "dotfiles-neomutt"]
+	path = dotfiles-neomutt
+	url = git@github.com:cunbidun/dotfiles-neomutt.git
