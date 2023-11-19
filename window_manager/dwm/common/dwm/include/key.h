@@ -78,12 +78,12 @@ static const Key keys[] = {
   // +---------------+
     {0,                                XK_s,                    spawn,                SHCMD("sc_prompt 'Do you want to shutdown?' 'shutdown -h now'"),           16},
     {0,                                XK_r,                    spawn,                SHCMD("sc_prompt 'Do you want to reboot?' 'reboot'"),                      16},
-    {0,                                XK_e,                    spawn,                SHCMD("sc_prompt 'Do you want to exit dwm?' 'pkill dwm'"),                 16},
+    {MODKEY | ShiftMask,               XK_q,                    spawn,                SHCMD("sc_prompt 'Do you want to exit dwm?' 'pkill dwm'"),                 16},
     {0,                                XK_l,                    spawn,                SHCMD("slock"),                                                            16},
     {ShiftMask,                        XK_l,                    spawn,                SHCMD("sc_prompt 'Do you want to suspend?' 'slock systemctl suspend -i'"), 16},
-    {MODKEY | ShiftMask,               XK_q,                    quit,                 {1},                                                                       31},
+    {MODKEY | ShiftMask,               XK_q,                    quit,                 {1},                                                                       15}, // all submap except for the power seesion
 
- // +--------+
+  // +--------+
   // | Tabbed |
   // +--------+
     {MODKEY,                           XK_s,                    spawn,                SHCMD("tabbedize"),                                                        32},

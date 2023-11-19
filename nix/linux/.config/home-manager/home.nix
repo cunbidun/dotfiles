@@ -22,7 +22,7 @@ with lib; {
   home.packages = if isDarwin then
     package_config.default_packages ++ package_config.mac_packages
   else
-    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages ++ [ ];
+    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages ++ [ pypr.packages.x86_64-linux.pyprland ];
 
   # +--------------------+
   # |    Linux Config    | 
@@ -106,8 +106,10 @@ with lib; {
   home.file = if isLinux then {
     ".xinitrc".source =
       "${config.home.homeDirectory}/dotfiles/xinitrc/.xinitrc";
-    "/.local/bin/hyprland_wrapped".source =
+    ".local/bin/hyprland_wrapped".source =
       "${config.home.homeDirectory}/dotfiles/window_manager/hyprland/linux/hyprland_wrapped";
+    ".local/bin/dwm_wrapped".source =
+      "${config.home.homeDirectory}/dotfiles/window_manager/dwm/common/dwm_wrapped";
     ".themes".source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/.nix-profile/share/themes";
     ".icons".source = config.lib.file.mkOutOfStoreSymlink

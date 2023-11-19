@@ -21,7 +21,7 @@ void togglescratch(const Arg *arg) {
   if (!target) {
     spawnscratch(arg);
   } else {
-    if (ISVISIBLE(target) && target->mon == selmon) {
+    if (ISVISIBLE(target) && target->mon == selmon && !HIDDEN(target)) {
       target->tags = 0;
     } else {
       sendmon(target, selmon);
@@ -30,6 +30,7 @@ void togglescratch(const Arg *arg) {
     updateclientdesktop(target);
     focus(NULL);
     arrange(selmon);
+    showwin(target);
     if (ISVISIBLE(target)) {
       focus(target);
       restack(selmon);

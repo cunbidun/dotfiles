@@ -1,6 +1,7 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
+1) set_language ;;
 6) "$TERMINAL" -t "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e "$EDITOR" "$0" ;;
 esac
 

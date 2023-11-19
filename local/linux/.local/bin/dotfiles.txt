@@ -45,6 +45,7 @@ $HOME/.dwm/autostart.sh
 $HOME/dotfiles/window_manager/hyprland/linux/hyprland_wrapped
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/pyprland.json
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
+$HOME/dotfiles/window_manager/hyprland/linux/.config/waybar/config
 $HOME/dotfiles/util/wofi/linux/.config/wofi/config
 
 $HOME/dmenu/

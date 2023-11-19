@@ -3,22 +3,31 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 COLORS_FILE="$DIR/colors-name.txt"
 
+# PICKER=wofi
+
 main() {
 	if [ -z "$PICKER" ]; then
-		notify-send "Nord file picker" "$PICKER env not defined. Set to [dmenu, wofi]"
+		notify-send "Nord file picker" "$PICKER env not defined. Set to [dmenu, wofi, tofi]"
 		exit 0
 	fi
 	if [ "$PICKER" == 'dmenu' ]; then
 		picker=rofi
-		args='-dmenu -i -markup-rows'
+		args=(-dmenu -i -markup-rows -p Colors)
 		clipboard_command="xclip -selection clipboard"
 	fi
 	if [ "$PICKER" == 'wofi' ]; then
 		picker=wofi
-		args='-d -m -L 18'
+		args=(-d -m -L 18 -p Colors)
 		clipboard_command=wl-copy
 	fi
-	selected="$($picker $args -p Colors <"$COLORS_FILE")"
+
+	if [ "$PICKER" == 'tofi' ]; then
+		picker=tofi
+		args=("--prompt-text" "Colors:" "--height=25%" "--horizontal=false" "--result-spacing=5")
+		clipboard_command=wl-copy
+	fi
+
+	selected="$($picker "${args[@]}" <"$COLORS_FILE")"
 
 	# Exit if nothing is selected
 	[[ -z $selected ]] && exit 1

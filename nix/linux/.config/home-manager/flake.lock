@@ -92,15 +92,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1698782034,
-        "narHash": "sha256-4iLZLbipCuMpdvQGAcMZVwHgIQ/1hStezBmxE59qYbs=",
+        "lastModified": 1699476159,
+        "narHash": "sha256-9gigU8AACmwX5ERnS58G/2yYi8cQHAb3KxGFdt9vNKs=",
         "owner": "hyprland-community",
         "repo": "pyprland",
-        "rev": "91e9d84924c7e205d9e259351454bf008b3283c0",
+        "rev": "3cee7c55f214a01c698f4e2ff45685ad29d46379",
         "type": "github"
       },
       "original": {
         "owner": "hyprland-community",
+        "ref": "3cee7c5",
         "repo": "pyprland",
         "type": "github"
       }

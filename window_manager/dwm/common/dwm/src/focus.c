@@ -11,7 +11,8 @@ extern Window root;
 void unfocus(Client *c, int setfocus) {
   if (!c)
     return;
-  if (selmon->pertag->curtag == c->tags) {
+
+  if (1 << (selmon->pertag->curtag - 1) == c->tags) {
     log_info("Setting prevclient for tag %d to %s", c->tags, c->name);
     selmon->pertag->prevclient[c->tags] = c;
   }

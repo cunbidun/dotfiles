@@ -32,22 +32,25 @@
     pkgs.wofi
     pkgs.gammastep
     pkgs.wl-clipboard pkgs.slurp pkgs.grim
-    pkgs.espanso-wayland
+    # pkgs.espanso-wayland # wayland version
+    pkgs.tofi
   ];
 
   x_packages = [
     pkgs.feh
     pkgs.redshift
+    pkgs.espanso # X version
 
   ];
 
   linux_packages = [
     # Text editor
     pkgs.vscode
+    pkgs.eww
 
     # Broswer
     pkgs.google-chrome
-    pkgs.firefox
+    pkgs.firefox-wayland
 
     # Font
     pkgs.liberation_ttf

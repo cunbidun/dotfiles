@@ -9,31 +9,31 @@
       "command": "alacritty -t __scratchpad",
       "animation": "",
       "lazy": "true",
-      "unfocus": "hide"
+      "unfocus": ""
     },
     "messenger": {
       "command": "caprine",
       "animation": "",
-      "unfocus": "hide",
+      "unfocus": "",
       "lazy": "true"
     },
     "spotify": {
       "command": "spotify",
       "animation": "",
       "lazy": "true",
-      "unfocus": "hide"
+      "unfocus": ""
     },
     "signal": {
       "command": "signal-desktop",
       "animation": "",
       "lazy": "true",
-      "unfocus": "hide"
+      "unfocus": ""
     },
     "obsidian": {
       "command": "obsidian",
       "animation": "",
       "lazy": "true",
-      "unfocus": "hide"
+      "unfocus": ""
     }
   }
 }

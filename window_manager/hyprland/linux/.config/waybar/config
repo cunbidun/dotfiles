@@ -40,6 +40,7 @@
   "clock": {
     "format": "{:%a %b %d, %H:%M:%S}",
     "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e 'calcurse'",
+    "interval": 1,
   },
 
   "pulseaudio": {

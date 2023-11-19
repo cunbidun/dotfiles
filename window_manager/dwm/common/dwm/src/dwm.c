@@ -86,8 +86,13 @@ void applyrules(Client *c) {
   if (strstr(class, "Steam") || strstr(class, "steam_app_"))
     c->issteam = 1;
 
-  if (strstr(class, "dota2") || strstr(class, "dota2")) {
+  if (strstr(class, "dota2")) {
     log_info("[In applyrules] got dota2 client. Setting to issteam");
+    c->issteam = 1;
+  }
+
+  if (strstr(class, "cs2")) {
+    log_info("[In applyrules] got cs2 client. Setting to issteam");
     c->issteam = 1;
   }
 
@@ -237,7 +242,6 @@ void setdesktopnames(void) {
   Xutf8TextListToTextProperty(dpy, newTags, TAGSLENGTH + 1, XUTF8StringStyle, &text);
   XSetTextProperty(dpy, root, &text, netatom[NetDesktopNames]);
 }
-
 
 void arrangemon(Monitor *m) {
   strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);

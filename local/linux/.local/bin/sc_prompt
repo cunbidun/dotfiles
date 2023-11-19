@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
 if [ $PICKER == "dmenu" ]; then
-	extra_flags="-i -l"
+	extra_flags=("-i" "-p" "$1")
 fi
 if [ $PICKER == "wofi" ]; then
-	extra_flags="-d -n -i -L 4 -W 25% -k /dev/null"
+	extra_flags=("-p" "$1" "-dni" "-L" "4" "-W" "25%" "-k" "/dev/null")
+fi
+
+if [ $PICKER == "tofi" ]; then
+	extra_flags=(--prompt-text "$1")
 fi
 
 # Usage:
 # prompt "Do you want to shutdown?" "shutdown -h now"
-[ "$(echo -e "No\nYes" | $PICKER $extra_flags -p "$1")" == "Yes" ] && bash -c "$2"
+[ "$(echo -e "No\nYes" | $PICKER "${extra_flags[@]}")" == "Yes" ] && bash -c "$2"
