@@ -85,6 +85,7 @@
     pkgs.rclone
     pkgs.rclone-browser
     pkgs.imagemagick
+    pkgs.bfg-repo-cleaner
     
     # Programming
     pkgs.cargo
