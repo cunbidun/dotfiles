@@ -4,3 +4,6 @@
 [submodule "dotfiles-neomutt"]
 	path = dotfiles-neomutt
 	url = git@github.com:cunbidun/dotfiles-neomutt.git
+[submodule "submodules/task"]
+	path = submodules/task
+	url = git@github.com:cunbidun/dotfiles-task.git
