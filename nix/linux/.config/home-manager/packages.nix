@@ -46,7 +46,6 @@
   linux_packages = [
     # Text editor
     pkgs.vscode
-    pkgs.eww
 
     # Broswer
     pkgs.google-chrome
