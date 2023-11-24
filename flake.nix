@@ -1,7 +1,7 @@
 {
-  description = "Home Manager Flake";
+  description = "cunbidun's flake";
 
-  inputs = {
+   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgsUnstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
@@ -19,7 +19,7 @@
           inherit system;
           config.allowUnfree = true;
         };
-        modules = [ ./home.nix ];
+        modules = [ ./nix/home-manager/home.nix ];
         extraSpecialArgs = { inherit pypr; };
       };
     };
