@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
-    pypr.url = "github:hyprland-community/pyprland/3cee7c5";
+    pypr.url = "github:hyprland-community/pyprland";
   };
 
   outputs = { nixpkgsUnstable, home-manager, pypr, ... }:
