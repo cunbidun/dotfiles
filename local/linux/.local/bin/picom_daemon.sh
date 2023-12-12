@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define an array of game processes
-games=("dota2" "cs2" "steam")
+games=("dota2" "cs2")
 
 while true; do
 	picom_pid=$(pgrep picom)

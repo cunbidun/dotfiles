@@ -31,3 +31,9 @@ sh <(curl -L https://nixos.org/nix/install) --daemon
 # ==========================================================================
 # Start services
 sudo systemctl enable --now bluetooth.service
+
+# ==========================================================================
+# obs installation
+
+yay -S vulkan-amdgpu-pro vulkan-radeon
+yay -S obs-studio fmpeg-amd-full ffmpeg-amd-full obs-streamfx-git --noconfirm --needed

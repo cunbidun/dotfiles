@@ -10,6 +10,7 @@ static const char *scratchpadnotecmd[]   = {"n", "obsidian", NULL};
 static const char *scratchpadchatcmd[]   = {"c", "caprine", NULL};
 static const char *scratchpadsignalcmd[] = {"s", "signal-desktop", NULL};
 static const char *scratchpadspotifycmd[] = {"m", "spotify", NULL};
+static const char *scratchpadobscmd[]     = {"r", "obs", NULL};
 
 void togglescratch(const Arg *arg);
 void spawnscratch(const Arg *arg);

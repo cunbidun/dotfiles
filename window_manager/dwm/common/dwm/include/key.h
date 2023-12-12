@@ -43,6 +43,7 @@ static const Key keys[] = {
     {MODKEY,                           XK_c,                    togglescratch,        {.v = scratchpadchatcmd},                                                  1 },
     {MODKEY,                           XK_s,                    togglescratch,        {.v = scratchpadsignalcmd},                                                1 },
     {MODKEY,                           XK_m,                    togglescratch,        {.v = scratchpadspotifycmd},                                               1 },
+    {MODKEY,                           XK_r,                    togglescratch,        {.v = scratchpadobscmd},                                                   1 },
 
  // +------+
   // | Gaps |
@@ -90,7 +91,7 @@ static const Key keys[] = {
 
     {MODKEY | ShiftMask,               XK_b,                    spawn,                SHCMD("sc_toggle_picom"),                                                  1 },
     {MODKEY,                           XK_o,                    show,                 {0},                                                                       1 },
-    {MODKEY | ShiftMask,               XK_o,                    showall,              {0},                                                                       1 },
+ // {MODKEY | ShiftMask,               XK_o,                    showall,              {0},  1 },
     {MODKEY | ControlMask | ShiftMask, XK_c,                    hide,                 {0},                                                                       1 },
 
     {MODKEY,                           XK_x,                    spawn,                SHCMD("arandr"),                                                           1 },
@@ -103,6 +104,8 @@ static const Key keys[] = {
 
     {MODKEY | ControlMask | ShiftMask, XK_j,                    focusstackhid,        {.i = +1},                                                                 1 },
     {MODKEY | ControlMask | ShiftMask, XK_k,                    focusstackhid,        {.i = -1},                                                                 1 },
+
+    {MODKEY,                           XK_f,                    togglefullscreen,     {0},                                                                       1 },
 
  // Window movement and swap
 

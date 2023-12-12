@@ -32,20 +32,22 @@
     pkgs.wofi
     pkgs.gammastep
     pkgs.wl-clipboard pkgs.slurp pkgs.grim
-    # pkgs.espanso-wayland # wayland version
+    pkgs.espanso-wayland # wayland version
     pkgs.tofi
   ];
 
   x_packages = [
     pkgs.feh
     pkgs.redshift
-    pkgs.espanso # X version
+    # pkgs.espanso # X version
 
   ];
 
   linux_packages = [
     # Text editor
+    pkgs.onlyoffice-bin
     pkgs.vscode
+    pkgs.pdfgrep
 
     # Broswer
     pkgs.google-chrome
@@ -55,6 +57,7 @@
     pkgs.liberation_ttf
     pkgs.cantarell-fonts
     pkgs.noto-fonts-color-emoji
+    pkgs.iosevka
 
     # Games
     pkgs.minecraft
@@ -79,7 +82,6 @@
     pkgs.evince
     pkgs.dunst
     pkgs.conky
-    pkgs.glxinfo
     pkgs.hwinfo # System monitoring
     pkgs.rclone
     pkgs.rclone-browser

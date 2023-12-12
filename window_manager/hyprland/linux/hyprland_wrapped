@@ -1,12 +1,12 @@
 #!/bin/sh
 
-cd $HOME
+cd "$HOME" || exit 1
 
 export PICKER=tofi
 export TERMINAL=alacritty
 
 yay -R xremap-x11-bin
-yay -S xremap-wlroots-bin --needned
+yay -S xremap-wlroots-bin --needed
 
 pkill waybarwrapped
 pkill .waybar-wrapped

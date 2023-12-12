@@ -43,7 +43,7 @@ $HOME/.dwm/autostart.sh
 
 # hyprlnd
 $HOME/dotfiles/window_manager/hyprland/linux/hyprland_wrapped
-$HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/pyprland.json
+$HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/pyprland.toml
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 $HOME/dotfiles/window_manager/hyprland/linux/.config/waybar/config
 $HOME/dotfiles/util/wofi/linux/.config/wofi/config
@@ -79,4 +79,4 @@ $HOME/.config/hypr/README.md
 $HOME/dotfiles/scripts/linux/install_utils.sh
 
 # nix
-$HOME/.config/home-manager/home.nix
+$HOME/dotfiles/nix/home-manager/packages.nix

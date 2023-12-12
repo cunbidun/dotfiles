@@ -1,0 +1,49 @@
+[pyprland]
+plugins = [
+  "scratchpads",
+]
+
+[scratchpads.term]
+command = "alacritty -t __scratchpad"
+animation = ""
+lazy = true
+unfocus = ""
+size = "50% 50%"
+position = "25% 25%"
+excludes = "*"
+
+[scratchpads.messenger]
+command = "caprine"
+animation = ""
+unfocus = ""
+lazy = true
+size = "50% 50%"
+position = "25% 25%"
+excludes = "*"
+
+[scratchpads.spotify]
+command = "spotify"
+animation = ""
+unfocus = ""
+lazy = true
+size = "50% 50%"
+position = "25% 25%"
+excludes = "*"
+
+[scratchpads.signal]
+command = "signal-desktop"
+animation = ""
+unfocus = ""
+lazy = true
+size = "50% 50%"
+position = "25% 25%"
+excludes = "*"
+
+[scratchpads.obsidian]
+command = "obsidian"
+animation = ""
+unfocus = ""
+lazy = true
+# size = "75% 75%"
+# position = "12.5% 12.5%"
+excludes = "*"

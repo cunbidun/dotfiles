@@ -19,6 +19,7 @@ static const Rule rules[] = {
 	{ "Arandr",      NULL,         "arandr",        NULL,               0,          1,           0,           0,          -1,       0          }, // center this
 
 	{ NULL,          "pop-up",     NULL,            NULL,               0,          1,           0,           0,          -1,       0          },
+	// { "firefox",     NULL,         "Navigator",     NULL,               0,          1,           0,           0,          -1,       0          },
 
   
 	{ TERMCLASS,     NULL,         NULL,            NULL,               0,          0,           1,           0,          -1,       0          },
@@ -32,6 +33,8 @@ static const Rule rules[] = {
 	{ "obsidian",    NULL,         "obsidian",      NULL,               0,          1,           0,           0,          -1,       'n'        },
 	{ "Caprine",     NULL,         "caprine",       NULL,               0,          1,           0,           0,          -1,       'c'        },
 	{ "Signal",      NULL,         "signal",        NULL,               0,          1,           0,           0,          -1,       's'        },
+	{ "obs",         NULL,         "obs",           NULL,               0,          1,           0,           0,          -1,       'r'        },
+
 
 	{ NULL,          NULL,         NULL,            "Event Tester",     0,          0,           0,           1,          -1,       0          }, /* xev */
 };
