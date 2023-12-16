@@ -2,13 +2,17 @@
   description = "cunbidun's flake";
 
    inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgsUnstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
-    pypr.url = "github:hyprland-community/pyprland";
+    # pypr.url = "github:hyprland-community/pyprland#ac6bba1";
+    pypr = {
+      type = "github";
+      owner = "hyprland-community";
+      repo = "pyprland";
+    };
   };
 
   outputs = { nixpkgsUnstable, home-manager, pypr, ... }:

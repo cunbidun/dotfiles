@@ -40,7 +40,6 @@
     pkgs.feh
     pkgs.redshift
     # pkgs.espanso # X version
-
   ];
 
   linux_packages = [
