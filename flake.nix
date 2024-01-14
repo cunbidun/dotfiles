@@ -15,15 +15,22 @@
   };
 
   outputs = { nixpkgsUnstable, home-manager, pypr, ... }:
-    let system = "x86_64-linux";
+    let 
+      system = "x86_64-linux";
+      project_root = "${builtins.toString ./.}";
     in {
       homeConfigurations.cunbidun = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgsUnstable {
           inherit system;
-          config.allowUnfree = true;
+          config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [
+              "electron-25.9.0"
+            ];
+          };
         };
         modules = [ ./nix/home-manager/home.nix ];
-        extraSpecialArgs = { inherit pypr; };
+        extraSpecialArgs = { inherit pypr; inherit project_root; };
       };
     };
 }

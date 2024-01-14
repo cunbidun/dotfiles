@@ -1,4 +1,4 @@
-{ pkgs, config, lib, pypr, ... }:
+{ pkgs, config, lib, pypr, project_root, ... }:
 
 let
   package_config = import ./packages.nix {pkgs = pkgs; };
@@ -106,11 +106,11 @@ with lib; {
 
   home.file = if isLinux then {
     ".xinitrc".source =
-      "${config.home.homeDirectory}/dotfiles/xinitrc/.xinitrc";
+      "${project_root}/xinitrc/.xinitrc";
     ".local/bin/hyprland_wrapped".source =
-      "${config.home.homeDirectory}/dotfiles/window_manager/hyprland/linux/hyprland_wrapped";
+      "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
     ".local/bin/dwm_wrapped".source =
-      "${config.home.homeDirectory}/dotfiles/window_manager/dwm/common/dwm_wrapped";
+      "${project_root}/window_manager/dwm/common/dwm_wrapped";
     ".themes".source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/.nix-profile/share/themes";
     ".icons".source = config.lib.file.mkOutOfStoreSymlink

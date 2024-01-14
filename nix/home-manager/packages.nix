@@ -1,4 +1,4 @@
-{pkgs, lib, ...}: {
+{pkgs, ...}: {
   default_packages = [
     # Utils
     pkgs.bat # cat
