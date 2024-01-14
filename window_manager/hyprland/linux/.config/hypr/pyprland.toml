@@ -1,6 +1,7 @@
 [pyprland]
 plugins = [
   "scratchpads",
+  "expose",
 ]
 
 [scratchpads.term]

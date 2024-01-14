@@ -3,6 +3,7 @@
 let
   package_config = import ./packages.nix {pkgs = pkgs; };
   dircolors = import ./dircolors.nix;
+  systemd_config = import ./systemd.nix {pkgs = pkgs; lib = lib; };
   bookmarks = [
     "file:///home/cunbidun/Documents"
     "file:///home/cunbidun/Music"
@@ -153,8 +154,8 @@ with lib; {
       };
     };
     theme = {
-      name = "Nordic-darker";
-      package = pkgs.nordic;
+      name = "Yaru-blue-dark";
+      package = pkgs.yaru-theme;
     };
     cursorTheme = {
       package = pkgs.apple-cursor;
@@ -178,6 +179,7 @@ with lib; {
     };
   } else {};
 
+  systemd.user= systemd_config;
   home.sessionVariables = if isLinux then {
     # Setting this is to local the .desktop files
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";

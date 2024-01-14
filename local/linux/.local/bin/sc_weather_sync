@@ -2,7 +2,12 @@
 
 notify-send -t 3000 "Sync weather report" "Updating report..."
 
+mv $HOME/.cache/weatherreport $HOME/.cache/weatherreport.bak
 curl -sf "https://wttr.in/?m" >$HOME/.cache/weatherreport || notify-send "Something went wrong. Check your internet connection and try again."
+
+if [ ! -s "$HOME/.cache/weatherreport" ]; then
+	mv $HOME/.cache/weatherreport.bak $HOME/.cache/weatherreport
+fi
 
 notify-send -t 3000 "Sync weather report" "Sync complete!"
 

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   default_packages = [
     # Utils
     pkgs.bat # cat
@@ -7,7 +7,6 @@
     pkgs.fzf
     pkgs.neofetch
     pkgs.tree
-    # pkgs.espanso
     pkgs.tmux
     pkgs.tmuxinator
     pkgs.wget
@@ -19,6 +18,7 @@
 
     pkgs.nixfmt
     pkgs.bazel
+    pkgs.syncthing
 
     # For vim
     pkgs.shellcheck
@@ -32,7 +32,7 @@
     pkgs.wofi
     pkgs.gammastep
     pkgs.wl-clipboard pkgs.slurp pkgs.grim
-    pkgs.espanso-wayland # wayland version
+    # pkgs.espanso-wayland # wayland version
     pkgs.tofi
   ];
 

@@ -1,0 +1,20 @@
+/* darkplus theme */
+@define-color base00 #000000;
+@define-color base01 #1E1E1E;
+@define-color base02 #1E1E1E;
+@define-color base03 #444444;
+
+@define-color base04 #d8dee9;
+@define-color base05 #e5e9f0;
+@define-color base06 #e5e5e5;
+
+@define-color base07 #8fbcbb;
+@define-color base08 #88c0d0; /* cyan */
+@define-color base09 #88c0d0;
+@define-color base0A #88c0d0;
+
+@define-color base0B #f14c4c; /* red */
+@define-color base0C #d08770;
+@define-color base0D #f5f543;
+@define-color base0E #a3be8c;
+@define-color base0F #b48ead;

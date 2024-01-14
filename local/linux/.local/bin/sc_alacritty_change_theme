@@ -15,16 +15,17 @@
 # Credits to script: https://github.com/thapakazi/kutto_kodalo/blob/gumantae/shellrc.d/alacrity.sh
 
 BASE_DIR="$HOME/.config/alacritty"
-THEME_DIR="$BASE_DIR/themes"
+THEME_DIR="$HOME/dotfiles/themes"
 
 change_theme() {
-	theme=${1:-nord}.yaml
-	if [ ! -f "$THEME_DIR/$theme" ]; then
-		echo "err: file not found!"
+	theme=${1:-nord}
+	file_path=$THEME_DIR/$theme/alacritty.yaml
+	if [ ! -f "$file_path" ]; then
+		echo "err: file $file_path not found!"
 		exit 1
 	fi
 	notify-send -t 3000 "alacrity theme" "changing theme to $theme"
-	sed -e "/#+begin_theme/,/#+end_theme/c\#+begin_theme\n$(sed -e 's/$/ \\/' $THEME_DIR/$theme) \n#+end_theme" $BASE_DIR/alacritty.yml -i
+	sed -e "/#+begin_theme/,/#+end_theme/c\#+begin_theme\n$(sed -e 's/$/ \\/' $file_path) \n#+end_theme" $BASE_DIR/alacritty.yml -i
 }
 
 change_theme $1

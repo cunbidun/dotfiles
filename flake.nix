@@ -7,7 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
-    # pypr.url = "github:hyprland-community/pyprland#ac6bba1";
     pypr = {
       type = "github";
       owner = "hyprland-community";

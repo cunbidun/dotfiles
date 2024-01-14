@@ -1,22 +1,25 @@
-@define-color base00 #2e3440;
-@define-color base01 #3b4252;
-@define-color base02 #434c5e;
-@define-color base03 #4c566a;
-
-@define-color base04 #d8dee9;
-@define-color base05 #e5e9f0;
-@define-color base06 #eceff4;
-
-@define-color base07 #8fbcbb;
-@define-color base08 #88c0d0;
-@define-color base09 #81a1c1;
-@define-color base0A #5e81ac;
-
-@define-color base0B #bf616a; /* red */
-@define-color base0C #d08770;
-@define-color base0D #ebcb8b;
-@define-color base0E #a3be8c;
-@define-color base0F #b48ead;
+/* begin_theme */
+/* darkplus theme */ 
+@define-color base00 #000000; 
+@define-color base01 #1E1E1E; 
+@define-color base02 #1E1E1E; 
+@define-color base03 #444444; 
+ 
+@define-color base04 #d8dee9; 
+@define-color base05 #e5e9f0; 
+@define-color base06 #e5e5e5; 
+ 
+@define-color base07 #8fbcbb; 
+@define-color base08 #88c0d0; /* cyan */ 
+@define-color base09 #88c0d0; 
+@define-color base0A #88c0d0; 
+ 
+@define-color base0B #f14c4c; /* red */ 
+@define-color base0C #d08770; 
+@define-color base0D #f5f543; 
+@define-color base0E #a3be8c; 
+@define-color base0F #b48ead;  
+/* end_theme */
 
 * {
   transition: none;
@@ -38,24 +41,32 @@
 #workspaces button {
   padding: 0 4px;
   color: @base06;
+  border-width: 0;
 }
 
-#workspaces button.visible {
+#workspaces button:hover {
+  border-radius: 0px;
+  background: @base06; 
+  color: @base01;
+  border-width: 0;
 }
 
 #workspaces button.active {
   border-radius: 0px;
   background-color: @base08;
   color: @base01;
+  border-width: 0;
 }
 
 #workspaces button.urgent {
+  border-radius: 0px;
   background-color: @base0C;
   color: @base01;
+  border-width: 0;
 }
 
 
-#tray, .ibus-en, .ibus-vi, #network, #custom-brightness, #custom-weather, #mode, #pulseaudio, #clock {
+#tray, .ibus-en, .ibus-vi, #network, #custom-brightness, #custom-minimized, #custom-weather, #mode, #pulseaudio, #clock {
   margin: 0 2px;
   padding: 0 6px;
   background-color: @base03;

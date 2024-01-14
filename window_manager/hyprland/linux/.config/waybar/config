@@ -2,12 +2,13 @@
   "name": "waybar",
   "layer": "top", // Waybar at top|bottom laye
 
+
   "height": 20, // Waybar height (to be removed for auto height)
   "spacing": 4, // Gaps between modules (4px)
 
   "modules-left": ["hyprland/workspaces", "hyprland/submap"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "pulseaudio", "custom/brightness", "custom/weather", "custom/language", "tray", "clock"],
+  "modules-right": ["network", "pulseaudio", "custom/minimized", "custom/brightness", "custom/weather", "custom/language", "tray", "clock"],
 
   // Modules configuration
   "hyprland/workspaces": {
@@ -28,7 +29,7 @@
   },
 
   "hyprland/submap": {
-    "format": "{}",
+    "format": "submap: {}",
     "max-length": 30,
     "tooltip": false
   },
@@ -93,6 +94,17 @@
     "on-click-right": "sc_weather_sync",
     "on-click-middle": "sc_weather_sync"
   },
+
+  "custom/minimized": {
+    "interval": "once",
+    "exec": "cat /tmp/waybar_minimized",
+    "signal": 17,
+    "tooltip": true,
+    "return-type": "json",
+    "on-click": "sc_hyprland_show_minimize",
+    "format": "MIN: {}",
+  },
+
 
   "custom/brightness": {
     "interval": "once",

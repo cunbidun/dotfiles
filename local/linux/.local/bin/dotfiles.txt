@@ -7,8 +7,8 @@
 $HOME/.local/bin/dotfiles.txt
 
 # lvim
-$HOME/.config/lvim/config.lua
-$HOME/.config/lvim/cp.vim
+# $HOME/.config/lvim/config.lua
+# $HOME/.config/lvim/cp.vim
 
 # snippet
 $HOME/.vsnip/cpp.json
@@ -34,24 +34,25 @@ $HOME/.local/bin/sc_prompt
 $HOME/.local/bin/nord_color_picker
 
 # dwm
-$HOME/dwm/include/config.h
-$HOME/dwm/src/dwm.c
-$HOME/dwmblocks-async/config.h
-$HOME/tabbed/config.h
-$HOME/tabbed/tabbed.c
-$HOME/.dwm/autostart.sh
+# $HOME/dwm/include/config.h
+# $HOME/dwm/src/dwm.c
+# $HOME/dwmblocks-async/config.h
+# $HOME/tabbed/config.h
+# $HOME/tabbed/tabbed.c
+# $HOME/.dwm/autostart.sh
 
 # hyprlnd
 $HOME/dotfiles/window_manager/hyprland/linux/hyprland_wrapped
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/pyprland.toml
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 $HOME/dotfiles/window_manager/hyprland/linux/.config/waybar/config
+$HOME/dotfiles/window_manager/hyprland/scripts/autostart.sh
 $HOME/dotfiles/util/wofi/linux/.config/wofi/config
 
 $HOME/dmenu/
 # dmenu
-$HOME/dmenu/dmenu.c
-$HOME/dmenu/config.def.h
+# $HOME/dmenu/dmenu.c
+# $HOME/dmenu/config.def.h
 
 # alacritty
 $HOME/.config/alacritty/alacritty.yml
@@ -69,11 +70,6 @@ $HOME/cron/root_jobs
 # general TODO and note 
 $HOME/dotfiles/docs/pages/TODO.md
 $HOME/dotfiles/docs/pages/Dotfiles Installation Note.md
-
-# hyprland
-$HOME/.config/hypr/hyprland.conf
-$HOME/.config/hypr/hyprpaper.conf
-$HOME/.config/hypr/README.md
 
 # install script
 $HOME/dotfiles/scripts/linux/install_utils.sh
