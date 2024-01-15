@@ -1,9 +1,9 @@
-{ pkgs, config, lib, pypr, project_root, ... }:
+{ pkgs, config, lib, project_root, ... }:
 
 let
   package_config = import ./packages.nix {pkgs = pkgs; };
   dircolors = import ./dircolors.nix;
-  systemd_config = import ./systemd.nix {pkgs = pkgs; lib = lib; };
+  systemd_config = import ./systemd.nix {pkgs = pkgs; lib = lib; project_root = project_root;};
   bookmarks = [
     "file:///home/cunbidun/Documents"
     "file:///home/cunbidun/Music"
@@ -23,7 +23,7 @@ with lib; {
   home.packages = if isDarwin then
     package_config.default_packages ++ package_config.mac_packages
   else
-    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages ++ [ pypr.packages.x86_64-linux.pyprland ];
+    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages;
 
   # +--------------------+
   # |    Linux Config    | 
@@ -183,6 +183,8 @@ with lib; {
   home.sessionVariables = if isLinux then {
     # Setting this is to local the .desktop files
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
+    PICKER = "tofi";
+    TERMINAL = "alacritty";
   } else {};
 
   # +--------------------+

@@ -32,6 +32,7 @@
     pkgs.wofi
     pkgs.gammastep
     pkgs.wl-clipboard pkgs.slurp pkgs.grim
+    pkgs.pyprland
     # pkgs.espanso-wayland # wayland version
     pkgs.tofi
   ];

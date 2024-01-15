@@ -19,6 +19,6 @@ fi
 path=$(grep -v "^#" "$dotfiles" | grep . | "$PICKER" "${extra_flags[@]}")
 
 if [ -n "$path" ]; then
-	notify-send -t 3000 "dotfiles picker" "editing $path"
-	"$TERMINAL" -e "$EDITOR" "$path" >/dev/null 2>&1
+	notify-send -t 3000 "dotfiles picker" "editing $path with $(which $TERMINAL)"
+	nohup "$TERMINAL" -e "$EDITOR" "$path" >/dev/null 2>&1 &
 fi

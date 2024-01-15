@@ -7,14 +7,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
-    pypr = {
-      type = "github";
-      owner = "hyprland-community";
-      repo = "pyprland";
-    };
   };
 
-  outputs = { nixpkgsUnstable, home-manager, pypr, ... }:
+  outputs = { nixpkgsUnstable, home-manager, ... }:
     let 
       system = "x86_64-linux";
       project_root = "${builtins.toString ./.}";
@@ -30,7 +25,7 @@
           };
         };
         modules = [ ./nix/home-manager/home.nix ];
-        extraSpecialArgs = { inherit pypr; inherit project_root; };
+        extraSpecialArgs = { inherit project_root; };
       };
     };
 }
