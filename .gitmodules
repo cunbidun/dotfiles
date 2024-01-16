@@ -1,9 +1,9 @@
-[submodule "calcurse/common/.calcurse"]
-	path = calcurse/common/.calcurse
-	url = git@github.com:cunbidun/calcurse.git
-[submodule "dotfiles-neomutt"]
-	path = dotfiles-neomutt
+[submodule "submodules/dotfiles-neomutt"]
+	path = submodules/dotfiles-neomutt
 	url = git@github.com:cunbidun/dotfiles-neomutt.git
-[submodule "submodules/task"]
-	path = submodules/task
-	url = git@github.com:cunbidun/dotfiles-task.git
+[submodule "submodules/dotfiles-calcurse"]
+	path = submodules/dotfiles-calcurse
+	url = git@github.com:cunbidun/calcurse.git
+[submodule "submodules/dotfiles-task"]
+	path = submodules/dotfiles-task
+	url = git@github.com:cunbidun/dotfiles-task
