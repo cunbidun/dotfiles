@@ -33,6 +33,7 @@
     pkgs.gammastep
     pkgs.wl-clipboard pkgs.slurp pkgs.grim
     pkgs.pyprland
+    pkgs.hyprpicker
     # pkgs.espanso-wayland # wayland version
     pkgs.tofi
   ];

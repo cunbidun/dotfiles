@@ -3,7 +3,7 @@ hide-cursor = true
 # Location and orientation
 anchor = top
 width = 100%
-height = 22 
+height = 24 
 horizontal = true
 
 # Font

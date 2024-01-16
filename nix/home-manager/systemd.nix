@@ -4,7 +4,7 @@
       Unit = {
         Description = "Waybar Service";
         PartOf = [ "hyprland.service" ];
-        After = [ "hyprland.service" "hyprland_autostart.service" ];
+        After = [ "hyprland.service" ];
         Requires = [ "hyprland.service" ];
       };
       Service = {
