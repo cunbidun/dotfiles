@@ -37,6 +37,42 @@
         WantedBy = [ "hyprland.service" ];
       };
     };
+    xremap = {
+      Unit = {
+        Description = "Xremap Service";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        Type = "simple";
+        WorkingDirectory = "%h";
+        ExecStart = "/usr/bin/xremap /home/cunbidun/.config/xremap/config.yml";
+        StandardOutput = "journal";
+        StandardError = "journal";
+      };
+      Install = {
+        WantedBy = [ "hyprland.service" ];
+      };
+    };
+    syncthing = {
+      Unit = {
+        Description = "Syncthing Service";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        Type = "simple";
+        WorkingDirectory = "%h";
+        ExecStart = "${lib.getExe pkgs.syncthing}";
+        StandardOutput = "journal";
+        StandardError = "journal";
+      };
+      Install = {
+        WantedBy = [ "hyprland.service" ];
+      };
+    };
     hyprland_autostart = {
       Unit = {
         Description = "Hyprland Auto Start Script";
