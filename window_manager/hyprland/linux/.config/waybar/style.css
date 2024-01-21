@@ -66,12 +66,16 @@
 }
 
 
-#tray, .ibus-en, .ibus-vi, #network, #custom-brightness, #custom-minimized, #custom-weather, #mode, #pulseaudio, #clock {
+#tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-minimized, #custom-weather, #mode, #pulseaudio, #clock {
   margin: 0 2px;
   padding: 0 6px;
   background-color: @base03;
   border-radius: 4px;
   min-width: 22px;
+}
+
+.output {
+  color: @base09;
 }
 
 .ibus-vi {

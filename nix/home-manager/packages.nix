@@ -31,11 +31,12 @@
     pkgs.hyprpaper
     pkgs.wofi
     pkgs.gammastep
-    pkgs.wl-clipboard pkgs.slurp pkgs.grim
+    pkgs.wl-clipboard pkgs.slurp pkgs.grim pkgs.cliphist
     pkgs.pyprland
     pkgs.hyprpicker
     # pkgs.espanso-wayland # wayland version
     pkgs.tofi
+    pkgs.sway-audio-idle-inhibit
   ];
 
   x_packages = [

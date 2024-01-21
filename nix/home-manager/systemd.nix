@@ -37,6 +37,24 @@
         WantedBy = [ "hyprland.service" ];
       };
     };
+    hyprpaper = {
+      Unit = {
+        Description = "hyprpaper Service";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        Type = "simple";
+        WorkingDirectory = "%h";
+        ExecStart = "${lib.getExe pkgs.hyprpaper}";
+        StandardOutput = "journal";
+        StandardError = "journal";
+      };
+      Install = {
+        WantedBy = [ "hyprland.service" ];
+      };
+    };
     xremap = {
       Unit = {
         Description = "Xremap Service";
@@ -48,6 +66,24 @@
         Type = "simple";
         WorkingDirectory = "%h";
         ExecStart = "/usr/bin/xremap /home/cunbidun/.config/xremap/config.yml";
+        StandardOutput = "journal";
+        StandardError = "journal";
+      };
+      Install = {
+        WantedBy = [ "hyprland.service" ];
+      };
+    };
+    gammastep = {
+      Unit = {
+        Description = "Gamma Step Service";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        Type = "simple";
+        WorkingDirectory = "%h";
+        ExecStart = "${lib.getExe pkgs.gammastep} -l 41.85003:-87.65005";
         StandardOutput = "journal";
         StandardError = "journal";
       };
@@ -75,6 +111,7 @@
     };
     hyprland_autostart = {
       Unit = {
+        ExecStartPre="/bin/sleep 1";
         Description = "Hyprland Auto Start Script";
         PartOf = [ "hyprland.service" ];
         After = [ "hyprland.service" ];
@@ -132,6 +169,16 @@
         ExecStart = "systemctl --user restart sc_hyprland_count_minimized.service";
       };
     };
+    hyprpaper_config_watcher = {
+      Unit = {
+        Description = "Hyprpaper Config Watcher";
+      };
+      Service = {
+        Type = "oneshot";
+        WorkingDirectory = "%h";
+        ExecStart = "systemctl --user restart hyprpaper.service";
+      };
+    };
     hyprland = {
       Unit = {
         Description = "My hyprland wrapper that runs it in systemd";
@@ -169,6 +216,19 @@
       };
       Path = {
         PathModified="%h/dotfiles/local/linux/.local/bin/sc_hyprland_count_minimized.py";
+      };
+      Install = {
+        WantedBy = [ "hyprland.service" ];
+      };
+    };
+    hyprpaper_config_watcher = {
+      Unit = {
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Path = {
+        PathModified="%h/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
       };
       Install = {
         WantedBy = [ "hyprland.service" ];

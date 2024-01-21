@@ -8,7 +8,7 @@
 
   "modules-left": ["hyprland/workspaces", "hyprland/submap"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "pulseaudio", "custom/minimized", "custom/brightness", "custom/weather", "custom/language", "tray", "clock"],
+  "modules-right": ["network", "pulseaudio", "custom/audio_idle_inhibitor", "custom/minimized", "custom/brightness", "custom/weather", "custom/language", "tray", "clock"],
 
   // Modules configuration
   "hyprland/workspaces": {
@@ -113,7 +113,20 @@
     "signal": 16,
     "tooltip": false,
     "format":"BRT: {}%",
-  }
+  },
+
+  "custom/audio_idle_inhibitor": {
+		"format": "INH: {icon}",
+		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+		"exec-if": "which sway-audio-idle-inhibit",
+		"return-type": "json",
+		"format-icons": {
+			"output": "O",
+			"input": "I",
+			"output-input": "B",
+			"none": "N"
+		}
+	},
 }
 
 
