@@ -18,11 +18,11 @@
     "format-icons": {
        "1": "1",
        "2": "2",
-       "3": "3",
-       "4": "4",
+       "3": "V",
+       "4": "quant",
        "5": "web",
        "6": "cp",
-       "7": "vi",
+       "7": "7",
        "8": "game",
        "9": "9",
      },
@@ -67,7 +67,7 @@
     "interface": "wlp0s20f3", // (Optional) To force the use of this interface
     "format-wifi": "{essid} ({signalStrength}%)",
     "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format": false,
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
     "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui"

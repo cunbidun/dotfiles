@@ -1,6 +1,6 @@
 #!/bin/sh
 
-notify-send -t 3000 "Sync weather report" "Updating report..."
+notify-send -t 3000 "Sync weather report" "Updating report..." -a "weather_sync"
 
 mv $HOME/.cache/weatherreport $HOME/.cache/weatherreport.bak
 curl -sf "https://wttr.in/?m" >$HOME/.cache/weatherreport || notify-send "Something went wrong. Check your internet connection and try again."
@@ -9,7 +9,7 @@ if [ ! -s "$HOME/.cache/weatherreport" ]; then
 	mv $HOME/.cache/weatherreport.bak $HOME/.cache/weatherreport
 fi
 
-notify-send -t 3000 "Sync weather report" "Sync complete!"
+notify-send -t 3000 "Sync weather report" "Sync complete!" -a "weather_sync"
 
 pkill -RTMIN+20 dwmblocks
 pkill -SIGRTMIN+20 waybar

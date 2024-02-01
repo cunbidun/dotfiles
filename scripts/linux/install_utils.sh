@@ -18,12 +18,10 @@ yay -S neovim
 yay -S zsh --needed
 yay -S bluetuith bluez bluez-utils --needed # bluetooth
 yay -S pipewire pipewire-pulse pulsemixer pipewire-media-session pactl --needed
-yay -S nautilus sushi file-roller --needed
 
-yay -S caprine                                        # ibus is not working with nix yet
 yay -S quickemu --needed                              # ibus is not working with nix yet
 yay -S swaylock-effects-git--needed swayidle --needed # need pam module
-pacman -S hyprland-git xdg-desktop-portal-hyprland
+pacman -S hyprprop-git --needed
 
 # =========================================================================
 # Install nix

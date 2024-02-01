@@ -11,6 +11,7 @@ let
     "file:///home/cunbidun/Videos"
     "file:///home/cunbidun/Downloads"
     "file:///home/cunbidun/competitive_programming/output"
+    "file:///home/cunbidun/Documents/Profile/green_card"
     "file:///home/cunbidun/.wallpapers"
   ];
 in with pkgs.stdenv;
@@ -129,6 +130,9 @@ with lib; {
       #   exec = "alacritty";
       #   exec-arg = "-e";
       # };
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
     };
   } else {};
 
@@ -154,8 +158,8 @@ with lib; {
       };
     };
     theme = {
-      name = "Yaru-blue-dark";
-      package = pkgs.yaru-theme;
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
     };
     cursorTheme = {
       package = pkgs.apple-cursor;
@@ -179,12 +183,16 @@ with lib; {
     };
   } else {};
 
-  systemd.user= systemd_config;
+  systemd.user = systemd_config;
   home.sessionVariables = if isLinux then {
     # Setting this is to local the .desktop files
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
     PICKER = "tofi";
     TERMINAL = "alacritty";
+    GTK_IM_MODULE = "ibus";
+    QT_IM_MODULE = "ibus";
+    XMODIFIERS = "@im=ibus";
+    GTK_THEME = "Adwaita-dark";
   } else {};
 
   # +--------------------+

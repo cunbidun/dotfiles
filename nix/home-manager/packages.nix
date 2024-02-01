@@ -23,6 +23,16 @@
     # For vim
     pkgs.shellcheck
     pkgs.shfmt
+
+    pkgs.caprine-bin
+    pkgs.gnome.gnome-terminal
+    pkgs.gtk4
+    pkgs.gnome.nautilus 
+    pkgs.gnome.sushi 
+    pkgs.gnome.file-roller
+
+    pkgs.ibus-engines.bamboo
+    pkgs.ibus
   ];
 
   wayland_packages = [
@@ -37,6 +47,9 @@
     # pkgs.espanso-wayland # wayland version
     pkgs.tofi
     pkgs.sway-audio-idle-inhibit
+    pkgs.eww-wayland
+    # pkgs.hyprland
+    # pkgs.xdg-desktop-portal-hyprland
   ];
 
   x_packages = [

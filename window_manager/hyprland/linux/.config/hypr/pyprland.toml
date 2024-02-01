@@ -21,6 +21,8 @@ lazy = true
 size = "50% 50%"
 position = "25% 25%"
 excludes = "*"
+class = "Caprine"
+class_match = true
 
 [scratchpads.spotify]
 command = "spotify"
