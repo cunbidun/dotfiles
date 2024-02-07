@@ -30,9 +30,7 @@
     pkgs.gnome.nautilus 
     pkgs.gnome.sushi 
     pkgs.gnome.file-roller
-
-    pkgs.ibus-engines.bamboo
-    pkgs.ibus
+    pkgs.slack
   ];
 
   wayland_packages = [

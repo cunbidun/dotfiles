@@ -1,11 +1,3 @@
-keymap:
-  - name: terminal copy 
-    application:
-      only: Alacritty 
-    remap:
-      Alt_L-c: C-Shift-c
-      Alt_L-v: C-Shift-v
-
 modmap:
   - name: Global
     application:

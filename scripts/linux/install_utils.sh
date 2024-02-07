@@ -14,14 +14,14 @@ makepkg -si
 # Install system packages
 cd
 yay -S pacman-contrib --needed # extra script for pacman
-yay -S neovim
+yay -S neovim --needed
 yay -S zsh --needed
 yay -S bluetuith bluez bluez-utils --needed # bluetooth
 yay -S pipewire pipewire-pulse pulsemixer pipewire-media-session pactl --needed
 
-yay -S quickemu --needed                              # ibus is not working with nix yet
+yay -S quickemu --needed
 yay -S swaylock-effects-git--needed swayidle --needed # need pam module
-pacman -S hyprprop-git --needed
+pacman -S hyprprop-git xdg-desktop-portal-hyprland --needed
 
 # =========================================================================
 # Install nix

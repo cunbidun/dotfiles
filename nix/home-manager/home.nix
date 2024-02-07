@@ -189,11 +189,17 @@ with lib; {
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$HOME/.local/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
     PICKER = "tofi";
     TERMINAL = "alacritty";
-    GTK_IM_MODULE = "ibus";
-    QT_IM_MODULE = "ibus";
-    XMODIFIERS = "@im=ibus";
     GTK_THEME = "Adwaita-dark";
   } else {};
+
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-unikey
+      fcitx5-gtk
+    ];
+  };
+
 
   # +--------------------+
   # |    Common conifg   |

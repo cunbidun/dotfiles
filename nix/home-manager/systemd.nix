@@ -28,6 +28,7 @@
       };
       Service = {
         Type = "simple";
+        ExecStartPre="env";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.pyprland}";
         StandardOutput = "journal";

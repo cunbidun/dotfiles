@@ -3,7 +3,8 @@
 echo "PATH is set to $PATH"
 
 [[ $(pgrep dunst) ]] || dunst &
-ibus-daemon -drx &
+# ibus-daemon -drx &
+fcitx5 -dr &
 
 [[ $(pgrep aw-qt) ]] || aw-qt &
 [[ $(pgrep 1password) ]] || 1password --silent &
