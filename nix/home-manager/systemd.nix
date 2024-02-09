@@ -1,4 +1,4 @@
-{pkgs, lib, project_root, ...}: {
+{ pkgs, lib, project_root, ... }: {
   services = {
     waybar = {
       Unit = {
@@ -8,16 +8,14 @@
         Requires = [ "hyprland.service" ];
       };
       Service = {
-        ExecStartPre="/bin/sleep 1";
+        ExecStartPre = "/bin/sleep 1";
         Type = "simple";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.waybar}";
         StandardOutput = "journal";
         StandardError = "journal";
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     pypr = {
       Unit = {
@@ -28,15 +26,13 @@
       };
       Service = {
         Type = "simple";
-        ExecStartPre="env";
+        ExecStartPre = "env";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.pyprland}";
         StandardOutput = "journal";
         StandardError = "journal";
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     hyprpaper = {
       Unit = {
@@ -52,9 +48,7 @@
         StandardOutput = "journal";
         StandardError = "journal";
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     xremap = {
       Unit = {
@@ -70,9 +64,7 @@
         StandardOutput = "journal";
         StandardError = "journal";
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     gammastep = {
       Unit = {
@@ -88,9 +80,7 @@
         StandardOutput = "journal";
         StandardError = "journal";
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     syncthing = {
       Unit = {
@@ -106,13 +96,11 @@
         StandardOutput = "journal";
         StandardError = "journal";
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     hyprland_autostart = {
       Unit = {
-        ExecStartPre="/bin/sleep 1";
+        ExecStartPre = "/bin/sleep 1";
         Description = "Hyprland Auto Start Script";
         PartOf = [ "hyprland.service" ];
         After = [ "hyprland.service" ];
@@ -125,14 +113,10 @@
         StandardOutput = "journal";
         StandardError = "journal";
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     waybar_config_watcher = {
-      Unit = {
-        Description = "Waybar Restarter Service";
-      };
+      Unit = { Description = "Waybar Restarter Service"; };
       Service = {
         Type = "oneshot";
         WorkingDirectory = "%h";
@@ -152,18 +136,12 @@
         ExecStart = "${project_root}/local/linux/.local/bin/sc_hyprland_count_minimized.py";
         StandardOutput = "journal";
         StandardError = "journal";
-        Environment = [ 
-          "PYTHONUNBUFFERED=1" 
-        ];
+        Environment = [ "PYTHONUNBUFFERED=1" ];
       };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     sc_hyprland_count_minimized_watcher = {
-      Unit = {
-        Description = "Hyprland Minimize Daemon Restarter";
-      };
+      Unit = { Description = "Hyprland Minimize Daemon Restarter"; };
       Service = {
         Type = "oneshot";
         WorkingDirectory = "%h";
@@ -171,9 +149,7 @@
       };
     };
     hyprpaper_config_watcher = {
-      Unit = {
-        Description = "Hyprpaper Config Watcher";
-      };
+      Unit = { Description = "Hyprpaper Config Watcher"; };
       Service = {
         Type = "oneshot";
         WorkingDirectory = "%h";
@@ -181,9 +157,7 @@
       };
     };
     hyprland = {
-      Unit = {
-        Description = "My hyprland wrapper that runs it in systemd";
-      };
+      Unit = { Description = "My hyprland wrapper that runs it in systemd"; };
       Service = {
         Type = "notify";
         ExecStartPre = "systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY";
@@ -202,12 +176,8 @@
         After = [ "hyprland.service" ];
         Requires = [ "hyprland.service" ];
       };
-      Path = {
-        PathModified="%h/dotfiles/window_manager/hyprland/linux/.config/waybar/";
-      };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Path = { PathModified = "%h/dotfiles/window_manager/hyprland/linux/.config/waybar/"; };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     sc_hyprland_count_minimized_watcher = {
       Unit = {
@@ -215,12 +185,8 @@
         After = [ "hyprland.service" ];
         Requires = [ "hyprland.service" ];
       };
-      Path = {
-        PathModified="%h/dotfiles/local/linux/.local/bin/sc_hyprland_count_minimized.py";
-      };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Path = { PathModified = "%h/dotfiles/local/linux/.local/bin/sc_hyprland_count_minimized.py"; };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
     hyprpaper_config_watcher = {
       Unit = {
@@ -228,12 +194,8 @@
         After = [ "hyprland.service" ];
         Requires = [ "hyprland.service" ];
       };
-      Path = {
-        PathModified="%h/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
-      };
-      Install = {
-        WantedBy = [ "hyprland.service" ];
-      };
+      Path = { PathModified = "%h/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf"; };
+      Install = { WantedBy = [ "hyprland.service" ]; };
     };
   };
 }

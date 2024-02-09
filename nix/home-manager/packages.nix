@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, nixGLWrap, ... }: {
   default_packages = [
     # Utils
     pkgs.bat # cat
@@ -21,15 +21,10 @@
     pkgs.syncthing
 
     # For vim
+    pkgs.lunarvim
     pkgs.shellcheck
     pkgs.shfmt
 
-    pkgs.caprine-bin
-    pkgs.gnome.gnome-terminal
-    pkgs.gtk4
-    pkgs.gnome.nautilus 
-    pkgs.gnome.sushi 
-    pkgs.gnome.file-roller
     pkgs.slack
   ];
 
@@ -39,7 +34,10 @@
     pkgs.hyprpaper
     pkgs.wofi
     pkgs.gammastep
-    pkgs.wl-clipboard pkgs.slurp pkgs.grim pkgs.cliphist
+    pkgs.wl-clipboard
+    pkgs.slurp
+    pkgs.grim
+    pkgs.cliphist
     pkgs.pyprland
     pkgs.hyprpicker
     # pkgs.espanso-wayland # wayland version
@@ -48,15 +46,41 @@
     pkgs.eww-wayland
     # pkgs.hyprland
     # pkgs.xdg-desktop-portal-hyprland
+    pkgs.wev
   ];
 
   x_packages = [
     pkgs.feh
     pkgs.redshift
+    pkgs.maim
+    pkgs.conky
+    pkgs.xdotool
+    pkgs.rofi
+    pkgs.xclip
+    pkgs.wmctrl
     # pkgs.espanso # X version
   ];
 
   linux_packages = [
+    # System
+    pkgs.nixgl.auto.nixGLDefault
+    pkgs.inotify-tools
+    pkgs.libnotify
+
+    pkgs.caprine-bin
+    pkgs.quickemu
+
+    # shell
+    (nixGLWrap pkgs.alacritty)
+    (nixGLWrap pkgs.obs-studio)
+
+    pkgs.lazygit
+    pkgs.pulsemixer
+    pkgs.pamixer
+    pkgs.arandr
+    pkgs.vlc
+    pkgs.calcurse
+
     # Text editor
     pkgs.onlyoffice-bin
     pkgs.vscode
@@ -71,6 +95,7 @@
     pkgs.cantarell-fonts
     pkgs.noto-fonts-color-emoji
     pkgs.iosevka
+    pkgs.nerdfonts
 
     # Games
     pkgs.minecraft
@@ -88,6 +113,9 @@
 
     # GUI File manager
     pkgs.gnome.dconf-editor
+    pkgs.gnome.nautilus
+    pkgs.gnome.sushi
+    pkgs.gnome.file-roller
 
     # CLI File manager
     pkgs.ranger
@@ -100,9 +128,10 @@
     pkgs.rclone-browser
     pkgs.imagemagick
     pkgs.bfg-repo-cleaner
-    
+
     # Programming
     pkgs.cargo
+    pkgs.rustc
     pkgs.zulu # OpenJDK for Java
     pkgs.texlive.combined.scheme-full
 

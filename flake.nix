@@ -7,9 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
+    nixgl.url = "github:guibou/nixGL";
   };
 
-  outputs = { nixpkgsUnstable, home-manager, ... }:
+  outputs = { nixpkgsUnstable, home-manager, nixgl, ... }:
     let 
       system = "x86_64-linux";
       project_root = "${builtins.toString ./.}";
@@ -17,6 +18,7 @@
       homeConfigurations.cunbidun = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgsUnstable {
           inherit system;
+          overlays = [ nixgl.overlay ];
           config = {
             allowUnfree = true;
             permittedInsecurePackages = [

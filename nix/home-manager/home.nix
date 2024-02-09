@@ -1,9 +1,28 @@
 { pkgs, config, lib, project_root, ... }:
 
 let
-  package_config = import ./packages.nix {pkgs = pkgs; };
+  nixGLWrap = pkg:
+    pkgs.runCommand "${pkg.name}-nixgl-wrapper" { } ''
+          mkdir $out
+          ln -s ${pkg}/* $out
+          rm $out/bin
+          mkdir $out/bin
+          for bin in ${pkg}/bin/*; do
+           wrapped_bin=$out/bin/$(basename $bin)
+           echo "exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL $bin  \"\$@\"" > $wrapped_bin
+           chmod +x $wrapped_bin
+          done
+    '';
+  package_config = import ./packages.nix {
+    pkgs = pkgs;
+    nixGLWrap = nixGLWrap;
+  };
   dircolors = import ./dircolors.nix;
-  systemd_config = import ./systemd.nix {pkgs = pkgs; lib = lib; project_root = project_root;};
+  systemd_config = import ./systemd.nix {
+    pkgs = pkgs;
+    lib = lib;
+    project_root = project_root;
+  };
   bookmarks = [
     "file:///home/cunbidun/Documents"
     "file:///home/cunbidun/Music"
@@ -24,7 +43,8 @@ with lib; {
   home.packages = if isDarwin then
     package_config.default_packages ++ package_config.mac_packages
   else
-    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages ++ package_config.wayland_packages;
+    package_config.default_packages ++ package_config.linux_packages ++ package_config.x_packages
+    ++ package_config.wayland_packages;
 
   # +--------------------+
   # |    Linux Config    | 
@@ -106,23 +126,18 @@ with lib; {
   };
 
   home.file = if isLinux then {
-    ".xinitrc".source =
-      "${project_root}/xinitrc/.xinitrc";
-    ".local/bin/hyprland_wrapped".source =
-      "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-    ".local/bin/dwm_wrapped".source =
-      "${project_root}/window_manager/dwm/common/dwm_wrapped";
-    ".themes".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/.nix-profile/share/themes";
-    ".icons".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/.nix-profile/share/icons";
-    ".fonts".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/.nix-profile/share/fonts";
-  } else {};
+    ".xinitrc".source = "${project_root}/xinitrc/.xinitrc";
+    ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
+    ".local/bin/dwm_wrapped".source = "${project_root}/window_manager/dwm/common/dwm_wrapped";
+    ".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
+    ".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
+    ".fonts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/fonts";
+  } else
+    { };
 
   dconf = if isLinux then {
-    enable = true; 
-    settings =  {
+    enable = true;
+    settings = {
       # "org/nemo/preferences" = {
       #   show-hidden-files = true;
       # };
@@ -130,11 +145,10 @@ with lib; {
       #   exec = "alacritty";
       #   exec-arg = "-e";
       # };
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
+      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     };
-  } else {};
+  } else
+    { };
 
   gtk = if isLinux then {
     enable = true;
@@ -146,7 +160,7 @@ with lib; {
         gtk-xft-hintstyle = "hintfull";
         gtk-xft-rgba = "none";
       };
-      bookmarks = bookmarks;    
+      bookmarks = bookmarks;
     };
     gtk4 = {
       extraConfig = {
@@ -170,18 +184,20 @@ with lib; {
       package = pkgs.papirus-nord;
       name = "Papirus-Dark";
     };
-  } else {};
+  } else
+    { };
 
   xdg.mimeApps = if isLinux then {
     enable = true;
     defaultApplications = {
-      "application/pdf" = ["org.gnome.Evince.desktop"];
-      "image/jpeg" = ["feh.desktop"];
-      "image/png" = ["feh.desktop"];
-      "text/plain" = ["lvim.desktop"];
-      "inode/directory" = ["org.gnome.nautilus.desktop"];
+      "application/pdf" = [ "org.gnome.Evince.desktop" ];
+      "image/jpeg" = [ "feh.desktop" ];
+      "image/png" = [ "feh.desktop" ];
+      "text/plain" = [ "lvim.desktop" ];
+      "inode/directory" = [ "org.gnome.nautilus.desktop" ];
     };
-  } else {};
+  } else
+    { };
 
   systemd.user = systemd_config;
   home.sessionVariables = if isLinux then {
@@ -190,16 +206,13 @@ with lib; {
     PICKER = "tofi";
     TERMINAL = "alacritty";
     GTK_THEME = "Adwaita-dark";
-  } else {};
+  } else
+    { };
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-unikey
-      fcitx5-gtk
-    ];
+    fcitx5.addons = with pkgs; [ fcitx5-unikey fcitx5-gtk ];
   };
-
 
   # +--------------------+
   # |    Common conifg   |
