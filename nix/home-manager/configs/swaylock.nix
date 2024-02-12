@@ -1,0 +1,33 @@
+{ color-scheme, ... } : {
+  settings = ''
+clock
+screenshots
+indicator
+indicator-radius=100
+indicator-thickness=10
+indicator-caps-lock
+effect-blur=7x5
+effect-vignette=0.5:0.5
+grace=0
+fade-in=0.2
+line-uses-inside
+ring-color=${color-scheme.blue}
+ring-ver-color=${color-scheme.blue}
+ring-clear-color=${color-scheme.blue}
+ring-caps-lock-color=${color-scheme.blue}
+ring-wrong-color=${color-scheme.blue}
+key-hl-color=${color-scheme.magenta}
+bs-hl-color=${color-scheme.red}
+separator-color=${color-scheme.white}
+inside-color=${color-scheme.white}
+inside-caps-lock-color=${color-scheme.white}
+inside-clear-color=${color-scheme.white}
+inside-ver-color=${color-scheme.green}
+inside-wrong-color=${color-scheme.white}
+text-color=${color-scheme.black}
+text-clear-color=${color-scheme.black}
+text-caps-lock-color=${color-scheme.yellow}
+text-ver-color=${color-scheme.black}
+text-wrong-color=${color-scheme.red}
+''
+}

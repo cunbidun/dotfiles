@@ -33,6 +33,10 @@ let
     "file:///home/cunbidun/Documents/Profile/green_card"
     "file:///home/cunbidun/.wallpapers"
   ];
+  color-scheme = import ./colors/vscode-dark.nix;
+  swaylock-settings = import ./configs/swaylock.nix {
+    color-scheme = color-scheme;
+  };
 in with pkgs.stdenv;
 with lib; {
   # Home Manager needs a bit of information about you and the
@@ -132,6 +136,7 @@ with lib; {
     ".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
     ".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
     ".fonts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/fonts";
+    ".config/swaylock/config".text = swaylock-settings.settings;
   } else
     { };
 
