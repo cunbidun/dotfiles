@@ -1,18 +1,46 @@
 { pkgs, config, lib, project_root, ... }:
 
 let
+  # mkDerivation signature: https://blog.ielliott.io/nix-docs/mkDerivation.html
+  # {
+  #   # Core Attributes
+  #   name: 	string
+  #   pname?: 	string
+  #   version?: 	string
+  #   src: 	path
+  #   # Building
+  #   buildInputs?: 	list[derivation]
+  #   buildPhase?: 	string
+  #   installPhase?: 	string
+  #   builder?: 	path
+  #   # Nix shell
+  #   shellHook?: 	string
+  # }
+
+  # runCommand implementation:
+  #  runCommand' = stdenv: name: env: buildCommand: 
+  #      stdenv.mkDerivation ({ 
+  #        inherit name buildCommand; 
+  #        passAsFile = [ "buildCommand" ]; 
+  #      } // env); 
   nixGLWrap = pkg:
-    pkgs.runCommand "${pkg.name}-nixgl-wrapper" { } ''
-          mkdir $out
-          ln -s ${pkg}/* $out
-          rm $out/bin
-          mkdir $out/bin
-          for bin in ${pkg}/bin/*; do
-           wrapped_bin=$out/bin/$(basename $bin)
-           echo "exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL $bin  \"\$@\"" > $wrapped_bin
-           chmod +x $wrapped_bin
-          done
-    '';
+    pkgs.stdenv.mkDerivation ({
+      pname = "${pkg.name}-nixgl-wrapper";
+      version = "${pkg.version}";
+      buildCommand = ''
+        mkdir $out
+        ln -s ${pkg}/* $out
+        rm $out/bin
+        mkdir $out/bin
+        for bin in ${pkg}/bin/*; do
+         wrapped_bin=$out/bin/$(basename $bin)
+         echo "exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL $bin  \"\$@\"" > $wrapped_bin
+         chmod +x $wrapped_bin
+        done
+      '';
+      passAsFile = [ "buildCommand" ];
+    } // { });
+
   package_config = import ./packages.nix {
     pkgs = pkgs;
     nixGLWrap = nixGLWrap;
@@ -33,13 +61,10 @@ let
     "file:///home/cunbidun/Documents/Profile/green_card"
     "file:///home/cunbidun/.wallpapers"
   ];
-  color-scheme = import ./colors/vscode-dark.nix;
-  swaylock-settings = import ./configs/swaylock.nix {
-    color-scheme = color-scheme;
-  };
-  alacritty-settings = import ./configs/alacritty.nix {
-    color-scheme = color-scheme;
-  };
+  # color-scheme = import ./colors/vscode-dark.nix;
+  color-scheme = import ./colors/nord.nix;
+  swaylock-settings = import ./configs/swaylock.nix { color-scheme = color-scheme; };
+  alacritty-settings = import ./configs/alacritty.nix { color-scheme = color-scheme; };
 in with pkgs.stdenv;
 with lib; {
   # Home Manager needs a bit of information about you and the
@@ -273,7 +298,8 @@ with lib; {
       export BAT_THEME="${color-scheme.bat_theme}"
       export BAT_OPTS="--color always"
       export FZF_DEFAULT_OPTS="${color-scheme.fzf_default_opts}"
-      '' else "");
+    '' else
+      "");
   };
   programs.fzf = {
     enable = true;
@@ -291,7 +317,7 @@ with lib; {
   };
   programs.alacritty = {
     enable = true;
-    pkgs = (nixGLWrap pkgs.alacritty);
+    package = (nixGLWrap pkgs.alacritty);
     settings = alacritty-settings.settings;
   };
 }

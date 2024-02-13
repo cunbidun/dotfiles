@@ -12,38 +12,34 @@
   magenta = "#D16D9E";
   fzf_default_opts = "--preview-window sharp";
   bat_theme = "Visual Studio Dark+";
-  alacritty = {
-    colors = {
-      name = "vscode (dark)";
-      author = "senpai-10";
-      primary = {
-        background = bg;
-        foreground = fg;
-      };
-      cursor = {
-        text = "#1d1f21";
-        cursor = "#cccccc";
-      };
-      normal = {
-        black = "#000000";
-        red = "#cd3131";
-        green = "#0dbc79";
-        yellow = "#e5e510";
-        blue = "#2472c8";
-        magenta = "#bc3fbc";
-        cyan = "#11a8cd";
-        white = "#e5e5e5";
-      };
-      bright = {
-        black = "#666666";
-        red = "#f14c4c";
-        green = "#23d18b";
-        yellow = "#f5f543";
-        blue = "#3b8eea";
-        magenta = "#d670d6";
-        cyan = "#29b8db";
-        white = "#e5e5e5";
-      };
+  alacritty-colors = {
+    primary = {
+      background = "#1E1E1E";
+      foreground = "#D4D4D4";
+    };
+    cursor = {
+      text = "#1d1f21";
+      cursor = "#cccccc";
+    };
+    normal = {
+      black = "#000000";
+      red = "#cd3131";
+      green = "#0dbc79";
+      yellow = "#e5e510";
+      blue = "#2472c8";
+      magenta = "#bc3fbc";
+      cyan = "#11a8cd";
+      white = "#e5e5e5";
+    };
+    bright = {
+      black = "#666666";
+      red = "#f14c4c";
+      green = "#23d18b";
+      yellow = "#f5f543";
+      blue = "#3b8eea";
+      magenta = "#d670d6";
+      cyan = "#29b8db";
+      white = "#e5e5e5";
     };
   };
 }

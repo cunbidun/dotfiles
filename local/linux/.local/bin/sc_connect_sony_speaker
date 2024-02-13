@@ -1,8 +1,0 @@
-#!/bin/sh
-mac="6C:47:60:22:D3:4C"
-sink="bluez_sink.6C_47_60_22_D3_4C.a2dp_sink"
-
-bluetoothctl power on
-bluetoothctl scan on
-bluetoothctl connect $mac
-pactl set-default-sink $sink

@@ -1,8 +1,0 @@
-#!/bin/sh
-
-case $BLOCK_BUTTON in
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac
-
-get_doge_python
-

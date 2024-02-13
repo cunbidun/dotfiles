@@ -1,9 +1,0 @@
-#!/bin/sh
-
-sc_create_today_note
-
-BASE_DIR="$HOME/zettelkasten"
-cd "$BASE_DIR" || notify-send "Could not open $NOTE_DIR"
-
-file_name=$(date +"%Y-%m-%d.md")
-lvim "daily/$file_name"

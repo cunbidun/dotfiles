@@ -1,26 +1,20 @@
-{ color-scheme, ... } : {
+{ color-scheme, ... }: {
   settings = {
     live_config_reload = true;
-    colors = color-scheme.alacritty; 
-    env = {
-      TERM = "alacritty";
-    };
+    colors.bright = color-scheme.alacritty-colors.bright;
+    colors.cursor= color-scheme.alacritty-colors.cursor;
+    colors.normal= color-scheme.alacritty-colors.normal;
+    colors.primary= color-scheme.alacritty-colors.primary;
+    colors.draw_bold_text_with_bright_colors = true;
+    env = { TERM = "alacritty"; };
     font = {
       size = 10;
-      normal = {
-        family = "SauceCodePro Nerd Font Mono";
-      };
+      normal = { family = "SauceCodePro Nerd Font Mono"; };
     };
     window = {
       decorations = "none";
       dynamic_padding = true;
       opacity = 0.85;
-      dimensions = [
-        {
-          lines = 3;
-          columns = 200;
-        }
-      ];
     };
     keyboard = {
       bindings = [
@@ -33,11 +27,6 @@
           key = "C";
           mods = "Alt";
           action = "Copy";
-        }
-        {
-          key = "K";
-          mods = "Control";
-          chars = "\\x0c";
         }
       ];
     };
