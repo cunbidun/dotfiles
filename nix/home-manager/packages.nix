@@ -71,7 +71,6 @@
     pkgs.quickemu
 
     # shell
-    (nixGLWrap pkgs.alacritty)
     (nixGLWrap pkgs.obs-studio)
 
     pkgs.lazygit

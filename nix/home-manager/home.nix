@@ -37,6 +37,9 @@ let
   swaylock-settings = import ./configs/swaylock.nix {
     color-scheme = color-scheme;
   };
+  alacritty-settings = import ./configs/alacritty.nix {
+    color-scheme = color-scheme;
+  };
 in with pkgs.stdenv;
 with lib; {
   # Home Manager needs a bit of information about you and the
@@ -265,7 +268,12 @@ with lib; {
       . $HOME/dotfiles/zsh/zshpath
       . $HOME/dotfiles/zsh/zshtheme
       . $HOME/dotfiles/zsh/zshconda
-    '';
+    '' + (if isLinux then ''
+      export BAT_STYLE="plain"
+      export BAT_THEME="${color-scheme.bat_theme}"
+      export BAT_OPTS="--color always"
+      export FZF_DEFAULT_OPTS="${color-scheme.fzf_default_opts}"
+      '' else "");
   };
   programs.fzf = {
     enable = true;
@@ -280,5 +288,10 @@ with lib; {
     enable = true;
     enableZshIntegration = true;
     extraConfig = dircolors.settings;
+  };
+  programs.alacritty = {
+    enable = true;
+    pkgs = (nixGLWrap pkgs.alacritty);
+    settings = alacritty-settings.settings;
   };
 }
