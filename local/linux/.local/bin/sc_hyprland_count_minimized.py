@@ -12,7 +12,7 @@ def compute_data(ws_numer: int):
     minimize_ws_name = f"special:minimized_{ws_numer}"
 
     p = subprocess.run(
-        "/usr/bin/hyprctl clients -j",
+        "hyprctl clients -j",
         shell=True,
         check=True,
         stdout=subprocess.PIPE,

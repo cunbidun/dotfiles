@@ -44,8 +44,6 @@
     pkgs.tofi
     pkgs.sway-audio-idle-inhibit
     pkgs.eww-wayland
-    # pkgs.hyprland
-    # pkgs.xdg-desktop-portal-hyprland
     pkgs.wev
   ];
 
@@ -95,9 +93,7 @@
     pkgs.noto-fonts-color-emoji
     pkgs.iosevka
     pkgs.nerdfonts
-
-    # Games
-    pkgs.minecraft
+    (nixGLWrap pkgs.minecraft)
 
     # Messaging
     pkgs.signal-desktop

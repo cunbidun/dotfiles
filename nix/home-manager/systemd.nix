@@ -100,13 +100,13 @@
     };
     hyprland_autostart = {
       Unit = {
-        ExecStartPre = "/bin/sleep 1";
         Description = "Hyprland Auto Start Script";
         PartOf = [ "hyprland.service" ];
         After = [ "hyprland.service" ];
         Requires = [ "hyprland.service" ];
       };
       Service = {
+        ExecStartPre = "/bin/sleep 1";
         Type = "simple";
         WorkingDirectory = "%h";
         ExecStart = "${project_root}/window_manager/hyprland/scripts/autostart.sh";
@@ -162,7 +162,7 @@
         Type = "notify";
         ExecStartPre = "systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY";
         WorkingDirectory = "%h";
-        ExecStart = "/usr/bin/Hyprland";
+        ExecStart = "${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${lib.getExe pkgs.hyprland}";
         StandardOutput = "journal";
         StandardError = "journal";
         TimeoutStopSec = 5;
