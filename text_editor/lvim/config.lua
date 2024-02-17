@@ -45,7 +45,7 @@ formatters.setup({
   { exe = "stylua",  filetypes = { "lua" } },
   { exe = "shfmt",   filetypes = { "sh" } },
   { exe = "rustfmt", filetypes = { "rust" } },
-  { exe = "nixfmt",  filetypes = { "nixfmt" } },
+  { exe = "nixfmt",  filetypes = { "nix" } },
 })
 -- }}}
 
@@ -72,7 +72,6 @@ lvim.plugins = {
   { "moll/vim-bbye" },
   { "tpope/vim-surround" },
   { "axkirillov/easypick.nvim" },
-  { "wakatime/vim-wakatime" },
 }
 
 -- +--------------------------------------------------------+

@@ -74,7 +74,6 @@
     git
     firefox-wayland
     xdg-utils
-    coreutils
     python3
   ];
 

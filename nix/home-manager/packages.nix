@@ -17,7 +17,7 @@
     pkgs.newsboat
 
     pkgs.nixfmt
-    pkgs.bazel
+    pkgs.nixpkgs-fmt
     pkgs.syncthing
 
     # For vim
@@ -94,7 +94,7 @@
     pkgs.noto-fonts-color-emoji
     pkgs.iosevka
     pkgs.nerdfonts
-    pkgs.minecraft
+    pkgs.prismlauncher
 
     # Messaging
     pkgs.signal-desktop
@@ -128,7 +128,6 @@
     # Programming
     pkgs.cargo
     pkgs.rustc
-    pkgs.zulu # OpenJDK for Java
     pkgs.texlive.combined.scheme-full
 
     # Python package

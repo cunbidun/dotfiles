@@ -179,6 +179,12 @@ with lib; {
     ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
     ".config/lvim/markdown-preview.vim".source = "${project_root}/text_editor/lvim/markdown-preview.vim";
 
+    ".config/ranger/commands_full.py".source = "${project_root}/util/ranger/commands_full.py";
+    ".config/ranger/commands.py".source = "${project_root}/util/ranger/commands.py";
+    ".config/ranger/rc.conf".source = "${project_root}/util/ranger/rc.conf";
+    ".config/ranger/rifle.conf".source = "${project_root}/util/ranger/rifle.conf";
+    ".config/ranger/scope.sh".source = "${project_root}/util/ranger/scope.sh";
+
     ".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
     ".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
     ".fonts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/fonts";
@@ -212,6 +218,7 @@ with lib; {
     ".local/bin/sc_weather_sync".source = "${project_root}/local/linux/.local/bin/sc_weather_sync";
     ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";
     ".local/bin/toggle_volume".source = "${project_root}/local/linux/.local/bin/toggle_volume";
+    ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
   } else
     { };
 

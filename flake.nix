@@ -1,7 +1,7 @@
 {
   description = "cunbidun's flake";
 
-   inputs = {
+  inputs = {
     nixpkgsUnstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -12,7 +12,7 @@
   };
 
   outputs = inputs@{ nixpkgsUnstable, home-manager, nixgl, ... }:
-    let 
+    let
       system = "x86_64-linux";
       project_root = "${builtins.toString ./.}";
     in {
@@ -22,14 +22,12 @@
           overlays = [ nixgl.overlay ];
           config = {
             allowUnfree = true;
-            permittedInsecurePackages = [
-              "electron-25.9.0"
-            ];
+            permittedInsecurePackages = [ "electron-25.9.0" ];
           };
         };
-        modules = [ 
-          ./nix/home-manager/home.nix 
-          inputs.xremap-flake.homeManagerModules.default 
+        modules = [
+          ./nix/home-manager/home.nix
+          inputs.xremap-flake.homeManagerModules.default
           {
             services.xremap = {
               withWlroots = true;
@@ -45,7 +43,10 @@
             };
           }
         ];
-        extraSpecialArgs = { inherit project_root; inherit inputs; };
+        extraSpecialArgs = {
+          inherit project_root;
+          inherit inputs;
+        };
       };
     };
 }

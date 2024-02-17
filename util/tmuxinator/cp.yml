@@ -3,7 +3,8 @@ root: ~/competitive_programming/
 
 windows:
   - editor:
-    - vi
+    - nix-shell 
+    - $EDITOR 
   - cc:  
     - cpcli_cc --project-config project_config.json -o
 
