@@ -9,7 +9,7 @@ horizontal_padding = 20
 frame_width = 2 
 sort = true 
 idle_threshold = 120
-font = SauceCodePro Nerd Font Mono
+font = SauceCodePro Nerd Font Mono 10
 line_height = 4
 
 # The format of the message.  Possible variables are:

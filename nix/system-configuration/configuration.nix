@@ -57,6 +57,8 @@
     packages = with pkgs; [
       swayidle
       swaylock-effects
+      jdk17
+      xdg-utils
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
@@ -73,7 +75,6 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     firefox-wayland
-    xdg-utils
     python3
   ];
 
