@@ -160,10 +160,6 @@ with lib; {
   };
 
   home.file = if isLinux then {
-    ".xinitrc".source = "${project_root}/xinitrc/.xinitrc";
-    ".local/bin/dwm_wrapped".source =
-      "${project_root}/window_manager/dwm/common/dwm_wrapped";
-
     ".local/bin/hyprland_wrapped".source =
       "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
     ".config/waybar/".source =
@@ -426,15 +422,9 @@ with lib; {
   };
   programs.alacritty = {
     enable = true;
-    # package = (nixGLWrap pkgs.alacritty);
     package = pkgs.alacritty;
     settings = alacritty-settings.settings;
   };
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
-  #   configPackages = [ pkgs.hyprland ];
-  # };
   # https://github.com/spikespaz/dotfiles/tree/master/users/jacob/hyprland
   wayland.windowManager.hyprland = {
     enable = true;

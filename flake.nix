@@ -36,7 +36,7 @@
                 modmap:
                   - name: Global
                     application:
-                      not: [Alacritty, steam, dota1, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+                      not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
                     remap:
                       Alt_L: Ctrl_L 
               '';
