@@ -8,7 +8,7 @@
         Requires = [ "hyprland.service" ];
       };
       Service = {
-        ExecStartPre = "/bin/sleep 1";
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.waybar}";
@@ -26,7 +26,6 @@
       };
       Service = {
         Type = "simple";
-        ExecStartPre = "env";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.pyprland}";
         StandardOutput = "journal";
@@ -50,22 +49,6 @@
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
-    xremap = {
-      Unit = {
-        Description = "Xremap Service";
-        PartOf = [ "hyprland.service" ];
-        After = [ "hyprland.service" ];
-        Requires = [ "hyprland.service" ];
-      };
-      Service = {
-        Type = "simple";
-        WorkingDirectory = "%h";
-        ExecStart = "/usr/bin/xremap /home/cunbidun/.config/xremap/config.yml";
-        StandardOutput = "journal";
-        StandardError = "journal";
-      };
-      Install = { WantedBy = [ "hyprland.service" ]; };
-    };
     gammastep = {
       Unit = {
         Description = "Gamma Step Service";
@@ -75,6 +58,7 @@
       };
       Service = {
         Type = "simple";
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.gammastep} -l 41.85003:-87.65005";
         StandardOutput = "journal";
@@ -106,7 +90,7 @@
         Requires = [ "hyprland.service" ];
       };
       Service = {
-        ExecStartPre = "/bin/sleep 1";
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
         ExecStart = "${project_root}/window_manager/hyprland/scripts/autostart.sh";
@@ -162,7 +146,7 @@
         Type = "notify";
         ExecStartPre = "systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY";
         WorkingDirectory = "%h";
-        ExecStart = "${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${lib.getExe pkgs.hyprland}";
+        ExecStart = "${lib.getExe pkgs.hyprland}";
         StandardOutput = "journal";
         StandardError = "journal";
         TimeoutStopSec = 5;

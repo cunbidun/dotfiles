@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env bash
 
 choice=$(wmctrl -l | awk '{$1 = strtonum($1); print}' | $PICKER -i -l 10 -p "select window: ")
 

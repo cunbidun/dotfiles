@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env bash
 pamixer -t; pkill -RTMIN+10 dwmblocks
 
 if [ "$(pamixer --get-mute)" = true ]; then

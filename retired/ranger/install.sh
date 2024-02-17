@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env bash
 
 # symlink config
 stow common --no-folding -t "$HOME"

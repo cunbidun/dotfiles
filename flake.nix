@@ -8,9 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
     nixgl.url = "github:guibou/nixGL";
+    xremap-flake.url = "github:xremap/nix-flake";
   };
 
-  outputs = { nixpkgsUnstable, home-manager, nixgl, ... }:
+  outputs = inputs@{ nixpkgsUnstable, home-manager, nixgl, ... }:
     let 
       system = "x86_64-linux";
       project_root = "${builtins.toString ./.}";
@@ -26,8 +27,25 @@
             ];
           };
         };
-        modules = [ ./nix/home-manager/home.nix ];
-        extraSpecialArgs = { inherit project_root; };
+        modules = [ 
+          ./nix/home-manager/home.nix 
+          inputs.xremap-flake.homeManagerModules.default 
+          {
+            services.xremap = {
+              withWlroots = true;
+              watch = true;
+              yamlConfig = ''
+                modmap:
+                  - name: Global
+                    application:
+                      not: [Alacritty, steam, dota1, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+                    remap:
+                      Alt_L: Ctrl_L 
+              '';
+            };
+          }
+        ];
+        extraSpecialArgs = { inherit project_root; inherit inputs; };
       };
     };
 }

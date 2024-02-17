@@ -61,15 +61,16 @@
 
   linux_packages = [
     # System
-    pkgs.nixgl.auto.nixGLDefault
+    # pkgs.nixgl.auto.nixGLDefault
     pkgs.inotify-tools
     pkgs.libnotify
+    pkgs.ddcutil
 
     pkgs.caprine-bin
     pkgs.quickemu
 
     # shell
-    (nixGLWrap pkgs.obs-studio)
+    pkgs.obs-studio
 
     pkgs.lazygit
     pkgs.pulsemixer
@@ -85,7 +86,7 @@
 
     # Broswer
     pkgs.google-chrome
-    pkgs.firefox-wayland
+    # pkgs.firefox-wayland
 
     # Font
     pkgs.liberation_ttf
@@ -93,7 +94,7 @@
     pkgs.noto-fonts-color-emoji
     pkgs.iosevka
     pkgs.nerdfonts
-    (nixGLWrap pkgs.minecraft)
+    pkgs.minecraft
 
     # Messaging
     pkgs.signal-desktop

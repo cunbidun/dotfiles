@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env bash
 #
 EN_ibus="xkb:us::eng"
 VN_ibus="Bamboo"

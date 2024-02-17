@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env bash
 
 # Arch linux
 check=$(cat /etc/os-release | grep "Arch Linux" | wc -l)

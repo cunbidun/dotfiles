@@ -159,12 +159,48 @@ with lib; {
 
   home.file = if isLinux then {
     ".xinitrc".source = "${project_root}/xinitrc/.xinitrc";
-    ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
     ".local/bin/dwm_wrapped".source = "${project_root}/window_manager/dwm/common/dwm_wrapped";
+
+    ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
+    ".config/waybar/".source = "${project_root}/window_manager/hyprland/linux/.config/waybar";
+    ".config/hypr/pyprland.toml".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
+    ".config/hypr/hyprpaper.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
+    ".config/tofi/config".source = "${project_root}/util/tofi/linux/.config/tofi/config";
+    ".config/dunst/dunstrc".source = "${project_root}/dunst/dunstrc";
+
     ".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
     ".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
     ".fonts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/fonts";
     ".config/swaylock/config".text = swaylock-settings.settings;
+   
+    ".local/bin/clock".source = "${project_root}/local/linux/.local/bin/clock";
+    ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
+    ".local/bin/decrease_volume".source = "${project_root}/local/linux/.local/bin/decrease_volume";
+    ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
+    ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
+    ".local/bin/get_cpu".source = "${project_root}/local/linux/.local/bin/get_cpu";
+    ".local/bin/get_internet".source = "${project_root}/local/linux/.local/bin/get_internet";
+    ".local/bin/get_language".source = "${project_root}/local/linux/.local/bin/get_language";
+    ".local/bin/get_memory".source = "${project_root}/local/linux/.local/bin/get_memory";
+    ".local/bin/get_temp".source = "${project_root}/local/linux/.local/bin/get_temp";
+    ".local/bin/get_volume".source = "${project_root}/local/linux/.local/bin/get_volume";
+    ".local/bin/increase_volume".source = "${project_root}/local/linux/.local/bin/increase_volume";
+    ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
+    ".local/bin/sc_brightness_change".source = "${project_root}/local/linux/.local/bin/sc_brightness_change";
+    ".local/bin/sc_calcurse_sync".source = "${project_root}/local/linux/.local/bin/sc_calcurse_sync";
+    ".local/bin/sc_get_brightness".source = "${project_root}/local/linux/.local/bin/sc_get_brightness";
+    ".local/bin/sc_get_brightness_percentage".source = "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
+    ".local/bin/sc_hyprland_count_minimized.py".source = "${project_root}/local/linux/.local/bin/sc_hyprland_count_minimized.py";
+    ".local/bin/sc_hyprland_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
+    ".local/bin/sc_hyprland_show_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
+    ".local/bin/sc_lvim_update".source = "${project_root}/local/linux/.local/bin/sc_lvim_update";
+    ".local/bin/sc_pacman_sync".source = "${project_root}/local/linux/.local/bin/sc_pacman_sync";
+    ".local/bin/sc_remove_calcurse_dup".source = "${project_root}/local/linux/.local/bin/sc_remove_calcurse_dup";
+    ".local/bin/sc_toggle_picom".source = "${project_root}/local/linux/.local/bin/sc_toggle_picom";
+    ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
+    ".local/bin/sc_weather_sync".source = "${project_root}/local/linux/.local/bin/sc_weather_sync";
+    ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";
+    ".local/bin/toggle_volume".source = "${project_root}/local/linux/.local/bin/toggle_volume";
   } else
     { };
 
@@ -317,7 +353,8 @@ with lib; {
   };
   programs.alacritty = {
     enable = true;
-    package = (nixGLWrap pkgs.alacritty);
+    # package = (nixGLWrap pkgs.alacritty);
+    package = pkgs.alacritty;
     settings = alacritty-settings.settings;
   };
   # xdg.portal = {
@@ -502,8 +539,8 @@ bind = $mainMod SHIFT, N, exec, nord_color_picker
 # bind = $mainMod, Space, exec, set_language 
 
 # Clipboard
-bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy
-bind = SUPER, V, exec,  cliphist list | tofi --prompt-text "select clipboard:" --height=25% --horizontal=false --result-spacing=5 | cliphist decode | wl-copy
+bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
+bind = $mainMod, V, exec,  cliphist list | tofi --prompt-text "select clipboard:" --height=25% --horizontal=false --result-spacing=5 | cliphist decode | wl-copy
 
 bind = $mainMod, Z, layoutmsg, togglesplit
 bind = $mainMod, F, togglefloating, 

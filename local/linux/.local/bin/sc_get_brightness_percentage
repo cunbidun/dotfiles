@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env bash
 
 if [[ $(uname -r) == *asahi* ]]; then
 	BASE_PATH="/sys/class/backlight/apple-panel-bl/"
