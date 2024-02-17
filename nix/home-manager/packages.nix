@@ -142,9 +142,6 @@
 
     # Theme
     pkgs.lxappearance
-
-    pkgs._1password-gui
-    pkgs._1password
   ];
 
   mac_packages = [ ];

@@ -34,7 +34,7 @@ lvim.keys.normal_mode["<S-M-f>"] = "<cmd>lua vim.lsp.buf.formatting()<CR>"
 -- | plugin config |
 -- +---------------+
 -- vsnip {{{
-require("luasnip.loaders.from_vscode").load({ paths = { "~/.vsnip/" } })
+require("luasnip.loaders.from_vscode").load({ paths = { "~/dotfiles/text_editor/lvim/snippet/" } })
 -- }}}
 
 -- formatters {{{

@@ -167,6 +167,7 @@ with lib; {
     ".config/hypr/hyprpaper.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
     ".config/tofi/config".source = "${project_root}/util/tofi/linux/.config/tofi/config";
     ".config/dunst/dunstrc".source = "${project_root}/dunst/dunstrc";
+    ".config/lvim".source = "${project_root}/text_editor/lvim";
 
     ".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
     ".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
