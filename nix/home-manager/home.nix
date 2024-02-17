@@ -167,7 +167,17 @@ with lib; {
     ".config/hypr/hyprpaper.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
     ".config/tofi/config".source = "${project_root}/util/tofi/linux/.config/tofi/config";
     ".config/dunst/dunstrc".source = "${project_root}/dunst/dunstrc";
-    ".config/lvim".source = "${project_root}/text_editor/lvim";
+    ".config/tmuxinator".source = "${project_root}/util/tmuxinator";
+    ".tmux.conf".source = "${project_root}/util/tmux/.tmux.conf";
+
+    #######################
+    # lvim configurations #
+    #######################
+    ".config/lvim/lua".source = "${project_root}/text_editor/lvim/lua";
+    ".config/lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
+    ".config/lvim/config.lua".source = "${project_root}/text_editor/lvim/config.lua";
+    ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
+    ".config/lvim/markdown-preview.vim".source = "${project_root}/text_editor/lvim/markdown-preview.vim";
 
     ".themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/themes";
     ".icons".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-profile/share/icons";
@@ -265,6 +275,11 @@ with lib; {
       "image/png" = [ "feh.desktop" ];
       "text/plain" = [ "lvim.desktop" ];
       "inode/directory" = [ "org.gnome.nautilus.desktop" ];
+      "text/html" = ["firefox.desktop"];
+      "x-scheme-handler/http" = ["firefox.desktop"];
+      "x-scheme-handler/https" = ["firefox.desktop"];
+      "x-scheme-handler/about" = ["firefox.desktop"];
+      "x-scheme-handler/unknown" = ["firefox.desktop"];
     };
   } else
     { };
@@ -329,7 +344,6 @@ with lib; {
       . $HOME/dotfiles/zsh/zshvim
       . $HOME/dotfiles/zsh/zshpath
       . $HOME/dotfiles/zsh/zshtheme
-      . $HOME/dotfiles/zsh/zshconda
     '' + (if isLinux then ''
       export BAT_STYLE="plain"
       export BAT_THEME="${color-scheme.bat_theme}"
