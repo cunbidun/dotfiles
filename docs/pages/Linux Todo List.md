@@ -36,9 +36,9 @@
 - [ ] formatter and lsp for md
 - [ ] formatter and lsp for yaml
 ## rofi
-- [ ] transparent background
+- [X] transparent background
 - [O] alt-tab switching
-- [ ] rofi select first and last element bug
+- [X] rofi select first and last element bug
 ## zsh
 - [ ] add commit message to prompt
 # ranger

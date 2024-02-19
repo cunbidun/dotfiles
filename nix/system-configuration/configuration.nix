@@ -53,12 +53,15 @@
   users.users.cunbidun = {
     isNormalUser = true;
     description = "Duy Pham";
-    extraGroups = [ "networkmanager" "wheel" "input" "i2c" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "i2c" "docker" ];
     packages = with pkgs; [
       swayidle
       swaylock-effects
       jdk17
       xdg-utils
+      desktop-file-utils
+      docker-compose
+      activitywatch
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
@@ -140,6 +143,25 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
+  services.flatpak.enable = true;
+  services.flatpak.packages = [
+    "com.getpostman.Postman"
+  ];
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    xdgOpenUsePortal = true;
+  };
 
   programs._1password.enable = true;
   programs._1password-gui = {
@@ -150,4 +172,18 @@
   };
 
   hardware.i2c.enable = true;
+  programs.nix-ld.enable = true;
+  # Sets up all the libraries to load
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    zlib
+    nss
+    openssl
+    curl
+    expat
+    # ...
+  ];
 }

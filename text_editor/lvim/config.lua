@@ -72,6 +72,7 @@ lvim.plugins = {
   { "moll/vim-bbye" },
   { "tpope/vim-surround" },
   { "axkirillov/easypick.nvim" },
+  { "ActivityWatch/aw-watcher-vim" },
 }
 
 -- +--------------------------------------------------------+

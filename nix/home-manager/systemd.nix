@@ -30,6 +30,7 @@
         ExecStart = "${lib.getExe pkgs.pyprland}";
         StandardOutput = "journal";
         StandardError = "journal";
+        ExecStopPost = "/bin/sh -c 'rm -f /tmp/hypr/$\{HYPRLAND_INSTANCE_SIGNATURE\}/.pyprland.sock'";
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
