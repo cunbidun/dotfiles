@@ -172,7 +172,7 @@ with lib; {
         "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
       ".config/tofi/config".source =
         "${project_root}/util/tofi/linux/.config/tofi/config";
-      ".config/dunst/dunstrc".source = "${project_root}/dunst/dunstrc";
+      ".config/dunst/dunstrc".source = "${project_root}/util/dunst/dunstrc";
       ".config/tmuxinator".source = "${project_root}/util/tmuxinator";
       ".tmux.conf".source = "${project_root}/util/tmux/.tmux.conf";
 

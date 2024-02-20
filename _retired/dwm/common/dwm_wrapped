@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-yay -R xremap-wlroots-bin
-yay -S xremap-x11-bin --needed --noconfirm
-
-startx

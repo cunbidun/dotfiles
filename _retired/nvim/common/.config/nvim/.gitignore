@@ -1,8 +1,0 @@
-autoload/plug.vim*
-temp_dir/*
-bundle/*
-doc/tags
-.DS_Store
-vimrcs/custom.vim
-plugin
-site
