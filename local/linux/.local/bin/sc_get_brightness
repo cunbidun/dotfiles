@@ -1,8 +1,0 @@
-#/usr/bin/env bash
-
-case $BLOCK_BUTTON in
-6) "$TERMINAL" -t "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e "$EDITOR" "$0" ;;
-esac
-
-brightness=$(sc_get_brightness_percentage)
-echo "^c#81A1C1^BRT: ^d^$brightness%^d^"

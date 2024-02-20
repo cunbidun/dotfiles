@@ -1,3 +1,0 @@
-#/usr/bin/env bash
-
-pkill -RTMIN+12 dwmblocks

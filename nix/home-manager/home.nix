@@ -58,8 +58,6 @@ let
     "file:///home/cunbidun/Videos"
     "file:///home/cunbidun/Downloads"
     "file:///home/cunbidun/competitive_programming/output"
-    "file:///home/cunbidun/Documents/Profile/green_card"
-    "file:///home/cunbidun/.wallpapers"
   ];
   # color-scheme = import ./colors/vscode-dark.nix;
   color-scheme = import ./colors/nord.nix;
@@ -206,7 +204,6 @@ with lib; {
         "${config.home.homeDirectory}/.nix-profile/share/fonts";
       ".config/swaylock/config".text = swaylock-settings.settings;
 
-      ".local/bin/clock".source = "${project_root}/local/linux/.local/bin/clock";
       ".local/bin/colors-name.txt".source =
         "${project_root}/local/linux/.local/bin/colors-name.txt";
       ".local/bin/decrease_volume".source =
@@ -215,28 +212,12 @@ with lib; {
         "${project_root}/local/linux/.local/bin/dotfiles.txt";
       ".local/bin/dotfiles_picker".source =
         "${project_root}/local/linux/.local/bin/dotfiles_picker";
-      ".local/bin/get_cpu".source =
-        "${project_root}/local/linux/.local/bin/get_cpu";
-      ".local/bin/get_internet".source =
-        "${project_root}/local/linux/.local/bin/get_internet";
-      ".local/bin/get_language".source =
-        "${project_root}/local/linux/.local/bin/get_language";
-      ".local/bin/get_memory".source =
-        "${project_root}/local/linux/.local/bin/get_memory";
-      ".local/bin/get_temp".source =
-        "${project_root}/local/linux/.local/bin/get_temp";
-      ".local/bin/get_volume".source =
-        "${project_root}/local/linux/.local/bin/get_volume";
       ".local/bin/increase_volume".source =
         "${project_root}/local/linux/.local/bin/increase_volume";
       ".local/bin/nord_color_picker".source =
         "${project_root}/local/linux/.local/bin/nord_color_picker";
       ".local/bin/sc_brightness_change".source =
         "${project_root}/local/linux/.local/bin/sc_brightness_change";
-      ".local/bin/sc_calcurse_sync".source =
-        "${project_root}/local/linux/.local/bin/sc_calcurse_sync";
-      ".local/bin/sc_get_brightness".source =
-        "${project_root}/local/linux/.local/bin/sc_get_brightness";
       ".local/bin/sc_get_brightness_percentage".source =
         "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
       ".local/bin/sc_hyprland_count_minimized.py".source =
@@ -245,24 +226,14 @@ with lib; {
         "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
       ".local/bin/sc_hyprland_show_minimize".source =
         "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
-      ".local/bin/sc_lvim_update".source =
-        "${project_root}/local/linux/.local/bin/sc_lvim_update";
-      ".local/bin/sc_pacman_sync".source =
-        "${project_root}/local/linux/.local/bin/sc_pacman_sync";
-      ".local/bin/sc_remove_calcurse_dup".source =
-        "${project_root}/local/linux/.local/bin/sc_remove_calcurse_dup";
-      ".local/bin/sc_toggle_picom".source =
-        "${project_root}/local/linux/.local/bin/sc_toggle_picom";
-      ".local/bin/sc_weather".source =
-        "${project_root}/local/linux/.local/bin/sc_weather";
-      ".local/bin/sc_weather_sync".source =
-        "${project_root}/local/linux/.local/bin/sc_weather_sync";
       ".local/bin/sc_window_picker".source =
         "${project_root}/local/linux/.local/bin/sc_window_picker";
       ".local/bin/toggle_volume".source =
         "${project_root}/local/linux/.local/bin/toggle_volume";
       ".local/bin/sc_prompt".source =
         "${project_root}/local/linux/.local/bin/sc_prompt";
+      ".local/bin/sc_weather".source =
+        "${project_root}/local/linux/.local/bin/sc_weather";
     } else
       { };
 
@@ -288,6 +259,14 @@ with lib; {
     style = { name = "adwaita-dark"; };
   };
 
+  # home.pointerCursor = {
+  #   gtk.enable = true;
+  #   # x11.enable = true;
+  #   package = pkgs.apple-cursor;
+  #   name = "macOS-Monterey";
+  #   size = 24;
+  # };
+
   gtk =
     if isLinux then {
       enable = true;
@@ -300,21 +279,6 @@ with lib; {
           gtk-xft-rgba = "none";
         };
         bookmarks = bookmarks;
-        extraCss = ''
-          .titlebar,
-          window {
-            border-radius: 0;
-            box-shadow: none;
-          }
-
-          /** also remove shaddows */
-          decoration {
-            box-shadow: none;
-          }
-
-          decoration:backdrop {
-            box-shadow: none;
-          }'';
       };
       gtk4 = {
         extraConfig = {
@@ -324,21 +288,6 @@ with lib; {
           gtk-xft-hintstyle = "hintfull";
           gtk-xft-rgba = "none";
         };
-        extraCss = ''
-          .titlebar,
-          window {
-            border-radius: 0;
-            box-shadow: none;
-          }
-
-          /** also remove shaddows */
-          decoration {
-            box-shadow: none;
-          }
-
-          decoration:backdrop {
-            box-shadow: none;
-          }'';
       };
       theme = {
         name = "Adwaita-dark";
@@ -464,6 +413,5 @@ with lib; {
     package = pkgs.alacritty;
     settings = alacritty-settings.settings;
   };
-  # https://github.com/spikespaz/dotfiles/tree/master/users/jacob/hyprland
   wayland.windowManager.hyprland = hyprland_configs.settings;
 }

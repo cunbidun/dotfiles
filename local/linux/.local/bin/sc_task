@@ -1,9 +1,0 @@
-#/usr/bin/env bash
-
-case $BLOCK_BUTTON in
-	# 1) setsid -f "$TERMINAL" -e "task +todo" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac
-
-num_task=$(task +todo status:pending count)
-echo "^c#81A1C1^TASK: ^d^$num_task"

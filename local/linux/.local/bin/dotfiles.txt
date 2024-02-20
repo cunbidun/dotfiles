@@ -19,7 +19,6 @@ $HOME/.local/bin/sc_weather
 $HOME/.local/bin/get_temp
 $HOME/.local/bin/sc_printscreen
 $HOME/.local/bin/sc_calcurse_sync
-$HOME/.local/bin/sc_weather_sync
 $HOME/.local/bin/get_battery
 $HOME/.local/bin/dotfiles_picker
 $HOME/.local/bin/sc_alacritty_change_theme

@@ -108,6 +108,20 @@
         ExecStart = "systemctl --user restart waybar.service";
       };
     };
+    sync_weather = {
+      Unit = {
+        Description = "Sync weather";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        Type = "oneshot";
+        WorkingDirectory = "%h";
+        ExecStart = "${project_root}/local/linux/.local/bin/sc_weather_sync";
+      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
+    };
     sc_hyprland_count_minimized = {
       Unit = {
         Description = "Hyprland Minimize Daemon";
@@ -180,6 +194,20 @@
         Requires = [ "hyprland.service" ];
       };
       Path = { PathModified = "%h/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf"; };
+      Install = { WantedBy = [ "hyprland.service" ]; };
+    };
+  };
+  timers = {
+    sync_weather = {
+      Unit = {
+        Description = "Sync weather timer";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Timer = {
+        OnCalendar = "*:0/30";
+      };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
   };

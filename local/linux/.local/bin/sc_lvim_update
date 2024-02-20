@@ -1,7 +1,0 @@
-#/usr/bin/env bash
-
-notify-send "Lvim Sync" "Checking for updates..."
-
-lvim +LvimUpdate +q
-
-notify-send "Lvim Sync" "Finished."
