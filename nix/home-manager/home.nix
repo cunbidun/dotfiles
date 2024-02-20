@@ -171,10 +171,10 @@ with lib; {
       ".config/hypr/hyprpaper.conf".source =
         "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
       ".config/tofi/config".source =
-        "${project_root}/util/tofi/linux/.config/tofi/config";
-      ".config/dunst/dunstrc".source = "${project_root}/util/dunst/dunstrc";
-      ".config/tmuxinator".source = "${project_root}/util/tmuxinator";
-      ".tmux.conf".source = "${project_root}/util/tmux/.tmux.conf";
+        "${project_root}/utilities/tofi/linux/.config/tofi/config";
+      ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
+      ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
+      ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
 
       #######################
       # lvim configurations #
@@ -188,13 +188,13 @@ with lib; {
         "${project_root}/text_editor/lvim/markdown-preview.vim";
 
       ".config/ranger/commands_full.py".source =
-        "${project_root}/util/ranger/commands_full.py";
+        "${project_root}/utilities/ranger/commands_full.py";
       ".config/ranger/commands.py".source =
-        "${project_root}/util/ranger/commands.py";
-      ".config/ranger/rc.conf".source = "${project_root}/util/ranger/rc.conf";
+        "${project_root}/utilities/ranger/commands.py";
+      ".config/ranger/rc.conf".source = "${project_root}/utilities/ranger/rc.conf";
       ".config/ranger/rifle.conf".source =
-        "${project_root}/util/ranger/rifle.conf";
-      ".config/ranger/scope.sh".source = "${project_root}/util/ranger/scope.sh";
+        "${project_root}/utilities/ranger/rifle.conf";
+      ".config/ranger/scope.sh".source = "${project_root}/utilities/ranger/scope.sh";
 
       ".themes".source = config.lib.file.mkOutOfStoreSymlink
         "${config.home.homeDirectory}/.nix-profile/share/themes";
