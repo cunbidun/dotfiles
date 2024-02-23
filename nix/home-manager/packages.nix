@@ -1,4 +1,4 @@
-{ pkgs, nixGLWrap, ... }: {
+{ pkgs, nixGLWrap, inputs, ... }: {
   default_packages = [
     # Utils
     pkgs.bat # cat
@@ -45,6 +45,7 @@
     pkgs.sway-audio-idle-inhibit
     pkgs.eww-wayland
     pkgs.wev
+    inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop 
   ];
 
   x_packages = [

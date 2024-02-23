@@ -1,4 +1,4 @@
-{ pkgs, config, lib, project_root, ... }:
+{ pkgs, config, lib, project_root, inputs, ... }:
 
 let
   # mkDerivation signature: https://blog.ielliott.io/nix-docs/mkDerivation.html
@@ -44,6 +44,7 @@ let
   package_config = import ./packages.nix {
     pkgs = pkgs;
     nixGLWrap = nixGLWrap;
+    inputs = inputs;
   };
   dircolors = import ./dircolors.nix;
   systemd_config = import ./systemd.nix {

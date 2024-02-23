@@ -9,6 +9,7 @@
     };
     nixgl.url = "github:guibou/nixGL";
     xremap-flake.url = "github:xremap/nix-flake";
+    hyprland-contrib.url = "github:hyprwm/contrib";
   };
 
   outputs = inputs@{ nixpkgsUnstable, home-manager, nixgl, ... }:

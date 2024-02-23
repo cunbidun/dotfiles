@@ -163,6 +163,7 @@
       # DOTFILE Rules
       windowrulev2 = workspace 3 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)
       windowrulev2 = workspace 1 silent,class:^(Code)$
+      windowrulev2 = workspace 8 silent,class:^(Steam)$
 
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
