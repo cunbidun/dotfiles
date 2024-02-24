@@ -5,7 +5,10 @@
 ![alt text](./images/dwm-desktop.png "Screenshot")
 
 ## Home Manager
+
 ```bash
+# First time setup:
+nix run home-manager/master -- init --switch ~/dotfiles
 # update nix
 nix --extra-experimental-features "flakes" --extra-experimental-features "nix-command" flake update ~/dotfiles
 # rebuild

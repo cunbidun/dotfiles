@@ -334,6 +334,7 @@ with lib; {
       TERMINAL = "alacritty";
       GTK_THEME = "Adwaita-dark";
       QT_QTA_PLATFORMTHEME = "qt5ct";
+      GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
     } else
       { };
 
@@ -415,4 +416,7 @@ with lib; {
     settings = alacritty-settings.settings;
   };
   wayland.windowManager.hyprland = hyprland_configs.settings;
+  programs.firefox = {
+    enable = true;
+  };
 }

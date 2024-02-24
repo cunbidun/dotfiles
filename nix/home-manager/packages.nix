@@ -113,6 +113,7 @@
     pkgs.gnome.nautilus
     pkgs.gnome.sushi
     pkgs.gnome.file-roller
+    pkgs.gnome3.gvfs
 
     # CLI File manager
     pkgs.ranger

@@ -5,15 +5,14 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # boot.kernelModules = [ "uinput" "i2c-dev" ];
+  boot.kernelModules = [ "uinput" "i2c-dev" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -62,10 +61,11 @@
       desktop-file-utils
       docker-compose
       activitywatch
+      python3
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-    	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
     ];
   };
 
@@ -77,8 +77,6 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
-    firefox-wayland
-    python3
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -99,7 +97,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh = { 
+  services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
@@ -118,7 +116,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-  
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -130,9 +128,7 @@
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
-  security.pam.services.swaylock = {
-    fprintAuth = false;
-  };
+  security.pam.services.swaylock = { fprintAuth = false; };
   # rtkit is optional but recommended
   security.rtkit.enable = true;
   services.pipewire = {
@@ -144,9 +140,7 @@
     #jack.enable = true;
   };
   services.flatpak.enable = true;
-  services.flatpak.packages = [
-    "com.getpostman.Postman"
-  ];
+  services.flatpak.packages = [ "com.getpostman.Postman" ];
   virtualisation.docker.enable = true;
   virtualisation.docker.rootless = {
     enable = true;
