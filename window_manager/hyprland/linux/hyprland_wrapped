@@ -2,4 +2,5 @@
 
 systemctl --user import-environment PATH XDG_DATA_DIRS HOME TERMINAL PICKER EDITOR GTK_THEME 
 systemctl --user import-environment GLFW_IM_MODULE GTK_IM_MODULE QT_IM_MODULE XMODIFIERS NIX_PROFILES # for keyboard
+systemctl --user imoprt-environment GIO_EXTRA_MODULES # trash folder on nautilus
 systemctl --user start hyprland.service

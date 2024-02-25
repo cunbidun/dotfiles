@@ -41,128 +41,57 @@ let
       passAsFile = [ "buildCommand" ];
     } // { });
 
-  package_config = import ./packages.nix {
+  package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
     nixGLWrap = nixGLWrap;
     inputs = inputs;
   };
-  dircolors = import ./dircolors.nix;
-  systemd_config = import ./systemd.nix {
+  systemd_config = import "${project_root}/nix/home-manager/systemd.nix" {
     pkgs = pkgs;
     lib = lib;
     project_root = project_root;
   };
-  bookmarks = [
-    "file:///home/cunbidun/Documents"
-    "file:///home/cunbidun/Music"
-    "file:///home/cunbidun/Pictures"
-    "file:///home/cunbidun/Videos"
-    "file:///home/cunbidun/Downloads"
-    "file:///home/cunbidun/competitive_programming/output"
-  ];
-  # color-scheme = import ./colors/vscode-dark.nix;
-  color-scheme = import ./colors/nord.nix;
+  # color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
+  color-scheme = import "${project_root}/nix/home-manager/colors/nord.nix";
   swaylock-settings =
-    import ./configs/swaylock.nix { color-scheme = color-scheme; };
+    import "${project_root}/nix/home-manager/configs/swaylock.nix" { color-scheme = color-scheme; };
   alacritty-settings =
-    import ./configs/alacritty.nix { color-scheme = color-scheme; };
-  hyprland_configs = import ./configs/hyprland/configs.nix { pkgs = pkgs; color-scheme = color-scheme; };
+    import "${project_root}/nix/home-manager/configs/alacritty.nix" { color-scheme = color-scheme; };
+  hyprland_configs = import "${project_root}/nix/home-manager/configs/hyprland/configs.nix" { pkgs = pkgs; color-scheme = color-scheme; };
 in
-with pkgs.stdenv;
-with lib; {
+{
+  imports = [
+    inputs.xremap-flake.homeManagerModules.default
+  ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "cunbidun";
-  home.homeDirectory = if isDarwin then "/Users/cunbidun" else "/home/cunbidun";
+  home.homeDirectory = "/home/cunbidun";
 
-  home.packages =
-    if isDarwin then
-      package_config.default_packages ++ package_config.mac_packages
-    else
-      package_config.default_packages ++ package_config.linux_packages
-      ++ package_config.x_packages ++ package_config.wayland_packages;
+  home.packages = package_config.default_packages ++ package_config.linux_packages
+    ++ package_config.x_packages ++ package_config.wayland_packages;
+
+  services.xremap = {
+    withWlroots = true;
+    watch = true;
+    yamlConfig = ''
+      modmap:
+        - name: Global
+          application:
+            not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+          remap:
+            Alt_L: Ctrl_L 
+    '';
+  };
 
   # +--------------------+
   # |    Linux Config    | 
   # +--------------------+
   fonts.fontconfig.enable = true;
 
-  xresources = {
-    extraConfig = ''
-      ! Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
-      ! Copyright (c) 2016-present Sven Greb <code@svengreb.de>
-
-      ! Project:    Nord XResources
-      ! Version:    0.1.0
-      ! Repository: https://github.com/arcticicestudio/nord-xresources
-      ! License:    MIT
-
-      #define nord0 #2E3440
-      #define nord1 #3B4252
-      #define nord2 #434C5E
-      #define nord3 #4C566A
-      #define nord4 #D8DEE9
-      #define nord5 #E5E9F0
-      #define nord6 #ECEFF4
-      #define nord7 #8FBCBB
-      #define nord8 #88C0D0
-      #define nord9 #81A1C1
-      #define nord10 #5E81AC
-      #define nord11 #BF616A
-      #define nord12 #D08770
-      #define nord13 #EBCB8B
-      #define nord14 #A3BE8C
-      #define nord15 #B48EAD
-    '';
-    properties = {
-      "*.foreground" = "nord4";
-      "*.background" = "nord0";
-      "*.cursorColor" = "nord4";
-      "*fading" = "35";
-      "*fadeColor" = "nord3";
-
-      "*.color0" = "nord1";
-      "*.color1" = "nord11";
-      "*.color2" = "nord14";
-      "*.color3" = "nord13";
-      "*.color4" = "nord9";
-      "*.color5" = "nord15";
-      "*.color6" = "nord8";
-      "*.color7" = "nord5";
-      "*.color8" = "nord3";
-      "*.color9" = "nord11";
-      "*.color10" = "nord14";
-      "*.color11" = "nord13";
-      "*.color12" = "nord9";
-      "*.color13" = "nord15";
-      "*.color14" = "nord7";
-      "*.color15" = "nord6";
-
-      # Rofi
-      "rofi.kb-row-up" = "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
-      "rofi.kb-row-down" = "Down,Control+j,Alt+Tab";
-      "rofi.kb-accept-entry" = "Control+m,Return,KP_Enter,Alt+q";
-      "rofi.terminal" = "mate-terminal";
-      "rofi.kb-remove-to-eol" = "Control+Shift+e";
-      "rofi.kb-mode-next" = "Shift+Right,Control+Tab,Control+l";
-      "rofi.kb-mode-previous" = "Shift+Left,Control+Shift+Tab,Control+h";
-      "rofi.kb-remove-char-back" = "BackSpace";
-
-      # cursor
-      "Xcursor.size" = "24"; # note, this must match the gtk theme
-      "Xcursor.theme" = "macOS-Monterey";
-
-      # dwm
-      "dwm.borderpx" = "2";
-      "dwm.scheme_sym_bg" = "nord4";
-      "dwm.scheme_sym_fg" = "nord0";
-
-      "Xft.dpi" = "100";
-    };
-  };
-
   home.file =
-    if isLinux then {
+    {
       ".local/bin/hyprland_wrapped".source =
         "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
       ".config/waybar/".source =
@@ -197,12 +126,12 @@ with lib; {
         "${project_root}/utilities/ranger/rifle.conf";
       ".config/ranger/scope.sh".source = "${project_root}/utilities/ranger/scope.sh";
 
-      ".themes".source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.nix-profile/share/themes";
-      ".icons".source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.nix-profile/share/icons";
-      ".fonts".source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.nix-profile/share/fonts";
+      # ".themes".source = config.lib.file.mkOutOfStoreSymlink
+      #   "${config.home.homeDirectory}/.nix-profile/share/themes";
+      # ".icons".source = config.lib.file.mkOutOfStoreSymlink
+      #   "${config.home.homeDirectory}/.nix-profile/share/icons";
+      # ".fonts".source = config.lib.file.mkOutOfStoreSymlink
+      #   "${config.home.homeDirectory}/.nix-profile/share/fonts";
       ".config/swaylock/config".text = swaylock-settings.settings;
 
       ".local/bin/colors-name.txt".source =
@@ -235,11 +164,10 @@ with lib; {
         "${project_root}/local/linux/.local/bin/sc_prompt";
       ".local/bin/sc_weather".source =
         "${project_root}/local/linux/.local/bin/sc_weather";
-    } else
-      { };
+    };
 
   dconf =
-    if isLinux then {
+    {
       enable = true;
       settings = {
         # "org/nemo/preferences" = {
@@ -251,8 +179,7 @@ with lib; {
         # };
         "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
       };
-    } else
-      { };
+    };
 
   qt = {
     enable = true;
@@ -269,7 +196,7 @@ with lib; {
   # };
 
   gtk =
-    if isLinux then {
+    {
       enable = true;
       gtk3 = {
         extraConfig = {
@@ -279,7 +206,10 @@ with lib; {
           gtk-xft-hintstyle = "hintfull";
           gtk-xft-rgba = "none";
         };
-        bookmarks = bookmarks;
+        bookmarks = [
+          "file:///home/cunbidun/Downloads"
+          "file:///home/cunbidun/competitive_programming/output"
+        ];
       };
       gtk4 = {
         extraConfig = {
@@ -303,11 +233,10 @@ with lib; {
         package = pkgs.papirus-nord;
         name = "Papirus-Dark";
       };
-    } else
-      { };
+    };
 
   xdg.mimeApps =
-    if isLinux then {
+    {
       enable = true;
       defaultApplications = {
         "application/pdf" = [ "org.gnome.Evince.desktop" ];
@@ -321,31 +250,25 @@ with lib; {
         "x-scheme-handler/about" = [ "firefox.desktop" ];
         "x-scheme-handler/unknown" = [ "firefox.desktop" ];
       };
-    } else
-      { };
+    };
 
   systemd.user = systemd_config;
   home.sessionVariables =
-    if isLinux then {
+    {
       # Setting this is to local the .desktop files
       XDG_DATA_DIRS =
-        "$HOME/.nix-profile/share:$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
+        "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
       PICKER = "tofi";
       TERMINAL = "alacritty";
       GTK_THEME = "Adwaita-dark";
       QT_QTA_PLATFORMTHEME = "qt5ct";
       GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
-    } else
-      { };
+    };
 
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [ fcitx5-unikey fcitx5-gtk ];
   };
-
-  # +--------------------+
-  # |    Common conifg   |
-  # +--------------------+
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -388,13 +311,11 @@ with lib; {
       . $HOME/dotfiles/zsh/zshvim
       . $HOME/dotfiles/zsh/zshpath
       . $HOME/dotfiles/zsh/zshtheme
-    '' + (if isLinux then ''
       export BAT_STYLE="plain"
       export BAT_THEME="${color-scheme.bat_theme}"
       export BAT_OPTS="--color always"
       export FZF_DEFAULT_OPTS="${color-scheme.fzf_default_opts}"
-    '' else
-      "");
+    '';
   };
   programs.fzf = {
     enable = true;
@@ -404,11 +325,6 @@ with lib; {
     enable = true;
     userName = "Duy Pham";
     userEmail = "cunbidun@gmail.com";
-  };
-  programs.dircolors = {
-    enable = true;
-    enableZshIntegration = true;
-    extraConfig = dircolors.settings;
   };
   programs.alacritty = {
     enable = true;

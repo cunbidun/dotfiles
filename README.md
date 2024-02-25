@@ -4,15 +4,11 @@
 
 ![alt text](./images/dwm-desktop.png "Screenshot")
 
-## Home Manager
+## NixOS
 
 ```bash
-# First time setup:
-nix run home-manager/master -- init --switch ~/dotfiles
-# update nix
-nix --extra-experimental-features "flakes" --extra-experimental-features "nix-command" flake update ~/dotfiles
-# rebuild
-home-manager --extra-experimental-features "flakes" --extra-experimental-features "nix-command" switch --flake ~/dotfiles --impure
+nix flake update ~/dotfiles
+sudo nixos-rebuild switch --flake ~/dotfiles#nixos
 # Fix broken symlink
 nix-store --repair --verify --check-contents
 # Clear old symlink and version
