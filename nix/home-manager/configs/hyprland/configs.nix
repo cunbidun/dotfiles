@@ -194,12 +194,8 @@
       bindle=,XF86AudioRaiseVolume, exec, increase_volume
       bindle=,XF86AudioLowerVolume, exec, decrease_volume
       bindle=,XF86AudioMute, exec, toggle_volume 
-      bindle=,F12, exec, increase_volume
-      bindle=,F11, exec, decrease_volume
-      bindle=,F10, exec, toggle_volume 
-      bindle=,F12, exec, increase_volume
-      bindle=,F1, exec, sc_brightness_change decrease 5
-      bindle=,F2, exec, sc_brightness_change increase 5
+      bindle=$mainMod, F1, exec, sc_brightness_change decrease 5
+      bindle=$mainMod, F2, exec, sc_brightness_change increase 5
 
       # scratchpad
       bind = $mainMod, Grave, exec, pypr toggle term 
