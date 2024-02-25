@@ -45,7 +45,7 @@
     pkgs.sway-audio-idle-inhibit
     pkgs.eww-wayland
     pkgs.wev
-    inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop 
+    inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop
   ];
 
   x_packages = [
@@ -57,12 +57,10 @@
     pkgs.rofi
     pkgs.xclip
     pkgs.wmctrl
-    # pkgs.espanso # X version
   ];
 
   linux_packages = [
     # System
-    # pkgs.nixgl.auto.nixGLDefault
     pkgs.inotify-tools
     pkgs.libnotify
     pkgs.ddcutil
@@ -87,7 +85,6 @@
 
     # Broswer
     pkgs.google-chrome
-    # pkgs.firefox-wayland
 
     # Font
     pkgs.liberation_ttf
@@ -121,7 +118,7 @@
     pkgs.evince
     pkgs.dunst
     pkgs.conky
-    pkgs.hwinfo # System monitoring
+    pkgs.hwinfo
     pkgs.rclone
     pkgs.rclone-browser
     pkgs.imagemagick
