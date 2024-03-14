@@ -43,7 +43,7 @@
     # pkgs.espanso-wayland # wayland version
     pkgs.tofi
     pkgs.sway-audio-idle-inhibit
-    pkgs.eww-wayland
+    pkgs.eww
     pkgs.wev
     inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop
   ];

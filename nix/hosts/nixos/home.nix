@@ -206,6 +206,23 @@ in
           gtk-xft-hintstyle = "hintfull";
           gtk-xft-rgba = "none";
         };
+        extraCss = ''
+          /* Remove rounded corners */
+          .titlebar,
+          .titlebar .background,
+          decoration,
+          window,
+          window.background
+          {
+              border-radius: 0;
+          }
+
+          /* Remove csd shadows */
+          decoration, decoration:backdrop
+          {
+              box-shadow: none;
+          }
+        '';
         bookmarks = [
           "file:///home/cunbidun/Downloads"
           "file:///home/cunbidun/competitive_programming/output"

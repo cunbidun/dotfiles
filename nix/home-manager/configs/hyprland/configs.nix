@@ -161,8 +161,7 @@
       windowrulev2 = stayfocused,class:^(tofi.*)$
 
       # DOTFILE Rules
-      windowrulev2 = workspace 3 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)
-      windowrulev2 = workspace 1 silent,class:^(Code)$
+      windowrulev2 = workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)
       windowrulev2 = workspace 8 silent,class:^(Steam)$
 
 
@@ -186,7 +185,6 @@
       bind = $mainMod, Z, layoutmsg, togglesplit
       bind = $mainMod, F, togglefloating, 
       bind = $mainMod SHIFT, C, killactive, 
-      bind = $mainMod, B, exec, pypr expose
       bind = $mainMod, backslash, exec, dunstctl close-all
       # bind = $mainMod SHIFT, Q, exec, touch ~/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 
