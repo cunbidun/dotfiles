@@ -51,8 +51,8 @@ let
     lib = lib;
     project_root = project_root;
   };
-  # color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
-  color-scheme = import "${project_root}/nix/home-manager/colors/nord.nix";
+  color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
+  # color-scheme = import "${project_root}/nix/home-manager/colors/nord.nix";
   swaylock-settings =
     import "${project_root}/nix/home-manager/configs/swaylock.nix" { color-scheme = color-scheme; };
   alacritty-settings =
@@ -164,6 +164,9 @@ in
         "${project_root}/local/linux/.local/bin/sc_prompt";
       ".local/bin/sc_weather".source =
         "${project_root}/local/linux/.local/bin/sc_weather";
+
+      ".local/share/applications/uxplay.desktop".source =
+        "${project_root}/utilities/uxplay/uxplay.desktop";
     };
 
   dconf =
@@ -226,6 +229,7 @@ in
         bookmarks = [
           "file:///home/cunbidun/Downloads"
           "file:///home/cunbidun/competitive_programming/output"
+          "file:///home/cunbidun/Books"
         ];
       };
       gtk4 = {
@@ -316,11 +320,6 @@ in
       ls = "exa -la";
       cat = "bat";
       tree = "tree -a";
-
-      # vim;
-      vi = "lvim";
-      nvim = "lvim";
-      vim = "lvim";
     };
     initExtra = ''
       . $HOME/dotfiles/zsh/zshenv

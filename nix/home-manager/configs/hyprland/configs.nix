@@ -133,12 +133,6 @@
           workspace_swipe_distance = 100 
       }
 
-      # Example per-device config
-      # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-      device:epic-mouse-v1 {
-          sensitivity = -0.5
-      }
-
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       windowrulev2 = nofocus,class:^(Conky)$
       windowrulev2 = noinitialfocus,class:^(Conky)$
@@ -197,6 +191,7 @@
 
       # scratchpad
       bind = $mainMod, Grave, exec, pypr toggle term 
+      bind = $mainMod, x, exec, pypr toggle calendar 
       bind = $mainMod, c, exec, pypr toggle messenger
       bind = $mainMod, m, exec, pypr toggle spotify 
       bind = $mainMod, s, exec, pypr toggle signal 
@@ -261,9 +256,9 @@
       # will switch to a submap called resize
       bind = $mainMod SHIFT,R,submap,resize
 
-      #######################################
-      # will start a submap called "resize" #
-      #######################################
+      #-------------------------------------+
+      # will start a submap called "resize" |
+      #-------------------------------------+
       submap=resize
 
       # sets repeatable binds for resizing the active window
@@ -287,9 +282,9 @@
       # will switch to a submap called resize
       bind = $mainMod CONTROL,S,submap,session
 
-      ########################################
-      # will start a submap called "session" #
-      ########################################
+      #--------------------------------------+
+      # will start a submap called "session" |
+      #--------------------------------------+
       submap=session
 
       # sets repeatable binds for resizing the active window
@@ -303,9 +298,9 @@
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
 
-      ############################
-      # Start a windows property #
-      ############################
+      #--------------------------+
+      # Start a windows property |
+      #--------------------------+
       bind = $mainMod SHIFT,P,submap,property
       submap=property
 

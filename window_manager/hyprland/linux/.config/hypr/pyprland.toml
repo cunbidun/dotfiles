@@ -47,6 +47,15 @@ command = "obsidian"
 animation = ""
 unfocus = ""
 lazy = true
-# size = "75% 75%"
-# position = "12.5% 12.5%"
+size = "75% 75%"
+position = "12% 12%"
+excludes = "*"
+
+[scratchpads.calendar]
+command = "google-chrome-stable --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep"
+animation = ""
+unfocus = ""
+lazy = true
+size = "50% 50%"
+position = "25% 25%"
 excludes = "*"
