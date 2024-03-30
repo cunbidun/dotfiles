@@ -62,6 +62,8 @@ in
 {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
+    inputs.ags.homeManagerModules.default
+    "${project_root}/nix/home-manager/configs/zsh.nix"
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -69,8 +71,7 @@ in
   home.username = "cunbidun";
   home.homeDirectory = "/home/cunbidun";
 
-  home.packages = package_config.default_packages ++ package_config.linux_packages
-    ++ package_config.x_packages ++ package_config.wayland_packages;
+  home.packages = package_config.linux_packages;
 
   services.xremap = {
     withWlroots = true;
@@ -265,11 +266,6 @@ in
         "image/png" = [ "feh.desktop" ];
         "text/plain" = [ "lvim.desktop" ];
         "inode/directory" = [ "org.gnome.nautilus.desktop" ];
-        "text/html" = [ "firefox.desktop" ];
-        "x-scheme-handler/http" = [ "firefox.desktop" ];
-        "x-scheme-handler/https" = [ "firefox.desktop" ];
-        "x-scheme-handler/about" = [ "firefox.desktop" ];
-        "x-scheme-handler/unknown" = [ "firefox.desktop" ];
       };
     };
 
@@ -306,7 +302,9 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion = {
+      enable = true;
+    };
     syntaxHighlighting.enable = true;
     oh-my-zsh = {
       enable = true;
@@ -348,7 +346,14 @@ in
     settings = alacritty-settings.settings;
   };
   wayland.windowManager.hyprland = hyprland_configs.settings;
-  programs.firefox = {
+  programs.ags = {
     enable = true;
+
+    # additional packages to add to gjs's runtime
+    extraPackages = with pkgs; [
+      gtksourceview
+      webkitgtk
+      accountsservice
+    ];
   };
 }

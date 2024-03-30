@@ -1,5 +1,5 @@
 { pkgs, nixGLWrap, inputs, ... }: {
-  default_packages = [
+  linux_packages = [
     # Utils
     pkgs.bat # cat
     pkgs.eza # ls
@@ -24,11 +24,8 @@
     pkgs.lunarvim
     pkgs.shellcheck
     pkgs.shfmt
-
     pkgs.slack
-  ];
 
-  wayland_packages = [
     # Hyprland
     pkgs.waybar
     pkgs.hyprpaper
@@ -46,24 +43,12 @@
     pkgs.eww
     pkgs.wev
     inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop
-  ];
 
-  x_packages = [
-    pkgs.feh
-    pkgs.redshift
-    pkgs.maim
-    pkgs.conky
-    pkgs.xdotool
-    pkgs.rofi
-    pkgs.xclip
-    pkgs.wmctrl
-  ];
-
-  linux_packages = [
     # System
     pkgs.inotify-tools
     pkgs.libnotify
     pkgs.ddcutil
+    pkgs.bluetuith
 
     pkgs.caprine-bin
     pkgs.quickemu

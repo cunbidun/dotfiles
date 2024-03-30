@@ -15,6 +15,7 @@
     xremap-flake.url = "github:xremap/nix-flake";
     hyprland-contrib.url = "github:hyprwm/contrib";
     nix-flatpak.url = "github:gmodena/nix-flatpak"; # unstable branch. Use github:gmodena/nix-flatpak/?ref=<tag> to pin releases.
+    ags.url = "github:Aylur/ags";
   };
 
   outputs = inputs@{ nixpkgsUnstable, nix-darwin, home-manager, nixgl, nix-flatpak, ... }:

@@ -189,14 +189,6 @@
       bindle=$mainMod, F1, exec, sc_brightness_change decrease 5
       bindle=$mainMod, F2, exec, sc_brightness_change increase 5
 
-      # scratchpad
-      bind = $mainMod, Grave, exec, pypr toggle term 
-      bind = $mainMod, x, exec, pypr toggle calendar 
-      bind = $mainMod, c, exec, pypr toggle messenger
-      bind = $mainMod, m, exec, pypr toggle spotify 
-      bind = $mainMod, s, exec, pypr toggle signal 
-      bind = $mainMod, n, exec, pypr toggle obsidian
-
       # Move focus with mainMod + arrow keys
       bind = $mainMod, h, movefocus, l
       bind = $mainMod, l, movefocus, r
@@ -314,6 +306,31 @@
 
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
+
+      #---------------------------+
+      # Start a scratchpad submap |
+      #---------------------------+
+      bind = $mainMod, S, exec, sleep 1 && hyprctl dispatch submap reset 
+      bind = $mainMod, S, submap, scratchpad
+      submap=scratchpad
+
+      # sets repeatable binds for resizing the active window
+      bind = ,m, exec, pypr toggle spotify 
+      bind = ,m, submap,reset 
+      bind = ,s, exec, pypr toggle signal 
+      bind = ,s, submap,reset 
+
+      # use reset to go back to the global submap
+      bind=,escape,submap,reset 
+
+      # will reset the submap, meaning end the current one and return to the global one
+      submap=reset
+
+      # scratchpad
+      bind = $mainMod, Grave, exec, pypr toggle term 
+      bind = $mainMod, c, exec, pypr toggle messenger
+      bind = $mainMod, n, exec, pypr toggle obsidian
+
     '';
   };
 }
