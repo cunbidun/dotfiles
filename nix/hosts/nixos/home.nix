@@ -63,7 +63,10 @@ in
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
-    "${project_root}/nix/home-manager/configs/zsh.nix"
+    # "${project_root}/nix/home-manager/configs/zsh.nix"  {
+    #   color-scheme = color-scheme;
+    # }
+    "${project_root}/nix/home-manager/configs/fzf.nix"
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -330,10 +333,6 @@ in
       export BAT_OPTS="--color always"
       export FZF_DEFAULT_OPTS="${color-scheme.fzf_default_opts}"
     '';
-  };
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
   };
   programs.git = {
     enable = true;
