@@ -41,6 +41,8 @@ let
       passAsFile = [ "buildCommand" ];
     } // { });
 
+  color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
+
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
     nixGLWrap = nixGLWrap;
@@ -51,21 +53,15 @@ let
     lib = lib;
     project_root = project_root;
   };
-  color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
-  # color-scheme = import "${project_root}/nix/home-manager/colors/nord.nix";
-  swaylock-settings =
-    import "${project_root}/nix/home-manager/configs/swaylock.nix" { color-scheme = color-scheme; };
-  alacritty-settings =
-    import "${project_root}/nix/home-manager/configs/alacritty.nix" { color-scheme = color-scheme; };
-  hyprland_configs = import "${project_root}/nix/home-manager/configs/hyprland/configs.nix" { pkgs = pkgs; color-scheme = color-scheme; };
+  swaylock-settings = import "${project_root}/nix/home-manager/configs/swaylock.nix" { color-scheme = color-scheme; };
 in
 {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
-    # "${project_root}/nix/home-manager/configs/zsh.nix"  {
-    #   color-scheme = color-scheme;
-    # }
+    (import "${project_root}/nix/home-manager/configs/zsh.nix" { color-scheme = color-scheme; })
+    (import "${project_root}/nix/home-manager/configs/alacritty.nix" { color-scheme = color-scheme; pkgs = pkgs; })
+    (import "${project_root}/nix/home-manager/configs/hyprland/configs.nix" { pkgs = pkgs; color-scheme = color-scheme; })
     "${project_root}/nix/home-manager/configs/fzf.nix"
   ];
 
@@ -74,7 +70,7 @@ in
   home.username = "cunbidun";
   home.homeDirectory = "/home/cunbidun";
 
-  home.packages = package_config.linux_packages;
+  home.packages = package_config.default_packages ++ package_config.linux_packages;
 
   services.xremap = {
     withWlroots = true;
@@ -302,49 +298,11 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion = {
-      enable = true;
-    };
-    syntaxHighlighting.enable = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-    };
-    shellAliases = {
-      cdnote = "cd $HOME/note";
-      s = "source $HOME/.zshrc";
-      CP = "$HOME/competitive_programming/";
-      r = "ranger";
-      ls = "exa -la";
-      cat = "bat";
-      tree = "tree -a";
-    };
-    initExtra = ''
-      . $HOME/dotfiles/zsh/zshenv
-      . $HOME/dotfiles/zsh/zshfunctions
-      . $HOME/dotfiles/zsh/zshvim
-      . $HOME/dotfiles/zsh/zshpath
-      . $HOME/dotfiles/zsh/zshtheme
-      export BAT_STYLE="plain"
-      export BAT_THEME="${color-scheme.bat_theme}"
-      export BAT_OPTS="--color always"
-      export FZF_DEFAULT_OPTS="${color-scheme.fzf_default_opts}"
-    '';
-  };
   programs.git = {
     enable = true;
     userName = "Duy Pham";
     userEmail = "cunbidun@gmail.com";
   };
-  programs.alacritty = {
-    enable = true;
-    package = pkgs.alacritty;
-    settings = alacritty-settings.settings;
-  };
-  wayland.windowManager.hyprland = hyprland_configs.settings;
   programs.ags = {
     enable = true;
 

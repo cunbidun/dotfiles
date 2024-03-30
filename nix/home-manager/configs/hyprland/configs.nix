@@ -2,7 +2,7 @@
 # Example: https://github.com/spikespaz/dotfiles/tree/master/users/jacob/hyprland
 
 { pkgs, color-scheme, ... }: {
-  settings = {
+  wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
     settings = {
