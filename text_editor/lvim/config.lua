@@ -6,6 +6,8 @@ reload("user.lvim_plugins.which_key")
 reload("user.lvim_plugins.easypick")
 reload("user.lsp.clangd")
 
+require('nvim-treesitter.install').compilers = { 'gcc' }
+
 -- +------------------------------------------------------------+
 -- | keymappings [view all the defaults by pressing <leader>Lk] |
 -- +------------------------------------------------------------+
@@ -83,7 +85,6 @@ vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = ':silent 
 vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
--- vim.api.nvim_create_autocmd("ColorScheme", { pattern = { "*" }, command = "highlight Normal guibg=NONE" })
 vim.api.nvim_create_autocmd("ColorScheme", { pattern = { "*" }, command = "highlight VertSplit guifg=#4C566A" })
 
 -- }}}
