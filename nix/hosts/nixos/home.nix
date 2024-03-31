@@ -41,7 +41,8 @@ let
       passAsFile = [ "buildCommand" ];
     } // { });
 
-  color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
+  color-scheme =
+    import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
 
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
@@ -53,15 +54,25 @@ let
     lib = lib;
     project_root = project_root;
   };
-  swaylock-settings = import "${project_root}/nix/home-manager/configs/swaylock.nix" { color-scheme = color-scheme; };
-in
-{
+  swaylock-settings =
+    import "${project_root}/nix/home-manager/configs/swaylock.nix" {
+      color-scheme = color-scheme;
+    };
+in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
-    (import "${project_root}/nix/home-manager/configs/zsh.nix" { color-scheme = color-scheme; })
-    (import "${project_root}/nix/home-manager/configs/alacritty.nix" { color-scheme = color-scheme; pkgs = pkgs; })
-    (import "${project_root}/nix/home-manager/configs/hyprland/configs.nix" { pkgs = pkgs; color-scheme = color-scheme; })
+    (import "${project_root}/nix/home-manager/configs/zsh.nix" {
+      color-scheme = color-scheme;
+    })
+    (import "${project_root}/nix/home-manager/configs/alacritty.nix" {
+      color-scheme = color-scheme;
+      pkgs = pkgs;
+    })
+    (import "${project_root}/nix/home-manager/configs/hyprland/configs.nix" {
+      pkgs = pkgs;
+      color-scheme = color-scheme;
+    })
     "${project_root}/nix/home-manager/configs/fzf.nix"
   ];
 
@@ -70,7 +81,8 @@ in
   home.username = "cunbidun";
   home.homeDirectory = "/home/cunbidun";
 
-  home.packages = package_config.default_packages ++ package_config.linux_packages;
+  home.packages = package_config.default_packages
+    ++ package_config.linux_packages;
 
   services.xremap = {
     withWlroots = true;
@@ -90,99 +102,99 @@ in
   # +--------------------+
   fonts.fontconfig.enable = true;
 
-  home.file =
-    {
-      ".local/bin/hyprland_wrapped".source =
-        "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-      ".config/waybar/".source =
-        "${project_root}/window_manager/hyprland/linux/.config/waybar";
-      ".config/hypr/pyprland.toml".source =
-        "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
-      ".config/hypr/hyprpaper.conf".source =
-        "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
-      ".config/tofi/config".source =
-        "${project_root}/utilities/tofi/linux/.config/tofi/config";
-      ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
-      ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
-      ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
+  home.file = {
+    ".local/bin/hyprland_wrapped".source =
+      "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
+    ".config/waybar/".source =
+      "${project_root}/window_manager/hyprland/linux/.config/waybar";
+    ".config/hypr/pyprland.toml".source =
+      "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
+    ".config/hypr/hyprpaper.conf".source =
+      "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
+    ".config/tofi/config".source =
+      "${project_root}/utilities/tofi/linux/.config/tofi/config";
+    ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
+    ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
+    ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
 
-      #######################
-      # lvim configurations #
-      #######################
-      ".config/lvim/lua".source = "${project_root}/text_editor/lvim/lua";
-      ".config/lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
-      ".config/lvim/config.lua".source =
-        "${project_root}/text_editor/lvim/config.lua";
-      ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
-      ".config/lvim/markdown-preview.vim".source =
-        "${project_root}/text_editor/lvim/markdown-preview.vim";
+    #######################
+    # lvim configurations #
+    #######################
+    ".config/lvim/lua".source = "${project_root}/text_editor/lvim/lua";
+    ".config/lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
+    ".config/lvim/config.lua".source =
+      "${project_root}/text_editor/lvim/config.lua";
+    ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
+    ".config/lvim/markdown-preview.vim".source =
+      "${project_root}/text_editor/lvim/markdown-preview.vim";
 
-      ".config/ranger/commands_full.py".source =
-        "${project_root}/utilities/ranger/commands_full.py";
-      ".config/ranger/commands.py".source =
-        "${project_root}/utilities/ranger/commands.py";
-      ".config/ranger/rc.conf".source = "${project_root}/utilities/ranger/rc.conf";
-      ".config/ranger/rifle.conf".source =
-        "${project_root}/utilities/ranger/rifle.conf";
-      ".config/ranger/scope.sh".source = "${project_root}/utilities/ranger/scope.sh";
+    ".config/ranger/commands_full.py".source =
+      "${project_root}/utilities/ranger/commands_full.py";
+    ".config/ranger/commands.py".source =
+      "${project_root}/utilities/ranger/commands.py";
+    ".config/ranger/rc.conf".source =
+      "${project_root}/utilities/ranger/rc.conf";
+    ".config/ranger/rifle.conf".source =
+      "${project_root}/utilities/ranger/rifle.conf";
+    ".config/ranger/scope.sh".source =
+      "${project_root}/utilities/ranger/scope.sh";
 
-      # ".themes".source = config.lib.file.mkOutOfStoreSymlink
-      #   "${config.home.homeDirectory}/.nix-profile/share/themes";
-      # ".icons".source = config.lib.file.mkOutOfStoreSymlink
-      #   "${config.home.homeDirectory}/.nix-profile/share/icons";
-      # ".fonts".source = config.lib.file.mkOutOfStoreSymlink
-      #   "${config.home.homeDirectory}/.nix-profile/share/fonts";
-      ".config/swaylock/config".text = swaylock-settings.settings;
+    # ".themes".source = config.lib.file.mkOutOfStoreSymlink
+    #   "${config.home.homeDirectory}/.nix-profile/share/themes";
+    # ".icons".source = config.lib.file.mkOutOfStoreSymlink
+    #   "${config.home.homeDirectory}/.nix-profile/share/icons";
+    # ".fonts".source = config.lib.file.mkOutOfStoreSymlink
+    #   "${config.home.homeDirectory}/.nix-profile/share/fonts";
+    ".config/swaylock/config".text = swaylock-settings.settings;
 
-      ".local/bin/colors-name.txt".source =
-        "${project_root}/local/linux/.local/bin/colors-name.txt";
-      ".local/bin/decrease_volume".source =
-        "${project_root}/local/linux/.local/bin/decrease_volume";
-      ".local/bin/dotfiles.txt".source =
-        "${project_root}/local/linux/.local/bin/dotfiles.txt";
-      ".local/bin/dotfiles_picker".source =
-        "${project_root}/local/linux/.local/bin/dotfiles_picker";
-      ".local/bin/increase_volume".source =
-        "${project_root}/local/linux/.local/bin/increase_volume";
-      ".local/bin/nord_color_picker".source =
-        "${project_root}/local/linux/.local/bin/nord_color_picker";
-      ".local/bin/sc_brightness_change".source =
-        "${project_root}/local/linux/.local/bin/sc_brightness_change";
-      ".local/bin/sc_get_brightness_percentage".source =
-        "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
-      ".local/bin/sc_hyprland_count_minimized.py".source =
-        "${project_root}/local/linux/.local/bin/sc_hyprland_count_minimized.py";
-      ".local/bin/sc_hyprland_minimize".source =
-        "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
-      ".local/bin/sc_hyprland_show_minimize".source =
-        "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
-      ".local/bin/sc_window_picker".source =
-        "${project_root}/local/linux/.local/bin/sc_window_picker";
-      ".local/bin/toggle_volume".source =
-        "${project_root}/local/linux/.local/bin/toggle_volume";
-      ".local/bin/sc_prompt".source =
-        "${project_root}/local/linux/.local/bin/sc_prompt";
-      ".local/bin/sc_weather".source =
-        "${project_root}/local/linux/.local/bin/sc_weather";
+    ".local/bin/colors-name.txt".source =
+      "${project_root}/local/linux/.local/bin/colors-name.txt";
+    ".local/bin/decrease_volume".source =
+      "${project_root}/local/linux/.local/bin/decrease_volume";
+    ".local/bin/dotfiles.txt".source =
+      "${project_root}/local/linux/.local/bin/dotfiles.txt";
+    ".local/bin/dotfiles_picker".source =
+      "${project_root}/local/linux/.local/bin/dotfiles_picker";
+    ".local/bin/increase_volume".source =
+      "${project_root}/local/linux/.local/bin/increase_volume";
+    ".local/bin/nord_color_picker".source =
+      "${project_root}/local/linux/.local/bin/nord_color_picker";
+    ".local/bin/sc_brightness_change".source =
+      "${project_root}/local/linux/.local/bin/sc_brightness_change";
+    ".local/bin/sc_get_brightness_percentage".source =
+      "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
+    ".local/bin/sc_hyprland_count_minimized.py".source =
+      "${project_root}/local/linux/.local/bin/sc_hyprland_count_minimized.py";
+    ".local/bin/sc_hyprland_minimize".source =
+      "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
+    ".local/bin/sc_hyprland_show_minimize".source =
+      "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
+    ".local/bin/sc_window_picker".source =
+      "${project_root}/local/linux/.local/bin/sc_window_picker";
+    ".local/bin/toggle_volume".source =
+      "${project_root}/local/linux/.local/bin/toggle_volume";
+    ".local/bin/sc_prompt".source =
+      "${project_root}/local/linux/.local/bin/sc_prompt";
+    ".local/bin/sc_weather".source =
+      "${project_root}/local/linux/.local/bin/sc_weather";
 
-      ".local/share/applications/uxplay.desktop".source =
-        "${project_root}/utilities/uxplay/uxplay.desktop";
+    ".local/share/applications/uxplay.desktop".source =
+      "${project_root}/utilities/uxplay/uxplay.desktop";
+  };
+
+  dconf = {
+    enable = true;
+    settings = {
+      # "org/nemo/preferences" = {
+      #   show-hidden-files = true;
+      # };
+      # "org/cinnamon/desktop/default-applications/terminal" = {
+      #   exec = "alacritty";
+      #   exec-arg = "-e";
+      # };
+      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     };
-
-  dconf =
-    {
-      enable = true;
-      settings = {
-        # "org/nemo/preferences" = {
-        #   show-hidden-files = true;
-        # };
-        # "org/cinnamon/desktop/default-applications/terminal" = {
-        #   exec = "alacritty";
-        #   exec-arg = "-e";
-        # };
-        "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
-      };
-    };
+  };
 
   qt = {
     enable = true;
@@ -198,88 +210,85 @@ in
   #   size = 24;
   # };
 
-  gtk =
-    {
-      enable = true;
-      gtk3 = {
-        extraConfig = {
-          gtk-font-name = "Cantarell 11";
-          gtk-xft-antialias = 1;
-          gtk-xft-hinting = 1;
-          gtk-xft-hintstyle = "hintfull";
-          gtk-xft-rgba = "none";
-        };
-        extraCss = ''
-          /* Remove rounded corners */
-          .titlebar,
-          .titlebar .background,
-          decoration,
-          window,
-          window.background
-          {
-              border-radius: 0;
-          }
+  gtk = {
+    enable = true;
+    gtk3 = {
+      extraConfig = {
+        gtk-font-name = "Cantarell 11";
+        gtk-xft-antialias = 1;
+        gtk-xft-hinting = 1;
+        gtk-xft-hintstyle = "hintfull";
+        gtk-xft-rgba = "none";
+      };
+      extraCss = ''
+        /* Remove rounded corners */
+        .titlebar,
+        .titlebar .background,
+        decoration,
+        window,
+        window.background
+        {
+            border-radius: 0;
+        }
 
-          /* Remove csd shadows */
-          decoration, decoration:backdrop
-          {
-              box-shadow: none;
-          }
-        '';
-        bookmarks = [
-          "file:///home/cunbidun/Downloads"
-          "file:///home/cunbidun/competitive_programming/output"
-          "file:///home/cunbidun/Books"
-        ];
-      };
-      gtk4 = {
-        extraConfig = {
-          gtk-font-name = "Cantarell 11";
-          gtk-xft-antialias = 1;
-          gtk-xft-hinting = 1;
-          gtk-xft-hintstyle = "hintfull";
-          gtk-xft-rgba = "none";
-        };
-      };
-      theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome.gnome-themes-extra;
-      };
-      cursorTheme = {
-        package = pkgs.apple-cursor;
-        name = "macOS-Monterey";
-        size = 24;
-      };
-      iconTheme = {
-        package = pkgs.papirus-nord;
-        name = "Papirus-Dark";
+        /* Remove csd shadows */
+        decoration, decoration:backdrop
+        {
+            box-shadow: none;
+        }
+      '';
+      bookmarks = [
+        "file:///home/cunbidun/Downloads"
+        "file:///home/cunbidun/competitive_programming/output"
+        "file:///home/cunbidun/Books"
+      ];
+    };
+    gtk4 = {
+      extraConfig = {
+        gtk-font-name = "Cantarell 11";
+        gtk-xft-antialias = 1;
+        gtk-xft-hinting = 1;
+        gtk-xft-hintstyle = "hintfull";
+        gtk-xft-rgba = "none";
       };
     };
-
-  xdg.mimeApps =
-    {
-      enable = true;
-      defaultApplications = {
-        "application/pdf" = [ "org.gnome.Evince.desktop" ];
-        "image/jpeg" = [ "feh.desktop" ];
-        "image/png" = [ "feh.desktop" ];
-        "text/plain" = [ "lvim.desktop" ];
-        "inode/directory" = [ "org.gnome.nautilus.desktop" ];
-      };
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
     };
+    cursorTheme = {
+      package = pkgs.apple-cursor;
+      name = "macOS-Monterey";
+      size = 24;
+    };
+    iconTheme = {
+      package = pkgs.papirus-nord;
+      name = "Papirus-Dark";
+    };
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [ "org.gnome.Evince.desktop" ];
+      "image/jpeg" = [ "feh.desktop" ];
+      "image/png" = [ "feh.desktop" ];
+      "text/plain" = [ "lvim.desktop" ];
+      "inode/directory" = [ "org.gnome.nautilus.desktop" ];
+    };
+  };
 
   systemd.user = systemd_config;
-  home.sessionVariables =
-    {
-      # Setting this is to local the .desktop files
-      XDG_DATA_DIRS =
-        "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
-      PICKER = "tofi";
-      TERMINAL = "alacritty";
-      GTK_THEME = "Adwaita-dark";
-      QT_QTA_PLATFORMTHEME = "qt5ct";
-      GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
-    };
+  home.sessionVariables = {
+    # Setting this is to local the .desktop files
+    XDG_DATA_DIRS =
+      "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
+    PICKER = "tofi";
+    TERMINAL = "alacritty";
+    GTK_THEME = "Adwaita-dark";
+    QT_QTA_PLATFORMTHEME = "qt5ct";
+    GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
+  };
 
   i18n.inputMethod = {
     enabled = "fcitx5";
@@ -307,10 +316,6 @@ in
     enable = true;
 
     # additional packages to add to gjs's runtime
-    extraPackages = with pkgs; [
-      gtksourceview
-      webkitgtk
-      accountsservice
-    ];
+    extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
   };
 }

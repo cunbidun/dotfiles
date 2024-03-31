@@ -28,4 +28,40 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
     ];
   };
+  # TODO To make this work, homebrew need to be installed manually, see https://brew.sh
+  # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # 
+  # The apps installed by homebrew are not managed by nix, and not reproducible!
+  # But on macOS, homebrew has a much larger selection of apps than nixpkgs, especially for GUI apps!
+  homebrew = {
+    enable = true;
+
+    onActivation = {
+      cleanup = "uninstall";
+    };
+
+    taps =
+      [ "homebrew/cask-fonts" "homebrew/services" "homebrew/cask-versions" ];
+
+    # `brew install`
+    brews = [
+    ];
+
+    # `brew install --cask`
+    casks = [
+      "1password"
+      "visual-studio-code"
+      "spotify"
+      "alt-tab"
+      "google-chrome"
+      "signal"
+      "messenger"
+      "rectangle"
+      "obsidian"
+      "syncthing"
+      "discord"
+      "flux"
+      "monitorcontrol"
+    ];
+  };
 }

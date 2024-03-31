@@ -62,7 +62,6 @@
       xdg-utils
       desktop-file-utils
       docker-compose
-      activitywatch
       python3
     ];
     shell = pkgs.zsh;
@@ -180,6 +179,7 @@
     # ...
   ];
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot =
+    true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
 }

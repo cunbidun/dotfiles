@@ -18,7 +18,10 @@ nix-collect-garbage -d
 ### MacOS
 
 ```nix
+# installing nix on MacOS
 sh <(curl -L https://nixos.org/nix/install)
+# Initial switch to the nix-darwin flake
 nix --extra-experimental-features nix-command --extra-experimental-features flakes  run nix-darwin -- switch --flake ~/dotfiles#macbook-m1
+# Subsequent switches
 darwin-rebuild switch --flake ~/dotfiles#macbook-m1
 ```
