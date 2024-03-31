@@ -5,8 +5,9 @@ let
     nixGLWrap = pkg: pkg;
     inputs = inputs;
   };
-  color-scheme = import "${project_root}/nix/home-manager/colors/nord.nix";
-in {
+  color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
+in
+{
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default

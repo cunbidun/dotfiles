@@ -41,10 +41,11 @@
     };
 
     taps =
-      [ "homebrew/cask-fonts" "homebrew/services" "homebrew/cask-versions" ];
+      [ "homebrew/cask-fonts" ];
 
     # `brew install`
     brews = [
+      "bazel"
     ];
 
     # `brew install --cask`
@@ -62,6 +63,7 @@
       "discord"
       "flux"
       "monitorcontrol"
+      "font-sauce-code-pro-nerd-font"
     ];
   };
 }
