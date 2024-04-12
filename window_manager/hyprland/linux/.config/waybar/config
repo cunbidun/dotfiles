@@ -1,65 +1,75 @@
 {
   "name": "waybar",
   "layer": "top", // Waybar at top|bottom laye
-
-
   "height": 20, // Waybar height (to be removed for auto height)
   "spacing": 4, // Gaps between modules (4px)
-
-  "modules-left": ["hyprland/workspaces", "hyprland/submap"],
-  "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "pulseaudio", "custom/audio_idle_inhibitor", "custom/minimized", "custom/brightness", "custom/weather", "tray", "clock"],
-
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/submap"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "custom/audio_idle_inhibitor",
+    "custom/minimized",
+    "custom/brightness",
+    "custom/weather",
+    "tray",
+    "clock"
+  ],
   // Modules configuration
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "format": "{icon}",
     "format-icons": {
-       "1": "1",
-       "2": "2",
-       "3": "3",
-       "4": "4",
-       "5": "web",
-       "6": "cp",
-       "7": "quant",
-       "8": "game",
-       "9": "9",
-     },
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "web",
+      "6": "cp",
+      "7": "quant",
+      "8": "game",
+      "9": "9",
+    },
   },
-
   "hyprland/submap": {
     "format": "submap: {}",
     "max-length": 30,
     "tooltip": false
   },
-
   "tray": {
     "spacing": 0
   },
-
   "clock": {
     "format": "{:%a %b %d, %H:%M:%S}",
     "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e 'calcurse'",
     "interval": 1,
   },
-
   "pulseaudio": {
-      "scroll-step": 5, // %, can be a float
-      "format": "{icon}: {volume}%",
-      "format-bluetooth": "{icon}: {volume}% ",
-      "format-bluetooth-muted": "{icon}: Muted ",
-      "format-muted": "{icon}: Muted",
-      "format-icons": {
-          "headphone": "",
-          "hands-free": "",
-          "headset": "",
-          "phone": "",
-          "portable": "",
-          "car": "",
-          "default": ["[.]", "[v]", "[V]"]
-      },
-      "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e pulsemixer"
+    "scroll-step": 5, // %, can be a float
+    "format": "{icon}: {volume}%",
+    "format-bluetooth": "{icon}: {volume}% ",
+    "format-bluetooth-muted": "{icon}: Muted ",
+    "format-muted": "{icon}: Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "[.]",
+        "[v]",
+        "[V]"
+      ]
+    },
+    "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e pulsemixer"
   },
   // https://github.com/Alexays/Waybar/wiki/Module:-Network
   "network": {
@@ -72,29 +82,26 @@
     "format-disconnected": "Disconnected ⚠",
     "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui"
   },
-
   "custom/language": {
     "interval": "once",
     "exec-if": "which sc_language_get",
     "exec": "sc_language_get",
-    "return-type":"json",
+    "return-type": "json",
     "signal": 11,
     "tooltip": false,
-    "format":"{}",
+    "format": "{}",
   },
-
   "custom/weather": {
     "interval": "once",
     "exec-if": "which sc_weather",
     "exec": "sc_weather",
     "signal": 20,
     "tooltip": false,
-    "format":"{}",
+    "format": "{}",
     "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"",
     "on-click-right": "sc_weather_sync",
     "on-click-middle": "sc_weather_sync"
   },
-
   "custom/minimized": {
     "interval": "once",
     "exec": "cat /tmp/waybar_minimized",
@@ -104,29 +111,24 @@
     "on-click": "sc_hyprland_show_minimize",
     "format": "MIN: {}",
   },
-
-
   "custom/brightness": {
     "interval": "once",
     "exec-if": "which sc_get_brightness_percentage",
     "exec": "sc_get_brightness_percentage",
     "signal": 16,
     "tooltip": false,
-    "format":"BRT: {}%",
+    "format": "BRT: {}%",
   },
-
   "custom/audio_idle_inhibitor": {
-		"format": "INH: {icon}",
-		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-		"exec-if": "which sway-audio-idle-inhibit",
-		"return-type": "json",
-		"format-icons": {
-			"output": "O",
-			"input": "I",
-			"output-input": "B",
-			"none": "N"
-		}
-	},
+    "format": "INH: {icon}",
+    "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+    "exec-if": "which sway-audio-idle-inhibit",
+    "return-type": "json",
+    "format-icons": {
+      "output": "O",
+      "input": "I",
+      "output-input": "B",
+      "none": "N"
+    }
+  },
 }
-
-

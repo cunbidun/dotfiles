@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports = [
@@ -148,7 +148,6 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-kde
       pkgs.xdg-desktop-portal-gtk
     ];
@@ -168,7 +167,6 @@
   # Sets up all the libraries to load
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc
-    zlib
     fuse3
     icu
     zlib

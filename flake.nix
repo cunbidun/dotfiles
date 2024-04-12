@@ -13,14 +13,31 @@
     };
     nixgl.url = "github:guibou/nixGL";
     xremap-flake.url = "github:xremap/nix-flake";
-    hyprland-contrib.url = "github:hyprwm/contrib";
-    nix-flatpak.url =
-      "github:gmodena/nix-flatpak"; # unstable branch. Use github:gmodena/nix-flatpak/?ref=<tag> to pin releases.
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
     ags.url = "github:Aylur/ags";
+
+    ############
+    # Hyprland #
+    ############
+    hyprland = {
+      url = github:hyprwm/Hyprland/ac0f3411c18497a39498b756b711e092512de9e0;
+      inputs.nixpkgs.follows = "nixpkgsUnstable";
+    };
+    hyprland-contrib.url = "github:hyprwm/contrib";
+    Hyprspace = {
+      url = github:KZDKM/Hyprspace;
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
-  outputs = inputs@{ nixpkgsUnstable, nix-darwin, home-manager, nixgl
-    , nix-flatpak, ... }:
+  outputs =
+    inputs@{ nixpkgsUnstable
+    , nix-darwin
+    , home-manager
+    , nixgl
+    , nix-flatpak
+    , ...
+    }:
     let project_root = "${builtins.toString ./.}";
     in {
       darwinConfigurations."macbook-m1" = nix-darwin.lib.darwinSystem {
@@ -54,6 +71,9 @@
               permittedInsecurePackages = [ "electron-25.9.0" ];
             };
           };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             nix-flatpak.nixosModules.nix-flatpak
             ./nix/hosts/nixos/configuration.nix
@@ -61,8 +81,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.cunbidun =
-                import "${project_root}/nix/hosts/nixos/home.nix";
+              home-manager.users.cunbidun = import "${project_root}/nix/hosts/nixos/home.nix";
               home-manager.extraSpecialArgs = {
                 inherit project_root;
                 inherit inputs;

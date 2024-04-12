@@ -50,6 +50,7 @@ let
     inputs = inputs;
   };
   systemd_config = import "${project_root}/nix/home-manager/systemd.nix" {
+    inputs = inputs;
     pkgs = pkgs;
     lib = lib;
     project_root = project_root;
@@ -70,6 +71,7 @@ in {
       pkgs = pkgs;
     })
     (import "${project_root}/nix/home-manager/configs/hyprland/configs.nix" {
+      inputs = inputs;
       pkgs = pkgs;
       color-scheme = color-scheme;
     })
@@ -279,16 +281,19 @@ in {
   };
 
   systemd.user = systemd_config;
-  home.sessionVariables = {
-    # Setting this is to local the .desktop files
-    XDG_DATA_DIRS =
-      "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
-    PICKER = "tofi";
-    TERMINAL = "alacritty";
-    GTK_THEME = "Adwaita-dark";
-    QT_QTA_PLATFORMTHEME = "qt5ct";
-    GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
-  };
+  home.sessionVariables =
+    {
+      # Setting this is to local the .desktop files
+      XDG_DATA_DIRS =
+        "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
+      PICKER = "tofi";
+      TERMINAL = "alacritty";
+      GTK_THEME = "Adwaita-dark";
+      QT_QTA_PLATFORMTHEME = "qt5ct";
+      GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
+      XCURSOR_THEME = "macOS-Monterey";
+      XCURSOR_SIZE = 24;
+    };
 
   i18n.inputMethod = {
     enabled = "fcitx5";

@@ -5,6 +5,7 @@ windows:
   - editor:
     - nix-shell 
     - $EDITOR 
+
   - cc:  
     - cpcli_cc --project-config project_config.json -o
 

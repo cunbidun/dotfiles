@@ -1,10 +1,9 @@
 # Source code: https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/hyprland.nix
 # Example: https://github.com/spikespaz/dotfiles/tree/master/users/jacob/hyprland
 
-{ pkgs, color-scheme, ... }: {
+{ inputs, pkgs, color-scheme, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
     settings = {
       misc = {
         enable_swallow = true;
@@ -26,6 +25,10 @@
         "col.border_inactive" = "rgb(3b4252)";
       };
     };
+   
+    plugins = [
+      inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+    ];
     extraConfig = ''
       #
       # Please note not all available settings / options are set here.
@@ -43,16 +46,12 @@
       exec-once = wl-paste --type text --watch cliphist store #Stores only text data
       exec-once = wl-paste --type image --watch cliphist store #Stores only image data
       exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
-      exec-once = hyprctl setcursor macOS-Monterey 24
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       # exec = 
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
-
-      # Some default env vars.
-      env = XCURSOR_SIZE,24
 
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       input {
@@ -131,6 +130,18 @@
           workspace_swipe = on 
           workspace_swipe_cancel_ratio = 0.1
           workspace_swipe_distance = 100 
+      }
+
+      plugin {
+        overview {
+          showNewWorkspace = false
+          exitOnSwitch = true
+
+          # theme
+          workspaceBorderSize = 3
+          workspaceActiveBorder = rgb(88c0d0)
+          panelColor = rgba(00000000)
+        }
       }
 
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
@@ -230,12 +241,8 @@
       bind = $mainMod SHIFT, M, exec, sc_hyprland_minimize
 
       # Scroll through existing workspaces with mainMod + scroll
-      bind = $mainMod, mouse_down, workspace, e+1
-      bind = $mainMod, mouse_up, workspace, e-1
-
-      binde = $mainMod, Tab, cyclenext,
-      binde = $mainMod SHIFT, Tab, cyclenext, prev
-
+      bind = $mainMod, Tab, overview:toggle,
+   
       # Group
       bind = $mainMod, t, togglegroup
 
@@ -315,13 +322,13 @@
       submap=scratchpad
 
       # sets repeatable binds for resizing the active window
-      bind = ,m, exec, pypr toggle spotify 
-      bind = ,m, submap,reset 
-      bind = ,s, exec, pypr toggle signal 
-      bind = ,s, submap,reset 
-
-      # use reset to go back to the global submap
-      bind=,escape,submap,reset 
+      bind = , m, exec, pypr toggle spotify 
+      bind = , m, submap,reset 
+      bind = , s, exec, pypr toggle signal 
+      bind = , s, submap,reset 
+      bind = , a, exec, hyprctl dispatch togglespecialworkspace special:background
+      bind = , a, submap, reset 
+      bind = , escape, submap, reset 
 
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset

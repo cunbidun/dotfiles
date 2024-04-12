@@ -1,4 +1,4 @@
-{ pkgs, lib, project_root, ... }: {
+{ inputs, pkgs, lib, project_root, ... }: {
   services = {
     waybar = {
       Unit = {
@@ -166,7 +166,7 @@
         ExecStartPre =
           "systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY";
         WorkingDirectory = "%h";
-        ExecStart = "${lib.getExe pkgs.hyprland}";
+        ExecStart = "${lib.getExe inputs.hyprland.packages.${pkgs.system}.hyprland}";
         StandardOutput = "journal";
         StandardError = "journal";
         TimeoutStopSec = 5;
