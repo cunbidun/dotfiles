@@ -15,7 +15,7 @@
     pkgs.zip # A compression and archive utility
     pkgs.unzip # A decompression utility
     pkgs.newsboat # An RSS feed reader
-    pkgs.nixfmt # A formatter for Nix code
+    pkgs.nixfmt-classic # A formatter for Nix code
     pkgs.nixpkgs-fmt # A code formatter for Nix expressions
     pkgs.syncthing # A continuous file synchronization program
 

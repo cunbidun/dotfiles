@@ -28,6 +28,7 @@
    
     plugins = [
       inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
     extraConfig = ''
       #
@@ -141,6 +142,35 @@
           workspaceBorderSize = 3
           workspaceActiveBorder = rgb(88c0d0)
           panelColor = rgba(00000000)
+        }
+
+        hyprfocus {
+          enabled = yes
+          animate_floating = yes
+          animate_workspacechange = no 
+          focus_animation = shrink 
+          # Beziers for focus animations
+          bezier = realsmooth, 0.28,0.29,.69,1.08
+          # Flash settings
+          flash {
+            flash_opacity = 0.95
+          }
+          # Shrink settings
+          shrink {
+              shrink_percentage = 0.99
+              in_bezier = realsmooth
+              in_speed = 1
+              out_bezier = realsmooth
+              out_speed = 2
+          }
+        }
+
+        hycov {
+          overview_gappo = 60 #gaps width from screen
+          overview_gappi = 24 #gaps width from clients
+          hotarea_size = 10 #hotarea size in bottom left,10x10
+          enable_hotarea = 1 # enable mouse cursor hotarea
+          enable_alt_release_exit = 1
         }
       }
 
@@ -326,8 +356,6 @@
       bind = , m, submap,reset 
       bind = , s, exec, pypr toggle signal 
       bind = , s, submap,reset 
-      bind = , a, exec, hyprctl dispatch togglespecialworkspace special:background
-      bind = , a, submap, reset 
       bind = , escape, submap, reset 
 
       # will reset the submap, meaning end the current one and return to the global one

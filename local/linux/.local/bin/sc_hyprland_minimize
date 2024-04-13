@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
 current_workspace=$(hyprctl activeworkspace | grep "workspace ID" | head -n 1 | awk '{print $3}')
+
+# Transfers the window to/from a designated workspace based on the visibility status of that workspace.
 pypr toggle_special "minimized_$current_workspace"
