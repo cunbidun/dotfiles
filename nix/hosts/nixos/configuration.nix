@@ -138,8 +138,14 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
-  services.flatpak.enable = true;
-  services.flatpak.packages = [ "com.getpostman.Postman" ];
+  services.flatpak = { 
+    enable = true;
+    packages = [ 
+      # Example package
+      # "com.getpostman.Postman"
+    ];
+  };
+  virtualisation.spiceUSBRedirection.enable = true;
   virtualisation = {
     podman = {
       enable = true;
@@ -151,6 +157,7 @@
       };
     };
   };
+  services.usbmuxd.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -181,10 +188,8 @@
     openssl
     curl
     expat
-    # ...
   ];
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot =
-    true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
 }
