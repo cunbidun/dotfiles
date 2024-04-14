@@ -78,7 +78,7 @@
 }
 
 
-#tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-minimized, #custom-weather, #mode, #pulseaudio, #clock {
+#tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-minimized, #custom-weather, #mode, #pulseaudio, #clock, #bluetooth {
   margin: 0 2px;
   padding: 0 6px;
   background-color: @base03;

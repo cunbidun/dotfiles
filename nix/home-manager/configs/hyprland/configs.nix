@@ -141,7 +141,9 @@
           # theme
           workspaceBorderSize = 3
           workspaceActiveBorder = rgb(88c0d0)
-          panelColor = rgba(00000000)
+          panelColor = rgba(00000099)
+          panelHeight = 175
+          workspaceMargin = 25
         }
 
         hyprfocus {
@@ -207,6 +209,7 @@
 
       # Start Applications
       bind = $mainMod, Return, exec, alacritty 
+      bind = $mainMod SHIFT, Return, exec, $TERMINAL -e spawn_archlinux 
       bind = $mainMod, P, exec, tofi-drun
       bind = $mainMod, E, exec, nautilus 
       bind = $mainMod SHIFT, D, exec, dotfiles_picker 

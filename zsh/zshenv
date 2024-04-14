@@ -18,7 +18,24 @@ fi
 
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-theme_autocompletion_file="$HOME/.config/alacritty/changer_autocompletion"
 if [ -f "$theme_autocompletion_file" ]; then
   source "$theme_autocompletion_file"
+fi
+
+if [ ! -d "/etc/nixos" ]; then
+  # if archlinux then source conda env
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/home/cunbidun/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/home/cunbidun/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/home/cunbidun/miniconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/home/cunbidun/miniconda3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
 fi

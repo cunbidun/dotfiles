@@ -3,7 +3,6 @@ root: ~/competitive_programming/
 
 windows:
   - editor:
-    - nix-shell 
     - $EDITOR 
 
   - cc:  

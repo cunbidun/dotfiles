@@ -11,7 +11,7 @@
         ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
-        ExecStart = "${lib.getExe pkgs.waybar}";
+        ExecStart = "${lib.getExe pkgs.waybar} --config %h/dotfiles/window_manager/hyprland/linux/.config/waybar/config --style %h/dotfiles/window_manager/hyprland/linux/.config/waybar/style.css";
         StandardOutput = "journal";
         StandardError = "journal";
       };

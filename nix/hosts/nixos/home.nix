@@ -179,6 +179,8 @@ in {
       "${project_root}/local/linux/.local/bin/sc_prompt";
     ".local/bin/sc_weather".source =
       "${project_root}/local/linux/.local/bin/sc_weather";
+    ".local/bin/spawn_archlinux".source =
+      "${project_root}/local/linux/.local/bin/spawn_archlinux";
 
     ".local/share/applications/uxplay.desktop".source =
       "${project_root}/utilities/uxplay/uxplay.desktop";

@@ -1,0 +1,2 @@
+#!/usr/bin/env sh 
+distrobox enter archlinux -- sh -c "PATH=/usr/sbin:/usr/bin:/sbin:/bin ZSH_DISABLE_COMPFIX=true /bin/zsh"
