@@ -23,14 +23,17 @@
       url = github:hyprwm/Hyprland;
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
-    hyprland-contrib.url = "github:hyprwm/contrib";
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.hyprland.follows = "hyprland";
+    };
     Hyprspace = {
       url = github:KZDKM/Hyprspace;
       inputs.hyprland.follows = "hyprland";
     };
-    hyprfocus = { 
+    hyprfocus = {
       url = "github:pyt0xic/hyprfocus"; # Not the official git repository 
-      inputs.hyprland.follows = "hyprland"; 
+      inputs.hyprland.follows = "hyprland";
     };
   };
 

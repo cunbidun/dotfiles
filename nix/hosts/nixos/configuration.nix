@@ -61,9 +61,12 @@
       jdk17
       xdg-utils
       desktop-file-utils
-      docker-compose
       python3
       distrobox
+
+      # Container
+      podman-tui # status of containers in the terminal
+      podman-compose # start group of containers for dev
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
@@ -156,6 +159,18 @@
         dns_enabled = true;
       };
     };
+    # * Post installation steps: https://nixos.wiki/wiki/WayDroid
+    #   Fetch WayDroid images.
+    #     sudo waydroid init -s GAPPS
+    #   sudo systemctl start waydroid-container
+    #   sudo journalctl -u waydroid-container
+    #   waydroid session start
+    # * Google Play Certification: https://docs.waydro.id/faq/google-play-certification
+    # * Set size
+    #   waydroid prop set persist.waydroid.width 576
+    #   waydroid prop set persist.waydroid.height 1024
+    #   sudo systemctl restart waydroid-container
+    waydroid.enable = true;
   };
   services.usbmuxd.enable = true;
 

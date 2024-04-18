@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1713044980,
-        "narHash": "sha256-3SZ4mlhNvegCs8d+UMkVvfhhgFZj7OFvuo+8RUyAa3w=",
+        "lastModified": 1713240951,
+        "narHash": "sha256-Nvbn1baUNN7AQOA1hHunUHuFziF0dErqaTlfxr9NNwo=",
         "owner": "KZDKM",
         "repo": "Hyprspace",
-        "rev": "c91364c4f85267a2e949b766a6ba517e7fb61310",
+        "rev": "954eda50aca5ef986c557f3b515c4321fd3c7fd8",
         "type": "github"
       },
       "original": {

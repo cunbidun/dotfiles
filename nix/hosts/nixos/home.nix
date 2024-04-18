@@ -150,8 +150,8 @@ in
     ".local/bin/spawn_archlinux".source = "${project_root}/local/linux/.local/bin/spawn_archlinux";
 
     # Custom deskop files
-    ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktop/uxplay.desktop";
-    ".local/share/applications/postman.desktop".source = "${project_root}/utilities/desktop/postman.desktop";
+    ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
+    ".local/share/applications/postman.desktop".source = "${project_root}/utilities/desktops/postman.desktop";
   };
 
   dconf = {
