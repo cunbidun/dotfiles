@@ -124,33 +124,6 @@
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
-    sc_hyprland_count_minimized = {
-      Unit = {
-        Description = "Hyprland Minimize Daemon";
-        PartOf = [ "hyprland.service" ];
-        After = [ "hyprland.service" ];
-        Requires = [ "hyprland.service" ];
-      };
-      Service = {
-        Type = "simple";
-        WorkingDirectory = "%h";
-        ExecStart =
-          "${project_root}/local/linux/.local/bin/sc_hyprland_count_minimized.py";
-        StandardOutput = "journal";
-        StandardError = "journal";
-        Environment = [ "PYTHONUNBUFFERED=1" ];
-      };
-      Install = { WantedBy = [ "hyprland.service" ]; };
-    };
-    sc_hyprland_count_minimized_watcher = {
-      Unit = { Description = "Hyprland Minimize Daemon Restarter"; };
-      Service = {
-        Type = "oneshot";
-        WorkingDirectory = "%h";
-        ExecStart =
-          "systemctl --user restart sc_hyprland_count_minimized.service";
-      };
-    };
     hyprpaper_config_watcher = {
       Unit = { Description = "Hyprpaper Config Watcher"; };
       Service = {
@@ -183,18 +156,6 @@
       Path = {
         PathModified =
           "%h/dotfiles/window_manager/hyprland/linux/.config/waybar/";
-      };
-      Install = { WantedBy = [ "hyprland.service" ]; };
-    };
-    sc_hyprland_count_minimized_watcher = {
-      Unit = {
-        PartOf = [ "hyprland.service" ];
-        After = [ "hyprland.service" ];
-        Requires = [ "hyprland.service" ];
-      };
-      Path = {
-        PathModified =
-          "%h/dotfiles/local/linux/.local/bin/sc_hyprland_count_minimized.py";
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };

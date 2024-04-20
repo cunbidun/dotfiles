@@ -1,0 +1,11 @@
+.taskbar {
+    color: #1E1E1E;
+    font-family: 'SauceCodePro Nerd Font Mono';
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.taskbar-minimized {
+    /* CSS properties go here */
+    color: red;
+}

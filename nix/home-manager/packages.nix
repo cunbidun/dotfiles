@@ -89,6 +89,7 @@
     pkgs.gnome.sushi # GNOME's preview utility
     pkgs.gnome.file-roller # GNOME's archive manager
     pkgs.gnome3.gvfs # GNOME's virtual file system
+    pkgs.djvulibre
 
     # CLI File manager
     pkgs.ranger # A console file manager

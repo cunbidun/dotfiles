@@ -140,7 +140,6 @@ in
     ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
     ".local/bin/sc_brightness_change".source = "${project_root}/local/linux/.local/bin/sc_brightness_change";
     ".local/bin/sc_get_brightness_percentage".source = "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
-    ".local/bin/sc_hyprland_count_minimized.py".source = "${project_root}/local/linux/.local/bin/sc_hyprland_count_minimized.py";
     ".local/bin/sc_hyprland_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
     ".local/bin/sc_hyprland_show_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
     ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";

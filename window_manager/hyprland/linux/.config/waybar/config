@@ -14,7 +14,6 @@
     "network",
     "pulseaudio",
     "custom/audio_idle_inhibitor",
-    "custom/minimized",
     "bluetooth",
     "custom/brightness",
     "custom/weather",
@@ -109,15 +108,6 @@
     "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"",
     "on-click-right": "sc_weather_sync",
     "on-click-middle": "sc_weather_sync"
-  },
-  "custom/minimized": {
-    "interval": "once",
-    "exec": "cat /tmp/waybar_minimized",
-    "signal": 17,
-    "tooltip": true,
-    "return-type": "json",
-    "on-click": "sc_hyprland_show_minimize",
-    "format": "MIN: {}",
   },
   "custom/brightness": {
     "interval": "once",
