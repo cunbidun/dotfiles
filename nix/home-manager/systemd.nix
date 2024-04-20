@@ -17,6 +17,23 @@
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
+    ags = {
+      Unit = {
+        Description = "Ags Service";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
+        Type = "simple";
+        WorkingDirectory = "%h";
+        ExecStart = "${lib.getExe pkgs.ags} --config %h/dotfiles/utilities/ags/config.js";
+        StandardOutput = "journal";
+        StandardError = "journal";
+      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
+    };
     pypr = {
       Unit = {
         Description = "Pypr Service";
@@ -110,6 +127,14 @@
         ExecStart = "systemctl --user restart waybar.service";
       };
     };
+    ags_config_watcher = {
+      Unit = { Description = "Ags Restarter Service"; };
+      Service = {
+        Type = "oneshot";
+        WorkingDirectory = "%h";
+        ExecStart = "systemctl --user restart ags.service";
+      };
+    };
     sync_weather = {
       Unit = {
         Description = "Sync weather";
@@ -168,6 +193,17 @@
       Path = {
         PathModified =
           "%h/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
+      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
+    };
+    ags_config_watcher = {
+      Unit = {
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Path = {
+        PathModified = "%h/dotfiles/utilities/ags";
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };

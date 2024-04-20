@@ -107,7 +107,6 @@ in
 
   home.file = {
     ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-    ".config/waybar/".source = "${project_root}/window_manager/hyprland/linux/.config/waybar";
     ".config/hypr/pyprland.toml".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
     ".config/hypr/hyprpaper.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
     ".config/tofi/config".source = "${project_root}/utilities/tofi/linux/.config/tofi/config";

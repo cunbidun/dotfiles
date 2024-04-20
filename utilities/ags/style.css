@@ -1,5 +1,4 @@
-.taskbar {
-    color: #1E1E1E;
+.taskbar, .toggle-minimized-button {
     font-family: 'SauceCodePro Nerd Font Mono';
     font-size: 14px;
     font-weight: 400;
@@ -7,5 +6,17 @@
 
 .taskbar-minimized {
     /* CSS properties go here */
-    color: red;
+    color: #f5f543;
+}
+
+.taskbar-button,.toggle-minimized-button {
+    border-radius: 0%;
+    /* background-color: #1E1E1E; */
+    color: #e5e5e5;
+
+}
+
+.taskbar-focus  {
+    color: #88c0d0;
+    font-weight: bold;
 }
