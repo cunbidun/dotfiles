@@ -15,6 +15,9 @@
     color: #e5e5e5;
 
 }
+.taskbar-button {
+    min-width: 250px;
+}
 
 .taskbar-focus  {
     color: #88c0d0;

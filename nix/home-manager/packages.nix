@@ -119,6 +119,8 @@
 
     # Theme
     pkgs.lxappearance # A desktop theme switcher
+
+    gnome.zenity
   ];
 
   mac_packages = [

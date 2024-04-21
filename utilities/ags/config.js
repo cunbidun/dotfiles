@@ -7,6 +7,20 @@ function isMinimized(client) {
     return client.workspace.name.includes("special:minimized")
 }
 
+function shortenString(str, maxLength = 30) {
+    if (str.length <= maxLength) {
+        return str;
+    } else {
+        return str.substring(0, maxLength - 3) + '...';
+    }
+}
+function getClientAddress(client) {
+    if (client.grouped.length === 0) {
+        return client.address;
+    }
+    return client.grouped[0]
+
+}
 function TaskBar() {
     return Widget.EventBox({
         child: Widget.Box({
@@ -22,6 +36,7 @@ function TaskBar() {
                     let current_clients = hyprland.clients.filter(client => client.workspace.id === hyprland.active.workspace.id)
                     let minimized_clients = hyprland.clients.filter(client => client.workspace.name === `special:minimized_${hyprland.active.workspace.id}`)
                     let all_clients = current_clients.concat(minimized_clients).sort((a, b) => a.pid - b.pid)
+                    current_clients[0].grouped
                     self.children = all_clients.map(client => Widget.Button({
                         class_name: "taskbar-button",
                         child: Widget.Box({
@@ -43,20 +58,22 @@ function TaskBar() {
                                         }
                                         return "taskbar-normal"
                                     })(client),
-                                    label: `${client.title}`,
+                                    label: `${shortenString(client.title)}`,
                                 })
                             ]
                         }),
                         on_middle_click: () => {
+                            let address = getClientAddress(client)
                             if (!isMinimized(client)) {
-                                hyprland.messageAsync(`dispatch movetoworkspacesilent special:minimized_${hyprland.active.workspace.id},address:${client.address}`)
+                                hyprland.messageAsync(`dispatch movetoworkspacesilent special:minimized_${hyprland.active.workspace.id},address:${address}`)
                             } else {
-                                hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${client.address}`)
+                                hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${address}`)
                             }
                         },
                         on_clicked: () => {
+                            let address = getClientAddress(client)
                             if (isMinimized(client)) {
-                                hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${client.address}`)
+                                hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${address}`)
                             }
                             hyprland.messageAsync(`dispatch focuswindow address:${client.address}`)
                         }

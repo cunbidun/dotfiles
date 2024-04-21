@@ -196,6 +196,7 @@
       windowrulev2 = float,title:^(__waybar_popup)$
       windowrulev2 = noanim,class:^(ueberzugpp.*)$
       windowrulev2 = stayfocused,class:^(tofi.*)$
+      windowrulev2 = float,class:^(waydroid.com.*)$
 
       # DOTFILE Rules
       windowrulev2 = workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)
