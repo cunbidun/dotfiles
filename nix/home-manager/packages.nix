@@ -64,7 +64,7 @@
     pkgs.pdfgrep # A tool to search text in PDF files
 
     # Browser
-    pkgs.google-chrome # Google Chrome web browser
+    (pkgs.google-chrome.override { commandLineArgs = "--ozone-platform=wayland"; })
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts
@@ -120,7 +120,7 @@
     # Theme
     pkgs.lxappearance # A desktop theme switcher
 
-    gnome.zenity
+    pkgs.gnome.zenity
   ];
 
   mac_packages = [

@@ -11,7 +11,9 @@
         ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
-        ExecStart = "${lib.getExe pkgs.waybar} --config %h/dotfiles/window_manager/hyprland/linux/.config/waybar/config --style %h/dotfiles/window_manager/hyprland/linux/.config/waybar/style.css";
+        ExecStart = "${
+            lib.getExe pkgs.waybar
+          } --config %h/dotfiles/window_manager/hyprland/linux/.config/waybar/config --style %h/dotfiles/window_manager/hyprland/linux/.config/waybar/style.css";
         StandardOutput = "journal";
         StandardError = "journal";
       };
@@ -28,7 +30,8 @@
         ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
-        ExecStart = "${lib.getExe pkgs.ags} --config %h/dotfiles/utilities/ags/config.js";
+        ExecStart =
+          "${lib.getExe pkgs.ags} --config %h/dotfiles/utilities/ags/config.js";
         StandardOutput = "journal";
         StandardError = "journal";
       };
@@ -42,6 +45,7 @@
         Requires = [ "hyprland.service" ];
       };
       Service = {
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.pyprland}";
@@ -60,6 +64,7 @@
         Requires = [ "hyprland.service" ];
       };
       Service = {
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
         ExecStart = "${lib.getExe pkgs.hyprpaper}";
@@ -160,11 +165,12 @@
     hyprland = {
       Unit = { Description = "My hyprland wrapper that runs it in systemd"; };
       Service = {
-        Type = "notify";
+        Type = "simple";
         ExecStartPre =
           "systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY";
         WorkingDirectory = "%h";
-        ExecStart = "${lib.getExe inputs.hyprland.packages.${pkgs.system}.hyprland}";
+        ExecStart =
+          "${lib.getExe inputs.hyprland.packages.${pkgs.system}.hyprland}";
         StandardOutput = "journal";
         StandardError = "journal";
         TimeoutStopSec = 5;
@@ -202,9 +208,7 @@
         After = [ "hyprland.service" ];
         Requires = [ "hyprland.service" ];
       };
-      Path = {
-        PathModified = "%h/dotfiles/utilities/ags";
-      };
+      Path = { PathModified = "%h/dotfiles/utilities/ags"; };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
   };

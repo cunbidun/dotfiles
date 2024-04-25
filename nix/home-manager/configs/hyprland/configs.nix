@@ -4,6 +4,7 @@
 { inputs, pkgs, color-scheme, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     settings = {
       misc = {
         enable_swallow = true;
@@ -25,7 +26,7 @@
         "col.border_inactive" = "rgb(3b4252)";
       };
     };
-   
+
     plugins = [
       inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
@@ -276,7 +277,7 @@
 
       # Scroll through existing workspaces with mainMod + scroll
       bind = $mainMod, Tab, overview:toggle,
-   
+
       # Group
       bind = $mainMod, t, togglegroup
 

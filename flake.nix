@@ -20,12 +20,10 @@
     # Hyprland #
     ############
     hyprland = {
-      url = github:hyprwm/Hyprland;
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
+      url = github:hyprwm/Hyprland/v0.39.1;
     };
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
-      inputs.hyprland.follows = "hyprland";
     };
     Hyprspace = {
       url = github:KZDKM/Hyprspace;

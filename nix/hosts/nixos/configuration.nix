@@ -88,6 +88,7 @@
   programs.zsh.enable = true;
   programs.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
   programs.steam.enable = true;
@@ -141,11 +142,11 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
-  services.flatpak = { 
+  services.flatpak = {
     enable = true;
-    packages = [ 
+    packages = [
       # Example package
-      # "com.getpostman.Postman"
+      "com.getpostman.Postman"
     ];
   };
   virtualisation.spiceUSBRedirection.enable = true;
@@ -155,9 +156,7 @@
       # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
       # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings = {
-        dns_enabled = true;
-      };
+      defaultNetwork.settings = { dns_enabled = true; };
     };
     # * Post installation steps: https://nixos.wiki/wiki/WayDroid
     #   Fetch WayDroid images.
@@ -176,10 +175,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-kde
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gtk ];
     xdgOpenUsePortal = true;
   };
 
@@ -205,6 +201,7 @@
     expat
   ];
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot =
+    true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
 }

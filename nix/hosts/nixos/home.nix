@@ -146,11 +146,9 @@ in
     ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
     ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
     ".local/bin/spawn_archlinux".source = "${project_root}/local/linux/.local/bin/spawn_archlinux";
-    ".local/bin/password-prompt".source = "${project_root}/local/linux/.local/bin/password-prompt";
 
     # Custom deskop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
-    ".local/share/applications/postman.desktop".source = "${project_root}/utilities/desktops/postman.desktop";
   };
 
   dconf = {
@@ -169,7 +167,7 @@ in
 
   qt = {
     enable = true;
-    platformTheme = "qtct";
+    platformTheme.name = "qtct";
     style = { name = "adwaita-dark"; };
   };
 
@@ -261,7 +259,7 @@ in
       GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
       XCURSOR_THEME = "macOS-Monterey";
       XCURSOR_SIZE = 24;
-      SUDO_ASKPASS = "~/.local/bin/password-prompt";
+      SUDO_ASKPASS = "${project_root}/local/linux/.local/bin/password-prompt";
     };
 
   i18n.inputMethod = {
