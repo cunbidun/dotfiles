@@ -59,8 +59,7 @@ let
     import "${project_root}/nix/home-manager/configs/swaylock.nix" {
       color-scheme = color-scheme;
     };
-in
-{
+in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
@@ -106,10 +105,14 @@ in
   fonts.fontconfig.enable = true;
 
   home.file = {
-    ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-    ".config/hypr/pyprland.toml".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
-    ".config/hypr/hyprpaper.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
-    ".config/tofi/config".source = "${project_root}/utilities/tofi/linux/.config/tofi/config";
+    ".local/bin/hyprland_wrapped".source =
+      "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
+    ".config/hypr/pyprland.toml".source =
+      "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
+    ".config/hypr/hyprpaper.conf".source =
+      "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
+    ".config/tofi/config".source =
+      "${project_root}/utilities/tofi/linux/.config/tofi/config";
     ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
     ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
@@ -119,36 +122,62 @@ in
     #######################
     ".config/lvim/lua".source = "${project_root}/text_editor/lvim/lua";
     ".config/lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
-    ".config/lvim/config.lua".source = "${project_root}/text_editor/lvim/config.lua";
+    ".config/lvim/config.lua".source =
+      "${project_root}/text_editor/lvim/config.lua";
     ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
-    ".config/lvim/markdown-preview.vim".source = "${project_root}/text_editor/lvim/markdown-preview.vim";
+    ".config/lvim/markdown-preview.vim".source =
+      "${project_root}/text_editor/lvim/markdown-preview.vim";
 
-    ".config/ranger/commands_full.py".source = "${project_root}/utilities/ranger/commands_full.py";
-    ".config/ranger/commands.py".source = "${project_root}/utilities/ranger/commands.py";
-    ".config/ranger/rc.conf".source = "${project_root}/utilities/ranger/rc.conf";
-    ".config/ranger/rifle.conf".source = "${project_root}/utilities/ranger/rifle.conf";
-    ".config/ranger/scope.sh".source = "${project_root}/utilities/ranger/scope.sh";
+    ".config/ranger/commands_full.py".source =
+      "${project_root}/utilities/ranger/commands_full.py";
+    ".config/ranger/commands.py".source =
+      "${project_root}/utilities/ranger/commands.py";
+    ".config/ranger/rc.conf".source =
+      "${project_root}/utilities/ranger/rc.conf";
+    ".config/ranger/rifle.conf".source =
+      "${project_root}/utilities/ranger/rifle.conf";
+    ".config/ranger/scope.sh".source =
+      "${project_root}/utilities/ranger/scope.sh";
+    ".config/activitywatch/aw-qt/aw-qt.toml".source =
+      "${project_root}/utilities/aw/aw-qt.toml";
 
     ".config/swaylock/config".text = swaylock-settings.settings;
-
-    ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
-    ".local/bin/decrease_volume".source = "${project_root}/local/linux/.local/bin/decrease_volume";
-    ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
-    ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
-    ".local/bin/increase_volume".source = "${project_root}/local/linux/.local/bin/increase_volume";
-    ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
-    ".local/bin/sc_brightness_change".source = "${project_root}/local/linux/.local/bin/sc_brightness_change";
-    ".local/bin/sc_get_brightness_percentage".source = "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
-    ".local/bin/sc_hyprland_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
-    ".local/bin/sc_hyprland_show_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
-    ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";
-    ".local/bin/toggle_volume".source = "${project_root}/local/linux/.local/bin/toggle_volume";
-    ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
-    ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
-    ".local/bin/spawn_archlinux".source = "${project_root}/local/linux/.local/bin/spawn_archlinux";
+    ".local/bin/colors-name.txt".source =
+      "${project_root}/local/linux/.local/bin/colors-name.txt";
+    ".local/bin/decrease_volume".source =
+      "${project_root}/local/linux/.local/bin/decrease_volume";
+    ".local/bin/dotfiles.txt".source =
+      "${project_root}/local/linux/.local/bin/dotfiles.txt";
+    ".local/bin/dotfiles_picker".source =
+      "${project_root}/local/linux/.local/bin/dotfiles_picker";
+    ".local/bin/increase_volume".source =
+      "${project_root}/local/linux/.local/bin/increase_volume";
+    ".local/bin/nord_color_picker".source =
+      "${project_root}/local/linux/.local/bin/nord_color_picker";
+    ".local/bin/sc_brightness_change".source =
+      "${project_root}/local/linux/.local/bin/sc_brightness_change";
+    ".local/bin/sc_get_brightness_percentage".source =
+      "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
+    ".local/bin/sc_hyprland_minimize".source =
+      "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
+    ".local/bin/sc_hyprland_show_minimize".source =
+      "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
+    ".local/bin/sc_window_picker".source =
+      "${project_root}/local/linux/.local/bin/sc_window_picker";
+    ".local/bin/toggle_volume".source =
+      "${project_root}/local/linux/.local/bin/toggle_volume";
+    ".local/bin/sc_prompt".source =
+      "${project_root}/local/linux/.local/bin/sc_prompt";
+    ".local/bin/sc_weather".source =
+      "${project_root}/local/linux/.local/bin/sc_weather";
+    ".local/bin/spawn_archlinux".source =
+      "${project_root}/local/linux/.local/bin/spawn_archlinux";
+    ".local/bin/aw-awatcher".source =
+      "${project_root}/local/linux/.local/bin/aw-awatcher";
 
     # Custom deskop files
-    ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
+    ".local/share/applications/uxplay.desktop".source =
+      "${project_root}/utilities/desktops/uxplay.desktop";
   };
 
   dconf = {
@@ -248,19 +277,19 @@ in
   };
 
   systemd.user = systemd_config;
-  home.sessionVariables =
-    {
-      # Setting this is to local the .desktop files
-      XDG_DATA_DIRS = "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
-      PICKER = "tofi";
-      TERMINAL = "alacritty";
-      GTK_THEME = "Adwaita-dark";
-      QT_QTA_PLATFORMTHEME = "qt5ct";
-      GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
-      XCURSOR_THEME = "macOS-Monterey";
-      XCURSOR_SIZE = 24;
-      SUDO_ASKPASS = "${project_root}/local/linux/.local/bin/password-prompt";
-    };
+  home.sessionVariables = {
+    # Setting this is to local the .desktop files
+    XDG_DATA_DIRS =
+      "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
+    PICKER = "tofi";
+    TERMINAL = "alacritty";
+    GTK_THEME = "Adwaita-dark";
+    QT_QTA_PLATFORMTHEME = "qt5ct";
+    GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
+    XCURSOR_THEME = "macOS-Monterey";
+    XCURSOR_SIZE = 24;
+    SUDO_ASKPASS = "${project_root}/local/linux/.local/bin/password-prompt";
+  };
 
   i18n.inputMethod = {
     enabled = "fcitx5";

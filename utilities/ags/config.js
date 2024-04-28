@@ -18,8 +18,7 @@ function getClientAddress(client) {
     if (client.grouped.length === 0) {
         return client.address;
     }
-    return client.grouped[0]
-
+    return client.grouped[client.grouped.length - 1]
 }
 
 function isInGroup(client) {
@@ -41,7 +40,6 @@ function TaskBar() {
                     let current_clients = hyprland.clients.filter(client => client.workspace.id === hyprland.active.workspace.id)
                     let minimized_clients = hyprland.clients.filter(client => client.workspace.name === `special:minimized_${hyprland.active.workspace.id}`)
                     let all_clients = current_clients.concat(minimized_clients).sort((a, b) => a.pid - b.pid)
-                    current_clients[0].grouped
                     self.children = all_clients.map(client => Widget.Button({
                         class_name: "taskbar-button",
                         child: Widget.Box({
@@ -68,9 +66,6 @@ function TaskBar() {
                             ]
                         }),
                         on_middle_click: () => {
-                            if (isInGroup(client)) {
-                                return
-                            }
                             let address = getClientAddress(client)
                             if (!isMinimized(client)) {
                                 hyprland.messageAsync(`dispatch movetoworkspacesilent special:minimized_${hyprland.active.workspace.id},address:${address}`)
@@ -79,9 +74,6 @@ function TaskBar() {
                             }
                         },
                         on_clicked: () => {
-                            if (isInGroup(client)) {
-                                return
-                            }
                             let address = getClientAddress(client)
                             if (isMinimized(client)) {
                                 hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${address}`)

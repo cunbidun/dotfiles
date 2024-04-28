@@ -64,7 +64,9 @@
     pkgs.pdfgrep # A tool to search text in PDF files
 
     # Browser
-    (pkgs.google-chrome.override { commandLineArgs = "--ozone-platform=wayland"; })
+    (pkgs.google-chrome.override {
+      commandLineArgs = "--ozone-platform=wayland";
+    })
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts
@@ -81,6 +83,7 @@
 
     # Note
     pkgs.obsidian # A knowledge base and note-taking app
+    pkgs.activitywatch
 
     ######## # Util ########
     # GUI File manager
@@ -119,8 +122,6 @@
 
     # Theme
     pkgs.lxappearance # A desktop theme switcher
-
-    pkgs.gnome.zenity
   ];
 
   mac_packages = [

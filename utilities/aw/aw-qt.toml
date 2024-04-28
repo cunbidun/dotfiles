@@ -1,0 +1,2 @@
+[aw-qt]
+autostart_modules = ["aw-server", "aw-awatcher"]

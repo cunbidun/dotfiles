@@ -47,7 +47,7 @@ formatters.setup({
   { exe = "stylua",  filetypes = { "lua" } },
   { exe = "shfmt",   filetypes = { "sh" } },
   { exe = "rustfmt", filetypes = { "rust" } },
-  { exe = "nixfmt",  filetypes = { "nix" } },
+  { exe = "nixpkgs-fmt",  filetypes = { "nix" } },
 })
 -- }}}
 

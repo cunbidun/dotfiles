@@ -22,7 +22,7 @@ size = "50% 50%"
 position = "25% 25%"
 excludes = "*"
 class = "Caprine"
-class_match = true
+match_by =  "class"
 
 [scratchpads.spotify]
 command = "spotify"
