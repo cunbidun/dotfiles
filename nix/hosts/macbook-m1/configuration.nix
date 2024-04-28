@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [ pkgs.vim pkgs.git pkgs.python3 ];
+  environment.systemPackages = [ pkgs.vim pkgs.git ];
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -36,17 +36,12 @@
   homebrew = {
     enable = true;
 
-    onActivation = {
-      cleanup = "uninstall";
-    };
+    onActivation = { cleanup = "uninstall"; };
 
-    taps =
-      [ "homebrew/cask-fonts" ];
+    taps = [ "homebrew/cask-fonts" ];
 
     # `brew install`
-    brews = [
-      "bazel"
-    ];
+    brews = [ "bazel" "python@3.11" ];
 
     # `brew install --cask`
     casks = [
@@ -64,6 +59,7 @@
       "flux"
       "monitorcontrol"
       "font-sauce-code-pro-nerd-font"
+      "activitywatch"
     ];
   };
 }
