@@ -29,6 +29,7 @@
     # Hyprland
     pkgs.waybar # A Wayland bar for Sway and Hyprland
     pkgs.hyprpaper # A wallpaper utility for Hyprland
+    pkgs.hypridle
     pkgs.wofi # A launcher/menu program for wlroots compositors
     pkgs.gammastep # A screen temperature adjusting utility
     pkgs.wl-clipboard # A command-line copy/paste tool for Wayland

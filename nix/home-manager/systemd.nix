@@ -90,6 +90,22 @@
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
+    activitywatch = {
+      Unit = {
+        Description = "Activit Watch service";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        Type = "simple";
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
+        ExecStart = "/bin/sh -c 'aw-qt'";
+        StandardOutput = "journal";
+        StandardError = "journal";
+      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
+    };
     syncthing = {
       Unit = {
         Description = "Syncthing Service";

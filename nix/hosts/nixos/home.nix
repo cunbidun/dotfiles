@@ -111,6 +111,8 @@ in {
       "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
     ".config/hypr/hyprpaper.conf".source =
       "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
+    ".config/hypr/hypridle.conf".source =
+      "${project_root}/window_manager/hyprland/linux/.config/hypr/hypridle.conf";
     ".config/tofi/config".source =
       "${project_root}/utilities/tofi/linux/.config/tofi/config";
     ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
