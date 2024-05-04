@@ -39,7 +39,6 @@
     pkgs.pyprland # Python library for Hyprland
     pkgs.hyprpicker # A launcher/menu program for Hyprland
     pkgs.tofi # A launcher/menu program for Wayland
-    pkgs.sway-audio-idle-inhibit # An audio idle inhibitor for Sway
     pkgs.wev # An event daemon for Wayland
     inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop # Hyprland contrib package for hyprprop
     #pkgs.espanso-wayland # Text expander for Wayland (commented out)

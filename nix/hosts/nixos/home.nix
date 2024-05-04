@@ -59,7 +59,8 @@ let
     import "${project_root}/nix/home-manager/configs/swaylock.nix" {
       color-scheme = color-scheme;
     };
-in {
+in
+{
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
@@ -172,6 +173,8 @@ in {
       "${project_root}/local/linux/.local/bin/sc_prompt";
     ".local/bin/sc_weather".source =
       "${project_root}/local/linux/.local/bin/sc_weather";
+    ".local/bin/sc_weather_sync".source =
+      "${project_root}/local/linux/.local/bin/sc_weather_sync";
     ".local/bin/spawn_archlinux".source =
       "${project_root}/local/linux/.local/bin/spawn_archlinux";
     ".local/bin/aw-awatcher".source =

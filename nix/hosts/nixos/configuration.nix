@@ -56,7 +56,6 @@
     description = "Duy Pham";
     extraGroups = [ "networkmanager" "wheel" "input" "i2c" "docker" ];
     packages = with pkgs; [
-      swayidle
       swaylock-effects
       jdk17
       xdg-utils

@@ -280,6 +280,7 @@
 
       # Group
       bind = $mainMod, t, togglegroup
+      bind = $mainMod SHIFT, t, moveoutofgroup
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = $mainMod, mouse:272, movewindow

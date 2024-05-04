@@ -30,7 +30,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     hyprfocus = {
-      url = "github:pyt0xic/hyprfocus"; # Not the official git repository 
+      url = "github:pyt0xic/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
   };

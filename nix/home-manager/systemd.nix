@@ -73,6 +73,23 @@
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };
+    hypridle = {
+      Unit = {
+        Description = "hypridle Service";
+        PartOf = [ "hyprland.service" ];
+        After = [ "hyprland.service" ];
+        Requires = [ "hyprland.service" ];
+      };
+      Service = {
+        ExecStartPre = "/bin/sh -c 'sleep 1'";
+        Type = "simple";
+        WorkingDirectory = "%h";
+        ExecStart = "${lib.getExe pkgs.hypridle}";
+        StandardOutput = "journal";
+        StandardError = "journal";
+      };
+      Install = { WantedBy = [ "hyprland.service" ]; };
+    };
     gammastep = {
       Unit = {
         Description = "Gamma Step Service";
