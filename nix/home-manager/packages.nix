@@ -26,6 +26,7 @@
   ];
 
   linux_packages = [
+    pkgs.nix-output-monitor
     # Hyprland
     pkgs.waybar # A Wayland bar for Sway and Hyprland
     pkgs.hyprpaper # A wallpaper utility for Hyprland

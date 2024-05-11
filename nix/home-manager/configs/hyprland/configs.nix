@@ -29,7 +29,7 @@
 
     plugins = [
       inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus  # currently not working for 0.40
     ];
     extraConfig = ''
       #

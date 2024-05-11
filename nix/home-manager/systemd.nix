@@ -116,7 +116,7 @@
       };
       Service = {
         Type = "simple";
-        ExecStartPre = "/bin/sh -c 'sleep 1'";
+        ExecStartPre = "/bin/sh -c 'sleep 5'";
         ExecStart = "/bin/sh -c 'aw-qt'";
         StandardOutput = "journal";
         StandardError = "journal";

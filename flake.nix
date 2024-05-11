@@ -20,7 +20,7 @@
     # Hyprland #
     ############
     hyprland = {
-      url = github:hyprwm/Hyprland/v0.39.1;
+      url = "github:hyprwm/Hyprland/v0.40.0?submodules=1";
     };
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
