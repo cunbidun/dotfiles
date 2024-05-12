@@ -37,7 +37,7 @@
     pkgs.slurp # A tool to select a region on a screen
     pkgs.grim # A screen capture utility for Wayland
     pkgs.cliphist # A clipboard manager utility
-    pkgs.pyprland # Python library for Hyprland
+    inputs.pyprland.packages.${pkgs.system}.pyprland # pyprland
     pkgs.hyprpicker # A launcher/menu program for Hyprland
     pkgs.tofi # A launcher/menu program for Wayland
     pkgs.wev # An event daemon for Wayland

@@ -1,3 +1,16 @@
+# excludes (optional)
+# No default value.
+# List of scratchpads to hide when this one is displayed, eg: excludes = ["term", "volume"]. 
+# If you want to hide every displayed scratch you can set this to the string "*" instead of a list: excludes = "*".
+
+# unfocus (optional)
+# No default value.
+# When set to "hide", allow to hide the window when the focus is lost.
+
+# hysteresis (optional)
+# Defaults to 0.4 (seconds)
+# Controls how fast a scratchpad hiding on unfocus will react. Check unfocus option. Set to 0 to disable (immediate reaction, as in versions < 2.0.1)
+
 [pyprland]
 plugins = [
   "scratchpads",
@@ -12,6 +25,7 @@ unfocus = ""
 size = "50% 50%"
 position = "25% 25%"
 excludes = "*"
+hysteresis=0
 
 [scratchpads.messenger]
 command = "caprine"
@@ -23,6 +37,7 @@ position = "25% 25%"
 excludes = "*"
 class = "Caprine"
 match_by =  "class"
+hysteresis=0
 
 [scratchpads.spotify]
 command = "spotify"
@@ -32,6 +47,7 @@ lazy = true
 size = "50% 50%"
 position = "25% 25%"
 excludes = "*"
+hysteresis=0
 
 [scratchpads.signal]
 command = "signal-desktop"
@@ -41,6 +57,8 @@ lazy = true
 size = "50% 50%"
 position = "25% 25%"
 excludes = "*"
+hysteresis=0
+
 
 [scratchpads.obsidian]
 command = "obsidian"
@@ -50,3 +68,4 @@ lazy = true
 size = "75% 75%"
 position = "12% 12%"
 excludes = "*"
+hysteresis=0
