@@ -66,9 +66,10 @@ function TaskBar() {
                             ]
                         }),
                         on_middle_click: () => {
-                            let address = getClientAddress(client)
+                            let address = client.address 
                             if (!isMinimized(client)) {
-                                hyprland.messageAsync(`dispatch movetoworkspacesilent special:minimized_${hyprland.active.workspace.id},address:${address}`)
+                                hyprland.messageAsync(`dispatch focuswindow address:${address}`)
+                                hyprland.messageAsync(`dispatch movetoworkspacesilent special:minimized_${hyprland.active.workspace.id}`)
                             } else {
                                 hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${address}`)
                             }

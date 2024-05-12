@@ -48,11 +48,11 @@
         ExecStartPre = "/bin/sh -c 'sleep 1'";
         Type = "simple";
         WorkingDirectory = "%h";
-        ExecStart = "${lib.getExe pkgs.pyprland}";
+        ExecStart = "${lib.getExe' inputs.pyprland.packages.${pkgs.system}.pyprland "pypr"}";
         StandardOutput = "journal";
         StandardError = "journal";
         ExecStopPost =
-          "/bin/sh -c 'rm -f /tmp/hypr/\${HYPRLAND_INSTANCE_SIGNATURE}/.pyprland.sock'";
+          "/bin/sh -c 'rm -f \${XDG_RUNTIME_DIR}/hypr/\${HYPRLAND_INSTANCE_SIGNATURE}/.pyprland.sock'";
       };
       Install = { WantedBy = [ "hyprland.service" ]; };
     };

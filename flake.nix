@@ -22,6 +22,9 @@
     hyprland = {
       url = "github:hyprwm/Hyprland/v0.40.0?submodules=1";
     };
+    pyprland = {
+      url = "github:hyprland-community/pyprland/2.2.20";
+    };
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
     };
