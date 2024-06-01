@@ -2,14 +2,15 @@
   description = "cunbidun's flake";
 
   inputs = {
-    nixpkgsUnstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl.url = "github:guibou/nixGL";
     xremap-flake.url = "github:xremap/nix-flake";
@@ -39,7 +40,8 @@
   };
 
   outputs =
-    inputs@{ nixpkgsUnstable
+    inputs@{ nixpkgs-unstable
+    , nixpkgs-stable
     , nix-darwin
     , home-manager
     , nixgl
@@ -47,9 +49,10 @@
     , ...
     }:
     let project_root = "${builtins.toString ./.}";
+
     in {
       darwinConfigurations."macbook-m1" = nix-darwin.lib.darwinSystem {
-        pkgs = import nixpkgsUnstable {
+        pkgs = import nixpkgs-unstable {
           system = "aarch64-darwin";
           config = { allowUnfree = true; };
         };
@@ -70,10 +73,16 @@
       };
       nixosConfigurations = {
         # build with sudo nixos-rebuild switch --flake ~/dotfiles#nixos
-        nixos = nixpkgsUnstable.lib.nixosSystem {
-          pkgs = import nixpkgsUnstable {
+        nixos = nixpkgs-unstable.lib.nixosSystem {
+          pkgs = import nixpkgs-unstable {
             system = "x86_64-linux";
-            overlays = [ nixgl.overlay ];
+            overlays = [
+              nixgl.overlay
+              # temporary overlay the older version of lvim 
+              (final: prev: {
+                lunarvim = nixpkgs-stable.legacyPackages.${prev.system}.lunarvim;
+              })
+            ];
             config = {
               allowUnfree = true;
               permittedInsecurePackages = [ "electron-25.9.0" ];
