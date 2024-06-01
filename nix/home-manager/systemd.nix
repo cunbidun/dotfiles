@@ -109,9 +109,9 @@
     };
     activitywatch = {
       Unit = {
-        Description = "Activit Watch service";
+        Description = "Activity Watch service";
         PartOf = [ "hyprland.service" ];
-        After = [ "hyprland.service" ];
+        After = [ "hyprland.service" "waybar.service" ];
         Requires = [ "hyprland.service" ];
       };
       Service = {
@@ -206,7 +206,7 @@
           "${lib.getExe inputs.hyprland.packages.${pkgs.system}.hyprland}";
         StandardOutput = "journal";
         StandardError = "journal";
-        TimeoutStopSec = 5;
+        TimeoutStopSec = 3;
       };
     };
   };
