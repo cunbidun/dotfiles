@@ -208,4 +208,7 @@ in
   hardware.bluetooth.powerOnBoot =
     true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/google-dark.yaml";
+  stylix.image = config.lib.stylix.pixel "base0A";
+  stylix.polarity = "dark";
 }

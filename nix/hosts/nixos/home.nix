@@ -185,19 +185,19 @@ in
       "${project_root}/utilities/desktops/uxplay.desktop";
   };
 
-  dconf = {
-    enable = true;
-    settings = {
-      # "org/nemo/preferences" = {
-      #   show-hidden-files = true;
-      # };
-      # "org/cinnamon/desktop/default-applications/terminal" = {
-      #   exec = "alacritty";
-      #   exec-arg = "-e";
-      # };
-      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
-    };
-  };
+  # dconf = {
+  #   enable = true;
+  #   settings = {
+  #     # "org/nemo/preferences" = {
+  #     #   show-hidden-files = true;
+  #     # };
+  #     # "org/cinnamon/desktop/default-applications/terminal" = {
+  #     #   exec = "alacritty";
+  #     #   exec-arg = "-e";
+  #     # };
+  #     # "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
+  #   };
+  # };
 
   qt = {
     enable = true;
@@ -255,10 +255,10 @@ in
         gtk-xft-rgba = "none";
       };
     };
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
+    # theme = {
+    #   name = "Adwaita-dark";
+    #   package = pkgs.gnome.gnome-themes-extra;
+    # };
     cursorTheme = {
       package = pkgs.apple-cursor;
       name = "macOS-Monterey";
@@ -320,8 +320,9 @@ in
   };
   programs.ags = {
     enable = true;
-
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
   };
+  stylix.targets.alacritty.enable = false;
+  stylix.targets.hyprland.enable = false;
 }

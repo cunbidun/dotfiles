@@ -16,6 +16,7 @@
     xremap-flake.url = "github:xremap/nix-flake";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     ags.url = "github:Aylur/ags";
+    stylix.url = "github:danth/stylix";
 
     ############
     # Hyprland #
@@ -93,6 +94,7 @@
           };
           modules = [
             nix-flatpak.nixosModules.nix-flatpak
+            inputs.stylix.nixosModules.stylix
             ./nix/hosts/nixos/configuration.nix
             home-manager.nixosModules.home-manager
             {
