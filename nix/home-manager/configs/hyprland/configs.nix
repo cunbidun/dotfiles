@@ -29,7 +29,7 @@
 
     plugins = [
       inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus  # currently not working for 0.40
+      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus # currently not working for 0.40
     ];
     extraConfig = ''
       #
@@ -323,8 +323,8 @@
       submap=session
 
       # sets repeatable binds for resizing the active window
-      bind=,l,exec,swaylock
-      bind=SHIFT,L,exec,sc_prompt 'Do you want to suspend?' 'sleep 0.6 && swaylock --daemonize && sleep 1 && systemctl suspend -i'
+      bind=,l,exec,loginctl lock-session
+      bind=SHIFT,L,exec,sc_prompt 'Do you want to suspend?' 'sleep 0.6 && loginctl lock-session && sleep 1 && systemctl suspend -i'
       bind=$mainMod SHIFT, Q, exec, sc_prompt 'Do you want to exit?' 'systemctl --user stop hyprland.service'
 
       # use reset to go back to the global submap

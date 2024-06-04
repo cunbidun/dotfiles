@@ -29,7 +29,7 @@
       url = "github:hyprwm/contrib";
     };
     Hyprspace = {
-      url = github:KZDKM/Hyprspace;
+      url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
     hyprfocus = {
