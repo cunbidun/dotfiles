@@ -266,11 +266,11 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1712965597,
-        "narHash": "sha256-QCmFRWM2dBEWvMtbSTpb5hQ830GdiEIDv70dydp969s=",
+        "lastModified": 1717066948,
+        "narHash": "sha256-R1ZgNhQkoS6ZHRRKB+j5vYgRANfYO//sHbrD7moUTx0=",
         "owner": "pyt0xic",
         "repo": "hyprfocus",
-        "rev": "0bf15a1492e8aaaaa4719b35b68dfbb7b806a31b",
+        "rev": "aa7262d3a4564062f97b9cfdad47fd914cfb80f2",
         "type": "github"
       },
       "original": {
