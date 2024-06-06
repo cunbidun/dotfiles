@@ -63,6 +63,7 @@ in
 {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
+    inputs.nixvim.homeManagerModules.nixvim
     inputs.ags.homeManagerModules.default
     (import "${project_root}/nix/home-manager/configs/zsh.nix" {
       color-scheme = color-scheme;
@@ -77,6 +78,7 @@ in
       color-scheme = color-scheme;
     })
     "${project_root}/nix/home-manager/configs/fzf.nix"
+    "${project_root}/nix/home-manager/configs/nixvim.nix"
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -320,7 +322,6 @@ in
   };
   programs.ags = {
     enable = true;
-
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
   };

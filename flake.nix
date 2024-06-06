@@ -2,7 +2,7 @@
   description = "cunbidun's flake";
 
   inputs = {
-    nixpkgsUnstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgsUnstable = { url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
@@ -11,10 +11,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
-    nixgl.url = "github:guibou/nixGL";
-    xremap-flake.url = "github:xremap/nix-flake";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    ags.url = "github:Aylur/ags";
+    nixgl = { url = "github:guibou/nixGL"; };
+    xremap-flake = { url = "github:xremap/nix-flake"; };
+    nix-flatpak = { url = "github:gmodena/nix-flatpak"; };
+    ags = { url = "github:Aylur/ags"; };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgsUnstable";
+    };
 
     ############
     # Hyprland #
