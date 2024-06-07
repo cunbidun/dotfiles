@@ -8,7 +8,7 @@
     settings = {
       misc = {
         enable_swallow = true;
-        swallow_exception_regex = "wev|ranger";
+        swallow_exception_regex = "wev|ranger|^(.*nvim.*)$";
         swallow_regex = "^(Alacritty)$";
         disable_hyprland_logo = true;
         focus_on_activate = true;
