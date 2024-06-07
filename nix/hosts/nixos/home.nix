@@ -63,7 +63,6 @@ in
 {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
-    inputs.nixvim.homeManagerModules.nixvim
     inputs.ags.homeManagerModules.default
     (import "${project_root}/nix/home-manager/configs/zsh.nix" {
       color-scheme = color-scheme;

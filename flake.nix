@@ -17,7 +17,7 @@
     ags = { url = "github:Aylur/ags"; };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/b113bc69ea5c04c37020a63afa687abfb2d43474";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
     };
 
