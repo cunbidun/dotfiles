@@ -50,6 +50,7 @@
       "spotify"
       "alt-tab"
       "google-chrome"
+      "firefox"
       "signal"
       "messenger"
       "rectangle"
