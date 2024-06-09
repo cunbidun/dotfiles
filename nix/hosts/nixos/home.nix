@@ -206,19 +206,11 @@ in
     style = { name = "adwaita-dark"; };
   };
 
-  # home.pointerCursor = {
-  #   gtk.enable = true;
-  #   # x11.enable = true;
-  #   package = pkgs.apple-cursor;
-  #   name = "macOS-Monterey";
-  #   size = 24;
-  # };
-
   gtk = {
     enable = true;
     gtk3 = {
       extraConfig = {
-        gtk-font-name = "Cantarell 11";
+        gtk-font-name = "SFProDisplay Nerd Font 11";
         gtk-xft-antialias = 1;
         gtk-xft-hinting = 1;
         gtk-xft-hintstyle = "hintfull";
@@ -249,7 +241,7 @@ in
     };
     gtk4 = {
       extraConfig = {
-        gtk-font-name = "Cantarell 11";
+        gtk-font-name = "SFProDisplay Nerd Font 11";
         gtk-xft-antialias = 1;
         gtk-xft-hinting = 1;
         gtk-xft-hintstyle = "hintfull";

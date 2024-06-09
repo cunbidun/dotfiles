@@ -3,7 +3,7 @@
 -- +--------+
 vim.opt.relativenumber = true
 vim.opt.sidescrolloff = 2
-vim.opt.guifont = { "SauceCodePro Nerd Font Mono", ":h10" }
+vim.opt.guifont = { "SFMono Nerd Font", ":h10" }
 
 -- +------+
 -- | lvim |

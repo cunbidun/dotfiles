@@ -15,7 +15,7 @@
       };
       group = {
         groupbar = {
-          font_family = "SauceCodePro Nerd Font Mono";
+          font_family = "SFMono Nerd Font";
           text_color = "rgb(2E3440)";
           font_size = 10;
           height = 15;

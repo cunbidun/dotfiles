@@ -11,7 +11,7 @@
     grace=0
     fade-in=0.2
     line-uses-inside
-    font=SauceCodePro Nerd Font Mono
+    font=SFMono Nerd Font
     font-size=20
     ring-color=${color-scheme.blue}
     ring-ver-color=${color-scheme.blue}

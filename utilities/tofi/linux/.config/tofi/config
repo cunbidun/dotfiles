@@ -8,7 +8,7 @@ horizontal = true
 
 # Font
 font-size = 10
-font = SauceCodePro Nerd Font Mono
+font = SFMono Nerd Font
 
 min-input-width = 240
 border-width = 0 
