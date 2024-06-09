@@ -41,6 +41,14 @@
       url = "github:pyt0xic/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
+
+    ###############
+    # nvim plugin #
+    ###############
+    nvim-plugin-easypick = {
+      url = "github:axkirillov/easypick.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -78,7 +86,18 @@
         nixos = nixpkgsUnstable.lib.nixosSystem {
           pkgs = import nixpkgsUnstable {
             system = "x86_64-linux";
-            overlays = [ nixgl.overlay ];
+            overlays = [
+              nixgl.overlay
+              # add easypick.nvim plugin
+              (final: prev: {
+                vimPlugins = prev.vimPlugins // {
+                  nvim-plugin-easypick = prev.vimUtils.buildVimPlugin {
+                    name = "easypick.nvim";
+                    src = inputs.nvim-plugin-easypick;
+                  };
+                };
+              })
+            ];
             config = {
               allowUnfree = true;
               permittedInsecurePackages = [ "electron-25.9.0" ];

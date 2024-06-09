@@ -183,6 +183,12 @@ in
       }
       {
         mode = "n";
+        key = "<leader>cf";
+        action = "<cmd>Easypick find_tasks<cr>";
+        options.desc = "Find tasks";
+      }
+      {
+        mode = "n";
         key = "<leader>cn";
         action = "<cmd>NewTask<cr>";
         options.desc = "New Task";
@@ -293,6 +299,7 @@ in
           float_opts = {
             border = "single";
           };
+          shell = "sh";
           size = ''
             function (term)
               if term.direction == "horizontal" then
@@ -482,8 +489,26 @@ in
       IblScope.fg = "#606060";
       IblIndent.fg = "#3E3E3E";
     };
+    extraPlugins = with pkgs.vimPlugins; [
+      nvim-plugin-easypick
+    ];
     extraConfigLua = ''
       vim.cmd([[source $HOME/.config/lvim/cp.vim]])
+
+      local easypick = require("easypick")
+      easypick.setup({
+      	pickers = {
+      		-- list files inside current folder with default previewer
+      		{
+      			-- name for your custom picker, that can be invoked using :Easypick <name> (supports tab completion)
+      			name = "find_tasks",
+      			-- the command to execute, output has to be a list of plain text entries
+      			command = "find task -type f ! -name '*.json' ! -path '*.dSYM*' ! -name '.gitkeep'",
+      			-- specify your custom previwer, or use one of the easypick.previewers
+      			previewer = easypick.previewers.default(),
+      		},
+      	},
+      })
     '';
   };
 }
