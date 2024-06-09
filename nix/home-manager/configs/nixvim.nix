@@ -384,20 +384,27 @@ in
         "<leader>f" = "find_files";
         "<leader>t" = "live_grep";
       };
-      settings.defaults = {
-        file_ignore_patterns = [
-          "^.git/"
-          "^.mypy_cache/"
-          "^__pycache__/"
-          "^output/"
-          "^data/"
-          "%.ipynb"
-        ];
-        set_env.COLORTERM = "truecolor";
-        mappings = {
-          i = {
-            "<C-j>".__raw = "require('telescope.actions').move_selection_next";
-            "<C-k>".__raw = "require('telescope.actions').move_selection_previous";
+      settings = {
+        defaults = {
+          file_ignore_patterns = [
+            "^.git/"
+            "^.mypy_cache/"
+            "^__pycache__/"
+            "^output/"
+            "^data/"
+            "%.ipynb"
+          ];
+          set_env.COLORTERM = "truecolor";
+          mappings = {
+            i = {
+              "<C-j>".__raw = "require('telescope.actions').move_selection_next";
+              "<C-k>".__raw = "require('telescope.actions').move_selection_previous";
+            };
+          };
+        };
+        pickers = {
+          find_files = {
+            hidden = true;
           };
         };
       };
