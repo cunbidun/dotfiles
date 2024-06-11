@@ -32,17 +32,4 @@ in
     userName = "Duy Pham";
     userEmail = "cunbidun@gmail.com";
   };
-
-  #######################
-  # lvim configurations #
-  #######################
-  home.file = {
-    ".config/lvim/lua".source = "${project_root}/text_editor/lvim/lua";
-    ".config/lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
-    ".config/lvim/config.lua".source =
-      "${project_root}/text_editor/lvim/config.lua";
-    ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
-    ".config/lvim/markdown-preview.vim".source =
-      "${project_root}/text_editor/lvim/markdown-preview.vim";
-  };
 }

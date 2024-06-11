@@ -1,8 +1,9 @@
 #/usr/bin/env bash
-pamixer -i 5 --allow-boost; pkill -RTMIN+10 dwmblocks
 
-if [ "$(pamixer --get-mute)" = true ]; then
-	icon="[Muted] "
-fi
-vol="$icon$(pamixer --get-volume)"
-notify-send --hint=string:x-dunst-stack-tag:volume "volume: $vol" -t 1000 -a "System"
+# Get the list of sinks and filter only the running ones
+running_sinks=$(pamixer --list-sinks | awk -F '"' '/Running/ {print $2}')
+
+# Loop through each running sink and increase the volume by 5%
+for sink in $running_sinks; do
+  pamixer --sink $sink -i 5 --allow-boost
+done

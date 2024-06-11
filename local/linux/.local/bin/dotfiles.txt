@@ -6,10 +6,6 @@
 # dotfiles list
 $HOME/.local/bin/dotfiles.txt
 
-# lvim
-# $HOME/.config/lvim/config.lua
-# $HOME/.config/lvim/cp.vim
-
 #.local
 $HOME/.local/bin/increase_volume
 $HOME/.local/bin/decrease_volume

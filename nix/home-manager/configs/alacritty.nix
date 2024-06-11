@@ -12,7 +12,7 @@
       env = { TERM = "alacritty"; };
       font = {
         size = 10;
-        normal = { family = "SauceCodePro Nerd Font Mono"; };
+        normal = { family = "SFMono Nerd Font"; };
       };
       window = {
         decorations = "none";

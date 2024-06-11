@@ -203,4 +203,8 @@
   hardware.bluetooth.powerOnBoot =
     true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+  # the following 3 options are for enable usb automount
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 }

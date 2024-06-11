@@ -77,6 +77,7 @@ in
       color-scheme = color-scheme;
     })
     "${project_root}/nix/home-manager/configs/fzf.nix"
+    "${project_root}/nix/home-manager/configs/nixvim.nix"
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -119,17 +120,6 @@ in
     ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
     ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
-
-    #######################
-    # lvim configurations #
-    #######################
-    ".config/lvim/lua".source = "${project_root}/text_editor/lvim/lua";
-    ".config/lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
-    ".config/lvim/config.lua".source =
-      "${project_root}/text_editor/lvim/config.lua";
-    ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
-    ".config/lvim/markdown-preview.vim".source =
-      "${project_root}/text_editor/lvim/markdown-preview.vim";
 
     ".config/ranger/commands_full.py".source =
       "${project_root}/utilities/ranger/commands_full.py";
@@ -205,19 +195,11 @@ in
     style = { name = "adwaita-dark"; };
   };
 
-  # home.pointerCursor = {
-  #   gtk.enable = true;
-  #   # x11.enable = true;
-  #   package = pkgs.apple-cursor;
-  #   name = "macOS-Monterey";
-  #   size = 24;
-  # };
-
   gtk = {
     enable = true;
     gtk3 = {
       extraConfig = {
-        gtk-font-name = "Cantarell 11";
+        gtk-font-name = "SFProDisplay Nerd Font 11";
         gtk-xft-antialias = 1;
         gtk-xft-hinting = 1;
         gtk-xft-hintstyle = "hintfull";
@@ -248,7 +230,7 @@ in
     };
     gtk4 = {
       extraConfig = {
-        gtk-font-name = "Cantarell 11";
+        gtk-font-name = "SFProDisplay Nerd Font 11";
         gtk-xft-antialias = 1;
         gtk-xft-hinting = 1;
         gtk-xft-hintstyle = "hintfull";
@@ -276,7 +258,7 @@ in
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
       "image/jpeg" = [ "feh.desktop" ];
       "image/png" = [ "feh.desktop" ];
-      "text/plain" = [ "lvim.desktop" ];
+      "text/plain" = [ "nvim.desktop" ];
       "inode/directory" = [ "org.gnome.nautilus.desktop" ];
     };
   };
@@ -320,7 +302,6 @@ in
   };
   programs.ags = {
     enable = true;
-
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
   };
