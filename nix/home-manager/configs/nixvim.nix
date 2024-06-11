@@ -1,35 +1,8 @@
 { inputs, pkgs, ... }:
 let
   icons = {
-    ActiveLSP = "";
-    ActiveTS = "";
-    ArrowLeft = "";
-    ArrowRight = "";
-    Bookmarks = "";
-    BufferClose = "󰅖";
-    DapBreakpoint = "";
-    DapBreakpointCondition = "";
-    DapBreakpointRejected = "";
-    DapLogPoint = "󰛿";
-    DapStopped = "󰁕";
-    Debugger = "";
-    DefaultFile = "󰈙";
-    Diagnostic = "󰒡";
-    DiagnosticError = "";
-    DiagnosticHint = "󰌵";
-    DiagnosticInfo = "󰋼";
-    DiagnosticWarn = "";
-    Ellipsis = "…";
-    Environment = "";
-    FileNew = "";
-    FileModified = "";
-    FileReadOnly = "";
-    FoldClosed = "";
-    FoldOpened = "";
-    FoldSeparator = " ";
-    FolderClosed = "";
-    FolderEmpty = "";
-    FolderOpen = "";
+    FileFind = "󰈞";
+    FileNew = "";
     Git = "󰊢";
     GitAdd = "";
     GitBranch = "";
@@ -39,26 +12,9 @@ let
     GitIgnored = "◌";
     GitRenamed = "➜";
     GitSign = "▎";
-    GitStaged = "✓";
-    GitUnstaged = "✗";
-    GitUntracked = "★";
-    LSPLoading1 = "";
-    LSPLoading2 = "󰀚";
-    LSPLoading3 = "";
-    MacroRecording = "";
-    Package = "󰏖";
-    Paste = "󰅌";
-    Refresh = "";
-    Search = "";
-    Selected = "❯";
-    Session = "󱂬";
-    Sort = "󰒺";
-    Spellcheck = "󰓆";
-    Tab = "󰓩";
-    TabClose = "󰅙";
-    Terminal = "";
-    Window = "";
-    WordFile = "󰈭";
+    GitStaged = "S";
+    GitUnstaged = "";
+    GitUntracked = "U";
   };
 in
 {
@@ -442,7 +398,12 @@ in
     # +------------+
     opts.completeopt = [ "menu" "menuone" "noselect" ];
     plugins = {
-      luasnip.enable = true;
+      luasnip = {
+        enable = true;
+        fromVscode = [{
+          paths = "~/dotfiles/data/luasnip";
+        }];
+      };
 
       lspkind = {
         enable = true;
@@ -500,7 +461,57 @@ in
       nvim-plugin-easypick
     ];
     extraConfigLua = ''
-      vim.cmd([[source $HOME/.config/lvim/cp.vim]])
+      local function TermWrapper(command)
+        vim.cmd('wa')
+
+        local function get_terminal_buffers()
+          local buffers = vim.api.nvim_list_bufs()
+          local terminal_buffers = {}
+
+          for _, buf in ipairs(buffers) do
+            if vim.api.nvim_buf_get_option(buf, 'buftype') == 'terminal' then
+              table.insert(terminal_buffers, buf)
+            end
+          end
+
+          return terminal_buffers
+        end
+
+        local buf_id = get_terminal_buffers()
+        if #buf_id > 0 then
+          vim.cmd(string.format("%sbdelete!", buf_id[1]))
+        end
+
+        vim.cmd(string.format("TermExec direction=vertical cmd='%s'", command))
+      end
+
+      vim.api.nvim_create_user_command('Runscript', function()
+        TermWrapper(string.format('clear; cpcli_app task --root-dir="%s" --build', vim.fn.expand('%:p:h')))
+      end, {})
+
+      vim.api.nvim_create_user_command('RunWithDebug', function()
+        TermWrapper(string.format('clear; cpcli_app task --root-dir="%s" --build-with-debug', vim.fn.expand('%:p:h')))
+      end, {})
+
+      vim.api.nvim_create_user_command('RunWithTerm', function()
+        TermWrapper(string.format('clear; cpcli_app task --root-dir="%s" --build-with-term', vim.fn.expand('%:p:h')))
+      end, {})
+
+      vim.api.nvim_create_user_command('TaskConfig', function()
+        TermWrapper(string.format('clear; cpcli_app task --root-dir="%s" --edit-problem-config', vim.fn.expand('%:p:h')))
+      end, {})
+
+      vim.api.nvim_create_user_command('ArchiveTask', function()
+        TermWrapper(string.format('clear; cpcli_app task --root-dir="%s" --archive', vim.fn.expand('%:p:h')))
+      end, {})
+
+      vim.api.nvim_create_user_command('NewTask', function()
+        TermWrapper('clear; cpcli_app project --new-task')
+      end, {})
+
+      vim.api.nvim_create_user_command('DeleteTask', function()
+        TermWrapper(string.format('mv "%s" ~/.local/share/Trash/files/', vim.fn.expand('%:p:h')))
+      end, {})
 
       local easypick = require("easypick")
       easypick.setup({

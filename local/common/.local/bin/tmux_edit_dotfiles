@@ -2,7 +2,7 @@
 
 dotfiles_path=(
 	"$HOME/.tmux.conf"
-	"$HOME/.config/lvim/config.lua"
+	"$HOME/.config/$EDITOR/config.lua"
 	"$HOME/.local/bin/tmux_edit_dotfiles"
 )
 

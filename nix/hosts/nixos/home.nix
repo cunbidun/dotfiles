@@ -121,17 +121,6 @@ in
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
     ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
 
-    #######################
-    # lvim configurations #
-    #######################
-    ".config/lvim/lua".source = "${project_root}/text_editor/lvim/lua";
-    ".config/lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
-    ".config/lvim/config.lua".source =
-      "${project_root}/text_editor/lvim/config.lua";
-    ".config/lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
-    ".config/lvim/markdown-preview.vim".source =
-      "${project_root}/text_editor/lvim/markdown-preview.vim";
-
     ".config/ranger/commands_full.py".source =
       "${project_root}/utilities/ranger/commands_full.py";
     ".config/ranger/commands.py".source =
@@ -269,7 +258,7 @@ in
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
       "image/jpeg" = [ "feh.desktop" ];
       "image/png" = [ "feh.desktop" ];
-      "text/plain" = [ "lvim.desktop" ];
+      "text/plain" = [ "nvim.desktop" ];
       "inode/directory" = [ "org.gnome.nautilus.desktop" ];
     };
   };
