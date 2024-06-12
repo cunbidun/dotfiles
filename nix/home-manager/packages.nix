@@ -1,4 +1,9 @@
-{ pkgs, nixGLWrap, inputs, ... }: {
+{
+  pkgs,
+  nixGLWrap,
+  inputs,
+  ...
+}: {
   default_packages = [
     # Utils
     pkgs.bat # A cat clone with syntax highlighting and Git integration
@@ -15,14 +20,8 @@
     pkgs.zip # A compression and archive utility
     pkgs.unzip # A decompression utility
     pkgs.newsboat # An RSS feed reader
-    pkgs.nixfmt-classic # A formatter for Nix code
-    pkgs.nixpkgs-fmt # A code formatter for Nix expressions
     pkgs.syncthing # A continuous file synchronization program
-
-    # For vim
-    pkgs.lunarvim # A Neovim config derived from LunarVim
-    pkgs.shellcheck # A shell script analysis tool
-    pkgs.shfmt # A formatter for shell scripts
+    pkgs.alejandra # nix formatter
   ];
 
   linux_packages = [
@@ -124,6 +123,7 @@
 
     # Theme
     pkgs.lxappearance # A desktop theme switcher
+    pkgs.jetbrains-toolbox
   ];
 
   mac_packages = [
