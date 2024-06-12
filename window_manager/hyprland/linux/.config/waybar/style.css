@@ -28,7 +28,7 @@
 
 #waybar {
 	font-family: 'SFMono Nerd Font';
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 400;
   color: @base06;
   background: @base01;
@@ -76,7 +76,6 @@
   border-radius: 4px;
   color: @base01;
 }
-
 
 #tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-weather, #mode, #pulseaudio, #clock, #bluetooth {
   margin: 0 2px;
