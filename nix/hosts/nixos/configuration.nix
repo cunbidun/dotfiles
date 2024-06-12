@@ -65,7 +65,7 @@
 
       # Container
       podman-tui # status of containers in the terminal
-      podman-compose # start group of containers for dev
+      docker-compose
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
@@ -148,12 +148,9 @@
       "com.getpostman.Postman"
     ];
   };
-  virtualisation.spiceUSBRedirection.enable = true;
   virtualisation = {
     podman = {
       enable = true;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings = { dns_enabled = true; };
     };
@@ -169,6 +166,8 @@
     #   waydroid prop set persist.waydroid.height 1024
     #   sudo systemctl restart waydroid-container
     waydroid.enable = true;
+    docker.enable = true;
+    spiceUSBRedirection.enable = true;
   };
   services.usbmuxd.enable = true;
 
