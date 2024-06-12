@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   icons = {
     FileFind = "󰈞";
     FileNew = "";
@@ -16,8 +19,7 @@ let
     GitUnstaged = "";
     GitUntracked = "U";
   };
-in
-{
+in {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
@@ -201,7 +203,7 @@ in
     plugins.nvim-autopairs.enable = true;
     plugins.nvim-colorizer.enable = true;
     # +-------------+
-    # | indentation | 
+    # | indentation |
     # +-------------+
     plugins.indent-blankline = {
       enable = true;
@@ -215,7 +217,7 @@ in
           show_exact_scope = true;
         };
         exclude = {
-          buftypes = [ "terminal" "nofile" ];
+          buftypes = ["terminal" "nofile"];
           filetypes = [
             "help"
             "alpha"
@@ -246,28 +248,27 @@ in
     # +----------+
     plugins.toggleterm = {
       enable = true;
-      settings =
-        {
-          open_mapping = "[[<C-\\>]]";
-          terminal_mappings = true;
-          insert_mappings = true;
-          direction = "float";
-          float_opts = {
-            border = "single";
-          };
-          shell = "sh";
-          size = ''
-            function (term)
-              if term.direction == "horizontal" then
-                return 15
-              elseif term.direction == "vertical" then
-                return math.min(120, math.max(vim.o.columns - 130, 35))
-              else
-                return 20
-              end
-            end
-          '';
+      settings = {
+        open_mapping = "[[<C-\\>]]";
+        terminal_mappings = true;
+        insert_mappings = true;
+        direction = "float";
+        float_opts = {
+          border = "single";
         };
+        shell = "sh";
+        size = ''
+          function (term)
+            if term.direction == "horizontal" then
+              return 15
+            elseif term.direction == "vertical" then
+              return math.min(120, math.max(vim.o.columns - 130, 35))
+            else
+              return 20
+            end
+          end
+        '';
+      };
     };
     # +-----+
     # | git |
@@ -329,6 +330,8 @@ in
         clangd.enable = true;
         lua-ls.enable = true;
         nixd.enable = true;
+        tsserver.enable = true;
+        ruff.enable = true;
       };
     };
     # +-----------+
@@ -385,8 +388,9 @@ in
     plugins.conform-nvim = {
       enable = true;
       formattersByFt = {
-        c = [ "clang-format" ];
-        cpp = [ "clang-format" ];
+        c = ["clang-format"];
+        cpp = ["clang-format"];
+        nix = ["alejandra"];
       };
       formatOnSave = {
         lspFallback = true;
@@ -396,13 +400,15 @@ in
     # +------------+
     # | completion |
     # +------------+
-    opts.completeopt = [ "menu" "menuone" "noselect" ];
+    opts.completeopt = ["menu" "menuone" "noselect"];
     plugins = {
       luasnip = {
         enable = true;
-        fromVscode = [{
-          paths = "~/dotfiles/data/luasnip";
-        }];
+        fromVscode = [
+          {
+            paths = "~/dotfiles/data/luasnip";
+          }
+        ];
       };
 
       lspkind = {
@@ -429,9 +435,9 @@ in
             "<CR>" = "cmp.mapping.confirm({ select = true })";
           };
           sources = [
-            { name = "path"; }
-            { name = "nvim_lsp"; }
-            { name = "luasnip"; }
+            {name = "path";}
+            {name = "nvim_lsp";}
+            {name = "luasnip";}
             {
               name = "buffer";
               option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
