@@ -1,7 +1,11 @@
 # Source code: https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/hyprland.nix
 # Example: https://github.com/spikespaz/dotfiles/tree/master/users/jacob/hyprland
-
-{ inputs, pkgs, color-scheme, ... }: {
+{
+  inputs,
+  pkgs,
+  color-scheme,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -50,7 +54,7 @@
       exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      # exec = 
+      # exec =
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
@@ -62,12 +66,12 @@
           kb_model =
           kb_options =
           kb_rules =
-          repeat_rate = 50 
-          repeat_delay = 200  
+          repeat_rate = 50
+          repeat_delay = 200
 
           follow_mouse = 1
           touchpad {
-              natural_scroll = yes 
+              natural_scroll = yes
           }
 
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
@@ -86,7 +90,7 @@
 
       decoration {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          rounding = 0 
+          rounding = 0
 
           blur {
               enabled = true
@@ -101,7 +105,7 @@
       }
 
       animations {
-          enabled = yes 
+          enabled = yes
 
           # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
           bezier = myBezier, 0.05, 0.9, 0.05, 1.05
@@ -123,21 +127,22 @@
 
       master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-          new_is_master = false 
+          new_is_master = false
           mfact = 0.5
       }
 
       gestures {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          workspace_swipe = on 
+          workspace_swipe = on
           workspace_swipe_cancel_ratio = 0.1
-          workspace_swipe_distance = 100 
+          workspace_swipe_distance = 100
       }
 
       plugin {
         overview {
           showNewWorkspace = false
           exitOnSwitch = true
+          autoDrag = false
 
           # theme
           workspaceBorderSize = 3
@@ -150,8 +155,8 @@
         hyprfocus {
           enabled = yes
           animate_floating = yes
-          animate_workspacechange = no 
-          focus_animation = shrink 
+          animate_workspacechange = no
+          focus_animation = shrink
           # Beziers for focus animations
           bezier = realsmooth, 0.28,0.29,.69,1.08
           # Flash settings
@@ -205,33 +210,33 @@
 
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      $mainMod = SUPER 
+      $mainMod = SUPER
 
       # See https://wiki.hyprland.org/Configuring/Binds/ for more
 
       # Start Applications
-      bind = $mainMod, Return, exec, alacritty 
-      bind = $mainMod SHIFT, Return, exec, $TERMINAL -e spawn_archlinux 
+      bind = $mainMod, Return, exec, alacritty
+      bind = $mainMod SHIFT, Return, exec, $TERMINAL -e spawn_archlinux
       bind = $mainMod, P, exec, tofi-drun
-      bind = $mainMod, E, exec, nautilus 
-      bind = $mainMod SHIFT, D, exec, dotfiles_picker 
-      bind = $mainMod SHIFT, N, exec, nord_color_picker 
-      # bind = $mainMod, Space, exec, set_language 
+      bind = $mainMod, E, exec, nautilus
+      bind = $mainMod SHIFT, D, exec, dotfiles_picker
+      bind = $mainMod SHIFT, N, exec, nord_color_picker
+      # bind = $mainMod, Space, exec, set_language
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
       bind = $mainMod, V, exec,  cliphist list | tofi --prompt-text "select clipboard:" --height=25% --horizontal=false --result-spacing=5 | cliphist decode | wl-copy
 
       bind = $mainMod, Z, layoutmsg, togglesplit
-      bind = $mainMod, F, togglefloating, 
-      bind = $mainMod SHIFT, C, killactive, 
+      bind = $mainMod, F, togglefloating,
+      bind = $mainMod SHIFT, C, killactive,
       bind = $mainMod, backslash, exec, dunstctl close-all
       # bind = $mainMod SHIFT, Q, exec, touch ~/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 
       # Media
       bindle=,XF86AudioRaiseVolume, exec, increase_volume
       bindle=,XF86AudioLowerVolume, exec, decrease_volume
-      bindle=,XF86AudioMute, exec, toggle_volume 
+      bindle=,XF86AudioMute, exec, toggle_volume
       bindle=$mainMod, F1, exec, sc_brightness_change decrease 5
       bindle=$mainMod, F2, exec, sc_brightness_change increase 5
 
@@ -309,7 +314,7 @@
       bind = $mainMod, j, movefocus, d
 
       # use reset to go back to the global submap
-      bind=,escape,submap,reset 
+      bind=,escape,submap,reset
 
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
@@ -328,7 +333,7 @@
       bind=$mainMod SHIFT, Q, exec, sc_prompt 'Do you want to exit?' 'systemctl --user stop hyprland.service'
 
       # use reset to go back to the global submap
-      bind=,escape,submap,reset 
+      bind=,escape,submap,reset
 
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
@@ -345,7 +350,7 @@
       bind=SHIFT,f,fakefullscreen
 
       # use reset to go back to the global submap
-      bind=,escape,submap,reset 
+      bind=,escape,submap,reset
 
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
@@ -353,22 +358,22 @@
       #---------------------------+
       # Start a scratchpad submap |
       #---------------------------+
-      bind = $mainMod, S, exec, sleep 1 && hyprctl dispatch submap reset 
+      bind = $mainMod, S, exec, sleep 1 && hyprctl dispatch submap reset
       bind = $mainMod, S, submap, scratchpad
       submap=scratchpad
 
       # sets repeatable binds for resizing the active window
-      bind = , m, exec, pypr toggle spotify 
-      bind = , m, submap,reset 
-      bind = , s, exec, pypr toggle signal 
-      bind = , s, submap,reset 
-      bind = , escape, submap, reset 
+      bind = , m, exec, pypr toggle spotify
+      bind = , m, submap,reset
+      bind = , s, exec, pypr toggle signal
+      bind = , s, submap,reset
+      bind = , escape, submap, reset
 
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
 
       # scratchpad
-      bind = $mainMod, Grave, exec, pypr toggle term 
+      bind = $mainMod, Grave, exec, pypr toggle term
       bind = $mainMod, c, exec, pypr toggle messenger
       bind = $mainMod, n, exec, pypr toggle obsidian
 
