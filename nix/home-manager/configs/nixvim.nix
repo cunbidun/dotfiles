@@ -89,7 +89,7 @@ in {
         mode = "n";
         key = "<leader>e";
         action = "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>";
-        options.desc = "Toggle Tree";
+        options.desc = "Toggle ree";
       }
       {
         mode = "n";
@@ -303,7 +303,19 @@ in {
         ignore = false;
       };
       openOnSetup = true;
-      renderer.indentWidth = 1;
+      renderer = {
+        indentWidth = 1;
+        highlightGit = true;
+        icons = {
+          glyphs = {
+            git = {
+              untracked = icons.GitUntracked;
+              staged = icons.GitStaged;
+              unstaged = icons.GitUnstaged;
+            };
+          };
+        };
+      };
       diagnostics.enable = true;
       view = {
         width = 30;
@@ -332,6 +344,7 @@ in {
         nixd.enable = true;
         tsserver.enable = true;
         ruff.enable = true;
+        bashls.enable = true;
       };
     };
     # +-----------+
@@ -391,6 +404,7 @@ in {
         c = ["clang-format"];
         cpp = ["clang-format"];
         nix = ["alejandra"];
+        sh = ["shfmt"];
       };
       formatOnSave = {
         lspFallback = true;
