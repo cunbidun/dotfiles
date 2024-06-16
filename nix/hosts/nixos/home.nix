@@ -1,6 +1,11 @@
-{ pkgs, config, lib, project_root, inputs, ... }:
-
-let
+{
+  pkgs,
+  config,
+  lib,
+  project_root,
+  inputs,
+  ...
+}: let
   # mkDerivation signature: https://blog.ielliott.io/nix-docs/mkDerivation.html
   # {
   #   # Core Attributes
@@ -16,30 +21,30 @@ let
   #   # Nix shell
   #   shellHook?: 	string
   # }
-
   # runCommand implementation:
-  #  runCommand' = stdenv: name: env: buildCommand: 
-  #      stdenv.mkDerivation ({ 
-  #        inherit name buildCommand; 
-  #        passAsFile = [ "buildCommand" ]; 
-  #      } // env); 
+  #  runCommand' = stdenv: name: env: buildCommand:
+  #      stdenv.mkDerivation ({
+  #        inherit name buildCommand;
+  #        passAsFile = [ "buildCommand" ];
+  #      } // env);
   nixGLWrap = pkg:
     pkgs.stdenv.mkDerivation ({
-      pname = "${pkg.name}-nixgl-wrapper";
-      version = "${pkg.version}";
-      buildCommand = ''
-        mkdir $out
-        ln -s ${pkg}/* $out
-        rm $out/bin
-        mkdir $out/bin
-        for bin in ${pkg}/bin/*; do
-         wrapped_bin=$out/bin/$(basename $bin)
-         echo "exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL $bin  \"\$@\"" > $wrapped_bin
-         chmod +x $wrapped_bin
-        done
-      '';
-      passAsFile = [ "buildCommand" ];
-    } // { });
+        pname = "${pkg.name}-nixgl-wrapper";
+        version = "${pkg.version}";
+        buildCommand = ''
+          mkdir $out
+          ln -s ${pkg}/* $out
+          rm $out/bin
+          mkdir $out/bin
+          for bin in ${pkg}/bin/*; do
+           wrapped_bin=$out/bin/$(basename $bin)
+           echo "exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL $bin  \"\$@\"" > $wrapped_bin
+           chmod +x $wrapped_bin
+          done
+        '';
+        passAsFile = ["buildCommand"];
+      }
+      // {});
 
   color-scheme =
     import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
@@ -55,12 +60,10 @@ let
     lib = lib;
     project_root = project_root;
   };
-  swaylock-settings =
-    import "${project_root}/nix/home-manager/configs/swaylock.nix" {
-      color-scheme = color-scheme;
-    };
-in
-{
+  swaylock-settings = import "${project_root}/nix/home-manager/configs/swaylock.nix" {
+    color-scheme = color-scheme;
+  };
+in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
@@ -85,7 +88,8 @@ in
   home.username = "cunbidun";
   home.homeDirectory = "/home/cunbidun";
 
-  home.packages = package_config.default_packages
+  home.packages =
+    package_config.default_packages
     ++ package_config.linux_packages;
 
   services.xremap = {
@@ -97,82 +101,53 @@ in
           application:
             not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
           remap:
-            Alt_L: Ctrl_L 
+            Alt_L: Ctrl_L
     '';
   };
 
   # +--------------------+
-  # |    Linux Config    | 
+  # |    Linux Config    |
   # +--------------------+
   fonts.fontconfig.enable = true;
 
   home.file = {
-    ".local/bin/hyprland_wrapped".source =
-      "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-    ".config/hypr/pyprland.toml".source =
-      "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
-    ".config/hypr/hyprpaper.conf".source =
-      "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
-    ".config/hypr/hypridle.conf".source =
-      "${project_root}/window_manager/hyprland/linux/.config/hypr/hypridle.conf";
-    ".config/tofi/config".source =
-      "${project_root}/utilities/tofi/linux/.config/tofi/config";
+    ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
+    ".config/hypr/pyprland.toml".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
+    ".config/hypr/hyprpaper.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
+    ".config/hypr/hypridle.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hypridle.conf";
+    ".config/tofi/config".source = "${project_root}/utilities/tofi/linux/.config/tofi/config";
     ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
-    ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
-    ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
 
-    ".config/ranger/commands_full.py".source =
-      "${project_root}/utilities/ranger/commands_full.py";
-    ".config/ranger/commands.py".source =
-      "${project_root}/utilities/ranger/commands.py";
-    ".config/ranger/rc.conf".source =
-      "${project_root}/utilities/ranger/rc.conf";
-    ".config/ranger/rifle.conf".source =
-      "${project_root}/utilities/ranger/rifle.conf";
-    ".config/ranger/scope.sh".source =
-      "${project_root}/utilities/ranger/scope.sh";
-    ".config/activitywatch/aw-qt/aw-qt.toml".source =
-      "${project_root}/utilities/aw/aw-qt.toml";
+    ".config/ranger/commands_full.py".source = "${project_root}/utilities/ranger/commands_full.py";
+    ".config/ranger/commands.py".source = "${project_root}/utilities/ranger/commands.py";
+    ".config/ranger/rc.conf".source = "${project_root}/utilities/ranger/rc.conf";
+    ".config/ranger/rifle.conf".source = "${project_root}/utilities/ranger/rifle.conf";
+    ".config/ranger/scope.sh".source = "${project_root}/utilities/ranger/scope.sh";
+    ".config/activitywatch/aw-qt/aw-qt.toml".source = "${project_root}/utilities/aw/aw-qt.toml";
 
     ".config/swaylock/config".text = swaylock-settings.settings;
-    ".local/bin/colors-name.txt".source =
-      "${project_root}/local/linux/.local/bin/colors-name.txt";
-    ".local/bin/decrease_volume".source =
-      "${project_root}/local/linux/.local/bin/decrease_volume";
-    ".local/bin/dotfiles.txt".source =
-      "${project_root}/local/linux/.local/bin/dotfiles.txt";
-    ".local/bin/dotfiles_picker".source =
-      "${project_root}/local/linux/.local/bin/dotfiles_picker";
-    ".local/bin/increase_volume".source =
-      "${project_root}/local/linux/.local/bin/increase_volume";
-    ".local/bin/nord_color_picker".source =
-      "${project_root}/local/linux/.local/bin/nord_color_picker";
-    ".local/bin/sc_brightness_change".source =
-      "${project_root}/local/linux/.local/bin/sc_brightness_change";
-    ".local/bin/sc_get_brightness_percentage".source =
-      "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
-    ".local/bin/sc_hyprland_minimize".source =
-      "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
-    ".local/bin/sc_hyprland_show_minimize".source =
-      "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
-    ".local/bin/sc_window_picker".source =
-      "${project_root}/local/linux/.local/bin/sc_window_picker";
-    ".local/bin/toggle_volume".source =
-      "${project_root}/local/linux/.local/bin/toggle_volume";
-    ".local/bin/sc_prompt".source =
-      "${project_root}/local/linux/.local/bin/sc_prompt";
-    ".local/bin/sc_weather".source =
-      "${project_root}/local/linux/.local/bin/sc_weather";
-    ".local/bin/sc_weather_sync".source =
-      "${project_root}/local/linux/.local/bin/sc_weather_sync";
-    ".local/bin/spawn_archlinux".source =
-      "${project_root}/local/linux/.local/bin/spawn_archlinux";
-    ".local/bin/aw-awatcher".source =
-      "${project_root}/local/linux/.local/bin/aw-awatcher";
+    ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
+    ".local/bin/decrease_volume".source = "${project_root}/local/linux/.local/bin/decrease_volume";
+    ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
+    ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
+    ".local/bin/increase_volume".source = "${project_root}/local/linux/.local/bin/increase_volume";
+    ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
+    ".local/bin/sc_brightness_change".source = "${project_root}/local/linux/.local/bin/sc_brightness_change";
+    ".local/bin/sc_get_brightness_percentage".source = "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
+    ".local/bin/sc_hyprland_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
+    ".local/bin/sc_hyprland_show_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
+    ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";
+    ".local/bin/toggle_volume".source = "${project_root}/local/linux/.local/bin/toggle_volume";
+    ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
+    ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
+    ".local/bin/sc_weather_sync".source = "${project_root}/local/linux/.local/bin/sc_weather_sync";
+    ".local/bin/spawn_archlinux".source = "${project_root}/local/linux/.local/bin/spawn_archlinux";
+    ".local/bin/aw-awatcher".source = "${project_root}/local/linux/.local/bin/aw-awatcher";
 
     # Custom deskop files
-    ".local/share/applications/uxplay.desktop".source =
-      "${project_root}/utilities/desktops/uxplay.desktop";
+    ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
+    ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
+    ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
   };
 
   dconf = {
@@ -185,14 +160,14 @@ in
       #   exec = "alacritty";
       #   exec-arg = "-e";
       # };
-      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
+      "org/gnome/desktop/interface" = {color-scheme = "prefer-dark";};
     };
   };
 
   qt = {
     enable = true;
     platformTheme.name = "qtct";
-    style = { name = "adwaita-dark"; };
+    style = {name = "adwaita-dark";};
   };
 
   gtk = {
@@ -255,19 +230,18 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "application/pdf" = [ "org.gnome.Evince.desktop" ];
-      "image/jpeg" = [ "feh.desktop" ];
-      "image/png" = [ "feh.desktop" ];
-      "text/plain" = [ "nvim.desktop" ];
-      "inode/directory" = [ "org.gnome.nautilus.desktop" ];
+      "application/pdf" = ["org.gnome.Evince.desktop"];
+      "image/jpeg" = ["feh.desktop"];
+      "image/png" = ["feh.desktop"];
+      "text/plain" = ["nvim.desktop"];
+      "inode/directory" = ["org.gnome.nautilus.desktop"];
     };
   };
 
   systemd.user = systemd_config;
   home.sessionVariables = {
     # Setting this is to local the .desktop files
-    XDG_DATA_DIRS =
-      "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
+    XDG_DATA_DIRS = "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
     PICKER = "tofi";
     TERMINAL = "alacritty";
     GTK_THEME = "Adwaita-dark";
@@ -280,7 +254,7 @@ in
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-unikey fcitx5-gtk ];
+    fcitx5.addons = with pkgs; [fcitx5-unikey fcitx5-gtk];
   };
 
   # This value determines the Home Manager release that your
@@ -303,6 +277,6 @@ in
   programs.ags = {
     enable = true;
     # additional packages to add to gjs's runtime
-    extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
+    extraPackages = with pkgs; [gtksourceview webkitgtk accountsservice];
   };
 }

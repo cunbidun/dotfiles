@@ -22,6 +22,7 @@
     pkgs.newsboat # An RSS feed reader
     pkgs.syncthing # A continuous file synchronization program
     pkgs.alejandra # nix formatter
+    pkgs.shfmt # nix formatter
   ];
 
   linux_packages = [

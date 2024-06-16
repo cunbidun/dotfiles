@@ -1,10 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, pkgs, ... }:
-
 {
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -14,7 +16,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = [ "uinput" "i2c-dev" ];
+  boot.kernelModules = ["uinput" "i2c-dev"];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -54,7 +56,7 @@
   users.users.cunbidun = {
     isNormalUser = true;
     description = "Duy Pham";
-    extraGroups = [ "networkmanager" "wheel" "input" "i2c" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker"];
     packages = with pkgs; [
       swaylock-effects
       jdk17
@@ -130,7 +132,7 @@
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
-  security.pam.services.swaylock = { fprintAuth = false; };
+  security.pam.services.swaylock = {fprintAuth = false;};
   # rtkit is optional but recommended
   security.rtkit.enable = true;
   services.pipewire = {
@@ -152,7 +154,7 @@
     podman = {
       enable = true;
       # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings = { dns_enabled = true; };
+      defaultNetwork.settings = {dns_enabled = true;};
     };
     # * Post installation steps: https://nixos.wiki/wiki/WayDroid
     #   Fetch WayDroid images.
@@ -173,7 +175,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gtk];
     xdgOpenUsePortal = true;
   };
 
@@ -182,7 +184,7 @@
     enable = true;
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    polkitPolicyOwners = [ "cunbidun" ];
+    polkitPolicyOwners = ["cunbidun"];
   };
 
   hardware.i2c.enable = true;
@@ -199,11 +201,14 @@
     expat
   ];
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot =
-    true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
   # the following 3 options are for enable usb automount
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  # services.openssh.extraConfig = ''
+  #   ForceCommand systemd-inhibit --who="SSH session" --why="Active user" --what=idle --mode=block bash
+  # '';
 }
