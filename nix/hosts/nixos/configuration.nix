@@ -207,8 +207,4 @@
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
-
-  # services.openssh.extraConfig = ''
-  #   ForceCommand systemd-inhibit --who="SSH session" --why="Active user" --what=idle --mode=block bash
-  # '';
 }
