@@ -205,6 +205,11 @@
       windowrulev2 = stayfocused,class:^(tofi.*)$
       windowrulev2 = float,class:^(waydroid.com.*)$
 
+      # Competitive Programming
+      # Example of rule to prevent inhibit while doing Competitive Programming problems
+      # windowrulev2 = idleinhibit focus,title:(Competitive Programming)
+      # windowrulev2 = idleinhibit focus,title:^(.*Codeforces.*)$
+
       # DOTFILE Rules
       windowrulev2 = workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)
       windowrulev2 = workspace 8 silent,class:^(Steam)$
@@ -222,6 +227,7 @@
       bind = $mainMod, E, exec, nautilus
       bind = $mainMod SHIFT, D, exec, dotfiles_picker
       bind = $mainMod SHIFT, N, exec, nord_color_picker
+      bind = $mainMod, M, exec, ~/dotfiles/window_manager/hyprland/scripts/mode.sh
       # bind = $mainMod, Space, exec, set_language
 
       # Clipboard
@@ -294,12 +300,10 @@
       bind = $mainMod, mouse:274, togglefloating, # middle
       bindm = $mainMod, mouse:274, resizewindow
 
-      # will switch to a submap called resize
-      bind = $mainMod SHIFT,R,submap,resize
-
       #-------------------------------------+
       # will start a submap called "resize" |
       #-------------------------------------+
+      bind = $mainMod SHIFT,R,submap,resize
       submap=resize
 
       # sets repeatable binds for resizing the active window
@@ -320,15 +324,16 @@
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
 
-      # will switch to a submap called resize
-      bind = $mainMod CONTROL,S,submap,session
-
       #--------------------------------------+
       # will start a submap called "session" |
       #--------------------------------------+
+      bind = $mainMod CONTROL, S, exec, sleep 1 && hyprctl dispatch submap reset
+      bind = $mainMod CONTROL,S,submap,session
+
       submap=session
 
       # sets repeatable binds for resizing the active window
+      bind=,r,exec,hyprctl reload && notify-send -t 1000 'Hyprland reloaded'
       bind=,l,exec,loginctl lock-session
       bind=SHIFT,L,exec,sc_prompt 'Do you want to suspend?' 'sleep 0.6 && loginctl lock-session && sleep 1 && systemctl suspend -i'
       bind=$mainMod SHIFT, Q, exec, sc_prompt 'Do you want to exit?' 'systemctl --user stop hyprland.service'

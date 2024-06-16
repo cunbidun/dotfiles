@@ -16,6 +16,7 @@
     "bluetooth",
     "custom/brightness",
     "custom/weather",
+    "custom/mode",
     "tray",
     "clock"
   ],
@@ -88,15 +89,6 @@
     "format-disconnected": "Disconnected ⚠",
     "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui"
   },
-  "custom/language": {
-    "interval": "once",
-    "exec-if": "which sc_language_get",
-    "exec": "sc_language_get",
-    "return-type": "json",
-    "signal": 11,
-    "tooltip": false,
-    "format": "{}",
-  },
   "custom/weather": {
     "interval": "once",
     "exec-if": "which sc_weather",
@@ -115,5 +107,12 @@
     "signal": 16,
     "tooltip": false,
     "format": "BRT: {}%",
+  },
+  "custom/mode": {
+    "interval": "once",
+    "exec": "cat ${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/current_mode 2>/dev/null || echo 'normal'",
+    "signal": 17,
+    "tooltip": false,
+    "format": "MODE: {}",
   },
 }
