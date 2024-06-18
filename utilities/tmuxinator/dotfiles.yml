@@ -4,3 +4,6 @@ root: ~/dotfiles/
 windows:
   - editor:
     - $EDITOR 
+
+  - git:
+    - lazygit

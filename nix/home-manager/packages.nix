@@ -64,7 +64,7 @@
 
     # Browser
     (pkgs.google-chrome.override {
-      commandLineArgs = "--ozone-platform=wayland";
+      commandLineArgs = "--ozone-platform=wayland --enable-wayland-ime";
     })
 
     # Font
