@@ -49,15 +49,15 @@
         "sf-pro": "sf-pro"
       },
       "locked": {
-        "lastModified": 1718060794,
-        "narHash": "sha256-OWrQQzLx/Kpa+UeIjIhVLuIS69hR99j6F9+T4PStJP8=",
-        "owner": "cunbidun",
+        "lastModified": 1718062482,
+        "narHash": "sha256-bGWs6XRVgzm1Uagx/EAnz9wnMQVImR1ZlVpAy+SDXCw=",
+        "owner": "Lyndeno",
         "repo": "apple-fonts.nix",
-        "rev": "28373ea755b2ce026e2b163c80b3233664ef3ba4",
+        "rev": "eeb3521706bfe21206b1301ff8e0876defa1b6dd",
         "type": "github"
       },
       "original": {
-        "owner": "cunbidun",
+        "owner": "Lyndeno",
         "repo": "apple-fonts.nix",
         "type": "github"
       }
