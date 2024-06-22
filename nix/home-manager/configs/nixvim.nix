@@ -344,6 +344,7 @@ in {
         nixd.enable = true;
         tsserver.enable = true;
         ruff.enable = true;
+        pyright.enable = true;
         bashls.enable = true;
       };
     };
@@ -405,6 +406,7 @@ in {
         cpp = ["clang-format"];
         nix = ["alejandra"];
         sh = ["shfmt"];
+        py = ["black"];
       };
       formatOnSave = {
         lspFallback = true;

@@ -473,31 +473,6 @@
     ],
     "description": "sparse_table"
   },
-  "mint_nck": {
-    "prefix": "mint_nck",
-    "body": [
-      "template <int MOD> struct mint_nck {",
-      "  int N;",
-      "  vector<mint<MOD>> f, invf;",
-      "  mint_nck(int _n) : N(_n) {",
-      "    f.assign(N + 1, 0), invf.assign(N + 1, 0);",
-      "    f[0] = 1;",
-      "    for (int i = 1; i <= N; i++) {",
-      "      f[i] = f[i - 1] * i;",
-      "    }",
-      "    invf[N] = f[N].pow(MOD - 2);",
-      "    for (int i = N - 1; i >= 0; i--) {",
-      "      invf[i] = invf[i + 1] * (i + 1);",
-      "    }",
-      "  }",
-      "  mint<MOD> get(int n, int k) {",
-      "    assert(0 <= n && n <= N && 0 <= k && k <= N);",
-      "    return (n < k) ? 0 : f[n] * invf[k] * invf[n - k];",
-      "  }",
-      "};"
-    ],
-    "description": "mint_nck"
-  },
   "b_pow": {
     "prefix": "b_pow",
     "body": [
@@ -520,8 +495,7 @@
   "mint": {
     "prefix": "mint",
     "body": [
-      "template <typename T>",
-      "T mod_inv(T a, T m) {",
+      "template <typename T> T mod_inv(T a, T m) {",
       "  // assert(__gcd(a, m) == 1);",
       "  a %= m;",
       "  a = a < 0 ? a + m : a;",
@@ -535,8 +509,7 @@
       "  return vy < 0 ? m + vy : vy;",
       "}",
       "",
-      "template <int MOD>",
-      "struct mint {",
+      "template <int MOD> struct mint {",
       "private:",
       "  int v;",
       "  explicit operator int() const { return v; }",
@@ -610,6 +583,26 @@
       "  friend mint operator-(mint a, const mint &b) { return a -= b; }",
       "  friend mint operator*(mint a, const mint &b) { return a *= b; }",
       "  friend mint operator/(mint a, const mint &b) { return a /= b; }",
+      "};",
+      "",
+      "template <typename T> struct nCk {",
+      "  int N;",
+      "  vector<T> f, invf;",
+      "  nCk(int _n) : N(_n) {",
+      "    f.assign(N + 1, 0), invf.assign(N + 1, 0);",
+      "    f[0] = 1;",
+      "    for (int i = 1; i <= N; i++) {",
+      "      f[i] = f[i - 1] * i;",
+      "    }",
+      "    invf[N] = f[N].inv();",
+      "    for (int i = N - 1; i >= 0; i--) {",
+      "      invf[i] = invf[i + 1] * (i + 1);",
+      "    }",
+      "  }",
+      "  T get(int n, int k) {",
+      "    assert(0 <= n && n <= N && 0 <= k && k <= N);",
+      "    return (n < k) ? 0 : f[n] * invf[k] * invf[n - k];",
+      "  }",
       "};",
       ""
     ],
@@ -798,21 +791,5 @@
       ""
     ],
     "description": "trie_bit"
-  },
-  "Vec": {
-    "prefix": "Vec",
-    "body": [
-      "template <int D, typename T> struct Vec : public vector<Vec<D - 1, T>> {",
-      "  static_assert(D >= 1, \"Vector dimension must be greater than zero!\");",
-      "  template <typename... Args>",
-      "  Vec(int n = 0, Args... args)",
-      "      : vector<Vec<D - 1, T>>(n, Vec<D - 1, T>(args...)) {}",
-      "};",
-      "template <typename T> struct Vec<1, T> : public vector<T> {",
-      "  Vec(int n = 0, const T &val = T()) : vector<T>(n, val) {}",
-      "};",
-      ""
-    ],
-    "description": "Vec"
   }
 }

@@ -27,6 +27,9 @@
 
   linux_packages = [
     pkgs.nix-output-monitor
+    pkgs.devenv
+    pkgs.prismlauncher
+
     # Hyprland
     pkgs.waybar # A Wayland bar for Sway and Hyprland
     pkgs.hyprpaper # A wallpaper utility for Hyprland
@@ -64,7 +67,7 @@
 
     # Browser
     (pkgs.google-chrome.override {
-      commandLineArgs = "--ozone-platform=wayland --enable-wayland-ime";
+      commandLineArgs = "--ozone-platform=wayland";
     })
 
     # Font

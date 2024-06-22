@@ -13,7 +13,11 @@
     ./uxplay.nix
   ];
 
+  # devenv wants users to be in the trusted-users list so that they can access the /nix/store
+  nix.settings.trusted-users = ["root" "@wheel"];
+
   # Bootloader.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = ["uinput" "i2c-dev"];
