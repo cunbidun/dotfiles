@@ -6,52 +6,12 @@
   inputs,
   ...
 }: let
-  # mkDerivation signature: https://blog.ielliott.io/nix-docs/mkDerivation.html
-  # {
-  #   # Core Attributes
-  #   name: 	string
-  #   pname?: 	string
-  #   version?: 	string
-  #   src: 	path
-  #   # Building
-  #   buildInputs?: 	list[derivation]
-  #   buildPhase?: 	string
-  #   installPhase?: 	string
-  #   builder?: 	path
-  #   # Nix shell
-  #   shellHook?: 	string
-  # }
-  # runCommand implementation:
-  #  runCommand' = stdenv: name: env: buildCommand:
-  #      stdenv.mkDerivation ({
-  #        inherit name buildCommand;
-  #        passAsFile = [ "buildCommand" ];
-  #      } // env);
-  nixGLWrap = pkg:
-    pkgs.stdenv.mkDerivation ({
-        pname = "${pkg.name}-nixgl-wrapper";
-        version = "${pkg.version}";
-        buildCommand = ''
-          mkdir $out
-          ln -s ${pkg}/* $out
-          rm $out/bin
-          mkdir $out/bin
-          for bin in ${pkg}/bin/*; do
-           wrapped_bin=$out/bin/$(basename $bin)
-           echo "exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL $bin  \"\$@\"" > $wrapped_bin
-           chmod +x $wrapped_bin
-          done
-        '';
-        passAsFile = ["buildCommand"];
-      }
-      // {});
 
   color-scheme =
     import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
 
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
-    nixGLWrap = nixGLWrap;
     inputs = inputs;
   };
   systemd_config = import "${project_root}/nix/home-manager/systemd.nix" {

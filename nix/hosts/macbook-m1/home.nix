@@ -2,7 +2,6 @@
 let
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
-    nixGLWrap = pkg: pkg;
     inputs = inputs;
   };
   color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
