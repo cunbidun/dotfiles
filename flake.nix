@@ -20,7 +20,7 @@
     pyprland = {url = "github:hyprland-community/pyprland/2.2.20";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
+      url = "github:KZDKM/Hyprspace/8049b2794ca19d49320093426677d8c2911e7327";
       inputs.hyprland.follows = "hyprland";
     };
     hyprfocus = {

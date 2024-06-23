@@ -32,7 +32,7 @@
     };
 
     plugins = [
-      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus # currently not working for 0.40
     ];
     extraConfig = ''
@@ -288,7 +288,7 @@
       bind = $mainMod SHIFT, M, exec, sc_hyprland_minimize
 
       # Scroll through existing workspaces with mainMod + scroll
-      # bind = $mainMod, Tab, overview:toggle,
+      bind = $mainMod, Tab, overview:toggle,
 
       # Group
       bind = $mainMod, t, togglegroup
