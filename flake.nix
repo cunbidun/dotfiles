@@ -3,21 +3,13 @@
 
   inputs = {
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixpkgs-unstable";};
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    nix-darwin = { url = "github:LnL7/nix-darwin"; };
+    home-manager = { url = "github:nix-community/home-manager"; };
     xremap-flake = {url = "github:xremap/nix-flake";};
     nix-flatpak = {url = "github:gmodena/nix-flatpak";};
     ags = {url = "github:Aylur/ags";};
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-    };
+    nixvim = { url = "github:nix-community/nixvim"; };
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
 
     ############
