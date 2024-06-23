@@ -388,6 +388,27 @@
         "type": "github"
       }
     },
+    "hycov": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
+      "locked": {
+        "lastModified": 1717987845,
+        "narHash": "sha256-RMvZ7GXt1+lsoj695gWoK0zVuKIYPHJ84iR3Lr54Bq8=",
+        "owner": "DreamMaoMao",
+        "repo": "hycov",
+        "rev": "7d90c3c6160470fc4f1a4f89b45c5ebc36bf8e02",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DreamMaoMao",
+        "repo": "hycov",
+        "rev": "7d90c3c6160470fc4f1a4f89b45c5ebc36bf8e02",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -1197,6 +1218,7 @@
         "ags": "ags",
         "apple-fonts": "apple-fonts",
         "home-manager": "home-manager",
+        "hycov": "hycov",
         "hyprfocus": "hyprfocus",
         "hypridle": "hypridle",
         "hyprland": "hyprland",

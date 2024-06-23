@@ -211,4 +211,14 @@
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%a, %d %b %Y • %T' --greeting  'Welcome!' --asterisks --remember --cmd '$SHELL'";
+        user = "greeter";
+      };
+    };
+  };
 }

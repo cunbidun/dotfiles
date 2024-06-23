@@ -33,7 +33,8 @@
 
     plugins = [
       inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus # currently not working for 0.40
+      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      inputs.hycov.packages.${pkgs.system}.hycov
     ];
     extraConfig = ''
       #
@@ -177,9 +178,10 @@
         hycov {
           overview_gappo = 60 #gaps width from screen
           overview_gappi = 24 #gaps width from clients
-          hotarea_size = 10 #hotarea size in bottom left,10x10
+          hotarea_size = 10 # hotarea size in bottom left,10x10
           enable_hotarea = 1 # enable mouse cursor hotarea
           enable_alt_release_exit = 1
+          only_active_workspace = 1
         }
       }
 

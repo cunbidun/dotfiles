@@ -27,6 +27,10 @@
       url = "github:pyt0xic/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
+    hycov = {
+      url = "github:DreamMaoMao/hycov/7d90c3c6160470fc4f1a4f89b45c5ebc36bf8e02";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     ###############
     # nvim plugin #

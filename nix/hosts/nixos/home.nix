@@ -6,7 +6,6 @@
   inputs,
   ...
 }: let
-
   color-scheme =
     import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
 
