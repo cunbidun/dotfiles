@@ -1,6 +1,11 @@
 {
   description = "cunbidun's flake";
 
+  nixConfig = {
+    extra-substituters = ["https://hyprland.cachix.org"];
+    extra-trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
+
   inputs = {
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixpkgs-unstable";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
@@ -15,12 +20,12 @@
     ############
     # Hyprland #
     ############
-    hyprland = {url = "github:hyprwm/Hyprland/v0.40.0?submodules=1";};
+    hyprland = {url = "git+https://github.com/hyprwm/Hyprland?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
     pyprland = {url = "github:hyprland-community/pyprland/2.2.20";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     Hyprspace = {
-      url = "github:KZDKM/Hyprspace/8049b2794ca19d49320093426677d8c2911e7327";
+      url = "github:clague/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
     hyprfocus = {
@@ -28,7 +33,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     hycov = {
-      url = "github:DreamMaoMao/hycov/7d90c3c6160470fc4f1a4f89b45c5ebc36bf8e02";
+      url = "github:DreamMaoMao/hycov";
       inputs.hyprland.follows = "hyprland";
     };
 

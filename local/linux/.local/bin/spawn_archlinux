@@ -1,2 +1,0 @@
-#!/usr/bin/env sh 
-distrobox enter --root archlinux -- sh -c "PATH=/usr/sbin:/usr/bin:/sbin:/bin /bin/zsh"

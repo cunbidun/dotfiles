@@ -2,6 +2,7 @@
 # Example: https://github.com/spikespaz/dotfiles/tree/master/users/jacob/hyprland
 {
   inputs,
+  lib,
   pkgs,
   color-scheme,
   ...
@@ -17,6 +18,9 @@
         disable_hyprland_logo = true;
         focus_on_activate = true;
       };
+      debug = {
+        disable_logs = true;
+      };
       group = {
         groupbar = {
           font_family = "SFMono Nerd Font";
@@ -29,6 +33,39 @@
         "col.border_active" = "rgb(88c0d0)";
         "col.border_inactive" = "rgb(3b4252)";
       };
+
+      bindle = let
+        increase_volume = pkgs.writeShellScriptBin "increase_volume" ''
+          # Get the list of sinks and filter only the running ones
+          running_sinks=$(pamixer --list-sinks | awk -F '"' '/Running/ {print $2}')
+
+          # Loop through each running sink and increase the volume by 5%
+          for sink in $running_sinks; do
+            pamixer --sink $sink -i 5 --allow-boost
+          done
+        '';
+        decrease_volume = pkgs.writeShellScriptBin "increase_volume" ''
+          # Get the list of sinks and filter only the running ones
+          running_sinks=$(pamixer --list-sinks | awk -F '"' '/Running/ {print $2}')
+
+          # Loop through each running sink and increase the volume by 5%
+          for sink in $running_sinks; do
+            pamixer --sink $sink -d 5 --allow-boost
+          done
+        '';
+        toggle_volume = pkgs.writeShellScriptBin "toggle_volume" ''
+          pamixer -t;
+          if [ "$(pamixer --get-mute)" = true ]; then
+          	icon="[Muted] "
+          fi
+          vol="$icon$(pamixer --get-volume)"
+          notify-send --hint=string:x-dunst-stack-tag:volume "volume: $vol" -t 1000 -a "System"
+        '';
+      in [
+        ",XF86AudioRaiseVolume, exec, ${lib.getExe increase_volume}"
+        ",XF86AudioLowerVolume, exec, ${lib.getExe decrease_volume}"
+        ",XF86AudioMute, exec, ${lib.getExe toggle_volume}"
+      ];
     };
 
     plugins = [
@@ -36,6 +73,7 @@
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
       inputs.hycov.packages.${pkgs.system}.hycov
     ];
+
     extraConfig = ''
       #
       # Please note not all available settings / options are set here.
@@ -129,7 +167,6 @@
 
       master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-          new_is_master = false
           mfact = 0.5
       }
 
@@ -144,7 +181,7 @@
         overview {
           showNewWorkspace = false
           exitOnSwitch = true
-          autoDrag = false
+          autoDrag = true
 
           # theme
           workspaceBorderSize = 3
@@ -224,7 +261,6 @@
 
       # Start Applications
       bind = $mainMod, Return, exec, alacritty
-      bind = $mainMod SHIFT, Return, exec, $TERMINAL -e spawn_archlinux
       bind = $mainMod, P, exec, tofi-drun
       bind = $mainMod, E, exec, nautilus
       bind = $mainMod SHIFT, D, exec, dotfiles_picker
@@ -243,9 +279,6 @@
       # bind = $mainMod SHIFT, Q, exec, touch ~/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 
       # Media
-      bindle=,XF86AudioRaiseVolume, exec, increase_volume
-      bindle=,XF86AudioLowerVolume, exec, decrease_volume
-      bindle=,XF86AudioMute, exec, toggle_volume
       bindle=$mainMod, F1, exec, sc_brightness_change decrease 5
       bindle=$mainMod, F2, exec, sc_brightness_change increase 5
 

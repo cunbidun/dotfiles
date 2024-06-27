@@ -8,12 +8,6 @@ showweather() {
 	echo "$desc $temp°C"
 }
 
-case $BLOCK_BUTTON in
-1) setsid -f "$TERMINAL" -t "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e less -Srf "$weatherreport" ;;
-3) sc_weather_sync && showweather ;;
-6) "$TERMINAL" -t "editdwmblock" -o "window.dimensions.columns=160" -o "window.dimensions.lines=40" -e "$EDITOR" "$0" ;;
-esac
-
 # The test if our forcecast is updated to the day. If it isn't download a new
 # weather report from wttr.in with the above function.
 [ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||

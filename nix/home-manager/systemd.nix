@@ -4,7 +4,9 @@
   lib,
   project_root,
   ...
-}: {
+}: let
+  scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
+in {
   services = {
     waybar = {
       Unit = {
@@ -19,7 +21,7 @@
         WorkingDirectory = "%h";
         ExecStart = "${
           lib.getExe pkgs.waybar
-        } --config %h/dotfiles/window_manager/hyprland/linux/.config/waybar/config --style %h/dotfiles/window_manager/hyprland/linux/.config/waybar/style.css";
+        }";
         StandardOutput = "journal";
         StandardError = "journal";
       };
@@ -186,7 +188,7 @@
       Service = {
         Type = "oneshot";
         WorkingDirectory = "%h";
-        ExecStart = "${project_root}/local/linux/.local/bin/sc_weather_sync";
+        ExecStart = "${lib.getExe scripts.weather-sync}";
       };
       Install = {WantedBy = ["hyprland.service"];};
     };
@@ -222,7 +224,7 @@
         Requires = ["hyprland.service"];
       };
       Path = {
-        PathModified = "%h/dotfiles/window_manager/hyprland/linux/.config/waybar/";
+        PathModified = "%h/.config/waybar/";
       };
       Install = {WantedBy = ["hyprland.service"];};
     };

@@ -48,13 +48,11 @@
     pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
     pkgs.libnotify # A library for sending desktop notifications
     pkgs.ddcutil # A monitor control tool
-    pkgs.bluetuith # A Bluetooth manager (typo in the name)
     pkgs.quickemu # A quick emu launcher
 
     # Shell
     pkgs.obs-studio # A free and open-source video recording and live streaming software
     pkgs.lazygit # A simple terminal UI for git commands
-    pkgs.pulsemixer # A CLI mixer for PulseAudio
     pkgs.pamixer # A CLI mixer for PulseAudio
     pkgs.arandr # A UI for managing displays
     pkgs.vlc # A multimedia player

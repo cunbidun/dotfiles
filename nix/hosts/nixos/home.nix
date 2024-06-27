@@ -37,6 +37,12 @@ in {
       inputs = inputs;
       pkgs = pkgs;
       color-scheme = color-scheme;
+      lib = lib;
+    })
+    (import "${project_root}/nix/home-manager/configs/hyprland/waybar.nix" {
+      pkgs = pkgs;
+      lib = lib;
+      project_root = project_root;
     })
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
@@ -86,21 +92,16 @@ in {
 
     ".config/swaylock/config".text = swaylock-settings.settings;
     ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
-    ".local/bin/decrease_volume".source = "${project_root}/local/linux/.local/bin/decrease_volume";
     ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
     ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
-    ".local/bin/increase_volume".source = "${project_root}/local/linux/.local/bin/increase_volume";
     ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
     ".local/bin/sc_brightness_change".source = "${project_root}/local/linux/.local/bin/sc_brightness_change";
     ".local/bin/sc_get_brightness_percentage".source = "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
     ".local/bin/sc_hyprland_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
     ".local/bin/sc_hyprland_show_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
     ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";
-    ".local/bin/toggle_volume".source = "${project_root}/local/linux/.local/bin/toggle_volume";
     ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
     ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
-    ".local/bin/sc_weather_sync".source = "${project_root}/local/linux/.local/bin/sc_weather_sync";
-    ".local/bin/spawn_archlinux".source = "${project_root}/local/linux/.local/bin/spawn_archlinux";
     ".local/bin/aw-awatcher".source = "${project_root}/local/linux/.local/bin/aw-awatcher";
 
     # Custom deskop files

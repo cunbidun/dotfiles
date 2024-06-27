@@ -14,7 +14,7 @@ $HOME/.local/bin/sc_brightness_change
 $HOME/.local/bin/sc_prompt
 $HOME/.local/bin/nord_color_picker
 
-# hyprlnd
+# hyprland
 $HOME/dotfiles/window_manager/hyprland/linux/hyprland_wrapped
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/pyprland.toml
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
