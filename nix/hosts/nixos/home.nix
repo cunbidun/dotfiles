@@ -210,6 +210,7 @@ in {
     XCURSOR_THEME = "macOS-Monterey";
     XCURSOR_SIZE = 24;
     SUDO_ASKPASS = "${project_root}/local/linux/.local/bin/password-prompt";
+    EDITOR = "nvim";
   };
 
   i18n.inputMethod = {

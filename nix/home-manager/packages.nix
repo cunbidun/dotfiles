@@ -127,6 +127,6 @@
   ];
 
   mac_packages = [
-    # No packages defined for macOS
+    pkgs.lunarvim
   ];
 }

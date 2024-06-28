@@ -1,12 +1,17 @@
-{ pkgs, config, lib, project_root, inputs, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  project_root,
+  inputs,
+  ...
+}: let
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
     inputs = inputs;
   };
   color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
-in
-{
+in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
@@ -20,9 +25,22 @@ in
   home.username = "cunbidun";
   home.homeDirectory = "/Users/cunbidun";
 
-  home.packages = package_config.default_packages
-    ++ package_config.mac_packages;
+  home.packages = package_config.default_packages ++ package_config.mac_packages;
   home.stateVersion = "23.11";
+
+  home.sessionVariables = {
+    EDITOR = "lvim";
+  };
+
+  # +---------------------+
+  # | lvim configurations |
+  # +---------------------+
+  #######################
+  xdg.configFile."lvim/lua".source = "${project_root}/text_editor/lvim/lua";
+  xdg.configFile."lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
+  xdg.configFile."lvim/config.lua".source = "${project_root}/text_editor/lvim/config.lua";
+  xdg.configFile."lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
+  xdg.configFile."lvim/markdown-preview.vim".source = "${project_root}/text_editor/lvim/markdown-preview.vim";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
