@@ -56,20 +56,13 @@
     ...
   }: let
     project_root = "${builtins.toString ./.}";
-  in {
-    ##########################
-    # macbook configurations #
-    ##########################
-    darwinConfigurations."macbook-m1" = nix-darwin.lib.darwinSystem {
-      pkgs = import nixpkgs-unstable {
-        system = "aarch64-darwin";
-        config = {allowUnfree = true;};
+    mkPkgs = system:
+      import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
         overlays = [
-          # temporary overlay the older version of lvim
           (final: prev: {
             lunarvim = nixpkgs-stable.legacyPackages.${prev.system}.lunarvim;
-          })
-          (final: prev: {
             vimPlugins =
               prev.vimPlugins
               // {
@@ -81,18 +74,24 @@
           })
         ];
       };
+    mkHomeManagerModule = configPath: {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        users.cunbidun = import configPath;
+        extraSpecialArgs = {inherit project_root inputs;};
+      };
+    };
+  in {
+    ##########################
+    # macbook configurations #
+    ##########################
+    darwinConfigurations."macbook-m1" = nix-darwin.lib.darwinSystem {
+      pkgs = mkPkgs "aarch64-darwin";
       modules = [
         ./nix/hosts/macbook-m1/configuration.nix
         home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.cunbidun = import "${project_root}/nix/hosts/macbook-m1/home.nix";
-          home-manager.extraSpecialArgs = {
-            inherit project_root;
-            inherit inputs;
-          };
-        }
+        (mkHomeManagerModule "${project_root}/nix/hosts/macbook-m1/home.nix")
       ];
     };
 
@@ -102,42 +101,14 @@
     nixosConfigurations = {
       # build with sudo nixos-rebuild switch --flake ~/dotfiles#nixos
       nixos = nixpkgs-unstable.lib.nixosSystem {
-        pkgs = import nixpkgs-unstable {
-          system = "x86_64-linux";
-          overlays = [
-            # add easypick.nvim plugin
-            (final: prev: {
-              vimPlugins =
-                prev.vimPlugins
-                // {
-                  nvim-plugin-easypick = prev.vimUtils.buildVimPlugin {
-                    name = "easypick.nvim";
-                    src = inputs.nvim-plugin-easypick;
-                  };
-                };
-            })
-          ];
-          config = {
-            allowUnfree = true;
-            permittedInsecurePackages = ["electron-25.9.0"];
-          };
-        };
-        specialArgs = {
-          inherit inputs;
-        };
+        pkgs = mkPkgs "x86_64-linux";
+        specialArgs = {inherit inputs;};
         modules = [
           nix-flatpak.nixosModules.nix-flatpak
           ./nix/hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.cunbidun = import "${project_root}/nix/hosts/nixos/home.nix";
-            home-manager.extraSpecialArgs = {
-              inherit project_root;
-              inherit inputs;
-            };
-          }
+          (mkHomeManagerModule "${project_root}/nix/hosts/noxos/home.nix")
+          {nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];}
         ];
       };
     };
