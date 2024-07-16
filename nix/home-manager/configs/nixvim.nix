@@ -387,7 +387,7 @@ in {
     # +------------+
     plugins.treesitter = {
       enable = true;
-      indent = true;
+      settings.indent.enable = true;
       folding = true;
     };
     # +----------+

@@ -127,7 +127,6 @@
   ];
 
   mac_packages = [
-    pkgs.lunarvim
     pkgs.nix-output-monitor
   ];
 }

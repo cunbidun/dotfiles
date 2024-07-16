@@ -10,7 +10,9 @@
     nix-flatpak = {url = "github:gmodena/nix-flatpak";};
     ags = {url = "github:Aylur/ags";};
 
-    nixvim = {url = "github:nix-community/nixvim";};
+    nixvim = {
+      url = "github:nix-community/nixvim";
+    };
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
 
     # +----------+
@@ -81,6 +83,7 @@
     ##########################
     # macbook configurations #
     ##########################
+    # nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles#macbook-m1 |& nom
     darwinConfigurations."macbook-m1" = nix-darwin.lib.darwinSystem {
       pkgs = mkPkgs "aarch64-darwin";
       modules = [

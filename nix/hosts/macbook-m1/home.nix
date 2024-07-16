@@ -19,6 +19,7 @@ in {
       color-scheme = color-scheme;
     })
     "${project_root}/nix/home-manager/configs/fzf.nix"
+    "${project_root}/nix/home-manager/configs/nixvim.nix"
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -29,18 +30,8 @@ in {
   home.stateVersion = "23.11";
 
   home.sessionVariables = {
-    EDITOR = "lvim";
+    EDITOR = "nvim";
   };
-
-  # +---------------------+
-  # | lvim configurations |
-  # +---------------------+
-  #######################
-  xdg.configFile."lvim/lua".source = "${project_root}/text_editor/lvim/lua";
-  xdg.configFile."lvim/snippet".source = "${project_root}/text_editor/lvim/snippet";
-  xdg.configFile."lvim/config.lua".source = "${project_root}/text_editor/lvim/config.lua";
-  xdg.configFile."lvim/cp.vim".source = "${project_root}/text_editor/lvim/cp.vim";
-  xdg.configFile."lvim/markdown-preview.vim".source = "${project_root}/text_editor/lvim/markdown-preview.vim";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
