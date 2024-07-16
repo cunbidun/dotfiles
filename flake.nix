@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixpkgs-unstable";};
-    nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-23.11";};
+    nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-24.05";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {url = "github:nix-community/home-manager";};
     xremap-flake = {url = "github:xremap/nix-flake";};
@@ -57,7 +57,7 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            # lunarvim = nixpkgs-stable.legacyPackages.${prev.system}.lunarvim;
+            lunarvim = nixpkgs-stable.legacyPackages.${prev.system}.lunarvim;
             vimPlugins =
               prev.vimPlugins
               // {
