@@ -64,6 +64,8 @@
       "font-sauce-code-pro-nerd-font"
       "activitywatch"
       "unnaturalscrollwheels"
+      "steam"
+      "league-of-legends"
     ];
   };
 }

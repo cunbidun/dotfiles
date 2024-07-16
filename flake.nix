@@ -1,11 +1,6 @@
 {
   description = "cunbidun's flake";
 
-  nixConfig = {
-    extra-substituters = ["https://hyprland.cachix.org"];
-    extra-trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
-
   inputs = {
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixpkgs-unstable";};
     nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-23.11";};
@@ -62,7 +57,7 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            lunarvim = nixpkgs-stable.legacyPackages.${prev.system}.lunarvim;
+            # lunarvim = nixpkgs-stable.legacyPackages.${prev.system}.lunarvim;
             vimPlugins =
               prev.vimPlugins
               // {
