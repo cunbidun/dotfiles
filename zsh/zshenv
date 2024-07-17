@@ -1,19 +1,9 @@
 export VISUAL=$EDITOR
-
 export LANG=en_US.UTF-8
 export TERM="xterm-256color"
 export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
 
-# MacOS
-if [[ "$(uname)" == "Darwin" ]]; then
-  export TERMINAL=iterm2
-fi
-
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-
-if [ -f "$theme_autocompletion_file" ]; then
-  source "$theme_autocompletion_file"
-fi
 
 if [ ! -d "/etc/nixos" ]; then
   # if archlinux then source conda env

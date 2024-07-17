@@ -31,6 +31,7 @@ in {
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERMINAL = "iterm2";
   };
 
   # Let Home Manager install and manage itself.

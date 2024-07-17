@@ -17,12 +17,7 @@
       cat = "bat";
       tree = "tree -a";
     };
-    initExtra = let
-      iterm2-shell-integration = builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/gnachman/iTerm2/90626bbb104f1ca1f0ed73aff57edf7608ec5f29/Resources/shell_integration/iterm2_shell_integration.zsh";
-        sha256 = "sha256:1xk6kx5kdn5wbqgx2f63vnafhkynlxnlshxrapkwkd9zf2531bqa";
-      };
-    in ''
+    initExtra = ''
       . $HOME/dotfiles/zsh/zshenv
       . $HOME/dotfiles/zsh/zshfunctions
       . $HOME/dotfiles/zsh/zshvim
@@ -32,10 +27,6 @@
       export BAT_THEME="${color-scheme.bat_theme}"
       export BAT_OPTS="--color always"
       export FZF_DEFAULT_OPTS="${color-scheme.fzf_default_opts}"
-
-      if [[ "$(uname)" == "Darwin" ]]; then
-        source ${iterm2-shell-integration}
-      fi
     '';
   };
 }
