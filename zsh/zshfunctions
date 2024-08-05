@@ -5,39 +5,3 @@ gitpush() {
   CURRENT_BRANCH="${1:-$CURRENT_BRANCH}"
   git push origin --delete $CURRENT_BRANCH && git push --set-upstream origin $CURRENT_BRANCH
 }
-
-change_waybar_theme() {
-	theme=${1:-nord}
-	file_path=$HOME/dotfiles/themes/$theme/waybar
-	if [ ! -f "$file_path" ]; then
-		echo "err: file $file_path not found!"
-    return 1
-	fi
-	notify-send -t 3000 "waybar theme" "changing theme to $theme"
-  sed -e "/\* begin_theme \*/,/\* end_theme \*/c\/\* begin_theme \*/\n$(sed -e 's/$/ \\/' $file_path) \n/\* end_theme \*/" ~/.config/waybar/style.css -i
-}
-
-change_dunst_theme() {
-	theme=${1:-nord}
-	file_path=$HOME/dotfiles/themes/$theme/dunst
-	if [ ! -f "$file_path" ]; then
-		echo "err: file $file_path not found!"
-    return 1
-	fi
-	sed -e "/#+begin_theme/,/#+end_theme/c\#+begin_theme\n$(sed -e 's/$/ \\/' $file_path) \n#+end_theme" ~/.config/dunst/dunstrc -i
-  kill -9 $(pgrep dunst) || true
-  nohup dunst >/dev/null 2>&1 &
-  sleep 0.5
-	notify-send -t 3000 "dunst theme" "changing theme to $theme"
-}
-
-change_tofi_theme() {
-	theme=${1:-nord}
-	file_path=$HOME/dotfiles/themes/$theme/tofi
-	if [ ! -f "$file_path" ]; then
-		echo "err: file $file_path not found!"
-    return 1
-	fi
-	notify-send -t 3000 "tofi theme" "changing theme to $theme"
-	sed -e "/#+begin_theme/,/#+end_theme/c\#+begin_theme\n$(sed -e 's/$/ \\/' $file_path) \n#+end_theme" ~/.config/tofi/config -i
-}
