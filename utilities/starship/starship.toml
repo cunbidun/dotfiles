@@ -4,17 +4,25 @@
 palette = 'vscode-dark'
 # Use custom format
 format = '''
-[┌─╼\[$username@$hostname\](╾─╼\[$status\])╾─╼\[$time\]](frame)
+[┌─╼\[$username@$hostname\](╾─╼(\[$status\])(\[$jobs\]))╾─╼\[$time\]](frame)
 [└─╼\[$directory\]](frame)
-([ ╰╼\[$git_branch$git_status$git_state\]╾─╼\[${custom.git_remote}\]](frame))
-([ ╰╼\[${custom.git_commit_message}\]╾─╼\[$git_commit\]╾─╼\[${custom.git_commit_time}\]](frame))
-▶ $python
+([ ╰╼(\[$git_branch\])(╾─╼$git_status)(╾─╼\[$git_state\])(╾─╼\[${custom.git_remote}\])](frame))${custom.line_break}([ ╰╼\[${custom.git_commit_message}\]╾─╼$git_commit╾─╼\[${custom.git_commit_time}\]](frame))${custom.line_break}▶ $python$conda
 '''
+
+[conda]
+ignore_base = false
+format = '[\($environment\)]($style)'
+style = 'green'
 
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style)"
 truncate_to_repo = false
 truncation_length = 100  # no truncate effectively
+style = "blue"
+
+[jobs]
+number_threshold = 1
+format = "[$number]($style)"
 style = "blue"
 
 [hostname]
@@ -28,27 +36,29 @@ always_show_remote = true
 style = "green"
 
 [git_commit]
-format = "[$hash]($style)( [│](bright_frame) [$tag](green))"
+commit_hash_length = 50
+format = '''\[[$hash]($style)\](\[[$tag](green)\])'''
 only_detached = false
 style = "cyan"
 tag_disabled = false
 tag_symbol = ""
 
 [git_state]
-format = "|[$state( $progress_current/$progress_total)]($style)"
+format = "[$state( $progress_current/$progress_total)]($style)"
 style = "yellow"
 
 [git_status]
-modified = '*${count}'
+untracked = "?${count}"
+modified = '[*${count}](yellow)'
 deleted = "✘${count}"
 conflicted = 'C'
 stashed = "S"
-diverged = "D+${ahead_count}-${behind_count}"
+diverged = "[D+${ahead_count}-${behind_count}](red)"
 up_to_date = '='
-staged = "+${count}"
+staged = "[+${count}](green)"
 ahead = '+${count}'
 behind = '-${count}'
-format ='''( [$all_status]($style))( [u$ahead_behind](white))'''
+format ='''(\[[$all_status]($style)\])(\[[[u](blue)$ahead_behind](white)\])'''
 style = "red"
 
 [status]
@@ -59,10 +69,11 @@ style = "red"
 [time]
 format = "[$time]($style)"
 style = "blue"
-disabled = false 
+disabled = false
 
 [python]
-format = "[${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
+format = '[${pyenv_prefix}(${version} )]($style)[(\($virtualenv\) )]($style)'
+style = 'yellow'
 
 [username]
 show_always = true
@@ -82,6 +93,14 @@ require_repo = true
 when = true
 format = "[$output]($style)"
 style = "white"
+
+# Configure the custom line_break module
+[custom.line_break]
+command = "echo ''"
+require_repo = true
+when = true
+format = "\n"
+
 
 # Custom module to display the last Git commit time
 [custom.git_commit_time]
@@ -119,8 +138,8 @@ bright_frame = '#4c566a'
 white = '#e5e5e5'
 blue = "#569CD6"
 cyan = "#4EC9B0"
-green = "#6A9955"
+green = "#77d231"
 red = "#F44747"
 orange = "#CE9178"
-yellow = "#DCDCAA"
+yellow = "#F5F556"
 purple = "#C586C0"
