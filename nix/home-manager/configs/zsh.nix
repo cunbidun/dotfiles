@@ -21,8 +21,13 @@
       . $HOME/dotfiles/zsh/zshenv
       . $HOME/dotfiles/zsh/zshfunctions
       . $HOME/dotfiles/zsh/zshvim
-      . $HOME/dotfiles/zsh/zshpath
-      # . $HOME/dotfiles/zsh/zshtheme
+
+      # adding important bin to bash
+      export PATH=$PATH:$HOME/.scripts/bin
+      export PATH=$PATH:$HOME/.local/bin
+      export PATH=$PATH:$HOME/.cargo/bin
+
+      [ -d "/snap/bin" ] && export PATH=$PATH:/snap/bin
       export BAT_STYLE="plain"
       export BAT_THEME="${color-scheme.bat_theme}"
       export BAT_OPTS="--color always"
