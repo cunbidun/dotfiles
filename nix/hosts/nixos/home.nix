@@ -103,6 +103,7 @@ in {
     ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
     ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
     ".local/bin/aw-awatcher".source = "${project_root}/local/linux/.local/bin/aw-awatcher";
+    ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
 
     # Custom deskop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";

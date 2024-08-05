@@ -467,9 +467,12 @@ in {
     # +-----------+
     plugins.which-key = {
       enable = true;
-      registrations = {
-        "<leader>c" = "Competitive Programming";
-      };
+      settings.spec = [
+        {
+          __unkeyed-1 = "<leader>c";
+          desc = "Competitive Programming";
+        }
+      ];
     };
     plugins.project-nvim = {
       enable = true;

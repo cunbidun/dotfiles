@@ -1,0 +1,126 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = 'vscode-dark'
+# Use custom format
+format = '''
+[┌─╼\[$username@$hostname\](╾─╼\[$status\])╾─╼\[$time\]](frame)
+[└─╼\[$directory\]](frame)
+[( ╰╼\[$git_branch$git_status$git_state\])(╾─╼\[${custom.git_remote}\])](frame)
+[( ╰╼\[${custom.git_commit_message}\])(╾─╼\[$git_commit\])(╾─╼\[${custom.git_commit_time}\])](frame)
+▶ $python
+'''
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style)"
+truncate_to_repo = false
+truncation_length = 100  # no truncate effectively
+style = "blue"
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+style = "blue"
+
+[git_branch]
+format ="[$branch]($style)"
+always_show_remote = true
+style = "green"
+
+[git_commit]
+format = "[$hash]($style)( [│](bright_frame) [$tag](green))"
+only_detached = false
+style = "cyan"
+tag_disabled = false
+tag_symbol = ""
+
+[git_state]
+format = "|[$state( $progress_current/$progress_total)]($style)"
+style = "yellow"
+
+[git_status]
+modified = '*${count}'
+deleted = "✘${count}"
+conflicted = 'C'
+stashed = "S"
+diverged = "D+${ahead_count}-${behind_count}"
+up_to_date = '='
+staged = "+${count}"
+ahead = '+${count}'
+behind = '-${count}'
+format ='''( [$all_status]($style))( [u$ahead_behind](white))'''
+style = "red"
+
+[status]
+disabled = false
+format = '''[$status]($style)'''
+style = "red"
+
+[time]
+format = "[$time]($style)"
+style = "blue"
+disabled = false 
+
+[python]
+format = "[${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
+
+[username]
+show_always = true
+format ="[$user]($style)"
+style_user = "blue"
+style_root = "red bold"
+
+# Custom module to display the remote origin and remote branch
+[custom.git_remote]
+command = """
+remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+if [ -n "$remote_branch" ]; then
+  echo "$remote_branch"
+fi
+"""
+require_repo = true
+when = true
+format = "[$output]($style)"
+style = "white"
+
+# Custom module to display the last Git commit time
+[custom.git_commit_time]
+command = """
+git log -1 --format=%cd --date=format-local:'%Y-%m-%d %H:%M:%S' 2>/dev/null
+"""
+require_repo = true
+when = true
+format = "[$output]($style)"
+style = "cyan"
+
+# Custom module to display the last Git commit message
+[custom.git_commit_message]
+command = """
+git log -1 --format=%s 2>/dev/null
+"""
+require_repo = true
+when = true
+format = "[$output]($style)"
+style = "cyan"
+
+[palettes.nord]
+blue = '#81a1c1'
+red = '#bf616a'
+green = '#a3be8c'
+yellow = '#ebcb8b'
+frame = '#434c5e'
+bright_frame = '#4c566a'
+cyan = '#88c0d0'
+white = '#eceff4'
+
+[palettes.vscode-dark]
+frame = '#434c5e'
+bright_frame = '#4c566a'
+white = '#e5e5e5'
+blue = "#569CD6"
+cyan = "#4EC9B0"
+green = "#6A9955"
+red = "#F44747"
+orange = "#CE9178"
+yellow = "#DCDCAA"
+purple = "#C586C0"
