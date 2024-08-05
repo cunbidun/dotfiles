@@ -6,8 +6,8 @@ palette = 'vscode-dark'
 format = '''
 [┌─╼\[$username@$hostname\](╾─╼\[$status\])╾─╼\[$time\]](frame)
 [└─╼\[$directory\]](frame)
-[( ╰╼\[$git_branch$git_status$git_state\])(╾─╼\[${custom.git_remote}\])](frame)
-[( ╰╼\[${custom.git_commit_message}\])(╾─╼\[$git_commit\])(╾─╼\[${custom.git_commit_time}\])](frame)
+([ ╰╼\[$git_branch$git_status$git_state\]╾─╼\[${custom.git_remote}\]](frame))
+([ ╰╼\[${custom.git_commit_message}\]╾─╼\[$git_commit\]╾─╼\[${custom.git_commit_time}\]](frame))
 ▶ $python
 '''
 
