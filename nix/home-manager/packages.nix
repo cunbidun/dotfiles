@@ -22,6 +22,8 @@
     pkgs.syncthing # A continuous file synchronization program
     pkgs.alejandra # nix formatter
     pkgs.shfmt # nix formatter
+    pkgs.ripgrep
+    pkgs.starship
   ];
 
   linux_packages = [
@@ -128,5 +130,6 @@
 
   mac_packages = [
     pkgs.nix-output-monitor
+    pkgs.fswatch
   ];
 }

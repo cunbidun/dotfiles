@@ -66,6 +66,7 @@
       "unnaturalscrollwheels"
       "steam"
       "league-of-legends"
+      "netnewswire"
     ];
   };
 }
