@@ -55,18 +55,31 @@
       "firefox"
       "signal"
       "messenger"
-      "rectangle"
       "obsidian"
       "syncthing"
       "discord"
-      "flux"
       "monitorcontrol"
       "font-sauce-code-pro-nerd-font"
       "activitywatch"
       "unnaturalscrollwheels"
       "steam"
       "league-of-legends"
+      "nikitabobko/tap/aerospace"
       "netnewswire"
+      "raycast"
     ];
   };
+  system.defaults.dock = {
+    autohide = true;
+  };
+
+  # from
+  # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
+  # If you configure some of your MacOS preferences via nix-darwin and then activate your system,
+  # you’ll find that some of them don’t take effect until you logout or restart your system.
+  # This option fixes that
+  system.activationScripts.postUserActivation.text = ''
+    # Following line should allow us to avoid a logout/login cycle
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  '';
 }

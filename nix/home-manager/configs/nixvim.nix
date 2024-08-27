@@ -507,7 +507,7 @@ in {
           vim.cmd(string.format("%sbdelete!", buf_id[1]))
         end
 
-        vim.cmd(string.format("TermExec direction=vertical cmd='%s'", command))
+        vim.cmd(string.format("TermExec cmd='%s'", command))
       end
 
       vim.api.nvim_create_user_command('Runscript', function()

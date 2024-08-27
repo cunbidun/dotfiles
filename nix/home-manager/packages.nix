@@ -24,6 +24,7 @@
     pkgs.shfmt # nix formatter
     pkgs.ripgrep
     pkgs.starship
+    pkgs.lean4
   ];
 
   linux_packages = [
