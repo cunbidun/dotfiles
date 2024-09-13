@@ -408,9 +408,11 @@ in {
         sh = ["shfmt"];
         py = ["black"];
       };
-      formatOnSave = {
-        lspFallback = true;
-        timeoutMs = 500;
+      settings = {
+        format_on_save = {
+          lspFallback = true;
+          timeoutMs = 500;
+        };
       };
     };
     # +------------+
