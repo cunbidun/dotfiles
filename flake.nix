@@ -22,16 +22,8 @@
     hypridle = {url = "github:hyprwm/hypridle";};
     pyprland = {url = "github:hyprland-community/pyprland/2.2.20";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
-    Hyprspace = {
-      url = "github:clague/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
     hyprfocus = {
       url = "github:pyt0xic/hyprfocus";
-      inputs.hyprland.follows = "hyprland";
-    };
-    hycov = {
-      url = "github:DreamMaoMao/hycov";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -105,8 +97,7 @@
           nix-flatpak.nixosModules.nix-flatpak
           ./nix/hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
-          (mkHomeManagerModule "${project_root}/nix/hosts/noxos/home.nix")
-          {nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];}
+          (mkHomeManagerModule "${project_root}/nix/hosts/nixos/home.nix")
         ];
       };
     };

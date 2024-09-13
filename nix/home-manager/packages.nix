@@ -46,6 +46,7 @@
     pkgs.wev # An event daemon for Wayland
     inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop # Hyprland contrib package for hyprprop
     #pkgs.espanso-wayland # Text expander for Wayland (commented out)
+    pkgs.firefox
 
     # System
     pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
@@ -91,10 +92,10 @@
 
     ######## # Util ########
     # GUI File manager
-    pkgs.gnome.dconf-editor # GNOME's dconf editor
-    pkgs.gnome.nautilus # GNOME's file manager
-    pkgs.gnome.sushi # GNOME's preview utility
-    pkgs.gnome.file-roller # GNOME's archive manager
+    pkgs.dconf-editor # GNOME's dconf editor
+    pkgs.nautilus # GNOME's file manager
+    pkgs.sushi # GNOME's preview utility
+    pkgs.file-roller # GNOME's archive manager
     pkgs.gnome3.gvfs # GNOME's virtual file system
     pkgs.djvulibre
 

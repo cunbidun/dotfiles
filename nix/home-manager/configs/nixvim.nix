@@ -240,7 +240,7 @@ in {
     # +-------------+
     plugins.lualine = {
       enable = true;
-      globalstatus = true;
+      settings.options.globalstatus = true;
     };
 
     # +----------+
@@ -342,7 +342,6 @@ in {
         clangd.enable = true;
         lua-ls.enable = true;
         nixd.enable = true;
-        tsserver.enable = true;
         ruff.enable = true;
         pyright.enable = true;
         bashls.enable = true;
@@ -401,7 +400,7 @@ in {
     # +-----------+
     plugins.conform-nvim = {
       enable = true;
-      formattersByFt = {
+      settings.formattersByFt = {
         c = ["clang-format"];
         cpp = ["clang-format"];
         nix = ["alejandra"];

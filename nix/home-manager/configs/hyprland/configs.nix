@@ -69,9 +69,7 @@
     };
 
     plugins = [
-      inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      inputs.hycov.packages.${pkgs.system}.hycov
     ];
 
     extraConfig = ''
@@ -178,19 +176,6 @@
       }
 
       plugin {
-        overview {
-          showNewWorkspace = false
-          exitOnSwitch = true
-          autoDrag = true
-
-          # theme
-          workspaceBorderSize = 3
-          workspaceActiveBorder = rgb(88c0d0)
-          panelColor = rgba(00000099)
-          panelHeight = 175
-          workspaceMargin = 25
-        }
-
         hyprfocus {
           enabled = yes
           animate_floating = yes
@@ -210,15 +195,6 @@
               out_bezier = realsmooth
               out_speed = 2
           }
-        }
-
-        hycov {
-          overview_gappo = 60 #gaps width from screen
-          overview_gappi = 24 #gaps width from clients
-          hotarea_size = 10 # hotarea size in bottom left,10x10
-          enable_hotarea = 1 # enable mouse cursor hotarea
-          enable_alt_release_exit = 1
-          only_active_workspace = 1
         }
       }
 
@@ -272,7 +248,7 @@
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
       bind = $mainMod, V, exec,  cliphist list | tofi --prompt-text "select clipboard:" --height=25% --horizontal=false --result-spacing=5 | cliphist decode | wl-copy
 
-      bind = $mainMod, Z, layoutmsg, togglesplit
+      bind = $mainMod, slash, layoutmsg, togglesplit
       bind = $mainMod, F, togglefloating,
       bind = $mainMod SHIFT, C, killactive,
       bind = $mainMod, backslash, exec, dunstctl close-all
@@ -323,7 +299,7 @@
       bind = $mainMod SHIFT, M, exec, sc_hyprland_minimize
 
       # Scroll through existing workspaces with mainMod + scroll
-      bind = $mainMod, Tab, overview:toggle,
+      # bind = $mainMod, Tab, overview:toggle,
 
       # Group
       bind = $mainMod, t, togglegroup
@@ -388,7 +364,6 @@
       # sets repeatable binds for resizing the active window
       bind=,f,fullscreen
       bind=,s,pin
-      bind=SHIFT,f,fakefullscreen
 
       # use reset to go back to the global submap
       bind=,escape,submap,reset
