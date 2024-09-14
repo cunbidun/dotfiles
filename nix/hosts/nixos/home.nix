@@ -46,6 +46,7 @@ in {
     })
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
+    inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -83,11 +84,6 @@ in {
     ".config/tofi/config".source = "${project_root}/utilities/tofi/linux/.config/tofi/config";
     ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
 
-    ".config/ranger/commands_full.py".source = "${project_root}/utilities/ranger/commands_full.py";
-    ".config/ranger/commands.py".source = "${project_root}/utilities/ranger/commands.py";
-    ".config/ranger/rc.conf".source = "${project_root}/utilities/ranger/rc.conf";
-    ".config/ranger/rifle.conf".source = "${project_root}/utilities/ranger/rifle.conf";
-    ".config/ranger/scope.sh".source = "${project_root}/utilities/ranger/scope.sh";
     ".config/activitywatch/aw-qt/aw-qt.toml".source = "${project_root}/utilities/aw/aw-qt.toml";
 
     ".config/swaylock/config".text = swaylock-settings.settings;
@@ -114,13 +110,6 @@ in {
   dconf = {
     enable = true;
     settings = {
-      # "org/nemo/preferences" = {
-      #   show-hidden-files = true;
-      # };
-      # "org/cinnamon/desktop/default-applications/terminal" = {
-      #   exec = "alacritty";
-      #   exec-arg = "-e";
-      # };
       "org/gnome/desktop/interface" = {color-scheme = "prefer-dark";};
     };
   };
@@ -141,23 +130,6 @@ in {
         gtk-xft-hintstyle = "hintfull";
         gtk-xft-rgba = "none";
       };
-      extraCss = ''
-        /* Remove rounded corners */
-        .titlebar,
-        .titlebar .background,
-        decoration,
-        window,
-        window.background
-        {
-            border-radius: 0;
-        }
-
-        /* Remove csd shadows */
-        decoration, decoration:backdrop
-        {
-            box-shadow: none;
-        }
-      '';
       bookmarks = [
         "file:///home/cunbidun/Downloads"
         "file:///home/cunbidun/competitive_programming/output"
@@ -177,20 +149,17 @@ in {
       name = "Adwaita-dark";
       package = pkgs.gnome-themes-extra;
     };
-    cursorTheme = {
-      package = pkgs.apple-cursor;
-      name = "macOS-Monterey";
-      size = 24;
-    };
     iconTheme = {
       package = pkgs.papirus-nord;
       name = "Papirus-Dark";
     };
   };
-
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      "text/html" = "firefox.desktop";  # Change to your preferred browser's .desktop entry
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
       "application/pdf" = ["org.gnome.Evince.desktop"];
       "image/jpeg" = ["feh.desktop"];
       "image/png" = ["feh.desktop"];
@@ -208,9 +177,6 @@ in {
     GTK_THEME = "Adwaita-dark";
     QT_QTA_PLATFORMTHEME = "qt5ct";
     GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
-    XCURSOR_THEME = "macOS-Monterey";
-    XCURSOR_SIZE = 24;
-    SUDO_ASKPASS = "${project_root}/local/linux/.local/bin/password-prompt";
     EDITOR = "nvim";
   };
 
@@ -218,16 +184,6 @@ in {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [fcitx5-unikey fcitx5-gtk];
   };
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "23.11";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -241,4 +197,22 @@ in {
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [gtksourceview webkitgtk accountsservice];
   };
+  home.pointerCursor = {
+    # https://github.com/phisch/phinger-cursors
+    name = "phinger-cursors-dark";
+    package = pkgs.phinger-cursors;
+    size = 24;
+    gtk.enable = true;
+  };
+  programs.hyprcursor-phinger.enable = true;
+
+  # This value determines the Home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new Home Manager release introduces backwards
+  # incompatible changes.
+  #
+  # You can update Home Manager without changing this value. See
+  # the Home Manager release notes for a list of state version
+  # changes in each release.
+  home.stateVersion = "23.11";
 }

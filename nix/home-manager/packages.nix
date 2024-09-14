@@ -100,7 +100,6 @@
     pkgs.djvulibre
 
     # CLI File manager
-    pkgs.ranger # A console file manager
     pkgs.ueberzugpp # A command-line UI library for image previews
     pkgs.evince # A document viewer
     pkgs.dunst # A lightweight notification daemon

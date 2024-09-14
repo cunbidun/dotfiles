@@ -89,7 +89,8 @@
       exec-once = wl-paste --type text --watch cliphist store #Stores only text data
       exec-once = wl-paste --type image --watch cliphist store #Stores only image data
       exec-once = systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE
-      # exec-once = systemctl --user restart dunst.service
+
+      env = HYPRCURSOR_THEME,hyprcursor-phinger
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       # exec =

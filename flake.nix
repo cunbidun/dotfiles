@@ -34,6 +34,7 @@
       url = "github:axkirillov/easypick.nvim";
       flake = false;
     };
+    hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
   };
 
   outputs = inputs @ {

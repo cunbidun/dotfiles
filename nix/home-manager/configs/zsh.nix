@@ -12,7 +12,6 @@
       cdnote = "cd $HOME/note";
       s = "source $HOME/.zshrc";
       CP = "$HOME/competitive_programming/";
-      r = "ranger";
       ls = "exa -la";
       cat = "bat";
       tree = "tree -a";
