@@ -63,15 +63,12 @@
 
     # Text editor
     pkgs.onlyoffice-bin # An office suite
-    pkgs.vscode # Visual Studio Code
     pkgs.pdfgrep # A tool to search text in PDF files
 
     pkgs.adw-gtk3
 
     # Browser
-    (pkgs.google-chrome.override {
-      commandLineArgs = "--ozone-platform=wayland";
-    })
+    pkgs.google-chrome
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts
