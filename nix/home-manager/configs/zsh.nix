@@ -1,4 +1,4 @@
-{color-scheme, ...}: {
+{...}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -28,9 +28,7 @@
 
       [ -d "/snap/bin" ] && export PATH=$PATH:/snap/bin
       export BAT_STYLE="plain"
-      export BAT_THEME="${color-scheme.bat_theme}"
       export BAT_OPTS="--color always"
-      export FZF_DEFAULT_OPTS="${color-scheme.fzf_default_opts}"
 
       eval "$(starship init zsh)"
     '';

@@ -66,6 +66,8 @@
     pkgs.vscode # Visual Studio Code
     pkgs.pdfgrep # A tool to search text in PDF files
 
+    pkgs.adw-gtk3
+
     # Browser
     (pkgs.google-chrome.override {
       commandLineArgs = "--ozone-platform=wayland";
@@ -79,6 +81,7 @@
     pkgs.nerdfonts # Iconic font aggregation
     inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd
     inputs.apple-fonts.packages.${pkgs.system}.sf-mono-nerd
+    inputs.apple-fonts.packages.${pkgs.system}.ny-nerd
 
     # Messaging
     pkgs.signal-desktop # Signal Desktop messaging app

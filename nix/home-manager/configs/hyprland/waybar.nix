@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   project_root,
@@ -6,147 +7,135 @@
 }: let
   scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
 in {
-  xdg.configFile."waybar/config".text = ''
-    {
-      "name": "waybar",
-      "layer": "top", // Waybar at top|bottom laye
-      "height": 20, // Waybar height (to be removed for auto height)
-      "spacing": 4, // Gaps between modules (4px)
-      "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/submap"
-      ],
-      "modules-center": [
-        "hyprland/window"
-      ],
-      "modules-right": [
-        "network",
-        "pulseaudio",
-        "bluetooth",
-        "custom/brightness",
-        "custom/weather",
-        "custom/mode",
-        "tray",
-        "clock"
-      ],
-      // Modules configuration
-      "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{icon}",
-        "format-icons": {
-          "1": "1",
-          "2": "2",
-          "3": "3",
-          "4": "4",
-          "5": "web",
-          "6": "cp",
-          "7": "quant",
-          "8": "game",
-          "9": "9",
-        },
-      },
-      "hyprland/submap": {
-        "format": "submap: {}",
-        "max-length": 30,
-        "tooltip": false
-      },
-      "tray": {
-        "spacing": 0
-      },
-      "clock": {
-        "format": "{:%a %b %d, %H:%M:%S}",
-        "interval": 1,
-      },
-      "bluetooth": {
-        "format-alt": false,
-        "format-on": "",
-        "format-off": "!",
-        "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.bluetuith}",
-        "tooltip": false,
-      },
-      "pulseaudio": {
-        "scroll-step": 5, // %, can be a float
-        "format": "{icon}: {volume}%",
-        "format-bluetooth": "{icon}: {volume}% ",
-        "format-bluetooth-muted": "{icon}: Muted ",
-        "format-muted": "{icon}: Muted",
-        "format-icons": {
-          "headphone": "",
-          "hands-free": "",
-          "headset": "",
-          "phone": "",
-          "portable": "",
-          "car": "",
-          "default": [
-            "[.]",
-            "[v]",
-            "[V]"
-          ]
-        },
-        "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.pulsemixer}"
-      },
-      // https://github.com/Alexays/Waybar/wiki/Module:-Network
-      "network": {
-        "interval": 60,
-        "interface": "wlp0s20f3", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%)",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": false,
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui"
-      },
-      "custom/weather": {
-        "interval": "once",
-        "exec-if": "which sc_weather",
-        "exec": "sc_weather",
-        "signal": 20,
-        "tooltip": false,
-        "format": "{}",
-        "on-click": "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"",
-        "on-click-right": "${lib.getExe scripts.weather-sync}",
-        "on-click-middle": "${lib.getExe scripts.weather-sync}"
-      },
-      "custom/brightness": {
-        "interval": "once",
-        "exec-if": "which sc_get_brightness_percentage",
-        "exec": "sc_get_brightness_percentage",
-        "signal": 16,
-        "tooltip": false,
-        "format": "BRT: {}%",
-      },
-      "custom/mode": {
-        "interval": "once",
-        "exec": "cat ''${XDG_RUNTIME_DIR}/hypr/''${HYPRLAND_INSTANCE_SIGNATURE}/current_mode 2>/dev/null || echo 'normal'",
-        "signal": 17,
-        "tooltip": false,
-        "format": "MODE: {}",
-      },
-    }
-  '';
+  programs.waybar = {
+    enable = true;
+    settings = [
+      {
+        name = "waybar";
+        layer = "top";
+        height = 20;
+        spacing = 4;
+        modules-left = ["hyprland/workspaces" "hyprland/submap"];
+        modules-center = ["hyprland/window"];
+        modules-right = [
+          "network"
+          "pulseaudio"
+          "bluetooth"
+          "custom/brightness"
+          "custom/weather"
+          "custom/mode"
+          "tray"
+          "clock"
+        ];
+        "hyprland/workspaces" = {
+          disable-scroll = true;
+          all-outputs = true;
+          format = "{icon}";
+          format-icons = {
+            "1" = "1";
+            "2" = "2";
+            "3" = "3";
+            "4" = "4";
+            "5" = "web";
+            "6" = "cp";
+            "7" = "quant";
+            "8" = "game";
+            "9" = "9";
+          };
+        };
+        "hyprland/submap" = {
+          format = "submap: {}";
+          max-length = 30;
+          tooltip = false;
+        };
+        tray.spacing = 0;
+        clock = {
+          format = "{:%a %b %d, %H:%M:%S}";
+          interval = 1;
+        };
+        bluetooth = {
+          format-alt = false;
+          format-on = "";
+          format-off = "!";
+          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.bluetuith}";
+          tooltip = false;
+        };
+        pulseaudio = {
+          scroll-step = 5;
+          format = "{icon}: {volume}%";
+          format-bluetooth = "{icon}: {volume}% ";
+          format-bluetooth-muted = "{icon}: Muted ";
+          format-muted = "{icon}: Muted";
+          format-icons = {
+            headphone = "";
+            "hands-free" = " ";
+            headset = " ";
+            phone = "";
+            portable = "";
+            car = "";
+            default = ["[.]" "[v]" "[V]"];
+          };
+          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.pulsemixer}";
+        };
+        network = {
+          interval = 60;
+          interface = "wlp0s20f3";
+          format-wifi = "{essid} ({signalStrength}%)";
+          format-ethernet = "{ipaddr}/{cidr} ";
+          tooltip-format = false;
+          format-linked = "{ifname} (No IP) ";
+          format-disconnected = "Disconnected ⚠";
+          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui";
+        };
+        "custom/weather" = {
+          interval = "once";
+          exec-if = "which sc_weather";
+          exec = "sc_weather";
+          signal = 20;
+          tooltip = false;
+          format = "{}";
+          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"";
+          on-click-right = "${lib.getExe scripts.weather-sync}";
+          on-click-middle = "${lib.getExe scripts.weather-sync}";
+        };
+        "custom/brightness" = {
+          interval = "once";
+          exec-if = "which sc_get_brightness_percentage";
+          exec = "sc_get_brightness_percentage";
+          signal = 16;
+          tooltip = false;
+          format = "BRT: {}%";
+        };
+        "custom/mode" = {
+          interval = "once";
+          exec = "cat \${XDG_RUNTIME_DIR}/hypr/\${HYPRLAND_INSTANCE_SIGNATURE}/current_mode 2>/dev/null || echo 'normal'";
+          signal = 17;
+          tooltip = false;
+          format = "MODE: {}";
+        };
+      }
+    ];
+  };
+
   xdg.configFile."waybar/style.css".text = ''
     /* begin_theme */
     /* darkplus theme */
-    @define-color base00 #000000;
-    @define-color base01 #1E1E1E;
-    @define-color base02 #1E1E1E;
-    @define-color base03 #444444;
-
-    @define-color base04 #d8dee9;
-    @define-color base05 #e5e9f0;
-    @define-color base06 #e5e5e5;
-
-    @define-color base07 #8fbcbb;
-    @define-color base08 #88c0d0; /* cyan */
-    @define-color base09 #4B95CF;
-    @define-color base0A #0078D4;
-
-    @define-color base0B #f14c4c; /* red */
-    @define-color base0C #d08770;
-    @define-color base0D #f5f543;
-    @define-color base0E #a3be8c;
-    @define-color base0F #b48ead;
+    @define-color base00 #${config.lib.stylix.colors.base00};
+    @define-color base01 #${config.lib.stylix.colors.base01};
+    @define-color base02 #${config.lib.stylix.colors.base02};
+    @define-color base03 #${config.lib.stylix.colors.base03};
+    @define-color base04 #${config.lib.stylix.colors.base04};
+    @define-color base05 #${config.lib.stylix.colors.base05};
+    @define-color base06 #${config.lib.stylix.colors.base06};
+    @define-color base07 #${config.lib.stylix.colors.base07};
+    @define-color base08 #${config.lib.stylix.colors.base08};
+    @define-color base09 #${config.lib.stylix.colors.base09};
+    @define-color base0A #${config.lib.stylix.colors.base0A};
+    @define-color base0B #${config.lib.stylix.colors.base0B};
+    @define-color base0C #${config.lib.stylix.colors.base0C};
+    @define-color base0D #${config.lib.stylix.colors.base0D};
+    @define-color base0E #${config.lib.stylix.colors.base0E};
+    @define-color base0F #${config.lib.stylix.colors.base0F};
     /* end_theme */
 
     * {
@@ -251,6 +240,5 @@ in {
       margin-right: 4px;
       background-color: @base03;
     }
-
   '';
 }

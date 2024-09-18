@@ -6,47 +6,28 @@
   inputs,
   ...
 }: let
-  color-scheme =
-    import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
-
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
     inputs = inputs;
-  };
-  systemd_config = import "${project_root}/nix/home-manager/systemd.nix" {
-    inputs = inputs;
-    pkgs = pkgs;
-    lib = lib;
-    project_root = project_root;
-  };
-  swaylock-settings = import "${project_root}/nix/home-manager/configs/swaylock.nix" {
-    color-scheme = color-scheme;
   };
 in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
-    (import "${project_root}/nix/home-manager/configs/zsh.nix" {
-      color-scheme = color-scheme;
-    })
-    (import "${project_root}/nix/home-manager/configs/alacritty.nix" {
-      color-scheme = color-scheme;
-      pkgs = pkgs;
-    })
-    (import "${project_root}/nix/home-manager/configs/hyprland/configs.nix" {
-      inputs = inputs;
-      pkgs = pkgs;
-      color-scheme = color-scheme;
-      lib = lib;
-    })
-    (import "${project_root}/nix/home-manager/configs/hyprland/waybar.nix" {
-      pkgs = pkgs;
-      lib = lib;
-      project_root = project_root;
-    })
+    "${project_root}/nix/home-manager/configs/zsh.nix"
+    "${project_root}/nix/home-manager/configs/alacritty.nix"
+    "${project_root}/nix/home-manager/configs/hyprland/configs.nix"
+    "${project_root}/nix/home-manager/configs/hyprland/waybar.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
+    "${project_root}/nix/home-manager/configs/dunst.nix"
+    "${project_root}/nix/home-manager/configs/tofi.nix"
+    "${project_root}/nix/home-manager/configs/vscode.nix"
+    "${project_root}/nix/home-manager/configs/swaylock.nix"
+    "${project_root}/nix/home-manager/systemd.nix"
+    "${project_root}/nix/home-manager/configs/stylix.nix"
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
+    inputs.stylix.homeManagerModules.stylix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -54,9 +35,7 @@ in {
   home.username = "cunbidun";
   home.homeDirectory = "/home/cunbidun";
 
-  home.packages =
-    package_config.default_packages
-    ++ package_config.linux_packages;
+  home.packages = package_config.default_packages ++ package_config.linux_packages;
 
   services.xremap = {
     withWlroots = true;
@@ -79,14 +58,9 @@ in {
   home.file = {
     ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
     ".config/hypr/pyprland.toml".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
-    ".config/hypr/hyprpaper.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hyprpaper.conf";
     ".config/hypr/hypridle.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hypridle.conf";
-    ".config/tofi/config".source = "${project_root}/utilities/tofi/linux/.config/tofi/config";
-    ".config/dunst/dunstrc".source = "${project_root}/utilities/dunst/dunstrc";
-
     ".config/activitywatch/aw-qt/aw-qt.toml".source = "${project_root}/utilities/aw/aw-qt.toml";
 
-    ".config/swaylock/config".text = swaylock-settings.settings;
     ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
     ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
     ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
@@ -107,13 +81,6 @@ in {
     ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
   };
 
-  dconf = {
-    enable = true;
-    settings = {
-      "org/gnome/desktop/interface" = {color-scheme = "prefer-dark";};
-    };
-  };
-
   qt = {
     enable = true;
     platformTheme.name = "qtct";
@@ -123,41 +90,17 @@ in {
   gtk = {
     enable = true;
     gtk3 = {
-      extraConfig = {
-        gtk-font-name = "SFProDisplay Nerd Font 11";
-        gtk-xft-antialias = 1;
-        gtk-xft-hinting = 1;
-        gtk-xft-hintstyle = "hintfull";
-        gtk-xft-rgba = "none";
-      };
       bookmarks = [
         "file:///home/cunbidun/Downloads"
         "file:///home/cunbidun/competitive_programming/output"
         "file:///home/cunbidun/Books"
       ];
     };
-    gtk4 = {
-      extraConfig = {
-        gtk-font-name = "SFProDisplay Nerd Font 11";
-        gtk-xft-antialias = 1;
-        gtk-xft-hinting = 1;
-        gtk-xft-hintstyle = "hintfull";
-        gtk-xft-rgba = "none";
-      };
-    };
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
-    };
-    iconTheme = {
-      package = pkgs.papirus-nord;
-      name = "Papirus-Dark";
-    };
   };
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = "firefox.desktop";  # Change to your preferred browser's .desktop entry
+      "text/html" = "firefox.desktop"; # Change to your preferred browser's .desktop entry
       "x-scheme-handler/http" = "firefox.desktop";
       "x-scheme-handler/https" = "firefox.desktop";
       "application/pdf" = ["org.gnome.Evince.desktop"];
@@ -168,14 +111,11 @@ in {
     };
   };
 
-  systemd.user = systemd_config;
   home.sessionVariables = {
     # Setting this is to local the .desktop files
     XDG_DATA_DIRS = "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
     PICKER = "tofi";
     TERMINAL = "alacritty";
-    GTK_THEME = "Adwaita-dark";
-    QT_QTA_PLATFORMTHEME = "qt5ct";
     GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
     EDITOR = "nvim";
   };
@@ -197,13 +137,7 @@ in {
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [gtksourceview webkitgtk accountsservice];
   };
-  home.pointerCursor = {
-    # https://github.com/phisch/phinger-cursors
-    name = "phinger-cursors-dark";
-    package = pkgs.phinger-cursors;
-    size = 24;
-    gtk.enable = true;
-  };
+
   programs.hyprcursor-phinger.enable = true;
 
   # This value determines the Home Manager release that your

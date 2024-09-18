@@ -27,6 +27,9 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
+    stylix.url = "github:danth/stylix";
+
     # +-------------+
     # | nvim plugin |
     # +-------------+
@@ -34,7 +37,6 @@
       url = "github:axkirillov/easypick.nvim";
       flake = false;
     };
-    hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
   };
 
   outputs = inputs @ {
@@ -52,7 +54,6 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            lunarvim = nixpkgs-stable.legacyPackages.${prev.system}.lunarvim;
             vimPlugins =
               prev.vimPlugins
               // {

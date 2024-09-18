@@ -10,14 +10,11 @@
     pkgs = pkgs;
     inputs = inputs;
   };
-  color-scheme = import "${project_root}/nix/home-manager/colors/vscode-dark.nix";
 in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
-    (import "${project_root}/nix/home-manager/configs/zsh.nix" {
-      color-scheme = color-scheme;
-    })
+    "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
   ];
