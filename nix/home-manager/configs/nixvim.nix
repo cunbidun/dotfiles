@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -23,12 +24,23 @@ in {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
+
   programs.nixvim = {
     extraPackages = with pkgs; [
       clang-tools
     ];
     enable = true;
-    colorschemes.vscode.enable = true;
+
+    colorschemes = {
+      nord.enable = config.lib.stylix.colors.base00 == "2e3440";
+      gruvbox.enable = config.lib.stylix.colors.base00 == "1d2021" || config.lib.stylix.colors.base00 == "f9f5d7";
+    };
+    opts = {
+      background =
+        if config.lib.stylix.colors.base00 == "f9f5d7"
+        then "light"
+        else "dark";
+    };
 
     globals = {
       mapleader = " ";
@@ -400,17 +412,17 @@ in {
     # +-----------+
     plugins.conform-nvim = {
       enable = true;
-      settings.formattersByFt = {
-        c = ["clang-format"];
-        cpp = ["clang-format"];
-        nix = ["alejandra"];
-        sh = ["shfmt"];
-        py = ["black"];
-      };
       settings = {
         format_on_save = {
           lspFallback = true;
           timeoutMs = 500;
+        };
+        formatters_by_ft = {
+          c = ["clang-format"];
+          cpp = ["clang-format"];
+          nix = ["alejandra"];
+          sh = ["shfmt"];
+          py = ["black"];
         };
       };
     };
@@ -508,7 +520,7 @@ in {
           vim.cmd(string.format("%sbdelete!", buf_id[1]))
         end
 
-        vim.cmd(string.format("TermExec cmd='%s'", command))
+        vim.cmd(string.format("TermExec direction=vertical cmd='%s'", command))
       end
 
       vim.api.nvim_create_user_command('Runscript', function()
@@ -553,6 +565,9 @@ in {
       		},
       	},
       })
+      vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
+      vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
+      vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
     '';
   };
 }

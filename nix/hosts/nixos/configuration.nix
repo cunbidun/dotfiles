@@ -211,6 +211,8 @@
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+  # Chrome is trying to access power-related information but can't find the UPower service.
+  services.upower.enable = true;
 
   services.greetd = {
     enable = true;

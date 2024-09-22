@@ -46,9 +46,12 @@
         then "Nord"
         else if config.lib.stylix.colors.base00 == "1d2021"
         then "Gruvbox Dark Hard"
+        else if config.lib.stylix.colors.base00 == "f9f5d7"
+        then "Gruvbox Light Hard"
         else "Default Dark+";
       "workbench.iconTheme" = "material-icon-theme";
       "terminal.integrated.fontSize" = 13;
+      "explorer.confirmDragAndDrop" = false;
     };
 
     mutableExtensionsDir = false;
@@ -70,9 +73,16 @@
       # formatter
       kamadorueda.alejandra
       foxundermoon.shell-format
+      tomoki1207.pdf
 
       # language server
       ms-python.python
+      ms-python.vscode-pylance
+      ms-python.isort
+      ms-python.black-formatter
+      ms-toolsai.jupyter
+
+      james-yu.latex-workshop
     ];
   };
 }

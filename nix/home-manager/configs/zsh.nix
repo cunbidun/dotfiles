@@ -28,7 +28,6 @@
 
       [ -d "/snap/bin" ] && export PATH=$PATH:/snap/bin
       export BAT_STYLE="plain"
-      export BAT_OPTS="--color always"
 
       eval "$(starship init zsh)"
     '';

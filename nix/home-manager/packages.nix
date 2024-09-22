@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+in {
   default_packages = [
     # Utils
     pkgs.bat # A cat clone with syntax highlighting and Git integration
@@ -45,8 +46,12 @@
     pkgs.tofi # A launcher/menu program for Wayland
     pkgs.wev # An event daemon for Wayland
     inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop # Hyprland contrib package for hyprprop
-    #pkgs.espanso-wayland # Text expander for Wayland (commented out)
+    (pkgs.espanso.override {
+      x11Support = false;
+      waylandSupport = true;
+    })
     pkgs.firefox
+    pkgs.caprine-bin
 
     # System
     pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
@@ -68,7 +73,9 @@
     pkgs.adw-gtk3
 
     # Browser
-    pkgs.google-chrome
+    (pkgs.google-chrome.override {
+      commandLineArgs = "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations";
+    })
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts
@@ -83,7 +90,7 @@
     # Messaging
     pkgs.signal-desktop # Signal Desktop messaging app
     pkgs.discord # Discord messaging app
-    pkgs.caprine-bin # An unofficial Facebook Messenger app
+
     pkgs.slack # A messaging and collaboration platform
 
     # Note

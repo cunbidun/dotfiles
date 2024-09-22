@@ -1,7 +1,7 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-palette = 'vscode-dark'
+palette = 'default'
 # Use custom format
 format = '''
 [┌─╼\[$username@$hostname\](╾─╼(\[$status\])(\[$jobs\]))╾─╼\[$time\]](frame)
@@ -122,24 +122,5 @@ when = true
 format = "[$output]($style)"
 style = "cyan"
 
-[palettes.nord]
-blue = '#81a1c1'
-red = '#bf616a'
-green = '#a3be8c'
-yellow = '#ebcb8b'
+[palettes.default]
 frame = '#434c5e'
-bright_frame = '#4c566a'
-cyan = '#88c0d0'
-white = '#eceff4'
-
-[palettes.vscode-dark]
-frame = '#434c5e'
-bright_frame = '#4c566a'
-white = '#e5e5e5'
-blue = "#569CD6"
-cyan = "#4EC9B0"
-green = "#77d231"
-red = "#F44747"
-orange = "#CE9178"
-yellow = "#F5F556"
-purple = "#C586C0"

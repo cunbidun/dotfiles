@@ -38,7 +38,7 @@ in {
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe pkgs.ags} --config %h/dotfiles/utilities/ags/config.js";
+          ExecStart = "${lib.getExe pkgs.ags}";
           StandardOutput = "journal";
           StandardError = "journal";
         };
@@ -214,7 +214,7 @@ in {
           After = ["hyprland.service"];
           Requires = ["hyprland.service"];
         };
-        Path = {PathModified = "%h/dotfiles/utilities/ags";};
+        Path = {PathModified = "%h/.config/ags/";};
       };
     };
     timers = {

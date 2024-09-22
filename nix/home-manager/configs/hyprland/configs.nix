@@ -27,7 +27,7 @@
 
       misc = {
         enable_swallow = true;
-        swallow_exception_regex = "wev|ranger|^(.*nvim.*)$|^(.*Competitive Programming.*)$";
+        swallow_exception_regex = "wev|^(.*Yazi.*)$|ranger|^(.*nvim.*)$|^(.*Competitive Programming.*)$";
         swallow_regex = "^(Alacritty)$";
         disable_hyprland_logo = true;
         focus_on_activate = true;
@@ -143,7 +143,9 @@
         "float,class:^(org.gnome.NautilusPreviewer)$"
         "float,title:^(__scratchpad)$"
         "float,title:^(__waybar_popup)$"
+        "float,class:^(xdg-desktop-portal-gtk)$"
         "noanim,class:^(ueberzugpp.*)$"
+        "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
         "float,class:^(waydroid.com.*)$"
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
