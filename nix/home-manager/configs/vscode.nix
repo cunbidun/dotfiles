@@ -42,13 +42,15 @@
       ];
       "vim.useSystemClipboard" = true;
       "workbench.colorTheme" =
-        if config.lib.stylix.colors.base00 == "2e3440"
+        if config.lib.stylix.scheme.scheme-name == "Nord"
         then "Nord"
-        else if config.lib.stylix.colors.base00 == "1d2021"
+        else if config.lib.stylix.scheme.scheme-name == "Gruvbox dark, hard"
         then "Gruvbox Dark Hard"
-        else if config.lib.stylix.colors.base00 == "f9f5d7"
+        else if config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard"
         then "Gruvbox Light Hard"
-        else "Default Dark+";
+        else if config.lib.stylix.scheme.scheme-name == "Default Dark"
+        then "Default Dark+"
+        else "Default Light+";
       "workbench.iconTheme" = "material-icon-theme";
       "terminal.integrated.fontSize" = 13;
       "explorer.confirmDragAndDrop" = false;
@@ -73,7 +75,6 @@
       # formatter
       kamadorueda.alejandra
       foxundermoon.shell-format
-      tomoki1207.pdf
 
       # language server
       ms-python.python

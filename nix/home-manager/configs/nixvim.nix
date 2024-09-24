@@ -32,14 +32,12 @@ in {
     enable = true;
 
     colorschemes = {
-      nord.enable = config.lib.stylix.colors.base00 == "2e3440";
-      gruvbox.enable = config.lib.stylix.colors.base00 == "1d2021" || config.lib.stylix.colors.base00 == "f9f5d7";
+      nord.enable = config.lib.stylix.colors.base00 == "Nord Light" || config.lib.stylix.scheme.scheme-name == "Nord";
+      gruvbox.enable = config.lib.stylix.scheme.scheme-name == "Gruvbox dark, hard" || config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard";
+      vscode.enable = config.lib.stylix.scheme.scheme-name == "Default Dark";
     };
     opts = {
-      background =
-        if config.lib.stylix.colors.base00 == "f9f5d7"
-        then "light"
-        else "dark";
+      background = config.lib.stylix.scheme.variant;
     };
 
     globals = {
@@ -210,7 +208,7 @@ in {
     # +------+
     plugins.vim-bbye.enable = true; # for delete buffer
     plugins.nvim-ufo.enable = true; # for folding
-    plugins.surround.enable = true;
+    plugins.vim-surround.enable = true;
     plugins.comment.enable = true;
     plugins.nvim-autopairs.enable = true;
     plugins.nvim-colorizer.enable = true;
@@ -494,6 +492,12 @@ in {
     highlight = {
       IblScope.fg = "#606060";
       IblIndent.fg = "#3E3E3E";
+      SignColumn.bg = "NONE";
+      NvimTreeNormal.bg = "NONE";
+      LineNr.bg = "NONE";
+      BufferLineFill.bg = "NONE";
+      ToggleTerm1SignColumn.bg = "NONE";
+      Normal.bg = "NONE";
     };
     extraPlugins = with pkgs.vimPlugins; [
       nvim-plugin-easypick
@@ -565,9 +569,6 @@ in {
       		},
       	},
       })
-      vim.api.nvim_create_autocmd("VimEnter", { pattern = { "*" }, command = "highlight SignColumn guibg=NONE" })
-      vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight BufferLineFill guibg=NONE" })
-      vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*" }, command = "highlight ToggleTerm1SignColumn guibg=NONE" })
     '';
   };
 }

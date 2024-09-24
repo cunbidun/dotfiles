@@ -172,7 +172,7 @@ in {
 
     #workspaces button.active {
       border-radius: 0px;
-      background-color: @base08;
+      background-color: @base0C;
       color: @base01;
       border-width: 0;
       border-radius: 4px;
@@ -180,7 +180,7 @@ in {
 
     #workspaces button.urgent {
       border-radius: 0px;
-      background-color: @base0C;
+      background-color: @base08;
       color: @base01;
       border-width: 0;
       border-radius: 4px;
@@ -215,12 +215,11 @@ in {
     }
 
     #tray {
-      background-color: @base0A;
+      background-color: @base0E;
     }
 
     #tray * {
       padding: 0 6px;
-      /* border-left: 1px solid @base00; */
     }
 
     #tray *:first-child {

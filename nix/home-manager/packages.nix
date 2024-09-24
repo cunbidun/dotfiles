@@ -73,9 +73,7 @@ in {
     pkgs.adw-gtk3
 
     # Browser
-    (pkgs.google-chrome.override {
-      commandLineArgs = "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations";
-    })
+    pkgs.google-chrome
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts
@@ -121,6 +119,7 @@ in {
     pkgs.cargo # The Rust package manager
     pkgs.rustc # The Rust compiler
     pkgs.texlive.combined.scheme-full # A comprehensive TeX distribution
+    pkgs.pandoc
 
     # Python package
     pkgs.python311Packages.flake8 # A Python code style checker

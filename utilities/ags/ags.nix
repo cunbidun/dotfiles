@@ -42,7 +42,7 @@
     }
 
     .taskbar-focus  {
-        color: @base0A;
+        color: @base0C;
         font-weight: bold;
     }
   '';

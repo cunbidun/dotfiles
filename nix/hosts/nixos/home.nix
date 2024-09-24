@@ -115,7 +115,6 @@ in {
     TERMINAL = "alacritty";
     GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
     EDITOR = "nvim";
-    NIXOS_OZONE_WL = "1";
   };
 
   i18n.inputMethod = {

@@ -23,7 +23,7 @@
         "systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE"
       ];
 
-      env = "HYPRCURSOR_THEME,hyprcursor-phinger";
+      env = ["HYPRCURSOR_THEME,hyprcursor-phinger" "NIXOS_OZONE_WL,1"];
 
       misc = {
         enable_swallow = true;

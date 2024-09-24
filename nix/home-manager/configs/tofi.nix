@@ -37,7 +37,7 @@
 
       # Colors
       selection-color = lib.mkForce "#${config.lib.stylix.colors.base00}";
-      selection-background = lib.mkForce "#${config.lib.stylix.colors.base08}";
+      selection-background = lib.mkForce "#${config.lib.stylix.colors.base0C}";
     };
   };
 }

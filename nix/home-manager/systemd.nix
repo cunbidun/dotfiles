@@ -184,6 +184,7 @@ in {
             "syncthing.service"
             "waybar.service"
             "waybar_config_watcher.path"
+            "fcitx5-daemon.service"
 
             "graphical-session-pre.target"
           ];
