@@ -73,7 +73,7 @@ in {
     pkgs.adw-gtk3
 
     # Browser
-    pkgs.google-chrome
+    inputs.browser-previews.packages.${pkgs.system}.google-chrome-beta
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts

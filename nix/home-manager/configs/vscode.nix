@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }: {
@@ -49,8 +48,8 @@
         else if config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard"
         then "Gruvbox Light Hard"
         else if config.lib.stylix.scheme.scheme-name == "Default Dark"
-        then "Default Dark+"
-        else "Default Light+";
+        then "Dark Modern"
+        else "Light Modern";
       "workbench.iconTheme" = "material-icon-theme";
       "terminal.integrated.fontSize" = 13;
       "explorer.confirmDragAndDrop" = false;
@@ -85,5 +84,14 @@
 
       james-yu.latex-workshop
     ];
+    # example of downloading extensions that's not in nixpackge
+    # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    #   {
+    #     name = "glassit";
+    #     publisher = "s-nlf-fh";
+    #     version = "0.2.6";
+    #     sha256 = "sha256-LcAomgK91hnJWqAW4I0FAgTOwr8Kwv7ZhvGCgkokKuY=";
+    #   }
+    # ];
   };
 }

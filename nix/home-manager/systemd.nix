@@ -60,36 +60,6 @@ in {
         };
       };
 
-      hypridle = {
-        Unit = {
-          Description = "hypridle Service";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
-        Service = {
-          Type = "simple";
-          WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe inputs.hypridle.packages.${pkgs.system}.hypridle}";
-          StandardOutput = "journal";
-          StandardError = "journal";
-        };
-      };
-
-      gammastep = {
-        Unit = {
-          Description = "Gamma Step Service";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
-        Service = {
-          Type = "simple";
-          WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe pkgs.gammastep} -l 41.85003:-87.65005";
-          StandardOutput = "journal";
-          StandardError = "journal";
-        };
-      };
-
       activitywatch = {
         Unit = {
           Description = "Activit Watch service";
@@ -129,7 +99,7 @@ in {
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
-          ExecStart = "${project_root}/window_manager/hyprland/scripts/autostart.sh";
+          ExecStart = "${scripts.hyprland-autostart}/bin/hyprland-autostart";
           StandardOutput = "journal";
           StandardError = "journal";
         };

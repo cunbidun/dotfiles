@@ -489,16 +489,6 @@ in {
       enable = true;
       enableTelescope = true;
     };
-    highlight = {
-      IblScope.fg = "#606060";
-      IblIndent.fg = "#3E3E3E";
-      SignColumn.bg = "NONE";
-      NvimTreeNormal.bg = "NONE";
-      LineNr.bg = "NONE";
-      BufferLineFill.bg = "NONE";
-      ToggleTerm1SignColumn.bg = "NONE";
-      Normal.bg = "NONE";
-    };
     extraPlugins = with pkgs.vimPlugins; [
       nvim-plugin-easypick
     ];
@@ -569,6 +559,28 @@ in {
       		},
       	},
       })
+
+      local function set_custom_highlights()
+        local highlights = {
+          -- IblScope = { fg = "#606060" },
+          -- IblIndent = { fg = "#3E3E3E" },
+          SignColumn = { bg = "NONE" },
+          NvimTreeNormal = { bg = "NONE" },
+          LineNr = { bg = "NONE" },
+          BufferLineFill = { bg = "NONE" },
+          ToggleTerm1SignColumn = { bg = "NONE" },
+          Normal = { bg = "NONE" },
+        }
+
+        for group, colors in pairs(highlights) do
+          vim.api.nvim_set_hl(0, group, colors)
+        end
+      end
+
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = set_custom_highlights,
+      })
+
     '';
   };
 }

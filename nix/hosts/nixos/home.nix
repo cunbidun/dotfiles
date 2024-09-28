@@ -18,6 +18,8 @@ in {
     "${project_root}/nix/home-manager/configs/alacritty.nix"
     "${project_root}/nix/home-manager/configs/hyprland/configs.nix"
     "${project_root}/nix/home-manager/configs/hyprland/waybar.nix"
+    "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
+    "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
     "${project_root}/nix/home-manager/configs/dunst.nix"
@@ -50,6 +52,11 @@ in {
             Alt_L: Ctrl_L
     '';
   };
+  services.gammastep = {
+    enable = true;
+    latitude = 40.730610;
+    longitude = 73.935242;
+  };
 
   # +--------------------+
   # |    Linux Config    |
@@ -58,8 +65,6 @@ in {
 
   home.file = {
     ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-    ".config/hypr/pyprland.toml".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/pyprland.toml";
-    ".config/hypr/hypridle.conf".source = "${project_root}/window_manager/hyprland/linux/.config/hypr/hypridle.conf";
     ".config/activitywatch/aw-qt/aw-qt.toml".source = "${project_root}/utilities/aw/aw-qt.toml";
 
     ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";

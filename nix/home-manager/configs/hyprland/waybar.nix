@@ -227,7 +227,7 @@ in {
     }
 
     #pulseaudio.muted {
-      color: @base0C;
+      color: @base08;
     }
 
     #pulseaudio.bluetooth {

@@ -4,8 +4,11 @@
   inputs,
   lib,
   pkgs,
+  project_root,
   ...
-}: {
+}: let
+  scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
+in {
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -152,37 +155,10 @@
         "workspace 8 silent,class:^(Steam)$"
       ];
 
-      bindle = let
-        increase_volume = pkgs.writeShellScriptBin "increase_volume" ''
-          # Get the list of sinks and filter only the running ones
-          running_sinks=$(pamixer --list-sinks | awk -F '"' '/Running/ {print $2}')
-
-          # Loop through each running sink and increase the volume by 5%
-          for sink in $running_sinks; do
-            pamixer --sink $sink -i 5 --allow-boost
-          done
-        '';
-        decrease_volume = pkgs.writeShellScriptBin "increase_volume" ''
-          # Get the list of sinks and filter only the running ones
-          running_sinks=$(pamixer --list-sinks | awk -F '"' '/Running/ {print $2}')
-
-          # Loop through each running sink and increase the volume by 5%
-          for sink in $running_sinks; do
-            pamixer --sink $sink -d 5 --allow-boost
-          done
-        '';
-        toggle_volume = pkgs.writeShellScriptBin "toggle_volume" ''
-          pamixer -t;
-          if [ "$(pamixer --get-mute)" = true ]; then
-          	icon="[Muted] "
-          fi
-          vol="$icon$(pamixer --get-volume)"
-          notify-send --hint=string:x-dunst-stack-tag:volume "volume: $vol" -t 1000 -a "System"
-        '';
-      in [
-        ",XF86AudioRaiseVolume, exec, ${lib.getExe increase_volume}"
-        ",XF86AudioLowerVolume, exec, ${lib.getExe decrease_volume}"
-        ",XF86AudioMute, exec, ${lib.getExe toggle_volume}"
+      bindle = [
+        ",XF86AudioRaiseVolume, exec, ${lib.getExe scripts.increase-volume}"
+        ",XF86AudioLowerVolume, exec, ${lib.getExe scripts.decrease-volume}"
+        ",XF86AudioMute, exec, ${lib.getExe scripts.toggle-volume}"
       ];
     };
 
@@ -204,7 +180,7 @@
       bind = $mainMod, E, exec, nautilus
       bind = $mainMod SHIFT, D, exec, dotfiles_picker
       bind = $mainMod SHIFT, N, exec, nord_color_picker
-      bind = $mainMod, M, exec, ~/dotfiles/window_manager/hyprland/scripts/mode.sh
+      bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
       # bind = $mainMod, Space, exec, set_language
 
       # Clipboard
