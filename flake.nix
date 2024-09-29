@@ -37,10 +37,6 @@
       url = "github:axkirillov/easypick.nvim";
       flake = false;
     };
-    browser-previews = {
-      url = "github:nix-community/browser-previews";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
   outputs = inputs @ {
