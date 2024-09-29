@@ -147,6 +147,7 @@ in {
         "float,title:^(__scratchpad)$"
         "float,title:^(__waybar_popup)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
+        "float,title:^(Sign in.*Google Accounts.*)$"
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"

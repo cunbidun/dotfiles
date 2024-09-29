@@ -26,10 +26,10 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.lean4
+    pkgs.nix-output-monitor
   ];
 
   linux_packages = [
-    pkgs.nix-output-monitor
     pkgs.devenv
     pkgs.prismlauncher
 
@@ -51,7 +51,6 @@ in {
       waylandSupport = true;
     })
     pkgs.firefox
-    pkgs.caprine-bin
 
     # System
     pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
@@ -88,8 +87,8 @@ in {
     # Messaging
     pkgs.signal-desktop # Signal Desktop messaging app
     pkgs.discord # Discord messaging app
-
     pkgs.slack # A messaging and collaboration platform
+    pkgs.caprine-bin
 
     # Note
     pkgs.obsidian # A knowledge base and note-taking app
@@ -113,30 +112,21 @@ in {
     pkgs.rclone # A command-line tool for cloud storage
     pkgs.rclone-browser # A browser UI for rclone
     pkgs.imagemagick # A suite of image manipulation tools
-    pkgs.bfg-repo-cleaner # A tool to remove large or problematic blobs from Git repos
 
     # Programming
     pkgs.cargo # The Rust package manager
     pkgs.rustc # The Rust compiler
     pkgs.texlive.combined.scheme-full # A comprehensive TeX distribution
-    pkgs.pandoc
 
-    # Python package
-    pkgs.python311Packages.flake8 # A Python code style checker
-    pkgs.black # A Python code formatter
-    pkgs.isort # A Python utility for sorting imports
     pkgs.nodejs_20 # Node.js version 20
 
     # Music player
     pkgs.spotify # The Spotify music streaming app
 
     # Theme
-    pkgs.lxappearance # A desktop theme switcher
     pkgs.jetbrains-toolbox
   ];
 
   mac_packages = [
-    pkgs.nix-output-monitor
-    pkgs.fswatch
   ];
 }

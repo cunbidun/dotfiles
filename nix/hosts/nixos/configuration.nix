@@ -66,7 +66,6 @@
       jdk17
       xdg-utils
       desktop-file-utils
-      python3
       distrobox
 
       # Container

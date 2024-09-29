@@ -1,8 +1,6 @@
 {
   inputs,
   pkgs,
-  lib,
-  project_root,
   ...
 }: {
   stylix = {
@@ -10,8 +8,8 @@
     image = ../../../wallpapers/others/QgdxHBX.jpeg;
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-light-hard.yaml";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-light-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-light.yaml";
 
     targets = {
