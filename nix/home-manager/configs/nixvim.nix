@@ -34,7 +34,7 @@ in {
     colorschemes = {
       nord.enable = config.lib.stylix.colors.base00 == "Nord Light" || config.lib.stylix.scheme.scheme-name == "Nord";
       gruvbox.enable = config.lib.stylix.scheme.scheme-name == "Gruvbox dark, hard" || config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard";
-      vscode.enable = config.lib.stylix.scheme.scheme-name == "Default Dark";
+      vscode.enable = builtins.elem config.lib.stylix.scheme.scheme-name ["Default Dark" "Default Light" "standardized-light" "standardized-dark"];
     };
     opts = {
       background = config.lib.stylix.scheme.variant;

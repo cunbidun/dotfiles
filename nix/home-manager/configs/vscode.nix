@@ -47,7 +47,7 @@
         then "Gruvbox Dark Hard"
         else if config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard"
         then "Gruvbox Light Hard"
-        else if config.lib.stylix.scheme.scheme-name == "Default Dark"
+        else if builtins.elem config.lib.stylix.scheme.scheme-name ["Default Dark" "standardized-dark"]
         then "Default Dark Modern"
         else "Default Light Modern";
       "workbench.iconTheme" = "material-icon-theme";

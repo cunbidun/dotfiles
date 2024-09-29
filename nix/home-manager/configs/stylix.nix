@@ -2,21 +2,17 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  theme-name = "standardized-light";
+in {
   stylix = {
     enable = true;
     image = ../../../wallpapers/others/QgdxHBX.jpeg;
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-light-hard.yaml";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/default-light.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
 
     targets = {
       gnome.enable = true;
       kde.enable = true;
-      hyprpaper.enable = true;
-      bat.enable = true;
 
       waybar.enable = false;
       vscode.enable = false;

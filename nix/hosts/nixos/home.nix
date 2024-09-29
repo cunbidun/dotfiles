@@ -1,7 +1,5 @@
 {
   pkgs,
-  config,
-  lib,
   project_root,
   inputs,
   ...
@@ -20,6 +18,7 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/waybar.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
+    "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
     "${project_root}/nix/home-manager/configs/dunst.nix"
@@ -138,6 +137,9 @@ in {
     enable = true;
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [gtksourceview webkitgtk accountsservice];
+  };
+  programs.bat = {
+    enable = true;
   };
 
   programs.hyprcursor-phinger.enable = true;
