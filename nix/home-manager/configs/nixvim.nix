@@ -280,6 +280,7 @@ in {
         '';
       };
     };
+    plugins.web-devicons.enable = true;
     # +-----+
     # | git |
     # +-----+

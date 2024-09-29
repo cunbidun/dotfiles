@@ -15,7 +15,7 @@ in {
         layer = "top";
         height = 20;
         spacing = 4;
-        modules-left = ["hyprland/workspaces" "hyprland/submap"];
+        modules-left = ["hyprland/workspaces" "hyprland/submap" "custom/mode"];
         modules-center = ["hyprland/window"];
         modules-right = [
           "network"
@@ -23,7 +23,6 @@ in {
           "bluetooth"
           "custom/brightness"
           "custom/weather"
-          "custom/mode"
           "tray"
           "clock"
         ];
@@ -44,7 +43,7 @@ in {
           };
         };
         "hyprland/submap" = {
-          format = "submap: {}";
+          format = "SUBMAP: {}";
           max-length = 30;
           tooltip = false;
         };
@@ -52,40 +51,37 @@ in {
         clock = {
           format = "{:%a %b %d, %H:%M:%S}";
           interval = 1;
+          tooltip = false;
         };
         bluetooth = {
+          format = "BLUE {status}";
           format-alt = false;
-          format-on = "";
-          format-off = "!";
+          format-on = "BLUE";
+          format-off = "[D] BLUE";
           on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.bluetuith}";
           tooltip = false;
         };
         pulseaudio = {
           scroll-step = 5;
-          format = "{icon}: {volume}%";
-          format-bluetooth = "{icon}: {volume}% ";
-          format-bluetooth-muted = "{icon}: Muted ";
-          format-muted = "{icon}: Muted";
+          format = "{icon} {volume}%";
+          format-bluetooth = "{icon} {volume}% ";
+          format-bluetooth-muted = "{icon} Muted ";
+          format-muted = "{icon} Muted";
           format-icons = {
-            headphone = "";
-            "hands-free" = " ";
-            headset = " ";
-            phone = "";
-            portable = "";
-            car = "";
-            default = ["[.]" "[v]" "[V]"];
+            default = ["VOL"];
           };
           on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.pulsemixer}";
+          tooltip = false;
         };
         network = {
           interval = 60;
           interface = "wlp0s20f3";
-          format-wifi = "{essid} ({signalStrength}%)";
-          format-ethernet = "{ipaddr}/{cidr} ";
-          tooltip-format = false;
-          format-linked = "{ifname} (No IP) ";
-          format-disconnected = "Disconnected ⚠";
+          format-wifi = "NET {essid} {signalStrength}%";
+          format-ethernet = "NET {ipaddr}/{cidr}";
+          format-linked = "NET {ifname} (No IP)";
+          format-disconnected = "[D] NET";
           on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui";
+          tooltip = false;
         };
         "custom/weather" = {
           interval = "once";
@@ -104,7 +100,7 @@ in {
           exec = "sc_get_brightness_percentage";
           signal = 16;
           tooltip = false;
-          format = "BRT: {}%";
+          format = "BRT {}%";
         };
         "custom/mode" = {
           interval = "once";
@@ -160,6 +156,7 @@ in {
       padding: 0 5px;
       color: @base06;
       border-width: 0;
+      font-weight: normal;
     }
 
     #workspaces button:hover {
@@ -167,7 +164,6 @@ in {
       background: @base06;
       color: @base01;
       border-width: 0;
-      border-radius: 4px;
     }
 
     #workspaces button.active {
@@ -175,7 +171,6 @@ in {
       background-color: @base0C;
       color: @base01;
       border-width: 0;
-      border-radius: 4px;
     }
 
     #workspaces button.urgent {
@@ -183,22 +178,16 @@ in {
       background-color: @base08;
       color: @base01;
       border-width: 0;
-      border-radius: 4px;
     }
 
     /* submap */
     #submap {
       padding: 0 4px;
-      background-color: @base0E;
-      border-radius: 4px;
-      color: @base01;
     }
 
     #tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-mode, #custom-weather, #mode, #pulseaudio, #clock, #bluetooth {
       margin: 0 2px;
       padding: 0 6px;
-      background-color: @base03;
-      border-radius: 4px;
       min-width: 22px;
     }
 
@@ -215,7 +204,7 @@ in {
     }
 
     #tray {
-      background-color: @base0E;
+      background-color: @base02;
     }
 
     #tray * {
@@ -237,7 +226,6 @@ in {
     #clock {
       margin-left: 0px;
       margin-right: 4px;
-      background-color: @base03;
     }
   '';
 }

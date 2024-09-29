@@ -17,6 +17,7 @@ in {
           Description = "Waybar Service";
           After = ["hyprland.service"];
           Requires = ["hyprland.service"];
+          ConditionEnvironment = "WAYLAND_DISPLAY";
         };
         Service = {
           Type = "simple";
