@@ -4,7 +4,7 @@
   ...
 }: {
   # Open network ports
-  networking.firewall.allowedTCPPorts = [7000 7001 7100];
+  networking.firewall.allowedTCPPorts = [7000 7001 7100 8888 8889];
   networking.firewall.allowedUDPPorts = [5353 6000 6001 7011];
 
   # To enable network-discovery

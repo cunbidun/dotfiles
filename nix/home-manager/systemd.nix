@@ -9,24 +9,6 @@
 in {
   systemd.user = {
     services = {
-      # +--------+
-      # | waybar |
-      # +--------+
-      waybar = {
-        Unit = {
-          Description = "Waybar Service";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-          ConditionEnvironment = "WAYLAND_DISPLAY";
-        };
-        Service = {
-          Type = "simple";
-          WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe pkgs.waybar}";
-          StandardOutput = "journal";
-          StandardError = "journal";
-        };
-      };
       # +-----+
       # | ags |
       # +-----+
@@ -64,8 +46,9 @@ in {
       activitywatch = {
         Unit = {
           Description = "Activit Watch service";
-          After = ["waybar.service"];
-          Requires = ["waybar.service"];
+          After = ["graphical-session.target"];
+          Requires = ["graphical-session.target"];
+          Requisite = ["graphical-session.target"];
         };
         Service = {
           ExecStartPre = "/bin/sh -c 'sleep 3'";
@@ -73,6 +56,9 @@ in {
           ExecStart = "/bin/sh -c 'aw-qt'";
           StandardOutput = "journal";
           StandardError = "journal";
+        };
+        Install = {
+          WantedBy = ["graphical-session.target"];
         };
       };
 
@@ -126,8 +112,8 @@ in {
 
       sync_weather = {
         Unit = {
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
+          after = ["hyprland.service"];
+          requires = ["hyprland.service"];
         };
         Service = {
           Type = "oneshot";
@@ -136,13 +122,26 @@ in {
         };
       };
 
+      hyprpaper = {
+        Service = {
+          RestartSec = lib.mkForce 1;
+        };
+      };
+      fcitx5-daemon = {
+        Unit = {
+          PartOf = ["hyprland.service"];
+          requires = ["hyprland.service"];
+        };
+      };
+
       hyprland = {
         Unit = {
           Description = "My hyprland wrapper that runs it in systemd";
-          Before = ["graphical-session.target"]; # make sure hyprland ready before graphical-session.target
+          Before = [
+            "graphical-session.target"
+          ]; # make sure hyprland ready before graphical-session.target
           After = ["graphical-session-pre.target"];
           Wants = [
-            "activitywatch.service"
             "ags.service"
             "ags_config_watcher.path"
             "gammastep.service"
@@ -156,7 +155,6 @@ in {
             "waybar.service"
             "waybar_config_watcher.path"
             "fcitx5-daemon.service"
-
             "graphical-session-pre.target"
           ];
         };

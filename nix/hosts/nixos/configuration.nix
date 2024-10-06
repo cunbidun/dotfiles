@@ -212,14 +212,8 @@
   services.udisks2.enable = true;
   # Chrome is trying to access power-related information but can't find the UPower service.
   services.upower.enable = true;
-
-  services.greetd = {
+  services.ollama = {
     enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%a, %d %b %Y • %T' --greeting  'Welcome!' --asterisks --remember --cmd '$SHELL'";
-        user = "greeter";
-      };
-    };
+    acceleration = "rocm";
   };
 }

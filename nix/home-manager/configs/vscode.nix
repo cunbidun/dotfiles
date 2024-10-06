@@ -53,45 +53,53 @@
       "workbench.iconTheme" = "material-icon-theme";
       "terminal.integrated.fontSize" = 13;
       "explorer.confirmDragAndDrop" = false;
+      "cloudcode.duetAI.project" = "test-api-moel";
     };
 
     mutableExtensionsDir = false;
-    extensions = with pkgs.vscode-extensions; [
-      # theme
-      arcticicestudio.nord-visual-studio-code
-      jdinhlife.gruvbox
-      pkief.material-icon-theme
+    extensions = with pkgs.vscode-extensions;
+      [
+        # theme
+        arcticicestudio.nord-visual-studio-code
+        jdinhlife.gruvbox
+        pkief.material-icon-theme
 
-      vscodevim.vim
-      ms-vscode-remote.remote-ssh
+        vscodevim.vim
+        ms-vscode-remote.remote-ssh
 
-      # gramma support
-      bbenoist.nix
+        # gramma support
+        bbenoist.nix
 
-      # linter
-      timonwong.shellcheck
+        # linter
+        timonwong.shellcheck
 
-      # formatter
-      kamadorueda.alejandra
-      foxundermoon.shell-format
+        # formatter
+        kamadorueda.alejandra
+        foxundermoon.shell-format
 
-      # language server
-      ms-python.python
-      ms-python.vscode-pylance
-      ms-python.isort
-      ms-python.black-formatter
-      ms-toolsai.jupyter
+        # language server
+        ms-python.python
+        ms-python.vscode-pylance
+        ms-python.isort
+        ms-python.black-formatter
 
-      james-yu.latex-workshop
-    ];
-    # example of downloading extensions that's not in nixpackge
-    # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-    #   {
-    #     name = "glassit";
-    #     publisher = "s-nlf-fh";
-    #     version = "0.2.6";
-    #     sha256 = "sha256-LcAomgK91hnJWqAW4I0FAgTOwr8Kwv7ZhvGCgkokKuY=";
-    #   }
-    # ];
+        james-yu.latex-workshop
+        streetsidesoftware.code-spell-checker
+      ]
+      # example of downloading extensions that's not in nixpackge
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "jupyter";
+          publisher = "ms-toolsai";
+          version = "2024.8.1";
+          sha256 = "sha256-eFInKB1xwVVJFIsXHxsuRJeLKTe3Cb8svquHJOW0P+I=";
+        }
+        {
+          name = "cloudcode";
+          publisher = "GoogleCloudTools";
+          version = "2.17.0";
+          sha256 = "sha256-ZN4ZVl5WE32sHAfqAz0+vxTYBp6iJxAjvsXNJahrGY0=";
+        }
+      ];
   };
 }

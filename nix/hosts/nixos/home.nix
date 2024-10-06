@@ -120,6 +120,7 @@ in {
     XDG_DATA_DIRS = "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
     PICKER = "tofi";
     TERMINAL = "alacritty";
+    QT_QTA_PLATFORMTHEME = "qt5ct";
     GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
     EDITOR = "nvim";
   };

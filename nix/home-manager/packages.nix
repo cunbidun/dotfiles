@@ -72,7 +72,7 @@ in {
     pkgs.adw-gtk3
 
     # Browser
-    inputs.browser-previews.packages.${pkgs.system}.google-chrome-beta
+    pkgs.google-chrome
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts
@@ -116,7 +116,6 @@ in {
     # Programming
     pkgs.cargo # The Rust package manager
     pkgs.rustc # The Rust compiler
-    pkgs.texlive.combined.scheme-full # A comprehensive TeX distribution
 
     pkgs.nodejs_20 # Node.js version 20
 

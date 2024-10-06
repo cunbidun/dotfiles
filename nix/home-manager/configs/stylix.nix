@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: let
+  # theme-name = "standardized-dark";
   theme-name = "standardized-light";
 in {
   stylix = {
