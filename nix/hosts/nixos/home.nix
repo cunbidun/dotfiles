@@ -12,9 +12,10 @@ in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.ags.homeManagerModules.default
+    inputs.spicetify-nix.homeManagerModules.default
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/alacritty.nix"
-    "${project_root}/nix/home-manager/configs/hyprland/configs.nix"
+    "${project_root}/nix/home-manager/configs/hyprland/hyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/waybar.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
@@ -39,6 +40,16 @@ in {
 
   home.packages = package_config.default_packages ++ package_config.linux_packages;
 
+  programs.spicetify = let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  in {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+    ];
+    # theme = spicePkgs.themes.catppuccin;
+    # colorScheme = "latte";
+  };
+
   services.xremap = {
     withWlroots = true;
     watch = true;
@@ -46,9 +57,20 @@ in {
       modmap:
         - name: Global
           application:
+          remap:
+            ALT_L: SUPER_L
+
+        - name: Almost
+          application:
             not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
           remap:
-            Alt_L: Ctrl_L
+            SUPER_L: CONTROL_L
+
+        - name: Other
+          application:
+            only: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+          remap:
+            SUPER_L: ALT_L
     '';
   };
   services.gammastep = {
@@ -145,7 +167,6 @@ in {
   programs.bat = {
     enable = true;
   };
-
   programs.hyprcursor-phinger.enable = true;
 
   # This value determines the Home Manager release that your

@@ -9,9 +9,6 @@
 in {
   systemd.user = {
     services = {
-      # +-----+
-      # | ags |
-      # +-----+
       ags = {
         Unit = {
           Description = "Ags Service";
@@ -45,20 +42,18 @@ in {
 
       activitywatch = {
         Unit = {
-          Description = "Activit Watch service";
-          After = ["graphical-session.target"];
-          Requires = ["graphical-session.target"];
-          Requisite = ["graphical-session.target"];
+          Description = "Activity Watch service";
+          After = ["xdg-desktop-portal-gtk.service"];
+          Requires = ["xdg-desktop-portal-gtk.service"];
         };
         Service = {
-          ExecStartPre = "/bin/sh -c 'sleep 3'";
           Type = "simple";
           ExecStart = "/bin/sh -c 'aw-qt'";
           StandardOutput = "journal";
           StandardError = "journal";
-        };
-        Install = {
-          WantedBy = ["graphical-session.target"];
+          Environment = "QT_QPA_PLATFORM=xcb";
+          RestartSec = lib.mkForce 1;
+          Restart = "always";
         };
       };
 
@@ -127,21 +122,29 @@ in {
           RestartSec = lib.mkForce 1;
         };
       };
+
+      waybar = {
+        Service = {
+          RestartSec = 1;
+        };
+      };
+
       fcitx5-daemon = {
         Unit = {
           PartOf = ["hyprland.service"];
           requires = ["hyprland.service"];
+        };
+        Service = {
+          RestartSec = lib.mkForce 1;
+          Restart = "on-failure";
         };
       };
 
       hyprland = {
         Unit = {
           Description = "My hyprland wrapper that runs it in systemd";
-          Before = [
-            "graphical-session.target"
-          ]; # make sure hyprland ready before graphical-session.target
-          After = ["graphical-session-pre.target"];
           Wants = [
+            "activitywatch.service"
             "ags.service"
             "ags_config_watcher.path"
             "gammastep.service"
@@ -155,7 +158,6 @@ in {
             "waybar.service"
             "waybar_config_watcher.path"
             "fcitx5-daemon.service"
-            "graphical-session-pre.target"
           ];
         };
         Service = {
@@ -169,6 +171,7 @@ in {
         };
       };
     };
+
     paths = {
       waybar_config_watcher = {
         Unit = {

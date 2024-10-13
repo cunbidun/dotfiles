@@ -119,9 +119,6 @@ in {
 
     pkgs.nodejs_20 # Node.js version 20
 
-    # Music player
-    pkgs.spotify # The Spotify music streaming app
-
     # Theme
     pkgs.jetbrains-toolbox
   ];

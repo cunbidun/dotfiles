@@ -23,7 +23,11 @@ in {
       exec-once = [
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE"
+        "systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user reset-failed"
+        "systemctl --user restart dbus.service"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user start activitywatch.service"
       ];
 
       env = ["HYPRCURSOR_THEME,hyprcursor-phinger" "NIXOS_OZONE_WL,1"];

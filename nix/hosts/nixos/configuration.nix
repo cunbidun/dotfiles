@@ -21,6 +21,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = ["uinput" "i2c-dev"];
+  boot.blacklistedKernelModules = ["wacom"];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -176,12 +177,6 @@
   };
   services.usbmuxd.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gtk];
-    xdgOpenUsePortal = true;
-  };
-
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
@@ -216,4 +211,20 @@
     enable = true;
     acceleration = "rocm";
   };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    xdgOpenUsePortal = true;
+  };
+
+  systemd.user.services.xdg-desktop-portal-gtk = {
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "5s";
+      Environment = "G_MESSAGES_DEBUG=all";
+    };
+  };
+
+  hardware.opentabletdriver.enable = true;
 }
