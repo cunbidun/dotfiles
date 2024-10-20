@@ -32,6 +32,7 @@ in {
   linux_packages = [
     pkgs.devenv
     pkgs.prismlauncher
+    pkgs.glib
 
     # Hyprland
     pkgs.waybar # A Wayland bar for Sway and Hyprland

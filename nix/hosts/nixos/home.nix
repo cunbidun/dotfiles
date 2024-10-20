@@ -120,26 +120,40 @@ in {
         "file:///home/cunbidun/Downloads"
         "file:///home/cunbidun/competitive_programming/output"
         "file:///home/cunbidun/Books"
+        "file:///home/cunbidun/Vi"
       ];
     };
-  };
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = "firefox.desktop"; # Change to your preferred browser's .desktop entry
-      "x-scheme-handler/http" = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-      "application/pdf" = ["org.gnome.Evince.desktop"];
-      "image/jpeg" = ["feh.desktop"];
-      "image/png" = ["feh.desktop"];
-      "text/plain" = ["nvim.desktop"];
-      "inode/directory" = ["org.gnome.nautilus.desktop"];
+    iconTheme = {
+      package = pkgs.papirus-nord;
+      name = "Papirus-Dark";
     };
   };
 
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "firefox.desktop"; # Change to your preferred browser's .desktop entry
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "application/pdf" = ["org.gnome.Evince.desktop"];
+        "image/jpeg" = ["feh.desktop"];
+        "image/png" = ["feh.desktop"];
+        "text/plain" = ["nvim.desktop"];
+        "inode/directory" = ["org.gnome.nautilus.desktop"];
+      };
+    };
+    systemDirs.data = [
+      "$HOME/.local/share"
+      "/usr/local/share"
+      "/usr/share"
+      "/var/lib/flatpak/exports/share"
+      "$HOME/.local/share/flatpak/exports/share"
+      "${pkgs.glib.out}/share/gsettings-schemas"
+      "${pkgs.gsettings-desktop-schemas}/share"
+    ];
+  };
   home.sessionVariables = {
-    # Setting this is to local the .desktop files
-    XDG_DATA_DIRS = "$HOME/.local/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
     PICKER = "tofi";
     TERMINAL = "alacritty";
     QT_QTA_PLATFORMTHEME = "qt5ct";

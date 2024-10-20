@@ -12,9 +12,6 @@ in {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
 
     targets = {
-      gnome.enable = true;
-      kde.enable = true;
-
       waybar.enable = false;
       vscode.enable = false;
       nixvim.enable = false;
