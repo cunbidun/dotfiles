@@ -18,7 +18,7 @@ in {
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe pkgs.ags}";
+          ExecStart = "${lib.getExe pkgs.ags} -c ${project_root}/utilities/ags/config.js";
           StandardOutput = "journal";
           StandardError = "journal";
         };

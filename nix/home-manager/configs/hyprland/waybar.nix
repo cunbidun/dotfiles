@@ -33,14 +33,14 @@ in {
           format = "{icon}";
           format-icons = {
             "1" = "1";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
+            "2" = "ADL";
+            "3" = "AML";
+            "4" = "ALGO";
             "5" = "web";
             "6" = "cp";
             "7" = "quant";
             "8" = "game";
-            "9" = "9";
+            "9" = "vi";
           };
         };
         "hyprland/submap" = {

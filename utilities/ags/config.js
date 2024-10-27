@@ -1,142 +1,58 @@
+import GLib from 'gi://GLib';
 
-const hyprland = await Service.import("hyprland")
-const apps = await Service.import("applications")
+const main = '/tmp/ags/main.js';
+const entry = `${App.configDir}/main.ts`;
+const bundler = GLib.getenv('AGS_BUNDLER') || 'bun';
 
+const v = {
+    ags: pkg.version?.split('.').map(Number) || [],
+    expect: [1, 8, 1],
+};
 
-function isMinimized(client) {
-  return client.workspace.name.includes("special:minimized")
+try {
+    switch (bundler) {
+        case 'bun':
+            await Utils.execAsync([
+                'bun',
+                'build',
+                entry,
+                '--outfile',
+                main,
+                '--external',
+                'resource://*',
+                '--external',
+                'gi://*',
+                '--external',
+                'file://*',
+            ]);
+            break;
+
+        case 'esbuild':
+            await Utils.execAsync([
+                'esbuild',
+                '--bundle',
+                entry,
+                '--format=esm',
+                `--outfile=${main}`,
+                '--external:resource://*',
+                '--external:gi://*',
+                '--external:file://*',
+            ]);
+            break;
+
+        default:
+            throw `"${bundler}" is not a valid bundler`;
+    }
+
+    if (v.ags[1] < v.expect[1] || v.ags[2] < v.expect[2]) {
+        print(`least v${v.expect.join('.')} of AGS, yours is v${v.ags.join('.')}`);
+        App.quit();
+    }
+
+    await import(`file://${main}`);
+} catch (error) {
+    console.error(error);
+    App.quit();
 }
 
-function shortenString(str, maxLength = 30) {
-  if (str.length <= maxLength) {
-    return str;
-  } else {
-    return str.substring(0, maxLength - 3) + '...';
-  }
-}
-function getClientAddress(client) {
-  if (client.grouped.length === 0) {
-    return client.address;
-  }
-  return client.grouped[client.grouped.length - 1]
-}
-
-function isInGroup(client) {
-  return client.grouped.length > 0
-}
-
-function TaskBar() {
-  return Widget.EventBox({
-    child: Widget.Box({
-      class_name: "taskbar",
-      spacing: 8,
-      children: [
-        Widget.Button({
-          child: Widget.Label({})
-        })
-      ],
-      setup: self => {
-        self.hook(hyprland, () => {
-          let current_clients = hyprland.clients.filter(client => client.workspace.id === hyprland.active.workspace.id)
-          current_clients = current_clients.filter(client => client.title !== '')
-          let minimized_clients = hyprland.clients.filter(client => client.workspace.name === `special:minimized_${hyprland.active.workspace.id}`)
-          let all_clients = current_clients.concat(minimized_clients).sort((a, b) => a.pid - b.pid)
-          self.children = all_clients.map(client => Widget.Button({
-            class_name: "taskbar-button",
-            child: Widget.Box({
-              spacing: 4,
-              hpack: 'center',
-              vpack: 'center',
-              children: [
-                Widget.Icon({
-                  size: 15,
-                  icon: apps.list.find(app => app.match(client.class))?.icon_name || ""
-                }),
-                Widget.Label({
-                  class_name: ((client) => {
-                    if (isMinimized(client)) {
-                      return "taskbar-minimized"
-                    }
-                    if (client.address === hyprland.active.client.address) {
-                      return "taskbar-focus"
-                    }
-                    return "taskbar-normal"
-                  })(client),
-                  label: `${shortenString(client.title)}`,
-                })
-              ]
-            }),
-            on_middle_click: () => {
-              let address = client.address
-              if (!isMinimized(client)) {
-                hyprland.messageAsync(`dispatch focuswindow address:${address}`)
-                hyprland.messageAsync(`dispatch movetoworkspacesilent special:minimized_${hyprland.active.workspace.id}`)
-              } else {
-                hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${address}`)
-              }
-            },
-            on_clicked: () => {
-              let address = getClientAddress(client)
-              if (isMinimized(client)) {
-                hyprland.messageAsync(`dispatch movetoworkspacesilent ${hyprland.active.workspace.id},address:${address}`)
-              }
-              hyprland.messageAsync(`dispatch focuswindow address:${client.address}`)
-            }
-          }))
-        })
-      }
-    })
-  })
-}
-
-function Left() {
-  return Widget.Box({
-    spacing: 8,
-    children: [
-      Widget.Button({
-        class_name: "toggle-minimized-button",
-        child: Widget.Label({
-          label: "Toggle Minimized"
-        }),
-        on_clicked: () => {
-          hyprland.messageAsync(`dispatch togglespecialworkspace minimized_${hyprland.active.workspace.id}`)
-        }
-      })
-    ],
-
-  })
-}
-
-function Center() {
-  return Widget.Box({
-    spacing: 8,
-    children: [
-      TaskBar()
-    ],
-  })
-}
-
-
-function Bar(monitor = 0) {
-  return Widget.Window({
-    name: `bar-${monitor}`, // name has to be unique
-    class_name: "bar",
-    monitor,
-    anchor: ["bottom", "left", "right"],
-    exclusivity: "exclusive",
-    child: Widget.CenterBox({
-      start_widget: Left(),
-      center_widget: Center(),
-
-    }),
-  })
-}
-
-App.config({
-  style: "./style.css",
-  windows: [
-    Bar(),
-  ],
-})
-
-export { }
+export {};

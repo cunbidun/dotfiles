@@ -126,7 +126,7 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.git;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';

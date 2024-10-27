@@ -28,7 +28,6 @@ in {
     "${project_root}/nix/home-manager/configs/swaylock.nix"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
-    "${project_root}/utilities/ags/ags.nix"
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.stylix.homeManagerModules.stylix
   ];

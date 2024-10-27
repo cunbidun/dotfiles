@@ -24,10 +24,6 @@ in {
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "systemctl --user reset-failed"
-        "systemctl --user restart dbus.service"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "systemctl --user start activitywatch.service"
       ];
 
       env = ["HYPRCURSOR_THEME,hyprcursor-phinger" "NIXOS_OZONE_WL,1"];
@@ -150,12 +146,13 @@ in {
         "float,class:^(org.gnome.NautilusPreviewer)$"
         "float,title:^(__scratchpad)$"
         "float,title:^(__waybar_popup)$"
+        "float,title:^(Open File)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
-        "float,title:^(Sign in.*Google Accounts.*)$"
+        "float,class:^(waydroid.com.*)$"
+
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
-        "float,class:^(waydroid.com.*)$"
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
         "workspace 8 silent,class:^(Steam)$"
       ];

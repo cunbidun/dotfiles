@@ -36,6 +36,7 @@ in {
 
     # Hyprland
     pkgs.waybar # A Wayland bar for Sway and Hyprland
+    pkgs.bun # to run ags
     pkgs.hyprpaper # A wallpaper utility for Hyprland
     pkgs.gammastep # A screen temperature adjusting utility
     pkgs.wl-clipboard # A command-line copy/paste tool for Wayland
@@ -73,6 +74,10 @@ in {
     pkgs.adw-gtk3
 
     # Browser
+    # This is an example of overriding chrome start command
+    # (pkgs.google-chrome.override {
+    #   commandLineArgs = "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version3";
+    # })
     pkgs.google-chrome
 
     # Font
@@ -101,7 +106,7 @@ in {
     pkgs.nautilus # GNOME's file manager
     pkgs.sushi # GNOME's preview utility
     pkgs.file-roller # GNOME's archive manager
-    pkgs.gnome3.gvfs # GNOME's virtual file system
+    pkgs.gnome.gvfs # GNOME's virtual file system
     pkgs.djvulibre
 
     # CLI File manager
@@ -117,10 +122,7 @@ in {
     # Programming
     pkgs.cargo # The Rust package manager
     pkgs.rustc # The Rust compiler
-
-    pkgs.nodejs_20 # Node.js version 20
-
-    # Theme
+    pkgs.nodejs_20
     pkgs.jetbrains-toolbox
   ];
 
