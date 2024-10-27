@@ -140,7 +140,7 @@ in {
         "noblur,class:^(cs2)$"
         "noshadow,class:^(cs2)$"
         "float,class:^(Caprine)$"
-        "float,class:^(Spotify)$"
+        "float,title:^(Spotify Premium)$"
         "float,class:^(Signal)$"
         "float,class:^(obsidian)$"
         "float,class:^(org.gnome.NautilusPreviewer)$"
@@ -149,12 +149,14 @@ in {
         "float,title:^(Open File)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
         "float,class:^(waydroid.com.*)$"
+        "float,class:^(org.gnome.Nautilus)$"
 
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
-        "workspace 8 silent,class:^(Steam)$"
+        "workspace 8 silent,class:^([Ss]team)$"
+        "workspace 8 silent,class:^(dota2)$"
       ];
 
       bindle = [

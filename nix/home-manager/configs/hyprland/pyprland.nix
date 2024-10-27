@@ -19,7 +19,7 @@
       };
 
       messenger = {
-        command = "caprine --ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version3";
+        command = "caprine --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version3";
         animation = "";
         unfocus = "";
         lazy = true;
