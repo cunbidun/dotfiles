@@ -15,9 +15,23 @@
 @define-color base0E #b46ee0;
 @define-color base0F #b87d28;
 
-.taskdock, .toggle-minimized-button {
-    font-family: 'SFMono Nerd Font';
-    font-size: 13px;
+* {
+    font-family: 'SFProDisplay Nerd Font';
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.focused-title {
+    background-color: @base0C;
+    padding: 10px;
+}
+
+.clock{
+    min-width: 125px;
+}
+
+.top-bar {
+    min-height: 500px;
 }
 
 .dock-minimized {
@@ -31,6 +45,6 @@
     min-width: 250px;
 }
 
-.dock-focus  {
+.dock-focus, .workspace-focus  {
     color: @base0C;
 }

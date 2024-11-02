@@ -42,7 +42,7 @@ in {
         groupbar = {
           font_family = "SFMono Nerd Font";
           font_size = 10;
-          height = 15;
+          height = 20;
         };
       };
 

@@ -36,11 +36,11 @@ in {
             "2" = "ADL";
             "3" = "AML";
             "4" = "ALGO";
-            "5" = "web";
-            "6" = "cp";
-            "7" = "quant";
-            "8" = "game";
-            "9" = "vi";
+            "5" = "WEB";
+            "6" = "CP";
+            "7" = "QUANT";
+            "8" = "GAME";
+            "9" = "VI";
           };
         };
         "hyprland/submap" = {
