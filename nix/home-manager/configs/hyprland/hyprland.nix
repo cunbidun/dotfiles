@@ -26,7 +26,7 @@ in {
         "systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];
 
-      env = ["HYPRCURSOR_THEME,hyprcursor-phinger" "NIXOS_OZONE_WL,1"];
+      env = ["HYPRCURSOR_THEME,hyprcursor-phinger"];
 
       misc = {
         enable_swallow = true;
@@ -150,7 +150,6 @@ in {
         "float,class:^(xdg-desktop-portal-gtk)$"
         "float,class:^(waydroid.com.*)$"
         "float,class:^(org.gnome.Nautilus)$"
-
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
