@@ -54,6 +54,7 @@
       "terminal.integrated.fontSize" = 13;
       "explorer.confirmDragAndDrop" = false;
       "cloudcode.duetAI.project" = "test-api-moel";
+      "terminal.integrated.defaultProfile.linux" = "zsh";
     };
 
     mutableExtensionsDir = false;
