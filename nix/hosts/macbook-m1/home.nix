@@ -17,6 +17,9 @@ in {
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
+    "${project_root}/nix/home-manager/configs/stylix.nix"
+    "${project_root}/nix/home-manager/configs/vscode.nix"
+    inputs.stylix.homeManagerModules.stylix
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
