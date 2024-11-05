@@ -46,7 +46,6 @@
 
   outputs = inputs @ {
     nixpkgs-unstable,
-    nixpkgs-stable,
     nix-darwin,
     home-manager,
     nix-flatpak,

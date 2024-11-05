@@ -351,7 +351,7 @@ in {
       };
       servers = {
         clangd.enable = true;
-        lua-ls.enable = true;
+        lua_ls.enable = true;
         nixd.enable = true;
         ruff.enable = true;
         pyright.enable = true;

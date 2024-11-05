@@ -40,9 +40,9 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Mouse lazily follows any focus (window or workspace)
-on-focus-changed = ['move-mouse window-lazy-center'] 
+# on-focus-changed = ['move-mouse window-lazy-center'] 
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -75,16 +75,20 @@ outer.right =      8
 # - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
 #                   keypadMinus, keypadMultiply, keypadPlus
 # - Arrows.         left, down, up, right
+alt-enter = '''exec-and-forget osascript -e '
+tell application "iTerm2"
+    activate
+    create window with default profile
+end tell'
+'''
 
 # All possible modifiers: cmd, alt, ctrl, shift
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-# You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
 alt-n = '''exec-and-forget python3 ~/.tmp/scratchpad.py obsidian'''
 alt-c = '''exec-and-forget python3 ~/.tmp/scratchpad.py messenger'''
-# alt-backtick= '''exec-and-forget python3 ~/.tmp/scratchpad.py messenger'''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
@@ -114,6 +118,7 @@ alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-0 = 'workspace 0'
 alt-v = 'workspace v'
+alt-q = 'workspace q'
 alt-w = 'workspace w'
 alt-a = 'workspace a'
 
@@ -129,6 +134,7 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 0'
 alt-shift-v = 'move-node-to-workspace v'
+alt-shift-q = 'move-node-to-workspace q'
 alt-shift-w = 'move-node-to-workspace w'
 alt-shift-a = 'move-node-to-workspace a'
 
@@ -156,6 +162,3 @@ esc = ['reload-config', 'mode main']
 esc = 'mode main'
 h = 'resize width +30'
 l = 'resize width -30'
-
-
-

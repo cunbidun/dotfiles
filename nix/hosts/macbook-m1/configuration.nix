@@ -38,17 +38,25 @@
   homebrew = {
     enable = true;
 
-    onActivation = {cleanup = "uninstall";};
+    onActivation = {
+      cleanup = "uninstall";
+      upgrade = true;
+    };
 
-    taps = ["homebrew/cask-fonts"];
+    taps = ["homebrew/cask-fonts" "dimentium/autoraise" "nikitabobko/tap" "homebrew/services"];
 
     # `brew install`
-    brews = ["bazel" "python@3.11"];
+    brews = [
+      {
+        name = "autoraise";
+        start_service = true;
+        restart_service = true;
+      }
+    ];
 
     # `brew install --cask`
     casks = [
       "1password"
-      "visual-studio-code"
       "spotify"
       "alt-tab"
       "google-chrome"
@@ -63,11 +71,11 @@
       "activitywatch"
       "unnaturalscrollwheels"
       "steam"
-      "league-of-legends"
-      "nikitabobko/tap/aerospace"
+      "aerospace"
       "netnewswire"
       "raycast"
     ];
+    global.autoUpdate = true;
   };
   system.defaults.dock = {
     autohide = true;
