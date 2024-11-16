@@ -68,7 +68,6 @@
       "discord"
       "monitorcontrol"
       "font-sauce-code-pro-nerd-font"
-      "activitywatch"
       "unnaturalscrollwheels"
       "steam"
       "aerospace"

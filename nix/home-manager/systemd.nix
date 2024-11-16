@@ -40,23 +40,6 @@ in {
         };
       };
 
-      activitywatch = {
-        Unit = {
-          Description = "Activity Watch service";
-          After = ["xdg-desktop-portal-gtk.service"];
-          Requires = ["xdg-desktop-portal-gtk.service"];
-        };
-        Service = {
-          Type = "simple";
-          ExecStart = "/bin/sh -c 'aw-qt'";
-          StandardOutput = "journal";
-          StandardError = "journal";
-          Environment = "QT_QPA_PLATFORM=xcb";
-          RestartSec = lib.mkForce 1;
-          Restart = "always";
-        };
-      };
-
       syncthing = {
         Unit = {
           Description = "Syncthing Service";
@@ -144,7 +127,6 @@ in {
         Unit = {
           Description = "My hyprland wrapper that runs it in systemd";
           Wants = [
-            "activitywatch.service"
             "ags.service"
             "ags_config_watcher.path"
             "gammastep.service"

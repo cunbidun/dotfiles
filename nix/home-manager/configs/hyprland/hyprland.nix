@@ -75,9 +75,6 @@ in {
           size = 3;
           passes = 1;
         };
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
       };
 
       animations = {
@@ -184,7 +181,6 @@ in {
       bind = $mainMod SHIFT, D, exec, dotfiles_picker
       bind = $mainMod SHIFT, N, exec, nord_color_picker
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
-      # bind = $mainMod, Space, exec, set_language
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png

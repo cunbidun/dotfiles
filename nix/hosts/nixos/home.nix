@@ -88,7 +88,6 @@ in {
 
   home.file = {
     ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-    ".config/activitywatch/aw-qt/aw-qt.toml".source = "${project_root}/utilities/aw/aw-qt.toml";
 
     ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
     ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
@@ -101,7 +100,6 @@ in {
     ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";
     ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
     ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
-    ".local/bin/aw-awatcher".source = "${project_root}/local/linux/.local/bin/aw-awatcher";
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
 
     # Custom deskop files

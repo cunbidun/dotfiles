@@ -98,7 +98,6 @@ in {
 
     # Note
     pkgs.obsidian # A knowledge base and note-taking app
-    pkgs.activitywatch
 
     ######## # Util ########
     # GUI File manager

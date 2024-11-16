@@ -18,7 +18,7 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.44.1?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.45.0?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
     pyprland = {url = "github:hyprland-community/pyprland/2.2.20";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
@@ -28,7 +28,7 @@
     };
 
     hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/b3594356b77c66a0db15024dba71514c0fddbed8";
 
     # +-------------+
     # | nvim plugin |
