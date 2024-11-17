@@ -27,9 +27,3 @@ if [ ! -d "/etc/nixos" ]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 fi
 
-# Check if the current session is an SSH connection
-if [ -n "$SSH_CONNECTION" ]; then
-  if ! systemd-inhibit --list | grep "Active SSH session" >/dev/null; then
-    systemd-inhibit --what=idle --who=me --why="Active SSH session" sleep infinity &
-  fi
-fi
