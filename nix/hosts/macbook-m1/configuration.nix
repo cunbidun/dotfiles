@@ -30,6 +30,106 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
     ];
   };
+
+  # MacOS Workspace Switching Configuration
+  #
+  # This configuration sets up keyboard shortcuts for switching between workspaces/desktops
+  # using the Option (Alt) key + number combinations.
+  #
+  # Modifier Key Values:
+  # - None:           0
+  # - Shift:          131072
+  # - Control:        1048576
+  # - Option/Alt:     524288
+  # - Command:        1048840
+  # - Command+Shift:  1179914
+  #
+  # Key Codes (first parameter):
+  # - 1: 49    - 6: 54
+  # - 2: 50    - 7: 55
+  # - 3: 51    - 8: 56
+  # - 4: 52    - 9: 57
+  # - 5: 53    - 0: 58
+  #
+  # Virtual Keycodes (second parameter):
+  # - 1: 18    - 6: 23
+  # - 2: 19    - 7: 24
+  # - 3: 20    - 8: 25
+  # - 4: 21    - 9: 26
+  # - 5: 22    - 0: 27
+  #
+  # Symbolic Hotkey IDs:
+  # - 118: Switch to Desktop 1    - 122: Switch to Desktop 5
+  # - 119: Switch to Desktop 2    - 123: Switch to Desktop 6
+  # - 120: Switch to Desktop 3    - 124: Switch to Desktop 7
+  # - 121: Switch to Desktop 4    - 125: Switch to Desktop 8
+  #
+  # Other Useful IDs:
+  # - 32: Mission Control
+  # - 33: Application Windows
+  # - 36: Move Left a Space
+  # - 37: Move Right a Space
+  #
+  # To debug current settings:
+  # $ defaults read com.apple.symbolichotkeys.plist AppleSymbolicHotKeys
+  system.defaults.CustomUserPreferences = {
+    "com.apple.symbolichotkeys" = {
+      AppleSymbolicHotKeys = {
+        "118" = {
+          enabled = true;
+          value = {
+            parameters = [49 18 524288]; # option + 1
+            type = "standard";
+          };
+        };
+        "119" = {
+          enabled = true;
+          value = {
+            parameters = [50 19 524288]; # option + 2
+            type = "standard";
+          };
+        };
+        "120" = {
+          enabled = true;
+          value = {
+            parameters = [51 20 524288]; # option + 3
+            type = "standard";
+          };
+        };
+        "121" = {
+          enabled = true;
+          value = {
+            parameters = [52 21 524288]; # option + 4
+            type = "standard";
+          };
+        };
+        "122" = {
+          enabled = true;
+          value = {
+            parameters = [53 21 524288]; # option + 5
+            type = "standard";
+          };
+        };
+        # Mission Control
+        "32" = {
+          enabled = true;
+          value = {
+            parameters = [65535 48 524288]; # 48 is Tab key
+            type = "standard";
+          };
+        };
+        # Input Source switching (id 60)
+        "60" = {
+          enabled = true;
+          value = {
+            parameters = [49 49 524288]; # 49 is Space, 524288 is Option modifier
+            type = "standard";
+          };
+        };
+      };
+    };
+  };
+
   # TODO To make this work, homebrew need to be installed manually, see https://brew.sh
   # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   #
@@ -47,11 +147,12 @@
 
     # `brew install`
     brews = [
-      {
-        name = "autoraise";
-        start_service = true;
-        restart_service = true;
-      }
+      # autoraise to implement focus follow mouse in aerospace
+      # {
+      #   name = "autoraise";
+      #   start_service = true;
+      #   restart_service = true;
+      # }
     ];
 
     # `brew install --cask`
@@ -68,18 +169,18 @@
       "discord"
       "monitorcontrol"
       "font-sauce-code-pro-nerd-font"
+      "visual-studio-code"
       "unnaturalscrollwheels"
       "steam"
-      "aerospace"
+      # "aerospace" -- windows manager for macos. very cool but not stable yet
       "netnewswire"
-      "raycast"
+      "rectangle"
     ];
     global.autoUpdate = true;
   };
   system.defaults.dock = {
     autohide = true;
   };
-
   # from
   # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
   # If you configure some of your MacOS preferences via nix-darwin and then activate your system,

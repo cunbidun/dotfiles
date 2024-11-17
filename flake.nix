@@ -2,10 +2,12 @@
   description = "cunbidun's flake";
 
   inputs = {
-    nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixpkgs-unstable";};
+    nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
     nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-24.05";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
-    home-manager = {url = "github:nix-community/home-manager";};
+    home-manager = {
+      url = "github:nix-community/home-manager";
+    };
     xremap-flake = {url = "github:xremap/nix-flake";};
     nix-flatpak = {url = "github:gmodena/nix-flatpak";};
     ags = {url = "github:Aylur/ags";};
