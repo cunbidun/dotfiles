@@ -20,9 +20,9 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.45.0?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.45.2?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
-    pyprland = {url = "github:hyprland-community/pyprland/2.2.20";};
+    pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprfocus = {
       url = "github:pyt0xic/hyprfocus";
@@ -30,7 +30,7 @@
     };
 
     hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
-    stylix.url = "github:danth/stylix/b3594356b77c66a0db15024dba71514c0fddbed8";
+    stylix.url = "github:danth/stylix";
 
     # +-------------+
     # | nvim plugin |
