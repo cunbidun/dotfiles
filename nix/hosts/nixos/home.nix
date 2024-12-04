@@ -45,8 +45,6 @@ in {
     enable = true;
     enabledExtensions = with spicePkgs.extensions; [
     ];
-    # theme = spicePkgs.themes.catppuccin;
-    # colorScheme = "latte";
   };
 
   services.xremap = {
@@ -180,6 +178,7 @@ in {
     enable = true;
   };
   programs.hyprcursor-phinger.enable = true;
+  programs.zoxide.enable = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

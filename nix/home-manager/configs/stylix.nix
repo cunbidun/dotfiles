@@ -3,13 +3,13 @@
   pkgs,
   ...
 }: let
-  theme-name = "standardized-dark";
-  # theme-name = "standardized-light";
+  # theme-name = "standardized-dark";
+  theme-name = "standardized-light";
 in {
   stylix = {
     enable = true;
-    image = ../../../wallpapers/others/QgdxHBX.jpeg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
+    image = ../../../wallpapers/others/QgdxHBX.jpeg;
 
     targets = {
       waybar.enable = false;
@@ -27,6 +27,8 @@ in {
     opacity = {
       terminal = 0.85;
     };
+
+    targets.gnome.enable = true;
 
     fonts = {
       sizes = {
