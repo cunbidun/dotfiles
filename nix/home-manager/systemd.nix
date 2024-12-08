@@ -6,15 +6,18 @@
   ...
 }: let
   scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
+  unit_section = {
+    PartOf = ["graphical-session.target"];
+    After = ["graphical-session-pre.target"];
+  };
+  install_section = {
+    WantedBy = ["graphical-session.target"];
+  };
 in {
   systemd.user = {
     services = {
       ags = {
-        Unit = {
-          Description = "Ags Service";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
@@ -22,14 +25,11 @@ in {
           StandardOutput = "journal";
           StandardError = "journal";
         };
+        Install = install_section;
       };
 
       pypr = {
-        Unit = {
-          Description = "Pypr Service";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
@@ -38,14 +38,11 @@ in {
           StandardError = "journal";
           ExecStopPost = "/bin/sh -c 'rm -f \${XDG_RUNTIME_DIR}/hypr/\${HYPRLAND_INSTANCE_SIGNATURE}/.pyprland.sock'";
         };
+        Install = install_section;
       };
 
       syncthing = {
-        Unit = {
-          Description = "Syncthing Service";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
@@ -53,14 +50,11 @@ in {
           StandardOutput = "journal";
           StandardError = "journal";
         };
+        Install = install_section;
       };
 
       hyprland_autostart = {
-        Unit = {
-          Description = "Hyprland Auto Start Script";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
@@ -68,42 +62,37 @@ in {
           StandardOutput = "journal";
           StandardError = "journal";
         };
+        Install = install_section;
       };
 
       waybar_config_watcher = {
-        Unit = {Description = "Waybar Restarter Service";};
+        Unit = unit_section;
         Service = {
           Type = "oneshot";
           WorkingDirectory = "%h";
           ExecStart = "systemctl --user restart waybar.service";
         };
+        Install = install_section;
       };
 
       ags_config_watcher = {
-        Unit = {Description = "Ags Restarter Service";};
+        Unit = unit_section;
         Service = {
           Type = "oneshot";
           WorkingDirectory = "%h";
           ExecStart = "systemctl --user restart ags.service";
         };
+        Install = install_section;
       };
 
       sync_weather = {
-        Unit = {
-          after = ["hyprland.service"];
-          requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Service = {
           Type = "oneshot";
           WorkingDirectory = "%h";
           ExecStart = "${lib.getExe scripts.weather-sync}";
         };
-      };
-
-      hyprpaper = {
-        Service = {
-          RestartSec = lib.mkForce 1;
-        };
+        Install = install_section;
       };
 
       waybar = {
@@ -112,73 +101,28 @@ in {
         };
       };
 
-      fcitx5-daemon = {
-        Unit = {
-          PartOf = ["hyprland.service"];
-          requires = ["hyprland.service"];
-        };
+      dunst = {
         Service = {
-          RestartSec = lib.mkForce 1;
-          Restart = "on-failure";
-        };
-      };
-
-      hyprland = {
-        Unit = {
-          Description = "My hyprland wrapper that runs it in systemd";
-          Wants = [
-            "ags.service"
-            "ags_config_watcher.path"
-            "gammastep.service"
-            "hypridle.service"
-            "hyprland_autostart.service"
-            "hyprpaper.service"
-            "pypr.service"
-            "sync_weather.service"
-            "sync_weather.timer"
-            "syncthing.service"
-            "waybar.service"
-            "waybar_config_watcher.path"
-            "fcitx5-daemon.service"
-          ];
-        };
-        Service = {
-          Type = "notify";
-          ExecStartPre = "systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY";
-          WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe inputs.hyprland.packages.${pkgs.system}.hyprland}";
-          StandardOutput = "journal";
-          StandardError = "journal";
-          TimeoutStopSec = 5;
+          RestartSec = 1;
         };
       };
     };
 
     paths = {
       waybar_config_watcher = {
-        Unit = {
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Path = {
           PathModified = "%h/.config/waybar/";
         };
       };
       ags_config_watcher = {
-        Unit = {
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Path = {PathModified = "%h/.config/ags/";};
       };
     };
     timers = {
       sync_weather = {
-        Unit = {
-          Description = "Sync weather timer";
-          After = ["hyprland.service"];
-          Requires = ["hyprland.service"];
-        };
+        Unit = unit_section;
         Timer = {OnCalendar = "*:0/10";};
       };
     };

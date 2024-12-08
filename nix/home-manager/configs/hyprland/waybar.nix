@@ -21,7 +21,7 @@ in {
         modules-right = [
           "network"
           "pulseaudio"
-          "bluetooth"
+          # "bluetooth"
           "custom/brightness"
           "custom/weather"
           "tray"
@@ -86,8 +86,7 @@ in {
         };
         "custom/weather" = {
           interval = "once";
-          exec-if = "which sc_weather";
-          exec = "sc_weather";
+          exec = "${lib.getExe scripts.weather}";
           signal = 20;
           tooltip = false;
           format = "{}";
@@ -97,8 +96,7 @@ in {
         };
         "custom/brightness" = {
           interval = "once";
-          exec-if = "which sc_get_brightness_percentage";
-          exec = "sc_get_brightness_percentage";
+          exec = "${lib.getExe scripts.brightness-control} get";
           signal = 16;
           tooltip = false;
           format = "BRT {}%";

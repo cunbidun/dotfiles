@@ -111,7 +111,6 @@ in {
     # CLI File manager
     pkgs.ueberzugpp # A command-line UI library for image previews
     pkgs.evince # A document viewer
-    pkgs.dunst # A lightweight notification daemon
     pkgs.conky # A lightweight system monitor
     pkgs.hwinfo # A hardware information tool
     pkgs.rclone # A command-line tool for cloud storage
@@ -122,7 +121,6 @@ in {
     pkgs.cargo # The Rust package manager
     pkgs.rustc # The Rust compiler
     pkgs.nodejs_20
-    pkgs.jetbrains-toolbox
   ];
 
   mac_packages = [

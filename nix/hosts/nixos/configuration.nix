@@ -95,7 +95,9 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    withUWSM = true;
   };
+  programs.uwsm.enable = true;
   programs.steam.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;

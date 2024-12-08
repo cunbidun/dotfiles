@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-hyprctl dispatch togglespecialworkspace "minimized_$(hyprctl activeworkspace -j | jq '.id')"

@@ -86,18 +86,12 @@ in {
 
   home.file = {
     ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
+    #
+    # ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
+    # ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
+    # ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
+    # ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
 
-    ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
-    ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
-    ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
-    ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
-    ".local/bin/sc_brightness_change".source = "${project_root}/local/linux/.local/bin/sc_brightness_change";
-    ".local/bin/sc_get_brightness_percentage".source = "${project_root}/local/linux/.local/bin/sc_get_brightness_percentage";
-    ".local/bin/sc_hyprland_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_minimize";
-    ".local/bin/sc_hyprland_show_minimize".source = "${project_root}/local/linux/.local/bin/sc_hyprland_show_minimize";
-    ".local/bin/sc_window_picker".source = "${project_root}/local/linux/.local/bin/sc_window_picker";
-    ".local/bin/sc_prompt".source = "${project_root}/local/linux/.local/bin/sc_prompt";
-    ".local/bin/sc_weather".source = "${project_root}/local/linux/.local/bin/sc_weather";
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
 
     # Custom deskop files

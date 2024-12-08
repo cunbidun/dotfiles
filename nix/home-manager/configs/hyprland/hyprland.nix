@@ -193,8 +193,8 @@ in {
       # bind = $mainMod SHIFT, Q, exec, touch ~/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 
       # Media
-      bindle=$mainMod, F1, exec, sc_brightness_change decrease 5
-      bindle=$mainMod, F2, exec, sc_brightness_change increase 5
+      bindle=$mainMod, F1, exec, ${lib.getExe scripts.brightness-control} decrease 5
+      bindle=$mainMod, F2, exec, ${lib.getExe scripts.brightness-control} increase 5
 
       # Move focus with mainMod + arrow keys
       bind = $mainMod, h, movefocus, l
@@ -222,7 +222,7 @@ in {
       bind = $mainMod, q, workspace, 7
       bind = $mainMod, g, workspace, 8
       bind = $mainMod, 9, workspace, 9
-      bind = $mainMod CONTROL, M, exec, sc_hyprland_show_minimize
+      bind = $mainMod CONTROL, M, exec, ${lib.getExe scripts.toggle-minimize-window}
 
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
       bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
@@ -234,7 +234,7 @@ in {
       bind = $mainMod SHIFT, q, movetoworkspacesilent, 7
       bind = $mainMod SHIFT, g, movetoworkspacesilent, 8
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
-      bind = $mainMod SHIFT, M, exec, sc_hyprland_minimize
+      bind = $mainMod SHIFT, M, exec, ${lib.getExe scripts.minimize-window}
 
       # Scroll through existing workspaces with mainMod + scroll
       # bind = $mainMod, Tab, overview:toggle,
@@ -284,8 +284,8 @@ in {
       # sets repeatable binds for resizing the active window
       bind=,r,exec,hyprctl reload && notify-send -t 1000 'Hyprland reloaded'
       bind=,l,exec,loginctl lock-session
-      bind=SHIFT,L,exec,sc_prompt 'Do you want to suspend?' 'sleep 0.6 && loginctl lock-session && sleep 1 && systemctl suspend -i'
-      bind=$mainMod SHIFT, Q, exec, sc_prompt 'Do you want to exit?' 'systemctl --user stop hyprland.service'
+      bind=SHIFT,L,exec,${lib.getExe scripts.prompt} 'Do you want to suspend?' 'sleep 0.6 && loginctl lock-session && sleep 1 && systemctl suspend -i'
+      bind=$mainMod SHIFT, Q, exec, ${lib.getExe scripts.prompt} 'Do you want to exit?' 'uwsm stop'
 
       # use reset to go back to the global submap
       bind=,escape,submap,reset

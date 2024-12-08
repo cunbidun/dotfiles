@@ -2,9 +2,9 @@
 
 set -e
 
+export PATH="/home/$USER/.local/bin:$PATH"
 systemctl --user import-environment PATH XDG_DATA_DIRS HOME TERMINAL PICKER EDITOR
 systemctl --user import-environment GLFW_IM_MODULE GTK_IM_MODULE QT_IM_MODULE XMODIFIERS NIX_PROFILES # for keyboard
 systemctl --user import-environment GIO_EXTRA_MODULES QT_QTA_PLATFORMTHEME                            # trash folder on nautilus
 systemctl --user import-environment NIX_LD NIX_LD_LIBRARY_PATH                                        # for unpatched binary
 systemctl --user import-environment NIXOS_OZONE_WL                                                    # for unpatched binary
-systemctl --user start hyprland.service
