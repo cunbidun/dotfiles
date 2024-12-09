@@ -7,8 +7,7 @@
 }: let
   scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
   unit_section = {
-    PartOf = ["graphical-session.target"];
-    After = ["graphical-session-pre.target"];
+    After = ["graphical-session.target"];
   };
   install_section = {
     WantedBy = ["graphical-session.target"];
@@ -24,6 +23,7 @@ in {
           ExecStart = "${lib.getExe pkgs.ags} -c ${project_root}/utilities/ags/config.js";
           StandardOutput = "journal";
           StandardError = "journal";
+          Slice = ["app-graphical.slice"];
         };
         Install = install_section;
       };
@@ -37,6 +37,7 @@ in {
           StandardOutput = "journal";
           StandardError = "journal";
           ExecStopPost = "/bin/sh -c 'rm -f \${XDG_RUNTIME_DIR}/hypr/\${HYPRLAND_INSTANCE_SIGNATURE}/.pyprland.sock'";
+          Slice = ["app-graphical.slice"];
         };
         Install = install_section;
       };
@@ -49,6 +50,7 @@ in {
           ExecStart = "${lib.getExe pkgs.syncthing}";
           StandardOutput = "journal";
           StandardError = "journal";
+          Slice = ["app-graphical.slice"];
         };
         Install = install_section;
       };
@@ -61,6 +63,7 @@ in {
           ExecStart = "${scripts.hyprland-autostart}/bin/hyprland-autostart";
           StandardOutput = "journal";
           StandardError = "journal";
+          Slice = ["app-graphical.slice"];
         };
         Install = install_section;
       };
@@ -71,6 +74,7 @@ in {
           Type = "oneshot";
           WorkingDirectory = "%h";
           ExecStart = "systemctl --user restart waybar.service";
+          Slice = ["app-graphical.slice"];
         };
         Install = install_section;
       };
@@ -81,6 +85,7 @@ in {
           Type = "oneshot";
           WorkingDirectory = "%h";
           ExecStart = "systemctl --user restart ags.service";
+          Slice = ["app-graphical.slice"];
         };
         Install = install_section;
       };
@@ -91,17 +96,12 @@ in {
           Type = "oneshot";
           WorkingDirectory = "%h";
           ExecStart = "${lib.getExe scripts.weather-sync}";
+          Slice = ["app-graphical.slice"];
         };
         Install = install_section;
       };
 
       waybar = {
-        Service = {
-          RestartSec = 1;
-        };
-      };
-
-      dunst = {
         Service = {
           RestartSec = 1;
         };
@@ -114,16 +114,19 @@ in {
         Path = {
           PathModified = "%h/.config/waybar/";
         };
+        Install = install_section;
       };
       ags_config_watcher = {
         Unit = unit_section;
         Path = {PathModified = "%h/.config/ags/";};
+        Install = install_section;
       };
     };
     timers = {
       sync_weather = {
         Unit = unit_section;
         Timer = {OnCalendar = "*:0/10";};
+        Install = install_section;
       };
     };
   };

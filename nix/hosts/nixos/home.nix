@@ -1,4 +1,6 @@
 {
+  lib,
+  config,
   pkgs,
   project_root,
   inputs,
@@ -22,7 +24,7 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
-    "${project_root}/nix/home-manager/configs/dunst.nix"
+    "${project_root}/nix/home-manager/configs/mako.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
     "${project_root}/nix/home-manager/configs/swaylock.nix"
@@ -85,7 +87,7 @@ in {
   fonts.fontconfig.enable = true;
 
   home.file = {
-    ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
+    # ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
     #
     # ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
     # ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
@@ -122,7 +124,7 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "text/html" = "firefox.desktop"; # Change to your preferred browser's .desktop entry
+        "text/html" = "firefox.desktop";
         "x-scheme-handler/http" = "firefox.desktop";
         "x-scheme-handler/https" = "firefox.desktop";
         "application/pdf" = ["org.gnome.Evince.desktop"];
@@ -142,6 +144,18 @@ in {
       "${pkgs.gsettings-desktop-schemas}/share"
     ];
   };
+  # Add content to .profile
+  home.file.".profile".text = ''
+    . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+
+    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES NIX_LD NIX_LD_LIBRARY_PATH NIXOS_OZONE_WL"
+    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES GLFW_IM_MODULE XMODIFIERS GTK_IM_MODULE QT_IM_MODULE"
+    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES GIO_EXTRA_MODULES QT_QTA_PLATFORMTHEME"
+    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES XDG_DATA_DIRS XDG_CURRENT_DESKTOP"
+    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES HOME TERMINAL PICKER EDITOR"
+
+    UWSM_WAIT_VARNAMES="$UWSM_FINALIZE_VARNAMES"
+  '';
   home.sessionVariables = {
     PICKER = "tofi";
     TERMINAL = "alacritty";
@@ -155,6 +169,7 @@ in {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [fcitx5-unikey fcitx5-gtk];
   };
+  systemd.user.services.fcitx5-daemon = lib.mkForce {};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

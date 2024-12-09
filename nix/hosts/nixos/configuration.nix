@@ -220,13 +220,19 @@
     xdgOpenUsePortal = true;
   };
 
-  systemd.user.services.xdg-desktop-portal-gtk = {
-    serviceConfig = {
-      Restart = "on-failure";
-      RestartSec = "5s";
-      Environment = "G_MESSAGES_DEBUG=all";
-    };
-  };
+  # systemd.user.services.xdg-desktop-portal = {
+  #   unitConfig = {
+  #     After = ["graphical-session.target"];
+  #   };
+  # };
+  #
+  # systemd.user.services.xdg-desktop-portal-gtk = {
+  #   serviceConfig = {
+  #     Restart = "on-failure";
+  #     RestartSec = "5s";
+  #     Environment = "G_MESSAGES_DEBUG=all";
+  #   };
+  # };
 
   hardware.opentabletdriver.enable = true;
 }

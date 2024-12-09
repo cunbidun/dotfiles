@@ -23,10 +23,11 @@ in {
       exec-once = [
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "systemctl --user import-environment HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "env > \${XDG_RUNTIME_DIR}/hypr/hyprland-runtime-env"
+        "uwsm finalize"
       ];
 
-      env = ["HYPRCURSOR_THEME,hyprcursor-phinger"];
+      env = ["HYPRCURSOR_THEME,hyprcursor-phinger" "HYPRCURSOR_SIZE,24"];
 
       misc = {
         enable_swallow = true;
@@ -144,6 +145,7 @@ in {
         "float,title:^(__scratchpad)$"
         "float,title:^(__waybar_popup)$"
         "float,title:^(Open File)$"
+        "float,title:^(Bluetooth Devices)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
         "float,class:^(waydroid.com.*)$"
         "float,class:^(org.gnome.Nautilus)$"
@@ -189,7 +191,7 @@ in {
       bind = $mainMod, slash, layoutmsg, togglesplit
       bind = $mainMod, F, togglefloating,
       bind = $mainMod SHIFT, C, killactive,
-      bind = $mainMod, backslash, exec, dunstctl close-all
+      bind = $mainMod, backslash, exec, makoctl dismiss -a
       # bind = $mainMod SHIFT, Q, exec, touch ~/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 
       # Media
