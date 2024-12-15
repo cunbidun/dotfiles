@@ -19,16 +19,17 @@
       };
 
       messenger = {
-        command = "caprine --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version3";
+        command = "firefoxpwa site launch 01JEQ82MQK9NCAQ8DCVVPYMJFX";
         animation = "";
         unfocus = "";
         lazy = true;
         size = "50% 50%";
         position = "25% 25%";
         excludes = "*";
-        class = "Caprine";
+        class = "FFPWA-01JEQ82MQK9NCAQ8DCVVPYMJFX";
         match_by = "class";
         hysteresis = 0;
+        process_tracking = false;
       };
 
       spotify = {

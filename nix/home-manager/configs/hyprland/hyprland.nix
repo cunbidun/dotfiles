@@ -137,7 +137,7 @@ in {
         "noborder,class:^(cs2)$"
         "noblur,class:^(cs2)$"
         "noshadow,class:^(cs2)$"
-        "float,class:^(Caprine)$"
+        "float,class:^(Messenger)$"
         "float,title:^(Spotify Premium)$"
         "float,class:^(Signal)$"
         "float,class:^(obsidian)$"

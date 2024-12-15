@@ -52,7 +52,6 @@ in {
       x11Support = false;
       waylandSupport = true;
     })
-    pkgs.firefox
 
     # System
     pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
@@ -94,7 +93,6 @@ in {
     pkgs.signal-desktop # Signal Desktop messaging app
     pkgs.discord # Discord messaging app
     pkgs.slack # A messaging and collaboration platform
-    pkgs.caprine-bin
 
     # Note
     pkgs.obsidian # A knowledge base and note-taking app

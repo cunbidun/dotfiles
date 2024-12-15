@@ -1,11 +1,16 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: let
   theme-name = "standardized-dark";
   # theme-name = "standardized-light";
 in {
+  dconf.settings."org/gnome/desktop/interface".color-scheme =
+    if theme-name == "standardized-dark"
+    then (lib.mkForce "prefer-dark")
+    else (lib.mkForce "prefer-light");
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
@@ -15,6 +20,9 @@ in {
       waybar.enable = false;
       vscode.enable = false;
       nixvim.enable = false;
+      gnome.enable = true;
+      kde.enable = true;
+      gtk.enable = true;
     };
 
     # https://github.com/phisch/phinger-cursors
@@ -27,8 +35,6 @@ in {
     opacity = {
       terminal = 0.85;
     };
-
-    targets.gnome.enable = true;
 
     fonts = {
       sizes = {
