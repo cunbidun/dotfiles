@@ -18,19 +18,19 @@
         hysteresis = 0;
       };
 
-      messenger = {
-        command = "firefoxpwa site launch 01JEQ82MQK9NCAQ8DCVVPYMJFX";
-        animation = "";
-        unfocus = "";
-        lazy = true;
-        size = "50% 50%";
-        position = "25% 25%";
-        excludes = "*";
-        class = "FFPWA-01JEQ82MQK9NCAQ8DCVVPYMJFX";
-        match_by = "class";
-        hysteresis = 0;
-        process_tracking = false;
-      };
+      # messenger = {
+      #   command = "firefoxpwa site launch 01JEQ82MQK9NCAQ8DCVVPYMJFX";
+      #   animation = "";
+      #   unfocus = "";
+      #   lazy = true;
+      #   size = "50% 50%";
+      #   position = "25% 25%";
+      #   excludes = "*";
+      #   class = "FFPWA-01JEQ82MQK9NCAQ8DCVVPYMJFX";
+      #   match_by = "class";
+      #   hysteresis = 0;
+      #   process_tracking = false;
+      # };
 
       spotify = {
         command = "spotify";
@@ -52,6 +52,20 @@
         position = "25% 25%";
         excludes = "*";
         hysteresis = 0;
+      };
+
+      file = {
+        command = "command ";
+        animation = "";
+        unfocus = "";
+        lazy = true;
+        size = "50% 50%";
+        position = "25% 25%";
+        excludes = "*";
+        hysteresis = 0;
+        match_by = "class";
+        process_tracking = false;
+        class = "org.gnome.Nautilus";
       };
 
       obsidian = {

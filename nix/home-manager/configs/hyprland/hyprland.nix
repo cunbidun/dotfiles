@@ -141,20 +141,33 @@ in {
         "float,title:^(Spotify Premium)$"
         "float,class:^(Signal)$"
         "float,class:^(obsidian)$"
-        "float,class:^(org.gnome.NautilusPreviewer)$"
         "float,title:^(__scratchpad)$"
         "float,title:^(__waybar_popup)$"
         "float,title:^(Open File)$"
         "float,title:^(Bluetooth Devices)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
         "float,class:^(waydroid.com.*)$"
-        "float,class:^(org.gnome.Nautilus)$"
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
         "workspace 8 silent,class:^([Ss]team)$"
         "workspace 8 silent,class:^(dota2)$"
+
+        # 1Password rules
+        "float,class:^(.*1Password.*)$"
+        "pin,class:^(.*1Password.*)$"
+        "center,class:^(.*1Password.*)$"
+        "size 50% 50%,class:^(.*1Password.*)$"
+
+        # File
+        "float,class:^(.*org.gnome.Nautilus.*)$"
+        "center,class:^(.*org.gnome.Nautilus.*)$"
+        "size 50% 50%,class:^(.*org.gnome.Nautilus.*)$"
+        "float,class:^(org.gnome.NautilusPreviewer)$"
+        "center,class:^(org.gnome.NautilusPreviewer)$"
+        "size 50% 50%,class:^(org.gnome.NautilusPreviewer)$"
+        "pin,class:^(org.gnome.NautilusPreviewer)$"
       ];
 
       bindle = [
@@ -332,6 +345,7 @@ in {
       bind = $mainMod, Grave, exec, pypr toggle term
       bind = $mainMod, c, exec, pypr toggle messenger
       bind = $mainMod, n, exec, pypr toggle obsidian
+      bind = $mainMod, e, exec, pypr toggle file
 
     '';
   };

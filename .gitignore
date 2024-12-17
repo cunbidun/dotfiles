@@ -49,3 +49,8 @@ coverage.xml
 docs/_build/
 
 .DS_Store
+
+dist
+
+types
+node_modules

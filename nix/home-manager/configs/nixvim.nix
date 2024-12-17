@@ -266,7 +266,7 @@ in {
         float_opts = {
           border = "single";
         };
-        shell = "sh";
+        shell = "zsh";
         size = ''
           function (term)
             if term.direction == "horizontal" then
