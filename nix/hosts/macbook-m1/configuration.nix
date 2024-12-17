@@ -126,6 +126,14 @@
             type = "standard";
           };
         };
+        # Selected screenshot (Option + Shift + S)
+        "31" = {
+          enabled = true;
+          value = {
+            parameters = [115 1 655360]; # 1 is 'S', 655360 is Option(524288) + Shift(131072)
+            type = "standard";
+          };
+        };
       };
     };
   };
