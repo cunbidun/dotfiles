@@ -11,7 +11,7 @@ format = '''
 
 [conda]
 ignore_base = false
-format = '[\($environment\)]($style)'
+format = '[\($environment\)]($style) '
 style = 'green'
 
 [directory]
