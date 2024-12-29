@@ -137,9 +137,8 @@ in {
         "noborder,class:^(cs2)$"
         "noblur,class:^(cs2)$"
         "noshadow,class:^(cs2)$"
-        "float,class:^(Messenger)$"
         "float,title:^(Spotify Premium)$"
-        "float,class:^(Signal)$"
+        "float,class:^(signal)$"
         "float,class:^(obsidian)$"
         "float,title:^(__scratchpad)$"
         "float,title:^(__waybar_popup)$"
@@ -153,6 +152,9 @@ in {
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
         "workspace 8 silent,class:^([Ss]team)$"
         "workspace 8 silent,class:^(dota2)$"
+
+        # Messenger
+        "float,class:^(Caprine)$"
 
         # 1Password rules
         "float,class:^(.*1Password.*)$"

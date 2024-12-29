@@ -33,6 +33,7 @@ in {
     pkgs.devenv
     pkgs.prismlauncher
     pkgs.glib
+    pkgs.caprine
 
     # Hyprland
     pkgs.waybar # A Wayland bar for Sway and Hyprland

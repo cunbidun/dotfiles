@@ -118,7 +118,7 @@ in {
       };
       ags_config_watcher = {
         Unit = unit_section;
-        Path = {PathModified = "%h/.config/ags/";};
+        Path = {PathModified = "${project_root}/utilities/ags";};
         Install = install_section;
       };
     };

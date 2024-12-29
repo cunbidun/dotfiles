@@ -32,10 +32,10 @@ in {
           all-outputs = true;
           format = "{icon}";
           format-icons = {
-            "1" = "FIN";
-            "2" = "ADL";
-            "3" = "AML";
-            "4" = "ALGO";
+            "1" = "1";
+            "2" = "2";
+            "3" = "3";
+            "4" = "4";
             "5" = "WEB";
             "6" = "CP";
             "7" = "QUANT";

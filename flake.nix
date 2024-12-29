@@ -20,12 +20,12 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.45.2?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.46.2?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprfocus = {
-      url = "github:pyt0xic/hyprfocus";
+      url = "github:pyt0xic/hyprfocus/e7d9ee3c470b194fe16179ff2f16fc4233e928ef";
       inputs.hyprland.follows = "hyprland";
     };
 
