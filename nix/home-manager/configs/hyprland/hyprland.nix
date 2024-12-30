@@ -141,7 +141,6 @@ in {
         "float,class:^(signal)$"
         "float,class:^(obsidian)$"
         "float,title:^(__scratchpad)$"
-        "float,title:^(__waybar_popup)$"
         "float,title:^(Open File)$"
         "float,title:^(Bluetooth Devices)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
@@ -170,6 +169,10 @@ in {
         "center,class:^(org.gnome.NautilusPreviewer)$"
         "size 50% 50%,class:^(org.gnome.NautilusPreviewer)$"
         "pin,class:^(org.gnome.NautilusPreviewer)$"
+
+        # Waybar popup
+        "size 50% 50%,title:^(__waybar_popup)$"
+        "float,title:^(__waybar_popup)$"
       ];
 
       bindle = [
