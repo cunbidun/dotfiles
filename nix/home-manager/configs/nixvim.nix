@@ -152,8 +152,8 @@ in {
       {
         mode = "n";
         key = "<leader>cf";
-        action = "<cmd>Easypick find_tasks<cr>";
-        options.desc = "Find tasks";
+        action = "<cmd>TaskFiles<CR>";
+        options.desc = "Find Task Files";
       }
       {
         mode = "n";
@@ -491,7 +491,6 @@ in {
       enableTelescope = true;
     };
     extraPlugins = with pkgs.vimPlugins; [
-      nvim-plugin-easypick
     ];
     extraConfigLua = ''
       local function TermWrapper(command)
@@ -546,21 +545,6 @@ in {
         TermWrapper(string.format('mv "%s" ~/.local/share/Trash/files/', vim.fn.expand('%:p:h')))
       end, {})
 
-      local easypick = require("easypick")
-      easypick.setup({
-      	pickers = {
-      		-- list files inside current folder with default previewer
-      		{
-      			-- name for your custom picker, that can be invoked using :Easypick <name> (supports tab completion)
-      			name = "find_tasks",
-      			-- the command to execute, output has to be a list of plain text entries
-      			command = "find task -type f ! -name '*.json' ! -path '*.dSYM*' ! -name '.gitkeep'",
-      			-- specify your custom previwer, or use one of the easypick.previewers
-      			previewer = easypick.previewers.default(),
-      		},
-      	},
-      })
-
       local function set_custom_highlights()
         local highlights = {
           -- IblScope = { fg = "#606060" },
@@ -581,6 +565,30 @@ in {
       vim.api.nvim_create_autocmd("VimEnter", {
         callback = set_custom_highlights,
       })
+
+      local function find_task_files()
+        require('telescope.builtin').find_files({
+          prompt_title = "Task Files",
+          find_command = {
+            "find",
+            "task",
+            "-type",
+            "f",
+            "!",
+            "-name",
+            "*.json",
+            "!",
+            "-path",
+            "*.dSYM*",
+            "!",
+            "-name",
+            ".gitkeep"
+          }
+        })
+      end
+
+      -- Create command
+      vim.api.nvim_create_user_command('TaskFiles', find_task_files, {})
 
     '';
   };

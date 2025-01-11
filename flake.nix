@@ -11,7 +11,10 @@
     xremap-flake = {url = "github:xremap/nix-flake";};
     nix-flatpak = {url = "github:gmodena/nix-flatpak";};
     ags = {url = "github:Aylur/ags";};
-    nixvim = {url = "github:nix-community/nixvim";};
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
 
     # +----------+
@@ -28,15 +31,6 @@
 
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     stylix = {url = "github:danth/stylix";};
-
-    # +-------------+
-    # | nvim plugin |
-    # +-------------+
-    nvim-plugin-easypick = {
-      url = "github:axkirillov/easypick.nvim";
-      flake = false;
-    };
-
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
   };
 
@@ -52,18 +46,6 @@
       import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [
-          (final: prev: {
-            vimPlugins =
-              prev.vimPlugins
-              // {
-                nvim-plugin-easypick = prev.vimUtils.buildVimPlugin {
-                  name = "easypick.nvim";
-                  src = inputs.nvim-plugin-easypick;
-                };
-              };
-          })
-        ];
       };
     mkHomeManagerModule = configPath: {
       home-manager = {
