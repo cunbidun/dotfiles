@@ -189,12 +189,6 @@ in {
   programs.hyprcursor-phinger.enable = true;
   programs.zoxide.enable = true;
 
-  home.activation = {
-    restartAGS = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      $DRY_RUN_CMD /run/current-system/sw/bin/systemctl --user restart ags.service
-    '';
-  };
-
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
