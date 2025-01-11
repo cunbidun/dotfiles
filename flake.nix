@@ -11,10 +11,7 @@
     xremap-flake = {url = "github:xremap/nix-flake";};
     nix-flatpak = {url = "github:gmodena/nix-flatpak";};
     ags = {url = "github:Aylur/ags";};
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-    };
+    nixvim = {url = "github:nix-community/nixvim";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
 
     # +----------+
@@ -25,12 +22,12 @@
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprfocus = {
-      url = "github:pyt0xic/hyprfocus/e7d9ee3c470b194fe16179ff2f16fc4233e928ef";
+      url = "github:pyt0xic/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
 
-    hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
-    stylix.url = "github:danth/stylix";
+    hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
+    stylix = {url = "github:danth/stylix";};
 
     # +-------------+
     # | nvim plugin |
@@ -40,10 +37,7 @@
       flake = false;
     };
 
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
   };
 
   outputs = inputs @ {
