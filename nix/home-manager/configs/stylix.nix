@@ -4,8 +4,8 @@
   lib,
   ...
 }: let
-  # theme-name = "standardized-dark";
-  theme-name = "standardized-light";
+  theme-name = "standardized-dark";
+  # theme-name = "standardized-light";
 in {
   dconf.settings."org/gnome/desktop/interface".color-scheme =
     if theme-name == "standardized-dark"
