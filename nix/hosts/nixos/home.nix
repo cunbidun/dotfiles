@@ -167,7 +167,7 @@ in {
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [fcitx5-unikey fcitx5-gtk];
+    fcitx5.addons = with pkgs; [fcitx5-bamboo fcitx5-gtk];
   };
   systemd.user.services.fcitx5-daemon = lib.mkForce {};
 

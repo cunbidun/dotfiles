@@ -84,6 +84,10 @@
         ms-python.isort
         ms-python.black-formatter
 
+        ms-vscode.cpptools
+
+        bazelbuild.vscode-bazel
+
         james-yu.latex-workshop
         streetsidesoftware.code-spell-checker
       ]
