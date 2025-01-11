@@ -211,7 +211,7 @@ in {
     plugins.vim-surround.enable = true;
     plugins.comment.enable = true;
     plugins.nvim-autopairs.enable = true;
-    plugins.nvim-colorizer.enable = true;
+    plugins.colorizer.enable = true;
     # +-------------+
     # | indentation |
     # +-------------+
