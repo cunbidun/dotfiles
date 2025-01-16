@@ -13,7 +13,6 @@
 in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
-    inputs.ags.homeManagerModules.default
     inputs.spicetify-nix.homeManagerModules.default
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/alacritty.nix"
@@ -177,11 +176,6 @@ in {
     enable = true;
     userName = "Duy Pham";
     userEmail = "cunbidun@gmail.com";
-  };
-  programs.ags = {
-    enable = true;
-    # additional packages to add to gjs's runtime
-    extraPackages = with pkgs; [gtksourceview webkitgtk accountsservice];
   };
   programs.bat = {
     enable = true;

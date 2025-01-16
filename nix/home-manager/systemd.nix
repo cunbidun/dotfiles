@@ -15,19 +15,6 @@
 in {
   systemd.user = {
     services = {
-      ags = {
-        Unit = unit_section;
-        Service = {
-          Type = "simple";
-          WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe pkgs.ags} -c ${project_root}/utilities/ags/config.js";
-          StandardOutput = "journal";
-          StandardError = "journal";
-          Slice = ["app-graphical.slice"];
-        };
-        Install = install_section;
-      };
-
       pypr = {
         Unit = unit_section;
         Service = {
@@ -79,17 +66,6 @@ in {
         Install = install_section;
       };
 
-      ags_config_watcher = {
-        Unit = unit_section;
-        Service = {
-          Type = "oneshot";
-          WorkingDirectory = "%h";
-          ExecStart = "systemctl --user restart ags.service";
-          Slice = ["app-graphical.slice"];
-        };
-        Install = install_section;
-      };
-
       sync_weather = {
         Unit = unit_section;
         Service = {
@@ -114,11 +90,6 @@ in {
         Path = {
           PathModified = "%h/.config/waybar/";
         };
-        Install = install_section;
-      };
-      ags_config_watcher = {
-        Unit = unit_section;
-        Path = {PathModified = "${project_root}/utilities/ags";};
         Install = install_section;
       };
     };

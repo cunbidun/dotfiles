@@ -10,7 +10,6 @@
     };
     xremap-flake = {url = "github:xremap/nix-flake";};
     nix-flatpak = {url = "github:gmodena/nix-flatpak";};
-    ags = {url = "github:Aylur/ags";};
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
