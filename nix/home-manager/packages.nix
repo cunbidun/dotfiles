@@ -20,7 +20,6 @@ in {
     pkgs.zip # A compression and archive utility
     pkgs.unzip # A decompression utility
     pkgs.newsboat # An RSS feed reader
-    pkgs.syncthing # A continuous file synchronization program
     pkgs.alejandra # nix formatter
     pkgs.shfmt # nix formatter
     pkgs.ripgrep

@@ -8,8 +8,10 @@
     home-manager = {
       url = "github:nix-community/home-manager";
     };
-    xremap-flake = {url = "github:xremap/nix-flake";};
-    nix-flatpak = {url = "github:gmodena/nix-flatpak";};
+    xremap-flake = {
+      url = "github:xremap/nix-flake";
+      inputs.hyprland.follows = "hyprland";
+    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -19,15 +21,10 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.46.2?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
-    hyprfocus = {
-      url = "github:pyt0xic/hyprfocus";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     stylix = {url = "github:danth/stylix";};
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
@@ -37,7 +34,6 @@
     nixpkgs-unstable,
     nix-darwin,
     home-manager,
-    nix-flatpak,
     ...
   }: let
     project_root = "${builtins.toString ./.}";
@@ -77,7 +73,6 @@
         pkgs = mkPkgs "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          nix-flatpak.nixosModules.nix-flatpak
           ./nix/hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           (mkHomeManagerModule "${project_root}/nix/hosts/nixos/home.nix")

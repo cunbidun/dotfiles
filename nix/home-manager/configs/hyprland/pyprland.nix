@@ -8,7 +8,7 @@
     };
     scratchpads = {
       term = {
-        command = "alacritty -t __scratchpad";
+        command = "alacritty -t Scratchpad";
         animation = "";
         lazy = true;
         unfocus = "";

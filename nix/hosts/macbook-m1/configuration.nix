@@ -173,7 +173,6 @@
       "signal"
       "messenger"
       "obsidian"
-      "syncthing"
       "discord"
       "monitorcontrol"
       "font-sauce-code-pro-nerd-font"

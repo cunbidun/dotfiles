@@ -137,8 +137,6 @@ in {
       "$HOME/.local/share"
       "/usr/local/share"
       "/usr/share"
-      "/var/lib/flatpak/exports/share"
-      "$HOME/.local/share/flatpak/exports/share"
       "${pkgs.glib.out}/share/gsettings-schemas"
       "${pkgs.gsettings-desktop-schemas}/share"
     ];

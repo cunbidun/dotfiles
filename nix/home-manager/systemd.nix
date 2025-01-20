@@ -29,19 +29,6 @@ in {
         Install = install_section;
       };
 
-      syncthing = {
-        Unit = unit_section;
-        Service = {
-          Type = "simple";
-          WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe pkgs.syncthing}";
-          StandardOutput = "journal";
-          StandardError = "journal";
-          Slice = ["app-graphical.slice"];
-        };
-        Install = install_section;
-      };
-
       hyprland_autostart = {
         Unit = unit_section;
         Service = {

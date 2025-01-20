@@ -108,23 +108,6 @@ in {
       };
 
       plugin = {
-        hyprfocus = {
-          enabled = true;
-          animate_floating = true;
-          animate_workspacechange = false;
-          focus_animation = "shrink";
-          bezier = "realsmooth, 0.28,0.29,.69,1.08";
-          flash = {
-            flash_opacity = 0.95;
-          };
-          shrink = {
-            shrink_percentage = 0.99;
-            in_bezier = "realsmooth";
-            in_speed = 1;
-            out_bezier = "realsmooth";
-            out_speed = 2;
-          };
-        };
       };
 
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
@@ -138,9 +121,9 @@ in {
         "noblur,class:^(cs2)$"
         "noshadow,class:^(cs2)$"
         "float,title:^(Spotify Premium)$"
-        "float,class:^(signal)$"
+        "float,class:^([Ss]ignal)$"
         "float,class:^(obsidian)$"
-        "float,title:^(__scratchpad)$"
+        "float,title:^(Scratchpad)$"
         "float,title:^(Open File)$"
         "float,title:^(Bluetooth Devices)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
@@ -183,7 +166,6 @@ in {
     };
 
     plugins = [
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
 
     extraConfig = ''
@@ -351,7 +333,6 @@ in {
       bind = $mainMod, c, exec, pypr toggle messenger
       bind = $mainMod, n, exec, pypr toggle obsidian
       bind = $mainMod, e, exec, pypr toggle file
-
     '';
   };
 }
