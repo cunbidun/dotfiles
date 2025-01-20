@@ -14,7 +14,7 @@ in {
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
-    image = ../../../wallpapers/others/QgdxHBX.jpeg;
+    image = ../../../wallpapers/Astronaut.png;
 
     targets = {
       waybar.enable = false;
