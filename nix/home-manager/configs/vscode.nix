@@ -67,6 +67,7 @@
 
         vscodevim.vim
         ms-vscode-remote.remote-ssh
+        ms-vscode-remote.remote-containers
 
         # gramma support
         bbenoist.nix

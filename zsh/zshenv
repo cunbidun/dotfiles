@@ -6,6 +6,9 @@ export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 if [ ! -d "/etc/nixos" ]; then
+  export PATH=/etc/profiles/per-user/cunbidun/bin:$PATH
+  export CONDA_CHANGEPS1=false
+
   # if archlinux then source conda env
   # >>> conda initialize >>>
   # !! Contents within this block are managed by 'conda init' !!
