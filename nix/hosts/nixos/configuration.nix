@@ -104,10 +104,6 @@
   };
   programs.uwsm.enable = true;
   programs.steam.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # List services that you want to enable:
 

@@ -178,8 +178,6 @@
       "font-sauce-code-pro-nerd-font"
       "visual-studio-code"
       "unnaturalscrollwheels"
-      "steam"
-      # "aerospace" -- windows manager for macos. very cool but not stable yet
       "netnewswire"
       "rectangle"
     ];

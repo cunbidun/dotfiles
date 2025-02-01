@@ -35,7 +35,6 @@ in {
 
   home.file = {
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
-    ".config/aerospace/aerospace.toml".source = "${project_root}/window_manager/aerospace/aerospace.toml";
   };
 
   # Let Home Manager install and manage itself.

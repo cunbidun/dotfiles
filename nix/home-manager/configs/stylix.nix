@@ -4,8 +4,8 @@
   lib,
   ...
 }: let
-  theme-name = "standardized-dark";
-  # theme-name = "standardized-light";
+  # theme-name = "standardized-dark";
+  theme-name = "standardized-light";
 in {
   dconf.settings."org/gnome/desktop/interface".color-scheme =
     if theme-name == "standardized-dark"
@@ -14,7 +14,11 @@ in {
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
-    image = ../../../wallpapers/Astronaut.png;
+
+    image =
+      if theme-name == "standardized-dark"
+      then ../../../wallpapers/Astronaut.png
+      else ../../../wallpapers/thuonglam.jpeg;
 
     targets = {
       waybar.enable = false;
