@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (pkgs.stdenv) isLinux isDarwin;
+in {
   programs.vscode = {
     enable = true;
 
@@ -85,13 +87,17 @@
         ms-python.isort
         ms-python.black-formatter
 
-        ms-vscode.cpptools
-
         bazelbuild.vscode-bazel
 
         james-yu.latex-workshop
         streetsidesoftware.code-spell-checker
       ]
+      # per os extension
+      ++ (
+        if isLinux
+        then [ms-vscode.cpptools]
+        else []
+      )
       # example of downloading extensions that's not in nixpackge
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {

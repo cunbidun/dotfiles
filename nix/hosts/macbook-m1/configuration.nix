@@ -78,39 +78,39 @@
         "118" = {
           enabled = true;
           value = {
-            parameters = [49 18 524288]; # option + 1
+            parameters = [49 18 524288]; # Option + 1
             type = "standard";
           };
         };
         "119" = {
           enabled = true;
           value = {
-            parameters = [50 19 524288]; # option + 2
+            parameters = [50 19 524288]; # Option + 2
             type = "standard";
           };
         };
         "120" = {
           enabled = true;
           value = {
-            parameters = [51 20 524288]; # option + 3
+            parameters = [51 20 524288]; # Option + 3
             type = "standard";
           };
         };
         "121" = {
           enabled = true;
           value = {
-            parameters = [52 21 524288]; # option + 4
+            parameters = [52 21 524288]; # Option + 4
             type = "standard";
           };
         };
         "122" = {
           enabled = true;
           value = {
-            parameters = [53 21 524288]; # option + 5
+            parameters = [53 21 524288]; # Option + 5
             type = "standard";
           };
         };
-        # Mission Control
+        # Mission Control Option + tab
         "32" = {
           enabled = true;
           value = {
@@ -118,7 +118,7 @@
             type = "standard";
           };
         };
-        # Input Source switching (id 60)
+        # Input Source switching Option + space
         "60" = {
           enabled = true;
           value = {
