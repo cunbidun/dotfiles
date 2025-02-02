@@ -165,6 +165,7 @@
 
     # `brew install --cask`
     casks = [
+      "iterm2"
       "1password"
       "spotify"
       "alt-tab"
