@@ -1,0 +1,20 @@
+local M = {}
+
+function M.setup()
+  require("gitsigns").setup({
+    current_line_blame = true,
+    current_line_blame_formatter = " <author>, <author_time:%R> – <summary>",
+    current_line_blame_formatter_nc = " Uncommitted",
+    current_line_blame_opts = { ignore_whitespace = true },
+    signs = {
+      add = { text = "▎" },
+      change = { text = "▎" },
+      changedelete = { text = "▎" },
+      delete = { text = "▎" },
+      topdelete = { text = "▎" },
+      untracked = { text = "▎" },
+    },
+  })
+end
+
+return M

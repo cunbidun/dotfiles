@@ -22,7 +22,7 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
-    "${project_root}/nix/home-manager/configs/nixvim.nix"
+    # "${project_root}/nix/home-manager/configs/nixvim.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/mako.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
@@ -95,6 +95,7 @@ in {
     # ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
 
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
 
     # Custom deskop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";

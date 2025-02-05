@@ -5,22 +5,24 @@
   config,
   ...
 }: let
-  nvim-plugin-list = with pkgs; [
-    vimPlugins.bufdelete-nvim
-    vimPlugins.nvim-autopairs
-    vimPlugins.nvim-surround
-    vimPlugins.gitsigns-nvim
-    vimPlugins.indent-blankline-nvim
-    vimPlugins.neo-tree-nvim
-    vimPlugins.bufferline-nvim
-    vimPlugins.conform-nvim
-    vimPlugins.which-key-nvim
-    vimPlugins.comment-nvim
-    vimPlugins.toggleterm-nvim
-    vimPlugins.telescope-nvim
-    vimPlugins.nvim-cmp
-    vimPlugins.nvim-treesitter
-    vimPlugins.lualine-nvim
+  nvim-plugin-list = with pkgs.vimPlugins; [
+    bufdelete-nvim
+    nvim-autopairs
+    nvim-surround
+    gitsigns-nvim
+    indent-blankline-nvim
+    neo-tree-nvim
+    bufferline-nvim
+    conform-nvim
+    which-key-nvim
+    comment-nvim
+    toggleterm-nvim
+    telescope-nvim
+    nvim-cmp
+    nvim-treesitter
+    lualine-nvim
+    vscode-nvim # theme
+    lazy-nvim
   ];
 
   treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [
