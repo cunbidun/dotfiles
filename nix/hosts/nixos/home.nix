@@ -23,6 +23,7 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nixvim.nix"
+    "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/mako.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
@@ -109,7 +110,6 @@ in {
       bookmarks = [
         "file:///home/cunbidun/Downloads"
         "file:///home/cunbidun/competitive_programming/output"
-        "file:///home/cunbidun/Books"
         "file:///home/cunbidun/Vi"
       ];
     };
