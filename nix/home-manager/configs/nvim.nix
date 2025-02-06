@@ -18,6 +18,13 @@
     comment-nvim
     toggleterm-nvim
     telescope-nvim
+    lspkind-nvim
+    cmp-nvim-lsp
+    neodev-nvim
+    nvim-lspconfig
+    nui-nvim
+    plenary-nvim
+    nvim-web-devicons
     nvim-cmp
     nvim-treesitter
     lualine-nvim
@@ -32,6 +39,10 @@
     nix
     c
     cpp
+  ];
+
+  formatters = with pkgs; [
+    stylua
   ];
 
   # Function to extract language name from grammar package name
@@ -59,4 +70,5 @@
   '';
 in {
   home.file.".local/share/vim-plugins".source = local-plugin-dir;
+  home.packages = formatters;
 }

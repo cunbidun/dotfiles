@@ -1,6 +1,6 @@
-local M = {}
-
-function M.setup()
-  require("bufferline").setup({})
-end
-return M
+return {
+  "vim-plugins/bufferline.nvim",
+  config = function()
+    require("bufferline").setup({})
+  end,
+}

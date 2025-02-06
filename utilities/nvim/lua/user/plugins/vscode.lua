@@ -1,9 +1,7 @@
-local M = {}
-
-function M.setup()
-  local _vscode = require("vscode")
-  _vscode.setup({})
-  _vscode.load()
-end
-
-return M
+return {
+  "vim-plugins/vscode.nvim",
+  config = function()
+    require("vscode").setup({})
+    require("vscode").load()
+  end,
+}

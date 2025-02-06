@@ -1,7 +1,6 @@
-local M = {}
-
-M.setup = function()
-  require("which-key").setup()
-end
-
-return M
+return {
+  "vim-plugins/which-key.nvim",
+  config = function()
+    require("which-key").setup()
+  end,
+}

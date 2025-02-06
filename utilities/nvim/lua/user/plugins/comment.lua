@@ -1,5 +1,7 @@
-local M = {}
-M.setup = function()
-  require("Comment").setup({})
-end
-return M
+return {
+  "vim-plugins/comment.nvim",
+  event = "VeryLazy",
+  config = function()
+    require("Comment").setup({})
+  end,
+}
