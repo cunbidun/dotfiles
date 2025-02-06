@@ -9,3 +9,7 @@ require("lazy").setup("user.plugins", {
     patterns = { "vim-plugins" },
   },
 })
+
+if vim.env.CP_ENV then
+  require("user.config.cp")
+end

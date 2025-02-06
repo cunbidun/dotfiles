@@ -1,8 +1,6 @@
 {
-  inputs,
   pkgs,
   lib,
-  config,
   ...
 }: let
   nvim-plugin-list = with pkgs.vimPlugins; [
@@ -20,7 +18,6 @@
     telescope-nvim
     lspkind-nvim
     cmp-nvim-lsp
-    neodev-nvim
     nvim-lspconfig
     nui-nvim
     plenary-nvim
@@ -28,8 +25,11 @@
     nvim-cmp
     nvim-treesitter
     lualine-nvim
+    lazydev-nvim
     vscode-nvim # theme
     lazy-nvim
+    mini-icons
+    luasnip
   ];
 
   treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [
@@ -43,6 +43,26 @@
 
   formatters = with pkgs; [
     stylua
+    clang-tools
+    shfmt
+    black
+    alejandra
+  ];
+
+  lsp-servers = with pkgs; [
+    nixd
+    pyright
+    lua-language-server
+    bash-language-server
+  ];
+
+  linters = with pkgs; [
+    ruff
+  ];
+
+  extra-packages = with pkgs; [
+    lua51Packages.luarocks
+    lua51Packages.lua
   ];
 
   # Function to extract language name from grammar package name
@@ -70,5 +90,5 @@
   '';
 in {
   home.file.".local/share/vim-plugins".source = local-plugin-dir;
-  home.packages = formatters;
+  home.packages = formatters ++ lsp-servers ++ linters ++ extra-packages;
 }

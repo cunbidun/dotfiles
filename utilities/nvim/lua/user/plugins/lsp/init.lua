@@ -3,7 +3,6 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "vim-plugins/cmp-nvim-lsp",
-    { "vim-plugins/neodev.nvim", opts = {} },
   },
   config = function()
     local __lspServers = {

@@ -20,8 +20,6 @@ in {
     pkgs.zip # A compression and archive utility
     pkgs.unzip # A decompression utility
     pkgs.newsboat # An RSS feed reader
-    pkgs.alejandra # nix formatter
-    pkgs.shfmt # nix formatter
     pkgs.ripgrep
     pkgs.starship
     pkgs.lean4
