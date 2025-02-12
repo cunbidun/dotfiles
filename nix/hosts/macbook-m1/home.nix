@@ -15,7 +15,7 @@ in {
     inputs.xremap-flake.homeManagerModules.default
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
-    "${project_root}/nix/home-manager/configs/nixvim.nix"
+    "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
     inputs.stylix.homeManagerModules.stylix
@@ -35,6 +35,7 @@ in {
 
   home.file = {
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
   };
 
   # Let Home Manager install and manage itself.

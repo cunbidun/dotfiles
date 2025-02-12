@@ -8,13 +8,14 @@ local binds = {
   { action = "<C-w>j", key = "<C-j>", mode = "n" },
   { action = "<C-w>l", key = "<C-l>", mode = "n" },
   { action = "<C-w>k", key = "<C-k>", mode = "n" },
-  { action = "<Cmd>Neotree toggle<CR>", key = "<leader>e", mode = "n" },
+  { action = "<Cmd>NvimTreeToggle<CR>", key = "<leader>e", mode = "n" },
 
   -- terminal navigation
   { action = "<C-\\><C-N><C-w>h", key = "<C-h>", mode = "t" },
   { action = "<C-\\><C-N><C-w>j", key = "<C-j>", mode = "t" },
   { action = "<C-\\><C-N><C-w>l", key = "<C-l>", mode = "t" },
   { action = "<C-\\><C-N><C-w>k", key = "<C-k>", mode = "t" },
+  { action = "<C-\\><C-n>", key = "<Esc>", mode = "t", options = { silent = true } },
 
   -- LSP
   { action = "<cmd>lua vim.lsp.buf.declaration()<CR>", key = "gD", mode = "n" }, -- Go to definition

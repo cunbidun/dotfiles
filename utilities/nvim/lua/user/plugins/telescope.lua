@@ -1,5 +1,8 @@
 return {
   "vim-plugins/telescope.nvim",
+  dependencies = {
+    "vim-plugins/plenary.nvim"
+  },
   event = "BufEnter",
   config = function()
     require("telescope").setup({

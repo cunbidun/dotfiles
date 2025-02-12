@@ -42,7 +42,11 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-local globals_options = { mapleader = " " }
+local globals_options = { 
+  mapleader = " " ,
+  loaded_netrw= 1,
+  loaded_netrwPlugin = 1
+}
 
 for k, v in pairs(globals_options) do
   vim.g[k] = v
