@@ -104,10 +104,57 @@ in {
         "command" = "editor.action.insertCursorAbove";
         "when" = "editorTextFocus";
       }
+      {
+        "key" = "ctrl+q";
+        "command" = "-workbench.action.quickOpenView";
+      }
+      {
+        "key" = "ctrl+n";
+        "command" = "search.action.focusNextSearchResult";
+        "when" = "hasSearchResult || inSearchEditor";
+      }
+      {
+        "key" = "ctrl+p";
+        "command" = "search.action.focusPreviousSearchResult";
+        "when" = "hasSearchResult || inSearchEditor";
+      }
+      {
+        key = "ctrl+\\";
+        command = "workbench.action.terminal.toggleTerminal";
+      }
+      {
+        key = "ctrl+shift+q";
+        command = "workbench.action.terminal.kill";
+        when = "terminalFocus";
+      }
+      {
+        key = "ctrl+`";
+        command = "workbench.action.terminal.new";
+        when = "terminalFocus";
+      }
+      {
+        key = "ctrl+shift+j";
+        command = "workbench.action.terminal.focusNext";
+        when = "terminalFocus";
+      }
+      {
+        key = "ctrl+shift+k";
+        command = "workbench.action.terminal.focusPrevious";
+        when = "terminalFocus";
+      }
+      {
+        key = "ctrl+shift+h";
+        command = "workbench.action.terminal.focusPreviousPane";
+        when = "terminalFocus";
+      }
+      {
+        key = "ctrl+shift+l";
+        command = "workbench.action.terminal.focusNextPane";
+        when = "terminalFocus";
+      }
     ];
     userSettings = {
       "editor.minimap.enabled" = false;
-      "editor.fontSize" = 13;
       "explorer.confirmDelete" = false;
       "editor.rulers" = [120];
       "files.saveConflictResolution" = "overwriteFileOnDisk";
@@ -170,7 +217,16 @@ in {
         then "Default Dark Modern"
         else "Default Light Modern";
       "workbench.iconTheme" = "material-icon-theme";
-      "terminal.integrated.fontSize" = 13;
+      "editor.fontSize" =
+        if isLinux
+        then 13
+        else 12;
+      "terminal.integrated.fontSize" =
+        if isLinux
+        then 13
+        else 12;
+
+      "editor.fontFamily" = "SFMono Nerd Font";
       "explorer.confirmDragAndDrop" = false;
       "cloudcode.duetAI.project" = "test-api-moel";
       "terminal.integrated.defaultProfile.linux" = "zsh";
