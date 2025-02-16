@@ -254,7 +254,7 @@ in {
 
       "editor.fontFamily" = "SFMono Nerd Font";
       "explorer.confirmDragAndDrop" = false;
-      "cloudcode.duetAI.project" = "test-api-moel";
+      "cloudcode.duetAI.project" = "test-api-model";
       "terminal.integrated.defaultProfile.linux" = "zsh";
     };
 
