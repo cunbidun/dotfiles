@@ -1,0 +1,81 @@
+{
+  "cloudcode.duetAI.project": "test-api-moel",
+  "editor.fontFamily": "SFMono Nerd Font",
+  "editor.fontSize": 12,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [
+    120
+  ],
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.fontSize": 12,
+  "vim.easymotion": true,
+  "vim.easymotionMarkerBackgroundColor": "#7e57c2",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-c>": false,
+    "<C-f>": false,
+    "<C-h>": false,
+    "<C-n>": false,
+    "<C-p>": false,
+    "<C-v>": false,
+    "<C-w>": false,
+    "<C-x>": false
+  },
+  "vim.leader": " ",
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<TAB>"
+      ],
+      "commands": [
+        "workbench.action.nextEditorInGroup"
+      ],
+      "silent": true
+    },
+    {
+      "before": [
+        "<S-TAB>"
+      ],
+      "commands": [
+        "workbench.action.previousEditorInGroup"
+      ],
+      "silent": true
+    },
+    {
+      "before": [
+        "<S-x>"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ],
+      "silent": true
+    },
+    {
+      "after": [
+        "<leader>",
+        "<leader>"
+      ],
+      "before": [
+        "<leader>",
+        "m"
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "e"
+      ],
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
+      ]
+    }
+  ],
+  "vim.useSystemClipboard": true,
+  "workbench.colorTheme": "Default Light Modern",
+  "workbench.iconTheme": "material-icon-theme"
+}
