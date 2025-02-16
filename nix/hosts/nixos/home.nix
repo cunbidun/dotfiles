@@ -86,8 +86,6 @@ in {
   fonts.fontconfig.enable = true;
 
   home.file = {
-    # ".local/bin/hyprland_wrapped".source = "${project_root}/window_manager/hyprland/linux/hyprland_wrapped";
-    #
     # ".local/bin/colors-name.txt".source = "${project_root}/local/linux/.local/bin/colors-name.txt";
     # ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
     # ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";

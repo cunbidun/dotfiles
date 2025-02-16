@@ -1,13 +1,10 @@
 {
-  "cloudcode.duetAI.project": "test-api-moel",
   "editor.fontFamily": "SFMono Nerd Font",
   "editor.fontSize": 12,
   "editor.minimap.enabled": false,
   "editor.rulers": [
     120
   ],
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontSize": 12,

@@ -41,6 +41,11 @@
     "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
   },
   {
+    "command": "moveFileToTrash",
+    "key": "d",
+    "when": "explorerResourceMoveableToTrash && filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+  },
+  {
     "command": "filesExplorer.copy",
     "key": "c",
     "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
