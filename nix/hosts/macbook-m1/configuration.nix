@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  username = "cunbidun";
+in {
   security.pam.enableSudoTouchIdAuth = true;
 
   # List packages installed in system profile. To search by name, run:
@@ -24,7 +26,7 @@
 
   users.users.cunbidun = {
     description = "Duy Pham";
-    home = "/Users/cunbidun";
+    home = "/Users/${username}";
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
@@ -135,6 +137,10 @@
           };
         };
       };
+    };
+    "com.googlecode.iterm2" = {
+      "PrefsCustomFolder" = "/Users/${username}/.config/iterm";
+      "LoadPrefsFromCustomFolder" = 1;
     };
   };
 

@@ -36,6 +36,7 @@ in {
   home.file = {
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
+    ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
   };
 
   # Let Home Manager install and manage itself.
