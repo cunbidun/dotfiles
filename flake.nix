@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
-    nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-24.05";};
+    nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-24.11";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -11,10 +11,6 @@
     xremap-flake = {
       url = "github:xremap/nix-flake";
       inputs.hyprland.follows = "hyprland";
-    };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
 

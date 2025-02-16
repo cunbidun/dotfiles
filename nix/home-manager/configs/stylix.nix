@@ -23,7 +23,6 @@ in {
     targets = {
       waybar.enable = false;
       vscode.enable = false;
-      nixvim.enable = false;
       gnome.enable = true;
       kde.enable = true;
       gtk.enable = true;

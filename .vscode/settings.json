@@ -1,20 +1,35 @@
 {
     "cSpell.words": [
+        "alacritty",
         "arcticicestudio",
         "autohide",
         "cloudcode",
         "cunbidun",
         "googlecode",
         "gruvbox",
+        "hypr",
+        "hyprcursor",
+        "hypridle",
+        "hyprland",
+        "hyprwm",
         "iterm",
         "jdinhlife",
+        "macbook",
+        "nixos",
         "nixpkgs",
         "nord",
         "nvim",
         "Pham",
+        "phinger",
         "pkgs",
         "Prefs",
+        "pyprland",
+        "spicetify",
         "stdenv",
-        "symbolichotkeys"
+        "stylix",
+        "symbolichotkeys",
+        "waybar",
+        "wofi",
+        "xremap"
     ]
 }

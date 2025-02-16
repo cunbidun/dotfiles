@@ -1,4 +1,4 @@
-# dotfiles.txt contains list of dotfiles for faster accessiblity.
+# dotfiles.txt contains list of dotfiles for faster accessibility.
 # the dotfiles_picker will ignore blank lines or lines starting with a pound sign.
 
 # NOTE: don't use the tilde sign (~) for the home directory. Instead, use $HOME
@@ -15,7 +15,6 @@ $HOME/.local/bin/sc_prompt
 $HOME/.local/bin/nord_color_picker
 
 # hyprland
-$HOME/dotfiles/window_manager/hyprland/linux/hyprland_wrapped
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/pyprland.toml
 $HOME/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 $HOME/dotfiles/window_manager/hyprland/linux/.config/waybar/config

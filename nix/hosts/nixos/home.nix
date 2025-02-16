@@ -22,7 +22,7 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
-    "${project_root}/nix/home-manager/onfigs/nvim.nix"
+    "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/mako.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
