@@ -291,6 +291,7 @@ in {
         ms-python.vscode-pylance
         ms-python.isort
         ms-python.black-formatter
+        ms-azuretools.vscode-docker
         github.copilot
         github.copilot-chat
 

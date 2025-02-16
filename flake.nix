@@ -22,7 +22,7 @@
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
-    stylix = {url = "github:danth/stylix";};
+    stylix = {url = "github:panchoh/stylix";}; # FIXME: should be github:danth/stylix
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
   };
 

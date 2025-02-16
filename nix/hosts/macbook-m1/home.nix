@@ -12,7 +12,6 @@
   };
 in {
   imports = [
-    inputs.xremap-flake.homeManagerModules.default
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
