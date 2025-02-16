@@ -9,6 +9,9 @@ in {
     enable = true;
 
     keybindings = [
+      # +------------+
+      # | navigation |
+      # +------------+
       {
         "key" = "ctrl+h";
         "command" = "workbench.action.navigateLeft";
@@ -26,8 +29,9 @@ in {
         "command" = "workbench.action.navigateRight";
       }
 
-      # When the explorer is focused (and no input field is active),
-      # pressing "o" will open the file (or toggle a folder’s expansion)
+      # +----------+
+      # | explorer |
+      # +----------+
       {
         "key" = "o";
         "command" = "list.select";
@@ -56,6 +60,11 @@ in {
         "key" = "d";
         "command" = "deleteFile";
         "when" = "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus";
+      }
+      {
+        "key" = "d";
+        "command" = "moveFileToTrash";
+        "when" = "explorerResourceMoveableToTrash && filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus";
       }
       # Copy file with "c"
       {
@@ -181,7 +190,6 @@ in {
     ];
     userSettings = {
       "editor.minimap.enabled" = false;
-      "explorer.confirmDelete" = false;
       "editor.rulers" = [120];
       "files.saveConflictResolution" = "overwriteFileOnDisk";
 
@@ -253,8 +261,6 @@ in {
         else 12;
 
       "editor.fontFamily" = "SFMono Nerd Font";
-      "explorer.confirmDragAndDrop" = false;
-      "cloudcode.duetAI.project" = "test-api-model";
       "terminal.integrated.defaultProfile.linux" = "zsh";
     };
 
@@ -285,6 +291,8 @@ in {
         ms-python.vscode-pylance
         ms-python.isort
         ms-python.black-formatter
+        github.copilot
+        github.copilot-chat
 
         bazelbuild.vscode-bazel
 
@@ -304,12 +312,6 @@ in {
           publisher = "ms-toolsai";
           version = "2024.8.1";
           sha256 = "sha256-eFInKB1xwVVJFIsXHxsuRJeLKTe3Cb8svquHJOW0P+I=";
-        }
-        {
-          name = "cloudcode";
-          publisher = "GoogleCloudTools";
-          version = "2.17.0";
-          sha256 = "sha256-ZN4ZVl5WE32sHAfqAz0+vxTYBp6iJxAjvsXNJahrGY0=";
         }
       ];
   };

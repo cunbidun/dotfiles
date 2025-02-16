@@ -39,6 +39,7 @@ for file in "${files[@]}"; do
   SRC_FILE="$VSCODE_SRC/$file"
   if [ -f "$SRC_FILE" ]; then
     echo "Copying $SRC_FILE to $VSCODE_DEST/"
+    rm -f "$VSCODE_DEST/$file"
     # -L: Follow symlinks, -p: Preserve file attributes.
     cp -Lp "$SRC_FILE" "$VSCODE_DEST/"
   else
