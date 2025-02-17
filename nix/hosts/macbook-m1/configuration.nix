@@ -3,17 +3,6 @@
 in {
   security.pam.enableSudoTouchIdAuth = true;
 
-  programs.sudo = {
-    enable = true;
-    extraRules = [
-      {
-        users = ["yourusername"];
-        commands = ["/opt/homebrew/bin/brew"];
-        nopasswd = true;
-      }
-    ];
-  };
-
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [pkgs.neovim pkgs.git];
