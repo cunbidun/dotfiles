@@ -18,6 +18,7 @@ in {
     "${project_root}/nix/home-manager/configs/stylix.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
     inputs.stylix.homeManagerModules.stylix
+    inputs.mac-app-util.homeManagerModules.default
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -36,6 +37,7 @@ in {
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
     ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
+    ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/tmux/.tmux.conf";
   };
 
   # Let Home Manager install and manage itself.

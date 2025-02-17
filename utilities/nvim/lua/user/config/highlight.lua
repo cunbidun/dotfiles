@@ -5,7 +5,7 @@ local function set_custom_highlights()
     LineNr = { bg = "NONE" },
     BufferLineFill = { bg = "NONE" },
     ToggleTerm1SignColumn = { bg = "NONE" },
-    Normal = { bg = "NONE" },
+    -- Normal = { bg = "NONE" },
   }
 
   for group, colors in pairs(highlights) do

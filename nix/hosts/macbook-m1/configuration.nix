@@ -153,17 +153,21 @@ in {
       upgrade = true;
     };
 
-    taps = ["homebrew/cask-fonts" "dimentium/autoraise" "nikitabobko/tap" "homebrew/services"];
+    # example of adding a tap
+    # taps = ["homebrew/cask-fonts" "dimentium/autoraise" "nikitabobko/tap" "homebrew/services"];
+    taps = [];
 
     # `brew install`
-    brews = [
-      # autoraise to implement focus follow mouse in aerospace
-      # {
-      #   name = "autoraise";
-      #   start_service = true;
-      #   restart_service = true;
-      # }
-    ];
+    # Example of installing a package and starting a service
+    # brews = [
+    #   autoraise to implement focus follow mouse in aerospace
+    #   {
+    #     name = "autoraise";
+    #     start_service = true;
+    #     restart_service = true;
+    #   }
+    # ];
+    brews = [];
 
     # `brew install --cask`
     casks = [

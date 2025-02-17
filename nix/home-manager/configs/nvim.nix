@@ -3,6 +3,38 @@
   lib,
   ...
 }: let
+  # Helper function to fetch a vim plugin from GitHub.
+  customVimPlugin = {
+    owner,
+    repo,
+    rev,
+    sha256,
+    pname ? repo,
+  }:
+    pkgs.stdenv.mkDerivation {
+      pname = pname;
+      name = pname + "-" + rev;
+      src = pkgs.fetchFromGitHub {
+        owner = owner;
+        repo = repo;
+        rev = rev;
+        sha256 = sha256;
+      };
+      installPhase = ''
+        mkdir -p $out
+        cp -r . $out
+      '';
+    };
+
+  # fetch f-person/auto-dark-mode.nvim.
+  auto-dark-mode-nvim = customVimPlugin {
+    owner = "f-person";
+    repo = "auto-dark-mode.nvim";
+    rev = "master"; # or specify a commit/tag
+    sha256 = "sha256-FTXakglUrqifEXjzES6M4L+rthItu5rlw6QyIOLYNOc=";
+    pname = "auto-dark-mode.nvim";
+  };
+
   nvim-plugin-list = with pkgs.vimPlugins; [
     # -------------------------------------------------------------------
     # File Explorer Plugins
@@ -83,6 +115,7 @@
     # Themes and Appearance
     # -------------------------------------------------------------------
     vscode-nvim # A theme for Neovim inspired by Visual Studio Code aesthetics.
+    auto-dark-mode-nvim
 
     # -------------------------------------------------------------------
     # Plugin Management and Lazy Loading

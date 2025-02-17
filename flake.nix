@@ -24,6 +24,7 @@
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     stylix = {url = "github:panchoh/stylix";}; # FIXME: should be github:danth/stylix
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs = inputs @ {
@@ -54,6 +55,7 @@
     darwinConfigurations."macbook-m1" = nix-darwin.lib.darwinSystem {
       pkgs = mkPkgs "aarch64-darwin";
       modules = [
+        inputs.mac-app-util.darwinModules.default
         ./nix/hosts/macbook-m1/configuration.nix
         home-manager.darwinModules.home-manager
         (mkHomeManagerModule "${project_root}/nix/hosts/macbook-m1/home.nix")

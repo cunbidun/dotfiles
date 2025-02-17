@@ -4,6 +4,18 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux isDarwin;
+  darkTheme =
+    if config.lib.stylix.scheme.scheme-name == "Nord"
+    then "Nord"
+    else if config.lib.stylix.scheme.scheme-name == "Gruvbox dark, hard"
+    then "Gruvbox Dark Hard"
+    else if builtins.elem config.lib.stylix.scheme.scheme-name ["Default Dark" "standardized-dark"]
+    then "Default Dark Modern"
+    else "Default Dark Modern";
+  lightTheme =
+    if config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard"
+    then "Gruvbox Light Hard"
+    else "Default Light Modern";
 in {
   programs.vscode = {
     enable = true;
@@ -240,17 +252,9 @@ in {
         }
       ];
       "vim.useSystemClipboard" = true;
-      "workbench.colorTheme" =
-        if config.lib.stylix.scheme.scheme-name == "Nord"
-        then "Nord"
-        else if config.lib.stylix.scheme.scheme-name == "Gruvbox dark, hard"
-        then "Gruvbox Dark Hard"
-        else if config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard"
-        then "Gruvbox Light Hard"
-        else if builtins.elem config.lib.stylix.scheme.scheme-name ["Default Dark" "standardized-dark"]
-        then "Default Dark Modern"
-        else "Default Light Modern";
-      "workbench.iconTheme" = "material-icon-theme";
+      "window.autoDetectColorScheme" = true;
+      "workbench.preferredDarkColorTheme" = darkTheme;
+      "workbench.preferredLightColorTheme" = lightTheme;
       "editor.fontSize" =
         if isLinux
         then 13
