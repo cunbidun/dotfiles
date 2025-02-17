@@ -10,7 +10,6 @@ in {
     pkgs.eza # A tiny file explorer
     pkgs.htop # An interactive process viewer
     pkgs.fzf # A command-line fuzzy finder
-    pkgs.neofetch # A system information tool
     pkgs.tree # A recursive directory listing program
     pkgs.tmux # A terminal multiplexer
     pkgs.tmuxinator # A tmux session manager
@@ -109,8 +108,6 @@ in {
     pkgs.evince # A document viewer
     pkgs.conky # A lightweight system monitor
     pkgs.hwinfo # A hardware information tool
-    pkgs.rclone # A command-line tool for cloud storage
-    pkgs.rclone-browser # A browser UI for rclone
     pkgs.imagemagick # A suite of image manipulation tools
 
     # Programming

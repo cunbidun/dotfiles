@@ -9,7 +9,7 @@
     repo,
     rev,
     sha256,
-    pname ? repo,
+    pname,
   }:
     pkgs.stdenv.mkDerivation {
       pname = pname;

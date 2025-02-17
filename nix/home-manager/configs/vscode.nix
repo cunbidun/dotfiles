@@ -255,6 +255,7 @@ in {
       "window.autoDetectColorScheme" = true;
       "workbench.preferredDarkColorTheme" = darkTheme;
       "workbench.preferredLightColorTheme" = lightTheme;
+      "workbench.iconTheme" = "material-icon-theme";
       "editor.fontSize" =
         if isLinux
         then 13
