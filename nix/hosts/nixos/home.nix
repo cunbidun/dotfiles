@@ -69,23 +69,6 @@ in {
             only: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
           remap:
             SUPER_L: ALT_L
-
-      keymap:
-        - name: Alacritty
-          application:
-            only: [Alacritty]
-          remap:
-            Super-c: C-Shift-c   # Copy
-            Super-v: C-Shift-v   # Paste
-            Super-x: C-Shift-x   # Cut
-            Super-a: C-Shift-a   # Select All
-            Super-z: C-Shift-z   # Undo (if desired)
-            Super-s: C-Shift-s   # Save
-            Super-t: C-Shift-t   # New Tab/Terminal (if applicable)
-            Super-w: C-Shift-w   # Close Tab/Window
-            Super-q: C-Shift-q   # Quit/Close Application
-            Super-f: C-Shift-f   # Find
-            Super-n: C-Shift-n   # New Window/Instance
     '';
   };
   services.gammastep = {
