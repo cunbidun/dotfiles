@@ -75,17 +75,17 @@ in {
           application:
             only: [Alacritty]
           remap:
-            SUPER_L+C: CONTROL_L+SHIFT+C   # Copy
-            SUPER_L+V: CONTROL_L+SHIFT+V   # Paste
-            SUPER_L+X: CONTROL_L+SHIFT+X   # Cut
-            SUPER_L+A: CONTROL_L+SHIFT+A   # Select All
-            SUPER_L+Z: CONTROL_L+SHIFT+Z   # Undo (if desired)
-            SUPER_L+S: CONTROL_L+SHIFT+S   # Save
-            SUPER_L+T: CONTROL_L+SHIFT+T   # New Tab/Terminal (if applicable)
-            SUPER_L+W: CONTROL_L+SHIFT+W   # Close Tab/Window
-            SUPER_L+Q: CONTROL_L+SHIFT+Q   # Quit/Close Application
-            SUPER_L+F: CONTROL_L+SHIFT+F   # Find
-            SUPER_L+N: CONTROL_L+SHIFT+N   # New Window/Instance
+            Super-c: C+Shift+c   # Copy
+            Super-v: C+Shift+v   # Paste
+            Super-x: C+Shift+x   # Cut
+            Super-a: C+Shift+a   # Select All
+            Super-z: C+Shift+z   # Undo (if desired)
+            Super-s: C+Shift+s   # Save
+            Super-t: C+Shift+t   # New Tab/Terminal (if applicable)
+            Super-w: C+Shift+w   # Close Tab/Window
+            Super-q: C+Shift+q   # Quit/Close Application
+            Super-f: C+Shift+f   # Find
+            Super-n: C+Shift+n   # New Window/Instance
     '';
   };
   services.gammastep = {
