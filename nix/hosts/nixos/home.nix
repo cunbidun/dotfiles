@@ -54,8 +54,6 @@ in {
     yamlConfig = ''
       modmap:
         - name: Global
-          application:
-            not: [Alacritty]
           remap:
             ALT_L: SUPER_L
 
