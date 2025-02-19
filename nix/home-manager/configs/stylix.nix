@@ -24,9 +24,9 @@ in {
         ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
       '';
     };
-    # settings = {
-    #   usegeoclue = true;
-    # };
+    settings = {
+      usegeoclue = true;
+    };
   };
   stylix = {
     enable = true;
