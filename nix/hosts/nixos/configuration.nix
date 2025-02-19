@@ -208,29 +208,5 @@
     acceleration = "rocm";
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    xdgOpenUsePortal = true;
-    config = {
-      common.default = ["gtk"];
-      hyprland.default = ["gtk" "hyprland"];
-    };
-  };
-
-  # systemd.user.services.xdg-desktop-portal = {
-  #   unitConfig = {
-  #     After = ["graphical-session.target"];
-  #   };
-  # };
-  #
-  # systemd.user.services.xdg-desktop-portal-gtk = {
-  #   serviceConfig = {
-  #     Restart = "on-failure";
-  #     RestartSec = "5s";
-  #     Environment = "G_MESSAGES_DEBUG=all";
-  #   };
-  # };
-
   hardware.opentabletdriver.enable = true;
 }

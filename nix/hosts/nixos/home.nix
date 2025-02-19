@@ -179,6 +179,12 @@ in {
   programs.hyprcursor-phinger.enable = true;
   programs.zoxide.enable = true;
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.darkman];
+    xdgOpenUsePortal = true;
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
