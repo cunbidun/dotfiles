@@ -21,5 +21,5 @@ if [ "$os" = "Darwin" ]; then
   darwin-rebuild switch --flake ~/dotfiles#macbook-m1
 else
   echo "Detected non-macOS; running nix switch..."
-  nix switch --flake ~/dotfiles#nixos
+  sudo nixos-rebuild switch --cores 12 --flake ~/dotfiles#nixos
 fi

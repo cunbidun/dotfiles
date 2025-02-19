@@ -212,6 +212,10 @@
     enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
     xdgOpenUsePortal = true;
+    config = {
+      common.default = ["gtk"];
+      hyprland.default = ["gtk" "hyprland"];
+    };
   };
 
   # systemd.user.services.xdg-desktop-portal = {

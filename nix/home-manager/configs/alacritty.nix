@@ -13,20 +13,6 @@
         decorations = "none";
         dynamic_padding = true;
       };
-      keyboard = {
-        bindings = [
-          {
-            key = "V";
-            mods = "Alt";
-            action = "Paste";
-          }
-          {
-            key = "C";
-            mods = "Alt";
-            action = "Copy";
-          }
-        ];
-      };
     };
   };
 }
