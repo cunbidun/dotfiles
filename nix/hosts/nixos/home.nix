@@ -70,6 +70,7 @@ in {
           remap:
             SUPER_L: ALT_L
 
+      keymap:
         - name: Alacritty
           application:
             only: [Alacritty]
