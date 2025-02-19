@@ -6,11 +6,28 @@
 }: let
   theme-name = "standardized-dark";
   # theme-name = "standardized-light";
-in {
-  dconf.settings."org/gnome/desktop/interface".color-scheme =
+  polarity =
     if theme-name == "standardized-dark"
     then (lib.mkForce "prefer-dark")
     else (lib.mkForce "prefer-light");
+in {
+  dconf.settings."org/gnome/desktop/interface".color-scheme = polarity;
+  services.darkman = {
+    enable = true;
+    darkModeScripts = {
+      gtk-theme = ''
+        ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+      '';
+    };
+    lightModeScripts = {
+      gtk-theme = ''
+        ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
+      '';
+    };
+    # settings = {
+    #   usegeoclue = true;
+    # };
+  };
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
