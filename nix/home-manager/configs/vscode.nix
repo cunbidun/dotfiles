@@ -5,15 +5,16 @@
 }: let
   inherit (pkgs.stdenv) isLinux isDarwin;
   darkTheme =
-    if config.lib.stylix.scheme.scheme-name == "Nord"
+    if config.lib.stylix.colors.scheme-name == "Nord"
     then "Nord"
-    else if config.lib.stylix.scheme.scheme-name == "Gruvbox dark, hard"
+    else if config.lib.stylix.colors.scheme-name == "Gruvbox dark, hard"
     then "Gruvbox Dark Hard"
-    else if builtins.elem config.lib.stylix.scheme.scheme-name ["Default Dark" "standardized-dark"]
+    else if builtins.elem config.lib.stylix.colors.scheme-name ["Default Dark" "standardized-dark"]
     then "Default Dark Modern"
     else "Default Dark Modern";
+
   lightTheme =
-    if config.lib.stylix.scheme.scheme-name == "Gruvbox light, hard"
+    if config.lib.stylix.colors.scheme-name == "Gruvbox light, hard"
     then "Gruvbox Light Hard"
     else "Default Light Modern";
 in {

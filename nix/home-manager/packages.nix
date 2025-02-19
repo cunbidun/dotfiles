@@ -21,7 +21,6 @@ in {
     pkgs.newsboat # An RSS feed reader
     pkgs.ripgrep
     pkgs.starship
-    pkgs.lean4
     pkgs.nix-output-monitor
   ];
 
