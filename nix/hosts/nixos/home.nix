@@ -60,13 +60,13 @@ in {
 
         - name: Almost
           application:
-            not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            not: [steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
           remap:
             SUPER_L: CONTROL_L
 
         - name: Other
           application:
-            only: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            only: [steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
           remap:
             SUPER_L: ALT_L
     '';
