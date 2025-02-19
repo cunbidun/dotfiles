@@ -55,20 +55,38 @@ in {
       modmap:
         - name: Global
           application:
+            not: [Alacritty]
           remap:
             ALT_L: SUPER_L
 
         - name: Almost
           application:
-            not: [steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
           remap:
             SUPER_L: CONTROL_L
 
         - name: Other
           application:
             only: [steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            not: [Alacritty]
           remap:
             SUPER_L: ALT_L
+
+        - name: Alacritty
+          application:
+            only: [Alacritty]
+          remap:
+            SUPER_L+C: CONTROL_L+SHIFT+C   # Copy
+            SUPER_L+V: CONTROL_L+SHIFT+V   # Paste
+            SUPER_L+X: CONTROL_L+SHIFT+X   # Cut
+            SUPER_L+A: CONTROL_L+SHIFT+A   # Select All
+            SUPER_L+Z: CONTROL_L+SHIFT+Z   # Undo (if desired)
+            SUPER_L+S: CONTROL_L+SHIFT+S   # Save
+            SUPER_L+T: CONTROL_L+SHIFT+T   # New Tab/Terminal (if applicable)
+            SUPER_L+W: CONTROL_L+SHIFT+W   # Close Tab/Window
+            SUPER_L+Q: CONTROL_L+SHIFT+Q   # Quit/Close Application
+            SUPER_L+F: CONTROL_L+SHIFT+F   # Find
+            SUPER_L+N: CONTROL_L+SHIFT+N   # New Window/Instance
     '';
   };
   services.gammastep = {
