@@ -207,7 +207,12 @@
     enable = true;
     acceleration = "rocm";
   };
-  services.geoclue2.enable = true;
+  services.geoclue2 = {
+    enable = true;
+    submitData = true;
+    submissionUrl = "https://api.beacondb.net/v2/geosubmit";
+    geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+  };
 
   hardware.opentabletdriver.enable = true;
 }
