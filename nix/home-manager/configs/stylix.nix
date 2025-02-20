@@ -26,7 +26,7 @@ in {
     #   '';
     # };
     settings = {
-      usegeoclue = true;
+      usegeoclue = false;
     };
   };
   stylix = {
