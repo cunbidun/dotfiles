@@ -207,6 +207,7 @@
     enable = true;
     acceleration = "rocm";
   };
+  services.geoclue2.enable = true;
 
   hardware.opentabletdriver.enable = true;
 }
