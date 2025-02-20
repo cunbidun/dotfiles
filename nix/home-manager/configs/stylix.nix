@@ -25,7 +25,12 @@ in {
     #     ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
     #   '';
     # };
+
     settings = {
+      # as of feb 19, 2025, we didn't integrate the current autoswitch mechanism yet betcause we don't know how to
+      # implement specialization in nix for toggling between light/dark theme
+      #
+      # so for now, stylix will drive everything theme-related
       usegeoclue = false;
     };
   };
