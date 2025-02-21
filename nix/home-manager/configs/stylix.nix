@@ -10,10 +10,14 @@
     if theme-name == "standardized-dark"
     then (lib.mkForce "prefer-dark")
     else (lib.mkForce "prefer-light");
+  inherit (pkgs.stdenv) isLinux isDarwin;
 in {
   dconf.settings."org/gnome/desktop/interface".color-scheme = polarity;
   services.darkman = {
-    enable = true;
+    enable =
+      if isLinux
+      then true
+      else false;
     # example of custom script to run when changing dark/light mode
     # darkModeScripts = {
     #   gtk-theme = ''
