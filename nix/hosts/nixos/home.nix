@@ -55,18 +55,20 @@ in {
       modmap:
         - name: Global
           application:
+            not: [spicy]
           remap:
             ALT_L: SUPER_L
 
         - name: Almost
           application:
-            not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, spicy]
           remap:
             SUPER_L: CONTROL_L
 
         - name: Other
           application:
             only: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            not: [spicy]
           remap:
             SUPER_L: ALT_L
     '';

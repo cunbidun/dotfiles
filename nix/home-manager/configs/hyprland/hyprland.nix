@@ -156,6 +156,11 @@ in {
         # Waybar popup
         "size 50% 50%,title:^(__waybar_popup)$"
         "float,title:^(__waybar_popup)$"
+
+        # WMs
+        "float,class:^(spicy)$"
+        "noborder,class:^(spicy)$"
+        "noblur,class:^(spicy)$"
       ];
 
       bindle = [
