@@ -56,9 +56,23 @@
       pkgs = mkPkgs "aarch64-darwin";
       modules = [
         inputs.mac-app-util.darwinModules.default
-        ./nix/hosts/macbook-m1/configuration.nix
+        ./nix/hosts/macbook/configuration.nix
         home-manager.darwinModules.home-manager
-        (mkHomeManagerModule "${project_root}/nix/hosts/macbook-m1/home.nix")
+        (mkHomeManagerModule "${project_root}/nix/hosts/macbook/home.nix")
+      ];
+    };
+
+    ##########################
+    # macbook configurations #
+    ##########################
+    # nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles#macbook-intel |& nom
+    darwinConfigurations."macbook-intel" = nix-darwin.lib.darwinSystem {
+      pkgs = mkPkgs "x86_64-darwin";
+      modules = [
+        inputs.mac-app-util.darwinModules.default
+        ./nix/hosts/macbook/configuration.nix
+        home-manager.darwinModules.home-manager
+        (mkHomeManagerModule "${project_root}/nix/hosts/macbook/home.nix")
       ];
     };
 

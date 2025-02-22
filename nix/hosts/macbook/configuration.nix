@@ -18,7 +18,7 @@ in {
   system.stateVersion = 4;
 
   # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.hostPlatform = pkgs.stdenv.hostPlatform;
 
   users.users.cunbidun = {
     description = "Duy Pham";
