@@ -193,7 +193,7 @@ in {
     autohide = true;
   };
   system.defaults.NSGlobalDomain.KeyRepeat = 7;
-  system.defaults.NSGlobalDomain.InitialKeyRepeat = 4;
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 3;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
 
   # from
