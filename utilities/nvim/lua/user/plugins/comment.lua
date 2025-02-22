@@ -4,4 +4,6 @@ return {
   config = function()
     require("Comment").setup({})
   end,
+  enabled = not vim.g.vscode
 }
+

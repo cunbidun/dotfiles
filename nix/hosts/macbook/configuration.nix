@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  stateVersion,
+  ...
+}: let
   username = "cunbidun";
 in {
   security.pam.enableSudoTouchIdAuth = true;
@@ -15,7 +19,7 @@ in {
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 5;
+  system.stateVersion = stateVersion;
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = pkgs.stdenv.hostPlatform;
@@ -192,8 +196,8 @@ in {
   system.defaults.dock = {
     autohide = true;
   };
-  system.defaults.NSGlobalDomain.KeyRepeat = 5;
-  system.defaults.NSGlobalDomain.InitialKeyRepeat = 25;
+  system.defaults.NSGlobalDomain.KeyRepeat = 2;
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
 
   # from

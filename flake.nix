@@ -54,6 +54,10 @@
     # nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles#macbook-m1 |& nom
     darwinConfigurations."macbook-m1" = nix-darwin.lib.darwinSystem {
       pkgs = mkPkgs "aarch64-darwin";
+      specialArgs = {
+        inherit inputs;
+        stateVersion = 4;
+      };
       modules = [
         inputs.mac-app-util.darwinModules.default
         ./nix/hosts/macbook/configuration.nix
@@ -68,6 +72,10 @@
     # nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles#macbook-intel |& nom
     darwinConfigurations."macbook-intel" = nix-darwin.lib.darwinSystem {
       pkgs = mkPkgs "x86_64-darwin";
+      specialArgs = {
+        inherit inputs;
+        stateVersion = 5;
+      };
       modules = [
         inputs.mac-app-util.darwinModules.default
         ./nix/hosts/macbook/configuration.nix

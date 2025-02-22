@@ -3,4 +3,5 @@ return {
   config = function()
     require("which-key").setup()
   end,
+  enabled = not vim.g.vscode
 }

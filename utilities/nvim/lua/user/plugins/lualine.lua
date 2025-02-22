@@ -24,4 +24,5 @@ return {
     -- Initialize lualine with the modified opts:
     require("lualine").setup(opts)
   end,
+  enabled = not vim.g.vscode
 }

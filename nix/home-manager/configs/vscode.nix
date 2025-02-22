@@ -205,54 +205,6 @@ in {
       "editor.minimap.enabled" = false;
       "editor.rulers" = [120];
       "files.saveConflictResolution" = "overwriteFileOnDisk";
-
-      # +--------------+
-      # | vim settings |
-      # +--------------+
-      "vim.handleKeys" = {
-        "<C-w>" = false;
-        "<C-a>" = false;
-        "<C-x>" = false;
-        "<C-c>" = false;
-        "<C-v>" = false;
-        "<C-h>" = false;
-        "<C-f>" = false;
-        "<C-p>" = false;
-        "<C-n>" = false;
-      };
-      "vim.easymotion" = true;
-      "vim.easymotionMarkerBackgroundColor" = "#7e57c2";
-      "vim.leader" = " ";
-      # Define a non-recursive normal-mode mapping: pressing <leader> then e runs
-      # the command to toggle the sidebar (which in this case is used to show or hide the Explorer)
-      "vim.normalModeKeyBindingsNonRecursive" = [
-        {
-          before = ["<leader>" "e"];
-          commands = ["workbench.action.toggleSidebarVisibility"];
-        }
-      ];
-      "vim.normalModeKeyBindings" = [
-        {
-          before = ["<TAB>"];
-          commands = ["workbench.action.nextEditorInGroup"];
-          silent = true;
-        }
-        {
-          before = ["<S-TAB>"];
-          commands = ["workbench.action.previousEditorInGroup"];
-          silent = true;
-        }
-        {
-          before = ["<S-x>"];
-          commands = ["workbench.action.closeActiveEditor"];
-          silent = true;
-        }
-        {
-          before = ["<leader>" "m"];
-          after = ["<leader>" "<leader>"];
-        }
-      ];
-      "vim.useSystemClipboard" = true;
       "window.autoDetectColorScheme" = true;
       "workbench.preferredDarkColorTheme" = darkTheme;
       "workbench.preferredLightColorTheme" = lightTheme;
@@ -268,8 +220,10 @@ in {
 
       "editor.fontFamily" = "SFMono Nerd Font";
       "terminal.integrated.defaultProfile.linux" = "zsh";
+      "extensions.experimental.affinity" = {
+        "asvetliakov.vscode-neovim" = 1;
+      };
     };
-
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions;
       [
@@ -278,7 +232,6 @@ in {
         jdinhlife.gruvbox
         pkief.material-icon-theme
 
-        vscodevim.vim
         ms-vscode-remote.remote-ssh
         ms-vscode-remote.remote-containers
 
@@ -305,6 +258,7 @@ in {
 
         james-yu.latex-workshop
         streetsidesoftware.code-spell-checker
+        asvetliakov.vscode-neovim
       ]
       # per os extension
       ++ (

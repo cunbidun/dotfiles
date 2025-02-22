@@ -19,4 +19,5 @@ return {
       pickers = { find_files = { hidden = true } },
     })
   end,
+  enabled = not vim.g.vscode
 }

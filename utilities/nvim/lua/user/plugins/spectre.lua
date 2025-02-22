@@ -39,4 +39,5 @@ return {
   config = function(_, opts)
     require("spectre").setup(opts)
   end,
+  enabled = not vim.g.vscode
 }
