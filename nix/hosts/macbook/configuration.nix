@@ -15,7 +15,7 @@ in {
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = pkgs.stdenv.hostPlatform;
@@ -167,7 +167,9 @@ in {
     #     restart_service = true;
     #   }
     # ];
-    brews = [];
+    brews = [
+      "displayplacer"
+    ];
 
     # `brew install --cask`
     casks = [
@@ -190,6 +192,10 @@ in {
   system.defaults.dock = {
     autohide = true;
   };
+  system.defaults.NSGlobalDomain.KeyRepeat = 7;
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 4;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+
   # from
   # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
   # If you configure some of your MacOS preferences via nix-darwin and then activate your system,
