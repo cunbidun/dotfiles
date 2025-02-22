@@ -76,6 +76,7 @@
     nvim-autopairs # Automatically inserts matching brackets, quotes, and more.
     nvim-surround # Provides convenient mappings to add, change, or delete surrounding characters.
     comment-nvim # Simplifies commenting out code with easy keybindings.
+    flash-nvim # Improved navigation
 
     # -------------------------------------------------------------------
     # UI Enhancements

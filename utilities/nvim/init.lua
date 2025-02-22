@@ -4,7 +4,8 @@ if vim.g.vscode then
     { action = "<Cmd>lua require('vscode').action('workbench.action.nextEditorInGroup')<CR>", key = "<TAB>", mode = "n" },
     { action = "<Cmd>lua require('vscode').action('workbench.action.previousEditorInGroup')<CR>", key = "<S-TAB>", mode = "n" },
     { action = "<Cmd>lua require('vscode').action('workbench.action.closeActiveEditor')<CR>", key = "<S-x>", mode = "n" },
-    { action = "<Cmd>lua require('vscode').action('workbench.action.toggleSidebarVisibility')<CR>", key = "<leader>e", mode = "n" },
+    { action = "<Cmd>lua require('vscode').action('workbench.action.toggleSidebarVisibility')<CR>", key = "<leader>b", mode = "n" },
+    { action = "<Cmd>lua require('vscode').action('workbench.files.action.showActiveFileInExplorer')<CR>", key = "<leader>e", mode = "n" },
   }
   
   for _, map in ipairs(binds) do
