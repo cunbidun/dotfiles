@@ -8,18 +8,28 @@ export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
 if [ ! -d "/etc/nixos" ]; then
   export PATH=/etc/profiles/per-user/cunbidun/bin:$PATH
   export CONDA_CHANGEPS1=false
+  
+  # set conda root correctly depending on the system. 
+  # if it's linux then /home/$USER/miniconda3
+  # if it's mac then /Users/$USER/miniconda3
+  
+  if [ "$(uname)" = "Darwin" ]; then
+    export CONDA_ROOT="/Users/cunbidun/miniconda3"
+  else
+    export CONDA_ROOT="/home/cunbidun/miniconda3"
+  fi
 
   # if archlinux then source conda env
   # >>> conda initialize >>>
   # !! Contents within this block are managed by 'conda init' !!
-  __conda_setup="$('/home/cunbidun/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+  __conda_setup="$($CONDA_ROOT/bin/conda 'shell.zsh' 'hook' 2>/dev/null)"
   if [ $? -eq 0 ]; then
     eval "$__conda_setup"
   else
-    if [ -f "/home/cunbidun/miniconda3/etc/profile.d/conda.sh" ]; then
-      . "/home/cunbidun/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$CONDA_ROOT/etc/profile.d/conda.sh" ]; then
+      . "$CONDA_ROOT/etc/profile.d/conda.sh"
     else
-      export PATH="/home/cunbidun/miniconda3/bin:$PATH"
+      export PATH="$CONDA_ROOT/bin:$PATH"
     fi
   fi
   unset __conda_setup

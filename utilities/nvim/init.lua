@@ -7,7 +7,6 @@ if vim.g.vscode then
     { action = "<Cmd>lua require('vscode').action('workbench.action.toggleSidebarVisibility')<CR>", key = "<leader>b", mode = "n" },
     { action = "<Cmd>lua require('vscode').action('workbench.files.action.showActiveFileInExplorer')<CR>", key = "<leader>e", mode = "n" },
   }
-  
   for _, map in ipairs(binds) do
     vim.keymap.set(map.mode, map.key, map.action, map.options)
   end

@@ -220,9 +220,65 @@ in {
 
       "editor.fontFamily" = "SFMono Nerd Font";
       "terminal.integrated.defaultProfile.linux" = "zsh";
-      "extensions.experimental.affinity" = {
-        "asvetliakov.vscode-neovim" = 1;
+      # "extensions.experimental.affinity" = {
+      #   "asvetliakov.vscode-neovim" = 1;
+      # };
+
+      # +--------------+
+      # | vim settings |
+      # +--------------+
+      "vim.handleKeys" = {
+        "<C-c>" = false;
+        "<C-v>" = false;
+        "<C-h>" = false;
+        "<C-f>" = false;
+        "<C-p>" = false;
+        "<C-n>" = false;
       };
+      "vim.leader" = " ";
+      # Define a non-recursive normal-mode mapping: pressing <leader> then e runs
+      # the command to toggle the sidebar (which in this case is used to show or hide the Explorer)
+      "vim.normalModeKeyBindingsNonRecursive" = [
+        {
+          before = ["<leader>" "b"];
+          commands = ["workbench.action.toggleSidebarVisibility"];
+        }
+        {
+          before = ["<leader>" "e"];
+          commands = ["workbench.files.action.showActiveFileInExplorer"];
+        }
+        {
+          before = ["s"];
+          commands = ["jumpy2.toggle"];
+        }
+        {
+          before = ["S"];
+          commands = ["jumpy2.toggleSelection"];
+        }
+        {
+          before = ["<C-o>"];
+          commands = ["workbench.action.navigateBack"];
+          silent = true;
+        }
+      ];
+      "vim.normalModeKeyBindings" = [
+        {
+          before = ["<TAB>"];
+          commands = ["workbench.action.nextEditorInGroup"];
+          silent = true;
+        }
+        {
+          before = ["<S-TAB>"];
+          commands = ["workbench.action.previousEditorInGroup"];
+          silent = true;
+        }
+        {
+          before = ["<S-x>"];
+          commands = ["workbench.action.closeActiveEditor"];
+          silent = true;
+        }
+      ];
+      "vim.useSystemClipboard" = true;
     };
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions;
@@ -258,7 +314,9 @@ in {
 
         james-yu.latex-workshop
         streetsidesoftware.code-spell-checker
-        asvetliakov.vscode-neovim
+
+        # not using asvetliakov.vscode-neovim at the moment because multicursor is not working
+        vscodevim.vim
       ]
       # per os extension
       ++ (
@@ -273,6 +331,12 @@ in {
           publisher = "ms-toolsai";
           version = "2024.8.1";
           sha256 = "sha256-eFInKB1xwVVJFIsXHxsuRJeLKTe3Cb8svquHJOW0P+I=";
+        }
+        {
+          name = "jumpy2";
+          publisher = "DavidLGoldberg";
+          version = "1.7.0";
+          sha256 = "sha256-Dgd5AANprAZi0iLGVSPw704Ib5fUurDHn1MioFVExsg=";
         }
       ];
   };
