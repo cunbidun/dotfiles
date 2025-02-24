@@ -173,6 +173,7 @@ in {
     # ];
     brews = [
       "displayplacer"
+      "libmagic"
     ];
 
     # `brew install --cask`
