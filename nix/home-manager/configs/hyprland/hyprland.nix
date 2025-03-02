@@ -143,6 +143,7 @@ in {
         "pin,class:^(.*1Password.*)$"
         "center,class:^(.*1Password.*)$"
         "size 50% 50%,class:^(.*1Password.*)$"
+        "stayfocused,class:^(.*1Password.*)$"
 
         # File
         "float,class:^(.*org.gnome.Nautilus.*)$"
