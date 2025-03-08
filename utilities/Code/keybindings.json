@@ -1,0 +1,146 @@
+[
+  {
+    "command": "workbench.action.navigateLeft",
+    "key": "ctrl+h"
+  },
+  {
+    "command": "workbench.action.navigateDown",
+    "key": "ctrl+j"
+  },
+  {
+    "command": "workbench.action.navigateUp",
+    "key": "ctrl+k"
+  },
+  {
+    "command": "workbench.action.navigateRight",
+    "key": "ctrl+l"
+  },
+  {
+    "command": "list.select",
+    "key": "o",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "renameFile",
+    "key": "r",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "workbench.action.splitEditor",
+    "key": "v",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "workbench.action.splitEditorDown",
+    "key": "s",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "moveFileToTrash",
+    "key": "d",
+    "when": "explorerResourceMoveableToTrash && filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.copy",
+    "key": "c",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.cut",
+    "key": "x",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.paste",
+    "key": "p",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "explorer.newFile",
+    "key": "a",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "list.focusParent",
+    "key": "u",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "workbench.files.action.refreshFilesExplorer",
+    "key": "shift+r",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "editor.action.insertCursorBelow",
+    "key": "alt+cmd+j",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "editor.action.insertCursorAbove",
+    "key": "alt+cmd+k",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "-workbench.action.quickOpenView",
+    "key": "ctrl+q"
+  },
+  {
+    "command": "search.action.focusNextSearchResult",
+    "key": "ctrl+n",
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible"
+  },
+  {
+    "command": "search.action.focusPreviousSearchResult",
+    "key": "ctrl+p",
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible"
+  },
+  {
+    "command": "workbench.action.replaceInFiles",
+    "key": "shift+cmd+r",
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible"
+  },
+  {
+    "command": "editor.action.startFindReplaceAction",
+    "key": "cmd+r",
+    "when": "editorFocus || editorIsOpen"
+  },
+  {
+    "command": "workbench.action.terminal.toggleTerminal",
+    "key": "ctrl+\\"
+  },
+  {
+    "command": "workbench.action.terminal.kill",
+    "key": "ctrl+shift+q",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.new",
+    "key": "ctrl+`",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusNext",
+    "key": "ctrl+shift+j",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusPrevious",
+    "key": "ctrl+shift+k",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+shift+h",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+shift+l",
+    "when": "terminalFocus"
+  }
+]

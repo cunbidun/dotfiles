@@ -1,0 +1,107 @@
+{
+  "editor.fontFamily": "SFMono Nerd Font",
+  "editor.fontSize": 13,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [
+    120
+  ],
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.fontSize": 13,
+  "vim.handleKeys": {
+    "<C-c>": false,
+    "<C-f>": false,
+    "<C-h>": false,
+    "<C-n>": false,
+    "<C-p>": false,
+    "<C-v>": false
+  },
+  "vim.leader": " ",
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<TAB>"
+      ],
+      "commands": [
+        "workbench.action.nextEditorInGroup"
+      ],
+      "silent": true
+    },
+    {
+      "before": [
+        "<S-TAB>"
+      ],
+      "commands": [
+        "workbench.action.previousEditorInGroup"
+      ],
+      "silent": true
+    },
+    {
+      "before": [
+        "<S-x>"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ],
+      "silent": true
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "b"
+      ],
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "e"
+      ],
+      "commands": [
+        "workbench.files.action.showActiveFileInExplorer"
+      ]
+    },
+    {
+      "before": [
+        "s"
+      ],
+      "commands": [
+        "flash-vscode.start"
+      ]
+    },
+    {
+      "before": [
+        "S"
+      ],
+      "commands": [
+        "flash-vscode.startSelection"
+      ]
+    },
+    {
+      "before": [
+        "<BS>"
+      ],
+      "commands": [
+        "flash-vscode.backspace"
+      ]
+    },
+    {
+      "before": [
+        "<C-o>"
+      ],
+      "commands": [
+        "workbench.action.navigateBack"
+      ],
+      "silent": true
+    }
+  ],
+  "vim.useSystemClipboard": true,
+  "window.autoDetectColorScheme": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.preferredDarkColorTheme": "Default Dark Modern",
+  "workbench.preferredLightColorTheme": "Default Light Modern"
+}

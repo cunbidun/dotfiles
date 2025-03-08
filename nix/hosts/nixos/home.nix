@@ -25,7 +25,7 @@ in {
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/mako.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
-    "${project_root}/nix/home-manager/configs/vscode.nix"
+    # "${project_root}/nix/home-manager/configs/vscode.nix"
     "${project_root}/nix/home-manager/configs/swaylock.nix"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
@@ -93,6 +93,8 @@ in {
     # ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
 
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
+    ".config/Code/User/settings.json".source = "${project_root}/utilities/Code/settings.json";
+    ".config/Code/User/keybindings.json".source = "${project_root}/utilities/Code/keybindings.json";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
 
     # Custom deskop files
