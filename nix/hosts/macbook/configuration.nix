@@ -5,7 +5,7 @@
 }: let
   username = "cunbidun";
 in {
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
