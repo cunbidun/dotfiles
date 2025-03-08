@@ -249,11 +249,15 @@ in {
         }
         {
           before = ["s"];
-          commands = ["jumpy2.toggle"];
+          commands = ["flash-vscode.start"];
         }
         {
           before = ["S"];
-          commands = ["jumpy2.toggleSelection"];
+          commands = ["flash-vscode.startSelection"];
+        }
+        {
+          before = ["<BS>"];
+          commands = ["flash-vscode.backspace"];
         }
         {
           before = ["<C-o>"];
@@ -333,10 +337,10 @@ in {
           sha256 = "sha256-eFInKB1xwVVJFIsXHxsuRJeLKTe3Cb8svquHJOW0P+I=";
         }
         {
-          name = "jumpy2";
-          publisher = "DavidLGoldberg";
-          version = "1.7.0";
-          sha256 = "sha256-Dgd5AANprAZi0iLGVSPw704Ib5fUurDHn1MioFVExsg=";
+          name = "flash-vscode";
+          publisher = "cunbidun";
+          version = "0.0.6";
+          sha256 = "sha256-lSCE2jZ/LoPniV1e/m1DAcZpM7Rp3dnMjbjFmCcmOeY=";
         }
       ];
   };

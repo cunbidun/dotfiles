@@ -6,8 +6,8 @@ export CPCLI_PATH="$HOME/competitive_programming/cpcli/"
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 if [ ! -d "/etc/nixos" ]; then
-  export PATH=/etc/profiles/per-user/cunbidun/bin:$PATH
   export CONDA_CHANGEPS1=false
+  export PATH=/etc/profiles/per-user/cunbidun/bin:$PATH
   
   # set conda root correctly depending on the system. 
   # if it's linux then /home/$USER/miniconda3

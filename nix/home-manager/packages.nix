@@ -22,6 +22,7 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
+    pkgs.neovim
   ];
 
   linux_packages = [
