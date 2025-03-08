@@ -93,8 +93,9 @@ in {
     # ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
 
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
-    ".config/Code/User/settings.json".source = "${project_root}/utilities/Code/settings.json";
-    ".config/Code/User/keybindings.json".source = "${project_root}/utilities/Code/keybindings.json";
+    # TODO: Not hermetic, relying on dotfiles install at dotfiles
+    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
+    ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
 
     # Custom deskop files

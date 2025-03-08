@@ -100,8 +100,6 @@
     }
   ],
   "vim.useSystemClipboard": true,
-  "window.autoDetectColorScheme": true,
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.preferredDarkColorTheme": "Default Dark Modern",
-  "workbench.preferredLightColorTheme": "Default Light Modern"
+  "window.autoDetectColorScheme": true
 }
