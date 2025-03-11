@@ -9,6 +9,7 @@
   "vim.handleKeys": {
     "<C-c>": false,
     "<C-f>": false,
+    "<C-w>": false,
     "<C-h>": false,
     "<C-n>": false,
     "<C-p>": false,
@@ -99,5 +100,7 @@
   ],
   "vim.useSystemClipboard": true,
   "workbench.iconTheme": "material-icon-theme",
-  "window.autoDetectColorScheme": true
+  "window.autoDetectColorScheme": true,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false
 }
