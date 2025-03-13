@@ -44,6 +44,10 @@ james-yu.latex-workshop
 
 # cpp 
 ms-vscode.cpptools
+ms-vscode.cmake-tools
+ms-vscode.cpptools-extension-pack
+ms-vscode.cpptools-themes
+ms-vscode.makefile-tools
 
 # python 
 ms-python.debugpy
