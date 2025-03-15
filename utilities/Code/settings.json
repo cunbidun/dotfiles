@@ -106,5 +106,8 @@
   "files.exclude": {
     "**/__pycache__": true,
     "**/.pytest_cache": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
   }
 }
