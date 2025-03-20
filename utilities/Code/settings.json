@@ -98,6 +98,7 @@
       "silent": true
     }
   ],
+  "flash-vscode.caseSensitive": false,
   "vim.useSystemClipboard": true,
   "workbench.iconTheme": "material-icon-theme",
   "window.autoDetectColorScheme": true,
@@ -109,5 +110,14 @@
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
-  }
+  },
+  "cSpell.userWords": [
+    "opensearch",
+    "opensearchservice",
+    "openserach",
+    "powertools"
+  ],
+  "black-formatter.args": [
+    "--line-length", "120"
+  ]
 }
