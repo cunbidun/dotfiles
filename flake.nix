@@ -1,5 +1,5 @@
 {
-  description = "cunbidun's flake";
+  description = "cunbidun's dotfiles";
 
   inputs = {
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
@@ -22,7 +22,7 @@
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
-    stylix = {url = "github:panchoh/stylix";}; # FIXME: should be github:danth/stylix
+    stylix = {url = "github:danth/stylix";};
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
     mac-app-util.url = "github:hraban/mac-app-util";
   };

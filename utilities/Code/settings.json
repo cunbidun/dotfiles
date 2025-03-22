@@ -6,15 +6,6 @@
   ],
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "terminal.integrated.defaultProfile.linux": "zsh",
-  "vim.handleKeys": {
-    "<C-c>": false,
-    "<C-f>": false,
-    "<C-w>": false,
-    "<C-h>": false,
-    "<C-n>": false,
-    "<C-p>": false,
-    "<C-v>": false
-  },
   "vim.leader": " ",
   "vim.normalModeKeyBindings": [
     {

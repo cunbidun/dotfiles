@@ -5,7 +5,8 @@ local function set_custom_highlights()
     LineNr = { bg = "NONE" },
     BufferLineFill = { bg = "NONE" },
     ToggleTerm1SignColumn = { bg = "NONE" },
-    -- Normal = { bg = "NONE" },
+    -- add highlight group for coplilot suggestions
+    CopilotSuggestion = { fg = "#808080", bg = "NONE" },
   }
 
   for group, colors in pairs(highlights) do

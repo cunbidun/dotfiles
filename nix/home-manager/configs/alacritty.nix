@@ -17,12 +17,12 @@
         bindings = [
           {
             key = "V";
-            mods = "Alt";
+            mods = "Super";
             action = "Paste";
           }
           {
             key = "C";
-            mods = "Alt";
+            mods = "Super";
             action = "Copy";
           }
         ];

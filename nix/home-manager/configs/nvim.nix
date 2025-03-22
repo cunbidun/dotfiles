@@ -123,6 +123,7 @@
     # -------------------------------------------------------------------
     lazy-nvim # Facilitates lazy loading of plugins to optimize startup time.
     lazydev-nvim # Tools to assist with development using lazy.nvim.
+    copilot-vim
   ];
 
   treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [

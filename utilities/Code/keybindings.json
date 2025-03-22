@@ -1,4 +1,7 @@
 [
+  ////////////////
+  // Navigation //
+  ////////////////
   {
     "command": "workbench.action.navigateLeft",
     "key": "ctrl+h"
@@ -15,6 +18,9 @@
     "command": "workbench.action.navigateRight",
     "key": "ctrl+l"
   },
+  //////////////////
+  // Explorer Tree//
+  //////////////////
   {
     "command": "list.select",
     "key": "o",
@@ -90,19 +96,29 @@
     "key": "ctrl+q"
   },
   {
+    "key": "ctrl+n",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen"
+  },
+  {
     "command": "search.action.focusNextSearchResult",
     "key": "ctrl+n",
-    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible"
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible"
   },
   {
     "command": "search.action.focusPreviousSearchResult",
     "key": "ctrl+p",
-    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible"
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible"
   },
   {
     "command": "workbench.action.replaceInFiles",
     "key": "shift+cmd+r",
-    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible"
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible"
   },
   {
     "command": "editor.action.startFindReplaceAction",
@@ -142,5 +158,74 @@
     "command": "workbench.action.terminal.focusNextPane",
     "key": "ctrl+shift+l",
     "when": "terminalFocus"
-  }
+  },
+  // for linux
+  {
+    "key": "cmd+f",
+    "command": "actions.find",
+    "when": "editorFocus || editorIsOpen"
+  },
+  {
+    "key": "cmd+shift+p",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "cmd+s",
+    "command": "workbench.action.files.save"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "cmd+p",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "cmd+c",
+    "command": "editor.action.clipboardCopyAction"
+  },
+  {
+    "key": "cmd+x",
+    "command": "editor.action.clipboardCutAction"
+  },
+  {
+    "key": "cmd+v",
+    "command": "editor.action.clipboardPasteAction"
+  },
+  {
+    "key": "cmd+z",
+    "command": "undo"
+  },
+  {
+    "key": "cmd+,",
+    "command": "workbench.action.openSettings"
+  },
+  {
+    "key": "cmd+w",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "cmd+a",
+    "command": "editor.action.selectAll"
+  },
+  {
+    "key": "cmd+shift+f",
+    "command": "workbench.action.findInFiles"
+  },
+  {
+    "key": "cmd+shift+f",
+    "command": "workbench.view.search",
+    "when": "workbench.view.search.active && neverMatch =~ /doesNotMatch/"
+  },
+  {
+    "key": "cmd+shift+e",
+    "command": "workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "cmd+shift+e",
+    "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
 ]
