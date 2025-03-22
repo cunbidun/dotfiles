@@ -185,7 +185,6 @@ in {
       # Start Applications
       bind = $mainMod, Return, exec, alacritty
       bind = $mainMod, P, exec, tofi-drun
-      bind = $mainMod, E, exec, nautilus
       bind = $mainMod SHIFT, D, exec, dotfiles_picker
       bind = $mainMod SHIFT, N, exec, nord_color_picker
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}

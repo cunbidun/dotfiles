@@ -55,7 +55,7 @@
       };
 
       file = {
-        command = "command ";
+        command = "nautilus";
         animation = "";
         unfocus = "";
         lazy = true;
