@@ -182,7 +182,6 @@ in {
       "1password"
       "spotify"
       "alt-tab"
-      "google-chrome"
       "firefox"
       "signal"
       "messenger"
