@@ -15,6 +15,11 @@
 
   # devenv wants users to be in the trusted-users list so that they can access the /nix/store
   nix.settings.trusted-users = ["root" "@wheel"];
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 7d";
+  };
+  nix.optimise.automatic = true;
 
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -85,11 +90,6 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
   ];
-
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox;
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -181,6 +181,15 @@
     polkitPolicyOwners = ["cunbidun"];
   };
 
+  environment.etc = {
+    "1password/custom_allowed_browsers" = {
+      text = ''
+        .zen-wrapped
+      '';
+      mode = "0755";
+    };
+  };
+
   hardware.i2c.enable = true;
   programs.nix-ld.enable = true;
   # Sets up all the libraries to load
@@ -215,4 +224,5 @@
   };
 
   hardware.opentabletdriver.enable = true;
+  services.tailscale.enable = true;
 }

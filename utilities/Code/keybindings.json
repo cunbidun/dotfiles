@@ -228,4 +228,9 @@
     "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
     "when": "inFilesPicker && inQuickOpen"
   },
+  {
+    "key": "cmd+f",
+    "command": "workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+  },
 ]

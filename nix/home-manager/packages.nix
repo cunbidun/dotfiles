@@ -27,7 +27,7 @@ in {
   ];
 
   linux_packages = [
-    pkgs.devenv
+    inputs.zen-browser.packages."${pkgs.system}".default
     pkgs.prismlauncher
     pkgs.glib
     pkgs.caprine
@@ -75,7 +75,7 @@ in {
     # (pkgs.google-chrome.override {
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version3";
     # })
-    pkgs.google-chrome
+    # pkgs.google-chrome
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts

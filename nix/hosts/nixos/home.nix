@@ -113,9 +113,9 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "text/html" = "firefox.desktop";
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
+        "text/html" = "zen-browser.desktop";
+        "x-scheme-handler/http" = "zen-browser.desktop";
+        "x-scheme-handler/https" = "zen-browser.desktop";
         "application/pdf" = ["org.gnome.Evince.desktop"];
         "image/jpeg" = ["feh.desktop"];
         "image/png" = ["feh.desktop"];

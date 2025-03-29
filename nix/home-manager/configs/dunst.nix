@@ -32,7 +32,7 @@
         max_icon_size = 48;
         sticky_history = true;
         history_length = 20;
-        browser = "firefox -new-tab";
+        browser = "zen -new-tab";
         always_run_script = true;
         title = "Dunst";
         class = "Dunst";

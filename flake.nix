@@ -19,12 +19,29 @@
     # +----------+
     hyprland = {url = "github:hyprwm/Hyprland?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
+    Hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
+    };
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
+    hyprfocus = {
+      url = "github:MartinLoeper/hyprfocus";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    # +--------+
+    # | Others |
+    # +--------+
     stylix = {url = "github:danth/stylix";};
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
+
     mac-app-util.url = "github:hraban/mac-app-util";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs @ {
