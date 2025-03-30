@@ -5,6 +5,7 @@
   inputs,
   config,
   pkgs,
+  username,
   ...
 }: {
   imports = [
@@ -63,7 +64,7 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.cunbidun = {
+  users.users.$(username)= {
     isNormalUser = true;
     description = "Duy Pham";
     extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker"];
@@ -178,7 +179,7 @@
     enable = true;
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    polkitPolicyOwners = ["cunbidun"];
+    polkitPolicyOwners = ["${username}"];
   };
 
   environment.etc = {

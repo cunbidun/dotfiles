@@ -1,9 +1,9 @@
 {
   pkgs,
   stateVersion,
+  username,
   ...
 }: let
-  username = "cunbidun";
 in {
   security.pam.services.sudo_local.touchIdAuth = true;
 
@@ -24,7 +24,7 @@ in {
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = pkgs.stdenv.hostPlatform;
 
-  users.users.cunbidun = {
+  users.users.${username} = {
     description = "Duy Pham";
     home = "/Users/${username}";
     shell = pkgs.zsh;

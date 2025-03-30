@@ -4,6 +4,7 @@
   pkgs,
   project_root,
   inputs,
+  username,
   ...
 }: let
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
@@ -36,8 +37,8 @@ in {
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "cunbidun";
-  home.homeDirectory = "/home/cunbidun";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   home.packages = package_config.default_packages ++ package_config.linux_packages;
 
@@ -98,9 +99,9 @@ in {
     enable = true;
     gtk3 = {
       bookmarks = [
-        "file:///home/cunbidun/Downloads"
-        "file:///home/cunbidun/competitive_programming/output"
-        "file:///home/cunbidun/Vi"
+        "file:///home/${username}/Downloads"
+        "file:///home/${username}/competitive_programming/output"
+        "file:///home/${username}/Vi"
       ];
     };
     iconTheme = {

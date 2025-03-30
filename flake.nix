@@ -64,6 +64,7 @@
         extraSpecialArgs = {inherit project_root inputs;};
       };
     };
+    username = "cunbidun";
   in {
     ##########################
     # macbook configurations #
@@ -74,6 +75,7 @@
       specialArgs = {
         inherit inputs;
         stateVersion = 4;
+        username = username;
       };
       modules = [
         inputs.mac-app-util.darwinModules.default
@@ -91,6 +93,7 @@
       pkgs = mkPkgs "x86_64-darwin";
       specialArgs = {
         inherit inputs;
+        username = username;
         stateVersion = 5;
       };
       modules = [
@@ -108,7 +111,10 @@
       # build with sudo nixos-rebuild switch --flake ~/dotfiles#nixos
       nixos = nixpkgs-unstable.lib.nixosSystem {
         pkgs = mkPkgs "x86_64-linux";
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+          username = username;
+        };
         modules = [
           ./nix/hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager

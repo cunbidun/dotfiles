@@ -4,6 +4,7 @@
   lib,
   project_root,
   inputs,
+  username
   ...
 }: let
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
@@ -22,8 +23,8 @@ in {
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "cunbidun";
-  home.homeDirectory = "/Users/cunbidun";
+  home.username = username;
+  home.homeDirectory = "/Users/${username}";
 
   home.packages = package_config.default_packages ++ package_config.mac_packages;
   home.stateVersion = "23.11";
