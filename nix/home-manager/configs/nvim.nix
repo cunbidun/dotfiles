@@ -51,8 +51,6 @@
     # LSP and Completion Ecosystem
     # -------------------------------------------------------------------
     blink-cmp
-    luasnip # A snippet engine for Neovim written in Lua.
-    # trouble-nvim # Provides a pretty list for diagnostics, references, and quickfixes.
 
     # -------------------------------------------------------------------
     # Fuzzy Finder and Searching
