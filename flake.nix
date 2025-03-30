@@ -42,17 +42,16 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    username = {username = "cunbidun";};
   };
 
   outputs = inputs @ {
     nixpkgs-unstable,
     nix-darwin,
     home-manager,
-    username,
     ...
   }: let
     project_root = "${builtins.toString ./.}";
+    username = "cunbidun";
     mkPkgs = system:
       import nixpkgs-unstable {
         inherit system;
