@@ -62,7 +62,7 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        users.cunbidun = import configPath;
+        users.${username} = import configPath;
         extraSpecialArgs = {
           inherit project_root inputs;
           username = username;
