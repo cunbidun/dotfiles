@@ -62,10 +62,10 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        users.${username} = import configPath;
+        users.${userdata.username} = import configPath;
         extraSpecialArgs = {
           inherit project_root inputs;
-          username = username;
+          userdata = userdata;
         };
       };
     };
@@ -79,7 +79,7 @@
       specialArgs = {
         inherit inputs;
         stateVersion = 4;
-        username = username;
+        userdata = userdata;
       };
       modules = [
         inputs.mac-app-util.darwinModules.default
@@ -97,8 +97,8 @@
       pkgs = mkPkgs "x86_64-darwin";
       specialArgs = {
         inherit inputs;
-        username = username;
         stateVersion = 5;
+        userdata = userdata;
       };
       modules = [
         inputs.mac-app-util.darwinModules.default
@@ -117,7 +117,7 @@
         pkgs = mkPkgs "x86_64-linux";
         specialArgs = {
           inherit inputs;
-          username = username;
+          userdata = userdata;
         };
         modules = [
           ./nix/hosts/nixos/configuration.nix

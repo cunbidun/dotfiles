@@ -5,7 +5,7 @@
   inputs,
   config,
   pkgs,
-  username,
+  userdata,
   ...
 }: {
   imports = [
@@ -64,9 +64,9 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${username} = {
+  users.users.${userdata.username} = {
     isNormalUser = true;
-    description = "Duy Pham";
+    description = userdata.name;
     extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker"];
     packages = with pkgs; [
       swaylock-effects
@@ -80,6 +80,7 @@
       docker-compose
     ];
     shell = pkgs.zsh;
+    # TODO fix this
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
     ];

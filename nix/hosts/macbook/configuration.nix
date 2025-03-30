@@ -1,7 +1,7 @@
 {
   pkgs,
   stateVersion,
-  username,
+  userdata,
   ...
 }: let
 in {
@@ -24,9 +24,9 @@ in {
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = pkgs.stdenv.hostPlatform;
 
-  users.users.${username} = {
-    description = "Duy Pham";
-    home = "/Users/${username}";
+  users.users.${userdata.username} = {
+    description = "${userdata.name}";
+    home = "/Users/${userdata.username}";
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
