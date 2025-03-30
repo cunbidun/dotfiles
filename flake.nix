@@ -61,7 +61,10 @@
         useGlobalPkgs = true;
         useUserPackages = true;
         users.cunbidun = import configPath;
-        extraSpecialArgs = {inherit project_root inputs;};
+        extraSpecialArgs = {
+          inherit project_root inputs;
+          username = "cunbidun";
+        };
       };
     };
     username = "cunbidun";

@@ -233,4 +233,9 @@
     "command": "workbench.action.terminal.focusFind",
     "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
   },
+  {
+    "key": "cmd+.",
+    "command": "problems.action.showQuickFixes",
+    "when": "problemFocus"
+  },
 ]
