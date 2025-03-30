@@ -50,6 +50,14 @@ fi
 
 # Change to the git repository root directory
 cd "$git_root"
+
+# Check if git root is "/home/$USER/dotfiles" or not. If not print an error message and exit
+# This is to ensure that the script is being run from the correct directory
+if [ "$git_root" != "/home/$USER/dotfiles" ]; then
+  echo "Error: dotfiles repository is not in the expected location. It is expected to be at /home/$USER/dotfiles but found at $git_root."
+  exit 1
+fi
+
 echo "Switching NixOS configuration from the git repository at: $git_root"
 
 # Auto-add all changes and commit if there are any
