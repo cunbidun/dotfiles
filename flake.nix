@@ -51,7 +51,8 @@
     ...
   }: let
     project_root = "${builtins.toString ./.}";
-    username = "cunbidun";
+    userdata = import ./userdata.nix;
+    username = userdata.username;
     mkPkgs = system:
       import nixpkgs-unstable {
         inherit system;
