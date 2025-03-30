@@ -64,7 +64,7 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.$(username)= {
+  users.users.${username} = {
     isNormalUser = true;
     description = "Duy Pham";
     extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker"];
