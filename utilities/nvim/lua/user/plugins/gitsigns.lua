@@ -9,5 +9,4 @@ return {
       current_line_blame_opts = { ignore_whitespace = true },
     })
   end,
-  enabled = not vim.g.vscode
 }

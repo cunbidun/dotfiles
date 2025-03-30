@@ -20,5 +20,4 @@ return {
       terminal_mappings = true,
     })
   end,
-  enabled = not vim.g.vscode
 }

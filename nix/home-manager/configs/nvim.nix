@@ -50,19 +50,14 @@
     # -------------------------------------------------------------------
     # LSP and Completion Ecosystem
     # -------------------------------------------------------------------
-    nvim-lspconfig # Quickstart configurations for Neovim’s built-in LSP client.
-    cmp-nvim-lsp # LSP source for nvim-cmp, enhancing completion capabilities.
-    nvim-cmp # A powerful autocompletion plugin for Neovim.
+    blink-cmp
     luasnip # A snippet engine for Neovim written in Lua.
-    lspkind-nvim # Adds VSCode-like icons to LSP completions for better visual cues.
-    lspsaga-nvim
     # trouble-nvim # Provides a pretty list for diagnostics, references, and quickfixes.
 
     # -------------------------------------------------------------------
     # Fuzzy Finder and Searching
     # -------------------------------------------------------------------
     telescope-nvim # An extendable fuzzy finder over lists (files, buffers, etc.) for Neovim.
-    nvim-spectre # find and replace
 
     # -------------------------------------------------------------------
     # Syntax Highlighting and Treesitter
@@ -122,7 +117,6 @@
     # Plugin Management and Lazy Loading
     # -------------------------------------------------------------------
     lazy-nvim # Facilitates lazy loading of plugins to optimize startup time.
-    lazydev-nvim # Tools to assist with development using lazy.nvim.
     copilot-vim
   ];
 
