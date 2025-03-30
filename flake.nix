@@ -42,12 +42,14 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    username = "cunbidun";
   };
 
   outputs = inputs @ {
     nixpkgs-unstable,
     nix-darwin,
     home-manager,
+    username,
     ...
   }: let
     project_root = "${builtins.toString ./.}";
@@ -63,11 +65,10 @@
         users.cunbidun = import configPath;
         extraSpecialArgs = {
           inherit project_root inputs;
-          username = "cunbidun";
+          username = username;
         };
       };
     };
-    username = "cunbidun";
   in {
     ##########################
     # macbook configurations #
