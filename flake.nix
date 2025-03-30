@@ -42,7 +42,7 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    username = "cunbidun";
+    username = {username = "cunbidun";};
   };
 
   outputs = inputs @ {
