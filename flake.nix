@@ -17,7 +17,7 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.48.1?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
     Hyprspace = {
       url = "github:KZDKM/Hyprspace";

@@ -31,7 +31,7 @@
     owner = "f-person";
     repo = "auto-dark-mode.nvim";
     rev = "master"; # or specify a commit/tag
-    sha256 = "sha256-FTXakglUrqifEXjzES6M4L+rthItu5rlw6QyIOLYNOc=";
+    sha256 = "sha256-ZCViqnA+VoEOG+Xr+aJNlfRKCjxJm5y78HRXax3o8UY=";
     pname = "auto-dark-mode.nvim";
   };
 
