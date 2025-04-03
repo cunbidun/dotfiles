@@ -82,15 +82,17 @@ in {
     # ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
 
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
-    # TODO: Not hermetic, relying on dotfiles install at dotfiles
-    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
-    ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
+    ".config/Code/User/settings.json".source = "${project_root}/utilities/Code/settings.json";
+    ".config/Code/User/keybindings.json".source = "${project_root}/utilities/Code/keybindings.json";
+    ".config/nvim".source = "${project_root}/utilities/nvim";
 
     # Custom deskop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
     ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
+    ".zsh/zshenv".source = "${project_root}/zsh/zshenv";
+    ".zsh/zshfunctions".source = "${project_root}/zsh/zshfunctions";
+    ".zsh/zshvim".source = "${project_root}/zsh/zshvim";
   };
 
   qt = {enable = true;};

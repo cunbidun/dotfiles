@@ -19,9 +19,9 @@
     initExtra = ''
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 
-      . $HOME/dotfiles/zsh/zshenv
-      . $HOME/dotfiles/zsh/zshfunctions
-      . $HOME/dotfiles/zsh/zshvim
+      . $HOME/.zsh/zshenv
+      . $HOME/.zsh/zshfunctions
+      . $HOME/.zsh/zshvim
 
       # adding important bin to bash
       export PATH=$PATH:$HOME/.scripts/bin
