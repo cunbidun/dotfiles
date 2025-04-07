@@ -113,4 +113,5 @@
     "120"
   ],
   "window.customMenuBarAltFocus": false,
+  "diffEditor.hideUnchangedRegions.enabled": true,
 }
