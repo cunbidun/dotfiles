@@ -31,6 +31,7 @@ in {
     pkgs.prismlauncher
     pkgs.glib
     pkgs.caprine
+    pkgs.trash-cli
 
     # Hyprland
     pkgs.waybar # A Wayland bar for Sway and Hyprland
@@ -97,23 +98,13 @@ in {
     ######## # Util ########
     # GUI File manager
     pkgs.dconf-editor # GNOME's dconf editor
-    pkgs.nautilus # GNOME's file manager
-    pkgs.sushi # GNOME's preview utility
-    pkgs.file-roller # GNOME's archive manager
-    pkgs.gnome.gvfs # GNOME's virtual file system
     pkgs.djvulibre
 
     # CLI File manager
     pkgs.ueberzugpp # A command-line UI library for image previews
     pkgs.evince # A document viewer
-    pkgs.conky # A lightweight system monitor
     pkgs.hwinfo # A hardware information tool
     pkgs.imagemagick # A suite of image manipulation tools
-
-    # Programming
-    pkgs.cargo # The Rust package manager
-    pkgs.rustc # The Rust compiler
-    pkgs.nodejs_20
   ];
 
   mac_packages = [

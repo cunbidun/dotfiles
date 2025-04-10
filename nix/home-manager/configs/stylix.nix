@@ -53,6 +53,7 @@ in {
       gnome.enable = true;
       kde.enable = true;
       gtk.enable = true;
+      yazi.enable = true;
     };
 
     # https://github.com/phisch/phinger-cursors

@@ -13,6 +13,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
+    yazi.url = "github:sxyazi/yazi/v25.4.8";
 
     # +----------+
     # | Hyprland |

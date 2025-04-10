@@ -31,8 +31,8 @@ in {
 
       misc = {
         enable_swallow = true;
-        swallow_exception_regex = "wev|^(.*Yazi.*)$|ranger|^(.*nvim.*)$|^(.*Competitive Programming.*)$";
-        swallow_regex = "^(Alacritty)$";
+        swallow_exception_regex = "wev|^(.*[Yy]azi.*)$|ranger|^(.*nvim.*)$|^(.*Competitive Programming.*)$";
+        swallow_regex = "^(.*[Yy]azi.*)$";
         disable_hyprland_logo = true;
         focus_on_activate = true;
       };
@@ -168,16 +168,19 @@ in {
         "pin,class:^(.*1Password.*)$"
         "center,class:^(.*1Password.*)$"
         "size 50% 50%,class:^(.*1Password.*)$"
-        "stayfocused,class:^(.*1Password.*)$"
+        # "stayfocused,class:^(.*1Password.*)$"
 
         # File
-        "float,class:^(.*org.gnome.Nautilus.*)$"
-        "center,class:^(.*org.gnome.Nautilus.*)$"
-        "size 50% 50%,class:^(.*org.gnome.Nautilus.*)$"
-        "float,class:^(org.gnome.NautilusPreviewer)$"
-        "center,class:^(org.gnome.NautilusPreviewer)$"
-        "size 50% 50%,class:^(org.gnome.NautilusPreviewer)$"
-        "pin,class:^(org.gnome.NautilusPreviewer)$"
+        "float,title:^(FileChooser)$"
+        "float,title:^(FileExplorer)$"
+
+        # "float,class:^(.*org.gnome.Nautilus.*)$"
+        # "center,class:^(.*org.gnome.Nautilus.*)$"
+        # "size 50% 50%,class:^(.*org.gnome.Nautilus.*)$"
+        # "float,class:^(org.gnome.NautilusPreviewer)$"
+        # "center,class:^(org.gnome.NautilusPreviewer)$"
+        # "size 50% 50%,class:^(org.gnome.NautilusPreviewer)$"
+        # "pin,class:^(org.gnome.NautilusPreviewer)$"
 
         # Waybar popup
         "size 50% 50%,title:^(__waybar_popup)$"
@@ -210,7 +213,7 @@ in {
       # See https://wiki.hyprland.org/Configuring/Binds/ for more
 
       # Start Applications
-      bind = $mainMod, Return, exec, alacritty
+      bind = $mainMod, Return, exec, $TERMINAL
       bind = $mainMod, P, exec, tofi-drun
       bind = $mainMod SHIFT, D, exec, dotfiles_picker
       bind = $mainMod SHIFT, N, exec, nord_color_picker

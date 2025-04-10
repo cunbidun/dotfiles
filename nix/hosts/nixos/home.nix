@@ -16,7 +16,7 @@ in {
     inputs.xremap-flake.homeManagerModules.default
     inputs.spicetify-nix.homeManagerModules.default
     "${project_root}/nix/home-manager/configs/zsh.nix"
-    "${project_root}/nix/home-manager/configs/alacritty.nix"
+    "${project_root}/nix/home-manager/configs/kitty.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/waybar.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
@@ -27,7 +27,7 @@ in {
     "${project_root}/nix/home-manager/configs/mako.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
-    # "${project_root}/nix/home-manager/configs/vscode.nix"
+    "${project_root}/nix/home-manager/configs/yazi.nix"
     "${project_root}/nix/home-manager/configs/swaylock.nix"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
@@ -57,7 +57,7 @@ in {
       modmap:
         - name: Global
           application:
-            not: [Alacritty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, spicy, code]
+            not: [kitty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, spicy, code]
           remap:
             SUPER_L: CONTROL_L
     '';
@@ -87,8 +87,11 @@ in {
     ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
 
-    # Custom deskop files
+    # Custom desktop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
+    ".local/share/applications/yazi.desktop".source = "${project_root}/utilities/desktops/yazi.desktop";
+    ".local/share/applications/zen.desktop".source = "${project_root}/utilities/desktops/zen.desktop";
+
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
     ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
   };
@@ -114,16 +117,27 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "text/html" = "zen-browser.desktop";
-        "x-scheme-handler/http" = "zen-browser.desktop";
-        "x-scheme-handler/https" = "zen-browser.desktop";
         "application/pdf" = ["org.gnome.Evince.desktop"];
         "image/jpeg" = ["feh.desktop"];
         "image/png" = ["feh.desktop"];
         "text/plain" = ["nvim.desktop"];
-        "inode/directory" = ["org.gnome.nautilus.desktop"];
+        "inode/directory" = ["yazi.desktop"];
+        # "inode/directory" = ["org.gnome.nautilus.desktop"];
+
+        # default bookmarks
+        "x-scheme-handler/http" = ["zen.desktop"];
+        "x-scheme-handler/https" = ["zen.desktop"];
+        "x-scheme-handler/chrome" = ["zen.desktop"];
+        "text/html" = ["zen.desktop"];
+        "application/x-extension-htm" = ["zen.desktop"];
+        "application/x-extension-html" = ["zen.desktop"];
+        "application/x-extension-shtml" = ["zen.desktop"];
+        "application/xhtml+xml" = ["zen.desktop"];
+        "application/x-extension-xhtml" = ["zen.desktop"];
+        "application/x-extension-xht" = ["zen.desktop"];
       };
     };
+
     systemDirs.data = [
       "$HOME/.local/share"
       "/usr/local/share"
@@ -131,6 +145,31 @@ in {
       "${pkgs.glib.out}/share/gsettings-schemas"
       "${pkgs.gsettings-desktop-schemas}/share"
     ];
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-termfilechooser
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+    portal.config = {
+      common.default = ["hyprland;gtk"];
+      hyprland.default = ["hyprland"];
+      hyprland."org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
+      common."org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
+    };
+
+    # https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser
+    # Make sure to Set widget.use-xdg-desktop-portal.file-picker to 1
+    configFile."xdg-desktop-portal-termfilechooser/config" = {
+      force = true;
+      text = ''
+        [filechooser]
+        cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+        env=TERMCMD=${pkgs.kitty}/bin/kitty --title FileChooser
+      '';
+    };
   };
   # Add content to .profile
   home.file.".profile".text = ''
@@ -146,9 +185,8 @@ in {
   '';
   home.sessionVariables = {
     PICKER = "tofi";
-    TERMINAL = "alacritty";
+    TERMINAL = "kitty";
     QT_QTA_PLATFORMTHEME = "qt5ct";
-    GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
     EDITOR = "nvim";
     NIXOS_OZONE_WL = "1";
   };
@@ -171,12 +209,6 @@ in {
   };
   programs.hyprcursor-phinger.enable = true;
   programs.zoxide.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    xdgOpenUsePortal = true;
-  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

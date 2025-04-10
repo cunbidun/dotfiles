@@ -21,12 +21,6 @@ $HOME/dotfiles/window_manager/hyprland/linux/.config/waybar/config
 $HOME/dotfiles/window_manager/hyprland/scripts/autostart.sh
 $HOME/dotfiles/util/wofi/linux/.config/wofi/config
 
-# alacritty
-$HOME/.config/alacritty/alacritty.yml
-$HOME/.config/alacritty/themes
-$HOME/.config/alacritty/themes/nord.yaml
-$HOME/.config/alacritty/themes/solarized_light.yaml
-
 # zsh
 $HOME/dotfiles/zsh/
 

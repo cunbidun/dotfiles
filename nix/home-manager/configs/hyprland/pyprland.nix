@@ -8,7 +8,7 @@
     };
     scratchpads = {
       term = {
-        command = "alacritty -t Scratchpad";
+        command = "kitty --title Scratchpad";
         animation = "";
         lazy = true;
         unfocus = "";
@@ -55,16 +55,13 @@
       };
 
       file = {
-        command = "nautilus";
+        command = "kitty --title FileExplorer -- yazi";
         animation = "";
         unfocus = "";
         lazy = true;
         size = "50% 50%";
         position = "25% 25%";
         hysteresis = 0;
-        match_by = "class";
-        process_tracking = false;
-        class = "org.gnome.Nautilus";
       };
 
       obsidian = {
