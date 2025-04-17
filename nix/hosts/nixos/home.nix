@@ -14,7 +14,7 @@
   xdg-terminal-exec = ''
     #!/bin/sh
     test -n "$*" && args=("$@")
-    exec kitty -d "$PWD" -e "$${args[@]}"
+    exec kitty -d "$PWD" -e "''${args[@]}"
   '';
 in {
   imports = [
