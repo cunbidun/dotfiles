@@ -82,7 +82,10 @@ in {
 
   home.file = {
     ".local/bin/vscode_extension.py".source = "${project_root}/scripts/vscode_extension.py";
-    ".local/bin/xdg-terminal-exec".text = xdg-terminal-exec;
+    ".local/bin/xdg-terminal-exec" = {
+      text = xdg-terminal-exec;
+      executable = true;
+    };
     # ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
     # ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
     # ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
