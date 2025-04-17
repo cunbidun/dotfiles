@@ -98,7 +98,7 @@ in {
 
     # Custom desktop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
-    ".local/share/applications/yazi.desktop".source = "${project_root}/utilities/desktops/yazi.desktop";
+    # ".local/share/applications/yazi.desktop".source = "${project_root}/utilities/desktops/yazi.desktop";
     ".local/share/applications/zen.desktop".source = "${project_root}/utilities/desktops/zen.desktop";
 
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
