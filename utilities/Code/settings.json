@@ -114,4 +114,11 @@
   ],
   "window.customMenuBarAltFocus": false,
   "diffEditor.hideUnchangedRegions.enabled": true,
+  // let the formatter run, but preserve your layout
+  "json.format.keepLines": true,
+
+  // the keybindings file is JSON with comments, so target jsonc
+  "[jsonc]": {
+    "editor.formatOnSave": true
+  }
 }
