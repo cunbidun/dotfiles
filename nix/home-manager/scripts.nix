@@ -235,7 +235,6 @@
             fi
             ddcutil setvcp 10 "$new_b" --bus "$bus_num" --sleep-multiplier 0.01
             pkill -SIGRTMIN+16 waybar
-            notify-send --hint=string:x-stack-tag:brightness_change "brightness: $new_b" -t 1000 -a "System"
         else
             echo "Brightness is already at the desired level ($current_b), no change needed."
         fi
