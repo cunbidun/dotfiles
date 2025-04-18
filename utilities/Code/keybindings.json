@@ -160,97 +160,97 @@
     "when": "terminalFocus"
   },
   // for linux
-  {
-    "key": "cmd+f",
-    "command": "actions.find",
-    "when": "editorFocus || editorIsOpen"
-  },
-  {
-    "key": "cmd+shift+p",
-    "command": "workbench.action.showCommands"
-  },
-  {
-    "key": "cmd+s",
-    "command": "workbench.action.files.save"
-  },
-  {
-    "key": "cmd+e",
-    "command": "workbench.action.quickOpen"
-  },
-  {
-    "key": "cmd+p",
-    "command": "workbench.action.quickOpen"
-  },
-  {
-    "key": "cmd+c",
-    "command": "editor.action.clipboardCopyAction"
-  },
-  {
-    "key": "cmd+x",
-    "command": "editor.action.clipboardCutAction"
-  },
-  {
-    "key": "cmd+v",
-    "command": "editor.action.clipboardPasteAction"
-  },
-  {
-    "key": "cmd+z",
-    "command": "undo"
-  },
-  {
-    "key": "cmd+,",
-    "command": "workbench.action.openSettings"
-  },
-  {
-    "key": "cmd+w",
-    "command": "workbench.action.closeActiveEditor"
-  },
-  {
-    "key": "cmd+a",
-    "command": "editor.action.selectAll"
-  },
-  {
-    "key": "cmd+shift+f",
-    "command": "workbench.action.findInFiles"
-  },
-  {
-    "key": "cmd+shift+f",
-    "command": "workbench.view.search",
-    "when": "workbench.view.search.active && neverMatch =~ /doesNotMatch/"
-  },
-  {
-    "key": "cmd+shift+e",
-    "command": "workbench.view.explorer",
-    "when": "viewContainer.workbench.view.explorer.enabled"
-  },
-  {
-    "key": "cmd+shift+e",
-    "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
-    "when": "inFilesPicker && inQuickOpen"
-  },
-  {
-    "key": "cmd+f",
-    "command": "workbench.action.terminal.focusFind",
-    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
-  },
-  {
-    "key": "cmd+.",
-    "command": "problems.action.showQuickFixes",
-    "when": "problemFocus"
-  },
-  {
-    "key": "cmd+.",
-    "command": "editor.action.quickFix",
-    "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "selectNextCodeAction",
-    "when": "codeActionMenuVisible"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "selectPrevCodeAction",
-    "when": "codeActionMenuVisible"
-  },
+  // {
+  //   "key": "alt+f",
+  //   "command": "actions.find",
+  //   "when": "editorFocus || editorIsOpen"
+  // },
+  // {
+  //   "key": "cmd+shift+p",
+  //   "command": "workbench.action.showCommands"
+  // },
+  // {
+  //   "key": "cmd+s",
+  //   "command": "workbench.action.files.save"
+  // },
+  // {
+  //   "key": "cmd+e",
+  //   "command": "workbench.action.quickOpen"
+  // },
+  // {
+  //   "key": "cmd+p",
+  //   "command": "workbench.action.quickOpen"
+  // },
+  // {
+  //   "key": "cmd+c",
+  //   "command": "editor.action.clipboardCopyAction"
+  // },
+  // {
+  //   "key": "cmd+x",
+  //   "command": "editor.action.clipboardCutAction"
+  // },
+  // {
+  //   "key": "cmd+v",
+  //   "command": "editor.action.clipboardPasteAction"
+  // },
+  // {
+  //   "key": "cmd+z",
+  //   "command": "undo"
+  // },
+  // {
+  //   "key": "cmd+,",
+  //   "command": "workbench.action.openSettings"
+  // },
+  // {
+  //   "key": "cmd+w",
+  //   "command": "workbench.action.closeActiveEditor"
+  // },
+  // {
+  //   "key": "cmd+a",
+  //   "command": "editor.action.selectAll"
+  // },
+  // {
+  //   "key": "cmd+shift+f",
+  //   "command": "workbench.action.findInFiles"
+  // },
+  // {
+  //   "key": "cmd+shift+f",
+  //   "command": "workbench.view.search",
+  //   "when": "workbench.view.search.active && neverMatch =~ /doesNotMatch/"
+  // },
+  // {
+  //   "key": "cmd+shift+e",
+  //   "command": "workbench.view.explorer",
+  //   "when": "viewContainer.workbench.view.explorer.enabled"
+  // },
+  // {
+  //   "key": "cmd+shift+e",
+  //   "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+  //   "when": "inFilesPicker && inQuickOpen"
+  // },
+  // {
+  //   "key": "cmd+f",
+  //   "command": "workbench.action.terminal.focusFind",
+  //   "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+  // },
+  // {
+  //   "key": "cmd+.",
+  //   "command": "problems.action.showQuickFixes",
+  //   "when": "problemFocus"
+  // },
+  // {
+  //   "key": "cmd+.",
+  //   "command": "editor.action.quickFix",
+  //   "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+  // },
+  // {
+  //   "key": "ctrl+n",
+  //   "command": "selectNextCodeAction",
+  //   "when": "codeActionMenuVisible"
+  // },
+  // {
+  //   "key": "ctrl+p",
+  //   "command": "selectPrevCodeAction",
+  //   "when": "codeActionMenuVisible"
+  // },
 ]

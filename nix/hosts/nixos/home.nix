@@ -67,13 +67,13 @@ in {
 
         - name: Almost
           application:
-            not: [kitty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            not: [kitty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, code]
           remap:
             SUPER_L: CONTROL_L
 
         - name: Other
           application:
-            only: [kitty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64]
+            only: [kitty, steam, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, code]
           remap:
             SUPER_L: ALT_L
     '';

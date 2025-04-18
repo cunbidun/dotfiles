@@ -7,6 +7,17 @@
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "vim.leader": " ",
+  "vim.handleKeys": {
+    "<C-w>": false,
+    "<C-a>": false,
+    "<C-x>": false,
+    "<C-c>": false,
+    "<C-v>": false,
+    "<C-h>": false,
+    "<C-f>": false,
+    "<C-p>": false,
+    "<C-n>": false,
+  },
   "vim.normalModeKeyBindings": [
     {
       "before": [
@@ -89,8 +100,8 @@
       "silent": true
     }
   ],
-  "flash-vscode.caseSensitive": false,
   "vim.useSystemClipboard": true,
+  "flash-vscode.caseSensitive": false,
   "workbench.iconTheme": "material-icon-theme",
   "window.autoDetectColorScheme": true,
   "explorer.confirmDragAndDrop": false,
