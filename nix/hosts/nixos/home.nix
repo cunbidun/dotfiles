@@ -86,11 +86,9 @@ in {
       text = xdg-terminal-exec;
       executable = true;
     };
-    # ".local/bin/dotfiles.txt".source = "${project_root}/local/linux/.local/bin/dotfiles.txt";
-    # ".local/bin/dotfiles_picker".source = "${project_root}/local/linux/.local/bin/dotfiles_picker";
-    # ".local/bin/nord_color_picker".source = "${project_root}/local/linux/.local/bin/nord_color_picker";
 
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
+
     # TODO: Not hermetic, relying on dotfiles install at dotfiles
     ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
     ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
@@ -98,7 +96,6 @@ in {
 
     # Custom desktop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
-    # ".local/share/applications/yazi.desktop".source = "${project_root}/utilities/desktops/yazi.desktop";
     ".local/share/applications/zen.desktop".source = "${project_root}/utilities/desktops/zen.desktop";
 
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
