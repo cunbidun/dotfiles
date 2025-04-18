@@ -128,7 +128,6 @@ in {
         "image/png" = ["feh.desktop"];
         "text/plain" = ["nvim.desktop"];
         "inode/directory" = ["yazi.desktop"];
-        # "inode/directory" = ["org.gnome.nautilus.desktop"];
 
         # default bookmarks
         "x-scheme-handler/http" = ["zen.desktop"];

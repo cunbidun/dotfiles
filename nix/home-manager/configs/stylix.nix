@@ -4,8 +4,8 @@
   lib,
   ...
 }: let
-  theme-name = "standardized-dark";
-  # theme-name = "standardized-light";
+  # theme-name = "standardized-dark";
+  theme-name = "standardized-light";
   polarity =
     if theme-name == "standardized-dark"
     then (lib.mkForce "prefer-dark")
