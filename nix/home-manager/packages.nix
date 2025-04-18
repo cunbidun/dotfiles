@@ -1,8 +1,15 @@
 {
+  project_root,
   pkgs,
   inputs,
   ...
 }: let
+  theme-switch = pkgs.writers.writeBashBin "theme-switch" (builtins.readFile "${project_root}/scripts/theme-switch.sh");
+  xdg-terminal-exec = pkgs.writers.writeBashBin "xdg-terminal-exec" ''
+    #!/bin/sh
+    test -n "$*" && args=("$@")
+    exec kitty -d "$PWD" -e "''${args[@]}"
+  '';
 in {
   default_packages = [
     # Utils
@@ -27,6 +34,8 @@ in {
   ];
 
   linux_packages = [
+    theme-switch
+    xdg-terminal-exec
     inputs.zen-browser.packages."${pkgs.system}".default
     pkgs.prismlauncher
     pkgs.glib

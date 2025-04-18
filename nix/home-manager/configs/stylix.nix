@@ -4,15 +4,8 @@
   lib,
   ...
 }: let
-  # theme-name = "standardized-dark";
-  theme-name = "standardized-light";
-  polarity =
-    if theme-name == "standardized-dark"
-    then (lib.mkForce "prefer-dark")
-    else (lib.mkForce "prefer-light");
   inherit (pkgs.stdenv) isLinux isDarwin;
 in {
-  dconf.settings."org/gnome/desktop/interface".color-scheme = polarity;
   services.darkman = {
     enable =
       if isLinux
@@ -38,14 +31,26 @@ in {
       usegeoclue = false;
     };
   };
+  specialisation.light-theme.configuration = {
+    # Helper                  | Priority it sets  | Typical use
+    # lib.mkDefault value     | 1000              | Ship a safe default that users can override easily
+    # lib.mkOverride N value  | N (you pick)      | Fine‑tune how strongly you want to win/lose merges
+    # lib.mkForce value       | 50                | “Last word”—almost always beats everything else
+
+    # force light mode with lowest number (highest priority)
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
+
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/standardized-light.yaml";
+      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
+    };
+  };
+
+  dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme-name}.yaml";
-
-    image =
-      if theme-name == "standardized-dark"
-      then ../../../wallpapers/Astronaut.png
-      else ../../../wallpapers/thuonglam.jpeg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
+    image = ../../../wallpapers/Astronaut.png;
 
     targets = {
       waybar.enable = false;

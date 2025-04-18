@@ -8,14 +8,10 @@
   ...
 }: let
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
+    project_root = project_root;
     pkgs = pkgs;
     inputs = inputs;
   };
-  xdg-terminal-exec = ''
-    #!/bin/sh
-    test -n "$*" && args=("$@")
-    exec kitty -d "$PWD" -e "''${args[@]}"
-  '';
 in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
@@ -93,11 +89,6 @@ in {
 
   home.file = {
     ".local/bin/vscode_extension.py".source = "${project_root}/scripts/vscode_extension.py";
-    ".local/bin/xdg-terminal-exec" = {
-      text = xdg-terminal-exec;
-      executable = true;
-    };
-
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
 
     # TODO: Not hermetic, relying on dotfiles install at dotfiles
