@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-gitpush() {
-  CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
-  CURRENT_BRANCH="${1:-$CURRENT_BRANCH}"
-  git push origin --delete $CURRENT_BRANCH && git push --set-upstream origin $CURRENT_BRANCH
-}
