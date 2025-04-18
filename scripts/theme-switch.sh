@@ -11,10 +11,7 @@ usage() {
 MODE=$1
 
 # locate your home-manager activation directory
-home_manager_dir=$(
-  systemctl cat home-manager-cunbidun.service \
-    | awk -F= '/ExecStart=/{print $2; exit}'
-)
+home_manager_dir="$(systemctl cat home-manager-$USER.service | grep 'ExecStart' | awk '{print $2}')"
 if [[ -z "$home_manager_dir" ]]; then
   echo "Could not find home-manager directory" >&2
   exit 1

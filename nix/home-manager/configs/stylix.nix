@@ -11,24 +11,20 @@ in {
       if isLinux
       then true
       else false;
-    # example of custom script to run when changing dark/light mode
-    # darkModeScripts = {
-    #   gtk-theme = ''
-    #     ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-    #   '';
-    # };
-    # lightModeScripts = {
-    #   gtk-theme = ''
-    #     ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-    #   '';
-    # };
+
+    darkModeScripts = {
+      dark-theme-switch = ''
+        /etc/profiles/per-user/$USER/bin/theme-switch dark
+      '';
+    };
+    lightModeScripts = {
+      light-theme-switch = ''
+        /etc/profiles/per-user/$USER/bin/theme-switch light
+      '';
+    };
 
     settings = {
-      # as of feb 19, 2025, we didn't integrate the current autoswitch mechanism yet betcause we don't know how to
-      # implement specialization in nix for toggling between light/dark theme
-      #
-      # so for now, stylix will drive everything theme-related
-      usegeoclue = false;
+      usegeoclue = true;
     };
   };
   specialisation.light-theme.configuration = {
