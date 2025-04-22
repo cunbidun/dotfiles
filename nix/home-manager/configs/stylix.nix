@@ -2,9 +2,10 @@
   inputs,
   pkgs,
   lib,
+  userdata,
   ...
 }: let
-  inherit (pkgs.stdenv) isLinux isDarwin;
+  inherit (pkgs.stdenv) isLinux;
 in {
   services.darkman = {
     enable =
@@ -14,12 +15,12 @@ in {
 
     darkModeScripts = {
       dark-theme-switch = ''
-        /etc/profiles/per-user/$USER/bin/theme-switch dark
+        /etc/profiles/per-user/${userdata.username}/bin/theme-switch dark
       '';
     };
     lightModeScripts = {
       light-theme-switch = ''
-        /etc/profiles/per-user/$USER/bin/theme-switch light
+        /etc/profiles/per-user/${userdata.username}/bin/theme-switch light
       '';
     };
 

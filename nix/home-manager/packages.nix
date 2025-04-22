@@ -4,7 +4,11 @@
   inputs,
   ...
 }: let
-  theme-switch = pkgs.writers.writeBashBin "theme-switch" (builtins.readFile "${project_root}/scripts/theme-switch.sh");
+  theme-switch = pkgs.writeShellApplication {
+    name = "theme-switch";
+    text = builtins.readFile "${project_root}/scripts/theme-switch.sh";
+    runtimeInputs = [pkgs.dconf-editor pkgs.gawk pkgs.gnugrep];
+  };
   xdg-terminal-exec = pkgs.writers.writeBashBin "xdg-terminal-exec" ''
     #!/bin/sh
     test -n "$*" && args=("$@")
