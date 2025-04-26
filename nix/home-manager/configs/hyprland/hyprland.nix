@@ -174,14 +174,6 @@ in {
         "float,title:^(FileChooser)$"
         "float,title:^(FileExplorer)$"
 
-        # "float,class:^(.*org.gnome.Nautilus.*)$"
-        # "center,class:^(.*org.gnome.Nautilus.*)$"
-        # "size 50% 50%,class:^(.*org.gnome.Nautilus.*)$"
-        # "float,class:^(org.gnome.NautilusPreviewer)$"
-        # "center,class:^(org.gnome.NautilusPreviewer)$"
-        # "size 50% 50%,class:^(org.gnome.NautilusPreviewer)$"
-        # "pin,class:^(org.gnome.NautilusPreviewer)$"
-
         # Waybar popup
         "size 50% 50%,title:^(__waybar_popup)$"
         "float,title:^(__waybar_popup)$"
