@@ -173,7 +173,7 @@ in {
       force = true;
       text = ''
         [filechooser]
-        cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+        cmd=/etc/profiles/per-user/${userdata.username}/bin/yazi-wrapper
         env=TERMCMD=${pkgs.kitty}/bin/kitty --title FileChooser
       '';
     };
