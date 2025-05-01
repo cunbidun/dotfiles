@@ -16,7 +16,7 @@
       cat = "bat";
       tree = "tree -a";
     };
-    initExtra = ''
+    initContent = ''
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

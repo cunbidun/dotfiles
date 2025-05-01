@@ -237,6 +237,7 @@
   services.geoclue2 = {
     enable = true;
     submitData = true;
+    # Wifi appears to not working at the moment
     enableWifi = false;
     submissionUrl = "https://api.beacondb.net/v2/geosubmit";
     geoProviderUrl = "https://api.beacondb.net/v1/geolocate";

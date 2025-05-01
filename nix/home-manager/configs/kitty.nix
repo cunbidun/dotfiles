@@ -2,7 +2,7 @@
   programs.kitty = {
     enable = true;
     keybindings = {
-      "alt+v" = "paste_from_selection";
+      "alt+v" = "paste_from_clipboard";
       "alt+c" = "copy_to_clipboard";
     };
     settings = {
