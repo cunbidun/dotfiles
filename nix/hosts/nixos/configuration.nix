@@ -6,6 +6,7 @@
   config,
   pkgs,
   userdata,
+  lib,
   ...
 }: {
   imports = [
@@ -183,14 +184,29 @@
     polkitPolicyOwners = ["${userdata.username}"];
   };
 
-  environment.etc = {
-    "1password/custom_allowed_browsers" = {
-      text = ''
-        zen
+  environment.etc =
+    lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
+      "geolocation".text = ''
+        # Statue of Liberty
+        40.6893129   # latitude
+        -74.0445531  # longitude
+        96           # altitude
+        1.83         # accuracy radius
       '';
-      mode = "0755";
+      "geoclue/conf.d/00-config.conf".text = ''
+        [static-source]
+        enable=true
+      '';
+    }
+    # then merge in your always-present files:
+    // {
+      "1password/custom_allowed_browsers" = {
+        text = ''
+          zen
+        '';
+        mode = "0755";
+      };
     };
-  };
 
   hardware.i2c.enable = true;
   programs.nix-ld.enable = true;
@@ -221,6 +237,7 @@
   services.geoclue2 = {
     enable = true;
     submitData = true;
+    enableWifi = false;
     submissionUrl = "https://api.beacondb.net/v2/geosubmit";
     geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
   };
