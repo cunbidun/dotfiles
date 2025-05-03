@@ -62,6 +62,7 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
+        backupFileExtension = "backup";
         users.${userdata.username} = import configPath;
         extraSpecialArgs = {
           inherit project_root inputs;

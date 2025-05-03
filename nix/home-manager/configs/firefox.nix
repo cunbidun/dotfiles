@@ -1,7 +1,58 @@
-{pkgs, ...}: {
+{
+  project_root,
+  userdata,
+  pkgs,
+  ...
+}: {
+  home.file.".mozilla/firefox/${userdata.username}/search.json.mozlz4".force = true;
   programs.firefox = {
     enable = true;
-    profiles.cunbidun = {
+    profiles.${userdata.username} = {
+      search = {
+        force = true;
+        engines = {
+          "GitHub Repositories" = {
+            urls = [
+              {
+                template = "https://github.com/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                  {
+                    name = "type";
+                    value = "repositories";
+                  }
+                ];
+              }
+            ];
+            icon = "${project_root}/icons/github.svg";
+            definedAliases = ["@gh"];
+          };
+          "Nix Packages" = {
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "type";
+                    value = "packages";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@nix"];
+          };
+        };
+      };
+
       bookmarks = {};
       bookmarks = {};
       extensions = {
@@ -16,6 +67,33 @@
           user-agent-string-switcher
           tampermonkey
         ];
+        settings = {
+          # competitive-companion
+          "{74e326aa-c645-4495-9287-b6febc5565a7}".settings = {
+            force = true;
+            customPorts = [8080];
+          };
+          # multi-account-containers
+          "@testpilot-containers".settings = {
+            force = true;
+            onboarding-stage = 8;
+            syncEnabled = false;
+            "siteContainerMap@@_chatgpt.com" = {
+              "userContextId" = "1";
+              "neverAsk" = true;
+              "identityMacAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
+            };
+            "siteContainerMap@@_openai.com" = {
+              "userContextId" = "1";
+              "neverAsk" = true;
+              "identityMacAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
+            };
+            "identitiesState@@_firefox-container-1" = {
+              "hiddenTabs" = [];
+              "macAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
+            };
+          };
+        };
       };
       containersForce = true;
       containers = {
@@ -87,6 +165,7 @@
         "general.smoothScroll.msdPhysics.slowdownMinDeltaRatio" = 0.3;
         "general.smoothScroll.msdPhysics.slowdownSpringConstant" = 250;
         "general.smoothScroll.stopDecelerationWeighting" = 1.0;
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
         "mousewheel.default.delta_multiplier_y" = 200;
 
         # Disable fx accounts
@@ -94,6 +173,71 @@
         "signon.rememberSignons" = false;
         "privacy.trackingprotection.enabled" = true;
         "dom.security.https_only_mode" = true;
+        "browser.uiCustomization.state" = ''
+          {
+            "placements": {
+              "widget-overflow-fixed-list": [],
+              "unified-extensions-area": [
+                "_testpilot-containers-browser-action",
+                "sponsorblocker_ajay_app-browser-action",
+                "ublock0_raymondhill_net-browser-action",
+                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action",
+                "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action",
+                "firefox_tampermonkey_net-browser-action"
+              ],
+              "nav-bar": [
+                "back-button",
+                "forward-button",
+                "stop-reload-button",
+                "customizableui-special-spring1",
+                "vertical-spacer",
+                "urlbar-container",
+                "customizableui-special-spring2",
+                "downloads-button",
+                "fxa-toolbar-menu-button",
+                "unified-extensions-button",
+                "_74e326aa-c645-4495-9287-b6febc5565a7_-browser-action",
+                "_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action",
+                "firefox_tampermonkey_net-browser-action"
+              ],
+              "toolbar-menubar": [
+                "menubar-items"
+              ],
+              "TabsToolbar": [
+                "firefox-view-button",
+                "tabbrowser-tabs",
+                "new-tab-button",
+                "alltabs-button"
+              ],
+              "vertical-tabs": [],
+              "PersonalToolbar": [
+                "personal-bookmarks"
+              ]
+            },
+            "seen": [
+              "save-to-pocket-button",
+              "developer-button",
+              "_74e326aa-c645-4495-9287-b6febc5565a7_-browser-action",
+              "_testpilot-containers-browser-action",
+              "_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action",
+              "sponsorblocker_ajay_app-browser-action",
+              "ublock0_raymondhill_net-browser-action",
+              "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action",
+              "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action",
+              "firefox_tampermonkey_net-browser-action"
+            ],
+            "dirtyAreaCache": [
+              "nav-bar",
+              "vertical-tabs",
+              "unified-extensions-area",
+              "toolbar-menubar",
+              "TabsToolbar",
+              "PersonalToolbar"
+            ],
+            "currentVersion": 22,
+            "newElementCount": 3
+          }
+        '';
       };
     };
   };

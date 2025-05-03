@@ -56,6 +56,7 @@ in {
       kde.enable = true;
       gtk.enable = true;
       yazi.enable = true;
+      firefox.profileNames = [userdata.username];
     };
 
     # https://github.com/phisch/phinger-cursors
