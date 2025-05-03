@@ -139,7 +139,7 @@ in {
       };
     };
     "com.googlecode.iterm2" = {
-      "PrefsCustomFolder" = "/Users/${username}/.config/iterm";
+      "PrefsCustomFolder" = "/Users/${userdata.username}/.config/iterm";
       "LoadPrefsFromCustomFolder" = 1;
     };
   };

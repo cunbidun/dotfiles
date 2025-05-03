@@ -10,10 +10,12 @@
   package_config = import "${project_root}/nix/home-manager/packages.nix" {
     pkgs = pkgs;
     inputs = inputs;
+    project_root = project_root;
   };
 in {
   imports = [
     "${project_root}/nix/home-manager/configs/zsh.nix"
+    "${project_root}/nix/home-manager/configs/firefox.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
