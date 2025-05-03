@@ -39,10 +39,7 @@
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
 
     mac-app-util.url = "github:hraban/mac-app-util";
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    nur.url = "github:nix-community/nur";
   };
 
   outputs = inputs @ {
@@ -53,10 +50,12 @@
   }: let
     project_root = "${builtins.toString ./.}";
     userdata = import ./userdata.nix;
-    username = userdata.username;
     mkPkgs = system:
       import nixpkgs-unstable {
         inherit system;
+        overlays = [
+          inputs.nur.overlay
+        ];
         config.allowUnfree = true;
       };
     mkHomeManagerModule = configPath: {

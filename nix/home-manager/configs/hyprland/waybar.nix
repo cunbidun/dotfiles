@@ -59,7 +59,7 @@ in {
           format-alt = false;
           format-on = "BLUE";
           format-off = "[D] BLUE";
-          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.bluetuith}";
+          on-click = "$TERMINAL -T '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.bluetuith}";
           tooltip = false;
         };
         pulseaudio = {
@@ -71,7 +71,7 @@ in {
           format-icons = {
             default = ["VOL"];
           };
-          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.pulsemixer}";
+          on-click = "$TERMINAL -T '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e ${lib.getExe pkgs.pulsemixer}";
           tooltip = false;
         };
         network = {
@@ -81,7 +81,7 @@ in {
           format-ethernet = "NET {ipaddr}/{cidr}";
           format-linked = "NET {ifname} (No IP)";
           format-disconnected = "[D] NET";
-          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui";
+          on-click = "$TERMINAL -T '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui";
           tooltip = false;
         };
         "custom/weather" = {
@@ -90,7 +90,7 @@ in {
           signal = 20;
           tooltip = false;
           format = "{}";
-          on-click = "$TERMINAL -t '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"";
+          on-click = "$TERMINAL -T '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"";
           on-click-right = "${lib.getExe scripts.weather-sync}";
           on-click-middle = "${lib.getExe scripts.weather-sync}";
         };

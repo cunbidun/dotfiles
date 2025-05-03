@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{lib, ...}: {
   services.dunst = {
     enable = true;
     settings = {
@@ -32,7 +27,7 @@
         max_icon_size = 48;
         sticky_history = true;
         history_length = 20;
-        browser = "zen -new-tab";
+        browser = "firefox -new-tab";
         always_run_script = true;
         title = "Dunst";
         class = "Dunst";

@@ -85,7 +85,6 @@ in {
     theme-switch
     yazi-wrapper
     xdg-terminal-exec
-    inputs.zen-browser.packages."${pkgs.system}".default
     pkgs.prismlauncher
     pkgs.glib
     pkgs.caprine

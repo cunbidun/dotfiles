@@ -23,6 +23,7 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
+    "${project_root}/nix/home-manager/configs/firefox.nix"
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/mako.nix"
@@ -98,7 +99,6 @@ in {
 
     # Custom desktop files
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
-    ".local/share/applications/zen.desktop".source = "${project_root}/utilities/desktops/zen.desktop";
 
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
     ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
@@ -130,18 +130,6 @@ in {
         "image/png" = ["feh.desktop"];
         "text/plain" = ["nvim.desktop"];
         "inode/directory" = ["yazi.desktop"];
-
-        # default bookmarks
-        "x-scheme-handler/http" = ["zen.desktop"];
-        "x-scheme-handler/https" = ["zen.desktop"];
-        "x-scheme-handler/chrome" = ["zen.desktop"];
-        "text/html" = ["zen.desktop"];
-        "application/x-extension-htm" = ["zen.desktop"];
-        "application/x-extension-html" = ["zen.desktop"];
-        "application/x-extension-shtml" = ["zen.desktop"];
-        "application/xhtml+xml" = ["zen.desktop"];
-        "application/x-extension-xhtml" = ["zen.desktop"];
-        "application/x-extension-xht" = ["zen.desktop"];
       };
     };
 
