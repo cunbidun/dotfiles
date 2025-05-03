@@ -4,7 +4,6 @@
   pkgs,
   ...
 }: {
-  home.file.".mozilla/firefox/${userdata.username}/search.json.mozlz4".force = true;
   programs.firefox = {
     enable = true;
     profiles.${userdata.username} = {
