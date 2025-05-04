@@ -120,5 +120,5 @@
   // the keybindings file is JSON with comments, so target jsonc
   "[jsonc]": {
     "editor.formatOnSave": true
-  }
+  },
 }

@@ -85,6 +85,7 @@ in {
     theme-switch
     yazi-wrapper
     xdg-terminal-exec
+    pkgs.blender # A 3D modeling and animation software
     pkgs.prismlauncher
     pkgs.glib
     pkgs.caprine
