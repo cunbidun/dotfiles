@@ -211,7 +211,15 @@ in {
 
         ## 2.  ~/.config/fcitx5/config  ── optional global tweaks
         globalOptions = {
-          "Hotkey.TriggerKeys"."0" = "Super+space"; # switch engines
+          Hotkey = {
+            # Enumerate when press trigger key repeatedly
+            EnumerateWithTriggerKeys = "True";
+            # Skip first input method while enumerating
+            EnumerateSkipFirst = "False";
+          };
+          "Hotkey/EnumerateForwardKeys" = {
+            "0" = "Super+space";
+          };
           Behavior.ActiveByDefault = true; # start IM on login
         };
       };
