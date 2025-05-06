@@ -190,6 +190,31 @@ in {
     type = "fcitx5";
     enable = true;
     fcitx5.addons = with pkgs; [fcitx5-bamboo fcitx5-gtk];
+    fcitx5 = {
+      settings = {
+        globalOptions = {
+          "Hotkey/TriggerKeys" = {
+            "0" = "Super+Space";
+          };
+        };
+        inputMethod = {
+          GroupOrder."0" = "Default";
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "no";
+            DefaultIM = "keyboard-no";
+          };
+          "Groups/0/Items/0" = {
+            Name = "keyboard-no";
+            Layout = "no";
+          };
+          "Groups/0/Items/1" = {
+            Name = "Bamboo";
+            Layout = "no";
+          };
+        };
+      };
+    };
   };
   systemd.user.services.fcitx5-daemon = lib.mkForce {};
 
