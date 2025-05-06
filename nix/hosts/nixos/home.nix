@@ -187,31 +187,32 @@ in {
   };
 
   i18n.inputMethod = {
-    type = "fcitx5";
-    enable = true;
-    fcitx5.addons = with pkgs; [fcitx5-bamboo fcitx5-gtk];
+    enable = true; # new syntax (replaces deprecated `enabled`)
+    type = "fcitx5"; # tell HM which backend you want
+
     fcitx5 = {
+      waylandFrontend = true; # flip to false on pure‑X11
+      addons = with pkgs; [fcitx5-bamboo]; # pull the Bamboo engine
+
       settings = {
-        globalOptions = {
-          "Hotkey/TriggerKeys" = {
-            "0" = "Super+Space";
-          };
-        };
+        ## 1.  ~/.config/fcitx5/profile  ── engine list & order
         inputMethod = {
-          GroupOrder."0" = "Default";
+          "GroupOrder"."0" = "Default";
+
           "Groups/0" = {
             Name = "Default";
-            "Default Layout" = "no";
-            DefaultIM = "keyboard-no";
+            "Default Layout" = "us"; # physical keyboard
+            DefaultIM = "keyboard-us";
           };
-          "Groups/0/Items/0" = {
-            Name = "keyboard-no";
-            Layout = "no";
-          };
-          "Groups/0/Items/1" = {
-            Name = "Bamboo";
-            Layout = "no";
-          };
+
+          "Groups/0/Items/0".Name = "keyboard-us";
+          "Groups/0/Items/1".Name = "bamboo";
+        };
+
+        ## 2.  ~/.config/fcitx5/config  ── optional global tweaks
+        globalOptions = {
+          Hotkey.TriggerKeys."0" = "Super+space"; # switch engines
+          Behavior.ActiveByDefault = true; # start IM on login
         };
       };
     };
