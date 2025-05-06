@@ -211,7 +211,7 @@ in {
 
         ## 2.  ~/.config/fcitx5/config  ── optional global tweaks
         globalOptions = {
-          Hotkey.TriggerKeys."0" = "Super+space"; # switch engines
+          "Hotkey.TriggerKeys"."0" = "Super+space"; # switch engines
           Behavior.ActiveByDefault = true; # start IM on login
         };
       };
