@@ -217,6 +217,7 @@ in {
             # Skip first input method while enumerating
             EnumerateSkipFirst = "False";
           };
+          "Hotkey/TriggerKeys" = {};
           "Hotkey/EnumerateForwardKeys" = {
             "0" = "Super+space";
           };

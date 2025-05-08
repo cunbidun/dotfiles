@@ -121,4 +121,10 @@
   "[jsonc]": {
     "editor.formatOnSave": true
   },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
 }
