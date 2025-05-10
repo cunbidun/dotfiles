@@ -80,6 +80,22 @@
         "type": "github"
       }
     },
+    "auto-dark-mode-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741620696,
+        "narHash": "sha256-ZCViqnA+VoEOG+Xr+aJNlfRKCjxJm5y78HRXax3o8UY=",
+        "owner": "f-person",
+        "repo": "auto-dark-mode.nvim",
+        "rev": "c31de126963ffe9403901b4b0990dde0e6999cc6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "f-person",
+        "repo": "auto-dark-mode.nvim",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -1541,6 +1557,7 @@
       "inputs": {
         "Hyprspace": "Hyprspace",
         "apple-fonts": "apple-fonts",
+        "auto-dark-mode-nvim": "auto-dark-mode-nvim",
         "home-manager": "home-manager",
         "hyprcursor-phinger": "hyprcursor-phinger",
         "hyprfocus": "hyprfocus",

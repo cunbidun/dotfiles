@@ -40,6 +40,14 @@
 
     mac-app-util.url = "github:hraban/mac-app-util";
     nur.url = "github:nix-community/nur";
+
+    # +----------------+
+    # | Neovim plugins |
+    # +----------------+
+    auto-dark-mode-nvim = {
+      url = "github:f-person/auto-dark-mode.nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -55,6 +63,18 @@
         inherit system;
         overlays = [
           inputs.nur.overlays.default
+
+          (final: prev: {
+            vimPlugins =
+              prev.vimPlugins
+              // {
+                auto-dark-mode-nvim = prev.vimUtils.buildVimPlugin {
+                  pname = "auto-dark-mode.nvim";
+                  src = inputs.auto-dark-mode-nvim;
+                  version = inputs.auto-dark-mode-nvim.shortRev;
+                };
+              };
+          })
         ];
         config.allowUnfree = true;
       };

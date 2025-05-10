@@ -3,38 +3,6 @@
   lib,
   ...
 }: let
-  # Helper function to fetch a vim plugin from GitHub.
-  customVimPlugin = {
-    owner,
-    repo,
-    rev,
-    sha256,
-    pname,
-  }:
-    pkgs.stdenv.mkDerivation {
-      pname = pname;
-      name = pname + "-" + rev;
-      src = pkgs.fetchFromGitHub {
-        owner = owner;
-        repo = repo;
-        rev = rev;
-        sha256 = sha256;
-      };
-      installPhase = ''
-        mkdir -p $out
-        cp -r . $out
-      '';
-    };
-
-  # fetch f-person/auto-dark-mode.nvim.
-  auto-dark-mode-nvim = customVimPlugin {
-    owner = "f-person";
-    repo = "auto-dark-mode.nvim";
-    rev = "master"; # or specify a commit/tag
-    sha256 = "sha256-ZCViqnA+VoEOG+Xr+aJNlfRKCjxJm5y78HRXax3o8UY=";
-    pname = "auto-dark-mode.nvim";
-  };
-
   nvim-plugin-list = with pkgs.vimPlugins; [
     # -------------------------------------------------------------------
     # File Explorer Plugins
@@ -116,6 +84,11 @@
     # -------------------------------------------------------------------
     lazy-nvim # Facilitates lazy loading of plugins to optimize startup time.
     copilot-vim
+
+    # -------------------------------------------------------------------
+    # Miscellaneous
+    # -------------------------------------------------------------------
+    aw-watcher-nvim
   ];
 
   treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [

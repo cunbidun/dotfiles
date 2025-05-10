@@ -54,6 +54,7 @@
 
       bookmarks = {};
       bookmarks = {};
+      # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
       extensions = {
         force = true;
         packages = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -65,6 +66,7 @@
           onepassword-password-manager
           user-agent-string-switcher
           tampermonkey
+          aw-watcher-web
         ];
         settings = {
           # competitive-companion
@@ -91,6 +93,12 @@
               "hiddenTabs" = [];
               "macAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
             };
+          };
+          # aw-watcher-web
+          "{ef87d84c-2127-493f-b952-5b4e744245bc}".settings = {
+            force = true;
+            baseUrl = "http://localhost:5600";
+            enabled = true;
           };
         };
       };
