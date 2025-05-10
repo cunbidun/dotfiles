@@ -221,6 +221,9 @@ in {
           "Hotkey/EnumerateForwardKeys" = {
             "0" = "Super+space";
           };
+          "Hotkey/TogglePreedit" = {
+            "0" = "Control+Super+space";
+          };
           Behavior.ActiveByDefault = true; # start IM on login
         };
       };
