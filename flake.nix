@@ -71,49 +71,12 @@
         inherit system;
         overlays = [
           inputs.nur.overlays.default
-          (
-            final: prev: {
-              nur.repos.rycee.firefox-addons =
-                prev.nur.repos.rycee.firefox-addons
-                // {
-                  carrot = prev.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
-                    pname = "carrot";
-                    version = "0.6.8";
-                    url = "https://addons.mozilla.org/firefox/downloads/file/4450645/carrot-${version}.xpi";
-                    sha256 = "sha256-4QXp97JyqBBHcZbCReEzKCltTBc8WShETjVXYjq2WZ0";
-                    addonId = "{f0eeb71a-e5d6-48e6-a818-568a6bef1bc0}";
-                    meta = {
-                    };
-                  };
-                };
-              # Add the home-manager overlay to the Nixpkgs overlays.
-            }
-          )
-
-          (final: prev: {
-            vimPlugins =
-              prev.vimPlugins
-              // {
-                auto-dark-mode-nvim = prev.vimUtils.buildVimPlugin {
-                  pname = "auto-dark-mode.nvim";
-                  src = inputs.auto-dark-mode-nvim;
-                  version = inputs.auto-dark-mode-nvim.shortRev;
-                };
-                copilot-lua = prev.vimUtils.buildVimPlugin {
-                  pname = "copilot-lua";
-                  src = inputs.copilot-lua;
-                  version = inputs.copilot-lua.shortRev;
-                };
-                blink-copilot = prev.vimUtils.buildVimPlugin {
-                  pname = "blink-copilot";
-                  src = inputs.blink-copilot;
-                  version = inputs.blink-copilot.shortRev;
-                };
-              };
-          })
+          (import "${project_root}/nix/overlays/firefox-addons.nix")
+          (import "${project_root}/nix/overlays/vim-plugins.nix" inputs)
         ];
         config.allowUnfree = true;
       };
+
     mkHomeManagerModule = configPath: {
       home-manager = {
         useGlobalPkgs = true;
