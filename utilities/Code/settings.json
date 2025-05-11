@@ -113,6 +113,7 @@
     "120"
   ],
   "window.customMenuBarAltFocus": false,
+  "window.enableMenuBarMnemonics": false,
   "diffEditor.hideUnchangedRegions.enabled": true,
   // let the formatter run, but preserve your layout
   "json.format.keepLines": true,
