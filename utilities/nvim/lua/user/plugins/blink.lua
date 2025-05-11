@@ -1,7 +1,12 @@
 return {
   "vim-plugins/blink.cmp",
-  -- optional: provides snippets for the snippet source
-  dependencies = { "rafamadriz/friendly-snippets" },
+  dependencies = {
+    "fang2hou/blink-copilot",
+    opts = {
+      max_completions = 1,  -- Global default for max completions
+      max_attempts = 2,     -- Global default for max attempts
+    }
+  },
 
   -- use a release tag to download pre-built binaries
   version = "1.*",
@@ -44,22 +49,44 @@ return {
     },
 
     appearance = {
-      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- Adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
+      use_nvim_cmp_as_default = true,
     },
 
-    -- (Default) Only show the documentation popup when manually triggered
     completion = {
+      accept = { auto_brackets = { enabled = true } },
+
+      -- MENUS WINDOW (left)
+      menu = {
+        border = "single",
+        draw = {
+          treesitter = { "lsp" },
+        },
+      },
+    
+      -- DOCS WINDOW (right)
+      -- https://cmp.saghen.dev/configuration/reference#completion-documentation
       documentation = {
-        auto_show = false,
+        auto_show          = true,
+        auto_show_delay_ms = 50,
+        treesitter_highlighting = true,
+        window = {
+          border = "single",
+        },
       },
     },
-
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "snippets", "buffer", "copilot" },
+      providers = {
+        copilot = {
+          name   = "copilot",
+          module = "blink-copilot",  -- or "blink-cmp-copilot"
+          score_offset = 100,        -- Copilot goes on top
+          async = true,
+        },
+      },
     },
 
     -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

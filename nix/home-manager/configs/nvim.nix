@@ -83,7 +83,8 @@
     # Plugin Management and Lazy Loading
     # -------------------------------------------------------------------
     lazy-nvim # Facilitates lazy loading of plugins to optimize startup time.
-    copilot-vim
+    copilot-lua # GitHub Copilot support
+    blink-copilot # Copilot source for blink.cmp
 
     # -------------------------------------------------------------------
     # Miscellaneous
@@ -122,6 +123,7 @@
   extra-packages = with pkgs; [
     lua51Packages.luarocks
     lua51Packages.lua
+    nodejs_23
   ];
 
   # Function to extract language name from grammar package name

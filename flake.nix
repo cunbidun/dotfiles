@@ -48,6 +48,14 @@
       url = "github:f-person/auto-dark-mode.nvim";
       flake = false;
     };
+    copilot-lua = {
+      url = "github:zbirenbaum/copilot.lua";
+      flake = false;
+    };
+    blink-copilot = {
+      url = "github:fang2hou/blink-copilot";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -72,6 +80,16 @@
                   pname = "auto-dark-mode.nvim";
                   src = inputs.auto-dark-mode-nvim;
                   version = inputs.auto-dark-mode-nvim.shortRev;
+                };
+                copilot-lua = prev.vimUtils.buildVimPlugin {
+                  pname = "copilot-lua";
+                  src = inputs.copilot-lua;
+                  version = inputs.copilot-lua.shortRev;
+                };
+                blink-copilot = prev.vimUtils.buildVimPlugin {
+                  pname = "blink-copilot";
+                  src = inputs.blink-copilot;
+                  version = inputs.blink-copilot.shortRev;
                 };
               };
           })

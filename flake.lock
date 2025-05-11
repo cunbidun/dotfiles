@@ -163,6 +163,22 @@
         "type": "github"
       }
     },
+    "blink-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745468784,
+        "narHash": "sha256-7P4CUg4ryfQnrc15/4dCMYEDP0u+L2QrI/GPI/r1/zM=",
+        "owner": "fang2hou",
+        "repo": "blink-copilot",
+        "rev": "bdc45bbbed2ec252b3a29f4adecf031e157b5573",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fang2hou",
+        "repo": "blink-copilot",
+        "type": "github"
+      }
+    },
     "cl-nix-lite": {
       "locked": {
         "lastModified": 1728174978,
@@ -175,6 +191,22 @@
       "original": {
         "owner": "hraban",
         "repo": "cl-nix-lite",
+        "type": "github"
+      }
+    },
+    "copilot-lua": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746735010,
+        "narHash": "sha256-TDoBdS7M6R/4/OdAbCiyZz6MHNwQXp/V3tgY9cPfmmA=",
+        "owner": "zbirenbaum",
+        "repo": "copilot.lua",
+        "rev": "2fe34db04570f6c47db0b752ca421a49b7357c03",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zbirenbaum",
+        "repo": "copilot.lua",
         "type": "github"
       }
     },
@@ -1558,6 +1590,8 @@
         "Hyprspace": "Hyprspace",
         "apple-fonts": "apple-fonts",
         "auto-dark-mode-nvim": "auto-dark-mode-nvim",
+        "blink-copilot": "blink-copilot",
+        "copilot-lua": "copilot-lua",
         "home-manager": "home-manager",
         "hyprcursor-phinger": "hyprcursor-phinger",
         "hyprfocus": "hyprfocus",

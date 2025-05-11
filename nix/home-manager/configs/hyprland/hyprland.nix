@@ -142,6 +142,8 @@ in {
         "noborder,class:^(dota2)$"
         "noblur,class:^(dota2)$"
         "noshadow,class:^(dota2)$"
+        "workspace 8 silent,class:^(dota2)$"
+        "workspace 8 silent,class:^(cs2)$"
         "noborder,class:^(cs2)$"
         "noblur,class:^(cs2)$"
         "noshadow,class:^(cs2)$"
@@ -158,7 +160,6 @@ in {
         "stayfocused,class:^(tofi.*)$"
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
         "workspace 8 silent,class:^([Ss]team)$"
-        "workspace 8 silent,class:^(dota2)$"
 
         # Messenger
         "float,class:^(Caprine)$"
