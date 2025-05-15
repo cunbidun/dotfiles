@@ -193,8 +193,8 @@ in {
     };
 
     plugins = [
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
     ];
 
     extraConfig = ''
@@ -268,7 +268,7 @@ in {
       bind = $mainMod SHIFT, M, exec, ${lib.getExe scripts.minimize-window}
 
       # Scroll through existing workspaces with mainMod + scroll
-      # bind = $mainMod, Tab, overview:toggle,
+      # bind = $mainMod, Tab, overview:toggle
 
       # Group
       bind = $mainMod, t, togglegroup
@@ -279,7 +279,6 @@ in {
       bindm = $mainMod, mouse:273, resizewindow
       bind = $mainMod, mouse:274, togglefloating, # middle
       bindm = $mainMod, mouse:274, resizewindow
-      bind = $mainMod, Tab, overview:toggle
 
       #-------------------------------------+
       # will start a submap called "resize" |
