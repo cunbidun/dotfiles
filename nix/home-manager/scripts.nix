@@ -67,8 +67,6 @@
 
   hyprland-autostart = pkgs.writers.writeBashBin "hyprland-autostart" ''
     echo "PATH is set to $PATH"
-    [[ $(pgrep -x "gammastep-ind") ]] || gammastep-indicator &
-    # start 1password
     [[ $(pgrep 1password) ]] || 1password --silent
   '';
   increase-volume = pkgs.writeShellScriptBin "increase_volume" ''

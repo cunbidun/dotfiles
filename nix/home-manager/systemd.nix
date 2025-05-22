@@ -28,7 +28,6 @@ in {
         };
         Install = install_section;
       };
-
       hyprland_autostart = {
         Unit = unit_section;
         Service = {

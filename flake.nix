@@ -13,17 +13,9 @@
     # +----------+
     hyprland = {url = "github:hyprwm/Hyprland/v0.49.0?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
-    Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
-    hyprfocus = {
-      url = "github:daxisunder/hyprfocus";
-      inputs.hyprland.follows = "hyprland";
-    };
     xremap-flake = {
       url = "github:xremap/nix-flake";
       inputs.hyprland.follows = "hyprland";

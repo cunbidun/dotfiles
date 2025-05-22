@@ -107,34 +107,6 @@ in {
         workspace_swipe_distance = 100;
       };
 
-      plugin = {
-        overview = {
-          showNewWorkspace = false;
-          exitOnSwitch = true;
-          workspaceBorderSize = 3;
-          workspaceActiveBorder = "rgb(88c0d0)";
-          panelColor = "rgba(00000000)";
-          affectStrut = true;
-        };
-        hyprfocus = {
-          enabled = true;
-          animate_floating = true;
-          animate_workspacechange = false;
-          focus_animation = "shrink";
-          bezier = "realsmooth, 0.28,0.29,.69,1.08";
-          flash = {
-            flash_opacity = 0.95;
-          };
-          shrink = {
-            shrink_percentage = 0.99;
-            in_bezier = "realsmooth";
-            in_speed = 1;
-            out_bezier = "realsmooth";
-            out_speed = 2;
-          };
-        };
-      };
-
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       windowrulev2 = [
         "nofocus,class:^(Conky)$"
@@ -193,8 +165,6 @@ in {
     };
 
     plugins = [
-      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
     ];
 
     extraConfig = ''
@@ -267,10 +237,6 @@ in {
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
       bind = $mainMod SHIFT, M, exec, ${lib.getExe scripts.minimize-window}
 
-      # Scroll through existing workspaces with mainMod + scroll
-      # bind = $mainMod, Tab, overview:toggle
-
-      # Group
       bind = $mainMod, t, togglegroup
       bind = $mainMod SHIFT, t, moveoutofgroup
 

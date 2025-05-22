@@ -35,7 +35,7 @@ in {
     "${project_root}/nix/home-manager/configs/stylix.nix"
     "${project_root}/nix/home-manager/configs/activitywatch.nix"
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -188,9 +188,8 @@ in {
   };
 
   i18n.inputMethod = {
-    enable = true; # new syntax (replaces deprecated `enabled`)
+    enable = true; # also enable auto start
     type = "fcitx5"; # tell HM which backend you want
-
     fcitx5 = {
       waylandFrontend = true; # flip to false on pure‑X11
       addons = with pkgs; [fcitx5-bamboo]; # pull the Bamboo engine
