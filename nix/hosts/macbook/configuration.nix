@@ -190,6 +190,8 @@ in {
       "monitorcontrol"
       "unnaturalscrollwheels"
       "rectangle"
+      "activitywatch"
+      "vlc"
     ];
     global.autoUpdate = true;
   };
