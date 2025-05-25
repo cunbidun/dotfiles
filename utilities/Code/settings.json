@@ -128,4 +128,6 @@
     "markdown": true,
     "scminput": false
   },
+  "python.languageServer": "Default",
+  "python.pyrefly.disableLanguageServices": true,
 }

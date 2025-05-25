@@ -11,13 +11,21 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.49.0?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/eb3b38d40baca5c05ddbc1507b3d3f02a0ccb164?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     xremap-flake = {
       url = "github:xremap/nix-flake";
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprfocus = {
+      url = "github:cunbidun/hyprfocus";
+      inputs.hyprland.follows = "hyprland";
+    };
+    Hyprspace = {
+      url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
 
