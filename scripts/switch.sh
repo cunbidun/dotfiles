@@ -107,7 +107,7 @@ fi
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild switch..."
-  nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles'#macbook-m1' |& nom
+  sudo nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles'#macbook-m1' |& nom --json
 else
   echo "Detected non-macOS; running nix switch..."
   sudo -v # Ensure sudo is available and prompt for password if needed

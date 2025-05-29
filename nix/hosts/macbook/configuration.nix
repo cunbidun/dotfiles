@@ -32,6 +32,7 @@ in {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
     ];
   };
+  system.primaryUser = "${userdata.name}";
 
   # MacOS Workspace Switching Configuration
   #
@@ -207,7 +208,7 @@ in {
   # If you configure some of your MacOS preferences via nix-darwin and then activate your system,
   # you’ll find that some of them don’t take effect until you logout or restart your system.
   # This option fixes that
-  system.activationScripts.postUserActivation.text = ''
+  system.activationScripts.postActivation.text = ''
     # Following line should allow us to avoid a logout/login cycle
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
