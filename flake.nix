@@ -33,7 +33,7 @@
     # | Others |
     # +--------+
     yazi = {url = "github:sxyazi/yazi/v25.4.8";};
-    stylix = {url = "github:danth/stylix";};
+    stylix = {url = "github:nix-community/stylix";};
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
 
     mac-app-util.url = "github:hraban/mac-app-util";

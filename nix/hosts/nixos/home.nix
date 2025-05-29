@@ -33,6 +33,7 @@ in {
     "${project_root}/nix/home-manager/configs/swaylock.nix"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
+    "${project_root}/nix/home-manager/configs/steam.nix"
     "${project_root}/nix/home-manager/configs/activitywatch.nix"
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.stylix.homeModules.stylix
@@ -158,33 +159,27 @@ in {
 
     # https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser
     # Make sure to Set widget.use-xdg-desktop-portal.file-picker to 1
-    configFile."xdg-desktop-portal-termfilechooser/config" = {
-      force = true;
-      text = ''
-        [filechooser]
-        cmd=/etc/profiles/per-user/${userdata.username}/bin/yazi-wrapper
-        env=TERMCMD=${pkgs.kitty}/bin/kitty --title FileChooser
-      '';
+    configFile = {
+      "xdg-desktop-portal-termfilechooser/config" = {
+        force = true;
+        text = ''
+          [filechooser]
+          cmd=/etc/profiles/per-user/${userdata.username}/bin/yazi-wrapper
+          env=TERMCMD=${pkgs.kitty}/bin/kitty --title FileChooser
+        '';
+      };
+
+      "uwsm/env" = {
+        text = ''
+          #!/usr/bin/env bash
+          export PICKER=tofi
+          export TERMINAL=kitty
+          export QT_QTA_PLATFORMTHEME=qt5ct
+          export EDITOR=nvim
+          export NIXOS_OZONE_WL=1
+        '';
+      };
     };
-  };
-  # Add content to .profile
-  home.file.".profile".text = ''
-    . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
-
-    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES NIX_LD NIX_LD_LIBRARY_PATH NIXOS_OZONE_WL"
-    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES GLFW_IM_MODULE XMODIFIERS GTK_IM_MODULE QT_IM_MODULE"
-    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES GIO_EXTRA_MODULES QT_QTA_PLATFORMTHEME"
-    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES XDG_DATA_DIRS XDG_CURRENT_DESKTOP"
-    UWSM_FINALIZE_VARNAMES="$UWSM_FINALIZE_VARNAMES HOME TERMINAL PICKER EDITOR"
-
-    UWSM_WAIT_VARNAMES="$UWSM_FINALIZE_VARNAMES"
-  '';
-  home.sessionVariables = {
-    PICKER = "tofi";
-    TERMINAL = "kitty";
-    QT_QTA_PLATFORMTHEME = "qt5ct";
-    EDITOR = "nvim";
-    NIXOS_OZONE_WL = "1";
   };
 
   i18n.inputMethod = {

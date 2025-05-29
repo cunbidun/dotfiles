@@ -79,6 +79,22 @@
   { "key": "alt+v", "command": "workbench.action.terminal.paste", "when": "isLinux&& terminalFocus" },
   { "key": "alt+r", "command": "editor.action.startFindReplaceAction", "when": "isLinux && (editorFocus || editorIsOpen)" },
 
+  // +---------------------+
+  // | Copilot key binding |
+  // +---------------------+
+
+  // inline suggestion
+  {
+    "key": "alt+i",
+    "command": "inlineChat.start",
+    "when": "isLinux && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
+  },
+  {
+    "key": "alt+n",
+    "command": "workbench.action.files.newUntitledFile",
+    "when": "isLinux"
+  },
+
   // +------------------------+
   // | Mac custom key binding | 
   // +------------------------+

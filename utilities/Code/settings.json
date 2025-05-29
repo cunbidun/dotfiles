@@ -130,4 +130,6 @@
   },
   "python.languageServer": "Default",
   "python.pyrefly.disableLanguageServices": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
 }
