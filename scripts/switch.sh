@@ -76,5 +76,5 @@ if [ "$os" = "Darwin" ]; then
 else
   echo "Detected non-macOS; running nix switch..."
   sudo -v # Ensure sudo is available and prompt for password if needed
-  sudo nixos-rebuild switch --cores 0 --flake '~/dotfiles#nixos' --log-format internal-json -v |& nom --json
+  sudo nixos-rebuild switch --cores 0 --flake ~/dotfiles'#nixos' --log-format internal-json -v |& nom --json
 fi
