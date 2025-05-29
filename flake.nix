@@ -11,7 +11,7 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/eb3b38d40baca5c05ddbc1507b3d3f02a0ccb164?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/?submodules=1";};
     hypridle = {url = "github:hyprwm/hypridle";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
