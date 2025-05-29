@@ -79,9 +79,16 @@ cd "$git_root"
 
 # Check if git root is "/home/$USER/dotfiles" or not. If not print an error message and exit
 # This is to ensure that the script is being run from the correct directory
-if [ "$git_root" != "/home/$USER/dotfiles" ]; then
-  echo "Error: dotfiles repository is not in the expected location. It is expected to be at /home/$USER/dotfiles but found at $git_root."
-  exit 1
+if [ "$os" = "Darwin" ]; then
+  if [ "$git_root" != "/Users/$USER/dotfiles" ]; then
+    echo "Error: dotfiles repository is not in the expected location. It is expected to be at /Users/$USER/dotfiles but found at $git_root."
+    exit 1
+  fi
+else
+  if [ "$git_root" != "/home/$USER/dotfiles" ]; then
+    echo "Error: dotfiles repository is not in the expected location. It is expected to be at /home/$USER/dotfiles but found at $git_root."
+    exit 1
+  fi
 fi
 
 echo "Switching NixOS configuration from the git repository at: $git_root"
@@ -100,7 +107,7 @@ fi
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild switch..."
-  darwin-rebuild switch --flake ~/dotfiles#macbook-m1
+  nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles'#macbook-m1' |& nom
 else
   echo "Detected non-macOS; running nix switch..."
   sudo -v # Ensure sudo is available and prompt for password if needed
