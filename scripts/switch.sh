@@ -1,6 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+commit_changes=true
+commit_message="Auto commit: $(date +'%Y-%m-%d %H:%M:%S')"
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --no-commit)
+    commit_changes=false
+    shift
+    ;;
+  --commit-message)
+    if [[ -n "${2:-}" && ! "$2" =~ ^-- ]]; then
+      commit_message="$2"
+      shift 2
+    else
+      echo "Error: --commit-message requires a non-empty argument."
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Unknown option: $1"
+    exit 1
+    ;;
+  esac
+done
+
 # Detect OS and switch accordingly
 os=$(uname)
 
@@ -60,14 +86,16 @@ fi
 
 echo "Switching NixOS configuration from the git repository at: $git_root"
 
-# Auto-add all changes and commit if there are any
-git add -A
-if ! git diff-index --quiet HEAD --; then
-  commit_message="Auto commit: $(date +'%Y-%m-%d %H:%M:%S')"
-  git commit -m "$commit_message"
-  echo "Committed changes with message: $commit_message"
+if [ "$commit_changes" = true ]; then
+  git add -A
+  if ! git diff-index --quiet HEAD --; then
+    git commit -m "$commit_message"
+    echo "Committed changes with message: $commit_message"
+  else
+    echo "No changes to commit."
+  fi
 else
-  echo "No changes to commit."
+  echo "--no-commit flag set; skipping commit."
 fi
 
 if [ "$os" = "Darwin" ]; then
