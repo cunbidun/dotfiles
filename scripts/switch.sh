@@ -75,6 +75,6 @@ if [ "$os" = "Darwin" ]; then
   darwin-rebuild switch --flake ~/dotfiles#macbook-m1
 else
   echo "Detected non-macOS; running nix switch..."
-  sudo nixos-rebuild switch --cores 0 --flake ~/dotfiles#nixos
+  sudo -v # Ensure sudo is available and prompt for password if needed
+  sudo nixos-rebuild switch --cores 0 --flake '~/dotfiles#nixos' --log-format internal-json -v |& nom --json
 fi
-
