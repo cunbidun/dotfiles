@@ -106,6 +106,10 @@
     withUWSM = true;
   };
   programs.uwsm.enable = true;
+  services.greetd = {
+    enable = true;
+    settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
+  };
   programs.steam.enable = true;
 
   # List services that you want to enable:
@@ -115,11 +119,6 @@
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
-  };
-  services.displayManager.defaultSession = "hyprland-uwsm";
-  services.greetd = {
-    enable = true;
-    settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --time-format '%I:%M %p | %a -- %h | %F' --cmd 'uwsm start default'";
   };
 
   # services.xserver.displayManager.gdm.enable = true;
@@ -243,4 +242,9 @@
 
   hardware.opentabletdriver.enable = true;
   services.tailscale.enable = true;
+  console = {
+    earlySetup = true;
+    packages = with pkgs; [terminus_font];
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+  };
 }
