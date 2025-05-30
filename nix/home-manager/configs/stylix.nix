@@ -49,15 +49,18 @@ in {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
     image = ../../../wallpapers/Astronaut.png;
 
-    targets = {
-      waybar.enable = false;
-      vscode.enable = false;
-      gnome.enable = true;
-      kde.enable = true;
-      gtk.enable = true;
-      yazi.enable = true;
-      firefox.profileNames = [userdata.username];
-    };
+    targets =
+      if isLinux
+      then {
+        waybar.enable = false;
+        vscode.enable = false;
+        gnome.enable = true;
+        kde.enable = true;
+        gtk.enable = true;
+        yazi.enable = true;
+        firefox.profileNames = [userdata.username];
+      }
+      else {};
 
     # https://github.com/phisch/phinger-cursors
     cursor = {
