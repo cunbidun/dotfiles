@@ -32,7 +32,8 @@ in {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
     ];
   };
-  system.primaryUser = "${userdata.name}";
+
+  system.primaryUser = "${userdata.username}";
 
   # MacOS Workspace Switching Configuration
   #
