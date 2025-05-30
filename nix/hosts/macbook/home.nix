@@ -19,8 +19,8 @@ in {
     "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
-    "${project_root}/nix/home-manager/configs/stylix.nix"
-    inputs.stylix.homeModules.stylix
+    # "${project_root}/nix/home-manager/configs/stylix.nix"
+    # inputs.stylix.homeModules.stylix
     inputs.mac-app-util.homeManagerModules.default
   ];
   # Home Manager needs a bit of information about you and the
