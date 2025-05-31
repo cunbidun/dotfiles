@@ -24,7 +24,6 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
     "${project_root}/nix/home-manager/configs/firefox.nix"
-    "${project_root}/nix/home-manager/configs/fzf.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/mako.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
