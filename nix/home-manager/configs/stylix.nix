@@ -8,10 +8,7 @@
   inherit (pkgs.stdenv) isLinux;
 in {
   services.darkman = {
-    enable =
-      if isLinux
-      then true
-      else false;
+    enable = isLinux;
 
     darkModeScripts = {
       dark-theme-switch = ''
@@ -49,18 +46,15 @@ in {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
     image = ../../../wallpapers/Astronaut.png;
 
-    targets =
-      if isLinux
-      then {
-        waybar.enable = false;
-        vscode.enable = false;
-        gnome.enable = true;
-        kde.enable = true;
-        gtk.enable = true;
-        yazi.enable = true;
-        firefox.profileNames = [userdata.username];
-      }
-      else {};
+    targets = lib.mkIf isLinux {
+      waybar.enable = false;
+      vscode.enable = false;
+      gnome.enable = true;
+      kde.enable = true;
+      gtk.enable = true;
+      yazi.enable = true;
+      firefox.profileNames = [userdata.username];
+    };
 
     # https://github.com/phisch/phinger-cursors
     cursor = {

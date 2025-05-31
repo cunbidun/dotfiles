@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
-    nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-24.11";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
@@ -62,7 +61,7 @@
     home-manager,
     ...
   }: let
-    project_root = "${builtins.toString ./.}";
+    project_root = ./.;
     userdata = import ./userdata.nix;
     mkPkgs = system:
       import nixpkgs-unstable {
@@ -79,7 +78,6 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        backupFileExtension = "backup";
         users.${userdata.username} = import configPath;
         extraSpecialArgs = {
           inherit project_root inputs;
