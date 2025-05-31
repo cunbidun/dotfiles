@@ -248,4 +248,33 @@ in {
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "23.11";
+
+  home.activation = {
+    reconciliation_theme = ''
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+
+      LOCKFILE="/tmp/theme-reconcile.lock"
+      # Check if the lock file exists
+      if [ -e "$LOCKFILE" ]; then
+        echo "Theme reconciliation has already been performed. Skipping."
+        rm -f "$LOCKFILE"
+        exit 0
+      fi
+
+      touch "$LOCKFILE"
+
+      echo "Running theme reconciliation..."
+      MODE="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # dark by default
+      echo "Detected theme: $MODE"
+
+      # by default, darkman is set to dark, so don't run the theme activation
+      if [[ $MODE = dark ]]; then
+        exit 0
+      fi
+
+      /etc/profiles/per-user/${userdata.username}/bin/theme-switch $MODE
+    '';
+  };
 }
