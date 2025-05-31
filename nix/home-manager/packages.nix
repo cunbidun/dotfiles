@@ -7,7 +7,7 @@
   theme-switch = pkgs.writeShellApplication {
     name = "theme-switch";
     text = builtins.readFile "${project_root}/scripts/theme-switch.sh";
-    runtimeInputs = [pkgs.gawk pkgs.systemdMinimal];
+    runtimeInputs = [pkgs.gawk pkgs.gnugrep pkgs.systemdMinimal];
   };
   yazi-wrapper = pkgs.writeShellApplication {
     name = "yazi-wrapper";
