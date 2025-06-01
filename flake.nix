@@ -35,6 +35,11 @@
     stylix = {url = "github:nix-community/stylix";};
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
 
+    nix-monitored = {
+      url = "github:ners/nix-monitored";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     mac-app-util.url = "github:hraban/mac-app-util";
     nur.url = "github:nix-community/nur";
 
@@ -125,12 +130,10 @@
     # macbook configurations #
     # -----------------------#
     darwinConfigurations = {
-      # nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles#macbook-m1 |& nom
       "macbook-m1" = mkDarwinSystem {
         system = "aarch64-darwin";
         stateVersionNum = 4;
       };
-      # nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles#macbook-intel |& nom
       "macbook-intel" = mkDarwinSystem {
         system = "x86_64-darwin";
         stateVersionNum = 5;
@@ -141,7 +144,6 @@
     #  nixos configurations  #
     # -----------------------#
     nixosConfigurations = {
-      # sudo nixos-rebuild switch --flake ~/dotfiles#nixos
       nixos = mkNixosHost {
         system = "x86_64-linux";
         hostPath = ./nix/hosts/nixos/configuration.nix;

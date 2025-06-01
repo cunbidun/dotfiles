@@ -2,6 +2,7 @@
   pkgs,
   stateVersion,
   userdata,
+  inputs,
   ...
 }: let
 in {
@@ -12,7 +13,14 @@ in {
   environment.systemPackages = [pkgs.neovim pkgs.git];
 
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix = {
+    enable = true;
+    optimise.automatic = true;
+    package = inputs.nix-monitored.packages.${pkgs.system}.default;
+    settings = {
+      experimental-features = "nix-command flakes pipe-operators";
+    };
+  };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
@@ -199,6 +207,18 @@ in {
   };
   system.defaults.dock = {
     autohide = true;
+  };
+  system.defaults.finder = {
+    AppleShowAllFiles = true;
+    CreateDesktop = false;
+    FXDefaultSearchScope = "SCcf";
+    FXEnableExtensionChangeWarning = false;
+    FXPreferredViewStyle = "Nlsv";
+    QuitMenuItem = true;
+    ShowPathbar = true;
+    ShowStatusBar = true;
+    _FXShowPosixPathInTitle = true;
+    _FXSortFoldersFirst = true;
   };
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;

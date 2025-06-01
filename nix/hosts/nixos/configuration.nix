@@ -16,17 +16,24 @@
   ];
 
   # devenv wants users to be in the trusted-users list so that they can access the /nix/store
-  nix.settings.trusted-users = ["root" "@wheel"];
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+
+  nix = {
+    package = inputs.nix-monitored.packages.${pkgs.system}.default;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    optimise.automatic = true;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
+    settings.trusted-users = ["root" "@wheel"];
+    settings = {
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
   };
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 7d";
-  };
-  nix.optimise.automatic = true;
 
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -142,13 +149,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
-  nix = {
-    package = pkgs.nixVersions.latest;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   services.udev.extraRules = ''
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"

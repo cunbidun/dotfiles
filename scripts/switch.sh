@@ -98,7 +98,7 @@ git add -A
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild switch..."
-  if sudo nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles'#macbook-m1' |& nom --json; then
+  if sudo darwin-rebuild switch --flake ~/dotfiles'#macbook-m1' --cores 0; then
     switch_success=true
   else
     switch_success=false
@@ -106,7 +106,7 @@ if [ "$os" = "Darwin" ]; then
 else
   echo "Detected non-macOS; running nix switch..."
   sudo -v # Ensure sudo is available and prompt for password if needed
-  if sudo nixos-rebuild switch --cores 0 --flake ~/dotfiles'#nixos' --log-format internal-json -v |& nom --json; then
+  if sudo nixos-rebuild switch --flake ~/dotfiles'#nixos' --cores 0; then
     switch_success=true
   else
     switch_success=false
@@ -134,3 +134,4 @@ if [ "$switch_success" = false ]; then
   exit 1
 fi
 echo "NixOS configuration switch completed successfully."
+

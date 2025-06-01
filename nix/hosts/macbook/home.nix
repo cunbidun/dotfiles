@@ -36,13 +36,21 @@ in {
   };
 
   home.file = {
-    ".local/bin/vscode_extension.py".source = "${project_root}/scripts/vscode_extension.py";
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
     ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/tmux/.tmux.conf";
+
+    # ------- #
+    # vscode  #
+    # ------- #
+    ".local/bin/vscode_extension.py".source = "${project_root}/scripts/vscode_extension.py";
     "Library/Application Support/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
     "Library/Application Support/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
+
+    ".config/nvim".source =
+      if userdata.hermeticNvimConfig
+      then "${project_root}/utilities/nvim"
+      else config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
   };
 
   # Let Home Manager install and manage itself.
