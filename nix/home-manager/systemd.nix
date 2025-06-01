@@ -28,6 +28,7 @@ in {
         };
         Install = install_section;
       };
+
       hyprland_autostart = {
         Unit = unit_section;
         Service = {
@@ -36,17 +37,6 @@ in {
           ExecStart = "${scripts.hyprland-autostart}/bin/hyprland-autostart";
           StandardOutput = "journal";
           StandardError = "journal";
-          Slice = ["app-graphical.slice"];
-        };
-        Install = install_section;
-      };
-
-      waybar_config_watcher = {
-        Unit = unit_section;
-        Service = {
-          Type = "oneshot";
-          WorkingDirectory = "%h";
-          ExecStart = "systemctl --user restart waybar.service";
           Slice = ["app-graphical.slice"];
         };
         Install = install_section;
@@ -70,15 +60,6 @@ in {
       };
     };
 
-    paths = {
-      waybar_config_watcher = {
-        Unit = unit_section;
-        Path = {
-          PathModified = "%h/.config/waybar/";
-        };
-        Install = install_section;
-      };
-    };
     timers = {
       sync_weather = {
         Unit = unit_section;

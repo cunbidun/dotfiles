@@ -38,7 +38,24 @@ in {
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/standardized-light.yaml";
       image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
     };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
   };
+
+  home.activation.reconciliation_theme = ''
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "Running theme reconciliation..."
+    MODE="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # dark by default
+    echo "Detected theme: $MODE"
+
+    if [[ $MODE != dark ]]; then
+      /etc/profiles/per-user/${userdata.username}/bin/theme-switch $MODE
+    fi
+  '';
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {
