@@ -93,23 +93,38 @@ fi
 
 echo "Switching NixOS configuration from the git repository at: $git_root"
 
-if [ "$commit_changes" = true ]; then
-  git add -A
-  if ! git diff-index --quiet HEAD --; then
-    git commit -m "$commit_message"
-    echo "Committed changes with message: $commit_message"
-  else
-    echo "No changes to commit."
-  fi
-else
-  echo "--no-commit flag set; skipping commit."
-fi
+# Always add changes to staging
+git add -A
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild switch..."
-  sudo nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles'#macbook-m1' |& nom --json
+  if sudo nix --log-format internal-json run nix-darwin -- switch --flake ~/dotfiles'#macbook-m1' |& nom --json; then
+    switch_success=true
+  else
+    switch_success=false
+  fi
 else
   echo "Detected non-macOS; running nix switch..."
   sudo -v # Ensure sudo is available and prompt for password if needed
-  sudo nixos-rebuild switch --cores 0 --flake ~/dotfiles'#nixos' --log-format internal-json -v |& nom --json
+  if sudo nixos-rebuild switch --cores 0 --flake ~/dotfiles'#nixos' --log-format internal-json -v |& nom --json; then
+    switch_success=true
+  else
+    switch_success=false
+  fi
+fi
+
+if [ "$switch_success" = true ]; then
+  echo "NixOS switch successful."
+  if [ "$commit_changes" = true ]; then
+    if ! git diff-index --quiet HEAD --; then
+      git commit -m "$commit_message"
+      echo "Committed changes with message: $commit_message"
+    else
+      echo "No changes to commit after successful switch."
+    fi
+  else
+    echo "--no-commit flag set; skipping commit."
+  fi
+else
+  echo "NixOS switch failed; skipping commit."
 fi

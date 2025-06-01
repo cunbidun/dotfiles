@@ -24,6 +24,7 @@ in {
           # "bluetooth"
           "custom/brightness"
           "custom/weather"
+          "custom/theme"
           "tray"
           "clock"
         ];
@@ -108,6 +109,13 @@ in {
           tooltip = false;
           format = "MODE: {}";
         };
+        "custom/theme" = {
+          interval = 1;
+          exec = "${lib.getExe scripts.get-theme-polarity}";
+          tooltip = false;
+          format = "{}";
+          on-click = "${lib.getExe scripts.toggle-theme-debounced}";
+        };
       }
     ];
   };
@@ -184,7 +192,7 @@ in {
       padding: 0 4px;
     }
 
-    #tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-mode, #custom-weather, #mode, #pulseaudio, #clock, #bluetooth {
+    #tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-mode, #custom-theme, #custom-weather, #mode, #pulseaudio, #clock, #bluetooth {
       margin: 0 2px;
       padding: 0 6px;
       min-width: 22px;
