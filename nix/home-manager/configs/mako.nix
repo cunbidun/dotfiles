@@ -7,6 +7,7 @@
       height = 100;
       margin = "20";
       padding = "20";
+      default-timeout = 5000;
 
       # Positioning and layout
       anchor = "top-right";
