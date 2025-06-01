@@ -44,7 +44,7 @@ in {
     '';
   };
 
-  home.activation.reconciliation_theme = ''
+  home.activation.reconciliation_theme = lib.mkIf isLinux ''
     #!/usr/bin/env bash
     set -euo pipefail
 
