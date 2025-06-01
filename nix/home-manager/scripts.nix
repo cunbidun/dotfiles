@@ -270,9 +270,9 @@
   get-theme-polarity = pkgs.writeShellScriptBin "get-theme-polarity" ''
     current_theme=$(darkman get)
     if [[ "$current_theme" == "dark" ]]; then
-      echo "T " # Moon icon for dark theme
+      echo "Polarity " # Moon icon for dark theme
     else
-      echo "T " # Sun icon for light theme
+      echo "Polarity " # Sun icon for light theme
     fi
   '';
 
