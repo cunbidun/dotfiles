@@ -235,4 +235,11 @@ in {
       margin-right: 4px;
     }
   '';
+  home.activation = {
+    waybar-restart = ''
+      export PATH=${lib.makeBinPath [pkgs.systemdMinimal]}:$PATH
+      #!/usr/bin/env bash
+      systemctl --user restart waybar.service
+    '';
+  };
 }

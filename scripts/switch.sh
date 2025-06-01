@@ -128,3 +128,9 @@ if [ "$switch_success" = true ]; then
 else
   echo "NixOS switch failed; skipping commit."
 fi
+
+if [ "$switch_success" = false ]; then
+  echo "Error: NixOS switch failed."
+  exit 1
+fi
+echo "NixOS configuration switch completed successfully."
