@@ -196,19 +196,23 @@
     polkitPolicyOwners = ["${userdata.username}"];
   };
 
-  environment.etc = lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
-    "geolocation".text = ''
-      # Statue of Liberty
-      40.6893129   # latitude
-      -74.0445531  # longitude
-      96           # altitude
-      1.83         # accuracy radius
-    '';
-    "geoclue/conf.d/00-config.conf".text = ''
-      [static-source]
-      enable=true
-    '';
-  };
+  environment.etc =
+    {
+      "flake-source".source = inputs.self;
+    }
+    // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
+      "geolocation".text = ''
+        # Statue of Liberty
+        40.6893129   # latitude
+        -74.0445531  # longitude
+        96           # altitude
+        1.83         # accuracy radius
+      '';
+      "geoclue/conf.d/00-config.conf".text = ''
+        [static-source]
+        enable=true
+      '';
+    };
 
   hardware.i2c.enable = true;
   programs.nix-ld.enable = true;

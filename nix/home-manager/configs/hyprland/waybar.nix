@@ -237,9 +237,11 @@ in {
   '';
   home.activation = {
     waybar-restart = ''
-      export PATH=${lib.makeBinPath [pkgs.systemdMinimal]}:$PATH
       #!/usr/bin/env bash
-      systemctl --user restart waybar.service
+      if [[ -n "''$DBUS_SESSION_BUS_ADDRESS" && -n "''$XDG_RUNTIME_DIR" ]]; then
+        export PATH=${lib.makeBinPath [pkgs.systemdMinimal]}:$PATH
+        systemctl --user restart waybar.service
+      fi
     '';
   };
 }
