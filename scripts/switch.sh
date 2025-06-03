@@ -3,6 +3,7 @@ set -euo pipefail
 
 commit_changes=true
 commit_message="Auto commit: $(date +'%Y-%m-%d %H:%M:%S')"
+profile_name=""
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -21,11 +22,23 @@ while [[ $# -gt 0 ]]; do
     fi
     ;;
   *)
-    echo "Unknown option: $1"
-    exit 1
+    if [[ -z "$profile_name" ]]; then
+      profile_name="$1"
+      shift
+    else
+      echo "Unknown option or too many arguments: $1"
+      exit 1
+    fi
     ;;
   esac
 done
+
+# Check if profile_name is provided
+if [[ -z "$profile_name" ]]; then
+  echo "Usage: $0 [--no-commit] [--commit-message <message>] <profile_name>"
+  echo "  <profile_name> can be 'macbook-m1' or 'nixos'"
+  exit 1
+fi
 
 # Detect OS and switch accordingly
 os=$(uname)
@@ -65,10 +78,10 @@ if [ "$os" != "Darwin" ]; then
   fi
 
   # Compare the content of the two files
-  if ! cmp -s /etc/nixos/hardware-configuration.nix "$git_root/nix/hosts/nixos/hardware-configuration.nix"; then
-    echo "Updating nix/hosts/nixos/hardware-configuration.nix from /etc/nixos/hardware-configuration.nix"
+  if ! cmp -s /etc/nixos/hardware-configuration.nix "$git_root/nix/hosts/$profile_name/hardware-configuration.nix"; then
+    echo "Updating nix/hosts/$profile_name/hardware-configuration.nix with value from /etc/nixos/hardware-configuration.nix"
     # Copy the content from /etc/nixos/hardware-configuration.nix to nix/hosts/nixos/hardware-configuration.nix
-    cp /etc/nixos/hardware-configuration.nix "$git_root/nix/hosts/nixos/hardware-configuration.nix"
+    cp /etc/nixos/hardware-configuration.nix "$git_root/nix/hosts/$profile_name/hardware-configuration.nix"
   else
     echo "No changes detected in hardware-configuration.nix."
   fi
@@ -98,7 +111,7 @@ git add -A
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild switch..."
-  if sudo darwin-rebuild switch --flake ~/dotfiles'#macbook-m1' --cores 0; then
+  if sudo darwin-rebuild switch --flake ~/dotfiles"#$profile_name" --cores 0; then
     switch_success=true
   else
     switch_success=false
@@ -106,7 +119,7 @@ if [ "$os" = "Darwin" ]; then
 else
   echo "Detected non-macOS; running nix switch..."
   sudo -v # Ensure sudo is available and prompt for password if needed
-  if sudo nixos-rebuild switch --flake ~/dotfiles'#nixos' --cores 0; then
+  if sudo nixos-rebuild switch --flake ~/dotfiles"#$profile_name" --cores 0; then
     switch_success=true
   else
     switch_success=false
@@ -142,8 +155,7 @@ else
 fi
 
 if [ "$switch_success" = false ]; then
-  echo "Error: NixOS switch failed."
+  echo "Error: Switch failed."
   exit 1
 fi
-echo "NixOS configuration switch completed successfully."
-
+echo "Configuration switch completed successfully."
