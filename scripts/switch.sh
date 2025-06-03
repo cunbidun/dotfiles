@@ -113,12 +113,24 @@ else
   fi
 fi
 
+# Get the current NixOS system profile version (e.g., system-1526-link)
+nixos_version=""
+if [ "$os" != "Darwin" ]; then
+  nixos_version=$(basename "$(readlink /nix/var/nix/profiles/system)" | sed 's/-link$//')
+fi
+
 if [ "$switch_success" = true ]; then
   echo "NixOS switch successful."
   if [ "$commit_changes" = true ]; then
     if ! git diff-index --quiet HEAD --; then
-      git commit -m "$commit_message"
-      echo "Committed changes with message: $commit_message"
+      # Append NixOS version to the commit message if available
+      if [ -n "$nixos_version" ]; then
+        git commit -m "$commit_message (nixos version: $nixos_version)"
+        echo "Committed changes with message: $commit_message (nixos version: $nixos_version)"
+      else
+        git commit -m "$commit_message"
+        echo "Committed changes with message: $commit_message"
+      fi
     else
       echo "No changes to commit after successful switch."
     fi
