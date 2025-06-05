@@ -238,7 +238,7 @@ in {
   home.activation = {
     waybar-restart = ''
       #!/usr/bin/env bash
-      if [[ -n "''$DBUS_SESSION_BUS_ADDRESS" && -n "''$XDG_RUNTIME_DIR" ]]; then
+      if [[ -v DBUS_SESSION_BUS_ADDRESS && -v XDG_RUNTIME_DIR ]]; then
         export PATH=${lib.makeBinPath [pkgs.systemdMinimal]}:$PATH
         systemctl --user restart waybar.service
       fi

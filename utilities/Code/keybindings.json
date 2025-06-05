@@ -22,6 +22,7 @@
   { "command": "explorer.newFile", "key": "a", "when": "filesExplorerFocus && !inputFocus" },
   { "command": "list.focusParent", "key": "u", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
   { "command": "workbench.files.action.refreshFilesExplorer", "key": "shift+r", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+  { "command": "workbench.action.files.newUntitledFile", "key": "alt+n", "when": "isLinux" },
 
   // +--------------+
   // | Multi cursor |
@@ -90,9 +91,9 @@
     "when": "isLinux && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
   },
   {
-    "key": "alt+n",
-    "command": "workbench.action.files.newUntitledFile",
-    "when": "isLinux"
+    "key": "alt+i",
+    "command": "workbench.action.terminal.chat.start",
+    "when": "isLinux && chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
   },
 
   // +------------------------+

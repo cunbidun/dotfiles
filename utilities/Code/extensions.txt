@@ -43,6 +43,9 @@ foxundermoon.shell-format
 # latex
 james-yu.latex-workshop
 
+# lua 
+yinfei.luahelper
+
 # cpp 
 ms-vscode.cpptools
 ms-vscode.cmake-tools
@@ -68,4 +71,5 @@ dbaeumer.vscode-eslint
 # New extensions added:
 docker.docker
 tomoki1207.pdf
-yinfei.luahelper
+activitywatch.aw-watcher-vscode
+ms-azuretools.vscode-containers
