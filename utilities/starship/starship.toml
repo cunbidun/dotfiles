@@ -72,7 +72,7 @@ style = "blue"
 disabled = false
 
 [cmd_duration]
-format = "[tooks $cmd_duration]($style)"
+format = "[tooks $duration]($style)"
 style = "blue"
 disabled = false
 min_time = 0
