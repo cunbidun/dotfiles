@@ -4,7 +4,7 @@
 palette = 'default'
 # Use custom format
 format = '''
-[┌─╼\[$username@$hostname\](╾─╼(\[$status\])(\[$jobs\]))╾─╼\[$time\]](frame)
+[┌─╼\[$username@$hostname\](╾─╼(\[$status\])(\[$jobs\]))╾─╼\[$time\](╾─╼\[$cmd_duration\])](frame)
 [└─╼\[$directory\]](frame)
 ([ ╰╼(\[$git_branch\])(╾─╼$git_status)(╾─╼\[$git_state\])(╾─╼\[${custom.git_remote}\])](frame))${custom.line_break}([ ╰╼\[${custom.git_commit_message}\]╾─╼$git_commit╾─╼\[${custom.git_commit_time}\]](frame))${custom.line_break}▶ $python$conda
 '''
@@ -70,6 +70,13 @@ style = "red"
 format = "[$time]($style)"
 style = "blue"
 disabled = false
+
+[cmd_duration]
+format = "[tooks $cmd_duration]($style)"
+style = "blue"
+disabled = false
+min_time = 0
+show_milliseconds = true
 
 [python]
 format = '[${pyenv_prefix}(${version} )]($style)[(\($virtualenv\) )]($style)'
