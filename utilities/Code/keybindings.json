@@ -59,8 +59,11 @@
   { "key": "alt+f", "command": "actions.find", "when": "isLinux && (editorFocus || editorIsOpen)" },
   { "key": "alt+shift+p", "command": "workbench.action.showCommands", "when": "isLinux" },
   { "key": "alt+s", "command": "workbench.action.files.save", "when": "isLinux" },
-  { "key": "alt+e", "command": "workbench.action.quickOpen", "when": "isLinux" },
-  { "key": "alt+p", "command": "workbench.action.quickOpen", "when": "isLinux" },
+  {
+    "key": "alt+p",
+    "command": "workbench.action.quickOpen",
+    "when": "isLinux"
+  },
   { "key": "alt+c", "command": "editor.action.clipboardCopyAction", "when": "isLinux" },
   { "key": "alt+x", "command": "editor.action.clipboardCutAction", "when": "isLinux" },
   { "key": "alt+v", "command": "editor.action.clipboardPasteAction", "when": "isLinux" },
@@ -96,6 +99,22 @@
     "when": "isLinux && chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
   },
 
+  {
+    "key": "alt+e alt+e",
+    "command": "sqltools.executeQuery",
+    "when": "isLinux && editorHasSelection && editorTextFocus && !config.sqltools.disableChordKeybindings"
+  },
+  {
+    "key": "ctrl+e ctrl+e",
+    "command": "-sqltools.executeQuery",
+    "when": "isLinux && editorTextFocus && !config.sqltools.disableChordKeybindings"
+  },
+  {
+    "key": "alt+\\",
+    "command": "workbench.action.terminal.split",
+    "when": "isLinux && (terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile)"
+  },
+
   // +------------------------+
   // | Mac custom key binding | 
   // +------------------------+
@@ -104,6 +123,8 @@
   // +---------------------------+
   // | Miscellaneous key binding |
   // +---------------------------+
-  { "key": "ctrl+q", "command": "-workbench.action.quickOpenView", },
-
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpenView",
+  },
 ]

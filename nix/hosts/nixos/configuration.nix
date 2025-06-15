@@ -131,7 +131,6 @@
     enable = true;
     settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
   };
-  programs.steam.enable = true;
 
   # List services that you want to enable:
 
