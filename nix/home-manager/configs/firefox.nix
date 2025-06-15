@@ -71,7 +71,7 @@ in {
           keepass-helper
 
           # description = "Remove YouTube end cards and end screen recommendation videowall.";
-          youtube-cards
+          youtube-recommended-videos
 
           # competitive programming contest rating prediction
           carrot
