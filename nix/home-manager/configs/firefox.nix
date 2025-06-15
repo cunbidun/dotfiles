@@ -69,6 +69,11 @@ in {
           tampermonkey
           aw-watcher-web
           keepass-helper
+
+          # description = "Remove YouTube end cards and end screen recommendation videowall.";
+          youtube-cards
+
+          # competitive programming contest rating prediction
           carrot
         ];
         settings = {
