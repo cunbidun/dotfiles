@@ -26,6 +26,10 @@ sudo nix-store --optimise
 
 ### MacOS
 
+Install XCode manually as this cannot currently be automated
+
+then run these commands:
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer && sudo xcodebuild -runFirstLaunch
 #### Bootstrap
 To bootstrap nix on MacOS with my dotfiles, follow these steps:
 1. Clone the repository to ~/dotfiles

@@ -42,6 +42,9 @@ in {
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/tmux/.tmux.conf";
     "Library/Application Support/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
     "Library/Application Support/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
+    ".zsh/zshenv".source = "${project_root}/zsh/zshenv";
+    ".zsh/zshfunctions".source = "${project_root}/zsh/zshfunctions";
+    ".zsh/zshvim".source = "${project_root}/zsh/zshvim";
   };
 
   # Let Home Manager install and manage itself.
