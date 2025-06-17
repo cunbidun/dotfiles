@@ -215,7 +215,7 @@ in {
       "vlc"
       "whisky"
     ];
-    // mas install https://www.moncefbelyamani.com/how-to-install-xcode-with-homebrew/
+    # mas install https://www.moncefbelyamani.com/how-to-install-xcode-with-homebrew/
     masApps = {
         XCode = 497799835;
     };
