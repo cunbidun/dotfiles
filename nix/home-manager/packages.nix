@@ -163,6 +163,7 @@ in {
     pkgs.evince # A document viewer
     pkgs.hwinfo # A hardware information tool
     pkgs.imagemagick # A suite of image manipulation tools
+    pkgs.yt-dlp # A command-line tool to download videos from YouTube and other sites
   ];
 
   mac_packages = [
