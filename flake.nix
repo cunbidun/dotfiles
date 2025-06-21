@@ -53,6 +53,10 @@
       url = "github:fang2hou/blink-copilot";
       flake = false;
     };
+    nix-monitored = {
+      url = "github:ners/nix-monitored";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs @ {

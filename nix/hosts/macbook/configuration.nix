@@ -2,6 +2,7 @@
   pkgs,
   stateVersion,
   userdata,
+  inputs,
   ...
 }: let
 in {
@@ -15,6 +16,10 @@ in {
   nix = {
     enable = true;
     optimise.automatic = true;
+    # TODO: this some how break 'nix develop'
+    # https://github.com/maralorn/nix-output-monitor/issues/166
+    # https://github.com/maralorn/nix-output-monitor/issues/140
+    package = inputs.nix-monitored.packages.${pkgs.system}.default;
     settings = {
       experimental-features = "nix-command flakes pipe-operators";
     };
