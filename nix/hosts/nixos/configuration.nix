@@ -178,20 +178,7 @@
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings = {dns_enabled = true;};
     };
-    # * Post installation steps: https://nixos.wiki/wiki/WayDroid
-    #   Fetch WayDroid images.
-    #     sudo waydroid init -s GAPPS
-    #   sudo systemctl start waydroid-container
-    #   sudo journalctl -u waydroid-container
-    #   waydroid session start
-    # * Google Play Certification: https://docs.waydro.id/faq/google-play-certification
-    # * Set size
-    #   waydroid prop set persist.waydroid.width 576
-    #   waydroid prop set persist.waydroid.height 1024
-    #   sudo systemctl restart waydroid-container
-    waydroid.enable = true;
     docker.enable = true;
-    spiceUSBRedirection.enable = true;
   };
   services.usbmuxd.enable = true;
 
@@ -243,10 +230,6 @@
   services.udisks2.enable = true;
   # Chrome is trying to access power-related information but can't find the UPower service.
   services.upower.enable = true;
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-  };
   services.geoclue2 = {
     enable = true;
     submitData = true;

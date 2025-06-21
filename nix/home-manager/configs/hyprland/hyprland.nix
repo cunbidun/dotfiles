@@ -126,7 +126,6 @@ in {
         "float,title:^(Open File)$"
         "float,title:^(Bluetooth Devices)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
-        "float,class:^(waydroid.com.*)$"
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
