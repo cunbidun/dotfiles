@@ -94,7 +94,6 @@
   "workbench.iconTheme": "material-icon-theme",
   "window.autoDetectColorScheme": true,
   "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
   "files.exclude": {
     "**/__pycache__": true,
     "**/.pytest_cache": true
@@ -132,4 +131,5 @@
   "python.pyrefly.disableLanguageServices": true,
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "git.blame.editorDecoration.enabled": true,
 }

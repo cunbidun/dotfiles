@@ -2,7 +2,6 @@
   pkgs,
   stateVersion,
   userdata,
-  inputs,
   ...
 }: let
 in {
@@ -16,7 +15,6 @@ in {
   nix = {
     enable = true;
     optimise.automatic = true;
-    package = inputs.nix-monitored.packages.${pkgs.system}.default;
     settings = {
       experimental-features = "nix-command flakes pipe-operators";
     };

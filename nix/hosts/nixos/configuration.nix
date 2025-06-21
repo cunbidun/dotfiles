@@ -18,7 +18,6 @@
   # devenv wants users to be in the trusted-users list so that they can access the /nix/store
 
   nix = {
-    package = inputs.nix-monitored.packages.${pkgs.system}.default;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';

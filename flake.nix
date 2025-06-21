@@ -35,11 +35,6 @@
     stylix = {url = "github:nix-community/stylix";};
     spicetify-nix = {url = "github:Gerg-L/spicetify-nix";};
 
-    nix-monitored = {
-      url = "github:ners/nix-monitored";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     mac-app-util.url = "github:hraban/mac-app-util";
     nur.url = "github:nix-community/nur";
 

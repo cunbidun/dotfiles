@@ -108,18 +108,18 @@ echo "Switching NixOS configuration from the git repository at: $git_root"
 
 # Always add changes to staging
 git add -A
+sudo -v # Ensure sudo is available and prompt for password if needed
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild switch..."
-  if sudo darwin-rebuild switch --flake ~/dotfiles"#$profile_name" --cores 0; then
+  if sudo darwin-rebuild --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
     switch_success=true
   else
     switch_success=false
   fi
 else
   echo "Detected non-macOS; running nix switch..."
-  sudo -v # Ensure sudo is available and prompt for password if needed
-  if sudo nixos-rebuild switch --flake ~/dotfiles"#$profile_name" --cores 0; then
+  if sudo nixos-rebuild --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
     switch_success=true
   else
     switch_success=false
