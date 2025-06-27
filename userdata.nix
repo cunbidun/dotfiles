@@ -9,4 +9,8 @@
   # Set this option to false allows direct editing of the Neovim configuration files in ~/.config/nvim,
   # making it's faster to iterate and test changes.
   hermeticNvimConfig = false;
+
+  authorizedKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
+  ];
 }

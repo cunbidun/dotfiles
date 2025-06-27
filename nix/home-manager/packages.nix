@@ -164,6 +164,9 @@ in {
     pkgs.hwinfo # A hardware information tool
     pkgs.imagemagick # A suite of image manipulation tools
     pkgs.yt-dlp # A command-line tool to download videos from YouTube and other sites
+
+    # build tools
+    pkgs.buildifier
   ];
 
   mac_packages = [

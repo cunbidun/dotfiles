@@ -51,11 +51,6 @@
   boot.blacklistedKernelModules = ["wacom"];
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -97,20 +92,16 @@
       distrobox
 
       # Container
-      podman-tui # status of containers in the terminal
+      podman-tui
       docker-compose
     ];
     shell = pkgs.zsh;
-    # TODO fix this
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
-    ];
+    openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # To search for packages run 'nix search'. For example, 'nix search nixpkgs bazel'
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
     git
   ];
 
@@ -131,31 +122,12 @@
     settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
   };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
-
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.gdm.wayland = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
 
   services.udev.extraRules = ''
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
@@ -209,18 +181,6 @@
     };
 
   hardware.i2c.enable = true;
-  programs.nix-ld.enable = true;
-  # Sets up all the libraries to load
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc
-    fuse3
-    icu
-    zlib
-    nss
-    openssl
-    curl
-    expat
-  ];
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
@@ -233,7 +193,7 @@
   services.geoclue2 = {
     enable = true;
     submitData = true;
-    # Wifi appears to not working at the moment
+    # TODO: Wifi appears to not working at the moment
     enableWifi = false;
     submissionUrl = "https://api.beacondb.net/v2/geosubmit";
     geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
@@ -250,4 +210,32 @@
   # TODO: Remove this once nixpkgs fixes the issue with podman OCI permissions
   # https://discourse.nixos.org/t/distrobox-podman-oci-permission-error/64943/10
   security.lsm = lib.mkForce [];
+
+  # Sets up all the libraries to load
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc
+      fuse3
+      icu
+      zlib
+      nss
+      openssl
+      curl
+      expat
+    ];
+  };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.11"; # Did you read the comment?
 }
