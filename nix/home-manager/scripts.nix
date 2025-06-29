@@ -22,7 +22,7 @@
   weather-sync =
     pkgs.writers.writePython3Bin "weather-sync" {
       libraries = [
-        pkgs.python312Packages.requests
+        pkgs.python3Packages.requests
       ];
       flakeIgnore = [
         "E501" # Line too long
