@@ -28,6 +28,9 @@ in {
           "tray"
           "clock"
         ];
+        "hyprland/window" = {
+          tooltip = false;
+        };
         "hyprland/workspaces" = {
           disable-scroll = true;
           all-outputs = true;
