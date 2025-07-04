@@ -10,6 +10,7 @@ in {
     profiles.${userdata.username} = {
       search = {
         force = true;
+        default = "ddg";
         engines = {
           "GitHub Repositories" = {
             urls = [
@@ -49,6 +50,10 @@ in {
 
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@nix"];
+          };
+          "Home Manager" = {
+            urls = [{template = "https://rycee.gitlab.io/home-manager/options.html";}];
+            definedAliases = ["@hm"];
           };
         };
       };
@@ -97,9 +102,38 @@ in {
               "neverAsk" = true;
               "identityMacAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
             };
+            "siteContainerMap@@_www.instagram.com" = {
+              "userContextId" = "2";
+              "neverAsk" = true;
+              "identityMacAddonUUID" = "0a2e9531-0591-45dc-8d4d-0750dee15140";
+            };
+            "siteContainerMap@@_www.facebook.com" = {
+              "userContextId" = "2";
+              "neverAsk" = true;
+              "identityMacAddonUUID" = "0a2e9531-0591-45dc-8d4d-0750dee15140";
+            };
+            "siteContainerMap@@_www.google.com" = {
+              "userContextId" = "3";
+              "neverAsk" = true;
+              "identityMacAddonUUID" = "b742fe80-8e51-4287-8c9e-9c2a73d4ca41";
+            };
+            "siteContainerMap@@_www.youtube.com" = {
+              "userContextId" = "3";
+              "neverAsk" = true;
+              "identityMacAddonUUID" = "b742fe80-8e51-4287-8c9e-9c2a73d4ca41";
+            };
+            # identitiesState
             "identitiesState@@_firefox-container-1" = {
               "hiddenTabs" = [];
               "macAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
+            };
+            "identitiesState@@_firefox-container-2" = {
+              "hiddenTabs" = [];
+              "macAddonUUID" = "0a2e9531-0591-45dc-8d4d-0750dee15140";
+            };
+            "identitiesState@@_firefox-container-3" = {
+              "hiddenTabs" = [];
+              "macAddonUUID" = "b742fe80-8e51-4287-8c9e-9c2a73d4ca41";
             };
           };
           # aw-watcher-web
@@ -116,6 +150,16 @@ in {
           color = "orange";
           icon = "briefcase";
           id = 1;
+        };
+        facebook = {
+          color = "blue";
+          icon = "briefcase";
+          id = 2;
+        };
+        google = {
+          color = "red";
+          icon = "briefcase";
+          id = 3;
         };
       };
       settings = {
