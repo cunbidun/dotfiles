@@ -123,7 +123,7 @@
   extra-packages = with pkgs; [
     lua51Packages.luarocks
     lua51Packages.lua
-    nodejs_24
+    nodejs_20
   ];
 
   # Function to extract language name from grammar package name

@@ -113,7 +113,6 @@ in {
     pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
     pkgs.libnotify # A library for sending desktop notifications
     pkgs.ddcutil # A monitor control tool
-    pkgs.quickemu # A quick emu launcher
 
     # Shell
     pkgs.obs-studio # A free and open-source video recording and live streaming software
@@ -124,7 +123,6 @@ in {
     pkgs.vlc # A multimedia player
 
     # Text editor
-    pkgs.onlyoffice-bin # An office suite
     pkgs.pdfgrep # A tool to search text in PDF files
 
     pkgs.adw-gtk3
