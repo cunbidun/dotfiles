@@ -16,6 +16,9 @@ in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.spicetify-nix.homeManagerModules.default
+    inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
+    inputs.stylix.homeModules.stylix
+    inputs.theme-manager.homeManagerModules.theme-manager
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/kitty.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprland.nix"
@@ -30,11 +33,10 @@ in {
     "${project_root}/nix/home-manager/configs/tofi.nix"
     "${project_root}/nix/home-manager/configs/yazi.nix"
     "${project_root}/nix/home-manager/configs/swaylock.nix"
+    "${project_root}/nix/home-manager/configs/vscode.nix"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
     "${project_root}/nix/home-manager/configs/activitywatch.nix"
-    inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
-    inputs.stylix.homeModules.stylix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -93,7 +95,7 @@ in {
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
 
     # TODO: Not hermetic, relying on dotfiles install at dotfiles
-    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
+    # ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
     ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
     ".config/nvim".source =
       if userdata.hermeticNvimConfig

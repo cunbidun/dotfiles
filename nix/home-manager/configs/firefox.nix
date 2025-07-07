@@ -69,11 +69,15 @@ in {
           vimium
           competitive-companion
           multi-account-containers
+          # If the extension is not connected to the desktop application,
+          # visit https://support.1password.com/connect-1password-browser-app/?linux for fixed
           onepassword-password-manager
           user-agent-string-switcher
-          tampermonkey
           aw-watcher-web
           keepass-helper
+
+          # theme
+          tampermonkey
 
           # description = "Remove YouTube end cards and end screen recommendation videowall.";
           youtube-recommended-videos
@@ -206,6 +210,7 @@ in {
         "datareporting.policy.dataSubmissionEnabled" = false;
         "datareporting.sessions.current.clean" = true;
         "devtools.onboarding.telemetry.logged" = false;
+        "devtools.chrome.enabled" = true;
         "toolkit.telemetry.archive.enabled" = false;
         "toolkit.telemetry.bhrPing.enabled" = false;
         "toolkit.telemetry.enabled" = false;

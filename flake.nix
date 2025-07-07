@@ -57,6 +57,10 @@
       url = "github:ners/nix-monitored";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    theme-manager = {
+      url = "path:/home/cunbidun/Project/theme-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs @ {

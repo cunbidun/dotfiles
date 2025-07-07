@@ -77,6 +77,8 @@
     # Themes and Appearance
     # -------------------------------------------------------------------
     vscode-nvim # A theme for Neovim inspired by Visual Studio Code aesthetics.
+    gruvbox-nvim
+    nord-nvim
     auto-dark-mode-nvim
 
     # -------------------------------------------------------------------
