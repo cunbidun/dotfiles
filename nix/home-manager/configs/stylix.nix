@@ -114,7 +114,6 @@ in {
       vscode.enable = false;
       yazi.enable = true;
       firefox.profileNames = [userdata.username];
-      firefox.firefoxGnomeTheme.enable = true;
     };
 
     targets.gnome.enable = lib.mkIf isLinux true;

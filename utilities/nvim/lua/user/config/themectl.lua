@@ -39,70 +39,8 @@ function M.apply_scheme(name)
   local ok = pcall(function()
     local lower = name:lower()
     if lower:find("nord") then
-      local highlights = require("nord").bufferline.highlights({
-        italic = true,
-        bold = true,
-      })
-      require("bufferline").setup({
-        options = {
-          indicator = {
-            style = "underline", -- adds an underline indicator
-          },
-        },
-        highlights = highlights,
-      })
       vim.cmd.colorscheme("nord")
     else
-      require("bufferline").setup({
-
-        options = {
-          indicator = {
-            style = "underline", -- adds an underline indicator
-          },
-        },
-        highlights = {
-          fill = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "StatusLineNC" },
-          },
-          background = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "StatusLine" },
-          },
-          buffer_visible = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-          },
-          buffer_selected = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-          },
-          separator = {
-            fg = { attribute = "bg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "StatusLine" },
-          },
-          separator_selected = {
-            fg = { attribute = "fg", highlight = "Special" },
-            bg = { attribute = "bg", highlight = "Normal" },
-          },
-          separator_visible = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "StatusLineNC" },
-          },
-          close_button = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "StatusLine" },
-          },
-          close_button_selected = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-          },
-          close_button_visible = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-          },
-        },
-      })
       vim.cmd.colorscheme("vscode")
     end
     vim.g.colors_name = lower:gsub("%s+", "_")
