@@ -29,7 +29,7 @@ in {
 
   services.theme-manager = {
     enable = true;
-    themes = ["default" "gruvbox" "nord"];
+    themes = ["default" "nord"];
     hookScriptContent = ''
       #!/usr/bin/env bash
       /etc/profiles/per-user/${userdata.username}/bin/theme-switch
@@ -48,30 +48,6 @@ in {
   # lib.mkDefault value     | 1000              | Ship a safe default that users can override easily
   # lib.mkOverride N value  | N (you pick)      | Fine‑tune how strongly you want to win/lose merges
   # lib.mkForce value       | 50                | “Last word”—almost always beats everything else
-
-  # gruvbox
-  specialisation.gruvbox-light.configuration = {
-    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/gruvbox-light-hard.yaml";
-      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
-    };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-  };
-
-  specialisation.gruvbox-dark.configuration = {
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-      image = ../../../wallpapers/Astronaut.png;
-    };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-  };
 
   # nord
   specialisation.nord-light.configuration = {
@@ -185,15 +161,11 @@ in {
     vscodeDarkTheme =
       if config.lib.stylix.colors.scheme-name == "Nord"
       then "Nord"
-      else if config.lib.stylix.colors.scheme-name == "Gruvbox dark, hard"
-      then "Gruvbox Dark Hard"
       else "Default Dark Modern";
 
     vscodeLightTheme =
       if config.lib.stylix.colors.scheme-name == "Nord Light"
       then "Nord Light"
-      else if config.lib.stylix.colors.scheme-name == "Gruvbox light, hard"
-      then "Gruvbox Light Hard"
       else "Default Light Modern";
   in {
     userSettings = {

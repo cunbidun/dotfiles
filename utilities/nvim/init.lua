@@ -9,6 +9,8 @@ require("lazy").setup("user.plugins", {
   },
 })
 
+require("user.config.themectl")
+
 if vim.env.CP_ENV then
   require("user.config.cp")
 end

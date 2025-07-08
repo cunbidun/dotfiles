@@ -99,7 +99,6 @@ in {
       [
         # theme
         arcticicestudio.nord-visual-studio-code
-        jdinhlife.gruvbox
         pkief.material-icon-theme
 
         # navigation
