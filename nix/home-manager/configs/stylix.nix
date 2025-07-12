@@ -29,7 +29,7 @@ in {
 
   services.theme-manager = {
     enable = true;
-    themes = ["default" "nord"];
+    themes = ["default" "nord" "catppuccin"];
     hookScriptContent = ''
       #!/usr/bin/env bash
       /etc/profiles/per-user/${userdata.username}/bin/theme-switch
@@ -65,6 +65,30 @@ in {
   specialisation.nord-dark.configuration = {
     stylix = {
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/nord.yaml";
+      image = ../../../wallpapers/Astronaut.png;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  # catppuccin
+  specialisation.catppuccin-light.configuration = {
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  specialisation.catppuccin-dark.configuration = {
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       image = ../../../wallpapers/Astronaut.png;
     };
     home.activation.reconciliation_theme = lib.mkForce ''
@@ -160,11 +184,14 @@ in {
     vscodeDarkTheme =
       if config.lib.stylix.colors.scheme-name == "Nord"
       then "Nord"
+      else if config.lib.stylix.colors.scheme-name == "Catppuccin Mocha"
+      then "Catppuccin Mocha"
       else "Default Dark Modern";
-
     vscodeLightTheme =
       if config.lib.stylix.colors.scheme-name == "Nord Light"
       then "Nord Light"
+      else if config.lib.stylix.colors.scheme-name == "Catppuccin Latte"
+      then "Catppuccin Latte"
       else "Default Light Modern";
   in {
     userSettings = {

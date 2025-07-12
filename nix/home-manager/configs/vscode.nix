@@ -100,6 +100,7 @@ in {
         # theme
         arcticicestudio.nord-visual-studio-code
         pkief.material-icon-theme
+        catppuccin.catppuccin-vsc
 
         # navigation
         vscodevim.vim
@@ -149,7 +150,7 @@ in {
       ++ (
         if isLinux
         then [
-          ms-vscode.cpptools-extension-pack
+          ms-vscode.cpptools
         ]
         else []
       )

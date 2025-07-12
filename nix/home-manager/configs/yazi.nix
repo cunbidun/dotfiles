@@ -114,6 +114,7 @@ in {
         hops = {
           -- competitive programming
           { key = "c",          path = "~/competitive_programming/output/",       desc = "competitive_programming/output"   },
+          { key = "t",          path = "~/Project/trading/",                      desc = "trading project"                  },
           { key = "r",          path = "/",                                                                                 },
           -- home
           { key = { "h", "h" }, path = "~",                                       desc = "Home"                             },

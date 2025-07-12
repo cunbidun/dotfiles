@@ -40,10 +40,11 @@ function M.apply_scheme(name)
     local lower = name:lower()
     if lower:find("nord") then
       vim.cmd.colorscheme("nord")
+    elseif lower:find("catppuccin") then
+      vim.cmd.colorscheme("catppuccin")
     else
       vim.cmd.colorscheme("vscode")
     end
-    vim.g.colors_name = lower:gsub("%s+", "_")
   end)
   if not ok then
     vim.notify("Failed to load " .. tostring(name), vim.log.levels.WARN)
