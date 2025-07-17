@@ -263,7 +263,7 @@ in {
       bind = $mainMod SHIFT, g, movetoworkspacesilent, 8
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
       bind = $mainMod SHIFT, M, exec, ${lib.getExe scripts.minimize-window}
-      bind = $mainMod, Tab, overview:toggle
+      # bind = $mainMod, Tab, overview:toggle
 
       # Group
       bind = $mainMod, t, togglegroup
