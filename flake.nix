@@ -136,10 +136,6 @@
         system = "aarch64-darwin";
         stateVersionNum = 4;
       };
-      "macbook-intel" = mkDarwinSystem {
-        system = "x86_64-darwin";
-        stateVersionNum = 5;
-      };
     };
 
     # -----------------------#

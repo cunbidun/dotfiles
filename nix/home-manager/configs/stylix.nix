@@ -194,11 +194,21 @@ in {
       then "Catppuccin Latte"
       else "Default Light Modern";
   in {
-    userSettings = {
+    profiles.default.userSettings = {
       "window.autoDetectColorScheme" = true;
       "workbench.preferredDarkColorTheme" = vscodeDarkTheme;
       "workbench.preferredLightColorTheme" = vscodeLightTheme;
     };
+  };
+
+  wayland.windowManager.hyprland.settings.group.groupbar = {
+    # white text on green background
+    "col.active" = lib.mkForce "rgb(${config.lib.stylix.colors.base0C})";
+    text_color = lib.mkForce "rgb(${config.lib.stylix.colors.base01})";
+
+    # black text on light gray background
+    "col.inactive" = lib.mkForce "rgb(${config.lib.stylix.colors.base01})";
+    text_color_inactive = lib.mkForce "rgb(${config.lib.stylix.colors.base06})";
   };
 
   home.file = {

@@ -5,6 +5,7 @@
   lib,
   pkgs,
   project_root,
+  config,
   ...
 }: let
   scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
@@ -43,7 +44,10 @@ in {
         groupbar = {
           font_family = "SFMono Nerd Font";
           font_size = 13;
-          height = 20;
+          indicator_height = 0;
+          height = 21;
+          rounding = 0;
+          gradients = true; # draw the full background instead of us unlerlying indicator
         };
       };
 

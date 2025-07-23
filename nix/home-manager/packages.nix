@@ -86,7 +86,8 @@ in {
     yazi-wrapper
     xdg-terminal-exec
     pkgs.blender # A 3D modeling and animation software
-    pkgs.prismlauncher
+    # TODO: Java 8 is not working
+    # pkgs.prismlauncher
     pkgs.glib
     pkgs.caprine
     pkgs.trash-cli
