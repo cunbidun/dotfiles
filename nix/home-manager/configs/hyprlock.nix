@@ -10,6 +10,8 @@
       };
 
       background = lib.mkForce {
+        color = "rgba(25, 20, 20, 1.0)";
+        path = "screenshot";
         blur_passes = 2;
         brightness = 0.5;
       };
