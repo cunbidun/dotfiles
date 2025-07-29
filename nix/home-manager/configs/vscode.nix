@@ -3,6 +3,7 @@
 in {
   programs.vscode = {
     enable = true;
+    package = pkgs.vscode;
 
     profiles.default = {
       userSettings = {
@@ -120,10 +121,11 @@ in {
 
           # python
           ms-python.debugpy
-          ms-python.python
+          # ms-python.python
           ms-python.vscode-pylance
           ms-python.isort
           ms-python.black-formatter
+          ms-python.flake8
 
           # jupyter
           ms-toolsai.jupyter
@@ -132,6 +134,7 @@ in {
           ms-toolsai.vscode-jupyter-cell-tags
           ms-toolsai.vscode-jupyter-slideshow
           ms-toolsai.datawrangler
+          github.vscode-pull-request-github
 
           # AI
           github.copilot
@@ -164,6 +167,13 @@ in {
             publisher = "cunbidun";
             version = "0.0.9";
             sha256 = "sha256-hZ1QPSOvlaG9SyQ2NWbe9Xv1l6UdVqYmt7ifJE8yxtg=";
+          }
+          # TODO: move back to the packaged extensions above
+          {
+            name = "python";
+            publisher = "ms-python";
+            version = "2025.11.2025072501";
+            sha256 = "sha256-A24xf51GqtzKhgrigkOtcQqKQa+aFCajxaWxiL6fMfM=";
           }
         ];
     };

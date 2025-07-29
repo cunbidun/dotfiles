@@ -77,8 +77,6 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
-    pkgs.neovim
-    pkgs.vscode
   ];
 
   linux_packages = [

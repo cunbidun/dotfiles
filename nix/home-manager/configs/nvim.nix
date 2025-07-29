@@ -135,6 +135,17 @@
   in
     withoutPrefix;
 
+  # Create a wrapped neovim with packages available
+  neovim-with-packages = pkgs.symlinkJoin {
+    name = "neovim-with-packages";
+    paths = [pkgs.neovim];
+    buildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      wrapProgram $out/bin/nvim \
+        --prefix PATH : ${lib.makeBinPath (formatters ++ lsp-servers ++ linters ++ extra-packages)}
+    '';
+  };
+
   local-plugin-dir = pkgs.runCommand "vim-plugins" {} ''
     mkdir -p $out
 
@@ -153,5 +164,7 @@
   '';
 in {
   home.file.".local/share/vim-plugins".source = local-plugin-dir;
-  home.packages = formatters ++ lsp-servers ++ linters ++ extra-packages;
+
+  # Install our wrapped neovim instead of using programs.neovim
+  home.packages = [neovim-with-packages];
 }

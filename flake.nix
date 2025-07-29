@@ -57,7 +57,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     theme-manager = {
-      url = "path:/home/cunbidun/Project/theme-manager";
+      url = "github:cunbidun/theme-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };

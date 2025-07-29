@@ -19,7 +19,6 @@
       };
 
       messenger = {
-        # command = "caprine --ozone-platform=x11";
         command = "caprine";
         animation = "";
         unfocus = "";
