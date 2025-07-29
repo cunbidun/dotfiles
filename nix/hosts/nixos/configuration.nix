@@ -85,7 +85,6 @@
     description = userdata.name;
     extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker"];
     packages = with pkgs; [
-      swaylock-effects
       jdk17
       xdg-utils
       desktop-file-utils
@@ -133,7 +132,7 @@
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
-  security.pam.services.swaylock = {fprintAuth = false;};
+  security.pam.services.hyprlock = {};
   # rtkit is optional but recommended
   security.rtkit.enable = true;
   services.pipewire = {

@@ -137,6 +137,7 @@ in {
       waybar.enable = false;
       vscode.enable = false;
       yazi.enable = true;
+      hyprlock.enable = true;
       firefox.profileNames = [userdata.username];
     };
 

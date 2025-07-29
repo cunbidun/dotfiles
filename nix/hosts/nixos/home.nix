@@ -31,7 +31,7 @@ in {
     "${project_root}/nix/home-manager/configs/tmux.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
     "${project_root}/nix/home-manager/configs/yazi.nix"
-    "${project_root}/nix/home-manager/configs/swaylock.nix"
+    "${project_root}/nix/home-manager/configs/hyprlock.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
