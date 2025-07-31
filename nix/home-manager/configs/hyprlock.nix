@@ -23,13 +23,17 @@
           size = "300, 50";
           valign = "bottom";
           position = "0%, 10%";
-          outline_thickness = 1;
+          outline_thickness = 0;
           fade_on_empty = true;
           placeholder_text = "Enter Password";
           dots_spacing = 0.1;
           dots_center = true;
         }
       ];
+
+      animations = {
+        enabled = false;
+      };
 
       label = [
         # Time
