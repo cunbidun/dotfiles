@@ -113,8 +113,7 @@ in {
 
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       windowrulev2 = [
-        "nofocus,class:^(Conky)$"
-        "noinitialfocus,class:^(Conky)$"
+        # Game rules
         "noborder,class:^(dota2)$"
         "noblur,class:^(dota2)$"
         "noshadow,class:^(dota2)$"
@@ -123,13 +122,13 @@ in {
         "noborder,class:^(cs2)$"
         "noblur,class:^(cs2)$"
         "noshadow,class:^(cs2)$"
+
+        # Scratchpad rules
         "float,title:^(Spotify Premium)$"
         "float,class:^([Ss]ignal)$"
         "float,class:^(obsidian)$"
         "float,title:^(Scratchpad)$"
         "float,title:^(Open File)$"
-        "float,title:^(Bluetooth Devices)$"
-        "float,class:^(xdg-desktop-portal-gtk)$"
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
@@ -148,11 +147,16 @@ in {
 
         # File
         "float,title:^(FileChooser)$"
+        "pin,title:^(FileChooser)$"
         "float,title:^(FileExplorer)$"
+        "float,class:^(xdg-desktop-portal-gtk)$"
+        "pin,class:^(xdg-desktop-portal-gtk)$"
 
         # Waybar popup
+        "float,title:^(Bluetooth Devices)$"
         "size 50% 50%,title:^(__waybar_popup)$"
         "float,title:^(__waybar_popup)$"
+        "pin,title:^(__waybar_popup)$"
 
         # WMs
         "float,class:^(spicy)$"

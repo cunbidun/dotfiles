@@ -8,10 +8,7 @@
     enable = true;
     settings = {
       general = {
-        disable_loading_bar = true;
-        grace = 0;
         hide_cursor = true;
-        no_fade_in = false;
       };
 
       background = lib.mkForce {
@@ -31,10 +28,6 @@
           placeholder_text = "Enter Password";
           dots_spacing = 0.1;
           dots_center = true;
-          dots_fade_time = 100;
-          shadow_color = "rgba(0, 0, 0, 0.1)";
-          shadow_size = 7;
-          shadow_passes = 2;
         }
       ];
 
