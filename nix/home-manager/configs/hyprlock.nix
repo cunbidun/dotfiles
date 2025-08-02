@@ -28,6 +28,9 @@
           placeholder_text = "Enter Password";
           dots_spacing = 0.1;
           dots_center = true;
+          color = "rgb(202, 211, 245)";
+          check_color = "rgb(202, 211, 245)";
+          fail_color = "rgb(202, 211, 245)";
         }
       ];
 

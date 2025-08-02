@@ -120,13 +120,9 @@
     // +------------------------+
     { "key": "cmd+r", "command": "editor.action.startFindReplaceAction", "when": "isMac && (editorFocus || editorIsOpen)" },
 
-    // +---------------------------+
-    // | Miscellaneous key binding |
-    // +---------------------------+
-    {
-        "key": "ctrl+q",
-        "command": "-workbench.action.quickOpenView",
-    },
+    // +----------+
+    // | Notebook |
+    // +----------+
     {
         "key": "alt+enter",
         "command": "-notebook.cell.executeAndInsertBelow",
@@ -137,5 +133,17 @@
         "key": "alt+enter",
         "command": "notebook.cell.execute",
         "when": "isLinux && (notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0)"
-    }
+    },
+
+    // escape will not delete the cell in notebook if there are multiple cursor selections
+    {
+        "key": "escape",
+        "command": "notebook.cell.quitEdit",
+        "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+    },
+    {
+        "key": "escape",
+        "command": "flash-vscode.exit",
+        "when": "notebookEditorFocused && flash-vscode.active"
+    },
 ]

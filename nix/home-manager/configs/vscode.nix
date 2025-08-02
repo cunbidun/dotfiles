@@ -13,6 +13,10 @@ in {
         "files.saveConflictResolution" = "overwriteFileOnDisk";
         "terminal.integrated.defaultProfile.linux" = "zsh";
         "vim.leader" = " ";
+        "vim.handleKeys" = {
+          "J" = false;
+          "gJ" = false;
+        };
         "vim.normalModeKeyBindings" = [
           {
             before = ["<TAB>"];
