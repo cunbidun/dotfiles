@@ -23,7 +23,6 @@ in {
           "pulseaudio"
           # "bluetooth"
           "custom/brightness"
-          "custom/weather"
           "custom/theme"
           "tray"
           "clock"
@@ -87,16 +86,6 @@ in {
           format-disconnected = "[D] NET";
           on-click = "$TERMINAL -T '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e nmtui";
           tooltip = false;
-        };
-        "custom/weather" = {
-          interval = "once";
-          exec = "${lib.getExe scripts.weather}";
-          signal = 20;
-          tooltip = false;
-          format = "{}";
-          on-click = "$TERMINAL -T '__waybar_popup' -o window.dimensions.columns=160 -o window.dimensions.lines=40 -e less -Srf \"$HOME/.cache/weatherreport\"";
-          on-click-right = "${lib.getExe scripts.weather-sync}";
-          on-click-middle = "${lib.getExe scripts.weather-sync}";
         };
         "custom/brightness" = {
           interval = "once";
@@ -195,7 +184,7 @@ in {
       padding: 0 4px;
     }
 
-    #tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-mode, #custom-theme, #custom-weather, #mode, #pulseaudio, #clock, #bluetooth {
+    #tray, .ibus-en, .ibus-vi, #network, #custom-audio_idle_inhibitor, #custom-brightness, #custom-mode, #custom-theme, #mode, #pulseaudio, #clock, #bluetooth {
       margin: 0 2px;
       padding: 0 6px;
       min-width: 22px;

@@ -42,29 +42,10 @@ in {
         Install = install_section;
       };
 
-      sync_weather = {
-        Unit = unit_section;
-        Service = {
-          Type = "oneshot";
-          WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe scripts.weather-sync}";
-          Slice = ["app-graphical.slice"];
-        };
-        Install = install_section;
-      };
-
       waybar = {
         Service = {
           RestartSec = 1;
         };
-      };
-    };
-
-    timers = {
-      sync_weather = {
-        Unit = unit_section;
-        Timer = {OnCalendar = "*:0/10";};
-        Install = install_section;
       };
     };
   };
