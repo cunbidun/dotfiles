@@ -4,11 +4,6 @@
   inputs,
   ...
 }: let
-  theme-switch = pkgs.writeShellApplication {
-    name = "theme-switch";
-    text = builtins.readFile "${project_root}/scripts/theme-switch.sh";
-    runtimeInputs = [pkgs.gawk pkgs.gnugrep pkgs.systemdMinimal pkgs.darkman inputs.theme-manager.packages.${pkgs.system}.theme-manager];
-  };
   yazi-wrapper = pkgs.writeShellApplication {
     name = "yazi-wrapper";
     text = ''
@@ -77,9 +72,16 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
+    pkgs.alejandra
   ];
 
-  linux_packages = [
+  linux_packages = let
+    theme-switch = pkgs.writeShellApplication {
+      name = "theme-switch";
+      text = builtins.readFile "${project_root}/scripts/theme-switch.sh";
+      runtimeInputs = [pkgs.gawk pkgs.gnugrep pkgs.systemdMinimal pkgs.darkman inputs.theme-manager.packages.${pkgs.system}.theme-manager];
+    };
+  in [
     theme-switch
     yazi-wrapper
     xdg-terminal-exec

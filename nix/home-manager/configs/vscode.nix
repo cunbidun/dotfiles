@@ -177,7 +177,7 @@ in {
             name = "python";
             publisher = "ms-python";
             version = "2025.11.2025072501";
-            sha256 = "sha256-A24xf51GqtzKhgrigkOtcQqKQa+aFCajxaWxiL6fMfM=";
+            sha256 = if isLinux then "sha256-A24xf51GqtzKhgrigkOtcQqKQa+aFCajxaWxiL6fMfM=" else "sha256-xrhGJbhqJTvpvwnO55oRZTMMkT6BbyfIOwyU3HOJzHE=";
           }
         ];
     };

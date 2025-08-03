@@ -28,7 +28,7 @@ in {
   };
 
   services.theme-manager = {
-    enable = true;
+    enable = isLinux;
     themes = ["default" "nord" "catppuccin"];
     hookScriptContent = ''
       #!/usr/bin/env bash

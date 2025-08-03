@@ -127,6 +127,11 @@ else
   fi
 fi
 
+if [ "$switch_success" = false ]; then
+  echo "Error: Switch failed."
+  exit 1
+fi
+
 # Get the current NixOS system profile version (e.g., system-1526-link)
 nixos_version=""
 if [ "$os" != "Darwin" ]; then
@@ -160,14 +165,17 @@ copy_files_to_git_root() {
   done
 }
 
-rm -rf "$git_root/generated" || true
-config_files=(
-  "$HOME/.config/Code/User/keybindings.json"
-  "$HOME/.config/Code/User/settings.json"
-  "$HOME/.config/tmux/tmux.conf"
-  "$HOME/.config/nvim"
-)
-copy_files_to_git_root "${config_files[@]}"
+# only copy files when profile_name is nixos
+if [ "$profile_name" == "nixos" ]; then
+  rm -rf "$git_root/generated" || true
+  config_files=(
+    "$HOME/.config/Code/User/keybindings.json"
+    "$HOME/.config/Code/User/settings.json"
+    "$HOME/.config/tmux/tmux.conf"
+    "$HOME/.config/nvim"
+  )
+  copy_files_to_git_root "${config_files[@]}"
+fi
 
 if [ "$switch_success" = true ]; then
   echo "NixOS switch successful."
@@ -189,11 +197,6 @@ if [ "$switch_success" = true ]; then
   fi
 else
   echo "NixOS switch failed; skipping commit."
-fi
-
-if [ "$switch_success" = false ]; then
-  echo "Error: Switch failed."
-  exit 1
 fi
 
 echo "Configuration switch completed successfully."
