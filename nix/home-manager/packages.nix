@@ -72,6 +72,10 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
+    pkgs.stylua
+    pkgs.clang-tools
+    pkgs.shfmt
+    pkgs.black
     pkgs.alejandra
   ];
 

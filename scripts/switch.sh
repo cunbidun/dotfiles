@@ -144,30 +144,41 @@ copy_files_to_git_root() {
     # 2. Skip if the source file doesn’t exist
     if [[ ! -e "$src" ]]; then
       echo "Warning: source not found: $src" >&2
-      continue
+      exist 1
     fi
 
     # 3. Resolve absolute path; skip on failure
     abs_src=$(readlink -f "$src") || {
       echo "Error: cannot resolve path: $src" >&2
-      continue
+      exist 1
     }
 
     # 4. Build the destination path and create its directory
-    dest="$git_root/generated/${src/#$HOME\//}"
+    dest="$git_root/generated/$profile_name/${src/#$HOME\//}"
     dest_dir=${dest%/*}
     mkdir -p "$dest_dir"
 
-    # 5. Copy safely: update only newer files and handle symlinks
-    cp -r -u --remove-destination "$abs_src" "$dest" || {
-      echo "Error: failed to copy $abs_src to $dest" >&2
-    }
+    if [ $os != "Darwin" ]; then
+      # 5. Copy safely: update only newer files and handle symlinks
+      cp -r --remove-destination "$abs_src" "$dest" || {
+        echo "Error: failed to copy $abs_src to $dest" >&2
+        exist 1
+      }
+    else
+      cp -R "$abs_src" "$dest" || {
+        echo "Error: failed to copy $abs_src to $dest" >&2
+        exit 1
+      }
+    fi
   done
 }
 
-# only copy files when profile_name is nixos
-if [ "$profile_name" == "nixos" ]; then
-  rm -rf "$git_root/generated" || true
+
+rm -rf "$git_root/generated/$profile_name" || true
+echo "Removed old generated configuration files for $profile_name."
+
+if [ "$os" != "Darwin" ]; then
+  echo "Detected NixOS; copying configuration files for NixOS..."
   config_files=(
     "$HOME/.config/Code/User/keybindings.json"
     "$HOME/.config/Code/User/settings.json"
@@ -177,26 +188,31 @@ if [ "$profile_name" == "nixos" ]; then
   copy_files_to_git_root "${config_files[@]}"
 fi
 
-if [ "$switch_success" = true ]; then
-  echo "NixOS switch successful."
-  if [ "$commit_changes" = true ]; then
-    if ! git diff-index --quiet HEAD --; then
-      # Append NixOS version to the commit message if available
-      if [ -n "$nixos_version" ]; then
-        git commit -m "$commit_message (nixos version: $nixos_version)"
-        echo "Committed changes with message: $commit_message (nixos version: $nixos_version)"
-      else
-        git commit -m "$commit_message"
-        echo "Committed changes with message: $commit_message"
-      fi
+if [ "$os" = "Darwin" ]; then
+  echo "Detected macOS; copying configuration files for macOS..."
+  config_files=(
+    "$HOME/Library/Application Support/Code/User/keybindings.json"
+    "$HOME/Library/Application Support/Code/User/settings.json"
+  )
+  copy_files_to_git_root "${config_files[@]}"
+fi
+
+echo "NixOS switch successful."
+if [ "$commit_changes" = true ]; then
+  if ! git diff-index --quiet HEAD --; then
+    # Append NixOS version to the commit message if available
+    if [ -n "$nixos_version" ]; then
+      git commit -m "$commit_message (nixos version: $nixos_version)"
+      echo "Committed changes with message: $commit_message (nixos version: $nixos_version)"
     else
-      echo "No changes to commit after successful switch."
+      git commit -m "$commit_message"
+      echo "Committed changes with message: $commit_message"
     fi
   else
-    echo "--no-commit flag set; skipping commit."
+    echo "No changes to commit after successful switch."
   fi
 else
-  echo "NixOS switch failed; skipping commit."
+  echo "--no-commit flag set; skipping commit."
 fi
 
 echo "Configuration switch completed successfully."
