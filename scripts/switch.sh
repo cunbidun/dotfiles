@@ -33,6 +33,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+
 # Check if profile_name is provided
 if [[ -z "$profile_name" ]]; then
   echo "Usage: $0 [--no-commit] [--commit-message <message>] <profile_name>"
@@ -132,6 +133,40 @@ if [ "$os" != "Darwin" ]; then
   nixos_version=$(basename "$(readlink /nix/var/nix/profiles/system)" | sed 's/-link$//')
 fi
 
+copy_files_to_git_root() {
+  local src abs_src dest dest_dir
+  for src in "$@"; do
+    # 2. Skip if the source file doesn’t exist
+    if [[ ! -e "$src" ]]; then
+      echo "Warning: source not found: $src" >&2
+      continue
+    fi
+
+    # 3. Resolve absolute path; skip on failure
+    abs_src=$(readlink -f "$src") || {
+      echo "Error: cannot resolve path: $src" >&2
+      continue
+    }
+
+    # 4. Build the destination path and create its directory
+    dest="$git_root/generated/${src/#$HOME\//}"
+    dest_dir=${dest%/*}
+    mkdir -p "$dest_dir"
+
+    # 5. Copy safely: update only newer files and handle symlinks
+    cp -u --remove-destination "$abs_src" "$dest" || {
+      echo "Error: failed to copy $abs_src to $dest" >&2
+    }
+  done
+}
+
+config_files=(
+  "$HOME/.config/Code/User/keybindings.json"
+  "$HOME/.config/Code/User/settings.json"
+  "$HOME/.config/tmux/tmux.conf"
+)
+copy_files_to_git_root "${config_files[@]}"
+
 if [ "$switch_success" = true ]; then
   echo "NixOS switch successful."
   if [ "$commit_changes" = true ]; then
@@ -158,22 +193,5 @@ if [ "$switch_success" = false ]; then
   echo "Error: Switch failed."
   exit 1
 fi
-
-copy_files_to_git_root() {
-  local files=("$@")
-  for src in "${files[@]}"; do
-    # Determine destination path relative to $git_root
-    local dest="$git_root/generated/${src/#$HOME\//}"
-    local dest_dir
-    dest_dir=$(dirname "$dest")
-    mkdir -p "$dest_dir"
-    cp --remove-destination "$(readlink -f "$src")" "$dest"
-  done
-}
-
-# Usage example:
-copy_files_to_git_root \
-  "$HOME/.config/Code/User/keybindings.json" \
-  "$HOME/.config/Code/User/settings.json"
 
 echo "Configuration switch completed successfully."

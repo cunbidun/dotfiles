@@ -97,7 +97,6 @@ in {
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
 
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
-    ".tmux.conf".source = "${project_root}/utilities/tmux/.tmux.conf";
   };
 
   qt = {enable = true;};
