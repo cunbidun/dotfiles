@@ -158,4 +158,22 @@ if [ "$switch_success" = false ]; then
   echo "Error: Switch failed."
   exit 1
 fi
+
+copy_files_to_git_root() {
+  local files=("$@")
+  for src in "${files[@]}"; do
+    # Determine destination path relative to $git_root
+    local dest="$git_root/generated/${src/#$HOME\//}"
+    local dest_dir
+    dest_dir=$(dirname "$dest")
+    mkdir -p "$dest_dir"
+    cp --remove-destination "$(readlink -f "$src")" "$dest"
+  done
+}
+
+# Usage example:
+copy_files_to_git_root \
+  "$HOME/.config/Code/User/keybindings.json" \
+  "$HOME/.config/Code/User/settings.json"
+
 echo "Configuration switch completed successfully."

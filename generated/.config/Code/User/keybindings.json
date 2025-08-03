@@ -1,0 +1,150 @@
+[
+    // +-----------------+
+    // | Navigation keys |
+    // +-----------------+
+    { "command": "workbench.action.navigateLeft", "key": "ctrl+h" },
+    { "command": "workbench.action.navigateDown", "key": "ctrl+j" },
+    { "command": "workbench.action.navigateUp", "key": "ctrl+k" },
+    { "command": "workbench.action.navigateRight", "key": "ctrl+l" },
+
+    // +---------------+
+    // | Explorer Tree |
+    // +---------------+
+    { "command": "list.select", "key": "o", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "renameFile", "key": "r", "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus" },
+    { "command": "workbench.action.splitEditor", "key": "v", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "workbench.action.splitEditorDown", "key": "s", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "deleteFile", "key": "d", "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus" },
+    { "command": "moveFileToTrash", "key": "d", "when": "explorerResourceMoveableToTrash && filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus" },
+    { "command": "filesExplorer.copy", "key": "c", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "filesExplorer.cut", "key": "x", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "filesExplorer.paste", "key": "p", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "explorer.newFile", "key": "a", "when": "filesExplorerFocus && !inputFocus" },
+    { "command": "list.focusParent", "key": "u", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "workbench.files.action.refreshFilesExplorer", "key": "shift+r", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
+    { "command": "workbench.action.files.newUntitledFile", "key": "alt+n", "when": "isLinux" },
+    { "key": "space e", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'" },
+
+    // +--------------+
+    // | Multi cursor |
+    // +--------------+
+    { "command": "editor.action.insertCursorBelow", "key": "alt+cmd+j", "when": "editorTextFocus" },
+    { "command": "editor.action.insertCursorAbove", "key": "alt+cmd+k", "when": "editorTextFocus" },
+
+    // +------------------+
+    // | Search & Replace |
+    // +------------------+
+    { "command": "search.action.focusNextSearchResult", "key": "ctrl+n", "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible" },
+    { "command": "search.action.focusPreviousSearchResult", "key": "ctrl+p", "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible" },
+    { "command": "workbench.action.replaceInFiles", "key": "shift+cmd+r", "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible" },
+    { "key": "ctrl+n", "command": "selectNextCodeAction", "when": "codeActionMenuVisible" },
+    { "key": "ctrl+p", "command": "selectPrevCodeAction", "when": "codeActionMenuVisible" },
+    { "key": "ctrl+n", "command": "workbench.action.quickOpenSelectNext", "when": "inQuickOpen" },
+    { "key": "ctrl+p", "command": "workbench.action.quickOpenSelectPrevious", "when": "inQuickOpen" },
+
+    // +----------+
+    // | Terminal | 
+    // +----------+
+    { "command": "workbench.action.terminal.toggleTerminal", "key": "ctrl+\\" },
+    { "command": "workbench.action.terminal.kill", "key": "ctrl+shift+q", "when": "terminalFocus" },
+    { "command": "workbench.action.terminal.new", "key": "ctrl+`", "when": "terminalFocus" },
+    { "command": "workbench.action.terminal.focusNext", "key": "ctrl+shift+j", "when": "terminalFocus" },
+    { "command": "workbench.action.terminal.focusPrevious", "key": "ctrl+shift+k", "when": "terminalFocus" },
+    { "command": "workbench.action.terminal.focusPreviousPane", "key": "ctrl+shift+h", "when": "terminalFocus" },
+    { "command": "workbench.action.terminal.focusNextPane", "key": "ctrl+shift+l", "when": "terminalFocus" },
+
+    // +--------------------------+
+    // | Linux custom key binding |
+    // +--------------------------+
+    { "key": "alt+d", "command": "editor.action.addSelectionToNextFindMatch", "when": "isLinux" },
+    { "key": "alt+f", "command": "actions.find", "when": "isLinux && (editorFocus || editorIsOpen)" },
+    { "key": "alt+shift+p", "command": "workbench.action.showCommands", "when": "isLinux" },
+    { "key": "alt+s", "command": "workbench.action.files.save", "when": "isLinux" },
+    {
+        "key": "alt+p",
+        "command": "workbench.action.quickOpen",
+        "when": "isLinux"
+    },
+    { "key": "alt+c", "command": "editor.action.clipboardCopyAction", "when": "isLinux" },
+    { "key": "alt+x", "command": "editor.action.clipboardCutAction", "when": "isLinux" },
+    { "key": "alt+v", "command": "editor.action.clipboardPasteAction", "when": "isLinux" },
+    { "key": "alt+z", "command": "undo", "when": "isLinux" },
+    { "key": "alt+,", "command": "workbench.action.openSettings", "when": "isLinux" },
+    { "key": "alt+w", "command": "workbench.action.closeActiveEditor", "when": "isLinux" },
+    { "key": "alt+a", "command": "editor.action.selectAll", "when": "isLinux" },
+    { "key": "alt+shift+f", "command": "workbench.action.findInFiles", "when": "isLinux" },
+    { "key": "alt+shift+f", "command": "workbench.view.search", "when": "isLinux &&  workbench.view.search.active && neverMatch =~ /doesNotMatch/" },
+    { "key": "alt+shift+e", "command": "workbench.view.explorer", "when": "isLinux && viewContainer.workbench.view.explorer.enabled" },
+    { "key": "alt+shift+e", "command": "workbench.action.quickOpenNavigatePreviousInFilePicker", "when": "isLinux && inFilesPicker && inQuickOpen" },
+    { "key": "alt+shift+t", "command": "workbench.action.reopenClosedEditor", "when": "isLinux" },
+    { "key": "alt+f", "command": "workbench.action.terminal.focusFind", "when": "isLinux && (terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported)" },
+    { "key": "alt+.", "command": "problems.action.showQuickFixes", "when": "isLinux && problemFocus" },
+    { "key": "alt+.", "command": "editor.action.quickFix", "when": "isLinux && editorHasCodeActionsProvider && textInputFocus && !editorReadonly" },
+    { "key": "alt+c", "command": "workbench.action.terminal.copySelection", "when": "isLinux && terminalFocus" },
+    { "key": "alt+v", "command": "workbench.action.terminal.paste", "when": "isLinux&& terminalFocus" },
+    { "key": "alt+r", "command": "editor.action.startFindReplaceAction", "when": "isLinux && (editorFocus || editorIsOpen)" },
+
+    // +---------------------+
+    // | Copilot key binding |
+    // +---------------------+
+
+    // inline suggestion
+    {
+        "key": "alt+i",
+        "command": "inlineChat.start",
+        "when": "isLinux && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
+    },
+    {
+        "key": "alt+i",
+        "command": "workbench.action.terminal.chat.start",
+        "when": "isLinux && chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
+    },
+
+    {
+        "key": "alt+e alt+e",
+        "command": "sqltools.executeQuery",
+        "when": "isLinux && editorHasSelection && editorTextFocus && !config.sqltools.disableChordKeybindings"
+    },
+    {
+        "key": "ctrl+e ctrl+e",
+        "command": "-sqltools.executeQuery",
+        "when": "isLinux && editorTextFocus && !config.sqltools.disableChordKeybindings"
+    },
+    {
+        "key": "alt+\\",
+        "command": "workbench.action.terminal.split",
+        "when": "isLinux && (terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile)"
+    },
+
+    // +------------------------+
+    // | Mac custom key binding | 
+    // +------------------------+
+    { "key": "cmd+r", "command": "editor.action.startFindReplaceAction", "when": "isMac && (editorFocus || editorIsOpen)" },
+
+    // +----------+
+    // | Notebook |
+    // +----------+
+    {
+        "key": "alt+enter",
+        "command": "-notebook.cell.executeAndInsertBelow",
+        "when": "notebookCellListFocused && notebookCellType == 'markup' || notebookCellListFocused && notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0"
+    },
+
+    {
+        "key": "alt+enter",
+        "command": "notebook.cell.execute",
+        "when": "isLinux && (notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0)"
+    },
+
+    // escape will not delete the cell in notebook if there are multiple cursor selections
+    {
+        "key": "escape",
+        "command": "notebook.cell.quitEdit",
+        "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+    },
+    {
+        "key": "escape",
+        "command": "flash-vscode.exit",
+        "when": "notebookEditorFocused && flash-vscode.active"
+    },
+]
