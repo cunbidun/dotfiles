@@ -23,6 +23,7 @@
     { "command": "list.focusParent", "key": "u", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
     { "command": "workbench.files.action.refreshFilesExplorer", "key": "shift+r", "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
     { "command": "workbench.action.files.newUntitledFile", "key": "alt+n", "when": "isLinux" },
+    { "key": "space e", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'" },
 
     // +--------------+
     // | Multi cursor |
