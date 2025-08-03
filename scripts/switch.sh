@@ -154,16 +154,18 @@ copy_files_to_git_root() {
     mkdir -p "$dest_dir"
 
     # 5. Copy safely: update only newer files and handle symlinks
-    cp -u --remove-destination "$abs_src" "$dest" || {
+    cp -r -u --remove-destination "$abs_src" "$dest" || {
       echo "Error: failed to copy $abs_src to $dest" >&2
     }
   done
 }
 
+rm -rf "$git_root/generated" || true
 config_files=(
   "$HOME/.config/Code/User/keybindings.json"
   "$HOME/.config/Code/User/settings.json"
   "$HOME/.config/tmux/tmux.conf"
+  "$HOME/.config/nvim"
 )
 copy_files_to_git_root "${config_files[@]}"
 
