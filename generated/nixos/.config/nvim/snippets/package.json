@@ -1,0 +1,24 @@
+{
+  "name": "snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "plaintext",
+          "markdown",
+          "tex",
+          "html",
+          "global"
+        ],
+        "path": "./global.json"
+      },
+      {
+        "language": "cpp",
+        "path": "./cpp.json"
+      }
+    ]
+  }
+}

@@ -33,7 +33,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-
 # Check if profile_name is provided
 if [[ -z "$profile_name" ]]; then
   echo "Usage: $0 [--no-commit] [--commit-message <message>] <profile_name>"
@@ -172,7 +171,6 @@ copy_files_to_git_root() {
     fi
   done
 }
-
 
 rm -rf "$git_root/generated/$profile_name" || true
 echo "Removed old generated configuration files for $profile_name."

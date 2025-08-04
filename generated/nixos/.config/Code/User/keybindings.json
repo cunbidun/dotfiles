@@ -1,0 +1,313 @@
+[
+  {
+    "command": "workbench.action.navigateLeft",
+    "key": "ctrl+h"
+  },
+  {
+    "command": "workbench.action.navigateDown",
+    "key": "ctrl+j"
+  },
+  {
+    "command": "workbench.action.navigateUp",
+    "key": "ctrl+k"
+  },
+  {
+    "command": "workbench.action.navigateRight",
+    "key": "ctrl+l"
+  },
+  {
+    "command": "list.select",
+    "key": "o",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "renameFile",
+    "key": "r",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "workbench.action.splitEditor",
+    "key": "v",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "workbench.action.splitEditorDown",
+    "key": "s",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "moveFileToTrash",
+    "key": "d",
+    "when": "explorerResourceMoveableToTrash && filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.copy",
+    "key": "c",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.cut",
+    "key": "x",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.paste",
+    "key": "p",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "explorer.newFile",
+    "key": "a",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "list.focusParent",
+    "key": "u",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "workbench.files.action.refreshFilesExplorer",
+    "key": "shift+r",
+    "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "command": "workbench.action.focusActiveEditorGroup",
+    "key": "space e",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'"
+  },
+  {
+    "command": "editor.action.insertCursorBelow",
+    "key": "alt+cmd+j",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "editor.action.insertCursorAbove",
+    "key": "alt+cmd+k",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "search.action.focusNextSearchResult",
+    "key": "ctrl+n",
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible"
+  },
+  {
+    "command": "search.action.focusPreviousSearchResult",
+    "key": "ctrl+p",
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible"
+  },
+  {
+    "command": "workbench.action.replaceInFiles",
+    "key": "shift+cmd+r",
+    "when": "(hasSearchResult || inSearchEditor) && !inQuickOpen && searchViewletVisible && !suggestWidgetVisible"
+  },
+  {
+    "command": "selectNextCodeAction",
+    "key": "ctrl+n",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "command": "selectPrevCodeAction",
+    "key": "ctrl+p",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "command": "workbench.action.quickOpenSelectNext",
+    "key": "ctrl+n",
+    "when": "inQuickOpen"
+  },
+  {
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "key": "ctrl+p",
+    "when": "inQuickOpen"
+  },
+  {
+    "command": "workbench.action.terminal.toggleTerminal",
+    "key": "ctrl+\\"
+  },
+  {
+    "command": "workbench.action.terminal.kill",
+    "key": "ctrl+shift+q",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.new",
+    "key": "ctrl+`",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusNext",
+    "key": "ctrl+shift+j",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusPrevious",
+    "key": "ctrl+shift+k",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "ctrl+shift+h",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
+    "key": "ctrl+shift+l",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "notebook.cell.quitEdit",
+    "key": "escape",
+    "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+  },
+  {
+    "command": "flash-vscode.exit",
+    "key": "escape",
+    "when": "notebookEditorFocused && flash-vscode.active"
+  },
+  {
+    "command": "workbench.action.files.newUntitledFile",
+    "key": "alt+n"
+  },
+  {
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "key": "alt+d"
+  },
+  {
+    "command": "actions.find",
+    "key": "alt+f",
+    "when": "editorFocus || editorIsOpen"
+  },
+  {
+    "command": "workbench.action.showCommands",
+    "key": "alt+shift+p"
+  },
+  {
+    "command": "workbench.action.files.save",
+    "key": "alt+s"
+  },
+  {
+    "command": "workbench.action.quickOpen",
+    "key": "alt+p"
+  },
+  {
+    "command": "editor.action.clipboardCopyAction",
+    "key": "alt+c"
+  },
+  {
+    "command": "editor.action.clipboardCutAction",
+    "key": "alt+x"
+  },
+  {
+    "command": "editor.action.clipboardPasteAction",
+    "key": "alt+v"
+  },
+  {
+    "command": "undo",
+    "key": "alt+z"
+  },
+  {
+    "command": "workbench.action.openSettings",
+    "key": "alt+,"
+  },
+  {
+    "command": "workbench.action.closeActiveEditor",
+    "key": "alt+w"
+  },
+  {
+    "command": "editor.action.selectAll",
+    "key": "alt+a"
+  },
+  {
+    "command": "workbench.action.findInFiles",
+    "key": "alt+shift+f"
+  },
+  {
+    "command": "workbench.view.search",
+    "key": "alt+shift+f",
+    "when": "workbench.view.search.active && neverMatch =~ /doesNotMatch/"
+  },
+  {
+    "command": "workbench.view.explorer",
+    "key": "alt+shift+e",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "key": "alt+shift+e",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "command": "workbench.action.reopenClosedEditor",
+    "key": "alt+shift+t"
+  },
+  {
+    "command": "workbench.action.terminal.focusFind",
+    "key": "alt+f",
+    "when": "(terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported)"
+  },
+  {
+    "command": "problems.action.showQuickFixes",
+    "key": "alt+.",
+    "when": "problemFocus"
+  },
+  {
+    "command": "editor.action.quickFix",
+    "key": "alt+.",
+    "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "command": "workbench.action.terminal.copySelection",
+    "key": "alt+c",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.terminal.paste",
+    "key": "alt+v",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "editor.action.startFindReplaceAction",
+    "key": "alt+r",
+    "when": "editorFocus || editorIsOpen"
+  },
+  {
+    "command": "inlineChat.start",
+    "key": "alt+i",
+    "when": "inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
+  },
+  {
+    "command": "workbench.action.terminal.chat.start",
+    "key": "alt+i",
+    "when": "chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "command": "sqltools.executeQuery",
+    "key": "alt+e alt+e",
+    "when": "editorHasSelection && editorTextFocus && !config.sqltools.disableChordKeybindings"
+  },
+  {
+    "command": "-sqltools.executeQuery",
+    "key": "ctrl+e ctrl+e",
+    "when": "editorTextFocus && !config.sqltools.disableChordKeybindings"
+  },
+  {
+    "command": "workbench.action.terminal.split",
+    "key": "alt+\\",
+    "when": "(terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile)"
+  },
+  {
+    "command": "-notebook.cell.executeAndInsertBelow",
+    "key": "alt+enter",
+    "when": "notebookCellListFocused && notebookCellType == 'markup' || notebookCellListFocused && notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0"
+  },
+  {
+    "command": "notebook.cell.execute",
+    "key": "alt+enter",
+    "when": "(notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0)"
+  }
+]

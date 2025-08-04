@@ -82,12 +82,11 @@ in {
   fonts.fontconfig.enable = true;
 
   home.file = {
-    ".local/bin/vscode_extension.py".source = "${project_root}/scripts/vscode_extension.py";
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
 
     # TODO: Not hermetic, relying on dotfiles install at dotfiles
     # ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
-    ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
+    # ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
     ".config/nvim".source =
       if userdata.hermeticNvimConfig
       then "${project_root}/utilities/nvim"
