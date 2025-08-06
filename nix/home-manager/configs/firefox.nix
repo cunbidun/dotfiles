@@ -66,7 +66,6 @@ in {
         packages = with pkgs.nur.repos.rycee.firefox-addons; [
           # theme
           adaptive-tab-bar-colour
-          darkreader
 
           ublock-origin
           sponsorblock
@@ -259,8 +258,7 @@ in {
                 "ublock0_raymondhill_net-browser-action",
                 "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action",
                 "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action",
-                "firefox_tampermonkey_net-browser-action",
-                "addon_darkreader_org-browser-action"
+                "firefox_tampermonkey_net-browser-action"
               ],
               "nav-bar": [
                 "back-button",
@@ -275,8 +273,7 @@ in {
                 "unified-extensions-button",
                 "_74e326aa-c645-4495-9287-b6febc5565a7_-browser-action",
                 "_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action",
-                "firefox_tampermonkey_net-browser-action",
-                "addon_darkreader_org-browser-action"
+                "firefox_tampermonkey_net-browser-action"
               ],
               "toolbar-menubar": [
                 "menubar-items"
@@ -302,8 +299,7 @@ in {
               "ublock0_raymondhill_net-browser-action",
               "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action",
               "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action",
-              "firefox_tampermonkey_net-browser-action",
-              "addon_darkreader_org-browser-action"
+              "firefox_tampermonkey_net-browser-action"
             ],
             "dirtyAreaCache": [
               "nav-bar",

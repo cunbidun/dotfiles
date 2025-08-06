@@ -27,7 +27,6 @@
         placeholder_text = "Enter Password";
         dots_spacing = 0.1;
         dots_center = true;
-        check_color = lib.mkForce "rgba(200, 200, 200, 1.0)";
       };
 
       animations = {
