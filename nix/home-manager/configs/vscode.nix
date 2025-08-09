@@ -485,7 +485,7 @@ in {
           ms-python.vscode-pylance
           ms-python.isort
           ms-python.black-formatter
-          ms-python.flake8
+          charliermarsh.ruff
 
           # jupyter
           ms-toolsai.jupyter

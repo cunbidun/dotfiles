@@ -8,6 +8,7 @@
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
     disko.url = "github:nix-community/disko";
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi";
     # +----------+
     # | Hyprland |
     # +----------+
@@ -62,12 +63,13 @@
     };
   };
 
-  outputs = inputs @ {
+  outputs = {
+    self,
     nixpkgs-unstable,
     nix-darwin,
     home-manager,
     ...
-  }: let
+  } @ inputs: let
     project_root = ./.;
     userdata = import ./userdata.nix;
     mkPkgs = system:
@@ -125,6 +127,7 @@
       system,
       hostPath,
       homePath,
+      diskoPath,
     }:
       nixpkgs-unstable.lib.nixosSystem {
         pkgs = mkPkgs system;
@@ -133,13 +136,16 @@
         };
         modules = [
           inputs.disko.nixosModules.disko
-          ./nix/hosts/nixos/disko.nix
+          diskoPath
           hostPath
           home-manager.nixosModules.home-manager
           (mkHomeManagerModule homePath)
         ];
       };
   in {
+    # for running commands like `nix eval .#inputs.hyprland.packages.x86_64-linux.hyprland`
+    inputs = inputs;
+
     # -----------------------#
     # macbook configurations #
     # -----------------------#
@@ -158,7 +164,28 @@
         system = "x86_64-linux";
         hostPath = ./nix/hosts/nixos/configuration.nix;
         homePath = "${project_root}/nix/hosts/nixos/home.nix";
+        diskoPath = "${project_root}/nix/hosts/nixos/disko.nix";
       };
+    };
+
+    # -------------------#
+    # rpi configurations #
+    # -------------------#
+    # To deploy to a Raspberry Pi, you can follow these steps:
+    #   1. build nom build 'github:nvmd/nixos-raspberrypi/v1.20250704.0#installerImages.rpi5'
+
+    rpiConfigurations = inputs.nixos-raspberrypi.lib.nixosSystem {
+      specialArgs = inputs;
+      modules = [
+        ({...}: {
+          imports = with inputs.nixos-raspberrypi.nixosModules; [
+            raspberry-pi-5.base
+          ];
+        })
+        ./nix/hosts/rpi/configuration.nix
+        inputs.disko.nixosModules.disko
+        ./nix/hosts/rpi/disko.nix
+      ];
     };
   };
 }

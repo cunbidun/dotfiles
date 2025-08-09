@@ -119,7 +119,7 @@ if [ "$os" = "Darwin" ]; then
   fi
 else
   echo "Detected non-macOS; running nix switch..."
-  if sudo nixos-rebuild --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
+  if sudo nixos-rebuild --accept-flake-config --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
     switch_success=true
   else
     switch_success=false

@@ -94,4 +94,8 @@
     ],
     "editor.fontSize": 12.5,
     "terminal.integrated.fontSize": 12.5,
+    "chat.tools.autoApprove": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "chat.agent.maxRequests": 100,
 }

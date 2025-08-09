@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     ./uxplay.nix
   ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   # devenv wants users to be in the trusted-users list so that they can access the /nix/store
 
@@ -26,22 +27,53 @@
       automatic = true;
       options = "--delete-older-than 7d";
     };
-    settings.trusted-users = ["root" "@wheel"];
-    settings = {
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "rpi-build"; # SSH config alias defined below
+        sshUser = "root"; # use your regular user on the Pi
+        system = "aarch64-linux";
+        protocol = "ssh";
+        maxJobs = 4; # adjust to Pi core count
+        speedFactor = 1;
+        supportedFeatures = ["big-parallel"];
+        mandatoryFeatures = [];
+      }
+    ];
+    settings = let
       substituters = [
+        "https://cache.nixos.org"
+        "https://nixos-raspberrypi.cachix.org"
         "https://hyprland.cachix.org"
         "https://yazi.cachix.org"
       ];
-      trusted-substituters = [
-        "https://hyprland.cachix.org"
-        "https://yazi.cachix.org"
-      ];
+    in {
+      builders-use-substitutes = true;
+      trusted-users = ["root" "@wheel"]; # removed unused 'builder'
+      substituters = substituters;
+      trusted-substituters = substituters;
       trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
       ];
     };
   };
+
+  # Host key for remote ARM builder so nix-daemon can verify without manual ssh-keyscan
+  programs.ssh.knownHosts."192.168.1.165" = {
+    hostNames = ["192.168.1.165" "rpi-build"];
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAEMVGzVfcBkJaRT/4wK6TyCP5FMwLxfuzpHo4NZcRU4";
+  };
+
+  # Root's SSH config entry for remote builder key (generate /root/.ssh/rpi-build_ed25519 manually)
+  programs.ssh.extraConfig = ''
+    Host rpi-build
+      HostName 192.168.1.165
+      IdentityFile /root/.ssh/rpi-build_ed25519
+      IdentitiesOnly yes
+  '';
 
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_latest;
