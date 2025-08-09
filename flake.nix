@@ -2,11 +2,12 @@
   description = "cunbidun's dotfiles";
 
   inputs = {
+    master.url = "github:nixos/nixpkgs?ref=master";
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
-
+    disko.url = "github:nix-community/disko";
     # +----------+
     # | Hyprland |
     # +----------+
@@ -72,7 +73,17 @@
     mkPkgs = system:
       import nixpkgs-unstable {
         inherit system;
-        overlays = [
+        overlays = let
+          mkSubPkgsOverlay = targetName: input: (self: super: {
+            "${targetName}" =
+              super."${targetName}" or {}
+              // import input {
+                inherit system;
+                config = super.config;
+              };
+          });
+        in [
+          (mkSubPkgsOverlay "master" inputs.master)
           inputs.nur.overlays.default
           (import "${project_root}/nix/overlays/firefox-addons.nix")
           (import "${project_root}/nix/overlays/vim-plugins.nix" inputs)
@@ -121,6 +132,8 @@
           inherit inputs userdata;
         };
         modules = [
+          inputs.disko.nixosModules.disko
+          ./nix/hosts/nixos/disko.nix
           hostPath
           home-manager.nixosModules.home-manager
           (mkHomeManagerModule homePath)

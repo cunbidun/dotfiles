@@ -79,6 +79,37 @@
     variant = "";
   };
 
+  # turn on for ollama
+  # services.ollama = {
+  #   package = pkgs.master.ollama;
+  #   enable = true;
+  #   acceleration = "rocm";
+  #   loadModels = [
+  #     "gpt-oss:20b"
+  #   ];
+  #   environmentVariables = {
+  #     HSA_OVERRIDE_GFX_VERSION = "10.3.0";
+  #     OLLAMA_CONTEXT_LENGTH = "16384";
+  #   };
+  # };
+  # services.open-webui = {
+  #   package = pkgs.master.open-webui;
+  #   enable = true;
+  #   host = "0.0.0.0";
+  #   port = 8000;
+  #   environment = {
+  #     WEBUI_AUTH = "False";
+  #     ENABLE_SIGNUP = "False";
+  #     ANONYMIZED_TELEMETRY = "False";
+  #     BYPASS_MODEL_ACCESS_CONTROL = "True";
+  #     DO_NOT_TRACK = "True";
+  #     SCARF_NO_ANALYTICS = "True";
+  #     FRONTEND_BUILD_DIR = "${config.services.open-webui.stateDir}/build";
+  #     DATA_DIR = "${config.services.open-webui.stateDir}/data";
+  #     STATIC_DIR = "${config.services.open-webui.stateDir}/static";
+  #   };
+  # };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userdata.username} = {
     isNormalUser = true;
@@ -93,6 +124,9 @@
       # Container
       podman-tui
       docker-compose
+      rocmPackages.rocm-smi
+      rocmPackages.rocminfo
+      rocmPackages.amdsmi
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
