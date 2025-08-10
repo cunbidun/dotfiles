@@ -61,20 +61,6 @@
     };
   };
 
-  # Host key for remote ARM builder so nix-daemon can verify without manual ssh-keyscan
-  programs.ssh.knownHosts."192.168.1.165" = {
-    hostNames = ["192.168.1.165" "rpi-build"];
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAEMVGzVfcBkJaRT/4wK6TyCP5FMwLxfuzpHo4NZcRU4";
-  };
-
-  # Root's SSH config entry for remote builder key (generate /root/.ssh/rpi-build_ed25519 manually)
-  programs.ssh.extraConfig = ''
-    Host rpi-build
-      HostName 192.168.1.165
-      IdentityFile /root/.ssh/rpi-build_ed25519
-      IdentitiesOnly yes
-  '';
-
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;

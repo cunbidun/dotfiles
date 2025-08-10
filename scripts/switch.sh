@@ -66,26 +66,6 @@ if [ -z "$git_root" ]; then
   exit 1
 fi
 
-# if [ "$os" != "Darwin" ]; then
-#   # check if nix/hosts/nixos/hardware-configuration.nix content is similar to /etc/nixos/hardware-configuration.nix
-#   # if not, copy the content from /etc/nixos/hardware-configuration.nix to nix/hosts/nixos/hardware-configuration.nix
-#   # this assume that /etc/nixos/hardware-configuration.nix is the source of truth for hardware configuration
-
-#   # check if the file /etc/nixos/hardware-configuration.nix exists, if not print an error message and exit
-#   if [ ! -f /etc/nixos/hardware-configuration.nix ]; then
-#     echo "Error: /etc/nixos/hardware-configuration.nix does not exist."
-#     exit 1
-#   fi
-
-#   # Compare the content of the two files
-#   if ! cmp -s /etc/nixos/hardware-configuration.nix "$git_root/nix/hosts/$profile_name/hardware-configuration.nix"; then
-#     echo "Updating nix/hosts/$profile_name/hardware-configuration.nix with value from /etc/nixos/hardware-configuration.nix"
-#     # Copy the content from /etc/nixos/hardware-configuration.nix to nix/hosts/nixos/hardware-configuration.nix
-#     cp /etc/nixos/hardware-configuration.nix "$git_root/nix/hosts/$profile_name/hardware-configuration.nix"
-#   else
-#     echo "No changes detected in hardware-configuration.nix."
-#   fi
-# fi
 
 # Change to the git repository root directory
 cd "$git_root"
@@ -119,7 +99,7 @@ if [ "$os" = "Darwin" ]; then
   fi
 else
   echo "Detected non-macOS; running nix switch..."
-  if sudo nixos-rebuild --accept-flake-config --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
+  if sudo nixos-rebuild --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
     switch_success=true
   else
     switch_success=false

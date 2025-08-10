@@ -166,26 +166,18 @@
         homePath = "${project_root}/nix/hosts/nixos/home.nix";
         diskoPath = "${project_root}/nix/hosts/nixos/disko.nix";
       };
-    };
-
-    # -------------------#
-    # rpi configurations #
-    # -------------------#
-    # To deploy to a Raspberry Pi, you can follow these steps:
-    #   1. build nom build 'github:nvmd/nixos-raspberrypi/v1.20250704.0#installerImages.rpi5'
-
-    rpiConfigurations = inputs.nixos-raspberrypi.lib.nixosSystem {
-      specialArgs = inputs;
-      modules = [
-        ({...}: {
-          imports = with inputs.nixos-raspberrypi.nixosModules; [
-            raspberry-pi-5.base
-          ];
-        })
-        ./nix/hosts/rpi/configuration.nix
-        inputs.disko.nixosModules.disko
-        ./nix/hosts/rpi/disko.nix
-      ];
+      # Raspberry Pi 5 system (accessible as .#rpi5)
+      rpi5 = mkRpi5 inputs.nixos-raspberrypi.lib.nixosSystem {
+        specialArgs = inputs // {inherit userdata;};
+        modules = [
+          ({...}: {
+            imports = with inputs.nixos-raspberrypi.nixosSystemFull; [
+              raspberry-pi-5.base
+            ];
+          })
+          ./nix/hosts/rpi/configuration.nix
+        ];
+      };
     };
   };
 }
