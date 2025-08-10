@@ -1,12 +1,16 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
   modulesPath,
   ...
 }: {
-  imports = [
+  imports = with inputs.nixos-raspberrypi.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
+    raspberry-pi-5.base
+    raspberry-pi-5.display-vc4
+    raspberry-pi-5.bluetooth
   ];
 
   boot.initrd.availableKernelModules = [];

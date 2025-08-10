@@ -167,13 +167,10 @@
         diskoPath = "${project_root}/nix/hosts/nixos/disko.nix";
       };
       # Raspberry Pi 5 system (accessible as .#rpi5)
-      rpi5 = mkRpi5 inputs.nixos-raspberrypi.lib.nixosSystem {
+      rpi5 = inputs.nixos-raspberrypi.lib.nixosSystem {
         specialArgs = inputs // {inherit userdata;};
         modules = [
           ({...}: {
-            imports = with inputs.nixos-raspberrypi.nixosSystemFull; [
-              raspberry-pi-5.base
-            ];
           })
           ./nix/hosts/rpi/configuration.nix
         ];

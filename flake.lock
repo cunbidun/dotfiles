@@ -998,26 +998,6 @@
     },
     "nixos-images": {
       "inputs": {
-        "nixos-stable": "nixos-stable",
-        "nixos-unstable": "nixos-unstable"
-      },
-      "locked": {
-        "lastModified": 1747747741,
-        "narHash": "sha256-LUOH27unNWbGTvZFitHonraNx0JF/55h30r9WxqrznM=",
-        "owner": "nvmd",
-        "repo": "nixos-images",
-        "rev": "cbbd6db325775096680b65e2a32fb6187c09bbb4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvmd",
-        "ref": "sdimage-installer",
-        "repo": "nixos-images",
-        "type": "github"
-      }
-    },
-    "nixos-images_2": {
-      "inputs": {
         "nixos-stable": [
           "nixos-raspberrypi",
           "nixpkgs"
@@ -1045,7 +1025,7 @@
     "nixos-raspberrypi": {
       "inputs": {
         "argononed": "argononed",
-        "nixos-images": "nixos-images_2",
+        "nixos-images": "nixos-images",
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
@@ -1060,40 +1040,6 @@
         "owner": "nvmd",
         "repo": "nixos-raspberrypi",
         "type": "github"
-      }
-    },
-    "nixos-stable": {
-      "locked": {
-        "lastModified": 1746957726,
-        "narHash": "sha256-k9ut1LSfHCr0AW82ttEQzXVCqmyWVA5+SHJkS5ID/Jo=",
-        "ref": "nixos-24.11",
-        "rev": "a39ed32a651fdee6842ec930761e31d1f242cb94",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixpkgs"
-      },
-      "original": {
-        "ref": "nixos-24.11",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixpkgs"
-      }
-    },
-    "nixos-unstable": {
-      "locked": {
-        "lastModified": 1747060738,
-        "narHash": "sha256-ByfPRQuqj+nhtVV0koinEpmJw0KLzNbgcgi9EF+NVow=",
-        "ref": "nixpkgs-unstable",
-        "rev": "eaeed9530c76ce5f1d2d8232e08bec5e26f18ec1",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixpkgs"
-      },
-      "original": {
-        "ref": "nixpkgs-unstable",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixpkgs"
       }
     },
     "nixpkgs": {
@@ -1541,7 +1487,6 @@
         "master": "master",
         "nix-darwin": "nix-darwin",
         "nix-monitored": "nix-monitored",
-        "nixos-images": "nixos-images",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
