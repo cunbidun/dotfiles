@@ -40,8 +40,6 @@ in {
   home.file = {
     ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
     ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
-    "Library/Application Support/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
-
     ".config/nvim".source =
       if userdata.hermeticNvimConfig
       then "${project_root}/utilities/nvim"
