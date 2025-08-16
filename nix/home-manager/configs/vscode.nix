@@ -343,10 +343,59 @@
       when = "editorFocus || editorIsOpen";
     }
   ];
+
+  # Common extensions shared between macOS and Linux
+  commonExtensions = with pkgs.vscode-extensions; [
+    # theme
+    arcticicestudio.nord-visual-studio-code
+    pkief.material-icon-theme
+    catppuccin.catppuccin-vsc
+
+    # navigation
+    vscodevim.vim
+
+    # remote
+    ms-vscode-remote.remote-ssh
+    ms-vscode-remote.remote-ssh-edit
+    ms-vscode.remote-explorer
+
+    # nix
+    kamadorueda.alejandra
+    bbenoist.nix
+
+    # shell
+    timonwong.shellcheck
+    foxundermoon.shell-format
+
+    # latex
+    james-yu.latex-workshop
+
+    # python
+    ms-python.debugpy
+    ms-python.vscode-pylance
+    ms-python.isort
+    ms-python.black-formatter
+    charliermarsh.ruff
+
+    # jupyter
+    ms-toolsai.jupyter
+    ms-toolsai.jupyter-keymap
+    ms-toolsai.jupyter-renderers
+    ms-toolsai.vscode-jupyter-cell-tags
+    ms-toolsai.vscode-jupyter-slideshow
+    ms-toolsai.datawrangler
+    github.vscode-pull-request-github
+
+    # Build tools
+    bazelbuild.vscode-bazel
+
+    # Misc
+    streetsidesoftware.code-spell-checker
+  ];
 in {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode;
+    package = pkgs.master.vscode;
 
     profiles.default = {
       keybindings =
@@ -454,101 +503,46 @@ in {
         "accessibility.dimUnfocused.enabled" = true;
       };
 
-      extensions = with pkgs.vscode-extensions;
-        [
-          # theme
-          arcticicestudio.nord-visual-studio-code
-          pkief.material-icon-theme
-          catppuccin.catppuccin-vsc
-
-          # navigation
-          vscodevim.vim
-
-          # remote
-          ms-vscode-remote.remote-ssh
-          ms-vscode-remote.remote-ssh-edit
-          ms-vscode.remote-explorer
-
-          # nix
-          kamadorueda.alejandra
-          bbenoist.nix
-
-          # shell
-          timonwong.shellcheck
-          foxundermoon.shell-format
-
-          # latex
-          james-yu.latex-workshop
-
-          # python
-          ms-python.debugpy
-          # ms-python.python
-          ms-python.vscode-pylance
-          ms-python.isort
-          ms-python.black-formatter
-          charliermarsh.ruff
-
-          # jupyter
-          ms-toolsai.jupyter
-          ms-toolsai.jupyter-keymap
-          ms-toolsai.jupyter-renderers
-          ms-toolsai.vscode-jupyter-cell-tags
-          ms-toolsai.vscode-jupyter-slideshow
-          ms-toolsai.datawrangler
-          github.vscode-pull-request-github
-
-          # AI
-          github.copilot
-
-          # Build tools
-          bazelbuild.vscode-bazel
-
-          # Mics
-          streetsidesoftware.code-spell-checker
-        ]
-        # per os extension
-        ++ (
-          if isLinux
-          then [
-            ms-vscode.cpptools
-          ]
-          else []
-        )
-        # example of downloading extensions that's not in nixpackge
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "aw-watcher-vscode";
-            publisher = "ActivityWatch";
-            version = "0.5.0";
-            sha256 = "sha256-OrdIhgNXpEbLXYVJAx/jpt2c6Qa5jf8FNxqrbu5FfFs=";
-          }
-          {
-            name = "flash-vscode";
-            publisher = "cunbidun";
-            version = "0.0.9";
-            sha256 = "sha256-hZ1QPSOvlaG9SyQ2NWbe9Xv1l6UdVqYmt7ifJE8yxtg=";
-          }
-          # TODO: move back to the packaged extensions above
-          {
-            name = "python";
-            publisher = "ms-python";
-            version = "2025.12.0";
-            sha256 =
-              if isLinux
-              then "sha256-A24xf51GqtzKhgrigkOtcQqKQa+aFCajxaWxiL6fMfM="
-              else "sha256-IY4xrAFLGe8JCgdx2H3kiQTCh9i5wOykL9hfpztV+44=";
-          }
-          {
-            name = "copilot-chat";
-            publisher = "github";
-            version = "0.30.0";
-            sha256 =
-              if isLinux
-              then "sha256-xrhGJbhqJTvpvwnO55oRZTMMkT6BbyfIOwyU3HOJzrE="
-              else "sha256-a7HYr2Z4IaZUmGty4LAVcQdtAEDbCPCWpyoGPYAm3eM=";
-          }
-        ];
+      #   extensions =
+      #     commonExtensions
+      #     # per os extension
+      #     ++ (
+      #       if isLinux
+      #       then
+      #         (with pkgs.vscode-extensions; [
+      #           ms-vscode.cpptools
+      #         ])
+      #       else []
+      #     )
+      #     # example of downloading extensions that's not in nixpackge
+      #     ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      #       {
+      #         name = "aw-watcher-vscode";
+      #         publisher = "ActivityWatch";
+      #         version = "0.5.0";
+      #         sha256 = "sha256-OrdIhgNXpEbLXYVJAx/jpt2c6Qa5jf8FNxqrbu5FfFs=";
+      #       }
+      #       {
+      #         name = "flash-vscode";
+      #         publisher = "cunbidun";
+      #         version = "0.0.9";
+      #         sha256 = "sha256-hZ1QPSOvlaG9SyQ2NWbe9Xv1l6UdVqYmt7ifJE8yxtg=";
+      #       }
+      #       # TODO: move back to the packaged extensions above
+      #       {
+      #         name = "python";
+      #         publisher = "ms-python";
+      #         version = "2025.12.0";
+      #         sha256 = "sha256-IY4xrAFLGe8JCgdx2H3kiQTCh9i5wOykL9hfpztV+44=";
+      #       }
+      #       {
+      #         name = "copilot";
+      #         publisher = "github";
+      #         version = "1.350.0";
+      #         sha256 = "sha256-F675MNhjhg0ZP1CepJA1m6Cb5rRcd1vj9tBeNLqjzA0=";
+      #       }
+      #     ];
     };
-    mutableExtensionsDir = false;
+    # mutableExtensionsDir = false; # don't allow users to install extensions
   };
 }

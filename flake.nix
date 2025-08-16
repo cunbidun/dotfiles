@@ -8,7 +8,7 @@
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
     disko.url = "github:nix-community/disko";
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi";
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
     # +----------+
     # | Hyprland |
     # +----------+
@@ -168,10 +168,24 @@
       };
       # Raspberry Pi 5 system (accessible as .#rpi5)
       rpi5 = inputs.nixos-raspberrypi.lib.nixosSystem {
-        specialArgs = inputs // {inherit userdata;};
+        specialArgs = {
+          inherit inputs;
+          nixos-raspberrypi = inputs.nixos-raspberrypi;
+          userdata = userdata;
+        };
+        trustCaches = true;
         modules = [
-          ({...}: {
+          ({modulesPath, ...}: {
+            imports = with inputs.nixos-raspberrypi.nixosModules; [
+              raspberry-pi-5.base
+            ];
+            disabledModules = [
+              # disable the sd-image module that nixos-images uses
+              (modulesPath + "/installer/sd-card/sd-image-aarch64-installer.nix")
+            ];
           })
+          inputs.disko.nixosModules.disko
+          ./nix/hosts/rpi/disko.nix
           ./nix/hosts/rpi/configuration.nix
         ];
       };

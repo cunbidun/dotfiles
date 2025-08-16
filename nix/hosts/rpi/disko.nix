@@ -1,6 +1,6 @@
 {
   disko.devices = {
-    disk.sd = {
+    disk.main = {
       type = "disk";
       device = "/dev/mmcblk0";
       content = {
@@ -12,8 +12,7 @@
             content = {
               type = "filesystem";
               format = "vfat";
-              mountpoint = "/boot";
-              mountOptions = ["umask=0077"];
+              mountpoint = "/boot/firmware";
             };
           };
           root = {
@@ -22,7 +21,6 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              mountOptions = ["relatime"];
             };
           };
         };
