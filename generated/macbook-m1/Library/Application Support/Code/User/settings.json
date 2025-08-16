@@ -20,6 +20,7 @@
     "openserach",
     "powertools"
   ],
+  "chat.tools.autoApprove": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
   "editor.fontFamily": "SFMono Nerd Font",
   "editor.minimap.enabled": false,

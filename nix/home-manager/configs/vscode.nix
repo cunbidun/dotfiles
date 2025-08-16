@@ -432,6 +432,7 @@ in {
           "openserach"
           "powertools"
         ];
+        "chat.tools.autoApprove" = true;
         "black-formatter.args" = ["--line-length" "120"];
         "window.customMenuBarAltFocus" = false;
         "window.enableMenuBarMnemonics" = false;
@@ -498,7 +499,6 @@ in {
 
           # AI
           github.copilot
-          github.copilot-chat
 
           # Build tools
           bazelbuild.vscode-bazel
@@ -532,11 +532,20 @@ in {
           {
             name = "python";
             publisher = "ms-python";
-            version = "2025.11.2025072501";
+            version = "2025.12.0";
             sha256 =
               if isLinux
               then "sha256-A24xf51GqtzKhgrigkOtcQqKQa+aFCajxaWxiL6fMfM="
-              else "sha256-xrhGJbhqJTvpvwnO55oRZTMMkT6BbyfIOwyU3HOJzHE=";
+              else "sha256-IY4xrAFLGe8JCgdx2H3kiQTCh9i5wOykL9hfpztV+44=";
+          }
+          {
+            name = "copilot-chat";
+            publisher = "github";
+            version = "0.30.0";
+            sha256 =
+              if isLinux
+              then "sha256-xrhGJbhqJTvpvwnO55oRZTMMkT6BbyfIOwyU3HOJzrE="
+              else "sha256-a7HYr2Z4IaZUmGty4LAVcQdtAEDbCPCWpyoGPYAm3eM=";
           }
         ];
     };

@@ -188,6 +188,7 @@ in {
       "displayplacer"
       "libmagic"
       "bazel"
+      "uv"
     ];
 
     # `brew install --cask`

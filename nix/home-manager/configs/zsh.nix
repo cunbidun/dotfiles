@@ -51,32 +51,6 @@
       if [ ! -d "/etc/nixos" ]; then
         export CONDA_CHANGEPS1=false
         export PATH=/etc/profiles/per-user/$USER/bin:$PATH
-
-        if [ "$(uname)" = "Darwin" ]; then
-          export CONDA_ROOT="/Users/$USER/miniconda3"
-        else
-          export CONDA_ROOT="/home/$USER/miniconda3"
-        fi
-
-        # if it's not NixOS then source conda env
-        # >>> conda initialize >>>
-        # !! Contents within this block are managed by 'conda init' !!
-        __conda_setup="$($CONDA_ROOT/bin/conda 'shell.zsh' 'hook' 2>/dev/null)"
-        if [ $? -eq 0 ]; then
-          eval "$__conda_setup"
-        else
-          if [ -f "$CONDA_ROOT/etc/profile.d/conda.sh" ]; then
-            . "$CONDA_ROOT/etc/profile.d/conda.sh"
-          else
-            export PATH="$CONDA_ROOT/bin:$PATH"
-          fi
-        fi
-        unset __conda_setup
-        # <<< conda initialize <<<
-
-        export NVM_DIR="$HOME/.config/nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
       fi
 
       # Use vim keys in tab complete menu:
