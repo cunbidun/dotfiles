@@ -172,6 +172,8 @@
     enable = true;
     settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
   };
+  security.pam.services.greetd.enableGnomeKeyring = true;
+  security.pam.services.hyprlock.enableGnomeKeyring = true;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -212,6 +214,7 @@
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     polkitPolicyOwners = ["${userdata.username}"];
   };
+  services.gnome.gnome-keyring.enable = true;
 
   environment.etc =
     {

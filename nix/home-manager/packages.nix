@@ -93,7 +93,7 @@ in {
     # TODO: Java 8 is not working
     # pkgs.prismlauncher
     pkgs.glib
-    pkgs.caprine
+    pkgs.master.caprine
     pkgs.trash-cli
 
     # Hyprland

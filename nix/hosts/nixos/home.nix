@@ -33,6 +33,7 @@ in {
     "${project_root}/nix/home-manager/configs/yazi.nix"
     "${project_root}/nix/home-manager/configs/hyprlock.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
+    "${project_root}/nix/home-manager/configs/vicinae.nix"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
     "${project_root}/nix/home-manager/configs/activitywatch.nix"

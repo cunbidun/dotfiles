@@ -216,6 +216,8 @@ in {
       # Start Applications
       bind = $mainMod, Return, exec, $TERMINAL
       bind = $mainMod, P, exec, tofi-drun
+      bind = ALT, space, exec, vicinae
+      bind = CTRL, space, exec, vicinae
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
 
       # Clipboard

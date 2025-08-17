@@ -6,4 +6,5 @@ in [
   inputs.nur.overlays.default
   (import ./firefox-addons.nix)
   (import ./vim-plugins.nix inputs)
+  (import ./vicinae.nix inputs)
 ]

@@ -907,11 +907,11 @@
     },
     "master": {
       "locked": {
-        "lastModified": 1755365997,
-        "narHash": "sha256-Xn8Z3ox8d063ysJ0cqXG0Q9oB2aYeix1xO9/bMEFTJs=",
+        "lastModified": 1755447629,
+        "narHash": "sha256-755u08IOluYoZyrGcR6rg+V1TWUOXwzWutvPwJ/epIk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "940ec0450b171b12d960f4cccb3d080ad0fe0519",
+        "rev": "00d02f5137e31c3b2952cd534f4f3a04447273a2",
         "type": "github"
       },
       "original": {
@@ -1511,6 +1511,7 @@
         "pyprland": "pyprland",
         "stylix": "stylix",
         "theme-manager": "theme-manager",
+        "vicinae": "vicinae",
         "xremap-flake": "xremap-flake",
         "yazi": "yazi"
       }
@@ -1926,6 +1927,19 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
+      }
+    },
+    "vicinae": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755451704,
+        "narHash": "sha256-nfJzITahTnwCNHeCmSTUvIfccrw2cAuR+mjxLC5M1Oc=",
+        "type": "tarball",
+        "url": "https://github.com/vicinaehq/vicinae/releases/download/v0.2.1/vicinae-linux-x86_64-v0.2.1.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/vicinaehq/vicinae/releases/download/v0.2.1/vicinae-linux-x86_64-v0.2.1.tar.gz"
       }
     },
     "xdph": {
