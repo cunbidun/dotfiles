@@ -1074,6 +1074,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1755274400,
+        "narHash": "sha256-rTInmnp/xYrfcMZyFMH3kc8oko5zYfxsowaLv1LVobY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "ad7196ae55c295f53a7d1ec39e4a06d922f3b899",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1752480373,
@@ -1489,6 +1505,7 @@
         "nix-darwin": "nix-darwin",
         "nix-monitored": "nix-monitored",
         "nixos-raspberrypi": "nixos-raspberrypi",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "pyprland": "pyprland",

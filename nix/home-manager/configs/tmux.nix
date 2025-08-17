@@ -4,45 +4,28 @@
   ...
 }: let
   # Helper function to fetch a vim plugin from GitHub.
-  customTmuxPlugin = {
-    owner,
-    repo,
-    rev,
-    sha256,
-    pname,
-  }:
-    pkgs.stdenv.mkDerivation {
-      pname = pname;
-      name = pname + "-" + rev;
-      src = pkgs.fetchFromGitHub {
-        owner = owner;
-        repo = repo;
-        rev = rev;
-        sha256 = sha256;
-      };
-      installPhase = ''
-        mkdir -p $out
-        cp -r . $out
-      '';
-    };
-
-  extrakto = customTmuxPlugin {
-    owner = "laktak";
-    repo = "extrakto";
-    rev = "master";
-    sha256 = "sha256-pzinDE6zRne470Hid5Y53e5ZmUjieCsD/6xghBO3898=";
-    pname = "extrakto";
-  };
-
-  # tmux-easy-motion = customTmuxPlugin {
-  #   owner = "IngoMeyer441";
-  #   repo = "tmux-easy-motion";
-  #   rev = "master";
-  #   sha256 = "sha256-wOIPq12OqqxLERKfvVp4JgLkDXnM0KKtTqRWMqj4rfs=";
-  #   pname = "tmux-easy-motion";
-  # };
-
-  tmux-plugin-list = [
+  # customTmuxPlugin = {
+  #   owner,
+  #   repo,
+  #   rev,
+  #   sha256,
+  #   pname,
+  # }:
+  #   pkgs.stdenv.mkDerivation {
+  #     pname = pname;
+  #     name = pname + "-" + rev;
+  #     src = pkgs.fetchFromGitHub {
+  #       owner = owner;
+  #       repo = repo;
+  #       rev = rev;
+  #       sha256 = sha256;
+  #     };
+  #     installPhase = ''
+  #       mkdir -p $out
+  #       cp -r . $out
+  #     '';
+  #   };
+  tmux-plugin-list = with pkgs.tmuxPlugins; [
     extrakto
   ];
 

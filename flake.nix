@@ -4,6 +4,8 @@
   inputs = {
     master.url = "github:nixos/nixpkgs?ref=master";
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
+    nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-25.05";};
+
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
@@ -38,6 +40,15 @@
     mac-app-util.url = "github:hraban/mac-app-util";
     nur.url = "github:nix-community/nur";
 
+    nix-monitored = {
+      url = "github:ners/nix-monitored";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    theme-manager = {
+      url = "github:cunbidun/theme-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # +----------------+
     # | Neovim plugins |
     # +----------------+
@@ -53,14 +64,6 @@
       url = "github:fang2hou/blink-copilot";
       flake = false;
     };
-    nix-monitored = {
-      url = "github:ners/nix-monitored";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    theme-manager = {
-      url = "github:cunbidun/theme-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
   outputs = {
@@ -75,21 +78,7 @@
     mkPkgs = system:
       import nixpkgs-unstable {
         inherit system;
-        overlays = let
-          mkSubPkgsOverlay = targetName: input: (self: super: {
-            "${targetName}" =
-              super."${targetName}" or {}
-              // import input {
-                inherit system;
-                config = super.config;
-              };
-          });
-        in [
-          (mkSubPkgsOverlay "master" inputs.master)
-          inputs.nur.overlays.default
-          (import "${project_root}/nix/overlays/firefox-addons.nix")
-          (import "${project_root}/nix/overlays/vim-plugins.nix" inputs)
-        ];
+        overlays = import "${project_root}/nix/overlays" inputs;
         config.allowUnfree = true;
       };
 
