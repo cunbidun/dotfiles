@@ -62,7 +62,7 @@
   };
 
   # Bootloader.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.nixpkgs-stable.linuxPackages_6_15; # Use the LTS kernel for better stability.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = ["uinput" "i2c-dev"];
@@ -170,7 +170,7 @@
   programs.uwsm.enable = true;
   services.greetd = {
     enable = true;
-    settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
+    settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
   };
   security.pam.services.greetd.enableGnomeKeyring = true;
   security.pam.services.hyprlock.enableGnomeKeyring = true;
