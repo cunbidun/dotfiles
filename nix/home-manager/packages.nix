@@ -154,7 +154,7 @@ in {
     pkgs.slack # A messaging and collaboration platform
 
     # Note
-    pkgs.obsidian # A knowledge base and note-taking app
+    pkgs.master.obsidian # A knowledge base and note-taking app
 
     ######## # Util ########
     # GUI File manager

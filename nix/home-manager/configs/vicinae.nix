@@ -54,7 +54,7 @@ in {
     systemd.user.services.vicinae = {
       Unit = {
         Description = "Vicinae launcher daemon";
-        After = ["graphical-session-pre.target"];
+        After = ["graphical-session.target"];
         PartOf = ["graphical-session.target"];
       };
 

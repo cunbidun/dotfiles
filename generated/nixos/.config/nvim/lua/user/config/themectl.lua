@@ -8,7 +8,7 @@ local function trim(s)
   return (s or ""):gsub("^%s*(.-)%s*$", "%1")
 end
 
--- --- async theme refresh ---------------------------------------------------
+--- async theme refresh ---------------------------------------------------
 local last_theme
 local function refresh()
   vim.system({ "themectl", "get-theme" }, { text = true }, function(obj)

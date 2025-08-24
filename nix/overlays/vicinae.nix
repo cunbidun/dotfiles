@@ -1,7 +1,7 @@
 inputs: final: prev: {
   vicinae = prev.stdenv.mkDerivation rec {
     pname = "vicinae";
-    version = "0.2.1";
+    version = "0.6.2";
 
     src = inputs.vicinae;
 

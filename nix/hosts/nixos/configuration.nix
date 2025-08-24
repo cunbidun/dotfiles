@@ -167,7 +167,10 @@
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     withUWSM = true;
   };
-  programs.uwsm.enable = true;
+  programs.uwsm = {
+    enable = true;
+    package = pkgs.uwsm;
+  };
   services.greetd = {
     enable = true;
     settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
