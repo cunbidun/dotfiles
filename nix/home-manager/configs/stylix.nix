@@ -181,7 +181,6 @@ in {
     image = ../../../wallpapers/Astronaut.png;
 
     targets = {
-      waybar.enable = false;
       vscode.enable = false;
       yazi.enable = true;
       hyprlock.enable = true;
