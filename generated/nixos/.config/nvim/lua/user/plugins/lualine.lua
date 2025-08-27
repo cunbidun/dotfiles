@@ -4,8 +4,8 @@ return {
     "vim-plugins/vscode.nvim",
     "vim-plugins/catppuccin-nvim",
     "vim-plugins/nord.nvim",
-    "vim-plugins/gruvbox.nvim",
-    "vim-plugins/solarized-nvim",
+    "vim-plugins/gruvbox",
+    "vim-plugins/solarized.nvim",
     "vim-plugins/nvim-web-devicons",
   },
   opts = {

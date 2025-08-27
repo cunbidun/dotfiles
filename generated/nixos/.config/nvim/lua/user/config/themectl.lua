@@ -15,7 +15,7 @@ local function refresh()
     local theme
     if obj.code == 0 then -- success; use real output
       theme = trim(obj.stdout)
-    else -- failure; use the fallback
+    else                  -- failure; use the fallback
       theme = DEFAULT_THEME
       vim.notify(
         ("themectl failed (exit %d); falling back to %s"):format(obj.code or -1, DEFAULT_THEME),
