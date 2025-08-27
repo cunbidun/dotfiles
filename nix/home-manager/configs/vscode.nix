@@ -350,6 +350,7 @@
     arcticicestudio.nord-visual-studio-code
     pkief.material-icon-theme
     catppuccin.catppuccin-vsc
+    jdinhlife.gruvbox
 
     # navigation
     vscodevim.vim

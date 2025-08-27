@@ -15,7 +15,7 @@ local function refresh()
     local theme
     if obj.code == 0 then -- success; use real output
       theme = trim(obj.stdout)
-    else -- failure; use the fallback
+    else                  -- failure; use the fallback
       theme = DEFAULT_THEME
       vim.notify(
         ("themectl failed (exit %d); falling back to %s"):format(obj.code or -1, DEFAULT_THEME),
@@ -42,6 +42,10 @@ function M.apply_scheme(name)
       vim.cmd.colorscheme("nord")
     elseif lower:find("catppuccin") then
       vim.cmd.colorscheme("catppuccin")
+    elseif lower:find("gruvbox") then
+      vim.cmd.colorscheme("gruvbox")
+    elseif lower:find("solarized") then
+      vim.cmd.colorscheme("solarized")
     else
       vim.cmd.colorscheme("vscode")
     end

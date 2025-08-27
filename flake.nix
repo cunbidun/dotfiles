@@ -36,10 +36,6 @@
     # +--------+
     yazi = {url = "github:sxyazi/yazi/v25.4.8";};
     stylix = {url = "github:nix-community/stylix";};
-    vicinae = {
-      url = "https://github.com/vicinaehq/vicinae/releases/download/v0.6.2/vicinae-linux-x86_64-v0.6.2.tar.gz";
-      flake = false;
-    };
     mac-app-util.url = "github:hraban/mac-app-util";
     nur.url = "github:nix-community/nur";
 

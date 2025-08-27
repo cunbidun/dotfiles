@@ -10,6 +10,7 @@ github.copilot
 github.copilot-chat
 github.vscode-pull-request-github
 james-yu.latex-workshop
+jdinhlife.gruvbox
 kamadorueda.alejandra
 ms-python.black-formatter
 ms-python.debugpy
@@ -29,6 +30,7 @@ ms-vscode.cpptools
 ms-vscode.remote-explorer
 pkief.material-icon-theme
 streetsidesoftware.code-spell-checker
+sumneko.lua
 timonwong.shellcheck
 vscodevim.vim
 zhuangtongfa.material-theme

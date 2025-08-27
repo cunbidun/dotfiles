@@ -42,6 +42,10 @@ function M.apply_scheme(name)
       vim.cmd.colorscheme("nord")
     elseif lower:find("catppuccin") then
       vim.cmd.colorscheme("catppuccin")
+    elseif lower:find("gruvbox") then
+      vim.cmd.colorscheme("gruvbox")
+    elseif lower:find("solarized") then
+      vim.cmd.colorscheme("solarized")
     else
       vim.cmd.colorscheme("vscode")
     end

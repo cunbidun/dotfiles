@@ -29,7 +29,7 @@ in {
 
   services.theme-manager = {
     enable = isLinux;
-    themes = ["default" "nord" "catppuccin"];
+    themes = ["default" "nord" "catppuccin" "gruvbox" "solarized"];
     hookScriptContent = ''
       #!/usr/bin/env bash
       /etc/profiles/per-user/${userdata.username}/bin/theme-switch
@@ -89,6 +89,53 @@ in {
   specialisation.catppuccin-dark.configuration = {
     stylix = {
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      image = ../../../wallpapers/Astronaut.png;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+  # solarized
+  specialisation.solarized-light.configuration = {
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
+      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  specialisation.solarized-dark.configuration = {
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/solarized-dark.yaml";
+      image = ../../../wallpapers/Astronaut.png;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  # gruvbox
+  specialisation.gruvbox-light.configuration = {
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/gruvbox-light-hard.yaml";
+      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  specialisation.gruvbox-dark.configuration = {
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
       image = ../../../wallpapers/Astronaut.png;
     };
     home.activation.reconciliation_theme = lib.mkForce ''
@@ -187,12 +234,20 @@ in {
       then "Nord"
       else if config.lib.stylix.colors.scheme-name == "Catppuccin Mocha"
       then "Catppuccin Mocha"
+      else if config.lib.stylix.colors.scheme-name == "Gruvbox dark, hard"
+      then "Gruvbox Dark Hard"
+      else if config.lib.stylix.colors.scheme-name == "Solarized Dark"
+      then "Solarized Dark"
       else "Default Dark Modern";
     vscodeLightTheme =
       if config.lib.stylix.colors.scheme-name == "Nord Light"
       then "Nord Light"
       else if config.lib.stylix.colors.scheme-name == "Catppuccin Latte"
       then "Catppuccin Latte"
+      else if config.lib.stylix.colors.scheme-name == "Gruvbox light, hard"
+      then "Gruvbox Light Hard"
+      else if config.lib.stylix.colors.scheme-name == "Solarized Light"
+      then "Solarized Light"
       else "Default Light Modern";
   in {
     profiles.default.userSettings = {
