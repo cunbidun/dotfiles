@@ -139,6 +139,6 @@
   "window.customMenuBarAltFocus": false,
   "window.enableMenuBarMnemonics": false,
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
+  "workbench.preferredDarkColorTheme": "Tokyo Night",
   "workbench.preferredLightColorTheme": "Default Light Modern"
 }

@@ -7,7 +7,9 @@ return {
     "vim-plugins/gruvbox",
     "vim-plugins/solarized.nvim",
     "vim-plugins/nvim-web-devicons",
+    "vim-plugins/tokyonight.nvim",
   },
+
   opts = {
     options = { globalstatus = true },
     sections = {

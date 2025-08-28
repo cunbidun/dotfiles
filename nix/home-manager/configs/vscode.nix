@@ -351,6 +351,7 @@
     pkief.material-icon-theme
     catppuccin.catppuccin-vsc
     jdinhlife.gruvbox
+    enkia.tokyo-night
 
     # navigation
     vscodevim.vim

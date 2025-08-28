@@ -29,7 +29,7 @@ in {
 
   services.theme-manager = {
     enable = isLinux;
-    themes = ["default" "nord" "catppuccin" "gruvbox" "solarized"];
+    themes = ["default" "nord" "catppuccin" "gruvbox" "solarized" "tokyo-night"];
     hookScriptContent = ''
       #!/usr/bin/env bash
       /etc/profiles/per-user/${userdata.username}/bin/theme-switch
@@ -112,6 +112,30 @@ in {
   specialisation.solarized-dark.configuration = {
     stylix = {
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/solarized-dark.yaml";
+      image = ../../../wallpapers/Astronaut.png;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  # tokyo-night
+  specialisation.tokyo-night-light.configuration = {
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-light.yaml";
+      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  specialisation.tokyo-night-dark.configuration = {
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
       image = ../../../wallpapers/Astronaut.png;
     };
     home.activation.reconciliation_theme = lib.mkForce ''
@@ -237,6 +261,8 @@ in {
       then "Gruvbox Dark Hard"
       else if config.lib.stylix.colors.scheme-name == "Solarized Dark"
       then "Solarized Dark"
+      else if config.lib.stylix.colors.scheme-name == "Tokyo Night Terminal Dark"
+      then "Tokyo Night"
       else "Default Dark Modern";
     vscodeLightTheme =
       if config.lib.stylix.colors.scheme-name == "Nord Light"
@@ -247,6 +273,8 @@ in {
       then "Gruvbox Light Hard"
       else if config.lib.stylix.colors.scheme-name == "Solarized Light"
       then "Solarized Light"
+      else if config.lib.stylix.colors.scheme-name == "Tokyo Night Terminal Light"
+      then "Tokyo Night Light"
       else "Default Light Modern";
   in {
     profiles.default.userSettings = {

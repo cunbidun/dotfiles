@@ -81,6 +81,7 @@
     catppuccin-nvim
     gruvbox
     solarized-nvim
+    tokyonight-nvim
     auto-dark-mode-nvim
 
     # -------------------------------------------------------------------

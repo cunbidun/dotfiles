@@ -46,6 +46,8 @@ function M.apply_scheme(name)
       vim.cmd.colorscheme("gruvbox")
     elseif lower:find("solarized") then
       vim.cmd.colorscheme("solarized")
+    elseif lower:find("tokyo") then
+      vim.cmd.colorscheme("tokyonight")
     else
       vim.cmd.colorscheme("vscode")
     end

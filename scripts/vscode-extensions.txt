@@ -5,6 +5,7 @@ bbenoist.nix
 catppuccin.catppuccin-vsc
 charliermarsh.ruff
 cunbidun.flash-vscode
+enkia.tokyo-night
 foxundermoon.shell-format
 github.copilot
 github.copilot-chat
