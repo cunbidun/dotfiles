@@ -501,7 +501,6 @@ in {
         "terminal.integrated.enableMultiLinePasteWarning" = "never";
         "git.blame.editorDecoration.enabled" = true;
         "explorer.confirmDelete" = false;
-        "accessibility.dimUnfocused.enabled" = true;
       };
 
       #   extensions =
