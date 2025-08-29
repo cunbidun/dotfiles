@@ -1,6 +1,9 @@
 {
   pkgs,
   lib,
+  userdata,
+  project_root,
+  config,
   ...
 }: let
   nvim-plugin-list = with pkgs.vimPlugins; [
@@ -166,8 +169,17 @@
       treesitter-grammars}
   '';
 in {
-  home.file.".local/share/vim-plugins".source = local-plugin-dir;
-
   # Install our wrapped neovim instead of using programs.neovim
   home.packages = [neovim-with-packages];
+
+  # TODO: Not hermetic, relying on dotfiles install at dotfiles
+  # ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
+  # ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
+  home.file = {
+    ".local/share/vim-plugins".source = local-plugin-dir;
+    ".config/nvim".source =
+      if userdata.hermeticNvimConfig
+      then "${project_root}/utilities/nvim"
+      else config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
+  };
 }
