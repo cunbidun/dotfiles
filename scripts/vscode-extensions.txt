@@ -29,6 +29,7 @@ ms-vscode.cpptools
 ms-vscode.remote-explorer
 pkief.material-icon-theme
 streetsidesoftware.code-spell-checker
+tamasfe.even-better-toml
 timonwong.shellcheck
 vscodevim.vim
 zhuangtongfa.material-theme
