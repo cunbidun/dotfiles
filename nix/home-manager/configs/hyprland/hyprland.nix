@@ -5,7 +5,6 @@
   lib,
   pkgs,
   project_root,
-  config,
   ...
 }: let
   scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
@@ -20,6 +19,10 @@ in {
       monitor = [
         ",preferred,auto,1"
       ];
+
+      ecosystem = {
+        no_update_news = true; # disable news popup on startup
+      };
 
       exec-once = [
         "wl-paste --type text --watch cliphist store"
@@ -103,12 +106,6 @@ in {
 
       master = {
         mfact = 0.5;
-      };
-
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_cancel_ratio = 0.1;
-        workspace_swipe_distance = 100;
       };
 
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more

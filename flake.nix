@@ -23,7 +23,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     hyprfocus = {
-      url = "github:cunbidun/hyprfocus";
+      url = "github:daxisunder/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
     Hyprspace = {

@@ -62,7 +62,7 @@
   };
 
   # Bootloader.
-  boot.kernelPackages = pkgs.nixpkgs-stable.linuxPackages_6_15; # Use the LTS kernel for better stability.
+  boot.kernelPackages = pkgs.nixpkgs-stable.linuxPackages_6_12; # Use the LTS kernel for better stability.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = ["uinput" "i2c-dev"];
