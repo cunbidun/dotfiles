@@ -7,6 +7,117 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
+
+  # Theme configuration abstraction
+  # Define theme configurations
+  # NOTE:
+  # to get the theme name: https://github.com/tinted-theming/schemes
+  themeConfigs = {
+    nord = {
+      light = {
+        scheme = "nord-light";
+        wallpaper = ../../../wallpapers/thuonglam.jpeg;
+        vscodeTheme = "Nord Light";
+      };
+      dark = {
+        scheme = "nord";
+        wallpaper = ../../../wallpapers/Astronaut.png;
+        vscodeTheme = "Nord";
+      };
+    };
+    catppuccin = {
+      light = {
+        scheme = "catppuccin-latte";
+        wallpaper = ../../../wallpapers/thuonglam.jpeg;
+        vscodeTheme = "Catppuccin Latte";
+      };
+      dark = {
+        scheme = "catppuccin-mocha";
+        wallpaper = ../../../wallpapers/Astronaut.png;
+        vscodeTheme = "Catppuccin Mocha";
+      };
+    };
+    default = {
+      light = {
+        scheme = "standardized-light";
+        wallpaper = ../../../wallpapers/thuonglam.jpeg;
+        vscodeTheme = "Default Light Modern";
+      };
+      # Note: default-dark is not defined as a specialization, only as base config
+    };
+  };
+
+  # NOTE:
+  # the specialisation name for theme must be named '{theme}-{polarity}'. Else switch won't work
+  # By default, the default configuration is 'default-dark' (with 'default-light')
+
+  # NOTE on priority
+  # Helper                  | Priority it sets  | Typical use
+  # lib.mkDefault value     | 1000              | Ship a safe default that users can override easily
+  # lib.mkOverride N value  | N (you pick)      | Fine‑tune how strongly you want to win/lose merges
+  # lib.mkForce value       | 50                | “Last word”—almost always beats everything else
+  mkSpecializationConfig = theme: polarity: config: let
+    colorScheme =
+      if polarity == "light"
+      then "prefer-light"
+      else "prefer-dark";
+  in {
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
+    stylix = {
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${config.scheme}.yaml";
+      image = lib.mkForce config.wallpaper;
+    };
+    home.activation.reconciliation_theme = lib.mkForce ''
+      #!/usr/bin/env bash
+      # no-op script to avoid double activation
+    '';
+  };
+
+  # Generate specializations for each theme/polarity combination
+  generateSpecializations = lib.foldl' (
+    acc: themeName: let
+      themeConfig = themeConfigs.${themeName};
+    in
+      acc
+      // (lib.mapAttrs' (
+          polarity: config:
+            lib.nameValuePair "${themeName}-${polarity}" {
+              configuration = mkSpecializationConfig themeName polarity config;
+            }
+        )
+        themeConfig)
+  ) {} (lib.attrNames themeConfigs);
+
+  # Function to get scheme name from base16 scheme file
+  getSchemeNameFromFile = schemeFile: let
+    schemeContent = builtins.readFile "${pkgs.base16-schemes}/share/themes/${schemeFile}.yaml";
+    # Extract scheme name from YAML (format: "name: \"Name\"")
+    schemeMatch = builtins.match ".*name: \"([^\"]+)\".*" schemeContent;
+  in
+    if schemeMatch != null
+    then builtins.head schemeMatch
+    else schemeFile; # fallback to filename if parsing fails
+
+  # Function to get VSCode theme from scheme name
+  getVscodeTheme = schemeName: let
+    # Find the matching theme config by inferred scheme name
+    findThemeConfig =
+      lib.findFirst (
+        entry: (getSchemeNameFromFile entry.scheme) == schemeName
+      )
+      null (
+        lib.flatten (
+          lib.mapAttrsToList (
+            themeName: themeConfig:
+              lib.mapAttrsToList (polarity: config: config) themeConfig
+          )
+          themeConfigs
+        )
+      );
+  in
+    if findThemeConfig != null
+    then findThemeConfig.vscodeTheme
+    else "Default Dark Modern"; # fallback
 in {
   services.darkman = {
     enable = isLinux;
@@ -29,89 +140,15 @@ in {
 
   services.theme-manager = {
     enable = isLinux;
-    themes = ["default" "nord" "catppuccin"];
+    themes = builtins.attrNames themeConfigs;
     hookScriptContent = ''
       #!/usr/bin/env bash
       /etc/profiles/per-user/${userdata.username}/bin/theme-switch
     '';
   };
 
-  # NOTE:
-  # to get the theme name: https://github.com/tinted-theming/schemes
-
-  # NOTE:
-  # the specialisation name for theme must be named '{theme}-{polarity}'. Else switch won't work
-  # By default, the default configuration is 'default-dark' (with 'default-light')
-
-  # NOTE on priority
-  # Helper                  | Priority it sets  | Typical use
-  # lib.mkDefault value     | 1000              | Ship a safe default that users can override easily
-  # lib.mkOverride N value  | N (you pick)      | Fine‑tune how strongly you want to win/lose merges
-  # lib.mkForce value       | 50                | “Last word”—almost always beats everything else
-
-  # nord
-  specialisation.nord-light.configuration = {
-    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/nord-light.yaml";
-      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
-    };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-  };
-
-  specialisation.nord-dark.configuration = {
-    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-dark";
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/nord.yaml";
-      image = ../../../wallpapers/Astronaut.png;
-    };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-  };
-
-  # catppuccin
-  specialisation.catppuccin-light.configuration = {
-    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
-      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
-    };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-  };
-
-  specialisation.catppuccin-dark.configuration = {
-    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-dark";
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      image = ../../../wallpapers/Astronaut.png;
-    };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-  };
-
-  # default
-  specialisation.default-light.configuration = {
-    # force light mode with lowest number (highest priority)
-    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-light";
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/standardized-light.yaml";
-      image = lib.mkForce ../../../wallpapers/thuonglam.jpeg;
-    };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-  };
+  # Apply the generated specializations
+  specialisation = generateSpecializations;
 
   home.activation = {
     reconciliation_theme = lib.mkIf isLinux ''
@@ -119,8 +156,8 @@ in {
       set -euo pipefail
 
       echo "Running theme reconciliation..."
-      POLARITY="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # dark by default
-      THEME="$(${inputs.theme-manager.packages.${pkgs.system}.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # dark by default
+      POLARITY="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # 'dark' by default
+      THEME="$(${inputs.theme-manager.packages.${pkgs.system}.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # 'default' by default
       echo "Detected theme: $THEME, polarity: $POLARITY"
 
       if [[ $POLARITY != dark || $THEME != default ]]; then
@@ -183,24 +220,9 @@ in {
     };
   };
 
-  programs.vscode = let
-    vscodeDarkTheme =
-      if config.lib.stylix.colors.scheme-name == "Nord"
-      then "Nord"
-      else if config.lib.stylix.colors.scheme-name == "Catppuccin Mocha"
-      then "Catppuccin Mocha"
-      else "Default Dark Modern";
-    vscodeLightTheme =
-      if config.lib.stylix.colors.scheme-name == "Nord Light"
-      then "Nord Light"
-      else if config.lib.stylix.colors.scheme-name == "Catppuccin Latte"
-      then "Catppuccin Latte"
-      else "Default Light Modern";
-  in {
+  programs.vscode = {
     profiles.default.userSettings = {
-      "window.autoDetectColorScheme" = true;
-      "workbench.preferredDarkColorTheme" = vscodeDarkTheme;
-      "workbench.preferredLightColorTheme" = vscodeLightTheme;
+      "workbench.colorTheme" = getVscodeTheme config.lib.stylix.colors.scheme-name;
     };
   };
 
