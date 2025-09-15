@@ -63,6 +63,7 @@ in {
   };
 
   specialisation.nord-dark.configuration = {
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-dark";
     stylix = {
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/nord.yaml";
       image = ../../../wallpapers/Astronaut.png;
@@ -87,6 +88,7 @@ in {
   };
 
   specialisation.catppuccin-dark.configuration = {
+    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 "prefer-dark";
     stylix = {
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       image = ../../../wallpapers/Astronaut.png;

@@ -17,10 +17,10 @@ local function refresh()
       theme = trim(obj.stdout)
     else -- failure; use the fallback
       theme = DEFAULT_THEME
-      vim.notify(
-        ("themectl failed (exit %d); falling back to %s"):format(obj.code or -1, DEFAULT_THEME),
-        vim.log.levels.WARN
-      )
+      -- vim.notify(
+      --   ("themectl failed (exit %d); falling back to %s"):format(obj.code or -1, DEFAULT_THEME),
+      --   vim.log.levels.WARN
+      -- )
     end
     if theme ~= last_theme then
       last_theme = theme

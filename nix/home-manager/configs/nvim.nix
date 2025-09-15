@@ -72,6 +72,7 @@
     # -------------------------------------------------------------------
     plenary-nvim # A collection of Lua functions that many other plugins depend on.
     nui-nvim # A library of UI components to help build Neovim plugins.
+    nvim-notify # A fancy notification manager for Neovim.
 
     # -------------------------------------------------------------------
     # Themes and Appearance
