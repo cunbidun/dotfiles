@@ -91,55 +91,6 @@
           force = true;
           customPorts = [8080];
         };
-        # multi-account-containers
-        "@testpilot-containers".settings = {
-          force = true;
-          onboarding-stage = 8;
-          syncEnabled = false;
-          "siteContainerMap@@_chatgpt.com" = {
-            "userContextId" = "1";
-            "neverAsk" = true;
-            "identityMacAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
-          };
-          "siteContainerMap@@_openai.com" = {
-            "userContextId" = "1";
-            "neverAsk" = true;
-            "identityMacAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
-          };
-          "siteContainerMap@@_www.instagram.com" = {
-            "userContextId" = "2";
-            "neverAsk" = true;
-            "identityMacAddonUUID" = "0a2e9531-0591-45dc-8d4d-0750dee15140";
-          };
-          "siteContainerMap@@_www.facebook.com" = {
-            "userContextId" = "2";
-            "neverAsk" = true;
-            "identityMacAddonUUID" = "0a2e9531-0591-45dc-8d4d-0750dee15140";
-          };
-          "siteContainerMap@@_www.google.com" = {
-            "userContextId" = "3";
-            "neverAsk" = true;
-            "identityMacAddonUUID" = "b742fe80-8e51-4287-8c9e-9c2a73d4ca41";
-          };
-          "siteContainerMap@@_www.youtube.com" = {
-            "userContextId" = "3";
-            "neverAsk" = true;
-            "identityMacAddonUUID" = "b742fe80-8e51-4287-8c9e-9c2a73d4ca41";
-          };
-          # identitiesState
-          "identitiesState@@_firefox-container-1" = {
-            "hiddenTabs" = [];
-            "macAddonUUID" = "78aa2e5b-407c-4fa9-8ee0-8aacf271ba19";
-          };
-          "identitiesState@@_firefox-container-2" = {
-            "hiddenTabs" = [];
-            "macAddonUUID" = "0a2e9531-0591-45dc-8d4d-0750dee15140";
-          };
-          "identitiesState@@_firefox-container-3" = {
-            "hiddenTabs" = [];
-            "macAddonUUID" = "b742fe80-8e51-4287-8c9e-9c2a73d4ca41";
-          };
-        };
         # aw-watcher-web
         "{ef87d84c-2127-493f-b952-5b4e744245bc}".settings = {
           force = true;
