@@ -98,4 +98,11 @@
     "github.copilot.nextEditSuggestions.enabled": true,
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "chat.agent.maxRequests": 100,
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python-envs.pythonProjects": [ ],
+    "chat.tools.terminal.autoApprove": {
+        "nix": true,
+        "git": true,
+        "ls": true,
+    }
 }

@@ -7,4 +7,5 @@ in [
   (import ./firefox-addons.nix)
   (import ./vim-plugins.nix inputs)
   (import ./vicinae.nix inputs)
+  (import ./theme-manager.nix)
 ]

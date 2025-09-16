@@ -17,7 +17,7 @@ in {
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.stylix.homeModules.stylix
-    inputs.theme-manager.homeManagerModules.theme-manager
+    inputs.self.homeManagerModules.theme-manager
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/kitty.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprland.nix"

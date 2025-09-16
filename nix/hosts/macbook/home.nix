@@ -20,7 +20,7 @@ in {
     "${project_root}/nix/home-manager/configs/tmux.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
-    inputs.theme-manager.homeManagerModules.theme-manager
+    inputs.self.homeManagerModules.theme-manager
     inputs.stylix.homeModules.stylix
     inputs.mac-app-util.homeManagerModules.default
   ];

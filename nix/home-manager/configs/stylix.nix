@@ -18,11 +18,13 @@
         scheme = "nord-light";
         wallpaper = ../../../wallpapers/thuonglam.jpeg;
         vscodeTheme = "Nord Light";
+        nvimTheme = "nord";
       };
       dark = {
         scheme = "nord";
         wallpaper = ../../../wallpapers/Astronaut.png;
         vscodeTheme = "Nord";
+        nvimTheme = "nord";
       };
     };
     catppuccin = {
@@ -30,11 +32,13 @@
         scheme = "catppuccin-latte";
         wallpaper = ../../../wallpapers/thuonglam.jpeg;
         vscodeTheme = "Catppuccin Latte";
+        nvimTheme = "catppuccin";
       };
       dark = {
         scheme = "catppuccin-mocha";
         wallpaper = ../../../wallpapers/Astronaut.png;
         vscodeTheme = "Catppuccin Mocha";
+        nvimTheme = "catppuccin";
       };
     };
     default = {
@@ -42,8 +46,14 @@
         scheme = "standardized-light";
         wallpaper = ../../../wallpapers/thuonglam.jpeg;
         vscodeTheme = "Default Light Modern";
+        nvimTheme = "vscode";
       };
-      # Note: default-dark is not defined as a specialization, only as base config
+      dark = {
+        scheme = "standardized-dark";
+        wallpaper = ../../../wallpapers/Astronaut.png;
+        vscodeTheme = "Default Dark Modern";
+        nvimTheme = "vscode";
+      };
     };
   };
 
@@ -88,6 +98,13 @@
         themeConfig)
   ) {} (lib.attrNames themeConfigs);
 
+  # Generate nvim theme mappings from themeConfigs (using dark variant as default)
+  nvimThemeMappings =
+    lib.mapAttrs (
+      _: themeConfig: themeConfig.dark.nvimTheme
+    )
+    themeConfigs;
+
   # Function to get scheme name from base16 scheme file
   getSchemeNameFromFile = schemeFile: let
     schemeContent = builtins.readFile "${pkgs.base16-schemes}/share/themes/${schemeFile}.yaml";
@@ -100,20 +117,21 @@
 
   # Function to get VSCode theme from scheme name
   getVscodeTheme = schemeName: let
+    # Get all theme configurations (both light and dark)
+    allConfigs = lib.flatten (
+      lib.mapAttrsToList (
+        themeName: themeConfig:
+          lib.mapAttrsToList (polarity: config: config) themeConfig
+      )
+      themeConfigs
+    );
     # Find the matching theme config by inferred scheme name
     findThemeConfig =
       lib.findFirst (
         entry: (getSchemeNameFromFile entry.scheme) == schemeName
       )
-      null (
-        lib.flatten (
-          lib.mapAttrsToList (
-            themeName: themeConfig:
-              lib.mapAttrsToList (polarity: config: config) themeConfig
-          )
-          themeConfigs
-        )
-      );
+      null
+      allConfigs;
   in
     if findThemeConfig != null
     then findThemeConfig.vscodeTheme
@@ -141,6 +159,7 @@ in {
   services.theme-manager = {
     enable = isLinux;
     themes = builtins.attrNames themeConfigs;
+    nvimThemeMap = nvimThemeMappings;
     hookScriptContent = ''
       #!/usr/bin/env bash
       /etc/profiles/per-user/${userdata.username}/bin/theme-switch
@@ -157,7 +176,7 @@ in {
 
       echo "Running theme reconciliation..."
       POLARITY="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # 'dark' by default
-      THEME="$(${inputs.theme-manager.packages.${pkgs.system}.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # 'default' by default
+      THEME="$(${pkgs.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # 'default' by default
       echo "Detected theme: $THEME, polarity: $POLARITY"
 
       if [[ $POLARITY != dark || $THEME != default ]]; then

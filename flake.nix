@@ -46,10 +46,6 @@
       url = "github:ners/nix-monitored";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    theme-manager = {
-      url = "github:cunbidun/theme-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
 
     # +----------------+
     # | Neovim plugins |
@@ -139,6 +135,11 @@
   in {
     # for running commands like `nix eval .#inputs.hyprland.packages.x86_64-linux.hyprland`
     inputs = inputs;
+
+    # Home Manager modules
+    homeManagerModules = {
+      theme-manager = import "${project_root}/nix/theme-manager/hm-module.nix";
+    };
 
     # -----------------------#
     # macbook configurations #

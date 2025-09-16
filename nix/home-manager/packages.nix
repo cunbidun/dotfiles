@@ -83,7 +83,7 @@ in {
     theme-switch = pkgs.writeShellApplication {
       name = "theme-switch";
       text = builtins.readFile "${project_root}/scripts/theme-switch.sh";
-      runtimeInputs = [pkgs.gawk pkgs.gnugrep pkgs.systemdMinimal pkgs.darkman inputs.theme-manager.packages.${pkgs.system}.theme-manager];
+      runtimeInputs = [pkgs.gawk pkgs.gnugrep pkgs.systemdMinimal pkgs.darkman pkgs.theme-manager];
     };
   in [
     theme-switch
