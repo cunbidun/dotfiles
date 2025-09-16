@@ -41,6 +41,20 @@
         nvimTheme = "catppuccin";
       };
     };
+    everforest = {
+      light = {
+        scheme = "everforest-light";
+        wallpaper = ../../../wallpapers/thuonglam.jpeg;
+        vscodeTheme = "Everforest Light";
+        nvimTheme = "everforest";
+      };
+      dark = {
+        scheme = "everforest-dark";
+        wallpaper = ../../../wallpapers/Astronaut.png;
+        vscodeTheme = "Everforest Dark";
+        nvimTheme = "everforest";
+      };
+    };
     default = {
       light = {
         scheme = "standardized-light";

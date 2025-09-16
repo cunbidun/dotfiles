@@ -27,6 +27,8 @@
   "editor.rulers": [
     120
   ],
+  "everforest.darkContrast": "hard",
+  "everforest.darkWorkbench": "flat",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.exclude": {
@@ -138,6 +140,6 @@
   "vim.useSystemClipboard": true,
   "window.customMenuBarAltFocus": false,
   "window.enableMenuBarMnemonics": false,
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.colorTheme": "Everforest Dark",
   "workbench.iconTheme": "material-icon-theme"
 }

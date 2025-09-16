@@ -452,6 +452,8 @@ in {
         "git.blame.editorDecoration.enabled" = true;
         "explorer.confirmDelete" = false;
         "accessibility.dimUnfocused.enabled" = true;
+        "everforest.darkContrast" = "hard";
+        "everforest.darkWorkbench" = "flat";
       };
     };
   };

@@ -81,6 +81,7 @@
     nord-nvim
     catppuccin-nvim
     auto-dark-mode-nvim
+    everforest
 
     # -------------------------------------------------------------------
     # Plugin Management and Lazy Loading

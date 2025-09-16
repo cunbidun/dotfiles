@@ -8,4 +8,5 @@ in [
   (import ./vim-plugins.nix inputs)
   (import ./vicinae.nix inputs)
   (import ./theme-manager.nix)
+  (import ./everforest-themes.nix)
 ]
