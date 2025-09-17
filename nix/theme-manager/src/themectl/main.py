@@ -32,7 +32,7 @@ def get_theme():
 
 
 def get_themes():
-    out, code = client_request("GET-THEMES\n")
+    out, code = client_request("LIST-THEMES\n")
     if out is not None:
         try:
             import json
@@ -67,11 +67,11 @@ def build_parser():
     sub = parser.add_subparsers(dest="cmd", required=True, help="sub-command")
 
     sub.add_parser("get-theme", help="Show current theme")
-    sub.add_parser("get-themes", help="List all available themes")
+    sub.add_parser("list-themes", help="List all available themes")
     sub.add_parser("get-nvim-theme", help="Show current theme's Neovim colorscheme")
 
     pset = sub.add_parser("set-theme", help="Set a new theme")
-    pset.add_argument("theme", help="Theme name (as returned by get-themes)")
+    pset.add_argument("theme", help="Theme name (as returned by list-themes)")
 
     return parser
 
@@ -82,7 +82,7 @@ def main():
 
     exit_code = {
         "get-theme": get_theme,
-        "get-themes": get_themes,
+        "list-themes": get_themes,
         "get-nvim-theme": get_nvim_theme,
         "set-theme": lambda: set_theme(args.theme),
     }[args.cmd]()

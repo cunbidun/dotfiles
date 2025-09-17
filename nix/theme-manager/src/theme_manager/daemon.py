@@ -67,7 +67,7 @@ def run():
             if cmd == "GET-THEME":
                 conn.sendall(f"OK {curr}\n".encode())
 
-            elif cmd == "GET-THEMES":
+            elif cmd == "LIST-THEMES":
                 # Return themes as JSON
                 payload = json.dumps(allowed)
                 conn.sendall(f"OK {payload}\n".encode())

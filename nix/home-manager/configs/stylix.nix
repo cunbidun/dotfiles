@@ -44,13 +44,13 @@
     everforest = {
       light = {
         scheme = "everforest-light";
-        wallpaper = ../../../wallpapers/thuonglam.jpeg;
+        wallpaper = ../../../wallpapers/fog_forest_2.png;
         vscodeTheme = "Everforest Light";
         nvimTheme = "everforest";
       };
       dark = {
         scheme = "everforest-dark";
-        wallpaper = ../../../wallpapers/Astronaut.png;
+        wallpaper = ../../../wallpapers/fog_forest_2.png;
         vscodeTheme = "Everforest Dark";
         nvimTheme = "everforest";
       };
@@ -72,13 +72,13 @@
     default = {
       light = {
         scheme = "standardized-light";
-        wallpaper = ../../../wallpapers/thuonglam.jpeg;
+        wallpaper = ../../../wallpapers/big-sur-mountains-day.jpg;
         vscodeTheme = "Default Light Modern";
         nvimTheme = "vscode";
       };
       dark = {
         scheme = "standardized-dark";
-        wallpaper = ../../../wallpapers/Astronaut.png;
+        wallpaper = ../../../wallpapers/big-sur-mountains-night.jpg;
         vscodeTheme = "Default Dark Modern";
         nvimTheme = "vscode";
       };
@@ -223,8 +223,8 @@ in {
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
-    image = ../../../wallpapers/Astronaut.png;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeConfigs.default.dark.scheme}.yaml";
+    image = themeConfigs.default.dark.wallpaper;
 
     targets = {
       waybar.enable = false;
