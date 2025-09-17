@@ -59,13 +59,13 @@
       light = {
         scheme = "one-light";
         wallpaper = ../../../wallpapers/thuonglam.jpeg;
-        vscodeTheme = "Atom One Light Theme";
+        vscodeTheme = "Atom One Light";
         nvimTheme = "onelight";
       };
       dark = {
         scheme = "onedark";
         wallpaper = ../../../wallpapers/Astronaut.png;
-        vscodeTheme = "Atom One Dark Theme";
+        vscodeTheme = "Atom One Dark";
         nvimTheme = "onedark";
       };
     };
