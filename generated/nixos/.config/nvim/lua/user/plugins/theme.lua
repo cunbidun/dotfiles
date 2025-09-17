@@ -10,4 +10,29 @@ return {
       vim.g.everforest_background = 'hard'
     end
   },
+  {
+    "vim-plugins/onedarkpro.nvim",
+    lazy = true,
+    config = function()
+      require("onedarkpro").setup({
+        -- Available themes: onedark, onelight, onedark_vivid, onedark_dark
+        theme = "onedark", -- default theme, will be overridden by theme manager
+        styles = {
+          types = "NONE",
+          methods = "NONE",
+          numbers = "NONE",
+          strings = "NONE",
+          comments = "italic",
+          keywords = "bold,italic",
+          constants = "NONE",
+          functions = "italic",
+          operators = "NONE",
+          variables = "NONE",
+          parameters = "NONE",
+          conditionals = "italic",
+          virtual_text = "NONE",
+        },
+      })
+    end
+  },
 }

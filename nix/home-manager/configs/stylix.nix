@@ -59,13 +59,13 @@
       light = {
         scheme = "one-light";
         wallpaper = ../../../wallpapers/thuonglam.jpeg;
-        vscodeTheme = "Atom One Light Theme";
+        vscodeTheme = "Atom One Light";
         nvimTheme = "onelight";
       };
       dark = {
         scheme = "onedark";
         wallpaper = ../../../wallpapers/Astronaut.png;
-        vscodeTheme = "Atom One Dark Theme";
+        vscodeTheme = "Atom One Dark";
         nvimTheme = "onedark";
       };
     };
@@ -135,7 +135,7 @@
       // {
         # Map light variants
         "${themeName}-light" = themeConfig.light.nvimTheme;
-        # Map dark variants  
+        # Map dark variants
         "${themeName}-dark" = themeConfig.dark.nvimTheme;
         # Keep legacy mapping for backwards compatibility (uses dark variant)
         "${themeName}" = themeConfig.dark.nvimTheme;
