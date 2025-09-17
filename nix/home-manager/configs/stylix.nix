@@ -55,6 +55,20 @@
         nvimTheme = "everforest";
       };
     };
+    onedark = {
+      light = {
+        scheme = "one-light";
+        wallpaper = ../../../wallpapers/thuonglam.jpeg;
+        vscodeTheme = "Atom One Light Theme";
+        nvimTheme = "onelight";
+      };
+      dark = {
+        scheme = "onedark";
+        wallpaper = ../../../wallpapers/Astronaut.png;
+        vscodeTheme = "Atom One Dark Theme";
+        nvimTheme = "onedark";
+      };
+    };
     default = {
       light = {
         scheme = "standardized-light";
@@ -112,12 +126,21 @@
         themeConfig)
   ) {} (lib.attrNames themeConfigs);
 
-  # Generate nvim theme mappings from themeConfigs (using dark variant as default)
-  nvimThemeMappings =
-    lib.mapAttrs (
-      _: themeConfig: themeConfig.dark.nvimTheme
-    )
-    themeConfigs;
+  # Generate nvim theme mappings from themeConfigs for both light and dark variants
+  nvimThemeMappings = lib.foldl' (
+    acc: themeName: let
+      themeConfig = themeConfigs.${themeName};
+    in
+      acc
+      // {
+        # Map light variants
+        "${themeName}-light" = themeConfig.light.nvimTheme;
+        # Map dark variants  
+        "${themeName}-dark" = themeConfig.dark.nvimTheme;
+        # Keep legacy mapping for backwards compatibility (uses dark variant)
+        "${themeName}" = themeConfig.dark.nvimTheme;
+      }
+  ) {} (lib.attrNames themeConfigs);
 
   # Function to get scheme name from base16 scheme file
   getSchemeNameFromFile = schemeFile: let
