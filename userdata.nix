@@ -10,6 +10,10 @@
   # making it's faster to iterate and test changes.
   hermeticNvimConfig = false;
 
+  # Set to true to use a hermetic AGS configuration (requires nix rebuild to see changes)
+  # Set to false to allow hot reloading AGS config by editing files directly in the dotfiles repo
+  hermeticAgsConfig = false;
+
   authorizedKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
   ];

@@ -21,6 +21,27 @@
         "type": "github"
       }
     },
+    "ags": {
+      "inputs": {
+        "astal": "astal",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1757330146,
+        "narHash": "sha256-ujlZerjj0ouA63nftpoHF/tA+xE5gDJZVBuuZP6YS+Q=",
+        "owner": "Aylur",
+        "repo": "ags",
+        "rev": "5347d21c2289df157e91e297daa37572e0d277b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Aylur",
+        "repo": "ags",
+        "type": "github"
+      }
+    },
     "apple-fonts": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -93,6 +114,27 @@
       "original": {
         "owner": "nvmd",
         "repo": "argononed",
+        "type": "github"
+      }
+    },
+    "astal": {
+      "inputs": {
+        "nixpkgs": [
+          "ags",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756474652,
+        "narHash": "sha256-iiBU6itpEqE0spXeNJ3uJTfioSyKYjt5bNepykpDXTE=",
+        "owner": "aylur",
+        "repo": "astal",
+        "rev": "20bd8318e4136fbd3d4eb2d64dbabc3acbc915dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aylur",
+        "repo": "astal",
         "type": "github"
       }
     },
@@ -1489,6 +1531,7 @@
     "root": {
       "inputs": {
         "Hyprspace": "Hyprspace",
+        "ags": "ags",
         "apple-fonts": "apple-fonts",
         "auto-dark-mode-nvim": "auto-dark-mode-nvim",
         "blink-copilot": "blink-copilot",

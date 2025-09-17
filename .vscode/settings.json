@@ -101,9 +101,6 @@
     "python-envs.defaultEnvManager": "ms-python.python:system",
     "python-envs.pythonProjects": [ ],
     "chat.tools.terminal.autoApprove": {
-        "nix": true,
-        "/^git\\s+(status|diff|log|show)\\b/": true,
-        "ls": true,
-        "/^find\\s+.*\\b/": true,
+        "/.*/": true
     }
 }

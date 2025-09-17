@@ -17,11 +17,13 @@ in {
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.stylix.homeModules.stylix
+    inputs.ags.homeManagerModules.default
     inputs.self.homeManagerModules.theme-manager
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/kitty.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/waybar.nix"
+    "${project_root}/nix/home-manager/configs/ags.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
