@@ -73,12 +73,25 @@ def run():
                 conn.sendall(f"OK {payload}\n".encode())
 
             elif cmd == "GET-NVIM-THEME":
-                # Return nvim theme for current theme, error if not mapped
-                if curr in cfg["nvimThemeMap"]:
-                    nvim_theme = cfg["nvimThemeMap"][curr]
+                # Return nvim theme for current theme with polarity, error if not mapped
+                # Get current polarity from darkman
+                try:
+                    result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
+                    polarity = result.stdout.strip() if result.returncode == 0 else "dark"
+                except (subprocess.TimeoutExpired, FileNotFoundError):
+                    polarity = "dark"  # fallback
+                
+                # Construct theme key with polarity
+                if curr == "default" and polarity == "dark":
+                    theme_key = curr  # special case for default-dark
+                else:
+                    theme_key = f"{curr}-{polarity}"
+                
+                if theme_key in cfg["nvimThemeMap"]:
+                    nvim_theme = cfg["nvimThemeMap"][theme_key]
                     conn.sendall(f"OK {nvim_theme}\n".encode())
                 else:
-                    conn.sendall(f"ERROR no nvim theme mapping for '{curr}'\n".encode())
+                    conn.sendall(f"ERROR no nvim theme mapping for '{theme_key}'\n".encode())
 
             elif cmd == "SET-THEME" and len(data) == 2:
                 theme = data[1]

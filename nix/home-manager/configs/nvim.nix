@@ -82,7 +82,7 @@
     catppuccin-nvim
     auto-dark-mode-nvim
     everforest
-    onedarkpro-nvim # OneDarkPro theme with both onedark and onelight variants
+    onedarkpro-nvim # OneDarkPro theme for Neovim with both light and dark variants
 
     # -------------------------------------------------------------------
     # Plugin Management and Lazy Loading
