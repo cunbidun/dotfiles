@@ -46,6 +46,18 @@ Use `./scripts/switch.sh` (not `nixos-rebuild` directly):
 - Validates repository location (`~/dotfiles`)
 - Supports custom profiles via argument
 
+#### Testing Configuration Changes
+**ALWAYS test configuration changes before switching**:
+- **Test build**: `./scripts/switch.sh --test nixos` - Builds configuration without switching to verify it works
+- **Switch**: `./scripts/switch.sh nixos` - Actually switches to the new configuration
+
+The `--test` flag performs a full build (including downloading packages and compilation) but skips activation. This ensures the configuration is valid before committing to the switch. Use this workflow:
+1. Make configuration changes
+2. Run `./scripts/switch.sh --test nixos` to verify build succeeds
+3. If test passes, run `./scripts/switch.sh nixos` to activate
+
+Never skip the test step for significant configuration changes as the switch script auto-commits changes.
+
 ### Theme Management
 The repository implements a sophisticated theming system:
 - **`themectl`**: External theme manager (from custom flake input)

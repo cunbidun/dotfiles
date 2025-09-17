@@ -4,6 +4,7 @@ set -euo pipefail
 commit_changes=true
 commit_message="Auto commit: $(date +'%Y-%m-%d %H:%M:%S')"
 profile_name=""
+test_only=false
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -21,6 +22,10 @@ while [[ $# -gt 0 ]]; do
       exit 1
     fi
     ;;
+  --test)
+    test_only=true
+    shift
+    ;;
   *)
     if [[ -z "$profile_name" ]]; then
       profile_name="$1"
@@ -35,8 +40,9 @@ done
 
 # Check if profile_name is provided
 if [[ -z "$profile_name" ]]; then
-  echo "Usage: $0 [--no-commit] [--commit-message <message>] <profile_name>"
+  echo "Usage: $0 [--no-commit] [--commit-message <message>] [--test] <profile_name>"
   echo "  <profile_name> can be 'macbook-m1' or 'nixos'"
+  echo "  --test: Build configuration without switching"
   exit 1
 fi
 
@@ -92,17 +98,37 @@ sudo -v # Ensure sudo is available and prompt for password if needed
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild switch..."
-  if sudo darwin-rebuild switch --flake ~/dotfiles"#$profile_name" --cores 0; then
-    switch_success=true
+  if [ "$test_only" = true ]; then
+    echo "Running test build..."
+    if sudo darwin-rebuild build --flake ~/dotfiles"#$profile_name" --cores 0; then
+      switch_success=true
+      echo "Test build successful! Configuration is valid."
+    else
+      switch_success=false
+    fi
   else
-    switch_success=false
+    if sudo darwin-rebuild switch --flake ~/dotfiles"#$profile_name" --cores 0; then
+      switch_success=true
+    else
+      switch_success=false
+    fi
   fi
 else
   echo "Detected non-macOS; running nix switch..."
-  if sudo nixos-rebuild --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
-    switch_success=true
+  if [ "$test_only" = true ]; then
+    echo "Running test build..."
+    if sudo nixos-rebuild --log-format internal-json build --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
+      switch_success=true
+      echo "Test build successful! Configuration is valid."
+    else
+      switch_success=false
+    fi
   else
-    switch_success=false
+    if sudo nixos-rebuild --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
+      switch_success=true
+    else
+      switch_success=false
+    fi
   fi
 fi
 
@@ -151,6 +177,12 @@ copy_files_to_git_root() {
     fi
   done
 }
+
+# Skip file copying and committing if we're only testing
+if [ "$test_only" = true ]; then
+  echo "Test completed successfully."
+  exit 0
+fi
 
 rm -rf "$git_root/generated/$profile_name" || true
 echo "Removed old generated configuration files for $profile_name."
