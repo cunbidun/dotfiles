@@ -139,6 +139,7 @@
             windowtitle = {
               spacing = "1em";
             };
+            modules.hypridle.spacing = "0.5em";
           };
           menus = {
             card_radius = "0em";
