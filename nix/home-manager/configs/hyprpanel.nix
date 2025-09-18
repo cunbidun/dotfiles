@@ -30,7 +30,7 @@
           truncation_size = 15;
         };
         launcher = {
-          icon = "";
+          icon = "NIX";
         };
         layouts = {
           "0" = {
