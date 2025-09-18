@@ -8,6 +8,9 @@
     enable = true;
 
     settings = {
+      wallpaper = {
+        image = "${config.stylix.image}";
+      };
       bar = {
         workspaces = {
           ignored = "-\\d+";
@@ -30,9 +33,6 @@
         };
         launcher = {
           icon = "";
-        };
-        wallpaper = {
-          image = "${config.stylix.image}";
         };
         layouts = {
           "0" = {
