@@ -9,13 +9,6 @@
 
     settings = {
       bar = {
-        customModules = {
-          hypridle = {
-            isActiveCommand = "systemctl --user status hypridle.service | grep -q 'Active: active (running)' && echo 'yes' || echo 'no'";
-            startCommand = "systemctl --user start hypridle.service";
-            stopCommand = "systemctl --user stop hypridle.service";
-          };
-        };
         workspaces = {
           ignored = "-\\d+";
           numbered_active_indicator = "highlight";
@@ -39,7 +32,7 @@
           icon = "";
         };
         wallpaper = {
-          image = "/home/cunbidun/dotfiles/wallpapers/fog_forest_2.png";
+          image = "${config.stylix.image}";
         };
         layouts = {
           "0" = {
