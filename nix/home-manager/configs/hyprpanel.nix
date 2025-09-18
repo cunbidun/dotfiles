@@ -192,6 +192,33 @@
     };
   };
 
+  # One-shot service to restart hyprpanel
+  systemd.user.services.hyprpanel-restart = {
+    Unit = {
+      Description = "Restart hyprpanel service";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/systemctl --user restart hyprpanel.service";
+    };
+  };
+
+  # Path watcher to restart hyprpanel when config changes
+  systemd.user.paths.hyprpanel-config-watcher = {
+    Unit = {
+      Description = "Watch hyprpanel config file for changes";
+    };
+    Path = {
+      # Watch both the file and the directory to catch file recreations
+      PathModified = "%h/.config/hyprpanel/config.json";
+      PathChanged = "%h/.config/hyprpanel";
+      Unit = "hyprpanel-restart.service";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
+  };
+
   # Add missing required dependencies for HyprPanel
   home.packages = with pkgs; [
     # Required dependencies
