@@ -9,8 +9,8 @@
   home.packages = with pkgs; [
     # Required dependencies that were missing
     libgtop           # System monitoring library
-    gvfs              # GNOME Virtual File System
-    gtksourceview3    # Text widget with syntax highlighting
+    gnome.gvfs        # GNOME Virtual File System  
+    gtksourceview     # Text widget with syntax highlighting (gtksourceview3)
     libsoup_3         # HTTP library (libsoup3)
     
     # Optional but useful dependencies
