@@ -13,7 +13,9 @@
           show_numbered = true;
           numbered_active_indicator = "underline";
           workspaces = 9;
+          ignored = "-\\d+";
         };
+        border.width = "0px";
       };
 
       menus = {
