@@ -70,17 +70,7 @@
           "0" = {
             left = ["dashboard" "workspaces" "windowtitle"];
             middle = ["media"];
-            right = ["volume" "network" "bluetooth" "systray" "polarity" "themectl" "clock" "notifications"];
-          };
-          "1" = {
-            left = ["dashboard" "workspaces" "windowtitle"];
-            middle = ["media"];
-            right = ["volume" "polarity" "themectl" "clock" "notifications"];
-          };
-          "2" = {
-            left = ["dashboard" "workspaces" "windowtitle"];
-            middle = ["media"];
-            right = ["volume" "polarity" "themectl" "clock" "notifications"];
+            right = ["volume" "network" "bluetooth" "polarity" "themectl" "hypridle" "systray" "clock" "notifications"];
           };
         };
       };
