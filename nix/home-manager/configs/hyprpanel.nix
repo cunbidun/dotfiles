@@ -9,14 +9,20 @@
 
     settings = {
       bar = {
-        wallpaper.image = "${config.stylix.image}";
-        theme.matugen = true;
+        customModules = {
+          hypridle = {
+            isActiveCommand = "systemctl --user status hypridle.service | grep -q 'Active: active (running)' && echo 'yes' || echo 'no'";
+            startCommand = "systemctl --user start hypridle.service";
+            stopCommand = "systemctl --user stop hypridle.service";
+          };
+        };
         workspaces = {
           ignored = "-\\d+";
           numbered_active_indicator = "highlight";
           show_icons = false;
           show_numbered = true;
           workspaces = 9;
+          spacing = 1;
         };
         autoHide = "never";
         notifications = {
@@ -30,7 +36,10 @@
           truncation_size = 15;
         };
         launcher = {
-          icon = "NIX";
+          icon = "";
+        };
+        wallpaper = {
+          image = "/home/cunbidun/dotfiles/wallpapers/fog_forest_2.png";
         };
         layouts = {
           "0" = {
@@ -90,7 +99,7 @@
           transparent = false;
           floating = false;
           enableShadow = false;
-          outer_spacing = "1em";
+          outer_spacing = "0.5em";
           border = {
             width = "0em";
           };
@@ -107,6 +116,7 @@
               numbered_active_highlight_border = "0em";
               numbered_active_highlight_padding = "0.4em";
               numbered_inactive_padding = "0.4em";
+              fontSize = "1em";
             };
             media = {
               enableBorder = false;
@@ -116,6 +126,34 @@
             };
           };
           menus = {
+            card_radius = "0em";
+            border = {
+              radius = "0em";
+              size = "0em";
+            };
+            popover = {
+              radius = "0em";
+            };
+            tooltip = {
+              radius = "0em";
+            };
+            scroller = {
+              radius = "0em";
+            };
+            slider = {
+              slider_radius = "0rem";
+              progress_radius = "0rem";
+            };
+            progressbar = {
+              radius = "0rem";
+            };
+            buttons = {
+              radius = "0em";
+            };
+            switch = {
+              radius = "0em";
+              slider_radius = "0em";
+            };
             menu = {
               media = {
                 scaling = 100;
@@ -151,7 +189,10 @@
           location = "top";
           radius = "0em";
         };
-        matugen = false;
+        matugen = true;
+        matugen_settings = {
+          scheme_type = "monochrome";
+        };
       };
     };
   };
