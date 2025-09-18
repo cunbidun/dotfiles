@@ -26,7 +26,7 @@
       wallpaper = ../../../../wallpapers/thuonglam.jpeg;
       vscodeTheme = "Catppuccin Latte";
       nvimTheme = "catppuccin";
-      hyprpanelTheme = "catppuccin_latte";
+      hyprpanelTheme = "catppuccin_mocha";
     };
     dark = {
       scheme = "catppuccin-mocha";
