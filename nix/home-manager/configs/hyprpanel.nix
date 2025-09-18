@@ -14,22 +14,25 @@
       bar = {
         customModules = {
           polarity = {
-            exec = "darkman get | sed 's/dark//g' | sed 's/light//g'";
-            format = "Polarity {}";
-            interval = 1;
-            tooltip = true;
-            tooltipText = "Click to toggle theme polarity";
-            signal = 16;
-            onPrimaryClick = "darkman toggle";
+            icon = {
+              dark = "";
+              light = "";
+            };
+            label = "{}";
+            tooltip = "Click to toggle theme polarity";
+            execute = "darkman get";
+            executeOnAction = "darkman toggle";
+            interval = 1000;
+            actions = {
+              onLeftClick = "darkman toggle";
+            };
           };
           themectl = {
-            exec = "themectl get-theme 2>/dev/null || echo 'default'";
-            format = "Theme: {}";
-            interval = 5;
-            tooltip = true;
-            tooltipText = "Current theme - click to cycle";
-            signal = 17;
-            onPrimaryClick = ''
+            icon = "";
+            label = "Theme: {}";
+            tooltip = "Current theme - click to cycle";
+            execute = "themectl get-theme 2>/dev/null || echo 'default'";
+            executeOnAction = ''
               current=$(themectl get-theme 2>/dev/null || echo 'default')
               themes=($(themectl list-themes 2>/dev/null || echo 'default'))
               current_index=-1
@@ -42,6 +45,12 @@
               next_index=$(( (current_index + 1) % ''${#themes[@]} ))
               themectl set-theme "''${themes[$next_index]}"
             '';
+            interval = 5000;
+            truncationSize = 15;
+            actions = {
+              onLeftClick = "themectl set-theme $(themectl list-themes | head -1)";
+              onRightClick = "notify-send 'Theme Manager' \"Current: $(themectl get-theme)\"";
+            };
           };
         };
         workspaces = {
