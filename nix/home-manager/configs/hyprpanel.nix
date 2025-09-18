@@ -8,11 +8,6 @@
 
     settings = {
       bar = {
-        launcher = {
-          icon = "";
-          autoDetectIcon = false;
-        };
-
         workspaces = {
           show_icons = false;
           show_numbered = true;
@@ -31,9 +26,9 @@
       };
 
       theme = {
-        bar.transparent = true;
+        bar.transparent = false;
         font = {
-          name = "CasSFMono Nerd Font";
+          name = "SFMono Nerd Font";
           size = "13px";
         };
       };
