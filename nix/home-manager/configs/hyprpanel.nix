@@ -12,6 +12,38 @@
         image = "${config.stylix.image}";
       };
       bar = {
+        customModules = {
+          polarity = {
+            exec = "darkman get | sed 's/dark//g' | sed 's/light//g'";
+            format = "Polarity {}";
+            interval = 1;
+            tooltip = true;
+            tooltipText = "Click to toggle theme polarity";
+            signal = 16;
+            onPrimaryClick = "darkman toggle";
+          };
+          themectl = {
+            exec = "themectl get-theme 2>/dev/null || echo 'default'";
+            format = "Theme: {}";
+            interval = 5;
+            tooltip = true;
+            tooltipText = "Current theme - click to cycle";
+            signal = 17;
+            onPrimaryClick = ''
+              current=$(themectl get-theme 2>/dev/null || echo 'default')
+              themes=($(themectl list-themes 2>/dev/null || echo 'default'))
+              current_index=-1
+              for i in "''${!themes[@]}"; do
+                if [[ "''${themes[$i]}" == "$current" ]]; then
+                  current_index=$i
+                  break
+                fi
+              done
+              next_index=$(( (current_index + 1) % ''${#themes[@]} ))
+              themectl set-theme "''${themes[$next_index]}"
+            '';
+          };
+        };
         workspaces = {
           ignored = "-\\d+";
           numbered_active_indicator = "highlight";
@@ -38,17 +70,17 @@
           "0" = {
             left = ["dashboard" "workspaces" "windowtitle"];
             middle = ["media"];
-            right = ["volume" "network" "bluetooth" "systray" "clock" "notifications"];
+            right = ["volume" "network" "bluetooth" "systray" "polarity" "themectl" "clock" "notifications"];
           };
           "1" = {
             left = ["dashboard" "workspaces" "windowtitle"];
             middle = ["media"];
-            right = ["volume" "clock" "notifications"];
+            right = ["volume" "polarity" "themectl" "clock" "notifications"];
           };
           "2" = {
             left = ["dashboard" "workspaces" "windowtitle"];
             middle = ["media"];
-            right = ["volume" "clock" "notifications"];
+            right = ["volume" "polarity" "themectl" "clock" "notifications"];
           };
         };
       };
