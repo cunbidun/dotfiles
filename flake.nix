@@ -30,11 +30,6 @@
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     # +--------+
     # | Others |
     # +--------+

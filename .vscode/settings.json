@@ -102,5 +102,6 @@
     "python-envs.pythonProjects": [ ],
     "chat.tools.terminal.autoApprove": {
         "/.*/": true
-    }
+    },
+    "chat.tools.terminal.enableAutoApprove": true
 }

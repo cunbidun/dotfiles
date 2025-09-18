@@ -5,11 +5,62 @@
   lib,
   userdata,
   ...
-}: {
+}: let
+  # Import centralized theme configuration
+  themeConfigs = import ./shared/theme-configs.nix;
+
+  # Function to get scheme name from base16 scheme file (same as in stylix.nix)
+  getSchemeNameFromFile = schemeFile: let
+    schemeContent = builtins.readFile "${pkgs.base16-schemes}/share/themes/${schemeFile}.yaml";
+    # Extract scheme name from YAML (format: "name: \"Name\"")
+    schemeMatch = builtins.match ".*name: \"([^\"]+)\".*" schemeContent;
+  in
+    if schemeMatch != null
+    then builtins.head schemeMatch
+    else schemeFile; # fallback to filename if parsing fails
+
+  # Get hyprpanel theme from current stylix scheme
+  getHyprPanelThemeFromStylix = let
+    # Get all theme configurations (both light and dark)
+    allConfigs = lib.flatten (
+      lib.mapAttrsToList (
+        themeName: themeConfig:
+          lib.mapAttrsToList (polarity: config:
+            config
+            // {
+              _themeName = themeName;
+              _polarity = polarity;
+            })
+          themeConfig
+      )
+      themeConfigs
+    );
+
+    # Get current scheme from stylix (extract basename without .yaml extension)
+    currentScheme = let
+      schemePath = config.stylix.base16Scheme;
+      schemeFile = baseNameOf schemePath;
+      schemeNameWithoutExt =
+        if lib.hasSuffix ".yaml" schemeFile
+        then lib.removeSuffix ".yaml" schemeFile
+        else schemeFile;
+    in
+      schemeNameWithoutExt;
+
+    # Find the matching theme config by scheme name
+    findThemeConfig = lib.findFirst (entry: entry.scheme == currentScheme) null allConfigs;
+  in
+    if findThemeConfig != null
+    then findThemeConfig.hyprpanelTheme
+    else "monochrome"; # fallback
+
+  # Load the appropriate theme
+  theme = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprPanelThemeFromStylix}.json";
+in {
   programs.hyprpanel = {
     enable = true;
 
-    settings = {
+    settings = lib.recursiveUpdate theme {
       bar = {
         customModules = {
           polarity = {
@@ -47,7 +98,7 @@
           truncation_size = 15;
         };
         launcher = {
-          icon = "";
+          icon = "";
         };
         layouts = {
           "0" = {

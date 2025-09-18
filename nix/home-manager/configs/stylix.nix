@@ -9,81 +9,9 @@
   inherit (pkgs.stdenv) isLinux;
 
   # Theme configuration abstraction
-  # Define theme configurations
+  # Import from shared theme configuration
   # NOTE:
-  # to get the theme name: https://github.com/tinted-theming/schemes
-  themeConfigs = {
-    nord = {
-      light = {
-        scheme = "nord-light";
-        wallpaper = ../../../wallpapers/thuonglam.jpeg;
-        vscodeTheme = "Nord Light";
-        nvimTheme = "nord";
-      };
-      dark = {
-        scheme = "nord";
-        wallpaper = ../../../wallpapers/Astronaut.png;
-        vscodeTheme = "Nord";
-        nvimTheme = "nord";
-      };
-    };
-    catppuccin = {
-      light = {
-        scheme = "catppuccin-latte";
-        wallpaper = ../../../wallpapers/thuonglam.jpeg;
-        vscodeTheme = "Catppuccin Latte";
-        nvimTheme = "catppuccin";
-      };
-      dark = {
-        scheme = "catppuccin-mocha";
-        wallpaper = ../../../wallpapers/Astronaut.png;
-        vscodeTheme = "Catppuccin Mocha";
-        nvimTheme = "catppuccin";
-      };
-    };
-    everforest = {
-      light = {
-        scheme = "everforest-light";
-        wallpaper = ../../../wallpapers/fog_forest_2.png;
-        vscodeTheme = "Everforest Light";
-        nvimTheme = "everforest";
-      };
-      dark = {
-        scheme = "everforest-dark";
-        wallpaper = ../../../wallpapers/fog_forest_2.png;
-        vscodeTheme = "Everforest Dark";
-        nvimTheme = "everforest";
-      };
-    };
-    onedark = {
-      light = {
-        scheme = "one-light";
-        wallpaper = ../../../wallpapers/thuonglam.jpeg;
-        vscodeTheme = "Atom One Light";
-        nvimTheme = "onelight";
-      };
-      dark = {
-        scheme = "onedark";
-        wallpaper = ../../../wallpapers/Astronaut.png;
-        vscodeTheme = "Atom One Dark";
-        nvimTheme = "onedark";
-      };
-    };
-    default = {
-      light = {
-        scheme = "standardized-light";
-        wallpaper = ../../../wallpapers/big-sur-mountains-day.jpg;
-        vscodeTheme = "Default Light Modern";
-        nvimTheme = "vscode";
-      };
-      dark = {
-        scheme = "standardized-dark";
-        wallpaper = ../../../wallpapers/big-sur-mountains-night.jpg;
-        vscodeTheme = "Default Dark Modern";
-        nvimTheme = "vscode";
-      };
-    };
-  };
+  themeConfigs = import ./shared/theme-configs.nix;
 
   # NOTE:
   # the specialisation name for theme must be named '{theme}-{polarity}'. Else switch won't work
@@ -171,6 +99,28 @@
     if findThemeConfig != null
     then findThemeConfig.vscodeTheme
     else "Default Dark Modern"; # fallback
+
+  # Function to get HyprPanel theme from scheme name
+  getHyprpanelTheme = schemeName: let
+    # Get all theme configurations (both light and dark)
+    allConfigs = lib.flatten (
+      lib.mapAttrsToList (
+        themeName: themeConfig:
+          lib.mapAttrsToList (polarity: config: config) themeConfig
+      )
+      themeConfigs
+    );
+    # Find the matching theme config by inferred scheme name
+    findThemeConfig =
+      lib.findFirst (
+        entry: (getSchemeNameFromFile entry.scheme) == schemeName
+      )
+      null
+      allConfigs;
+  in
+    if findThemeConfig != null
+    then findThemeConfig.hyprpanelTheme
+    else "monochrome"; # fallback
 in {
   services.darkman = {
     enable = isLinux;
@@ -278,6 +228,10 @@ in {
     profiles.default.userSettings = {
       "workbench.colorTheme" = getVscodeTheme config.lib.stylix.colors.scheme-name;
     };
+  };
+
+  programs.hyprpanel = {
+    settings = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprpanelTheme config.lib.stylix.colors.scheme-name}.json";
   };
 
   wayland.windowManager.hyprland.settings.group.groupbar = {

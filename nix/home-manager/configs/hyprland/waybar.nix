@@ -8,7 +8,7 @@
   scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
 in {
   programs.waybar = {
-    enable = true;
+    enable = false;
     systemd.enable = true;
     settings = [
       {
@@ -227,13 +227,4 @@ in {
       margin-right: 4px;
     }
   '';
-  home.activation = {
-    waybar-restart = ''
-      #!/usr/bin/env bash
-      if [[ -v DBUS_SESSION_BUS_ADDRESS && -v XDG_RUNTIME_DIR ]]; then
-        export PATH=${lib.makeBinPath [pkgs.systemdMinimal]}:$PATH
-        systemctl --user restart waybar.service
-      fi
-    '';
-  };
 }

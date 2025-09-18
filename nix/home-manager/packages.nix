@@ -97,7 +97,6 @@ in {
     pkgs.trash-cli
 
     # Hyprland
-    pkgs.waybar # A Wayland bar for Hyprland
     pkgs.bun # to run ags
     pkgs.hyprpaper # A wallpaper utility for Hyprland
     pkgs.wl-clipboard # A command-line copy/paste tool for Wayland
