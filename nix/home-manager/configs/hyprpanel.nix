@@ -30,6 +30,7 @@
         font = {
           name = "SFMono Nerd Font";
           size = "13px";
+          weight = "400";
         };
       };
     };
