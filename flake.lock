@@ -861,11 +861,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1758256125,
-        "narHash": "sha256-cph3usdPlp3K9f0OQMPMr6bwEQLlf66S08GlBhZybNA=",
+        "lastModified": 1758280230,
+        "narHash": "sha256-NlLYHaWhQ5CCMUcLa7HtK1BWq1mO8GDXCZlSa1neTI4=",
         "owner": "cunbidun",
         "repo": "HyprPanel",
-        "rev": "c555cb79a970ce1a41dae8ee1e6375ec4c602956",
+        "rev": "984cfb67f85dccee4a18bd6ac65e36606ff43b61",
         "type": "github"
       },
       "original": {
