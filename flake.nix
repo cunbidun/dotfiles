@@ -40,7 +40,8 @@
       flake = false;
     };
     hyprpanel = {
-      url = "github:cunbidun/HyprPanel";
+      # url = "github:cunbidun/HyprPanel";
+      url = "path:/home/cunbidun/.tmp/HyprPanel";
     };
     nur.url = "github:nix-community/nur";
 
