@@ -39,6 +39,9 @@
       url = "https://github.com/vicinaehq/vicinae/releases/download/v0.2.1/vicinae-linux-x86_64-v0.2.1.tar.gz";
       flake = false;
     };
+    hyprpanel = {
+      url = "path:/home/cunbidun/.tmp/HyprPanel";
+    };
     nur.url = "github:nix-community/nur";
 
     nix-monitored = {
