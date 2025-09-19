@@ -82,10 +82,7 @@ def run():
                     polarity = "dark"  # fallback
                 
                 # Construct theme key with polarity
-                if curr == "default" and polarity == "dark":
-                    theme_key = curr  # special case for default-dark
-                else:
-                    theme_key = f"{curr}-{polarity}"
+                theme_key = f"{curr}-{polarity}"
                 
                 if theme_key in cfg["nvimThemeMap"]:
                     nvim_theme = cfg["nvimThemeMap"][theme_key]
