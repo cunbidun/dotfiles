@@ -140,6 +140,6 @@
   "vim.useSystemClipboard": true,
   "window.customMenuBarAltFocus": false,
   "window.enableMenuBarMnemonics": false,
-  "workbench.colorTheme": "Default Light Modern",
+  "workbench.colorTheme": "Catppuccin Latte",
   "workbench.iconTheme": "material-icon-theme"
 }

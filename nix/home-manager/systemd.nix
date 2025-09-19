@@ -41,21 +41,6 @@ in {
         };
         Install = install_section;
       };
-
-      waybar = {
-        Service = {
-          RestartSec = 1;
-        };
-      };
-
-      hyprpanel = {
-        Service = {
-          # Restart within 2 seconds
-          RestartSec = 1;
-          # Force SIGKILL after 2 seconds if graceful stop fails
-          TimeoutStopSec = 1;
-        };
-      };
     };
   };
 }
