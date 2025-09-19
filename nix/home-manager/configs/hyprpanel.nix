@@ -223,12 +223,6 @@
       # Disable automatic restarts on config changes
       X-Restart-Triggers = lib.mkForce [];
     };
-    Service = {
-      # Restart within 2 seconds
-      RestartSec = 2;
-      # Force SIGKILL after 2 seconds if graceful stop fails
-      TimeoutStopSec = 2;
-    };
   };
 
   # home.activation = {
