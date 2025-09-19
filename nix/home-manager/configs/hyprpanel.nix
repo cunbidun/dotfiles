@@ -219,6 +219,10 @@
   };
 
   systemd.user.services.hyprpanel = {
+    Service = {
+      RestartSec = 1;
+      TimeoutStopSec = 1;
+    };
     Unit = {
       # Disable automatic restarts on config changes
       X-Restart-Triggers = lib.mkForce [];
