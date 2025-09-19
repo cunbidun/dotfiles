@@ -225,16 +225,6 @@
     };
   };
 
-  # home.activation = {
-  #   hyprpanel-restart = ''
-  #     #!/usr/bin/env bash
-  #     if [[ -v DBUS_SESSION_BUS_ADDRESS && -v XDG_RUNTIME_DIR ]]; then
-  #       export PATH=${lib.makeBinPath [pkgs.systemdMinimal]}:$PATH
-  #       systemctl --user restart hyprpanel.service
-  #     fi
-  #   '';
-  # };
-
   # Add missing required dependencies for HyprPanel
   home.packages = with pkgs; [
     # Required dependencies
