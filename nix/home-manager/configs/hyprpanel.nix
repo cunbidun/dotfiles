@@ -182,7 +182,12 @@ in {
     ".config/hyprpanel/modules.json".text = ''
       {
         "custom/polarity": {
-          "label": "{}",
+          "icon": {
+            "dark": "",
+            "light": "",
+          },
+          "label": "{text}",
+          "tooltip": "Click to toggle theme polarity",
           "execute": "${lib.getExe scripts.get-theme-polarity}",
           "interval": 1000,
           "actions": {

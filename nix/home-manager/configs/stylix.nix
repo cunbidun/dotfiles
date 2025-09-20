@@ -236,9 +236,7 @@ in {
 
   home.file = {
     ".config/hyprpanel/modules.scss".text = let
-      # Load the current HyprPanel theme JSON
       hyprpanelThemeJson = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprpanelTheme config.lib.stylix.colors.scheme-name}.json";
-      # Extract colors, using bluetooth as reference since you mentioned it
       textColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.text";
       iconColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.icon";
       iconBackground = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.icon_background";

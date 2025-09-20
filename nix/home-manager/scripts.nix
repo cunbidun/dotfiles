@@ -204,9 +204,9 @@
   get-theme-polarity = pkgs.writeShellScriptBin "get-theme-polarity" ''
     current_theme=$(darkman get)
     if [[ "$current_theme" == "dark" ]]; then
-      echo " Dark" # Moon icon for dark theme
+      echo '{"alt": "dark", "text": "Dark"}'  # Returns dark state with text
     else
-      echo " Light" # Sun icon for light theme
+      echo '{"alt": "light", "text": "Light"}'  # Returns light state with text
     fi
   '';
 
