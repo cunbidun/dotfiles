@@ -861,8 +861,8 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1758395733,
-        "narHash": "sha256-EdiEpAKggaH2ZlwOEdsbw+Lo7m4Hpv2HG1NKvy4S3iw=",
+        "lastModified": 1758395813,
+        "narHash": "sha256-t2Z+ruqrM6bvwBC3KnM9MGRSSWIqcdCqwMpcAI2t/zg=",
         "path": "/home/cunbidun/.tmp/HyprPanel",
         "type": "path"
       },
