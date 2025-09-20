@@ -195,7 +195,8 @@ in {
       @include styleModule(
         'cmodule-polarity',
         (
-          'icon-size': 1.2em
+          'icon-size': 1.2em,
+          'inner-spacing': 1.5em,
         )
       );
     '';
