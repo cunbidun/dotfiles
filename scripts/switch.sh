@@ -26,6 +26,10 @@ while [[ $# -gt 0 ]]; do
     test_only=true
     shift
     ;;
+  --copy-back)
+    copy_back=true
+    shift
+    ;;
   *)
     if [[ -z "$profile_name" ]]; then
       profile_name="$1"
@@ -40,9 +44,10 @@ done
 
 # Check if profile_name is provided
 if [[ -z "$profile_name" ]]; then
-  echo "Usage: $0 [--no-commit] [--commit-message <message>] [--test] <profile_name>"
+  echo "Usage: $0 [--no-commit] [--commit-message <message>] [--test] [--copy-back] <profile_name>"
   echo "  <profile_name> can be 'macbook-m1' or 'nixos'"
   echo "  --test: Build configuration without switching"
+  echo "  --copy-back: Copy generated configuration files back to repository (default: false)"
   exit 1
 fi
 
@@ -184,30 +189,42 @@ if [ "$test_only" = true ]; then
   exit 0
 fi
 
-rm -rf "$git_root/generated/$profile_name" || true
-echo "Removed old generated configuration files for $profile_name."
-
+# Get the current NixOS system profile version (e.g., system-1526-link)
+nixos_version=""
 if [ "$os" != "Darwin" ]; then
-  echo "Detected NixOS; copying configuration files for NixOS..."
-  config_files=(
-    "$HOME/.config/Code/User/keybindings.json"
-    "$HOME/.config/Code/User/settings.json"
-    "$HOME/.config/tmux/tmux.conf"
-    "$HOME/.config/nvim"
-  )
-  copy_files_to_git_root "${config_files[@]}"
+  nixos_version=$(basename "$(readlink /nix/var/nix/profiles/system)" | sed 's/-link$//')
 fi
 
-if [ "$os" = "Darwin" ]; then
-  echo "Detected macOS; copying configuration files for macOS..."
-  config_files=(
-    "$HOME/Library/Application Support/Code/User/keybindings.json"
-    "$HOME/Library/Application Support/Code/User/settings.json"
-  )
-  copy_files_to_git_root "${config_files[@]}"
+# Only copy files back if the --copy-back option is enabled
+if [ "$copy_back" = true ]; then
+  rm -rf "$git_root/generated/$profile_name" || true
+  echo "Removed old generated configuration files for $profile_name."
+
+  if [ "$os" != "Darwin" ]; then
+    echo "Detected NixOS; copying configuration files for NixOS..."
+    config_files=(
+      "$HOME/.config/Code/User/keybindings.json"
+      "$HOME/.config/Code/User/settings.json"
+      "$HOME/.config/tmux/tmux.conf"
+      "$HOME/.config/nvim"
+    )
+    copy_files_to_git_root "${config_files[@]}"
+  fi
+
+  if [ "$os" = "Darwin" ]; then
+    echo "Detected macOS; copying configuration files for macOS..."
+    config_files=(
+      "$HOME/Library/Application Support/Code/User/keybindings.json"
+      "$HOME/Library/Application Support/Code/User/settings.json"
+    )
+    copy_files_to_git_root "${config_files[@]}"
+  fi
+else
+  echo "Skipping file copy-back (use --copy-back to enable)."
 fi
 
 echo "NixOS switch successful."
+git add -A
 if [ "$commit_changes" = true ]; then
   if ! git diff-index --quiet HEAD --; then
     # Append NixOS version to the commit message if available
