@@ -240,6 +240,11 @@ in {
         'cmodule-polarity',
         (
           'icon-size': 1.2em,
+          'text-color': #${config.lib.stylix.colors.base06},
+          'icon-color': #${config.lib.stylix.colors.base0C},
+          'icon-background': #${config.lib.stylix.colors.base0C},
+          'label-background': #${config.lib.stylix.colors.base01},
+          'border-color': #${config.lib.stylix.colors.base0C},
         )
       );
     '';
