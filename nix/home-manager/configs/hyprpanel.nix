@@ -164,7 +164,7 @@ in {
         font = {
           name = "SFMono Nerd Font";
           label = "SFMono Nerd Font Medium";
-          size = "14px";
+          size = "13px";
           weight = "400";
           style = "normal";
         };

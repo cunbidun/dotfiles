@@ -235,16 +235,25 @@ in {
   };
 
   home.file = {
-    ".config/hyprpanel/modules.scss".text = ''
+    ".config/hyprpanel/modules.scss".text = let
+      # Load the current HyprPanel theme JSON
+      hyprpanelThemeJson = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprpanelTheme config.lib.stylix.colors.scheme-name}.json";
+      # Extract colors, using bluetooth as reference since you mentioned it
+      textColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.text";
+      iconColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.icon";
+      iconBackground = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.icon_background";
+      labelBackground = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.background";
+      borderColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.border";
+    in ''
       @include styleModule(
         'cmodule-polarity',
         (
           'icon-size': 1.2em,
-          'text-color': #${config.lib.stylix.colors.base06},
-          'icon-color': #${config.lib.stylix.colors.base0C},
-          'icon-background': #${config.lib.stylix.colors.base0C},
-          'label-background': #${config.lib.stylix.colors.base01},
-          'border-color': #${config.lib.stylix.colors.base0C},
+          'text-color': #${textColor},
+          'icon-color': #${iconColor},
+          'icon-background': #${iconBackground},
+          'label-background': #${labelBackground},
+          'border-color': #${borderColor},
         )
       );
     '';
