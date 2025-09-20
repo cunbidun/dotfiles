@@ -245,7 +245,7 @@ in {
   };
 
   home.file = {
-    ".local/state/colors.json".source = config.lib.stylix.colors {
+    ".local/state/stylix/colors.json".source = config.lib.stylix.colors {
       template = ''
         {
           "theme":  "{{scheme}}",

@@ -53,7 +53,7 @@
           "0" = {
             left = ["dashboard" "workspaces" "windowtitle"];
             middle = ["media"];
-            right = ["volume" "network" "bluetooth" "polarity" "hypridle" "systray" "clock" "notifications"];
+            right = ["volume" "network" "bluetooth" "custom/volume" "hypridle" "systray" "clock" "notifications"];
           };
         };
       };
@@ -241,5 +241,6 @@
     python312Packages.gpustat # python-gpustat for GPU usage tracking
     wf-recorder # For built-in screen recorder
     power-profiles-daemon # Switch power profiles
+    pulseaudio
   ];
 }
