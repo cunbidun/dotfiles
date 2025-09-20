@@ -246,7 +246,6 @@ in {
       @include styleModule(
         'cmodule-polarity',
         (
-          'icon-size': 1.2em,
           'text-color': #${textColor},
           'icon-color': #${iconColor},
           'icon-background': #${iconBackground},
