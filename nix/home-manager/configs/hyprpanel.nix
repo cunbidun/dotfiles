@@ -7,7 +7,7 @@
   ...
 }: {
   programs.hyprpanel = {
-    enable = true;
+    # enable = true;
     package = inputs.hyprpanel.packages.${pkgs.system}.default;
     settings = {
       bar = {
@@ -218,16 +218,16 @@
   #   };
   # };
 
-  systemd.user.services.hyprpanel = {
-    Service = {
-      RestartSec = 1;
-      TimeoutStopSec = 0;
-    };
-    # Unit = {
-    #   # Disable automatic restarts on config changes
-    #   X-Restart-Triggers = lib.mkForce [];
-    # };
-  };
+  # systemd.user.services.hyprpanel = {
+  #   Service = {
+  #     RestartSec = 1;
+  #     TimeoutStopSec = 0;
+  #   };
+  #   # Unit = {
+  #   #   # Disable automatic restarts on config changes
+  #   #   X-Restart-Triggers = lib.mkForce [];
+  #   # };
+  # };
 
   # Add missing required dependencies for HyprPanel
   home.packages = with pkgs; [
