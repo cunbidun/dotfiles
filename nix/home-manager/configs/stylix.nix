@@ -143,6 +143,7 @@ in {
 
   services.theme-manager = {
     enable = isLinux;
+    enableTray = isLinux; # Enable tray icon on Linux systems
     themes = builtins.attrNames themeConfigs;
     nvimThemeMap = nvimThemeMappings;
     hookScriptContent = ''

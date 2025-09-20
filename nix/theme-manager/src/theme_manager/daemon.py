@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os, socket, yaml, subprocess, sys, threading
 import json  # for JSON encoding
+import argparse
 
 CONFIG_PATH = os.path.expanduser("~/.config/theme-manager/config.yaml")
 STATE_PATH = os.path.expanduser("~/.local/share/theme-manager/state")
@@ -39,7 +40,8 @@ def save_state(theme):
 def trigger_script(script, theme):
     subprocess.Popen([script, theme])
 
-def run():
+def run_daemon_only():
+    """Run only the daemon (no tray)"""
     cfg = load_config()
     allowed = cfg["themes"]
     curr = load_state(allowed[0])
@@ -103,9 +105,55 @@ def run():
             else:
                 conn.sendall(f"ERROR unknown command\n".encode())
 
+    print("Theme manager daemon started")
     while True:
         conn, _ = serv.accept()
         threading.Thread(target=handle_client, args=(conn,)).start()
 
+def run_with_tray():
+    """Run daemon with system tray icon"""
+    try:
+        from .tray import ThemeManagerTray
+        
+        # Start daemon in background thread
+        daemon_thread = threading.Thread(target=run_daemon_only, daemon=True)
+        daemon_thread.start()
+        
+        # Give daemon time to start
+        import time
+        time.sleep(1)
+        
+        # Start tray (this will block)
+        print("Starting theme manager daemon with tray...")
+        tray_manager = ThemeManagerTray()
+        
+        # Try to use system tray, fallback to GUI if not available
+        try:
+            import pystray
+            tray_manager.run_tray()
+        except ImportError:
+            print("pystray not available, using fallback GUI...")
+            tray_manager.run_fallback_menu()
+            
+    except ImportError as e:
+        print(f"Error: Tray dependencies not available: {e}")
+        print("Running daemon only...")
+        run_daemon_only()
+
 def main():
-    run()
+    parser = argparse.ArgumentParser(description="Theme Manager Daemon")
+    parser.add_argument("--tray", action="store_true", 
+                       help="Start daemon with system tray icon")
+    parser.add_argument("--no-tray", action="store_true",
+                       help="Start daemon without tray (default)")
+    
+    args = parser.parse_args()
+    
+    # Check environment variable if no explicit flag
+    if not args.tray and not args.no_tray:
+        args.tray = os.environ.get("THEME_MANAGER_TRAY", "").lower() in ("1", "true", "yes")
+    
+    if args.tray:
+        run_with_tray()
+    else:
+        run_daemon_only()

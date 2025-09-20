@@ -16,6 +16,8 @@ python3.pkgs.buildPythonApplication {
 
   propagatedBuildInputs = with python3.pkgs; [
     pyyaml
+    pystray
+    pillow
   ];
 
   meta = with lib; {
