@@ -234,6 +234,17 @@ in {
     settings = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprpanelTheme config.lib.stylix.colors.scheme-name}.json";
   };
 
+  home.file = {
+    ".config/hyprpanel/modules.scss".text = ''
+      @include styleModule(
+        'cmodule-polarity',
+        (
+          'icon-size': 1.2em,
+        )
+      );
+    '';
+  };
+
   wayland.windowManager.hyprland.settings.group.groupbar = {
     # white text on green background
     "col.active" = lib.mkForce "rgb(${config.lib.stylix.colors.base0C})";

@@ -191,15 +191,6 @@ in {
         }
       }
     '';
-    ".config/hyprpanel/modules.scss".text = ''
-      @include styleModule(
-        'cmodule-polarity',
-        (
-          'icon-size': 1.2em,
-          'inner-spacing': 1.5em,
-        )
-      );
-    '';
   };
 
   # One-shot service to restart hyprpanel
