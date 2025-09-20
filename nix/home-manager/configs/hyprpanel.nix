@@ -4,29 +4,16 @@
   config,
   lib,
   userdata,
+  project_root,
   ...
-}: {
+}: let
+  scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
+in {
   programs.hyprpanel = {
     enable = true;
     package = inputs.hyprpanel.packages.${pkgs.system}.default;
     settings = {
       bar = {
-        customModules = {
-          polarity = {
-            icon = {
-              dark = "";
-              light = "";
-            };
-            label = "{}";
-            tooltip = "Click to toggle theme polarity";
-            execute = "darkman get";
-            executeOnAction = "darkman toggle";
-            interval = 1000;
-            actions = {
-              onLeftClick = "darkman toggle";
-            };
-          };
-        };
         workspaces = {
           ignored = "-\\d+";
           numbered_active_indicator = "highlight";
@@ -53,7 +40,7 @@
           "0" = {
             left = ["dashboard" "workspaces" "windowtitle"];
             middle = ["media"];
-            right = ["volume" "network" "bluetooth" "custom/volume" "hypridle" "systray" "clock" "notifications"];
+            right = ["volume" "network" "bluetooth" "custom/polarity" "hypridle" "systray" "clock" "notifications"];
           };
         };
       };
@@ -189,6 +176,21 @@
         };
       };
     };
+  };
+
+  home.file = {
+    ".config/hyprpanel/modules.json".text = ''
+      {
+        "custom/polarity": {
+          "label": "{}",
+          "execute": "${lib.getExe scripts.get-theme-polarity}",
+          "interval": 1000,
+          "actions": {
+            "onLeftClick": "${lib.getExe scripts.toggle-theme-debounced}"
+          }
+        }
+      }
+    '';
   };
 
   # One-shot service to restart hyprpanel
