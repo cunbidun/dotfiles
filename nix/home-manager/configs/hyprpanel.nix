@@ -184,7 +184,7 @@ in {
         "custom/polarity": {
           "icon": {
             "dark": "",
-            "light": "",
+            "light": ""
           },
           "label": "{text}",
           "tooltip": "Click to toggle theme polarity",
