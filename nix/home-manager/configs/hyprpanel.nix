@@ -47,7 +47,7 @@
           truncation_size = 15;
         };
         launcher = {
-          icon = "N";
+          icon = "";
         };
         layouts = {
           "0" = {

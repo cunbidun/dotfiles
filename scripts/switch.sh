@@ -5,6 +5,7 @@ commit_changes=true
 commit_message="Auto commit: $(date +'%Y-%m-%d %H:%M:%S')"
 profile_name=""
 test_only=false
+copy_back=false
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
