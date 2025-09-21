@@ -132,7 +132,7 @@ class ThemeManagerTray:
     def build_menu(self):
         items = []
         pol = self.current_polarity or "dark"
-        items.append(Item(f"Polarity: {pol.title()}", self.toggle_polarity))
+        items.append(Item(f"Polarity: {pol.title()}", self.toggle_polarity, default=True))
         items.append(pystray.Menu.SEPARATOR)
         items.append(Item("Themes:", lambda: None, enabled=False))
         for t in self.themes:
