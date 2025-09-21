@@ -10,10 +10,11 @@ in {
   options.services.theme-manager = {
     enable = lib.mkEnableOption "theme-manager";
 
+    # Tray is now always enabled; option retained only for backward compatibility (no-op)
     enableTray = lib.mkOption {
       type = lib.types.bool;
-      default = false;
-      description = "Enable the system tray icon for theme-manager.";
+      default = true;
+      description = "(Deprecated) Previously toggled tray; tray is now always enabled.";
     };
 
     themes = lib.mkOption {
@@ -39,7 +40,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # Single package now always contains tray dependencies; enableTray just toggles runtime usage
+    # Single package always contains tray dependencies; tray always active
     home.packages = [pkgs.theme-manager];
 
     xdg.configFile."theme-manager/config.yaml".text = ''
@@ -59,7 +60,7 @@ in {
 
       Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
-        description = "Theme Manager daemon" + lib.optionalString cfg.enableTray " with tray icon";
+        description = "Theme Manager daemon with tray icon";
         After = [config.wayland.systemd.target];
         PartOf = [config.wayland.systemd.target];
         X-Restart-Triggers = [
@@ -68,12 +69,11 @@ in {
       };
 
       Service = {
-        ExecStart = "${pkgs.theme-manager}/bin/theme-manager" + lib.optionalString cfg.enableTray " --tray";
+        ExecStart = "${pkgs.theme-manager}/bin/theme-manager";
         Restart = "always";
         RestartSec = "10";
-        Environment = lib.optionals cfg.enableTray [
+        Environment = [
           "DISPLAY=:0"
-          "THEME_MANAGER_TRAY=1"
         ];
       };
     };

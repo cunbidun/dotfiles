@@ -188,5 +188,29 @@
         ];
       };
     };
+
+    # -----------------------#
+    #     runnable apps      #
+    # -----------------------#
+    apps = let
+      forAllSystems = f:
+        builtins.listToAttrs (map (system: {
+          name = system;
+          value = f system;
+        }) ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"]);
+    in
+      forAllSystems (system: let
+        pkgs = mkPkgs system;
+        themeManager = pkgs.theme-manager;
+      in {
+        theme-manager = {
+          type = "app";
+          program = "${themeManager}/bin/theme-manager";
+        };
+        themectl = {
+          type = "app";
+          program = "${themeManager}/bin/themectl";
+        };
+      });
   };
 }

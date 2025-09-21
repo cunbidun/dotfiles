@@ -200,25 +200,4 @@
   toggle-minimize-window =
     pkgs.writeShellScriptBin "toggle-minimize-window" ''
       hyprctl dispatch togglespecialworkspace "minimized_$(hyprctl activeworkspace -j | jq '.id')"'';
-
-  get-theme-polarity = pkgs.writeShellScriptBin "get-theme-polarity" ''
-    current_theme=$(darkman get)
-    if [[ "$current_theme" == "dark" ]]; then
-      echo '{"alt": "dark", "text": "Dark"}'  # Returns dark state with text
-    else
-      echo '{"alt": "light", "text": "Light"}'  # Returns light state with text
-    fi
-  '';
-
-  toggle-theme-debounced = pkgs.writeShellScriptBin "toggle-theme-debounced" ''
-    LOCK_FILE="/tmp/waybar_theme_toggle.lock"
-
-    if [ -f "$LOCK_FILE" ]; then
-      exit 0
-    fi
-
-    touch "$LOCK_FILE"
-    darkman toggle
-    rm "$LOCK_FILE"
-  '';
 }

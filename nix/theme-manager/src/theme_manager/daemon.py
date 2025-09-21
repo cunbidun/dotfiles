@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import os, socket, yaml, subprocess, sys, threading
 import json  # for JSON encoding
-import argparse
+
+from .tray import ThemeManagerTray
 
 CONFIG_PATH = os.path.expanduser("~/.config/theme-manager/config.yaml")
 STATE_PATH = os.path.expanduser("~/.local/share/theme-manager/state")
@@ -45,6 +46,9 @@ def run_daemon_only():
     cfg = load_config()
     allowed = cfg["themes"]
     curr = load_state(allowed[0])
+    # Lock & state to prevent concurrent script executions
+    script_lock = threading.Lock()
+    script_running = False
     if curr not in allowed:
         curr = allowed[0]
     save_state(curr)
@@ -97,9 +101,27 @@ def run_daemon_only():
                 if theme not in allowed:
                     conn.sendall(f"ERROR invalid theme\n".encode())
                 else:
-                    curr = theme
-                    trigger_script(cfg["script"], theme)
-                    save_state(curr)
+                    nonlocal script_running
+                    # Acquire lock to check/update running state
+                    with script_lock:
+                        if script_running:
+                            conn.sendall(b"ERROR script busy\n")
+                            return
+                        # Accept this theme change
+                        curr = theme
+                        save_state(curr)
+                        # Launch script and mark running
+                        proc = subprocess.Popen([cfg["script"], theme])
+                        script_running = True
+
+                    # Detached watcher thread to reset running flag
+                    def _wait_proc(p):
+                        nonlocal script_running
+                        p.wait()
+                        with script_lock:
+                            script_running = False
+                    threading.Thread(target=_wait_proc, args=(proc,), daemon=True).start()
+
                     conn.sendall(f"OK {curr}\n".encode())
 
             else:
@@ -111,49 +133,13 @@ def run_daemon_only():
         threading.Thread(target=handle_client, args=(conn,)).start()
 
 def run_with_tray():
-    """Run daemon with system tray icon"""
-    try:
-        from .tray import ThemeManagerTray
-        
-        # Start daemon in background thread
-        daemon_thread = threading.Thread(target=run_daemon_only, daemon=True)
-        daemon_thread.start()
-        
-        # Give daemon time to start
-        import time
-        time.sleep(1)
-        
-        # Start tray (this will block)
-        print("Starting theme manager daemon with tray...")
-        tray_manager = ThemeManagerTray()
-        
-        # Try to use system tray, fallback to GUI if not available
-        try:
-            import pystray
-            tray_manager.run_tray()
-        except ImportError:
-            print("pystray not available, using fallback GUI...")
-            tray_manager.run_fallback_menu()
-            
-    except ImportError as e:
-        print(f"Error: Tray dependencies not available: {e}")
-        print("Running daemon only...")
-        run_daemon_only()
+    """Run daemon plus strict tray (no fallbacks)."""
+    threading.Thread(target=run_daemon_only, daemon=True).start()
+    import time
+    time.sleep(0.5)
+    print("Starting theme manager daemon with tray...")
+    tray_manager = ThemeManagerTray()
+    tray_manager.run()
 
 def main():
-    parser = argparse.ArgumentParser(description="Theme Manager Daemon")
-    parser.add_argument("--tray", action="store_true", 
-                       help="Start daemon with system tray icon")
-    parser.add_argument("--no-tray", action="store_true",
-                       help="Start daemon without tray (default)")
-    
-    args = parser.parse_args()
-    
-    # Check environment variable if no explicit flag
-    if not args.tray and not args.no_tray:
-        args.tray = os.environ.get("THEME_MANAGER_TRAY", "").lower() in ("1", "true", "yes")
-    
-    if args.tray:
-        run_with_tray()
-    else:
-        run_daemon_only()
+    run_with_tray()

@@ -178,26 +178,6 @@ in {
     };
   };
 
-  home.file = {
-    ".config/hyprpanel/modules.json".text = ''
-      {
-        "custom/polarity": {
-          "icon": {
-            "dark": "",
-            "light": ""
-          },
-          "label": "{text}",
-          "tooltip": "Click to toggle theme polarity",
-          "execute": "${lib.getExe scripts.get-theme-polarity}",
-          "interval": 1000,
-          "actions": {
-            "onLeftClick": "${lib.getExe scripts.toggle-theme-debounced}"
-          }
-        }
-      }
-    '';
-  };
-
   # One-shot service to restart hyprpanel
   systemd.user.services.hyprpanel-restart = {
     Unit = {
@@ -248,6 +228,5 @@ in {
     python312Packages.gpustat # python-gpustat for GPU usage tracking
     wf-recorder # For built-in screen recorder
     power-profiles-daemon # Switch power profiles
-    pulseaudio
   ];
 }

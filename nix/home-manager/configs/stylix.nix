@@ -235,28 +235,6 @@ in {
     settings = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprpanelTheme config.lib.stylix.colors.scheme-name}.json";
   };
 
-  home.file = {
-    ".config/hyprpanel/modules.scss".text = let
-      hyprpanelThemeJson = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprpanelTheme config.lib.stylix.colors.scheme-name}.json";
-      textColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.text";
-      iconColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.icon";
-      iconBackground = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.icon_background";
-      labelBackground = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.background";
-      borderColor = lib.removePrefix "#" hyprpanelThemeJson."theme.bar.buttons.bluetooth.border";
-    in ''
-      @include styleModule(
-        'cmodule-polarity',
-        (
-          'text-color': #${textColor},
-          'icon-color': #${iconColor},
-          'icon-background': #${iconBackground},
-          'label-background': #${labelBackground},
-          'border-color': #${borderColor},
-        )
-      );
-    '';
-  };
-
   wayland.windowManager.hyprland.settings.group.groupbar = {
     # white text on green background
     "col.active" = lib.mkForce "rgb(${config.lib.stylix.colors.base0C})";
