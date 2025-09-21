@@ -141,22 +141,10 @@ in {
               slider_radius = "0em";
             };
             menu = {
-              media = {
-                scaling = 100;
-              };
-              notifications = {
-                scaling = 100;
-              };
-              clock = {
-                scaling = 100;
-              };
               dashboard = {
                 profile = {
                   radius = "0em";
                 };
-              };
-              power = {
-                scaling = 90;
               };
             };
           };
