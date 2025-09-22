@@ -8,6 +8,7 @@ import socket
 import subprocess
 import threading
 import time
+import logging
 
 import pystray
 from pystray import MenuItem as Item
@@ -19,8 +20,24 @@ LIGHT_ICON = ""
 FONT_NAME = "SFMono Nerd Font"
 FONT_ENV = "THEME_MANAGER_FONT"
 
-def log_err(msg: str):
-    print(f"[theme-tray] {msg}", file=sys.stderr)
+# ------------- logging setup ------------- #
+_LOG_LEVEL = os.environ.get("THEME_TRAY_LOG", "INFO").upper()
+logger = logging.getLogger("theme-tray")
+if not logger.handlers:
+    handler_out = logging.StreamHandler(stream=sys.stdout)
+    formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+    handler_out.setFormatter(formatter)
+    logger.addHandler(handler_out)
+    # Errors will still go to stdout handler; add stderr for >=ERROR if desired
+    handler_err = logging.StreamHandler(stream=sys.stderr)
+    handler_err.setLevel(logging.ERROR)
+    handler_err.setFormatter(formatter)
+    logger.addHandler(handler_err)
+    try:
+        logger.setLevel(getattr(logging, _LOG_LEVEL))
+    except AttributeError:
+        logger.setLevel(logging.INFO)
+logger.propagate = False
 
 
 class ThemeManagerTray:
@@ -91,7 +108,7 @@ class ThemeManagerTray:
             self.current_polarity = new
             self.refresh_menu()
         else:
-            log_err(f"Failed to toggle polarity: {new}")
+            logger.error(f"Failed to toggle polarity: {new}")
 
     def set_theme(self, theme: str):
         def _set():
@@ -100,7 +117,7 @@ class ThemeManagerTray:
                 self.current_theme = theme
                 self.refresh_menu()
             else:
-                log_err(f"Failed to set theme: {result}")
+                logger.error(f"Failed to set theme: {result}")
         threading.Thread(target=_set, daemon=True).start()
 
     def update_status(self):
@@ -156,13 +173,28 @@ class ThemeManagerTray:
 
     def run(self):
         self.update_status()
+        logger.info("Starting tray icon")
         self.icon = pystray.Icon("theme-manager", self.create_image(), "Theme Manager", pystray.Menu(*self.build_menu()))
+
         def loop():
-            while self.icon and self.icon.visible:
-                time.sleep(30)
-                self.refresh_menu()
+            logger.info("Refresh loop started")
+            try:
+                while self.icon and self.icon.visible:
+                    for _ in range(30):  # finer granularity to allow faster shutdown
+                        if not (self.icon and self.icon.visible):
+                            break
+                        time.sleep(1)
+                    if self.icon and self.icon.visible:
+                        logger.debug("Loop tick: refreshing menu/icon")
+                        self.refresh_menu()
+            finally:
+                logger.info("Refresh loop stopped")
+
         threading.Thread(target=loop, daemon=True).start()
         try:
             self.icon.run()
         except KeyboardInterrupt:
+            logger.info("KeyboardInterrupt received; quitting tray")
             self.quit_app()
+        finally:
+            logger.info("Tray icon stopped")

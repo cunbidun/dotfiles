@@ -60,7 +60,6 @@ in {
 
       Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
-        description = "Theme Manager daemon with tray icon";
         After = [config.wayland.systemd.target];
         PartOf = [config.wayland.systemd.target];
         X-Restart-Triggers = [
