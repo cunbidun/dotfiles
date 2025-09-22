@@ -106,6 +106,7 @@ class ThemeManagerDaemon:
         else:
             conn.sendall(b"ERROR invalid polarity\n")
         self._release_write()
+        self._update_tray()
 
     def _handle_toggle_polarity(self, conn):
         if not self._acquire_write(conn):
@@ -114,6 +115,7 @@ class ThemeManagerDaemon:
         self._notify("Polarity Toggled", f"Now {new_pol}")
         conn.sendall(f"OK {new_pol}\n".encode())
         self._release_write()
+        self._update_tray()
 
     def _handle_set_theme(self, conn, theme: str):
         if not self._acquire_write(conn):
@@ -134,6 +136,11 @@ class ThemeManagerDaemon:
 
         self._notify("Theme Changed", f"Theme set to {self.current_theme}")
         conn.sendall(f"OK {self.current_theme}\n".encode())
+        self._update_tray()
+    
+    def _update_tray(self):
+        if self.tray:
+            self.tray.refresh_menu()
 
     # ---------- client handling ---------- #
     def _handle_client(self, conn: socket.socket):
