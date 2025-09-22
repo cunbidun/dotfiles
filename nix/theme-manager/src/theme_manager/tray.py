@@ -175,22 +175,6 @@ class ThemeManagerTray:
         self.update_status()
         logger.info("Starting tray icon")
         self.icon = pystray.Icon("theme-manager", self.create_image(), "Theme Manager", pystray.Menu(*self.build_menu()))
-
-        def loop():
-            logger.info("Refresh loop started")
-            try:
-                while self.icon and self.icon.visible:
-                    for _ in range(30):  # finer granularity to allow faster shutdown
-                        if not (self.icon and self.icon.visible):
-                            break
-                        time.sleep(1)
-                    if self.icon and self.icon.visible:
-                        logger.debug("Loop tick: refreshing menu/icon")
-                        self.refresh_menu()
-            finally:
-                logger.info("Refresh loop stopped")
-
-        threading.Thread(target=loop, daemon=True).start()
         try:
             self.icon.run()
         except KeyboardInterrupt:

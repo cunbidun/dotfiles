@@ -9,212 +9,218 @@ STATE_PATH = os.path.expanduser("~/.local/share/theme-manager/state")
 SOCKET_PATH = os.path.expanduser("~/.local/share/theme-manager/socket")
 LOCK_PATH = os.path.expanduser("~/.local/share/theme-manager/lock")
 
-# Global execution state
-script_lock = threading.Lock()
-script_running = False  # guarded by script_lock
 
-def load_config():
-    cfg = yaml.safe_load(open(CONFIG_PATH))
-    script = os.path.expanduser(cfg["script"])
+class ThemeManagerDaemon:
+    """Encapsulated daemon replacing previous global-state implementation."""
 
-    if not os.path.exists(script) or not os.path.isfile(script):
-        print(f"ERROR: script '{script}' does not exist or is not a file", file=sys.stderr)
-        sys.exit(1)
+    def __init__(self):
+        self.config = self._load_config()
+        self.allowed = self.config["themes"]
+        self.current_theme = self._load_state(self.allowed[0])
+        if self.current_theme not in self.allowed:
+            self.current_theme = self.allowed[0]
+            self._save_state(self.current_theme)
 
-    if not os.access(script, os.X_OK):
-        print(f"ERROR: script '{script}' is not executable", file=sys.stderr)
-        sys.exit(1)
+        self.lock = threading.Lock()
+        self.script_running = False  # guarded by self.lock
+        self.server_socket = None
+        self._accept_thread = None
+        self.tray: ThemeManagerTray | None = None  # tray instance (optional)
 
-    cfg["script"] = script
-    
-    # Set default nvim theme mappings if not provided
-    if "nvimThemeMap" not in cfg:
-        cfg["nvimThemeMap"] = {}
-        
-    return cfg
+    # ---------- config & state helpers ---------- #
+    def _load_config(self):
+        cfg = yaml.safe_load(open(CONFIG_PATH))
+        script = os.path.expanduser(cfg["script"])
 
-def load_state(default):
-    try:
-        return open(STATE_PATH).read().strip()
-    except FileNotFoundError:
-        return default
+        if not os.path.exists(script) or not os.path.isfile(script):
+            print(f"ERROR: script '{script}' does not exist or is not a file", file=sys.stderr)
+            sys.exit(1)
 
-def save_state(theme):
-    os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
-    open(STATE_PATH, "w").write(theme)
+        if not os.access(script, os.X_OK):
+            print(f"ERROR: script '{script}' is not executable", file=sys.stderr)
+            sys.exit(1)
 
-def trigger_script(script, theme):
-    subprocess.Popen([script, theme])
+        cfg["script"] = script
+        if "nvimThemeMap" not in cfg:
+            cfg["nvimThemeMap"] = {}
+        return cfg
 
-def notify(summary: str, body: str = ""):
-    try:
-        subprocess.Popen(["notify-send", summary, body])
-    except FileNotFoundError:
-        pass
+    def _load_state(self, default):
+        try:
+            return open(STATE_PATH).read().strip()
+        except FileNotFoundError:
+            return default
 
-def get_polarity():
-    try:
-        result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
-        return result.stdout.strip() if result.returncode == 0 else "dark"
-    except Exception:
-        return "dark"
+    def _save_state(self, theme):
+        os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
+        open(STATE_PATH, "w").write(theme)
 
-def set_polarity(polarity: str) -> bool:
-    if polarity not in ("light", "dark"):
-        return False
-    try:
-        subprocess.run(["darkman", "set", polarity], check=True)
-        return True
-    except subprocess.CalledProcessError:
-        return False
+    # ---------- system helpers ---------- #
+    def _notify(self, summary: str, body: str = ""):
+        try:
+            subprocess.Popen(["notify-send", summary, body])
+        except FileNotFoundError:
+            pass
 
-def toggle_polarity() -> str:
-    current = get_polarity()
-    new = "light" if current == "dark" else "dark"
-    return new if set_polarity(new) else current
+    def _get_polarity(self):
+        try:
+            result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
+            return result.stdout.strip() if result.returncode == 0 else "dark"
+        except Exception:
+            return "dark"
 
-# ------------- unified exclusive write decorator ------------- #
-def exclusive_write(handler):
-    """Ensure only one write (theme or polarity change) at a time.
+    def _set_polarity(self, polarity: str) -> bool:
+        if polarity not in ("light", "dark"):
+            return False
+        try:
+            subprocess.run(["darkman", "set", polarity], check=True)
+            return True
+        except subprocess.CalledProcessError:
+            return False
 
-    Handler is responsible for calling release_write() when work that blocks further
-    writes is complete. Theme changes release after external script finishes; quick
-    polarity changes release immediately.
-    """
-    def wrapped(conn, *args, **kwargs):
-        global script_running
-        with script_lock:
-            if script_running:
+    def _toggle_polarity(self) -> str:
+        current = self._get_polarity()
+        new = "light" if current == "dark" else "dark"
+        return new if self._set_polarity(new) else current
+
+    # ---------- concurrency helpers ---------- #
+    def _acquire_write(self, conn) -> bool:
+        with self.lock:
+            if self.script_running:
                 conn.sendall(b"ERROR script busy\n")
-                return
-            script_running = True
-        return handler(conn, *args, **kwargs)
-    return wrapped
+                return False
+            self.script_running = True
+            return True
 
-def release_write():
-    """Release write exclusivity (idempotent)."""
-    global script_running
-    with script_lock:
-        script_running = False
+    def _release_write(self):
+        with self.lock:
+            self.script_running = False
 
-def run_daemon_only():
-    """Run only the daemon (no tray)"""
-    cfg = load_config()
-    allowed = cfg["themes"]
-    curr = load_state(allowed[0])
-    if curr not in allowed:
-        curr = allowed[0]
-    save_state(curr)
+    def _update_tray(self, theme: str | None = None, polarity: str | None = None):
+        """Update tray instance state and refresh icon/menu if running."""
+        if not self.tray:
+            return
+        if theme:
+            self.tray.current_theme = theme
+        if polarity:
+            self.tray.current_polarity = polarity
+        # Always keep theme list synced
+        self.tray.themes = self.allowed
+        if self.tray.icon:  # live refresh
+            import pystray
+            self.tray.icon.icon = self.tray.create_image()
+            self.tray.icon.menu = pystray.Menu(*self.tray.build_menu())
 
-    try:
-        os.unlink(SOCKET_PATH)
-    except FileNotFoundError:
-        pass
+    def _push_tray_update(self):
+        # Acquire latest polarity (theme already tracked)
+        pol = self._get_polarity()
+        self._update_tray(theme=self.current_theme, polarity=pol)
 
-    os.makedirs(os.path.dirname(SOCKET_PATH), exist_ok=True)
-    serv = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    serv.bind(SOCKET_PATH)
-    os.chmod(SOCKET_PATH, 0o600)
-    serv.listen(1)
-
-    # --- command handlers (some decorated) --- #
-    @exclusive_write
-    def handle_set_polarity(conn, pol):
-        if set_polarity(pol):
-            notify("Polarity Changed", f"Polarity set to {pol}")
+    # ---------- command handlers ---------- #
+    def _handle_set_polarity(self, conn, pol: str):
+        if not self._acquire_write(conn):
+            return
+        if self._set_polarity(pol):
+            self._notify("Polarity Changed", f"Polarity set to {pol}")
             conn.sendall(f"OK {pol}\n".encode())
+            self._push_tray_update()
         else:
             conn.sendall(b"ERROR invalid polarity\n")
-        release_write()
+        self._release_write()
 
-    @exclusive_write
-    def handle_toggle_polarity(conn):
-        new_pol = toggle_polarity()
-        notify("Polarity Toggled", f"Now {new_pol}")
+    def _handle_toggle_polarity(self, conn):
+        if not self._acquire_write(conn):
+            return
+        new_pol = self._toggle_polarity()
+        self._notify("Polarity Toggled", f"Now {new_pol}")
         conn.sendall(f"OK {new_pol}\n".encode())
-        release_write()
+        self._push_tray_update()
+        self._release_write()
 
-    @exclusive_write
-    def handle_set_theme(conn, theme):
-        nonlocal curr
-        global script_running
+    def _handle_set_theme(self, conn, theme: str):
+        if not self._acquire_write(conn):
+            return
         try:
-            # Update state (no contention; script_running already reserved)
-            curr = theme
-            save_state(curr)
-            proc = subprocess.Popen([cfg["script"], theme])
+            self.current_theme = theme
+            self._save_state(self.current_theme)
+            proc = subprocess.Popen([self.config["script"], theme])
         except Exception as e:
-            # Release reservation on failure
-            release_write()
+            self._release_write()
             conn.sendall(f"ERROR failed to launch script: {e}\n".encode())
             return
 
-        def _wait_proc(p):
+        def _wait(p):
             p.wait()
-            release_write()
-        threading.Thread(target=_wait_proc, args=(proc,), daemon=True).start()
+            self._release_write()
+        threading.Thread(target=_wait, args=(proc,), daemon=True).start()
 
-        notify("Theme Changed", f"Theme set to {curr}")
-        conn.sendall(f"OK {curr}\n".encode())
+        self._notify("Theme Changed", f"Theme set to {self.current_theme}")
+        conn.sendall(f"OK {self.current_theme}\n".encode())
+        self._push_tray_update()
 
-    def handle_client(conn):
-        nonlocal curr  # current theme needs to be mutated
+    # ---------- client handling ---------- #
+    def _handle_client(self, conn: socket.socket):
         with conn:
             data = conn.recv(1024).decode().strip().split(maxsplit=1)
+            if not data or not data[0]:
+                return
             cmd = data[0]
 
             if cmd == "GET-THEME":
-                conn.sendall(f"OK {curr}\n".encode())
-
+                conn.sendall(f"OK {self.current_theme}\n".encode())
             elif cmd == "LIST-THEMES":
-                # Return themes as JSON
-                payload = json.dumps(allowed)
-                conn.sendall(f"OK {payload}\n".encode())
-
+                conn.sendall(f"OK {json.dumps(self.allowed)}\n".encode())
             elif cmd == "GET-POLARITY":
-                pol = get_polarity()
-                conn.sendall(f"OK {pol}\n".encode())
-
+                conn.sendall(f"OK {self._get_polarity()}\n".encode())
             elif cmd == "SET-POLARITY" and len(data) == 2:
-                handle_set_polarity(conn, data[1])
-
+                self._handle_set_polarity(conn, data[1])
             elif cmd == "TOGGLE-POLARITY":
-                handle_toggle_polarity(conn)
-
+                self._handle_toggle_polarity(conn)
             elif cmd == "GET-NVIM-THEME":
-                # Return nvim theme for current theme with polarity, error if not mapped
-                # Get current polarity from darkman
                 try:
-                    result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
-                    polarity = result.stdout.strip() if result.returncode == 0 else "dark"
-                except (subprocess.TimeoutExpired, FileNotFoundError):
-                    polarity = "dark"  # fallback
-                
-                # Construct theme key with polarity
-                theme_key = f"{curr}-{polarity}"
-                
-                if theme_key in cfg["nvimThemeMap"]:
-                    nvim_theme = cfg["nvimThemeMap"][theme_key]
-                    conn.sendall(f"OK {nvim_theme}\n".encode())
+                    pol = self._get_polarity()
+                except Exception:
+                    pol = "dark"
+                key = f"{self.current_theme}-{pol}"
+                if key in self.config["nvimThemeMap"]:
+                    conn.sendall(f"OK {self.config['nvimThemeMap'][key]}\n".encode())
                 else:
-                    conn.sendall(f"ERROR no nvim theme mapping for '{theme_key}'\n".encode())
-
+                    conn.sendall(f"ERROR no nvim theme mapping for '{key}'\n".encode())
             elif cmd == "SET-THEME" and len(data) == 2:
                 theme = data[1]
-                if theme not in allowed:
-                    conn.sendall(f"ERROR invalid theme\n".encode())
+                if theme not in self.allowed:
+                    conn.sendall(b"ERROR invalid theme\n")
                 else:
-                    handle_set_theme(conn, theme)
+                    self._handle_set_theme(conn, theme)
             else:
-                conn.sendall(f"ERROR unknown command\n".encode())
+                conn.sendall(b"ERROR unknown command\n")
 
-    print("Theme manager daemon started")
-    while True:
-        conn, _ = serv.accept()
-        threading.Thread(target=handle_client, args=(conn,)).start()
+    # ---------- server lifecycle ---------- #
+    def start(self, background: bool = False):
+        try:
+            os.unlink(SOCKET_PATH)
+        except FileNotFoundError:
+            pass
+        os.makedirs(os.path.dirname(SOCKET_PATH), exist_ok=True)
+        self.server_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        self.server_socket.bind(SOCKET_PATH)
+        os.chmod(SOCKET_PATH, 0o600)
+        self.server_socket.listen(5)
+        print("Theme manager daemon started")
+
+        def _loop():
+            while True:
+                conn, _ = self.server_socket.accept()
+                threading.Thread(target=self._handle_client, args=(conn,), daemon=True).start()
+
+        if background:
+            self._accept_thread = threading.Thread(target=_loop, daemon=True)
+            self._accept_thread.start()
+        else:
+            _loop()
 
 def run_with_tray():
-    """Run daemon plus strict tray (no fallbacks)."""
+    """Run daemon plus tray with tray as daemon property."""
     # ---- single-instance guard ---- #
     os.makedirs(os.path.dirname(LOCK_PATH), exist_ok=True)
     try:
@@ -226,7 +232,6 @@ def run_with_tray():
             return
     except Exception as e:
         print(f"theme-manager: failed to create lock file: {e}")
-        # continue without lock (last resort) but still attempt socket check
 
     # secondary guard: live socket present
     if os.path.exists(SOCKET_PATH):
@@ -236,15 +241,18 @@ def run_with_tray():
                 print("theme-manager: another instance detected via socket; exiting")
                 return
         except Exception:
-            # stale socket, will be cleaned by daemon start
-            pass
+            pass  # stale socket
 
-    threading.Thread(target=run_daemon_only, daemon=True).start()
+    daemon = ThemeManagerDaemon()
+    daemon.start(background=True)
     import time
-    time.sleep(0.5)
+    time.sleep(0.4)
     print("Starting theme manager daemon with tray...")
-    tray_manager = ThemeManagerTray()
-    tray_manager.run()
+    daemon.tray = ThemeManagerTray()
+    # Initialize tray with current daemon state
+    daemon._update_tray(theme=daemon.current_theme, polarity=daemon._get_polarity())
+    daemon.tray.run()
+
 
 def main():
     run_with_tray()
