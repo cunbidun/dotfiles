@@ -100,16 +100,11 @@ class ThemeManagerTray:
         return resp, False
 
     def get_current_polarity(self) -> str:
-        pol, ok = self.client_request("GET-POLARITY\n")
-        return pol if ok and pol else "dark"
+        output = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
+        return output.stdout.strip() if output.returncode == 0 else "dark"
 
     def toggle_polarity(self, *_):
-        new, ok = self.client_request("TOGGLE-POLARITY\n")
-        if ok:
-            self.current_polarity = new
-            self.refresh_menu()
-        else:
-            logger.error(f"Failed to toggle polarity: {new}")
+        subprocess.run(["darkman", "toggle"])
 
     def set_theme(self, theme: str):
         def _set():

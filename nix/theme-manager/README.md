@@ -11,7 +11,6 @@ themectl get-theme         # Print current theme
 themectl list-themes       # List available themes
 themectl set-theme <name>  # Set theme (must be in list)
 themectl get-nvim-theme    # Resolve current Neovim colorscheme (theme+polarity)
-themectl get-polarity      # Show current polarity (dark|light) via darkman
 themectl set-polarity <dark|light>  # Force polarity via darkman
 ```
 

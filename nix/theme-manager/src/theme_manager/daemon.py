@@ -147,8 +147,6 @@ class ThemeManagerDaemon:
                 conn.sendall(f"OK {self.current_theme}\n".encode())
             elif cmd == "LIST-THEMES":
                 conn.sendall(f"OK {json.dumps(self.allowed)}\n".encode())
-            elif cmd == "GET-POLARITY":
-                conn.sendall(f"OK {self._get_polarity()}\n".encode())
             elif cmd == "SET-POLARITY" and len(data) == 2:
                 self._handle_set_polarity(conn, data[1])
             elif cmd == "TOGGLE-POLARITY":

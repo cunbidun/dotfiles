@@ -30,14 +30,6 @@ def get_theme():
         print(out)
     return code
 
-
-def get_polarity():
-    out, code = client_request("GET-POLARITY\n")
-    if out is not None:
-        print(out)
-    return code
-
-
 def get_themes():
     out, code = client_request("LIST-THEMES\n")
     if out is not None:
@@ -86,7 +78,6 @@ def build_parser():
     sub.add_parser("get-theme", help="Show current theme")
     sub.add_parser("list-themes", help="List all available themes")
     sub.add_parser("get-nvim-theme", help="Show current theme's Neovim colorscheme")
-    sub.add_parser("get-polarity", help="Show current light/dark polarity")
 
     pset = sub.add_parser("set-theme", help="Set a new theme")
     pset.add_argument("theme", help="Theme name (as returned by list-themes)")
@@ -105,7 +96,6 @@ def main():
         "get-theme": get_theme,
         "list-themes": get_themes,
         "get-nvim-theme": get_nvim_theme,
-        "get-polarity": get_polarity,
         "set-theme": lambda: set_theme(args.theme),
         "set-polarity": lambda: set_polarity(args.polarity),
     }[args.cmd]()
