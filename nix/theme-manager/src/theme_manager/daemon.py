@@ -73,7 +73,7 @@ class ThemeManagerDaemon:
         if polarity not in ("light", "dark"):
             return False
         try:
-            subprocess.run(["darkman", "set", polarity], check=True)
+            proc = subprocess.run([self.config["script"], "-p", polarity])
             return True
         except subprocess.CalledProcessError:
             return False

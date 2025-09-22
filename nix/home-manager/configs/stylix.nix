@@ -127,12 +127,12 @@ in {
 
     darkModeScripts = {
       dark-theme-switch = ''
-        /etc/profiles/per-user/${userdata.username}/bin/theme-switch -p dark
+        /etc/profiles/per-user/${userdata.username}/bin/themectl set-polarity dark
       '';
     };
     lightModeScripts = {
       light-theme-switch = ''
-        /etc/profiles/per-user/${userdata.username}/bin/theme-switch -p light
+        /etc/profiles/per-user/${userdata.username}/bin/themectl set-polarity light
       '';
     };
 
