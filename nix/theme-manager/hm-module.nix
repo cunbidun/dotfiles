@@ -70,7 +70,7 @@ in {
       Service = {
         ExecStart = "${pkgs.theme-manager}/bin/theme-manager";
         Restart = "always";
-        RestartSec = "10";
+        RestartSec = "1";
         Environment = [
           "DISPLAY=:0"
         ];

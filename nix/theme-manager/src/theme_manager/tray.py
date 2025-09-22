@@ -167,12 +167,21 @@ class ThemeManagerTray:
             self.icon.icon = self.create_image()
             self.icon.menu = pystray.Menu(*self.build_menu())
 
+    def start_auto_refresh(self, interval=1):
+        def _refresh_loop():
+            while True:
+                time.sleep(interval)
+                self.refresh_menu()
+        t = threading.Thread(target=_refresh_loop, daemon=True)
+        t.start()
+
     def quit_app(self, *_):
         if self.icon:
             self.icon.stop()
 
     def run(self):
         self.update_status()
+        self.start_auto_refresh()
         logger.info("Starting tray icon")
         self.icon = pystray.Icon("theme-manager", self.create_image(), "Theme Manager", pystray.Menu(*self.build_menu()))
         try:

@@ -96,27 +96,6 @@ class ThemeManagerDaemon:
         with self.lock:
             self.script_running = False
 
-    def _update_tray(self, theme: str | None = None, polarity: str | None = None):
-        """Update tray instance state and refresh icon/menu if running."""
-        if not self.tray:
-            return
-        if theme:
-            self.tray.current_theme = theme
-        if polarity:
-            self.tray.current_polarity = polarity
-        # Always keep theme list synced
-        self.tray.themes = self.allowed
-        if self.tray.icon:  # live refresh
-            import pystray
-            self.tray.icon.icon = self.tray.create_image()
-            self.tray.icon.menu = pystray.Menu(*self.tray.build_menu())
-
-    def _push_tray_update(self):
-        # Acquire latest polarity (theme already tracked)
-        pol = self._get_polarity()
-        print(f"push tray update with theme {self.current_theme} and pol {pol}")
-        self._update_tray(theme=self.current_theme, polarity=pol)
-
     # ---------- command handlers ---------- #
     def _handle_set_polarity(self, conn, pol: str):
         if not self._acquire_write(conn):
@@ -124,7 +103,6 @@ class ThemeManagerDaemon:
         if self._set_polarity(pol):
             self._notify("Polarity Changed", f"Polarity set to {pol}")
             conn.sendall(f"OK {pol}\n".encode())
-            self._push_tray_update()
         else:
             conn.sendall(b"ERROR invalid polarity\n")
         self._release_write()
@@ -135,7 +113,6 @@ class ThemeManagerDaemon:
         new_pol = self._toggle_polarity()
         self._notify("Polarity Toggled", f"Now {new_pol}")
         conn.sendall(f"OK {new_pol}\n".encode())
-        self._push_tray_update()
         self._release_write()
 
     def _handle_set_theme(self, conn, theme: str):
@@ -157,7 +134,6 @@ class ThemeManagerDaemon:
 
         self._notify("Theme Changed", f"Theme set to {self.current_theme}")
         conn.sendall(f"OK {self.current_theme}\n".encode())
-        self._push_tray_update()
 
     # ---------- client handling ---------- #
     def _handle_client(self, conn: socket.socket):
