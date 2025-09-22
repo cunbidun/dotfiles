@@ -2,13 +2,13 @@
 import os, socket, yaml, subprocess, sys, threading, fcntl
 import json  # for JSON encoding
 
+import time
 from .tray import ThemeManagerTray
 
 CONFIG_PATH = os.path.expanduser("~/.config/theme-manager/config.yaml")
 STATE_PATH = os.path.expanduser("~/.local/share/theme-manager/state")
 SOCKET_PATH = os.path.expanduser("~/.local/share/theme-manager/socket")
 LOCK_PATH = os.path.expanduser("~/.local/share/theme-manager/lock")
-
 
 class ThemeManagerDaemon:
     """Encapsulated daemon replacing previous global-state implementation."""
@@ -114,6 +114,7 @@ class ThemeManagerDaemon:
     def _push_tray_update(self):
         # Acquire latest polarity (theme already tracked)
         pol = self._get_polarity()
+        print(f"push tray update with theme {self.current_theme} and pol {pol}")
         self._update_tray(theme=self.current_theme, polarity=pol)
 
     # ---------- command handlers ---------- #
@@ -245,12 +246,9 @@ def run_with_tray():
 
     daemon = ThemeManagerDaemon()
     daemon.start(background=True)
-    import time
     time.sleep(0.4)
     print("Starting theme manager daemon with tray...")
     daemon.tray = ThemeManagerTray()
-    # Initialize tray with current daemon state
-    daemon._update_tray(theme=daemon.current_theme, polarity=daemon._get_polarity())
     daemon.tray.run()
 
 
