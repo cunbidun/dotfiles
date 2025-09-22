@@ -47,6 +47,7 @@ class ThemeManagerTray:
         self.themes: list[str] = []
         self.icon: pystray.Icon | None = None
         self._font: ImageFont.FreeTypeFont | ImageFont.ImageFont | None = None
+        self._menu_active = False  # suppress auto refresh when user interacting
         self.update_status()
 
     # ------------- font resolution ------------- #
@@ -149,16 +150,16 @@ class ThemeManagerTray:
     def build_menu(self):
         items = []
         pol = self.current_polarity or "dark"
-        items.append(Item(f"Polarity: {pol.title()}", self.toggle_polarity, default=True))
+        items.append(Item(f"Polarity: {pol.title()}", self._wrap_action(self.toggle_polarity), default=True))
         items.append(pystray.Menu.SEPARATOR)
         items.append(Item("Themes:", lambda: None, enabled=False))
         for t in self.themes:
             def mk(theme_name):
-                return lambda *_: self.set_theme(theme_name)
+                return self._wrap_action(lambda *_: self.set_theme(theme_name))
             items.append(Item(t, mk(t), checked=lambda i, theme=t: theme == self.current_theme))
         items.append(pystray.Menu.SEPARATOR)
-        items.append(Item("Refresh", lambda *_: self.refresh_menu()))
-        items.append(Item("Exit", self.quit_app))
+        items.append(Item("Refresh", self._wrap_action(lambda *_: self.refresh_menu())))
+        items.append(Item("Exit", self._wrap_action(self.quit_app)))
         return items
 
     def refresh_menu(self):
@@ -171,9 +172,27 @@ class ThemeManagerTray:
         def _refresh_loop():
             while True:
                 time.sleep(interval)
+                # Skip refresh while menu is active to prevent flicker
+                if self._menu_active:
+                    continue
                 self.refresh_menu()
         t = threading.Thread(target=_refresh_loop, daemon=True)
         t.start()
+
+    # ------------- menu interaction helpers ------------- #
+    def _wrap_action(self, fn, post_delay=0.3):
+        """Wrap a menu callback to mark menu as active during execution and a short grace period."""
+        def wrapped(*a, **kw):
+            self._menu_active = True
+            try:
+                return fn(*a, **kw)
+            finally:
+                # release after small delay to allow menu to close
+                threading.Timer(post_delay, self._clear_menu_active).start()
+        return wrapped
+
+    def _clear_menu_active(self):
+        self._menu_active = False
 
     def quit_app(self, *_):
         if self.icon:
