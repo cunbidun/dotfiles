@@ -68,6 +68,11 @@
 
     # +-- MacOS specific --+
     mac-app-util.url = "github:hraban/mac-app-util";
+
+    winapps = {
+      url = "github:winapps-org/winapps";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = {

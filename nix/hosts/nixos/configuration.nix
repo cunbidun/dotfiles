@@ -46,6 +46,7 @@
         "https://nixos-raspberrypi.cachix.org"
         "https://hyprland.cachix.org"
         "https://yazi.cachix.org"
+        "https://winapps.cachix.org/"
       ];
     in {
       builders-use-substitutes = true;
@@ -57,6 +58,7 @@
         "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
+        "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
       ];
     };
   };
@@ -65,7 +67,7 @@
   boot.kernelPackages = pkgs.nixpkgs-stable.linuxPackages_6_12; # Use the LTS kernel for better stability.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = ["uinput" "i2c-dev"];
+  boot.kernelModules = ["uinput" "i2c-dev" "ip_tables" "iptable_nat"];
   boot.blacklistedKernelModules = ["wacom"];
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -154,6 +156,8 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
+    inputs.winapps.packages."${system}".winapps
+    inputs.winapps.packages."${system}".winapps-launcher
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
