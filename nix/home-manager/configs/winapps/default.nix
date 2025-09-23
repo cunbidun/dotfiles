@@ -46,7 +46,7 @@
           - data:/storage # Mount volume 'data' to use as Windows 'C:' drive.
           - ${config.home.homeDirectory}:/shared # Mount Linux user home directory @ '\\host.lan/Data'.
           #- /path/to/second/hard/disk:/storage2 # Uncomment to create a virtual second hard disk and mount it within the Windows VM. Ensure 'DISK2_SIZE' is specified above.
-          - .${./oem}:/oem # Enables automatic post-install execution of 'oem/install.bat', applying Windows registry modifications contained within 'oem/RDPApps.reg'.
+          - ${./oem}:/oem # Enables automatic post-install execution of 'oem/install.bat', applying Windows registry modifications contained within 'oem/RDPApps.reg'.
           #- /path/to/windows/install/media.iso:/custom.iso # Uncomment to use a custom Windows ISO. If specified, 'VERSION' (e.g. 'tiny11') will be ignored.
         devices:
           - /dev/kvm # Enable KVM.
