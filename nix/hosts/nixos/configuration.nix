@@ -156,8 +156,6 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
-    inputs.winapps.packages."${system}".winapps
-    inputs.winapps.packages."${system}".winapps-launcher
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
