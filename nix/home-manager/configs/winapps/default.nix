@@ -5,6 +5,8 @@
   config,
   ...
 }: {
+  # need to run docker compose --file ~/.config/winapps/compose.yaml up -d after switch
+  # then winapps-setup --user --setupAllOfficiallySupportedApps
   home.packages = [
     inputs.winapps.packages."${pkgs.system}".winapps
   ];

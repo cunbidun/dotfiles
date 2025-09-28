@@ -77,6 +77,9 @@ in {
     pkgs.shfmt
     pkgs.black
     pkgs.alejandra
+
+    # AI/Development tools
+    inputs.codex-nix.packages.${pkgs.system}.default
   ];
 
   linux_packages = let

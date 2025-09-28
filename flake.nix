@@ -73,6 +73,11 @@
       url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    codex-nix = {
+      url = "github:sadjow/codex-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = {
