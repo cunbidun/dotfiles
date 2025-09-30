@@ -272,6 +272,22 @@ in {
     };
   };
 
+  # create a firefox -p vi profile with desktop file
+  xdg.desktopEntries = {
+    firefox-vi = {
+      name = "Firefox (vi)";
+      exec = "${pkgs.firefox}/bin/firefox -P vi";
+      mimeType = ["text/html" "text/xml" "x-scheme-handler/http" "x-scheme-handler/https"];
+      noDisplay = false;
+      type = "Application";
+      categories = ["Network" "WebBrowser"];
+      startupNotify = true;
+      icon = "firefox";
+      terminal = false;
+      comment = "Browse the World Wide Web (vi profile)";
+    };
+  };
+
   xdg.mimeApps.defaultApplications = {
     "text/html" = ["firefox.desktop"];
     "text/xml" = ["firefox.desktop"];
