@@ -274,5 +274,38 @@ in {
       '';
       extension = ".json";
     };
+
+    ".local/state/stylix/theme-name.txt".text = let
+      # Function to get theme-polarity from the current base16 scheme
+      getThemePolarity = let
+        # Get the scheme file name without path and extension
+        schemeFile = builtins.replaceStrings [".yaml"] [""] (builtins.baseNameOf config.stylix.base16Scheme);
+        # Get all theme configurations with their names
+        allThemeEntries = lib.flatten (
+          lib.mapAttrsToList (
+            themeName: themeConfig:
+              lib.mapAttrsToList (
+                polarity: config: {
+                  name = "${themeName}-${polarity}";
+                  scheme = config.scheme;
+                }
+              )
+              themeConfig
+          )
+          themeConfigs
+        );
+        # Find the matching theme entry by scheme name
+        findThemeEntry =
+          lib.findFirst (
+            entry: entry.scheme == schemeFile
+          )
+          null
+          allThemeEntries;
+      in
+        if findThemeEntry != null
+        then findThemeEntry.name
+        else "default-dark"; # fallback
+    in
+      getThemePolarity;
   };
 }
