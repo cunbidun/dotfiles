@@ -25,7 +25,9 @@ class ThemeManagerDaemon:
         self.script_running = False  # guarded by self.lock
         self.server_socket = None
         self._accept_thread = None
+        self._monitor_thread = None
         self.tray: ThemeManagerTray | None = None  # tray instance (optional)
+        self._stop_monitoring = threading.Event()
 
     # ---------- config & state helpers ---------- #
     def _load_config(self):
@@ -142,6 +144,42 @@ class ThemeManagerDaemon:
         if self.tray:
             self.tray.refresh_menu()
 
+    def _monitor_stylix_theme(self):
+        """Monitor ~/.local/state/stylix/theme-name.txt and sync theme when different."""
+        stylix_theme_path = os.path.expanduser("~/.local/state/stylix/theme-name.txt")
+        
+        while not self._stop_monitoring.wait(2.0):  # Check every 2 seconds
+            try:
+                # Read the current theme from stylix file
+                if os.path.exists(stylix_theme_path):
+                    with open(stylix_theme_path, 'r') as f:
+                        stylix_theme = f.read().strip()
+                    
+                    # Get current daemon theme with polarity
+                    pol = self._get_polarity()
+                    daemon_theme = f"{self.current_theme}-{pol}"
+                    
+                    # If themes don't match, sync to daemon's theme
+                    if stylix_theme != daemon_theme:
+                        print(f"Theme mismatch detected: stylix='{stylix_theme}', daemon='{daemon_theme}'. Syncing...")
+                        
+                        # Acquire lock to prevent conflicts with other operations
+                        with self.lock:
+                            if not self.script_running:
+                                self.script_running = True
+                                try:
+                                    # Run the script to switch to the correct theme
+                                    subprocess.run([self.config["script"], self.current_theme], check=False)
+                                    print(f"Synced theme to {daemon_theme}")
+                                except Exception as e:
+                                    print(f"Failed to sync theme: {e}")
+                                finally:
+                                    self.script_running = False
+            except Exception as e:
+                # Don't spam errors, just print once and continue monitoring
+                print(f"Theme monitoring error: {e}")
+                time.sleep(5)  # Wait longer on error
+
     # ---------- client handling ---------- #
     def _handle_client(self, conn: socket.socket):
         with conn:
@@ -188,7 +226,11 @@ class ThemeManagerDaemon:
         self.server_socket.bind(SOCKET_PATH)
         os.chmod(SOCKET_PATH, 0o600)
         self.server_socket.listen(5)
-        print("Theme manager daemon started")
+        
+        # Start theme monitoring thread
+        self._monitor_thread = threading.Thread(target=self._monitor_stylix_theme, daemon=True)
+        self._monitor_thread.start()
+        print("Theme manager daemon started with stylix monitoring")
 
         def _loop():
             while True:
@@ -200,6 +242,16 @@ class ThemeManagerDaemon:
             self._accept_thread.start()
         else:
             _loop()
+
+    def stop(self):
+        """Stop the daemon and cleanup resources."""
+        self._stop_monitoring.set()
+        if self.server_socket:
+            self.server_socket.close()
+        try:
+            os.unlink(SOCKET_PATH)
+        except FileNotFoundError:
+            pass
 
 def run_with_tray():
     """Run daemon plus tray with tray as daemon property."""
