@@ -11,6 +11,7 @@
       vscodeTheme = "Nord Light";
       nvimTheme = "nord";
       hyprpanelTheme = "nord";
+      vicinaeTheme = "nord_light";
     };
     dark = {
       scheme = "nord";
@@ -18,6 +19,7 @@
       vscodeTheme = "Nord";
       nvimTheme = "nord";
       hyprpanelTheme = "nord";
+      vicinaeTheme = "nord_dark";
     };
   };
   catppuccin = {
@@ -27,6 +29,7 @@
       vscodeTheme = "Catppuccin Latte";
       nvimTheme = "catppuccin";
       hyprpanelTheme = "catppuccin_mocha";
+      vicinaeTheme = "catppuccin-latte";
     };
     dark = {
       scheme = "catppuccin-mocha";
@@ -34,6 +37,7 @@
       vscodeTheme = "Catppuccin Mocha";
       nvimTheme = "catppuccin";
       hyprpanelTheme = "catppuccin_mocha";
+      vicinaeTheme = "catppuccin-mocha";
     };
   };
   everforest = {
@@ -43,6 +47,7 @@
       vscodeTheme = "Everforest Light";
       nvimTheme = "everforest";
       hyprpanelTheme = "everforest";
+      vicinaeTheme = "vicinae-light";
     };
     dark = {
       scheme = "everforest-dark";
@@ -50,6 +55,7 @@
       vscodeTheme = "Everforest Dark";
       nvimTheme = "everforest";
       hyprpanelTheme = "everforest";
+      vicinaeTheme = "vicinae-dark";
     };
   };
   onedark = {
@@ -59,6 +65,7 @@
       vscodeTheme = "Atom One Light";
       nvimTheme = "onelight";
       hyprpanelTheme = "one_dark";
+      vicinaeTheme = "one-dark";
     };
     dark = {
       scheme = "onedark";
@@ -66,6 +73,7 @@
       vscodeTheme = "Atom One Dark";
       nvimTheme = "onedark";
       hyprpanelTheme = "one_dark";
+      vicinaeTheme = "one-dark";
     };
   };
   default = {
@@ -75,6 +83,7 @@
       vscodeTheme = "Default Light Modern";
       nvimTheme = "vscode";
       hyprpanelTheme = "monochrome";
+      vicinaeTheme = "vicinae-light";
     };
     dark = {
       scheme = "standardized-dark";
@@ -82,6 +91,7 @@
       vscodeTheme = "Default Dark Modern";
       nvimTheme = "vscode";
       hyprpanelTheme = "monochrome";
+      vicinaeTheme = "vicinae-dark";
     };
   };
 }

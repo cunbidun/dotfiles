@@ -33,6 +33,7 @@
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${config.scheme}.yaml";
       image = lib.mkForce config.wallpaper;
     };
+    services.vicinae.settings.theme.name = lib.mkForce config.vicinaeTheme;
     home.activation.reconciliation_theme = lib.mkForce ''
       #!/usr/bin/env bash
       # no-op script to avoid double activation
