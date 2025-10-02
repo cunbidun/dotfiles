@@ -232,10 +232,10 @@ in {
   programs.hyprcursor-phinger.enable = true;
   programs.zoxide.enable = true;
 
-  # services.vicinae = {
-  #   enable = true;
-  #   autoStart = true;
-  # };
+  services.vicinae = {
+    enable = true;
+    autoStart = true;
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
