@@ -35,10 +35,6 @@
     # +--------+
     yazi = {url = "github:sxyazi/yazi/v25.4.8";};
     stylix = {url = "github:nix-community/stylix";};
-    vicinae = {
-      url = "https://github.com/vicinaehq/vicinae/releases/download/v0.2.1/vicinae-linux-x86_64-v0.2.1.tar.gz";
-      flake = false;
-    };
     hyprpanel = {
       url = "github:cunbidun/HyprPanel";
       # url = "path:/home/cunbidun/.tmp/HyprPanel";
@@ -76,6 +72,10 @@
 
     codex-nix = {
       url = "github:sadjow/codex-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };

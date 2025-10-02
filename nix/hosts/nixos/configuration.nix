@@ -47,6 +47,7 @@
         "https://hyprland.cachix.org"
         "https://yazi.cachix.org"
         "https://winapps.cachix.org/"
+        "https://vicinae.cachix.org"
       ];
     in {
       builders-use-substitutes = true;
@@ -59,6 +60,7 @@
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
         "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
+        "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
       ];
     };
   };
