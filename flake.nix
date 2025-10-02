@@ -14,7 +14,7 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.51.1/?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
