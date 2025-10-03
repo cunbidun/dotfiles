@@ -245,8 +245,40 @@ in {
     "col.inactive" = lib.mkForce "rgb(${config.lib.stylix.colors.base01})";
     text_color_inactive = lib.mkForce "rgb(${config.lib.stylix.colors.base06})";
   };
+  home.activation.vicinae-theme-script = lib.mkIf isLinux ''
+    # chance vininae theme on theme change if vicinae is installed
+    if command -v vicinae >/dev/null 2>&1; then
+      theme="$(${pkgs.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # 'default' by default
+      polarity="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # 'dark' by default
 
+      vicinaeTheme=$(jq -r --arg theme "$theme" --arg polarity "$polarity" '.[$theme][$polarity].vicinaeTheme' ${config.home.homeDirectory}/.local/state/stylix/theme-config.json)
+
+      echo "Setting Vicinae theme to $vicinaeTheme"
+      vicinae "vicinae://theme/set/$vicinaeTheme"
+    else
+      echo "Vicinae not installed, skipping theme change"
+    fi
+  '';
   home.file = {
+    # dump the themeConfigs as json for other programs to consume
+    ".local/state/stylix/theme-config.json".text = let
+      # Convert themeConfigs to JSON-serializable format by converting paths to strings
+      serializableThemeConfigs =
+        lib.mapAttrs (
+          themeName: themeConfig:
+            lib.mapAttrs (
+              polarity: config:
+                config
+                // {
+                  wallpaper = toString config.wallpaper;
+                }
+            )
+            themeConfig
+        )
+        themeConfigs;
+    in
+      builtins.toJSON serializableThemeConfigs;
+
     ".local/state/stylix/colors.json".source = config.lib.stylix.colors {
       template = ''
         {
