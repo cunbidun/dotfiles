@@ -1,4 +1,13 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  project_root,
+  ...
+}: let
+  extensionsPath = ./. + "/extensions.nix";
+  extensions =
+    if builtins.pathExists extensionsPath
+    then import extensionsPath {inherit pkgs;}
+    else [];
   inherit (pkgs.stdenv) isLinux isDarwin;
 
   # Common keybindings for both platforms
@@ -349,6 +358,7 @@ in {
     package = pkgs.master.vscode;
 
     profiles.default = {
+      extensions = extensions;
       keybindings =
         commonKeybindings
         ++ (

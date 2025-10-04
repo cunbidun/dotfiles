@@ -1,3 +1,4 @@
+# Managed via scripts/update-vscode-extensions.py (outputs nix/home-manager/configs/vscode/extensions.nix)
 activitywatch.aw-watcher-vscode
 arcticicestudio.nord-visual-studio-code
 bazelbuild.vscode-bazel
