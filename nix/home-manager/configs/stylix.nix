@@ -247,14 +247,14 @@ in {
   };
   home.activation.vicinae-theme-script = lib.mkIf isLinux ''
     # chance vininae theme on theme change if vicinae is installed
-    if command -v vicinae >/dev/null 2>&1; then
+    if command -v /etc/profiles/per-user/${userdata.username}/bin/vicinae >/dev/null 2>&1; then
       theme="$(${pkgs.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # 'default' by default
       polarity="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # 'dark' by default
 
       vicinaeTheme=$(jq -r --arg theme "$theme" --arg polarity "$polarity" '.[$theme][$polarity].vicinaeTheme' ${config.home.homeDirectory}/.local/state/stylix/theme-config.json)
 
       echo "Setting Vicinae theme to $vicinaeTheme"
-      vicinae "vicinae://theme/set/$vicinaeTheme"
+      /etc/profiles/per-user/${userdata.username}/bin/vicinae "vicinae://theme/set/$vicinaeTheme"
     else
       echo "Vicinae not installed, skipping theme change"
     fi
