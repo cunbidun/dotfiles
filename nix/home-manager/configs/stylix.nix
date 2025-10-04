@@ -261,23 +261,7 @@ in {
   '';
   home.file = {
     # dump the themeConfigs as json for other programs to consume
-    ".local/state/stylix/theme-config.json".text = let
-      # Convert themeConfigs to JSON-serializable format by converting paths to strings
-      serializableThemeConfigs =
-        lib.mapAttrs (
-          themeName: themeConfig:
-            lib.mapAttrs (
-              polarity: config:
-                config
-                // {
-                  wallpaper = toString config.wallpaper;
-                }
-            )
-            themeConfig
-        )
-        themeConfigs;
-    in
-      builtins.toJSON serializableThemeConfigs;
+    ".local/state/stylix/theme-config.json".text = builtins.toJSON themeConfigs;
 
     ".local/state/stylix/colors.json".source = config.lib.stylix.colors {
       template = ''
