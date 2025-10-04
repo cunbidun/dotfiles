@@ -1,15 +1,12 @@
 {
   pkgs,
   project_root,
+  inputs,
   ...
 }: let
-  extensionsPath = ./. + "/extensions.nix";
-  extensions =
-    if builtins.pathExists extensionsPath
-    then import extensionsPath {inherit pkgs;}
-    else [];
+  inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
-
+  vscodeVersion = pkgs.master.vscode;
   # Common keybindings for both platforms
   commonKeybindings = [
     # Navigation keys
@@ -355,10 +352,10 @@
 in {
   programs.vscode = {
     enable = true;
-    package = pkgs.master.vscode;
+    package = vscodeVersion;
+    mutableExtensionsDir = false;
 
     profiles.default = {
-      extensions = extensions;
       keybindings =
         commonKeybindings
         ++ (
@@ -465,6 +462,43 @@ in {
         "everforest.darkContrast" = "hard";
         "everforest.darkWorkbench" = "flat";
       };
+      extensions = pkgs.nix4vscode.forVscodeVersion vscodeVersion.version [
+        "activitywatch.aw-watcher-vscode"
+        "arcticicestudio.nord-visual-studio-code"
+        "bazelbuild.vscode-bazel"
+        "bbenoist.nix"
+        "catppuccin.catppuccin-vsc"
+        "charliermarsh.ruff"
+        "cunbidun.flash-vscode"
+        "foxundermoon.shell-format"
+        "github.copilot"
+        "github.copilot-chat"
+        "github.vscode-pull-request-github"
+        "james-yu.latex-workshop"
+        "kamadorueda.alejandra"
+        "ms-python.black-formatter"
+        "ms-python.debugpy"
+        "ms-python.isort"
+        "ms-python.python"
+        "ms-python.vscode-pylance"
+        "ms-python.vscode-python-envs"
+        "ms-toolsai.datawrangler"
+        "ms-toolsai.jupyter"
+        "ms-toolsai.jupyter-keymap"
+        "ms-toolsai.jupyter-renderers"
+        "ms-toolsai.vscode-jupyter-cell-tags"
+        "ms-toolsai.vscode-jupyter-slideshow"
+        "ms-vscode-remote.remote-ssh"
+        "ms-vscode-remote.remote-ssh-edit"
+        "ms-vscode.cpptools"
+        "ms-vscode.remote-explorer"
+        "pkief.material-icon-theme"
+        "streetsidesoftware.code-spell-checker"
+        "tamasfe.even-better-toml"
+        "timonwong.shellcheck"
+        "vscodevim.vim"
+        "zhuangtongfa.material-theme"
+      ];
     };
   };
 }

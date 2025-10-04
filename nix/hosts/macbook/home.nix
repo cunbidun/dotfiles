@@ -18,7 +18,7 @@ in {
     "${project_root}/nix/home-manager/configs/firefox.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
-    "${project_root}/nix/home-manager/configs/vscode"
+    "${project_root}/nix/home-manager/configs/vscode.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
     inputs.self.homeManagerModules.theme-manager
     inputs.stylix.homeModules.stylix
