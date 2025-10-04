@@ -145,8 +145,8 @@ class ThemeManagerDaemon:
             self.tray.refresh_menu()
 
     def _monitor_stylix_theme(self):
-        """Monitor ~/.local/state/stylix/theme-name.txt and sync theme when different."""
-        stylix_theme_path = os.path.expanduser("~/.local/state/stylix/theme-name.txt")
+        """Monitor ~/.local/state/stylix/current-theme-name.txt and sync theme when different."""
+        stylix_theme_path = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
         
         while not self._stop_monitoring.wait(1):  # Check every 2 seconds
             try:
