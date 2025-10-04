@@ -18,7 +18,19 @@ in {
           ignored = "-\\d+";
           numbered_active_indicator = "highlight";
           show_icons = false;
-          show_numbered = true;
+          show_numbered = false;
+          showWsIcons = true;
+          workspaceIconMap = {
+            "1" = "1";
+            "2" = "2";
+            "3" = "3";
+            "4" = "4";
+            "5" = "WEB";
+            "6" = "EXTRA";
+            "7" = "QUANT";
+            "8" = "GAME";
+            "9" = "VI";
+          };
           workspaces = 9;
           spacing = 1;
         };

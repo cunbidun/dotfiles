@@ -4,7 +4,7 @@ set -euo pipefail
 commit_changes=true
 commit_message="Auto commit: $(date +'%Y-%m-%d %H:%M:%S')"
 profile_name=""
-test_only=false
+build_only=false
 copy_back=false
 
 # Parse command-line arguments
@@ -23,8 +23,8 @@ while [[ $# -gt 0 ]]; do
       exit 1
     fi
     ;;
-  --test)
-    test_only=true
+  --build|--build-only)
+    build_only=true
     shift
     ;;
   --copy-back)
@@ -45,9 +45,9 @@ done
 
 # Check if profile_name is provided
 if [[ -z "$profile_name" ]]; then
-  echo "Usage: $0 [--no-commit] [--commit-message <message>] [--test] [--copy-back] <profile_name>"
+  echo "Usage: $0 [--no-commit] [--commit-message <message>] [--build-only] [--copy-back] <profile_name>"
   echo "  <profile_name> can be 'macbook-m1' or 'nixos'"
-  echo "  --test: Build configuration without switching"
+  echo "  --build-only: Build configuration without switching"
   echo "  --copy-back: Copy generated configuration files back to repository (default: false)"
   exit 1
 fi
@@ -102,51 +102,38 @@ echo "Switching NixOS configuration from the git repository at: $git_root"
 git add -A
 sudo -v # Ensure sudo is available and prompt for password if needed
 
+switch_success=false
+operation="switch"
+operation_desc="switch"
+if [ "$build_only" = true ]; then
+  operation="build"
+  operation_desc="build (no switch)"
+fi
+
 if [ "$os" = "Darwin" ]; then
-  echo "Detected macOS; running darwin-rebuild switch..."
-  if [ "$test_only" = true ]; then
-    echo "Running test build..."
-    if sudo darwin-rebuild build --flake ~/dotfiles"#$profile_name" --cores 0; then
-      switch_success=true
-      echo "Test build successful! Configuration is valid."
-    else
-      switch_success=false
-    fi
-  else
-    if sudo darwin-rebuild switch --flake ~/dotfiles"#$profile_name" --cores 0; then
-      switch_success=true
-    else
-      switch_success=false
-    fi
+  echo "Detected macOS; running darwin-rebuild $operation_desc..."
+  if sudo darwin-rebuild "$operation" --flake ~/dotfiles"#$profile_name" --cores 0; then
+    switch_success=true
   fi
 else
-  echo "Detected non-macOS; running nix switch..."
-  if [ "$test_only" = true ]; then
-    echo "Running test build..."
-    if sudo nixos-rebuild --log-format internal-json build --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
-      switch_success=true
-      echo "Test build successful! Configuration is valid."
-    else
-      switch_success=false
-    fi
-  else
-    if sudo nixos-rebuild --log-format internal-json switch --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
-      switch_success=true
-    else
-      switch_success=false
-    fi
+  echo "Detected non-macOS; running nixos-rebuild $operation_desc..."
+  if sudo nixos-rebuild --log-format internal-json "$operation" --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
+    switch_success=true
   fi
 fi
 
 if [ "$switch_success" = false ]; then
-  echo "Error: Switch failed."
+  if [ "$build_only" = true ]; then
+    echo "Error: Build failed."
+  else
+    echo "Error: Switch failed."
+  fi
   exit 1
 fi
 
-# Get the current NixOS system profile version (e.g., system-1526-link)
-nixos_version=""
-if [ "$os" != "Darwin" ]; then
-  nixos_version=$(basename "$(readlink /nix/var/nix/profiles/system)" | sed 's/-link$//')
+if [ "$build_only" = true ]; then
+  echo "Build completed successfully. Run this script again without --build-only to switch using the cached result."
+  exit 0
 fi
 
 copy_files_to_git_root() {
@@ -184,12 +171,6 @@ copy_files_to_git_root() {
   done
 }
 
-# Skip file copying and committing if we're only testing
-if [ "$test_only" = true ]; then
-  echo "Test completed successfully."
-  exit 0
-fi
-
 # Get the current NixOS system profile version (e.g., system-1526-link)
 nixos_version=""
 if [ "$os" != "Darwin" ]; then
@@ -210,6 +191,15 @@ if [ "$copy_back" = true ]; then
       "$HOME/.config/nvim"
     )
     copy_files_to_git_root "${config_files[@]}"
+
+    extensions_dir="$HOME/.vscode/extensions"
+    if [ -d "$extensions_dir" ]; then
+      extensions_output="$git_root/generated/$profile_name/vscode/extensions.txt"
+      mkdir -p "$(dirname "$extensions_output")"
+      command ls -1 "$extensions_dir" >"$extensions_output"
+    else
+      echo "Warning: VSCode extensions directory not found: $extensions_dir" >&2
+    fi
   fi
 
   if [ "$os" = "Darwin" ]; then

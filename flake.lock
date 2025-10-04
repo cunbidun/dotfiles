@@ -1206,7 +1206,7 @@
       },
       "original": {
         "owner": "nvmd",
-        "ref": "main",
+        "ref": "v1.20250927.0",
         "repo": "nixos-raspberrypi",
         "type": "github"
       }

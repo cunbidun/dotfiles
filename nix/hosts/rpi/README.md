@@ -33,5 +33,5 @@ nix-env -iA nixpkgs.nixos-install-tools
 - on a remote host run
 ```bash
 nix run github:nix-community/nixos-anywhere --  --flake .#rpi5 --build-on remote --phases disko root@192.168.1.165
-nix run github:nix-community/nixos-anywhere --  --flake .#rpi5 --build-on remote --phases install  root@192.168.1.165
+nix run github:nix-community/nixos-anywhere --  --flake .#rpi5 --build-on remote --phases install root@192.168.1.165
 ```
