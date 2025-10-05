@@ -2,8 +2,10 @@
   project_root,
   userdata,
   pkgs,
+  lib,
   ...
 }: let
+  inherit (pkgs.stdenv) isLinux;
   profileSetting = {
     search = {
       force = true;
@@ -273,7 +275,7 @@ in {
   };
 
   # create a firefox -p vi profile with desktop file
-  xdg.desktopEntries = {
+  xdg.desktopEntries = lib.mkIf isLinux {
     firefox-vi = {
       name = "Firefox (vi)";
       exec = "${pkgs.firefox}/bin/firefox -P vi";

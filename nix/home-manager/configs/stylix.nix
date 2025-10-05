@@ -38,7 +38,7 @@
       #!/usr/bin/env bash
       # no-op script to avoid double activation
     '';
-    
+
     # Write the current theme name directly in the specialization
     home.file.".local/state/stylix/current-theme-name.txt".text = lib.mkForce "${theme}-${polarity}";
   };
@@ -206,7 +206,7 @@ in {
       terminal = 0.85;
     };
 
-    fonts = {
+    fonts = lib.mkIf isLinux {
       sizes = {
         applications = 11;
         terminal = 10;

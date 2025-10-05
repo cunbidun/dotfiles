@@ -432,6 +432,7 @@ in {
           "**/__pycache__" = true;
           "**/.pytest_cache" = true;
         };
+        "window.autoDetectColorScheme" = lib.mkIf isDarwin true;
         "[python]".editor.defaultFormatter = "ms-python.black-formatter";
         "cSpell.userWords" = [
           "opensearch"

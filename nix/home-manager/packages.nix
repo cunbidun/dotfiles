@@ -68,7 +68,6 @@ in {
     pkgs.ncdu # A disk usage analyzer
     pkgs.zip # A compression and archive utility
     pkgs.unzip # A decompression utility
-    pkgs.newsboat # An RSS feed reader
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
@@ -169,6 +168,8 @@ in {
     pkgs.hwinfo # A hardware information tool
     pkgs.imagemagick # A suite of image manipulation tools
     pkgs.yt-dlp # A command-line tool to download videos from YouTube and other sites
+
+    pkgs.newsboat # An RSS feed reader
   ];
 
   mac_packages = [
