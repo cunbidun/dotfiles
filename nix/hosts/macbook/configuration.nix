@@ -233,6 +233,10 @@ in {
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
 
+  services.tailscale = {
+    enable = true;
+  };
+
   # from
   # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
   # If you configure some of your MacOS preferences via nix-darwin and then activate your system,

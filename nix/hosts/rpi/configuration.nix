@@ -90,5 +90,9 @@
     config.boot.kernelPackages.kernel.version
   ];
 
+  services.tailscale = {
+    enable = true;
+  };
+
   programs.zsh.enable = true;
 }
