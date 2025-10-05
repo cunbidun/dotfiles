@@ -171,9 +171,9 @@
 in {
   home.file = {
     ".local/share/vim-plugins".source = local-plugin-dir;
-    # TODO: Not hermetic, relying on dotfiles install at dotfiles
-    # ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/settings.json";
-    # ".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/Code/keybindings.json";
+
+    # for quick iteration when developing, change the source
+    # config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
     ".config/nvim".source = "${project_root}/utilities/nvim";
   };
 
