@@ -1,9 +1,5 @@
 # NixOS on Raspberry Pi 5
 
-> **⚠️ WARNING: This configuration is currently not working and needs updates.**
-> 
-> The instructions below are incomplete and may contain errors. Use at your own risk.
-
 ## Overview
 
 This directory contains NixOS configuration for Raspberry Pi 5 using the [`nixos-raspberrypi`](https://github.com/nvmd/nixos-raspberrypi) flake. The system can be deployed using `nixos-anywhere` for remote installation.
@@ -69,20 +65,12 @@ nix run github:nix-community/nixos-anywhere -- --flake .#rpi5 --build-on remote 
 
 # Phase 2: System installation  
 nix run github:nix-community/nixos-anywhere -- --flake .#rpi5 --build-on remote --phases install root@192.168.1.165
+
+# and then
+reboot
+
+# Phase 3: After reboot, just switch to the new configuration normally
+nixos-rebuild --log-format internal-json switch --flake .#rpi5 --target-host root@rpi5 --cores 0 |& nom --json
 ```
 
 **Note:** Replace `192.168.1.165` with your Pi's actual IP address.
-
-## Configuration Details
-
-- **Flake target**: `.#rpi5` (defined in `flake.nix`)
-- **Architecture**: `aarch64-linux` 
-- **Base modules**: Raspberry Pi 5 with 16K page size, VC4 display, and Bluetooth
-- **Disk configuration**: Managed by Disko (see `disko.nix`)
-
-## Troubleshooting
-
-- Ensure the Pi is accessible via SSH before deployment
-- Check network connectivity between build machine and Pi
-- Verify the correct IP address is used in deployment commands
-- Monitor the Pi's console output during installation

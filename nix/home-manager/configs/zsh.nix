@@ -66,6 +66,7 @@
       eval "$(starship init zsh)"
     '';
   };
+  programs.eza.enable = true;
 
   programs.bat = {
     enable = true;

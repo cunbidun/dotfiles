@@ -56,10 +56,7 @@
 in {
   default_packages = [
     # Utils
-    pkgs.bat # A cat clone with syntax highlighting and Git integration
-    pkgs.eza # A tiny file explorer
     pkgs.htop # An interactive process viewer
-    pkgs.fzf # A command-line fuzzy finder
     pkgs.tree # A recursive directory listing program
     pkgs.tmux # A terminal multiplexer
     pkgs.tmuxinator # A tmux session manager
@@ -71,11 +68,6 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
-    pkgs.stylua
-    pkgs.clang-tools
-    pkgs.shfmt
-    pkgs.black
-    pkgs.alejandra
 
     # AI/Development tools
     inputs.codex-nix.packages.${pkgs.system}.default
@@ -99,8 +91,6 @@ in {
     pkgs.trash-cli
 
     # Hyprland
-    pkgs.bun # to run ags
-    pkgs.hyprpaper # A wallpaper utility for Hyprland
     pkgs.wl-clipboard # A command-line copy/paste tool for Wayland
     pkgs.slurp # A tool to select a region on a screen
     pkgs.grim # A screen capture utility for Wayland
@@ -132,13 +122,6 @@ in {
     pkgs.pdfgrep # A tool to search text in PDF files
 
     pkgs.adw-gtk3
-
-    # Browser
-    # This is an example of overriding chrome start command
-    # (pkgs.google-chrome.override {
-    #   commandLineArgs = "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version3";
-    # })
-    # pkgs.google-chrome
 
     # Font
     pkgs.liberation_ttf # Liberation TrueType fonts

@@ -2,39 +2,93 @@
   config,
   userdata,
   pkgs,
+  lib,
   ...
 }: {
-  networking.hostName = "rpi5";
-  networking.networkmanager.enable = true;
-  system.nixos.tags = let
-    cfg = config.boot.loader.raspberryPi;
-  in [
-    "raspberry-pi-${cfg.variant}"
-    cfg.bootloader
+  users.users = {
+    ${userdata.username} = {
+      isNormalUser = true;
+      description = userdata.name;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "video"
+        "input"
+        "i2c"
+        "docker"
+      ];
+      shell = pkgs.zsh;
+      openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
+    };
+
+    root = {
+      openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
+    };
+  };
+
+  security = {
+    polkit.enable = true;
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = false;
+    };
+  };
+
+  services = {
+    openssh = {
+      enable = true;
+      settings = {
+        PermitRootLogin = "yes";
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
+    };
+  };
+
+  system.stateVersion = config.system.nixos.release;
+
+  time.timeZone = userdata.timeZone;
+
+  networking = {
+    hostName = "rpi5";
+    useNetworkd = true;
+    firewall.allowedUDPPorts = [5353];
+    wireless.enable = false;
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        Network = {
+          EnableIPv6 = true;
+          RoutePriorityOffset = 300;
+        };
+        Settings.AutoConnect = true;
+      };
+    };
+  };
+
+  systemd.network.networks = {
+    "99-ethernet-default-dhcp".networkConfig.MulticastDNS = "yes";
+    "99-wireless-client-dhcp".networkConfig.MulticastDNS = "yes";
+  };
+
+  systemd.services = {
+    systemd-networkd.stopIfChanged = false;
+    systemd-resolved.stopIfChanged = false;
+  };
+
+  services.udev.extraRules = ''
+    # Ignore partitions with "Required Partition" GPT partition attribute
+    # On our RPis this is firmware (/boot/firmware) partition
+    ENV{ID_PART_ENTRY_SCHEME}=="gpt", \
+      ENV{ID_PART_ENTRY_FLAGS}=="0x1", \
+      ENV{UDISKS_IGNORE}="1"
+  '';
+
+  system.nixos.tags = [
+    "raspberry-pi-5"
+    config.boot.loader.raspberryPi.bootloader
     config.boot.kernelPackages.kernel.version
   ];
-  boot = {
-    loader.raspberryPi.firmwarePackage = pkgs.linuxAndFirmware.v6_6_31.raspberrypifw;
-    loader.raspberryPi.bootloader = "kernel";
-    kernelPackages = pkgs.linuxAndFirmware.v6_6_31.linuxPackages_rpi5;
-  };
-
-  system.stateVersion = "25.05";
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-  };
-
-  users.users.${userdata.username} = {
-    isNormalUser = true;
-    description = userdata.name;
-    extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker"];
-    shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
-  };
 
   programs.zsh.enable = true;
 }

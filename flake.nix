@@ -28,8 +28,10 @@
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
-    disko.url = "github:nix-community/disko";
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     # +----------+
     # | Hyprland |
     # +----------+
@@ -89,6 +91,11 @@
     # +-- MacOS specific --+
     mac-app-util.url = "github:hraban/mac-app-util";
 
+    # +-- Raspberry Pi --+
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
+    home-manager-rpi5 = {url = "github:nix-community/home-manager/release-25.05";};
+
+    # +-- Windows specific --+
     winapps = {
       url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -198,31 +205,23 @@
         homePath = "${project_root}/nix/hosts/nixos/home.nix";
         diskoPath = "${project_root}/nix/hosts/nixos/disko.nix";
       };
-      # Raspberry Pi 5 system (accessible as .#rpi5)
+
       rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
-        specialArgs = {
-          inherit inputs;
-          nixos-raspberrypi = inputs.nixos-raspberrypi;
-          userdata = userdata;
-          overlays = [
-            (_: prev: {
-              gjs = (prev.gjs.override {installTests = false;}).overrideAttrs {doCheck = false;};
-            })
-          ];
-        };
+        specialArgs = inputs // {inherit userdata;};
         trustCaches = true;
         modules = [
-          ({modulesPath, ...}: {
-            imports = with inputs.nixos-raspberrypi.nixosModules; [
+          ({nixos-raspberrypi, ...}: {
+            imports = with nixos-raspberrypi.nixosModules; [
               raspberry-pi-5.base
               raspberry-pi-5.page-size-16k
               raspberry-pi-5.display-vc4
-              raspberry-pi-5.bluetooth
             ];
           })
           inputs.disko.nixosModules.disko
-          ./nix/hosts/rpi/disko.nix
+          ./nix/hosts/rpi/hardware-configuration.nix
           ./nix/hosts/rpi/configuration.nix
+          inputs.home-manager-rpi5.nixosModules.home-manager
+          (mkHomeManagerModule "${project_root}/nix/hosts/rpi/home.nix")
         ];
       };
     };

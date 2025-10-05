@@ -2,6 +2,7 @@
   username = "cunbidun";
   email = "cunbidun@gmail.com";
   name = "Duy Pham";
+  timeZone = "America/New_York";
 
   # Set to true to use a hermetic Neovim configuration
   # With this option enabled, you modify your Neovim configuration in the dotfiles repository, then run

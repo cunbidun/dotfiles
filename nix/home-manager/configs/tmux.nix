@@ -3,33 +3,11 @@
   lib,
   ...
 }: let
-  # Helper function to fetch a vim plugin from GitHub.
-  # customTmuxPlugin = {
-  #   owner,
-  #   repo,
-  #   rev,
-  #   sha256,
-  #   pname,
-  # }:
-  #   pkgs.stdenv.mkDerivation {
-  #     pname = pname;
-  #     name = pname + "-" + rev;
-  #     src = pkgs.fetchFromGitHub {
-  #       owner = owner;
-  #       repo = repo;
-  #       rev = rev;
-  #       sha256 = sha256;
-  #     };
-  #     installPhase = ''
-  #       mkdir -p $out
-  #       cp -r . $out
-  #     '';
-  #   };
   tmux-plugin-list = with pkgs.tmuxPlugins; [
     extrakto
   ];
 
-  local-plugin-dir = pkgs.runCommand "vim-plugins" {} ''
+  local-plugin-dir = pkgs.runCommand "tmux-plugins" {} ''
     mkdir -p $out
 
     # Regular plugins
