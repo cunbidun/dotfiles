@@ -14,35 +14,20 @@ in {
 
   # Necessary for using flakes on this system.
   nix = {
-    enable = true;
     optimise.automatic = true;
     # TODO: this some how break 'nix develop'
     # https://github.com/maralorn/nix-output-monitor/issues/166
     # https://github.com/maralorn/nix-output-monitor/issues/140
     # package = inputs.nix-monitored.packages.${pkgs.system}.default;
-    settings = let
-      substituters = [
-        "https://cache.nixos.org"
-        "https://nixos-raspberrypi.cachix.org"
-        "https://hyprland.cachix.org"
-        "https://yazi.cachix.org"
-        "https://winapps.cachix.org/"
-        "https://vicinae.cachix.org"
-      ];
-    in {
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
+    settings = {
       experimental-features = "nix-command flakes pipe-operators";
+      accept-flake-config = true;
       builders-use-substitutes = true;
       trusted-users = ["root" "@wheel"]; # removed unused 'builder'
-      substituters = substituters;
-      trusted-substituters = substituters;
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
-        "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
-        "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-      ];
     };
   };
 

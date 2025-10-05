@@ -16,52 +16,21 @@
   ];
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-  # devenv wants users to be in the trusted-users list so that they can access the /nix/store
-
   nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
     optimise.automatic = true;
+    # TODO: this some how break 'nix develop'
+    # https://github.com/maralorn/nix-output-monitor/issues/166
+    # https://github.com/maralorn/nix-output-monitor/issues/140
+    # package = inputs.nix-monitored.packages.${pkgs.system}.default;
     gc = {
       automatic = true;
       options = "--delete-older-than 7d";
     };
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "rpi-build"; # SSH config alias defined below
-        sshUser = "root"; # use your regular user on the Pi
-        system = "aarch64-linux";
-        protocol = "ssh";
-        maxJobs = 4; # adjust to Pi core count
-        speedFactor = 1;
-        supportedFeatures = ["big-parallel"];
-        mandatoryFeatures = [];
-      }
-    ];
-    settings = let
-      substituters = [
-        "https://cache.nixos.org"
-        "https://nixos-raspberrypi.cachix.org"
-        "https://hyprland.cachix.org"
-        "https://yazi.cachix.org"
-        "https://winapps.cachix.org/"
-        "https://vicinae.cachix.org"
-      ];
-    in {
+    settings = {
+      experimental-features = "nix-command flakes pipe-operators";
+      accept-flake-config = true;
       builders-use-substitutes = true;
       trusted-users = ["root" "@wheel"]; # removed unused 'builder'
-      substituters = substituters;
-      trusted-substituters = substituters;
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
-        "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
-        "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-      ];
     };
   };
 

@@ -1,5 +1,24 @@
 {
   description = "cunbidun's dotfiles";
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.nixos.org"
+      "https://nixos-raspberrypi.cachix.org"
+      "https://hyprland.cachix.org"
+      "https://yazi.cachix.org"
+      "https://winapps.cachix.org/"
+      "https://vicinae.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
+      "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+    ];
+    connect-timeout = 5;
+  };
 
   inputs = {
     master.url = "github:nixos/nixpkgs?ref=master";
@@ -10,7 +29,7 @@
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
     disko.url = "github:nix-community/disko";
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/v1.20250927.0";
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
     # +----------+
     # | Hyprland |
     # +----------+
