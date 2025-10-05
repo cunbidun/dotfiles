@@ -180,11 +180,16 @@
         diskoPath = "${project_root}/nix/hosts/nixos/disko.nix";
       };
       # Raspberry Pi 5 system (accessible as .#rpi5)
-      rpi5 = inputs.nixos-raspberrypi.lib.nixosSystem {
+      rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
         specialArgs = {
           inherit inputs;
           nixos-raspberrypi = inputs.nixos-raspberrypi;
           userdata = userdata;
+          overlays = [
+            (_: prev: {
+              gjs = (prev.gjs.override {installTests = false;}).overrideAttrs {doCheck = false;};
+            })
+          ];
         };
         trustCaches = true;
         modules = [

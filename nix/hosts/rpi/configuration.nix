@@ -13,6 +13,11 @@
     cfg.bootloader
     config.boot.kernelPackages.kernel.version
   ];
+  boot = {
+    loader.raspberryPi.firmwarePackage = pkgs.linuxAndFirmware.v6_6_31.raspberrypifw;
+    loader.raspberryPi.bootloader = "kernel";
+    kernelPackages = pkgs.linuxAndFirmware.v6_6_31.linuxPackages_rpi5;
+  };
 
   system.stateVersion = "25.05";
 
