@@ -222,6 +222,9 @@
           ./nix/hosts/rpi/configuration.nix
           inputs.home-manager-rpi5.nixosModules.home-manager
           (mkHomeManagerModule "${project_root}/nix/hosts/rpi/home.nix")
+          ({...}: {
+            nixpkgs.overlays = import "${project_root}/nix/overlays" inputs;
+          })
         ];
       };
     };

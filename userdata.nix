@@ -11,6 +11,9 @@
   # making it's faster to iterate and test changes.
   hermeticNvimConfig = false;
 
+  # Hosts that should always receive the hermetic Neovim configuration, even when
+  # hermeticNvimConfig is disabled globally. Useful for remote systems where the
+  # dotfiles checkout is not present (e.g., Raspberry Pi builds).
   authorizedKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
   ];

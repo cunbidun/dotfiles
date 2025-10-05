@@ -16,6 +16,7 @@ in {
   imports = [
     "${project_root}/nix/home-manager/configs/zsh.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
+    "${project_root}/nix/home-manager/configs/nvim.nix"
   ];
   home.username = userdata.username;
   home.homeDirectory = "/home/${userdata.username}";
