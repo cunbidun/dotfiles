@@ -223,7 +223,23 @@
           inputs.home-manager-rpi5.nixosModules.home-manager
           (mkHomeManagerModule "${project_root}/nix/hosts/rpi/home.nix")
           ({...}: {
-            nixpkgs.overlays = import "${project_root}/nix/overlays" inputs;
+            nixpkgs.overlays =
+              import "${project_root}/nix/overlays" inputs
+              ++ [
+                (final: prev: {
+                  pythonPackagesExtensions =
+                    prev.pythonPackagesExtensions
+                    ++ [
+                      (pythonFinal: pythonPrev: {
+                        # Override markdown-it-py for all Python versions
+                        markdown-it-py = pythonPrev."markdown-it-py".overridePythonAttrs (old: {
+                          doCheck = false;
+                          doInstallCheck = false;
+                        });
+                      })
+                    ];
+                })
+              ];
           })
         ];
       };
