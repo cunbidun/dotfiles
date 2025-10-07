@@ -97,18 +97,11 @@
 
   services.pihole = {
     # to set password:
-    # sudo podman exec -it pihole -- /bin/bash and then run `pihole setpassword <password>`
+    # sudo podman exec -it pihole /bin/bash and then run `pihole setpassword <password>`
     # go to https://mynetworksettings.com/#/adv/network/networkconnections/broadsettings/WAN1 to set upstream DNS servers
     enable = true;
     serverIp = "192.168.1.165"; # Pi-Hole IP
   };
-  services.resolved = {
-    enable = false;
-  };
-  networking.nameservers = [
-    "1.1.1.1"
-    "8.8.8.8"
-  ];
 
   programs.zsh.enable = true;
 }
