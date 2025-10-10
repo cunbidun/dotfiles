@@ -95,12 +95,6 @@
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
     home-manager-rpi5 = {url = "github:nix-community/home-manager/release-25.05";};
 
-    # +-- Windows specific --+
-    winapps = {
-      url = "github:winapps-org/winapps";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     codex-nix = {
       url = "github:sadjow/codex-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

@@ -26,6 +26,7 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
     "${project_root}/nix/home-manager/configs/firefox.nix"
+    "${project_root}/nix/home-manager/configs/chromium.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
@@ -33,7 +34,6 @@ in {
     "${project_root}/nix/home-manager/configs/hyprlock.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
     inputs.vicinae.homeManagerModules.default
-    "${project_root}/nix/home-manager/configs/winapps"
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
     "${project_root}/nix/home-manager/configs/activitywatch.nix"

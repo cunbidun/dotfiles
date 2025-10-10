@@ -365,20 +365,6 @@
         "type": "github"
       }
     },
-    "flake-compat_4": {
-      "locked": {
-        "lastModified": 1696426674,
-        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
-        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
-        "revCount": 57,
-        "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/edolstra/flake-compat/1.0.1/018afb31-abd1-7bff-a5e4-cff7e18efb7a/source.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -534,24 +520,6 @@
     "flake-utils_6": {
       "inputs": {
         "systems": "systems_12"
-      },
-      "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_7": {
-      "inputs": {
-        "systems": "systems_13"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -1060,11 +1028,11 @@
     },
     "master": {
       "locked": {
-        "lastModified": 1759286389,
-        "narHash": "sha256-ewHfpE+spt4rK09kZ+reWuhg5EQ2B9YUY1Sd0lwDeZg=",
+        "lastModified": 1759887028,
+        "narHash": "sha256-gljzEVuaj841XmluE1ng62RHMN5NkMHqdw+4OtQcpi4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5eb18af2d6153c483c728f594e4dc2ee3efd762e",
+        "rev": "8b5c9dd8856f0c0cf46cc91f2c21c106a9d42e25",
         "type": "github"
       },
       "original": {
@@ -1093,21 +1061,6 @@
       }
     },
     "nix-filter": {
-      "locked": {
-        "lastModified": 1731533336,
-        "narHash": "sha256-oRam5PS1vcrr5UPgALW0eo1m/5/pls27Z/pabHNy2Ms=",
-        "owner": "numtide",
-        "repo": "nix-filter",
-        "rev": "f7653272fd234696ae94229839a99b73c9ab7de0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "nix-filter",
-        "type": "github"
-      }
-    },
-    "nix-filter_2": {
       "locked": {
         "lastModified": 1731533336,
         "narHash": "sha256-oRam5PS1vcrr5UPgALW0eo1m/5/pls27Z/pabHNy2Ms=",
@@ -1736,7 +1689,6 @@
         "pyprland": "pyprland",
         "stylix": "stylix",
         "vicinae": "vicinae",
-        "winapps": "winapps",
         "xremap-flake": "xremap-flake",
         "yazi": "yazi"
       }
@@ -1924,21 +1876,6 @@
       }
     },
     "systems_12": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_13": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -2233,29 +2170,6 @@
         "type": "github"
       }
     },
-    "winapps": {
-      "inputs": {
-        "flake-compat": "flake-compat_4",
-        "flake-utils": "flake-utils_6",
-        "nix-filter": "nix-filter_2",
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1758813453,
-        "narHash": "sha256-kpk4OmB/+3xuy3RA93sldWMWvQ1PDq3m+dd1CVwZh84=",
-        "owner": "winapps-org",
-        "repo": "winapps",
-        "rev": "7018afa1bdc245636e24112c86f70b5330798fb7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "winapps-org",
-        "repo": "winapps",
-        "type": "github"
-      }
-    },
     "xdph": {
       "inputs": {
         "hyprland-protocols": [
@@ -2343,7 +2257,7 @@
     },
     "yazi": {
       "inputs": {
-        "flake-utils": "flake-utils_7",
+        "flake-utils": "flake-utils_6",
         "nixpkgs": "nixpkgs_19",
         "rust-overlay": "rust-overlay"
       },

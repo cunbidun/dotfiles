@@ -28,6 +28,7 @@ in {
     escapeTime = 10;
     keyMode = "vi";
     terminal = "xterm-256color";
+    shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = ''
       set -g @plugin_path "~/.local/share/tmux-plugins"
       set -ga terminal-overrides ",xterm-256color:Tc"
