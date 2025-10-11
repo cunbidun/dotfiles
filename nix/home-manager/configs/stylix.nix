@@ -29,11 +29,11 @@
       else "prefer-dark";
   in {
     dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
+    services.vicinae.settings.theme.name = config.vicinaeTheme;
     stylix = {
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${config.scheme}.yaml";
       image = lib.mkForce config.wallpaper;
     };
-    # services.vicinae.settings.theme.name = lib.mkForce config.vicinaeTheme;
     home.activation.reconciliation_theme = lib.mkForce ''
       #!/usr/bin/env bash
       # no-op script to avoid double activation
@@ -249,20 +249,7 @@ in {
     "col.inactive" = lib.mkForce "rgb(${config.lib.stylix.colors.base01})";
     text_color_inactive = lib.mkForce "rgb(${config.lib.stylix.colors.base06})";
   };
-  home.activation.vicinae-theme-script = lib.mkIf isLinux ''
-    # chance vininae theme on theme change if vicinae is installed
-    if command -v /etc/profiles/per-user/${userdata.username}/bin/vicinae >/dev/null 2>&1; then
-      theme="$(${pkgs.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # 'default' by default
-      polarity="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # 'dark' by default
 
-      vicinaeTheme=$(jq -r --arg theme "$theme" --arg polarity "$polarity" '.[$theme][$polarity].vicinaeTheme' ${config.home.homeDirectory}/.local/state/stylix/theme-config.json)
-
-      echo "Setting Vicinae theme to $vicinaeTheme"
-      /etc/profiles/per-user/${userdata.username}/bin/vicinae "vicinae://theme/set/$vicinaeTheme"
-    else
-      echo "Vicinae not installed, skipping theme change"
-    fi
-  '';
   home.file = {
     # dump the themeConfigs as json for other programs to consume
     ".local/state/stylix/theme-config.json".text = builtins.toJSON themeConfigs;

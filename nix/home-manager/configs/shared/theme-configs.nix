@@ -30,7 +30,7 @@
       vscodeTheme = "Catppuccin Latte";
       nvimTheme = "catppuccin";
       hyprpanelTheme = "catppuccin_mocha";
-      vicinaeTheme = "catppuccin-latte";
+      vicinaeTheme = "catppuccin_latte";
     };
     dark = {
       scheme = "catppuccin-mocha";

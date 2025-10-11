@@ -32,6 +32,7 @@ in {
     "${project_root}/nix/home-manager/configs/tofi.nix"
     "${project_root}/nix/home-manager/configs/yazi.nix"
     "${project_root}/nix/home-manager/configs/hyprlock.nix"
+    "${project_root}/nix/home-manager/configs/vicinae.nix"
     "${project_root}/nix/home-manager/configs/vscode.nix"
     inputs.vicinae.homeManagerModules.default
     "${project_root}/nix/home-manager/systemd.nix"
@@ -223,11 +224,6 @@ in {
   };
   programs.hyprcursor-phinger.enable = true;
   programs.zoxide.enable = true;
-
-  services.vicinae = {
-    enable = true;
-    autoStart = true;
-  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

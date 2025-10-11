@@ -68,6 +68,7 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
+    pkgs.alejandra # nix formatter 
 
     # AI/Development tools
     inputs.codex-nix.packages.${pkgs.system}.default
