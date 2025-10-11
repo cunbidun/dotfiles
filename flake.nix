@@ -24,7 +24,6 @@
     master.url = "github:nixos/nixpkgs?ref=master";
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
     nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-25.05";};
-
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {url = "github:nix-community/home-manager";};
     apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
@@ -101,6 +100,12 @@
     };
     vicinae = {
       url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # +-- Windows interop --+
+    winboat = {
+      url = "github:Rexcrazy804/winboat?ref=fix-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };

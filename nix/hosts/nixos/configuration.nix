@@ -10,7 +10,7 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
+    inputs.winboat.nixosModules.default
     ./hardware-configuration.nix
     ./uxplay.nix
   ];
@@ -257,6 +257,8 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
+
+  services.winboat.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

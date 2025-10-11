@@ -464,6 +464,7 @@ in {
         "everforest.darkWorkbench" = "flat";
       };
       extensions = pkgs.nix4vscode.forVscodeVersion vscodeVersion.version [
+        "sainnhe.everforest"
         "activitywatch.aw-watcher-vscode"
         "arcticicestudio.nord-visual-studio-code"
         "bazelbuild.vscode-bazel"

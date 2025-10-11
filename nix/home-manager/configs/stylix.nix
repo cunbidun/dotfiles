@@ -187,6 +187,7 @@ in {
       yazi.enable = true;
       hyprlock.enable = true;
       firefox.profileNames = [userdata.username];
+      fzf.enable = true;
     };
 
     targets.gnome.enable = lib.mkIf isLinux true;

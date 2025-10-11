@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   tmux-plugin-list = with pkgs.tmuxPlugins; [
@@ -17,6 +18,20 @@
       tmux-plugin-list}
 
   '';
+
+  tmuxConfigDir = "${config.home.homeDirectory}/.config/tmux";
+  tmuxConfigPath = "${tmuxConfigDir}/tmux.conf";
+  tmuxReloadScript = pkgs.writeShellScript "tmux-reload" ''
+    set -euo pipefail
+
+    if ! ${pkgs.tmux}/bin/tmux has-session 2>/dev/null; then
+      exit 0
+    fi
+
+    ${pkgs.tmux}/bin/tmux source-file ${tmuxConfigPath}
+    ${pkgs.tmux}/bin/tmux display-message "tmux config reloaded"
+  '';
+
 in {
   home.file.".local/share/tmux-plugins".source = local-plugin-dir;
 
@@ -40,9 +55,9 @@ in {
       # clear both screen and history
       bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
       # edit configuration
-      bind e new-window -n "editing ~/.tmux.conf" sh -c '${EDITOR:-vim} ~/.tmux.conf && tmux source ~/.tmux.conf && tmux display "~/.tmux.conf sourced"'
+      bind e new-window -n "tmux.conf" "sh -c '$EDITOR ${tmuxConfigPath}'"
       # reload configuration
-      bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
+      bind r run-shell "${tmuxReloadScript}"
       # kill-session
       bind -n C-q confirm-before -p "kill-session? (y/n)" kill-session
 
@@ -75,7 +90,33 @@ in {
         send-keys -X search-forward "$USER@"
 
       # -- plugin --
-      run-shell "#{@plugin_path}/extrakto/extrakto.tmux"
+      run-shell "#{@plugin_path}/tmuxplugin-extrakto/share/tmux-plugins/extrakto/extrakto.tmux"
     '';
   };
+
+
+  systemd.user.services.tmux-reload = {
+    Unit = {
+      Description = "Reload tmux after config updates";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = tmuxReloadScript;
+    };
+  };
+
+  systemd.user.paths.tmux-reload = {
+    Unit = {
+      Description = "Watch tmux config for changes";
+    };
+    Path = {
+      PathModified = tmuxConfigPath;
+      PathChanged = tmuxConfigDir;
+      Unit = "tmux-reload.service";
+    };
+    Install = {
+      WantedBy = ["default.target"];
+    };
+  };
+
 }

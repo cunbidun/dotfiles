@@ -50,9 +50,20 @@ in {
         };
         layouts = {
           "0" = {
-            left = ["dashboard" "workspaces" "windowtitle"];
+            left = ["dashboard" "workspaces" "submap" "windowtitle"];
             middle = ["media"];
             right = ["volume" "network" "bluetooth" "custom/polarity" "hypridle" "systray" "clock" "notifications"];
+          };
+        };
+
+        customModules = {
+          submap = {
+            label = true;
+            showSubmapName = true;
+            enabledIcon = "󰌐";
+            disabledIcon = "󰌌";
+            enabledText = "Submap On";
+            disabledText = "Submap Off";
           };
         };
       };
