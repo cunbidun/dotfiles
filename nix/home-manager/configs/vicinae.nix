@@ -24,9 +24,27 @@ in {
     };
   };
 
-  systemd.user.services.vicinae = {
+  systemd.user.services.vicinae-reload = {
     Unit = {
-      X-Restart-Triggers = ["%h/.config/vicinae/vicinae.json"];
+      Description = "Restart Vicinae after config updates";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/systemctl --user restart vicinae.service";
+    };
+  };
+
+  systemd.user.paths.vicinae-reload = {
+    Unit = {
+      Description = "Watch Vicinae config for changes";
+    };
+    Path = {
+      PathModified = "%h/.config/vicinae/vicinae.json";
+      PathChanged = "%h/.config/vicinae";
+      Unit = "vicinae-reload.service";
+    };
+    Install = {
+      WantedBy = ["default.target"];
     };
   };
 }
