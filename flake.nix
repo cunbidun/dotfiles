@@ -101,7 +101,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.14.4";
+      url = "github:vicinaehq/vicinae";
     };
 
     # +-- Windows interop --+
