@@ -8,6 +8,7 @@
       "https://yazi.cachix.org"
       "https://winapps.cachix.org/"
       "https://vicinae.cachix.org"
+      "https://codex-cli.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -16,6 +17,7 @@
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
       "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+      "codex-cli.cachix.org-1:BH31Jb2xSzV+9BFgVfR9j7TDW3L8CSMziFdfLrKEKIk="
     ];
     connect-timeout = 5;
   };
@@ -100,7 +102,6 @@
     };
     vicinae = {
       url = "github:vicinaehq/vicinae/v0.14.4";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # +-- Windows interop --+
@@ -111,7 +112,6 @@
   };
 
   outputs = {
-    self,
     nixpkgs-unstable,
     nix-darwin,
     home-manager,
