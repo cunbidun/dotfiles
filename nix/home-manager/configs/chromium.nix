@@ -10,12 +10,13 @@
     url,
     icon ? null,
     profile ? "Default",
+    wmClass ? lib.replaceStrings [" "] [""] name,
   }: let
     desktopEntry =
       {
         inherit name;
         comment = "${name} PWA via Chrome";
-        exec = "${pkgs.chromium}/bin/chromium --profile-directory=${profile} --app=${url}";
+        exec = "${pkgs.chromium}/bin/chromium --class=${wmClass} --profile-directory=${profile} --app=${url}";
         terminal = false;
         categories = ["Network"];
         startupNotify = false;
@@ -35,6 +36,10 @@ in {
       name = "Messenger";
       url = "https://www.messenger.com/";
       icon = "messenger";
+    })
+    (mkChromePWA {
+      name = "Zalo";
+      url = "https://chat.zalo.me/";
     })
   ];
 }
