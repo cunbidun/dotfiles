@@ -1,0 +1,4 @@
+[
+  ./adguard.nix
+  ./pihole.nix
+]
