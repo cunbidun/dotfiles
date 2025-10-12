@@ -16,11 +16,26 @@ in {
     };
     persistanceRoot = mkOption {
       type = types.str;
-      default = "/var/log/pihole";
+      default = "/opt/pihole/etc";
     };
   };
 
   config = mkIf cfg.enable {
+    services.unbound = {
+      enable = true;
+      settings = {
+        server = {
+          # Listen only on loopback; Pi-hole (host network) will hit 127.0.0.1#5335
+          interface = ["127.0.0.1" "::1"];
+          port = 5335;
+          prefetch = true;
+          access-control = [
+            "127.0.0.0/8 allow"
+          ];
+        };
+      };
+    };
+
     services.resolved = {
       enable = false;
     };
@@ -56,14 +71,17 @@ in {
           "${cfg.persistanceRoot}/etc/pihole:/etc/pihole"
           "${cfg.persistanceRoot}/etc/dnsmasq.d:/etc/dnsmasq.d"
         ];
-        ports = [
-          "0.0.0.0:53:53/tcp"
-          "0.0.0.0:53:53/udp"
-          "${cfg.serverIp}:9080:80/tcp"
-        ];
+        extraOptions = ["--network=host" "--cap-add=NET_ADMIN"];
         environment = {
           PIHOLE_GID = "${toString config.users.groups.pihole.gid}";
           PIHOLE_UID = "${toString config.users.users.pihole.uid}";
+
+          # check https://docs.pi-hole.net/docker/upgrading/v5-v6/ for the lists of options
+          # to use google DNS, use:
+          # FTLCONF_dns_upstreams = "127.0.0.1#5335;8.8.8.8;8.8.4.4";
+          FTLCONF_dns_upstreams = "127.0.0.1#5335";
+          FTLCONF_dns_listeningMode = "all";
+          FTLCONF_webserver_api_password = "password";
           TZ = "${userdata.timeZone}";
         };
       };

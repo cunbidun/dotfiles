@@ -53,18 +53,9 @@
   networking = {
     hostName = "rpi5";
     useNetworkd = true;
-    firewall.allowedUDPPorts = [5353];
-    wireless.enable = false;
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        Network = {
-          EnableIPv6 = true;
-          RoutePriorityOffset = 300;
-        };
-        Settings.AutoConnect = true;
-      };
-    };
+    firewall.allowedUDPPorts = [53];
+    firewall.allowedTCPPorts = [53 80 443];
+    firewall.trustedInterfaces = ["tailscale0"];
   };
 
   systemd.network.networks = {
@@ -93,12 +84,20 @@
 
   services.tailscale = {
     enable = true;
+    useRoutingFeatures = "client";
+    openFirewall = true;
   };
 
   services.pihole = {
-    # to set password:
-    # sudo podman exec -it pihole /bin/bash and then run `pihole setpassword <password>`
     # go to https://mynetworksettings.com/#/adv/network/networkconnections/broadsettings/WAN1 to set upstream DNS servers
+
+    # Tell Tailscale to use your Pi as the DNS server
+    # Go to https://login.tailscale.com/admin/dns
+    # Under “Nameservers” click Add nameserver.
+    # Enter your Pi’s Tailscale IP (e.g. 100.x.x.x).
+    # You can find it by running tailscale ip -4 on your Pi.
+    # Optionally enable Override local DNS.
+    # From your devices, you can enable Tailscale VPN to use Pi-hole for DNS.
     enable = true;
     serverIp = "192.168.1.165"; # Pi-Hole IP
   };
