@@ -1,5 +1,38 @@
-{pkgs, ...}: {
-  xdg.configFile."hypr/pyprland.toml".source = (pkgs.formats.toml {}).generate "pyprland.toml" {
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  format = pkgs.formats.toml {};
+  messengerDesktop = "messenger.desktop";
+  messengerLauncher = pkgs.writeShellScript "launch-messenger-pwa" ''
+    set -euo pipefail
+
+    target=${lib.escapeShellArg messengerDesktop}
+
+    declare -a search_roots=()
+
+    IFS=':' read -r -a data_dirs <<< "''${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+    for dir in "''${data_dirs[@]}"; do
+      if [ -n "$dir" ]; then
+        search_roots+=("$dir")
+      fi
+    done
+
+    search_roots+=("/etc/profiles/per-user/$USER/share" "$HOME/.nix-profile/share")
+
+    for root in "''${search_roots[@]}"; do
+      candidate="$root/applications/$target"
+      if [ -f "$candidate" ]; then
+        exec xdg-open "$candidate"
+      fi
+    done
+
+    echo "Could not locate $target via known XDG data directories" >&2
+    exit 1
+  '';
+in {
+  xdg.configFile."hypr/pyprland.toml".source = format.generate "pyprland.toml" {
     pyprland = {
       plugins = [
         "scratchpads"
@@ -19,15 +52,15 @@
       };
 
       messenger = {
-        command = "caprine";
+        command = "${messengerLauncher}";
         animation = "";
         unfocus = "";
         lazy = true;
         size = "50% 50%";
         position = "25% 25%";
         excludes = "*";
-        class = "Caprine";
-        match_by = "class";
+        class = "MessengerPWA";
+        match_by = "initialClass";
         hysteresis = 0;
         process_tracking = false;
       };

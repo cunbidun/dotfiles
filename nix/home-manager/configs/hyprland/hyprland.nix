@@ -132,8 +132,8 @@ in {
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
         "workspace 8 silent,class:^([Ss]team)$"
 
-        # Messenger
-        "float,class:^(Caprine)$"
+        # Messenger PWA (Chromium)
+        "float,initialclass:^(MessengerPWA)$"
 
         # 1Password rules
         "float,class:^(.*1Password.*)$"

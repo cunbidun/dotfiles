@@ -10,13 +10,12 @@
     url,
     icon ? null,
     profile ? "Default",
-    wmClass ? lib.replaceStrings [" "] [""] name,
   }: let
     desktopEntry =
       {
         inherit name;
         comment = "${name} PWA via Chrome";
-        exec = "${pkgs.chromium}/bin/chromium --class=${wmClass} --profile-directory=${profile} --app=${url}";
+        exec = "${pkgs.chromium}/bin/chromium --class=${name}PWA --profile-directory=${profile} --app=${url}";
         terminal = false;
         categories = ["Network"];
         startupNotify = false;
@@ -26,11 +25,7 @@
     lib.nameValuePair (lib.toLower name) desktopEntry;
 in {
   programs.chromium.enable = true;
-
-  home.packages = [pkgs.chromium];
-
   xdg.dataFile."icons/hicolor/scalable/apps/messenger.svg".source = "${project_root}/icons/messenger.svg";
-
   xdg.desktopEntries = lib.listToAttrs [
     (mkChromePWA {
       name = "Messenger";
