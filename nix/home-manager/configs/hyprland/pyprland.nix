@@ -59,7 +59,7 @@ in {
         size = "50% 50%";
         position = "25% 25%";
         excludes = "*";
-        class = "MessengerPWA";
+        initialClass = "MessengerPWA";
         match_by = "initialClass";
         hysteresis = 0;
         process_tracking = false;
