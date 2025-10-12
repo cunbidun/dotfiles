@@ -24,7 +24,7 @@
     for root in "''${search_roots[@]}"; do
       candidate="$root/applications/$target"
       if [ -f "$candidate" ]; then
-        exec xdg-open "$candidate"
+        exec ${pkgs.glib}/bin/gio "$candidate"
       fi
     done
 
