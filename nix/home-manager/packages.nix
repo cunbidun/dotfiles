@@ -68,7 +68,9 @@ in {
     pkgs.ripgrep
     pkgs.starship
     pkgs.nix-output-monitor
-    pkgs.alejandra # nix formatter 
+    pkgs.alejandra # nix formatter
+    pkgs.dig
+    pkgs.inetutils
 
     # AI/Development tools
     inputs.codex-nix.packages.${pkgs.system}.default
@@ -88,7 +90,6 @@ in {
     # TODO: Java 8 is not working
     # pkgs.prismlauncher
     pkgs.glib
-    pkgs.master.caprine
     pkgs.trash-cli
 
     # Hyprland
