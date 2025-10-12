@@ -32,14 +32,6 @@ in {
 
   xdg.desktopEntries = lib.listToAttrs [
     (mkChromePWA {
-      name = "ChatGPT";
-      url = "https://chat.openai.com/";
-    })
-    (mkChromePWA {
-      name = "Notion";
-      url = "https://www.notion.so/";
-    })
-    (mkChromePWA {
       name = "Messenger";
       url = "https://www.messenger.com/";
       icon = "messenger";
