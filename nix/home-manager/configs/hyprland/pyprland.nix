@@ -59,7 +59,7 @@ in {
         size = "50% 50%";
         position = "25% 25%";
         excludes = "*";
-        class = "re:.*messenger.*";
+        class = "re:chrome-.*messenger.*";
         match_by = "class";
         hysteresis = 0;
         process_tracking = false;

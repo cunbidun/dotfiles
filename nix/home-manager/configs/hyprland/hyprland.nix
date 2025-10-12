@@ -133,7 +133,7 @@ in {
         "workspace 8 silent,class:^([Ss]team)$"
 
         # Messenger PWA (Chromium)
-        "float,initialclass:^(MessengerPWA)$"
+        "float,class:^(chrome-.*messenger.*)$"
 
         # 1Password rules
         "float,class:^(.*1Password.*)$"
