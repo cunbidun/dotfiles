@@ -130,7 +130,6 @@ in {
       enable = true;
       settings = {
         server = {
-          # Listen only on loopback; Pi-hole (host network) will hit 127.0.0.1#5335
           interface = ["127.0.0.1" "::1"];
           port = 5335;
           prefetch = true;

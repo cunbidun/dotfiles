@@ -1,15 +1,12 @@
-{ lib, pkgs, config, ... }:
-with lib;
-
-let
-  tailHost = "${config.networking.hostName}.tail9b4f4d.ts.net";
-  certDir  = "/var/lib/tailscale/certs";
-  certFile = "${certDir}/cert.pem";
-  keyFile  = "${certDir}/key.pem";
-in
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with lib; {
   options.services.adguard = {
-    enable = mkEnableOption "AdGuard Home DNS filtering service with Tailscale TLS integration";
+    enable = mkEnableOption "AdGuard Home DNS filtering service";
     stateDir = mkOption {
       type = types.str;
       default = "/var/lib/adguardhome";
@@ -18,82 +15,63 @@ in
   };
 
   config = mkIf config.services.adguard.enable {
-
-    #################################################
-    # Tailscale certificate automation (daily renew)
-    #################################################
-    systemd.tmpfiles.rules = [
-      "d /var/lib/tailscale 0750 root root -"
-      "d ${certDir} 0750 root root -"
-    ];
-
-    systemd.services."tailscale-cert" = {
-      description = "Fetch/refresh Tailscale TLS cert for ${tailHost}";
-      after = [ "network-online.target" "tailscale.service" ];
-      wants = [ "network-online.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-      };
-      script = ''
-        set -eu
-        mkdir -p ${certDir}
-        ${pkgs.tailscale}/bin/tailscale cert \
-          --cert-file ${certFile} \
-          --key-file  ${keyFile} \
-          ${tailHost}
-        chmod 0640 ${certFile} ${keyFile}
-      '';
-      wantedBy = [ "multi-user.target" ];
-    };
-
-    systemd.timers."tailscale-cert" = {
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = "daily";
-        Persistent = true;
+    #############
+    # Unbound DNS resolver for Pi-hole
+    #############
+    services.unbound = {
+      enable = true;
+      settings = {
+        server = {
+          interface = ["127.0.0.1" "::1"];
+          port = 5335;
+          prefetch = true;
+          access-control = [
+            "127.0.0.0/8 allow"
+          ];
+        };
       };
     };
 
     ###########################################
     # AdGuard Home DNS + HTTPS (built-in TLS)
     ###########################################
+    services.resolved = {
+      enable = false;
+    };
     services.adguardhome = {
       enable = true;
+      mutableSettings = false;
       openFirewall = true;
+      port = 80;
       settings = {
-        http = {
-          address = "0.0.0.0";
-          port = 80; # optional redirect
-        };
-        tls = {
-          enabled = true;
-          force_https = true;
-          certificate_chain = certFile;
-          private_key       = keyFile;
-        };
         dns = {
-          bind_hosts = [ "0.0.0.0" "::" ];
+          bind_hosts = ["0.0.0.0" "::"];
           port = 53;
-          # privacy-friendly DoH upstreams
-          upstream_dns = [
-            "https://cloudflare-dns.com/dns-query"
-            "https://dns.quad9.net/dns-query"
-          ];
-          bootstrap_dns = [ "1.1.1.1" "9.9.9.9" ];
+          upstream_dns = ["127.0.0.1:5335"];
+          bootstrap_dns = ["127.0.0.1:5335"];
           enable_dnssec = true;
-          edns_client_subnet = { enabled = false; };
+          edns_client_subnet = {enabled = false;};
           cache_size = 128;
           ratelimit = 0;
           blocking_mode = "default";
         };
         filters = [
-          { name = "AdGuard Base"; url = "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"; enabled = true; }
-          { name = "StevenBlack";  url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";   enabled = true; }
-          { name = "EasyPrivacy";  url = "https://v.firebog.net/hosts/Easyprivacy.txt";                         enabled = true; }
+          {
+            name = "AdGuard Base";
+            url = "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt";
+            enabled = true;
+          }
+          {
+            name = "hagezi";
+            url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt";
+            enabled = true;
+          }
         ];
         querylog_enabled = true;
-        statistics = { enabled = true; interval = "24h"; };
+        statistics = {
+          enabled = true;
+          interval = "24h";
+        };
       };
     };
   };

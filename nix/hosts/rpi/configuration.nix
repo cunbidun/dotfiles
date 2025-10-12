@@ -96,7 +96,7 @@
   # You can find it by running tailscale ip -4 on your Pi.
   # Optionally enable Override local DNS.
   # From your devices, you can enable Tailscale VPN to use Pi-hole for DNS.
-  services.pihole.enable = false;
+  # services.pihole.enable = true;
   services.adguard.enable = true;
 
   programs.zsh.enable = true;
