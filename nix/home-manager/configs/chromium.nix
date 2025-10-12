@@ -15,7 +15,7 @@
       {
         inherit name;
         comment = "${name} PWA via Chrome";
-        exec = "${pkgs.chromium}/bin/chromium --class=${name}PWA --profile-directory=${profile} --app=${url}";
+        exec = "${pkgs.chromium}/bin/chromium --profile-directory=${profile} --app=${url}";
         terminal = false;
         categories = ["Network"];
         startupNotify = false;

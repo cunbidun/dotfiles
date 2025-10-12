@@ -59,8 +59,8 @@ in {
         size = "50% 50%";
         position = "25% 25%";
         excludes = "*";
-        initialClass = "MessengerPWA";
-        match_by = "initialClass";
+        class = "re:.*messenger.*";
+        match_by = "class";
         hysteresis = 0;
         process_tracking = false;
       };
