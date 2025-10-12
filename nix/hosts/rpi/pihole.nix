@@ -14,10 +14,6 @@ with lib; let
 in {
   options.services.pihole = {
     enable = mkEnableOption "pihole service";
-    serverIp = mkOption {
-      type = types.str;
-      description = "Address Pi-hole listens on";
-    };
     persistanceRoot = mkOption {
       type = types.str;
       default = "/opt/pihole/etc";
