@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  project_root,
   ...
 }: let
   mkChromePWA = {
@@ -24,11 +25,24 @@
     lib.nameValuePair (lib.toLower name) desktopEntry;
 in {
   programs.chromium.enable = true;
-  # Place .desktop app entries for common PWAs.
+
+  home.packages = [pkgs.chromium];
+
+  xdg.dataFile."icons/hicolor/scalable/apps/messenger.svg".source = "${project_root}/icons/messenger.svg";
+
   xdg.desktopEntries = lib.listToAttrs [
     (mkChromePWA {
       name = "ChatGPT";
       url = "https://chat.openai.com/";
+    })
+    (mkChromePWA {
+      name = "Notion";
+      url = "https://www.notion.so/";
+    })
+    (mkChromePWA {
+      name = "Messenger";
+      url = "https://www.messenger.com/";
+      icon = "messenger";
     })
   ];
 }
