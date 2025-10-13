@@ -152,12 +152,12 @@
         {
           name = "GitHub Repositories";
           shortcut = "gh";
-          url = "https://github.com/search?q=%s";
+          url = "https://github.com/search?q={searchTerms}";
         }
         {
           name = "Nix Packages";
           shortcut = "nix";
-          url = "https://search.nixos.org/packages?query=%s";
+          url = "https://search.nixos.org/packages?query={searchTerms}";
         }
       ];
       ExtensionSettings = {
@@ -166,6 +166,7 @@
         };
         # competitive-companion
         "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
+          toolbar_pin = "force_pinned";
           settings = {
             force = true;
             customPorts = [8080];
