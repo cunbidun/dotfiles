@@ -143,9 +143,9 @@
   programs.chromium = {
     enable = true;
     extraOpts = {
-      DefaultSearchProviderEnabled = true;
-      DefaultSearchProviderName = "DuckDuckGo";
-      DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+      # DefaultSearchProviderEnabled = true;
+      # DefaultSearchProviderName = "DuckDuckGo";
+      # DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
       BrowserLabsEnabled = false;
       RestoreOnStartup = 1;
       SiteSearchSettings = [
@@ -167,10 +167,6 @@
         # competitive-companion
         "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
           toolbar_pin = "force_pinned";
-          settings = {
-            force = true;
-            customPorts = [8080];
-          };
         };
       };
     };
