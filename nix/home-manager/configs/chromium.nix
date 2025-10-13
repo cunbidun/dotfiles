@@ -40,6 +40,7 @@
   in
     lib.nameValuePair (lib.toLower name) desktopEntry;
 in {
+  programs.chromium.enable = true;
   # add xdg entries for PWAs
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = "${project_root}/icons/messenger.svg";
