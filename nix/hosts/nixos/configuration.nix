@@ -152,12 +152,12 @@
         {
           name = "GitHub Repositories";
           shortcut = "gh";
-          url = "https://github.com/search?q={searchTerms}";
+          url = "https://github.com/search?q=%s";
         }
         {
           name = "Nix Packages";
           shortcut = "nix";
-          url = "https://search.nixos.org/packages?query={searchTerms}";
+          url = "https://search.nixos.org/packages?query=%s";
         }
       ];
       ExtensionSettings = {
