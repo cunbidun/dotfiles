@@ -140,6 +140,55 @@
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     withUWSM = true;
   };
+  programs.chromium = {
+    enable = true;
+    defaultSearchProviderEnabled = true;
+    defaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+    defaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
+    extraOpts = {
+      DefaultSearchProviderName = "DuckDuckGo";
+      DefaultSearchProviderKeyword = "ddg";
+      DefaultSearchProviderIconURL = "https://duckduckgo.com/favicon.ico";
+      DefaultSearchProviderEncodings = ["UTF-8"];
+      DefaultSearchProviderAlternateURLs = ["https://duckduckgo.com/?q={searchTerms}"];
+      ManagedSearchEngines = [
+        {
+          name = "DuckDuckGo";
+          keyword = "ddg";
+          search_url = "https://duckduckgo.com/?q={searchTerms}";
+          suggest_url = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
+          favicon_url = "https://duckduckgo.com/favicon.ico";
+          encodings = ["UTF-8"];
+          is_default = true;
+        }
+        {
+          name = "GitHub Repositories";
+          keyword = "@gh";
+          search_url = "https://github.com/search?q={searchTerms}&type=repositories";
+          favicon_url = "https://github.githubassets.com/favicons/favicon.png";
+          encodings = ["UTF-8"];
+        }
+        {
+          name = "Nix Packages";
+          keyword = "@nix";
+          search_url = "https://search.nixos.org/packages?type=packages&query={searchTerms}";
+          favicon_url = "https://nixos.org/favicon.png";
+          encodings = ["UTF-8"];
+        }
+        {
+          name = "Home Manager";
+          keyword = "@hm";
+          search_url = "https://rycee.gitlab.io/home-manager/options.html#{searchTerms}";
+          encodings = ["UTF-8"];
+        }
+      ];
+      ExtensionSettings = {
+        "aeblfdkhhhdcdjpifhhbdiojplfjncoa" = {
+          toolbar_pin = "force_pinned";
+        };
+      };
+    };
+  };
   programs.uwsm.enable = true;
   services.greetd = {
     enable = true;

@@ -5,47 +5,6 @@
   project_root,
   ...
 }: let
-  searchPolicy = {
-    DefaultSearchProviderEnabled = true;
-    DefaultSearchProviderName = "DuckDuckGo";
-    DefaultSearchProviderKeyword = "ddg";
-    DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
-    DefaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
-    DefaultSearchProviderIconURL = "https://duckduckgo.com/favicon.ico";
-    DefaultSearchProviderEncodings = ["UTF-8"];
-    DefaultSearchProviderAlternateURLs = ["https://duckduckgo.com/?q={searchTerms}"];
-    ManagedSearchEngines = [
-      {
-        name = "DuckDuckGo";
-        keyword = "ddg";
-        search_url = "https://duckduckgo.com/?q={searchTerms}";
-        suggest_url = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
-        favicon_url = "https://duckduckgo.com/favicon.ico";
-        encodings = ["UTF-8"];
-        is_default = true;
-      }
-      {
-        name = "GitHub Repositories";
-        keyword = "@gh";
-        search_url = "https://github.com/search?q={searchTerms}&type=repositories";
-        favicon_url = "https://github.githubassets.com/favicons/favicon.png";
-        encodings = ["UTF-8"];
-      }
-      {
-        name = "Nix Packages";
-        keyword = "@nix";
-        search_url = "https://search.nixos.org/packages?type=packages&query={searchTerms}";
-        favicon_url = "https://nixos.org/favicon.png";
-        encodings = ["UTF-8"];
-      }
-      {
-        name = "Home Manager";
-        keyword = "@hm";
-        search_url = "https://rycee.gitlab.io/home-manager/options.html#{searchTerms}";
-        encodings = ["UTF-8"];
-      }
-    ];
-  };
   mkChromePWA = {
     name,
     url,
@@ -107,8 +66,4 @@ in {
       url = "https://chat.zalo.me/";
     })
   ];
-  xdg.configFile."chromium/policies/managed/search-engines.json" = {
-    force = true;
-    text = builtins.toJSON searchPolicy;
-  };
 }
