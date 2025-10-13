@@ -40,5 +40,12 @@ in {
         url = "https://chat.zalo.me/";
       })
     ];
+
+    mimeApps.defaultApplications = {
+      "text/html" = ["chromium.desktop"];
+      "text/xml" = ["chromium.desktop"];
+      "x-scheme-handler/http" = ["chromium.desktop"];
+      "x-scheme-handler/https" = ["chromium.desktop"];
+    };
   };
 }
