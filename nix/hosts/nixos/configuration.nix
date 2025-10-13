@@ -146,11 +146,8 @@
     defaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
     defaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
     extraOpts = {
-      DefaultSearchProviderName = "DuckDuckGo";
-      DefaultSearchProviderKeyword = "ddg";
-      DefaultSearchProviderIconURL = "https://duckduckgo.com/favicon.ico";
-      DefaultSearchProviderEncodings = ["UTF-8"];
-      DefaultSearchProviderAlternateURLs = ["https://duckduckgo.com/?q={searchTerms}"];
+      BrowserLabsEnabled = false;
+      RestoreOnStartup = 1;
       SiteSearchSettings = [
         {
           name = "GitHub Repositories";
@@ -177,14 +174,6 @@
           settings = {
             force = true;
             customPorts = [8080];
-          };
-        };
-        # aw-watcher-web
-        "nglaklhklhcoonedhgnpgddginnjdadi" = {
-          settings = {
-            force = true;
-            baseUrl = "http://localhost:5600";
-            enabled = true;
           };
         };
       };
