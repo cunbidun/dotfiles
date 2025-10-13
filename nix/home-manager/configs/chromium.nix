@@ -46,7 +46,7 @@ in {
     desktopEntries = lib.listToAttrs [
       (mkChromiumProfile {
         name = "Chromium Vi";
-        profileDir = "${config.home.homeDirectory}/.config/chromium/extra-profiles/vi";
+        profileDir = "${config.home.homeDirectory}/.config/chromium/Chromium-Vi";
       })
       (mkChromePWA {
         name = "Messenger";
