@@ -151,40 +151,41 @@
       DefaultSearchProviderIconURL = "https://duckduckgo.com/favicon.ico";
       DefaultSearchProviderEncodings = ["UTF-8"];
       DefaultSearchProviderAlternateURLs = ["https://duckduckgo.com/?q={searchTerms}"];
-      ManagedSearchEngines = [
-        {
-          name = "DuckDuckGo";
-          keyword = "ddg";
-          search_url = "https://duckduckgo.com/?q={searchTerms}";
-          suggest_url = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
-          favicon_url = "https://duckduckgo.com/favicon.ico";
-          encodings = ["UTF-8"];
-          is_default = true;
-        }
+      SiteSearchSettings = [
         {
           name = "GitHub Repositories";
-          keyword = "@gh";
-          search_url = "https://github.com/search?q={searchTerms}&type=repositories";
-          favicon_url = "https://github.githubassets.com/favicons/favicon.png";
-          encodings = ["UTF-8"];
+          shortcut = "gh";
+          url = "https://github.com/search?q=%s&type=repositories";
         }
         {
           name = "Nix Packages";
-          keyword = "@nix";
-          search_url = "https://search.nixos.org/packages?type=packages&query={searchTerms}";
-          favicon_url = "https://nixos.org/favicon.png";
-          encodings = ["UTF-8"];
+          shortcut = "nix";
+          url = "https://search.nixos.org/packages?type=packages&query=%s";
         }
         {
-          name = "Home Manager";
-          keyword = "@hm";
-          search_url = "https://rycee.gitlab.io/home-manager/options.html#{searchTerms}";
-          encodings = ["UTF-8"];
+          name = "Home Manager Options";
+          shortcut = "hm";
+          url = "https://duckduckgo.com/?q=site%3Arycee.gitlab.io%2Fhome-manager+%s";
         }
       ];
       ExtensionSettings = {
         "aeblfdkhhhdcdjpifhhbdiojplfjncoa" = {
           toolbar_pin = "force_pinned";
+        };
+        # competitive-companion
+        "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
+          settings = {
+            force = true;
+            customPorts = [8080];
+          };
+        };
+        # aw-watcher-web
+        "nglaklhklhcoonedhgnpgddginnjdadi" = {
+          settings = {
+            force = true;
+            baseUrl = "http://localhost:5600";
+            enabled = true;
+          };
         };
       };
     };
