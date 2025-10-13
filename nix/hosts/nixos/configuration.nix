@@ -142,27 +142,22 @@
   };
   programs.chromium = {
     enable = true;
-    defaultSearchProviderEnabled = true;
-    defaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
-    defaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
     extraOpts = {
+      DefaultSearchProviderEnabled = true;
+      DefaultSearchProviderName = "DuckDuckGo";
+      DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
       BrowserLabsEnabled = false;
       RestoreOnStartup = 1;
       SiteSearchSettings = [
         {
           name = "GitHub Repositories";
           shortcut = "gh";
-          url = "https://github.com/search?q=%s&type=repositories";
+          url = "https://github.com/search?q={searchTerms}";
         }
         {
           name = "Nix Packages";
           shortcut = "nix";
-          url = "https://search.nixos.org/packages?type=packages&query=%s";
-        }
-        {
-          name = "Home Manager Options";
-          shortcut = "hm";
-          url = "https://duckduckgo.com/?q=site%3Arycee.gitlab.io%2Fhome-manager+%s";
+          url = "https://search.nixos.org/packages?query={searchTerms}";
         }
       ];
       ExtensionSettings = {
