@@ -8,9 +8,7 @@
   userdata,
   lib,
   ...
-}: let
-  stylixColors = config.home-manager.users.${userdata.username}.lib.stylix.colors;
-in {
+}: {
   imports = [
     inputs.winboat.nixosModules.default
     ./hardware-configuration.nix
@@ -245,6 +243,9 @@ in {
   environment.etc =
     {
       "flake-source".source = inputs.self;
+    }
+    // lib.optionalAttrs config.programs.chromium.enable {
+      "chromium/policies/managed/theme.json".source = "/home/${userdata.username}/.config/chromium/policies/managed/theme.json";
     }
     // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
       "geolocation".text = ''

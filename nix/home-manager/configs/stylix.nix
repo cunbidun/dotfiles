@@ -12,6 +12,7 @@
   # Import from shared theme configuration
   # NOTE:
   themeConfigs = import ./shared/theme-configs.nix;
+  stylixColors = config.home-manager.users.${userdata.username}.lib.stylix.colors;
 
   # NOTE:
   # the specialisation name for theme must be named '{theme}-{polarity}'. Else switch won't work
@@ -38,7 +39,9 @@
       #!/usr/bin/env bash
       # no-op script to avoid double activation
     '';
-
+    home.file.".config/chromium/policies/managed/theme.json".text = builtins.toJSON {
+      BrowserThemeColor = "#${stylixColors.base00}";
+    };
     # Write the current theme name directly in the specialization
     home.file.".local/state/stylix/current-theme-name.txt".text = lib.mkForce "${theme}-${polarity}";
   };

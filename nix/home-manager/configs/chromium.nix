@@ -7,6 +7,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
+  chromePackage = inputs.browser-previews.packages.${pkgs.system}.google-chrome-dev;
   mkChromePWA = {
     name,
     url,
@@ -17,7 +18,7 @@
       {
         inherit name;
         comment = "${name} PWA via Chrome";
-        exec = "${pkgs.chromium}/bin/chromium --profile-directory=${profile} --app=${url}";
+        exec = "${chromePackage}/bin/google-chrome-unstable --profile-directory=${profile} --app=${url}";
         terminal = false;
         categories = ["Network"];
         startupNotify = false;
@@ -43,15 +44,15 @@ in {
     ];
 
     mimeApps.defaultApplications = {
-      "text/html" = ["chromium.desktop"];
-      "text/xml" = ["chromium.desktop"];
-      "x-scheme-handler/http" = ["chromium.desktop"];
-      "x-scheme-handler/https" = ["chromium.desktop"];
+      "text/html" = ["google-chrome-unstable.desktop"];
+      "text/xml" = ["google-chrome-unstable.desktop"];
+      "x-scheme-handler/http" = ["google-chrome-unstable.desktop"];
+      "x-scheme-handler/https" = ["google-chrome-unstable.desktop"];
     };
   };
   home.activation.refreshChromiumPolicy = lib.mkIf isLinux ''
-    if [ -x "${pkgs.chromium}/bin/chromium}" ]; then
-      "${pkgs.chromium}/bin/chromium" --refresh-platform-policy --no-startup-window >/dev/null 2>&1 || true
+    if [ -x "${chromePackage}/bin/google-chrome-unstable" ]; then
+      "${chromePackage}/bin/google-chrome-unstable" --refresh-platform-policy --no-startup-window >/dev/null 2>&1 || true
     fi
   '';
 }
