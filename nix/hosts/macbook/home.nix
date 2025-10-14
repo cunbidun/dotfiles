@@ -13,17 +13,19 @@
     project_root = project_root;
   };
 in {
-  imports = [
-    "${project_root}/nix/home-manager/configs/zsh.nix"
-    "${project_root}/nix/home-manager/configs/firefox.nix"
-    "${project_root}/nix/home-manager/configs/nvim.nix"
-    "${project_root}/nix/home-manager/configs/tmux.nix"
-    "${project_root}/nix/home-manager/configs/vscode.nix"
-    "${project_root}/nix/home-manager/configs/stylix.nix"
-    inputs.self.homeManagerModules.theme-manager
-    inputs.stylix.homeModules.stylix
-    inputs.mac-app-util.homeManagerModules.default
-  ];
+  imports =
+    [
+      "${project_root}/nix/home-manager/configs/zsh.nix"
+      "${project_root}/nix/home-manager/configs/nvim.nix"
+      "${project_root}/nix/home-manager/configs/tmux.nix"
+      "${project_root}/nix/home-manager/configs/vscode.nix"
+      "${project_root}/nix/home-manager/configs/stylix.nix"
+      inputs.self.homeManagerModules.theme-manager
+      inputs.stylix.homeModules.stylix
+      inputs.mac-app-util.homeManagerModules.default
+    ]
+    ++ lib.optional (userdata.default_browser == "firefox") "${project_root}/nix/home-manager/configs/firefox.nix"
+    ++ lib.optional (userdata.default_browser != "firefox") "${project_root}/nix/home-manager/configs/chromium.nix";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = userdata.username;

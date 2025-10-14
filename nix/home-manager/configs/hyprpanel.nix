@@ -8,6 +8,14 @@
   ...
 }: let
   scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
+  defaultBrowserCmd =
+    if userdata.default_browser == "firefox"
+    then "firefox"
+    else "chromium";
+  defaultBrowserLabel =
+    if userdata.default_browser == "firefox"
+    then "Firefox"
+    else "Chromium";
 in {
   programs.hyprpanel = {
     enable = true;
@@ -91,8 +99,8 @@ in {
           shortcuts = {
             left = {
               shortcut1 = {
-                command = "firefox";
-                tooltip = "Firefox";
+                command = defaultBrowserCmd;
+                tooltip = defaultBrowserLabel;
               };
               shortcut4 = {
                 command = "tofi-drun";

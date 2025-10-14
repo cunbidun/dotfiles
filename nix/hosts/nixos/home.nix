@@ -25,8 +25,6 @@ in {
     "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
     "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
     "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
-    "${project_root}/nix/home-manager/configs/firefox.nix"
-    "${project_root}/nix/home-manager/configs/chromium.nix"
     "${project_root}/nix/home-manager/configs/nvim.nix"
     "${project_root}/nix/home-manager/configs/tmux.nix"
     "${project_root}/nix/home-manager/configs/tofi.nix"
@@ -38,7 +36,9 @@ in {
     "${project_root}/nix/home-manager/systemd.nix"
     "${project_root}/nix/home-manager/configs/stylix.nix"
     "${project_root}/nix/home-manager/configs/activitywatch.nix"
-  ];
+  ]
+  ++ lib.optional (userdata.default_browser == "firefox") "${project_root}/nix/home-manager/configs/firefox.nix"
+  ++ lib.optional (userdata.default_browser != "firefox") "${project_root}/nix/home-manager/configs/chromium.nix";
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

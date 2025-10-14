@@ -181,20 +181,22 @@ in {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeConfigs.default.dark.scheme}.yaml";
     image = themeConfigs.default.dark.wallpaper;
 
-    targets = {
-      waybar.enable = false;
-      vscode.enable = false;
-      yazi.enable = true;
-      hyprlock.enable = true;
-      firefox.profileNames = [userdata.username];
-      fzf.enable = true;
-    };
-
-    targets.gnome.enable = lib.mkIf isLinux true;
-    targets.kde.enable = lib.mkIf isLinux true;
-    targets.gtk = lib.mkIf isLinux {
-      enable = true;
-    };
+    targets =
+      {
+        waybar.enable = false;
+        vscode.enable = false;
+        yazi.enable = true;
+        hyprlock.enable = true;
+        fzf.enable = true;
+        gnome.enable = lib.mkIf isLinux true;
+        kde.enable = lib.mkIf isLinux true;
+        gtk = lib.mkIf isLinux {
+          enable = true;
+        };
+      }
+      // lib.optionalAttrs (userdata.default_browser == "firefox") {
+        firefox.profileNames = [userdata.username];
+      };
 
     # https://github.com/phisch/phinger-cursors
     cursor = {
