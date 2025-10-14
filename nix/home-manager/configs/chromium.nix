@@ -7,7 +7,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
-  chromePackage = inputs.browser-previews.packages.${pkgs.system}.google-chrome-dev;
+  chromeBinary = "${pkgs.chromium}/bin/chromium";
   mkChromePWA = {
     name,
     url,
@@ -18,7 +18,7 @@
       {
         inherit name;
         comment = "${name} PWA via Chrome";
-        exec = "${chromePackage}/bin/google-chrome-unstable --profile-directory=${profile} --app=${url}";
+        exec = "${chromeBinary} --profile-directory=${profile} --app=${url}";
         terminal = false;
         categories = ["Network"];
         startupNotify = false;
@@ -28,7 +28,9 @@
     lib.nameValuePair (lib.toLower name) desktopEntry;
 in {
   # add xdg entries for PWAs
-  home.packages = [inputs.browser-previews.packages.${pkgs.system}.google-chrome-dev];
+  home.packages = [
+    pkgs.chromium
+  ];
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = "${project_root}/icons/messenger.svg";
     desktopEntries = lib.listToAttrs [
@@ -51,8 +53,8 @@ in {
     };
   };
   home.activation.refreshChromiumPolicy = lib.mkIf isLinux ''
-    if [ -x "${chromePackage}/bin/google-chrome-unstable" ]; then
-      "${chromePackage}/bin/google-chrome-unstable" --refresh-platform-policy --no-startup-window >/dev/null 2>&1 || true
+    if [ -x "${chromeBinary}" ]; then
+      "${chromeBinary}" --refresh-platform-policy --no-startup-window >/dev/null 2>&1 || true
     fi
   '';
 }
