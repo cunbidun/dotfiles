@@ -7,12 +7,6 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
-  chromiumPackage =
-    if isLinux
-    then pkgs.chromium
-    else pkgs.chromium;
-  chromiumBin = "${chromiumPackage}/bin/chromium";
-  chromiumDesktopId = "chromium.desktop";
   mkChromePWA = {
     name,
     url,
@@ -23,7 +17,7 @@
       {
         inherit name;
         comment = "${name} PWA via Chrome";
-        exec = "${chromiumBin} --profile-directory=${profile} --app=${url}";
+        exec = "${pkgs.chromium}/bin/chromium --profile-directory=${profile} --app=${url}";
         terminal = false;
         categories = ["Network"];
         startupNotify = false;
@@ -32,11 +26,6 @@
   in
     lib.nameValuePair (lib.toLower name) desktopEntry;
 in {
-  home.packages = lib.optionals isLinux [
-    (pkgs.writeShellScriptBin "chromium" ''
-      exec ${chromiumBin} "$@"
-    '')
-  ];
   # add xdg entries for PWAs
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = "${project_root}/icons/messenger.svg";
@@ -53,15 +42,15 @@ in {
     ];
 
     mimeApps.defaultApplications = {
-      "text/html" = [chromiumDesktopId];
-      "text/xml" = [chromiumDesktopId];
-      "x-scheme-handler/http" = [chromiumDesktopId];
-      "x-scheme-handler/https" = [chromiumDesktopId];
+      "text/html" = ["chromium.desktop"];
+      "text/xml" = ["chromium.desktop"];
+      "x-scheme-handler/http" = ["chromium.desktop"];
+      "x-scheme-handler/https" = ["chromium.desktop"];
     };
   };
   home.activation.refreshChromiumPolicy = lib.mkIf isLinux ''
-    if [ -x "${chromiumBin}" ]; then
-      "${chromiumBin}" --refresh-platform-policy --no-startup-window >/dev/null 2>&1 || true
+    if [ -x "${pkgs.chromium}/bin/chromium}" ]; then
+      "${pkgs.chromium}/bin/chromium" --refresh-platform-policy --no-startup-window >/dev/null 2>&1 || true
     fi
   '';
 }

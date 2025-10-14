@@ -246,11 +246,6 @@ in {
     {
       "flake-source".source = inputs.self;
     }
-    // lib.optionalAttrs config.programs.chromium.enable {
-      "chromium/policies/managed/theme.json".text = builtins.toJSON {
-        BrowserThemeColor = "#${stylixColors.base00}";
-      };
-    }
     // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
       "geolocation".text = ''
         # Statue of Liberty
