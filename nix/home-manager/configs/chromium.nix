@@ -27,6 +27,7 @@
     lib.nameValuePair (lib.toLower name) desktopEntry;
 in {
   # add xdg entries for PWAs
+  home.packages = [inputs.browser-previews.packages.${pkgs.system}.google-chrome-dev];
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = "${project_root}/icons/messenger.svg";
     desktopEntries = lib.listToAttrs [
