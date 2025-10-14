@@ -244,9 +244,9 @@
     {
       "flake-source".source = inputs.self;
     }
-    # // lib.optionalAttrs config.programs.chromium.enable {
-    #   "chromium/policies/managed/theme.json".source = "/home/${userdata.username}/.config/chromium/policies/managed/theme.json";
-    # }
+    // lib.optionalAttrs config.programs.chromium.enable {
+      "chromium/policies/managed/theme.json".source = "/home/${userdata.username}/.config/chromium/policies/managed/theme.json";
+    }
     // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
       "geolocation".text = ''
         # Statue of Liberty
