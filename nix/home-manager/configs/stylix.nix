@@ -38,9 +38,7 @@
       #!/usr/bin/env bash
       # no-op script to avoid double activation
     '';
-    home.file.".config/chromium/policies/managed/theme.json".text = builtins.toJSON {
-      BrowserThemeColor = "#${config.lib.stylix.colors.base00}";
-    };
+
     # Write the current theme name directly in the specialization
     home.file.".local/state/stylix/current-theme-name.txt".text = lib.mkForce "${theme}-${polarity}";
   };
@@ -282,7 +280,9 @@ in {
       '';
       extension = ".json";
     };
-
+    ".config/chromium/policies/managed/theme.json".text = builtins.toJSON {
+      BrowserThemeColor = "#${config.lib.stylix.colors.base00}";
+    };
     # Default theme name for base configuration (will be overridden by specializations)
     ".local/state/stylix/current-theme-name.txt".text = "default-dark";
   };
