@@ -12,7 +12,6 @@
   # Import from shared theme configuration
   # NOTE:
   themeConfigs = import ./shared/theme-configs.nix;
-  stylixColors = config.home-manager.users.${userdata.username}.lib.stylix.colors;
 
   # NOTE:
   # the specialisation name for theme must be named '{theme}-{polarity}'. Else switch won't work
@@ -23,24 +22,24 @@
   # lib.mkDefault value     | 1000              | Ship a safe default that users can override easily
   # lib.mkOverride N value  | N (you pick)      | Fine‑tune how strongly you want to win/lose merges
   # lib.mkForce value       | 50                | “Last word”—almost always beats everything else
-  mkSpecializationConfig = theme: polarity: config: let
+  mkSpecializationConfig = theme: polarity: themeConfig: let
     colorScheme =
       if polarity == "light"
       then "prefer-light"
       else "prefer-dark";
   in {
     dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
-    services.vicinae.settings.theme.name = config.vicinaeTheme;
+    services.vicinae.settings.theme.name = themeConfig.vicinaeTheme;
     stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${config.scheme}.yaml";
-      image = lib.mkForce config.wallpaper;
+      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${themeConfig.scheme}.yaml";
+      image = lib.mkForce themeConfig.wallpaper;
     };
     home.activation.reconciliation_theme = lib.mkForce ''
       #!/usr/bin/env bash
       # no-op script to avoid double activation
     '';
     home.file.".config/chromium/policies/managed/theme.json".text = builtins.toJSON {
-      BrowserThemeColor = "#${stylixColors.base00}";
+      BrowserThemeColor = "#${config.lib.stylix.colors.base00}";
     };
     # Write the current theme name directly in the specialization
     home.file.".local/state/stylix/current-theme-name.txt".text = lib.mkForce "${theme}-${polarity}";
