@@ -248,7 +248,7 @@ in {
     }
     // lib.optionalAttrs config.programs.chromium.enable {
       "chromium/policies/managed/theme.json".text = builtins.toJSON {
-        BrowserThemeColor = "#${stylixColors.base0C}";
+        BrowserThemeColor = "#${stylixColors.base00}";
       };
     }
     // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
