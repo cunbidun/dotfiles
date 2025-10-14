@@ -8,7 +8,9 @@
   userdata,
   lib,
   ...
-}: {
+}: let
+  stylixColors = config.home-manager.users.${userdata.username}.lib.stylix.colors;
+in {
   imports = [
     inputs.winboat.nixosModules.default
     ./hardware-configuration.nix
@@ -243,6 +245,11 @@
   environment.etc =
     {
       "flake-source".source = inputs.self;
+    }
+    // lib.optionalAttrs config.programs.chromium.enable {
+      "chromium/policies/managed/theme.json".text = builtins.toJSON {
+        BrowserThemeColor = "#${stylixColors.base0C}";
+      };
     }
     // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
       "geolocation".text = ''

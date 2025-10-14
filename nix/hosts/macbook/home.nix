@@ -23,9 +23,8 @@ in {
       inputs.self.homeManagerModules.theme-manager
       inputs.stylix.homeModules.stylix
       inputs.mac-app-util.homeManagerModules.default
-    ]
-    ++ lib.optional (userdata.default_browser == "firefox") "${project_root}/nix/home-manager/configs/firefox.nix"
-    ++ lib.optional (userdata.default_browser != "firefox") "${project_root}/nix/home-manager/configs/chromium.nix";
+      "${project_root}/nix/home-manager/configs/chromium.nix"
+    ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = userdata.username;

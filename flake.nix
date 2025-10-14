@@ -57,6 +57,10 @@
     # +--------+
     yazi = {url = "github:sxyazi/yazi/v25.4.8";};
     stylix = {url = "github:nix-community/stylix";};
+    browser-previews = {
+      url = "github:nix-community/browser-previews";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     hyprpanel = {
       url = "github:cunbidun/HyprPanel";
       # url = "path:/home/cunbidun/.tmp/HyprPanel";

@@ -4,8 +4,7 @@
   userdata,
   inputs,
   ...
-}: let
-in {
+}: {
   security.pam.services.sudo_local.touchIdAuth = true;
 
   # List packages installed in system profile. To search by name, run:
@@ -201,7 +200,6 @@ in {
       "1password"
       "spotify"
       "alt-tab"
-      "firefox"
       "signal"
       "messenger"
       "obsidian"
@@ -211,6 +209,7 @@ in {
       "rectangle"
       "activitywatch"
       "vlc"
+      "google-chrome"
     ];
     global.autoUpdate = true;
   };
