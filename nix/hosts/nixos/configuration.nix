@@ -31,6 +31,7 @@
       accept-flake-config = true;
       builders-use-substitutes = true;
       trusted-users = ["root" "@wheel"]; # removed unused 'builder'
+      eval-cache = true;
     };
   };
 

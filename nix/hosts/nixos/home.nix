@@ -90,7 +90,6 @@ in {
     ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
 
     ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
-    ".local/state/flake-source".source = inputs.self;
   };
 
   qt = {enable = true;};
