@@ -319,6 +319,9 @@
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
+    targets = {
+      chromium.enable = false; #https://github.com/nix-community/stylix/issues/686
+    };
   };
 
   services.winboat.enable = true;

@@ -181,16 +181,7 @@ in {
     image = themeConfigs.default.dark.wallpaper;
 
     targets = {
-      waybar.enable = false;
       vscode.enable = false;
-      yazi.enable = true;
-      hyprlock.enable = true;
-      fzf.enable = true;
-      gnome.enable = lib.mkIf isLinux true;
-      kde.enable = lib.mkIf isLinux true;
-      gtk = lib.mkIf isLinux {
-        enable = true;
-      };
     };
 
     # https://github.com/phisch/phinger-cursors
