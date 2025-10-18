@@ -112,7 +112,7 @@ fi
 
 if [ "$os" = "Darwin" ]; then
   echo "Detected macOS; running darwin-rebuild $operation_desc..."
-  if sudo darwin-rebuild "$operation" --flake ~/dotfiles"#$profile_name"; then
+  if sudo darwin-rebuild "$operation" --flake ~/dotfiles"#$profile_name" --cores 0; then
     switch_success=true
   fi
 else
