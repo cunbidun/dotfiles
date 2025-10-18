@@ -14,7 +14,6 @@ in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
-    inputs.stylix.homeModules.stylix
     inputs.self.homeManagerModules.theme-manager
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/kitty.nix

@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     ./uxplay.nix
   ];
+
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   nix = {
@@ -311,6 +312,13 @@
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  # Enable Stylix for system-wide theming
+  # The actual theme configuration is in home-manager/configs/stylix.nix
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
   };
 
   services.winboat.enable = true;

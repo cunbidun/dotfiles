@@ -177,7 +177,6 @@ in {
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {
-    enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeConfigs.default.dark.scheme}.yaml";
     image = themeConfigs.default.dark.wallpaper;
 

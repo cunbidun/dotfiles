@@ -169,6 +169,7 @@
         };
         modules = [
           inputs.disko.nixosModules.disko
+          inputs.stylix.nixosModules.stylix
           diskoPath
           hostPath
           home-manager.nixosModules.home-manager
