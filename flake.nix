@@ -41,7 +41,7 @@
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     xremap-flake = {
-      url = "github:xremap/nix-flake";
+      url = "github:xremap/nix-flake/226fcadfe1d810a89ce318f6a304df3caf7f9cd7";
       inputs.hyprland.follows = "hyprland";
     };
     hyprfocus = {
