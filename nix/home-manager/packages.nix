@@ -69,8 +69,6 @@ in {
     pkgs.starship
     pkgs.nix-output-monitor
     pkgs.alejandra # nix formatter
-    pkgs.dig
-    pkgs.inetutils
 
     # AI/Development tools
     inputs.codex-nix.packages.${pkgs.system}.default
@@ -91,6 +89,8 @@ in {
     # pkgs.prismlauncher
     pkgs.glib
     pkgs.trash-cli
+    pkgs.dig
+    pkgs.inetutils
 
     # Hyprland
     pkgs.wl-clipboard # A command-line copy/paste tool for Wayland

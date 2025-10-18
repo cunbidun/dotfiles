@@ -54,7 +54,7 @@
     hostName = "rpi5";
     useNetworkd = true;
     firewall.allowedUDPPorts = [53];
-    firewall.allowedTCPPorts = [53 80 443];
+    firewall.allowedTCPPorts = [53 80 443 3000];
     firewall.trustedInterfaces = ["tailscale0"];
   };
 

@@ -101,11 +101,12 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae";
+      url = "github:vicinaehq/vicinae/v0.14.5";
     };
 
     # +-- Windows interop --+
     winboat = {
+      # TODO: change to master branch after https://github.com/TibixDev/winboat/pull/281 get merged
       url = "github:Rexcrazy804/winboat?ref=fix-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };

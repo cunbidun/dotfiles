@@ -15,8 +15,22 @@ fi
 OUT_PATHS="$("${DERIV_CMD[@]}" "$DRV" | jq -r '.[].outputs | to_entries[] | .value.path')"
 [[ -n "$OUT_PATHS" ]] || { echo "No outputs found in: $DRV" >&2; exit 3; }
 
-# Get HTTP(S) substituters from your config
-SUB_LINE="$(nix show-config | sed -n 's/^substituters = //p')"
+# Get HTTP(S) substituters from the flake's nixConfig
+# Read extra-substituters by importing flake.nix directly
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+FLAKE_DIR="$(dirname "$SCRIPT_DIR")"
+if [[ -f "$FLAKE_DIR/flake.nix" ]]; then
+  FLAKE_SUBS="$(nix eval --json --impure --expr "(import $FLAKE_DIR/flake.nix).nixConfig.extra-substituters or []" 2>/dev/null | jq -r '.[]' | tr '\n' ' ')"
+  if [[ -n "$FLAKE_SUBS" ]]; then
+    # Use substituters from flake (which includes cache.nixos.org already)
+    SUB_LINE="$FLAKE_SUBS"
+  else
+    SUB_LINE="$(nix config show | sed -n 's/^substituters = //p')"
+  fi
+else
+  SUB_LINE="$(nix config show | sed -n 's/^substituters = //p')"
+fi
+echo "Checking substituters: $SUB_LINE"
 HTTP_SUBS=()
 for s in $SUB_LINE; do
   [[ "$s" =~ ^https?:// ]] && HTTP_SUBS+=("${s%/}")

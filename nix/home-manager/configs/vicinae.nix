@@ -11,6 +11,8 @@ in {
   services.vicinae = {
     enable = true;
     autoStart = true;
+    # Use vicinae's own package from its flake to match the cache
+    package = inputs.vicinae.packages.${pkgs.system}.default;
     settings = {
       faviconService = "twenty"; # twenty | google | none
       font.size = 11;
