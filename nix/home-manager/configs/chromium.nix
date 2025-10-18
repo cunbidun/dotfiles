@@ -27,7 +27,7 @@
     lib.nameValuePair (lib.toLower name) desktopEntry;
 in {
   # add xdg entries for PWAs
-  home.packages = [
+  home.packages = lib.mkIf isLinux [
     pkgs.chromium
   ];
   xdg = lib.mkIf isLinux {

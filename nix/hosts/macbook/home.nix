@@ -16,11 +16,9 @@ in {
     ../../home-manager/configs/nvim.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/vscode.nix
-    ../../home-manager/configs/stylix.nix
     inputs.self.homeManagerModules.theme-manager
     inputs.stylix.homeModules.stylix
     inputs.mac-app-util.homeManagerModules.default
-    ../../home-manager/configs/chromium.nix
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
