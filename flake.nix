@@ -118,12 +118,11 @@
     home-manager,
     ...
   } @ inputs: let
-    project_root = ./.;
     userdata = import ./userdata.nix;
     mkPkgs = system:
       import nixpkgs-unstable {
         inherit system;
-        overlays = import "${project_root}/nix/overlays" inputs;
+        overlays = import ./nix/overlays inputs;
         config.allowUnfree = true;
       };
 
@@ -133,7 +132,7 @@
         useUserPackages = true;
         users.${userdata.username} = import configPath;
         extraSpecialArgs = {
-          inherit project_root inputs;
+          inherit inputs;
           userdata = userdata;
         };
       };
@@ -153,7 +152,7 @@
           inputs.mac-app-util.darwinModules.default
           ./nix/hosts/macbook/configuration.nix
           home-manager.darwinModules.home-manager
-          (mkHomeManagerModule "${project_root}/nix/hosts/macbook/home.nix")
+          (mkHomeManagerModule ./nix/hosts/macbook/home.nix)
         ];
       };
 
@@ -182,7 +181,7 @@
 
     # Home Manager modules
     homeManagerModules = {
-      theme-manager = import "${project_root}/nix/theme-manager/hm-module.nix";
+      theme-manager = import ./nix/theme-manager/hm-module.nix;
     };
 
     # -----------------------#
@@ -202,8 +201,8 @@
       nixos = mkNixosHost {
         system = "x86_64-linux";
         hostPath = ./nix/hosts/nixos/configuration.nix;
-        homePath = "${project_root}/nix/hosts/nixos/home.nix";
-        diskoPath = "${project_root}/nix/hosts/nixos/disko.nix";
+        homePath = ./nix/hosts/nixos/home.nix;
+        diskoPath = ./nix/hosts/nixos/disko.nix;
       };
 
       rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
@@ -221,10 +220,10 @@
           ./nix/hosts/rpi/hardware-configuration.nix
           ./nix/hosts/rpi/configuration.nix
           inputs.home-manager-rpi5.nixosModules.home-manager
-          (mkHomeManagerModule "${project_root}/nix/hosts/rpi/home.nix")
+          (mkHomeManagerModule ./nix/hosts/rpi/home.nix)
           ({...}: {
             nixpkgs.overlays =
-              import "${project_root}/nix/overlays" inputs
+              import ./nix/overlays inputs
               ++ [
                 (final: prev: {
                   pythonPackagesExtensions =

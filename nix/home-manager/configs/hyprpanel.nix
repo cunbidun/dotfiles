@@ -3,10 +3,9 @@
   inputs,
   config,
   lib,
-  project_root,
   ...
 }: let
-  scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
+  scripts = import ../../scripts.nix {pkgs = pkgs;};
   defaultBrowserCmd = "chromium";
   defaultBrowserLabel = "Chromium";
 in {

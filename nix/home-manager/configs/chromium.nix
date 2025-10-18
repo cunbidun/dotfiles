@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  project_root,
   inputs,
   ...
 }: let
@@ -32,7 +31,7 @@ in {
     pkgs.chromium
   ];
   xdg = lib.mkIf isLinux {
-    dataFile."icons/hicolor/scalable/apps/messenger.svg".source = "${project_root}/icons/messenger.svg";
+    dataFile."icons/hicolor/scalable/apps/messenger.svg".source = ../../../icons/messenger.svg;
     desktopEntries = lib.listToAttrs [
       (mkChromePWA {
         name = "Messenger";

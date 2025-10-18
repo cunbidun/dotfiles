@@ -1,5 +1,4 @@
 {
-  project_root,
   pkgs,
   inputs,
   ...
@@ -77,7 +76,7 @@ in {
   linux_packages = let
     theme-switch = pkgs.writeShellApplication {
       name = "theme-switch";
-      text = builtins.readFile "${project_root}/scripts/theme-switch.sh";
+      text = builtins.readFile ../../scripts/theme-switch.sh;
       runtimeInputs = [pkgs.gawk pkgs.gnugrep pkgs.systemdMinimal pkgs.darkman pkgs.theme-manager];
     };
   in [

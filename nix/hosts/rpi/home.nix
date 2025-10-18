@@ -2,28 +2,26 @@
   pkgs,
   config,
   lib,
-  project_root,
   inputs,
   userdata,
   ...
 }: let
-  package_config = import "${project_root}/nix/home-manager/packages.nix" {
+  package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
-    project_root = project_root;
   };
 in {
   imports = [
-    "${project_root}/nix/home-manager/configs/zsh.nix"
-    "${project_root}/nix/home-manager/configs/tmux.nix"
-    "${project_root}/nix/home-manager/configs/nvim.nix"
+    ../../home-manager/configs/zsh.nix
+    ../../home-manager/configs/tmux.nix
+    ../../home-manager/configs/nvim.nix
   ];
   home.username = userdata.username;
   home.homeDirectory = "/home/${userdata.username}";
   home.packages = package_config.default_packages;
 
   home.file = {
-    ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
+    ".config/starship.toml".source = ../../../utilities/starship/starship.toml;
   };
   home.sessionVariables = {
     EDITOR = "nvim";

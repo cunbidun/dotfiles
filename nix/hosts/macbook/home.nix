@@ -2,29 +2,26 @@
   pkgs,
   config,
   lib,
-  project_root,
   inputs,
   userdata,
   ...
 }: let
-  package_config = import "${project_root}/nix/home-manager/packages.nix" {
+  package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
-    project_root = project_root;
   };
 in {
-  imports =
-    [
-      "${project_root}/nix/home-manager/configs/zsh.nix"
-      "${project_root}/nix/home-manager/configs/nvim.nix"
-      "${project_root}/nix/home-manager/configs/tmux.nix"
-      "${project_root}/nix/home-manager/configs/vscode.nix"
-      "${project_root}/nix/home-manager/configs/stylix.nix"
-      inputs.self.homeManagerModules.theme-manager
-      inputs.stylix.homeModules.stylix
-      inputs.mac-app-util.homeManagerModules.default
-      "${project_root}/nix/home-manager/configs/chromium.nix"
-    ];
+  imports = [
+    ../../home-manager/configs/zsh.nix
+    ../../home-manager/configs/nvim.nix
+    ../../home-manager/configs/tmux.nix
+    ../../home-manager/configs/vscode.nix
+    ../../home-manager/configs/stylix.nix
+    inputs.self.homeManagerModules.theme-manager
+    inputs.stylix.homeModules.stylix
+    inputs.mac-app-util.homeManagerModules.default
+    ../../home-manager/configs/chromium.nix
+  ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = userdata.username;
@@ -39,7 +36,7 @@ in {
   };
 
   home.file = {
-    ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
+    ".config/starship.toml".source = ../../../utilities/starship/starship.toml;
     ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
   };
 

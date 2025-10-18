@@ -31,8 +31,8 @@ Each host has:
 User configurations are modular:
 ```nix
 imports = [
-  "${project_root}/nix/home-manager/configs/nvim.nix"
-  "${project_root}/nix/home-manager/configs/hyprland/hyprland.nix"
+  "./nix/home-manager/configs/nvim.nix"
+  "./nix/home-manager/configs/hyprland/hyprland.nix"
   # ... other config modules
 ];
 ```

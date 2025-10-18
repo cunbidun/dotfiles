@@ -2,13 +2,11 @@
   lib,
   config,
   pkgs,
-  project_root,
   inputs,
   userdata,
   ...
 }: let
-  package_config = import "${project_root}/nix/home-manager/packages.nix" {
-    project_root = project_root;
+  package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
   };
@@ -18,25 +16,25 @@ in {
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.stylix.homeModules.stylix
     inputs.self.homeManagerModules.theme-manager
-    "${project_root}/nix/home-manager/configs/zsh.nix"
-    "${project_root}/nix/home-manager/configs/kitty.nix"
-    "${project_root}/nix/home-manager/configs/hyprland/hyprland.nix"
-    "${project_root}/nix/home-manager/configs/hyprpanel.nix"
-    "${project_root}/nix/home-manager/configs/hyprland/hypridle.nix"
-    "${project_root}/nix/home-manager/configs/hyprland/pyprland.nix"
-    "${project_root}/nix/home-manager/configs/hyprland/hyprpaper.nix"
-    "${project_root}/nix/home-manager/configs/nvim.nix"
-    "${project_root}/nix/home-manager/configs/tmux.nix"
-    "${project_root}/nix/home-manager/configs/tofi.nix"
-    "${project_root}/nix/home-manager/configs/yazi.nix"
-    "${project_root}/nix/home-manager/configs/hyprlock.nix"
-    "${project_root}/nix/home-manager/configs/vicinae.nix"
-    "${project_root}/nix/home-manager/configs/vscode.nix"
+    ../../home-manager/configs/zsh.nix
+    ../../home-manager/configs/kitty.nix
+    ../../home-manager/configs/hyprland/hyprland.nix
+    ../../home-manager/configs/hyprpanel.nix
+    ../../home-manager/configs/hyprland/hypridle.nix
+    ../../home-manager/configs/hyprland/pyprland.nix
+    ../../home-manager/configs/hyprland/hyprpaper.nix
+    ../../home-manager/configs/nvim.nix
+    ../../home-manager/configs/tmux.nix
+    ../../home-manager/configs/tofi.nix
+    ../../home-manager/configs/yazi.nix
+    ../../home-manager/configs/hyprlock.nix
+    ../../home-manager/configs/vicinae.nix
+    ../../home-manager/configs/vscode.nix
     inputs.vicinae.homeManagerModules.default
-    "${project_root}/nix/home-manager/systemd.nix"
-    "${project_root}/nix/home-manager/configs/stylix.nix"
-    "${project_root}/nix/home-manager/configs/activitywatch.nix"
-    "${project_root}/nix/home-manager/configs/chromium.nix"
+    ../../home-manager/systemd.nix
+    ../../home-manager/configs/stylix.nix
+    ../../home-manager/configs/activitywatch.nix
+    ../../home-manager/configs/chromium.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -84,12 +82,12 @@ in {
   fonts.fontconfig.enable = true;
 
   home.file = {
-    ".config/starship.toml".source = "${project_root}/utilities/starship/starship.toml";
+    ".config/starship.toml".source = ../../../utilities/starship/starship.toml;
 
     # Custom desktop files
-    ".local/share/applications/uxplay.desktop".source = "${project_root}/utilities/desktops/uxplay.desktop";
+    ".local/share/applications/uxplay.desktop".source = ../../../utilities/desktops/uxplay.desktop;
 
-    ".config/tmuxinator".source = "${project_root}/utilities/tmuxinator";
+    ".config/tmuxinator".source = ../../../utilities/tmuxinator;
   };
 
   qt = {enable = true;};

@@ -3,7 +3,6 @@
   config,
   lib,
   userdata,
-  project_root,
   ...
 }: let
   nvim-plugin-list = with pkgs.vimPlugins; [
@@ -174,7 +173,7 @@ in {
 
     # for quick iteration when developing, change the source
     # config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim";
-    ".config/nvim".source = "${project_root}/utilities/nvim";
+    ".config/nvim".source = ../../../utilities/nvim;
   };
 
   # Install our wrapped neovim instead of using programs.neovim

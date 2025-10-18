@@ -4,10 +4,9 @@
   inputs,
   lib,
   pkgs,
-  project_root,
   ...
 }: let
-  scripts = import "${project_root}/nix/home-manager/scripts.nix" {pkgs = pkgs;};
+  scripts = import ../../scripts.nix {pkgs = pkgs;};
 in {
   wayland.windowManager.hyprland = {
     enable = true;

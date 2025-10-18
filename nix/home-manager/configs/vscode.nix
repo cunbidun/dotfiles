@@ -1,6 +1,5 @@
 {
   pkgs,
-  project_root,
   inputs,
   ...
 }: let

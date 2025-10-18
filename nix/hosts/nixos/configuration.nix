@@ -243,6 +243,7 @@
 
   environment.etc =
     {
+      "flake-source".source = inputs.self;
     }
     # // lib.optionalAttrs config.programs.chromium.enable {
     #   "chromium/policies/managed/theme.json".source = "/home/${userdata.username}/.config/chromium/policies/managed/theme.json";

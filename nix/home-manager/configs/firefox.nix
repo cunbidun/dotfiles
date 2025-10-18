@@ -1,5 +1,4 @@
 {
-  project_root,
   userdata,
   pkgs,
   lib,
@@ -27,7 +26,7 @@
               ];
             }
           ];
-          icon = "${project_root}/icons/github.svg";
+          icon = ../../../icons/github.svg;
           definedAliases = ["@gh"];
         };
         "Nix Packages" = {
