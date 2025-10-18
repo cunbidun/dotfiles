@@ -320,13 +320,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
-  # Store flake source for derivation analysis without triggering /etc rebuilds
-  system.extraDependencies = [
-    (pkgs.writeTextFile {
-      name = "flake-source-path";
-      text = "${inputs.self}";
-      destination = "/flake-source";
-    })
-  ];
 }
