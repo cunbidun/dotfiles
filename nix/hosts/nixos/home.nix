@@ -49,6 +49,7 @@ in {
   services.xremap = {
     withWlroots = true;
     watch = true;
+    enable = true;
     yamlConfig = ''
       modmap:
         - name: Global
