@@ -90,6 +90,7 @@ in {
     pkgs.trash-cli
     pkgs.dig
     pkgs.inetutils
+    pkgs.ngrok
 
     # Hyprland
     pkgs.wl-clipboard # A command-line copy/paste tool for Wayland
