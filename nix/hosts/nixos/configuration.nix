@@ -207,6 +207,7 @@
           "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
           "khncfooichmfjbepaaaebmommgaepoid" # Unhook – Remove YouTube Recommendations
           "gakohpplicjdhhfllilcjpfildodfnnn" # Carrot (contest rating predictor)
+          "abehfkkfjlplnjadfcjiflnejblfmmpj" # nord extension
         ];
 
         DefaultSearchProviderEnabled = true;
