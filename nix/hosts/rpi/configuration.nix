@@ -6,6 +6,9 @@
   ...
 }: {
   imports = import ./adblock;
+
+  nixpkgs.config.allowUnfree = true;
+
   users.users = {
     ${userdata.username} = {
       isNormalUser = true;
