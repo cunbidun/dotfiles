@@ -131,7 +131,7 @@ in {
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
         "workspace 8 silent,class:^([Ss]team)$"
 
-        # Messenger PWA (Chromium)
+        # Messenger PWA
         "float,class:^(chrome-.*messenger.*)$"
 
         # 1Password rules

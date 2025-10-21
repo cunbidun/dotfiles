@@ -142,57 +142,6 @@
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     withUWSM = true;
   };
-  programs.chromium = {
-    enable = true;
-    extensions = [
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-      "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
-      "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
-      "cjnmckjndlpiamhfimnnjmnckgghkjbl" # Competitive Companion
-      "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password – Password Manager
-      "jkafdamincoabdjebhjmbiflploojgjf" # User-Agent Switcher
-      "nglaklhklhcoonedhgnpgddginnjdadi" # ActivityWatch Web watcher
-      "jgnfghanfbjmimbdmnjfofnbcgpkbegj" # KeePassHelper
-      "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
-      "khncfooichmfjbepaaaebmommgaepoid" # Unhook – Remove YouTube Recommendations
-      "gakohpplicjdhhfllilcjpfildodfnnn" # Carrot (contest rating predictor)
-    ];
-
-    extraOpts = {
-      DefaultSearchProviderEnabled = true;
-      DefaultSearchProviderName = "DuckDuckGo";
-      DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
-      BrowserLabsEnabled = false;
-      RestoreOnStartup = 1;
-      SiteSearchSettings = [
-        {
-          name = "GitHub Repositories";
-          shortcut = "gh";
-          url = "https://github.com/search?q={searchTerms}";
-        }
-        {
-          name = "Nix Code";
-          shortcut = "nc";
-          url = "https://github.com/search?q={searchTerms}+NOT+is%3Afork+language%3ANix&type=code";
-        }
-        {
-          name = "Nix Packages";
-          shortcut = "nix";
-          url = "https://search.nixos.org/packages?query={searchTerms}";
-        }
-      ];
-      ExtensionSettings = {
-        # 1Password
-        "aeblfdkhhhdcdjpifhhbdiojplfjncoa" = {
-          toolbar_pin = "force_pinned";
-        };
-        # competitive-companion
-        "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
-          toolbar_pin = "force_pinned";
-        };
-      };
-    };
-  };
   programs.uwsm.enable = true;
   services.greetd = {
     enable = true;
@@ -245,10 +194,58 @@
   environment.etc =
     {
       "flake-source".source = inputs.self;
+      "opt/chrome/policies/managed/10-base.json".text = builtins.toJSON {
+        enable = true;
+        extensions = [
+          "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+          "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
+          "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
+          "cjnmckjndlpiamhfimnnjmnckgghkjbl" # Competitive Companion
+          "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password – Password Manager
+          "jkafdamincoabdjebhjmbiflploojgjf" # User-Agent Switcher
+          "nglaklhklhcoonedhgnpgddginnjdadi" # ActivityWatch Web watcher
+          "jgnfghanfbjmimbdmnjfofnbcgpkbegj" # KeePassHelper
+          "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
+          "khncfooichmfjbepaaaebmommgaepoid" # Unhook – Remove YouTube Recommendations
+          "gakohpplicjdhhfllilcjpfildodfnnn" # Carrot (contest rating predictor)
+        ];
+
+        extraOpts = {
+          DefaultSearchProviderEnabled = true;
+          DefaultSearchProviderName = "DuckDuckGo";
+          DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+          BrowserLabsEnabled = false;
+          RestoreOnStartup = 1;
+          SiteSearchSettings = [
+            {
+              name = "GitHub Repositories";
+              shortcut = "gh";
+              url = "https://github.com/search?q={searchTerms}";
+            }
+            {
+              name = "Nix Code";
+              shortcut = "nc";
+              url = "https://github.com/search?q={searchTerms}+NOT+is%3Afork+language%3ANix&type=code";
+            }
+            {
+              name = "Nix Packages";
+              shortcut = "nix";
+              url = "https://search.nixos.org/packages?query={searchTerms}";
+            }
+          ];
+          ExtensionSettings = {
+            # 1Password
+            "aeblfdkhhhdcdjpifhhbdiojplfjncoa" = {
+              toolbar_pin = "force_pinned";
+            };
+            # competitive-companion
+            "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
+              toolbar_pin = "force_pinned";
+            };
+          };
+        };
+      };
     }
-    # // lib.optionalAttrs config.programs.chromium.enable {
-    #   "chromium/policies/managed/theme.json".source = "/home/${userdata.username}/.config/chromium/policies/managed/theme.json";
-    # }
     // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
       "geolocation".text = ''
         # Statue of Liberty
@@ -319,9 +316,6 @@
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
-    targets = {
-      chromium.enable = false; #https://github.com/nix-community/stylix/issues/686
-    };
   };
 
   services.winboat.enable = true;

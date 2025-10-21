@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
-  chromeBinary = "${pkgs.chromium}/bin/chromium";
+  chromeBinary = "${pkgs.google-chrome}/bin/google-chrome";
   mkChromePWA = {
     name,
     url,
@@ -28,7 +28,7 @@
 in {
   # add xdg entries for PWAs
   home.packages = lib.mkIf isLinux [
-    pkgs.chromium
+    pkgs.google-chrome
   ];
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = ../../../icons/messenger.svg;
@@ -45,15 +45,10 @@ in {
     ];
 
     mimeApps.defaultApplications = {
-      "text/html" = ["google-chrome-unstable.desktop"];
-      "text/xml" = ["google-chrome-unstable.desktop"];
-      "x-scheme-handler/http" = ["google-chrome-unstable.desktop"];
-      "x-scheme-handler/https" = ["google-chrome-unstable.desktop"];
+      "text/html" = ["google-chrome.desktop"];
+      "text/xml" = ["google-chrome.desktop"];
+      "x-scheme-handler/http" = ["google-chrome.desktop"];
+      "x-scheme-handler/https" = ["google-chrome.desktop"];
     };
   };
-  home.activation.refreshChromiumPolicy = lib.mkIf isLinux ''
-    if [ -x "${chromeBinary}" ]; then
-      "${chromeBinary}" --refresh-platform-policy --no-startup-window >/dev/null 2>&1 || true
-    fi
-  '';
 }
