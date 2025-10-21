@@ -195,8 +195,7 @@
     {
       "flake-source".source = inputs.self;
       "opt/chrome/policies/managed/10-base.json".text = builtins.toJSON {
-        enable = true;
-        extensions = [
+        ExtensionInstallForcelist = [
           "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
           "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
           "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
@@ -210,38 +209,36 @@
           "gakohpplicjdhhfllilcjpfildodfnnn" # Carrot (contest rating predictor)
         ];
 
-        extraOpts = {
-          DefaultSearchProviderEnabled = true;
-          DefaultSearchProviderName = "DuckDuckGo";
-          DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
-          BrowserLabsEnabled = false;
-          RestoreOnStartup = 1;
-          SiteSearchSettings = [
-            {
-              name = "GitHub Repositories";
-              shortcut = "gh";
-              url = "https://github.com/search?q={searchTerms}";
-            }
-            {
-              name = "Nix Code";
-              shortcut = "nc";
-              url = "https://github.com/search?q={searchTerms}+NOT+is%3Afork+language%3ANix&type=code";
-            }
-            {
-              name = "Nix Packages";
-              shortcut = "nix";
-              url = "https://search.nixos.org/packages?query={searchTerms}";
-            }
-          ];
-          ExtensionSettings = {
-            # 1Password
-            "aeblfdkhhhdcdjpifhhbdiojplfjncoa" = {
-              toolbar_pin = "force_pinned";
-            };
-            # competitive-companion
-            "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
-              toolbar_pin = "force_pinned";
-            };
+        DefaultSearchProviderEnabled = true;
+        DefaultSearchProviderName = "DuckDuckGo";
+        DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+        BrowserLabsEnabled = false;
+        RestoreOnStartup = 1;
+        SiteSearchSettings = [
+          {
+            name = "GitHub Repositories";
+            shortcut = "gh";
+            url = "https://github.com/search?q={searchTerms}";
+          }
+          {
+            name = "Nix Code";
+            shortcut = "nc";
+            url = "https://github.com/search?q={searchTerms}+NOT+is%3Afork+language%3ANix&type=code";
+          }
+          {
+            name = "Nix Packages";
+            shortcut = "nix";
+            url = "https://search.nixos.org/packages?query={searchTerms}";
+          }
+        ];
+        ExtensionSettings = {
+          # 1Password
+          "aeblfdkhhhdcdjpifhhbdiojplfjncoa" = {
+            toolbar_pin = "force_pinned";
+          };
+          # competitive-companion
+          "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
+            toolbar_pin = "force_pinned";
           };
         };
       };
@@ -316,6 +313,9 @@
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
+    targets = {
+      chromium.enable = false;
+    };
   };
 
   services.winboat.enable = true;
