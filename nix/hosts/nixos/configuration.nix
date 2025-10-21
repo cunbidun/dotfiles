@@ -217,17 +217,17 @@
         SiteSearchSettings = [
           {
             name = "GitHub Repositories";
-            shortcut = "gh";
+            shortcut = "@gh";
             url = "https://github.com/search?q={searchTerms}";
           }
           {
             name = "Nix Code";
-            shortcut = "nc";
+            shortcut = "@nc";
             url = "https://github.com/search?q={searchTerms}+NOT+is%3Afork+language%3ANix&type=code";
           }
           {
             name = "Nix Packages";
-            shortcut = "nix";
+            shortcut = "@nix";
             url = "https://search.nixos.org/packages?query={searchTerms}";
           }
         ];
