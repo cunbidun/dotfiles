@@ -31,7 +31,9 @@
 in {
   # add xdg entries for PWAs
   home.packages = lib.mkIf isLinux [
-    pkgs.google-chrome
+    (pkgs.google-chrome.override {
+      commandLineArgs = "--refresh-platform-policy";
+    })
   ];
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = ../../../icons/messenger.svg;
@@ -54,7 +56,6 @@ in {
       "x-scheme-handler/https" = ["google-chrome.desktop"];
     };
   };
-
   # Generate Chrome policy file in user home directory
   home.file.".local/etc/chrome-policy.json" = lib.mkIf isLinux {
     text = chromeConfig.mkChromePolicy chromeConfig.baseExtensions;
