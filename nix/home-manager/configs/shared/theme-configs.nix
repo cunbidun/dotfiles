@@ -54,7 +54,7 @@
       nvimTheme = "everforest";
       hyprpanelTheme = "everforest";
       vicinaeTheme = "vicinae-light";
-      chromeExtension = null; # No specific extension for Everforest
+      chromeExtension = "dlcadbmcfambdjhecipbnolmjchgnode"; # Everforest Chrome Theme
     };
     dark = {
       scheme = "everforest-dark";
@@ -63,7 +63,7 @@
       nvimTheme = "everforest";
       hyprpanelTheme = "everforest";
       vicinaeTheme = "vicinae-dark";
-      chromeExtension = null; # No specific extension for Everforest
+      chromeExtension = "dlcadbmcfambdjhecipbnolmjchgnode"; # Everforest Chrome Theme
     };
   };
   onedark = {
@@ -74,7 +74,7 @@
       nvimTheme = "onelight";
       hyprpanelTheme = "one_dark";
       vicinaeTheme = "one-dark";
-      chromeExtension = null; # No specific extension for OneDark
+      chromeExtension = "kepnmfkhnenagnngmikejckkinaghmik"; # seri's dark theme (Atom One Dark based)
     };
     dark = {
       scheme = "onedark";
@@ -83,7 +83,7 @@
       nvimTheme = "onedark";
       hyprpanelTheme = "one_dark";
       vicinaeTheme = "one-dark";
-      chromeExtension = null; # No specific extension for OneDark
+      chromeExtension = "kepnmfkhnenagnngmikejckkinaghmik"; # seri's dark theme (Atom One Dark based)
     };
   };
   default = {
@@ -94,7 +94,7 @@
       nvimTheme = "vscode";
       hyprpanelTheme = "monochrome";
       vicinaeTheme = "vicinae-light";
-      chromeExtension = null; # No specific extension for Default
+      chromeExtension = null; # Default theme - no specific extension needed
     };
     dark = {
       scheme = "standardized-dark";
@@ -103,7 +103,7 @@
       nvimTheme = "vscode";
       hyprpanelTheme = "monochrome";
       vicinaeTheme = "vicinae-dark";
-      chromeExtension = null; # No specific extension for Default
+      chromeExtension = null; # Default theme - no specific extension needed
     };
   };
 }
