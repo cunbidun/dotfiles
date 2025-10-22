@@ -7,11 +7,11 @@
 }: let
   inherit (pkgs.stdenv) isLinux;
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
-  
+
   # Import shared Chrome configuration
   chromeConfig = import ./shared/chrome-config.nix;
   baseExtensions = chromeConfig.baseExtensions;
-  
+
   mkChromePWA = {
     name,
     url,
@@ -53,10 +53,10 @@ in {
     ];
 
     mimeApps.defaultApplications = {
-      "text/html" = ["google-chrome-stable.desktop"];
-      "text/xml" = ["google-chrome-stable.desktop"];
-      "x-scheme-handler/http" = ["google-chrome-stable.desktop"];
-      "x-scheme-handler/https" = ["google-chrome-stable.desktop"];
+      "text/html" = ["google-chrome.desktop"];
+      "text/xml" = ["google-chrome.desktop"];
+      "x-scheme-handler/http" = ["google-chrome.desktop"];
+      "x-scheme-handler/https" = ["google-chrome.desktop"];
     };
   };
 
