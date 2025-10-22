@@ -50,13 +50,6 @@ in {
         url = "https://chat.zalo.me/";
       })
     ];
-
-    mimeApps.defaultApplications = {
-      "text/html" = ["google-chrome.desktop"];
-      "text/xml" = ["google-chrome.desktop"];
-      "x-scheme-handler/http" = ["google-chrome.desktop"];
-      "x-scheme-handler/https" = ["google-chrome.desktop"];
-    };
   };
   # Generate Chrome policy file in user home directory
   home.file.".local/etc/chrome-policy.json" = lib.mkIf isLinux {
