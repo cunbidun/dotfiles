@@ -15,7 +15,6 @@
 
   # Import shared Chrome configuration
   chromeConfig = import ./shared/chrome-config.nix;
-  baseExtensions = chromeConfig.baseExtensions;
 
   # NOTE:
   # the specialisation name for theme must be named '{theme}-{polarity}'. Else switch won't work
@@ -33,15 +32,12 @@
       else "prefer-dark";
     # Get theme-specific extension if defined
     themeExtension = themeConfig.chromeExtension or null;
-    
-    # Add theme extension to the list if defined
-    extensionList = 
-      if themeExtension != null
-      then baseExtensions ++ [themeExtension]
-      else baseExtensions;
 
-    # Generate Chrome policy JSON with theme-specific extension
-    chromePolicyJson = chromeConfig.mkChromePolicy extensionList;
+    # Add theme extension to the list if defined
+    extensionList =
+      if themeExtension != null
+      then chromeConfig.baseExtensions ++ [themeExtension]
+      else chromeConfig.baseExtensions;
   in {
     dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
     services.vicinae.settings.theme.name = themeConfig.vicinaeTheme;
@@ -59,7 +55,7 @@
 
     # Override Chrome policy with theme-specific extensions
     home.file.".local/etc/chrome-policy.json" = lib.mkForce {
-      text = chromePolicyJson;
+      text = chromeConfig.mkChromePolicy extensionList;
     };
   };
 
