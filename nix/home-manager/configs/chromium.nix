@@ -31,9 +31,10 @@
 in {
   # add xdg entries for PWAs
   home.packages = lib.mkIf isLinux [
-    (pkgs.google-chrome.override {
-      commandLineArgs = "--refresh-platform-policy";
-    })
+    # (pkgs.google-chrome.override {
+    #   commandLineArgs = "--refresh-platform-policy";
+    # })
+    pkgs.google-chrome
   ];
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = ../../../icons/messenger.svg;
