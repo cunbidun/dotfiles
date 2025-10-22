@@ -6,7 +6,8 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
-  chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
+  chromePackage = inputs.browser-previews.packages.${pkgs.system}.google-chrome-beta;
+  chromeBinary = "${chromePackage}/bin/google-chrome-beta";
 
   # Import shared Chrome configuration
   chromeConfig = import ./shared/chrome-config.nix;
@@ -34,7 +35,7 @@ in {
     # (pkgs.google-chrome.override {
     #   commandLineArgs = "--refresh-platform-policy";
     # })
-    pkgs.google-chrome
+    chromePackage
   ];
   xdg = lib.mkIf isLinux {
     dataFile."icons/hicolor/scalable/apps/messenger.svg".source = ../../../icons/messenger.svg;

@@ -110,6 +110,11 @@
       url = "github:Rexcrazy804/winboat?ref=fix-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    browser-previews = {
+      url = "github:nix-community/browser-previews";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = {
