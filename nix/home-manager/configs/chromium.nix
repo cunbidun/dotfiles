@@ -7,6 +7,11 @@
 }: let
   inherit (pkgs.stdenv) isLinux;
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
+  
+  # Import shared Chrome configuration
+  chromeConfig = import ./shared/chrome-config.nix;
+  baseExtensions = chromeConfig.baseExtensions;
+  
   mkChromePWA = {
     name,
     url,
@@ -25,6 +30,9 @@
       // lib.optionalAttrs (icon != null) {inherit icon;};
   in
     lib.nameValuePair (lib.toLower name) desktopEntry;
+
+  # Generate Chrome policy JSON
+  chromePolicyJson = chromeConfig.mkChromePolicy baseExtensions;
 in {
   # add xdg entries for PWAs
   home.packages = lib.mkIf isLinux [
@@ -50,5 +58,10 @@ in {
       "x-scheme-handler/http" = ["google-chrome-stable.desktop"];
       "x-scheme-handler/https" = ["google-chrome-stable.desktop"];
     };
+  };
+
+  # Generate Chrome policy file in user home directory
+  home.file.".local/etc/chrome-policy.json" = lib.mkIf isLinux {
+    text = chromePolicyJson;
   };
 }

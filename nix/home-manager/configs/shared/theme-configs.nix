@@ -12,6 +12,7 @@
       nvimTheme = "nord";
       hyprpanelTheme = "nord";
       vicinaeTheme = "nord_light";
+      chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
     };
     dark = {
       scheme = "nord";
@@ -20,6 +21,7 @@
       nvimTheme = "nord";
       hyprpanelTheme = "nord";
       vicinaeTheme = "nord_dark";
+      chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
       fzf_theme = "--color=bg+:#CCD0DA,bg:#EFF1F5,spinner:#DC8A78,hl:#D20F39 --color=fg:#4C4F69,header:#D20F39,info:#8839EF,pointer:#DC8A78 --color=marker:#7287FD,fg+:#4C4F69,prompt:#8839EF,hl+:#D20F39 --color=selected-bg:#BCC0CC --color=border:#9CA0B0,label:#4C4F69";
     };
   };
@@ -31,6 +33,7 @@
       nvimTheme = "catppuccin";
       hyprpanelTheme = "catppuccin_mocha";
       vicinaeTheme = "catppuccin_latte";
+      chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
     };
     dark = {
       scheme = "catppuccin-mocha";
@@ -39,6 +42,7 @@
       nvimTheme = "catppuccin";
       hyprpanelTheme = "catppuccin_mocha";
       vicinaeTheme = "catppuccin-mocha";
+      chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
       fzf_theme = "--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 --color=selected-bg:#45475A --color=border:#6C7086,label:#CDD6F4";
     };
   };
@@ -50,6 +54,7 @@
       nvimTheme = "everforest";
       hyprpanelTheme = "everforest";
       vicinaeTheme = "vicinae-light";
+      chromeExtension = null; # No specific extension for Everforest
     };
     dark = {
       scheme = "everforest-dark";
@@ -58,6 +63,7 @@
       nvimTheme = "everforest";
       hyprpanelTheme = "everforest";
       vicinaeTheme = "vicinae-dark";
+      chromeExtension = null; # No specific extension for Everforest
     };
   };
   onedark = {
@@ -68,6 +74,7 @@
       nvimTheme = "onelight";
       hyprpanelTheme = "one_dark";
       vicinaeTheme = "one-dark";
+      chromeExtension = null; # No specific extension for OneDark
     };
     dark = {
       scheme = "onedark";
@@ -76,6 +83,7 @@
       nvimTheme = "onedark";
       hyprpanelTheme = "one_dark";
       vicinaeTheme = "one-dark";
+      chromeExtension = null; # No specific extension for OneDark
     };
   };
   default = {
@@ -86,6 +94,7 @@
       nvimTheme = "vscode";
       hyprpanelTheme = "monochrome";
       vicinaeTheme = "vicinae-light";
+      chromeExtension = null; # No specific extension for Default
     };
     dark = {
       scheme = "standardized-dark";
@@ -94,6 +103,7 @@
       nvimTheme = "vscode";
       hyprpanelTheme = "monochrome";
       vicinaeTheme = "vicinae-dark";
+      chromeExtension = null; # No specific extension for Default
     };
   };
 }
