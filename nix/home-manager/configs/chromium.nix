@@ -55,4 +55,8 @@ in {
   home.file.".local/etc/chrome-policy.json" = lib.mkIf isLinux {
     text = chromeConfig.mkChromePolicy chromeConfig.baseExtensions;
   };
+  # run google-chrome-beta --refresh-platform-policy --no-startup-window when switching themes
+  home.activation.refresh_chrome_policy = lib.mkIf isLinux ''
+    ${chromeBinary} --refresh-platform-policy --no-startup-window || true
+  '';
 }
