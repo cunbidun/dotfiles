@@ -22,7 +22,6 @@
       hyprpanelTheme = "nord";
       vicinaeTheme = "nord_dark";
       chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
-      fzf_theme = "--color=bg+:#CCD0DA,bg:#EFF1F5,spinner:#DC8A78,hl:#D20F39 --color=fg:#4C4F69,header:#D20F39,info:#8839EF,pointer:#DC8A78 --color=marker:#7287FD,fg+:#4C4F69,prompt:#8839EF,hl+:#D20F39 --color=selected-bg:#BCC0CC --color=border:#9CA0B0,label:#4C4F69";
     };
   };
   catppuccin = {
@@ -33,7 +32,7 @@
       nvimTheme = "catppuccin";
       hyprpanelTheme = "catppuccin_mocha";
       vicinaeTheme = "catppuccin_latte";
-      chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
+      chromeExtension = "jhjnalhegpceacdhbplhnakmkdliaddd"; # Catppuccin extension
     };
     dark = {
       scheme = "catppuccin-mocha";
@@ -43,7 +42,6 @@
       hyprpanelTheme = "catppuccin_mocha";
       vicinaeTheme = "catppuccin-mocha";
       chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
-      fzf_theme = "--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 --color=selected-bg:#45475A --color=border:#6C7086,label:#CDD6F4";
     };
   };
   everforest = {
@@ -74,7 +72,7 @@
       nvimTheme = "onelight";
       hyprpanelTheme = "one_dark";
       vicinaeTheme = "one-dark";
-      chromeExtension = "kepnmfkhnenagnngmikejckkinaghmik"; # seri's dark theme (Atom One Dark based)
+      chromeExtension = "ajamefcbfaiolpnjelkafhjdninoclhc"; # seri's dark theme (Atom One Dark based)
     };
     dark = {
       scheme = "onedark";
@@ -83,7 +81,7 @@
       nvimTheme = "onedark";
       hyprpanelTheme = "one_dark";
       vicinaeTheme = "one-dark";
-      chromeExtension = "kepnmfkhnenagnngmikejckkinaghmik"; # seri's dark theme (Atom One Dark based)
+      chromeExtension = "kjboibophcgchimahpicagheccpnjnhi"; # seri's dark theme (Atom One Dark based)
     };
   };
   default = {
