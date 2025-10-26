@@ -55,13 +55,12 @@
     # +--------+
     # | Others |
     # +--------+
-    yazi = {url = "github:sxyazi/yazi/v25.4.8";};
+    yazi = {url = "github:sxyazi/yazi/v25.5.31";};
     stylix = {url = "github:nix-community/stylix";};
     hyprpanel = {
       url = "github:cunbidun/HyprPanel";
       # url = "path:/home/cunbidun/.tmp/HyprPanel";
     };
-    nur.url = "github:nix-community/nur";
 
     nix-monitored = {
       url = "github:ners/nix-monitored";
@@ -101,7 +100,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.14.5";
+      url = "github:vicinaehq/vicinae/v0.15.5";
     };
 
     # +-- Windows interop --+
@@ -271,6 +270,15 @@
         themectl = {
           type = "app";
           program = "${themeManager}/bin/themectl";
+        };
+        flake-input-versions = let
+          pythonWithDeps = pkgs.python3.withPackages (ps: with ps; [texttable]);
+          script = pkgs.writeShellScriptBin "flake-input-versions" ''
+            exec ${pythonWithDeps}/bin/python3 ${./scripts/flake_input_versions.py} "$@"
+          '';
+        in {
+          type = "app";
+          program = "${script}/bin/flake-input-versions";
         };
       });
   };
