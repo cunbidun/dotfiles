@@ -63,6 +63,11 @@
       when = "filesExplorerFocus && foldersViewVisible && !inputFocus";
     }
     {
+      command = "copyRelativeFilePath";
+      key = "shift+c";
+      when = "filesExplorerFocus && foldersViewVisible && !inputFocus";
+    }
+    {
       command = "filesExplorer.cut";
       key = "x";
       when = "filesExplorerFocus && foldersViewVisible && !inputFocus";
