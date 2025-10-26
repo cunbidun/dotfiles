@@ -10,7 +10,7 @@
   ...
 }: {
   imports = [
-    inputs.winboat.nixosModules.default
+    # inputs.winboat.nixosModules.default
     ./hardware-configuration.nix
     ./uxplay.nix
   ];
@@ -120,6 +120,8 @@
       rocmPackages.rocm-smi
       rocmPackages.rocminfo
       rocmPackages.amdsmi
+
+      pkgs.winboat
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
@@ -271,8 +273,6 @@
       chromium.enable = false;
     };
   };
-
-  services.winboat.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
