@@ -1049,22 +1049,6 @@
         "type": "github"
       }
     },
-    "master": {
-      "locked": {
-        "lastModified": 1761108182,
-        "narHash": "sha256-Nj72C9B4wlhYQVwMqy6ICn+fAwoGibsE5dTPP+D9SHY=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "91149d832c7f2cbcfdc5953dafb3ea9e38475ba3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "master",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": "nixpkgs_10"
@@ -1236,6 +1220,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1761510810,
+        "narHash": "sha256-ZfvOGzZPuC7dVHPq0tPYhibyqpG9Jp/9cFFXr86HQYY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "99187c7501b81366270251d9d3e59023669cf98a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -1683,17 +1682,16 @@
         "hyprland-contrib": "hyprland-contrib",
         "hyprpanel": "hyprpanel",
         "mac-app-util": "mac-app-util",
-        "master": "master",
         "nix-darwin": "nix-darwin",
         "nix-monitored": "nix-monitored",
         "nix4vscode": "nix4vscode",
         "nixos-raspberrypi": "nixos-raspberrypi",
+        "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "pyprland": "pyprland",
         "stylix": "stylix",
         "vicinae": "vicinae",
-        "winboat": "winboat",
         "xremap-flake": "xremap-flake",
         "yazi": "yazi"
       }
@@ -2186,27 +2184,6 @@
         "owner": "vicinaehq",
         "ref": "v0.15.5",
         "repo": "vicinae",
-        "type": "github"
-      }
-    },
-    "winboat": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1760091228,
-        "narHash": "sha256-Jds9Q+26pWBqxcDg2mmfFGpbFdoOtANgirvwOf6PMkQ=",
-        "owner": "Rexcrazy804",
-        "repo": "winboat",
-        "rev": "ebe8c6301de068bf6092cfb9a4efa0520c8ba258",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Rexcrazy804",
-        "ref": "fix-nix",
-        "repo": "winboat",
         "type": "github"
       }
     },

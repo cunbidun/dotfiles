@@ -23,7 +23,7 @@
   };
 
   inputs = {
-    master.url = "github:nixos/nixpkgs?ref=master";
+    nixpkgs-master = {url = "github:nixos/nixpkgs";};
     nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
     nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-25.05";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
@@ -101,13 +101,6 @@
     };
     vicinae = {
       url = "github:vicinaehq/vicinae/v0.15.5";
-    };
-
-    # +-- Windows interop --+
-    winboat = {
-      # TODO: change to master branch after https://github.com/TibixDev/winboat/pull/281 get merged
-      url = "github:Rexcrazy804/winboat?ref=fix-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     browser-previews = {

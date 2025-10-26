@@ -5,7 +5,7 @@
 }: let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
-  vscodeVersion = pkgs.master.vscode;
+  vscodeVersion = pkgs.nixpkgs-master.vscode;
   # Common keybindings for both platforms
   commonKeybindings = [
     # Navigation keys

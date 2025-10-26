@@ -10,7 +10,6 @@
   ...
 }: {
   imports = [
-    # inputs.winboat.nixosModules.default
     ./hardware-configuration.nix
     ./uxplay.nix
   ];
@@ -74,7 +73,7 @@
 
   # turn on for ollama
   # services.ollama = {
-  #   package = pkgs.master.ollama;
+  #   package = pkgs.nixpkgs-master.ollama;
   #   enable = true;
   #   acceleration = "rocm";
   #   loadModels = [
@@ -86,7 +85,7 @@
   #   };
   # };
   # services.open-webui = {
-  #   package = pkgs.master.open-webui;
+  #   package = pkgs.nixpkgs-master.open-webui;
   #   enable = true;
   #   host = "0.0.0.0";
   #   port = 8000;
