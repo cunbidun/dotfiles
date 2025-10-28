@@ -96,23 +96,23 @@
           lsp_fallback = true,
         },
       })
+      local function TermWrapper(command)
+        vim.cmd("wa")
+        local function get_terminal_buffers()
+          local buffers = vim.api.nvim_list_bufs()
+          local terminal_buffers = {}
 
+          for _, buf in ipairs(buffers) do
+          if vim.api.nvim_buf_get_option(buf, "buftype") == "terminal" then
+              table.insert(terminal_buffers, buf)
+          end
+        end
+        return terminal_buffers
+      end
       -- Conditional competitive programming configuration
       if vim.env.CP_ENV then
         print("loading cp.lua")
-        local function TermWrapper(command)
-          vim.cmd("wa")
-          local function get_terminal_buffers()
-            local buffers = vim.api.nvim_list_bufs()
-            local terminal_buffers = {}
 
-            for _, buf in ipairs(buffers) do
-            if vim.api.nvim_buf_get_option(buf, "buftype") == "terminal" then
-                table.insert(terminal_buffers, buf)
-            end
-          end
-          return terminal_buffers
-        end
 
         local buf_id = get_terminal_buffers()
         if #buf_id > 0 then
