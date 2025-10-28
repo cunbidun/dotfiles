@@ -22,7 +22,8 @@ in {
     ../../home-manager/configs/hyprland/hypridle.nix
     ../../home-manager/configs/hyprland/pyprland.nix
     ../../home-manager/configs/hyprland/hyprpaper.nix
-    ../../home-manager/configs/nvim.nix
+    # ../../home-manager/configs/nvim.nix # Replaced with NvChad
+    ../../home-manager/configs/nvchad.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/tofi.nix
     ../../home-manager/configs/yazi.nix
