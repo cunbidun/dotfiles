@@ -106,7 +106,7 @@
   users.users.${userdata.username} = {
     isNormalUser = true;
     description = userdata.name;
-    extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker" "groups"];
+    extraGroups = ["networkmanager" "wheel" "input" "i2c" "docker"];
     packages = with pkgs; [
       jdk17
       xdg-utils
