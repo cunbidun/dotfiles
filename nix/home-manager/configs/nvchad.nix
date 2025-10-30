@@ -47,6 +47,7 @@
 
     extraConfig = ''
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/lsp.lua}
+      ${builtins.readFile ../../../utilities/nvim/lua/user/config/keymaps.lua}
       ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/conform.lua}
       -- Conditional competitive programming configuration
       if vim.env.CP_ENV then
