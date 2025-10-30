@@ -38,12 +38,7 @@
       lldb # LLDB debugger
       gdb # GDB debugger
     ];
-    extraConfig = let
-      cpLua = builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua;
-      cpLuaIndented =
-        "        "
-        + builtins.replaceStrings ["\n"] ["\n        "] cpLua;
-    in ''
+    extraConfig = ''
       -- Lua LSP configurations
       vim.lsp.config.luals = {
         cmd = { "lua-language-server" },
@@ -104,7 +99,7 @@
 
       -- Conditional competitive programming configuration
       if vim.env.CP_ENV then
-${cpLuaIndented}
+        ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end
     '';
     backup = true;
