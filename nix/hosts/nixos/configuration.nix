@@ -190,6 +190,26 @@
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     polkitPolicyOwners = ["${userdata.username}"];
   };
+  # Enable Polkit
+  security.polkit.enable = true;
+  # Declare admin identities (optional; ensures which users/groups count as “administrators”)
+  security.polkit.adminIdentities = [
+    "unix-group:wheel"
+    # maybe "unix-user:yourusername"
+  ];
+  # Add extra rule(s) in JavaScript (via extraConfig) to allow suspend for your group
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (
+        (action.id == "org.freedesktop.login1.suspend" ||
+         action.id == "org.freedesktop.login1.suspend-multiple-sessions")
+        && subject.isInGroup("wheel")
+        && subject.active   // optionally check session is active
+      ) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
   services.gnome.gnome-keyring.enable = true;
 
   environment.etc =
