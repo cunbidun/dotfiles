@@ -1,5 +1,5 @@
-return {
-  "vim-plugins/toggleterm.nvim",
+{
+  "akinsho/toggleterm.nvim",
   event = "BufEnter",
   config = function()
     require("toggleterm").setup({

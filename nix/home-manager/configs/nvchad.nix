@@ -39,6 +39,12 @@
       gdb # GDB debugger
     ];
 
+    extraPlugins = ''
+      return {
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/terminal.lua}
+      }
+    '';
+
     extraConfig = ''
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/lsp.lua}
       ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/conform.lua}
