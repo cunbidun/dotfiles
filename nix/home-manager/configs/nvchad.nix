@@ -96,6 +96,7 @@
           lsp_fallback = true,
         },
       })
+
       local function TermWrapper(command)
         vim.cmd("wa")
         local function get_terminal_buffers()
@@ -109,18 +110,10 @@
         end
         return terminal_buffers
       end
+
       -- Conditional competitive programming configuration
       if vim.env.CP_ENV then
         print("loading cp.lua")
-
-
-        local buf_id = get_terminal_buffers()
-        if #buf_id > 0 then
-            vim.cmd(string.format("%sbdelete!", buf_id[1]))
-        end
-
-        vim.cmd(string.format("TermExec direction=vertical cmd='%s'", command))
-        end
 
         vim.api.nvim_create_user_command("Runscript", function()
           TermWrapper(string.format('clear; cpcli_app task --root-dir="%s" --build', vim.fn.expand("%:p:h")))

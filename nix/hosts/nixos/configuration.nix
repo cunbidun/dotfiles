@@ -192,12 +192,9 @@
   };
   # Enable Polkit
   security.polkit.enable = true;
-  # Declare admin identities (optional; ensures which users/groups count as “administrators”)
   security.polkit.adminIdentities = [
     "unix-group:wheel"
-    # maybe "unix-user:yourusername"
   ];
-  # Add extra rule(s) in JavaScript (via extraConfig) to allow suspend for your group
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
       if (
