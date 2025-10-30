@@ -38,65 +38,10 @@
       lldb # LLDB debugger
       gdb # GDB debugger
     ];
+
     extraConfig = ''
-      -- Lua LSP configurations
-      vim.lsp.config.luals = {
-        cmd = { "lua-language-server" },
-        filetypes = { "lua" },
-        root_markers = { ".luarc.json", ".luarc.jsonc" },
-        settings = {
-          Lua = {
-            workspace = {
-              library = { vim.env.VIMRUNTIME },
-            },
-          },
-        },
-      }
-
-      -- C/C++ Language Server configuration
-      vim.lsp.config.clangd = {
-        cmd = { "clangd", "--background-index" },
-        root_markers = { "compile_commands.json", "compile_flags.txt" },
-        filetypes = { "c", "cpp" },
-      }
-
-      vim.lsp.config.nixd = {
-        cmd = { "nixd" },
-        root_markers = { "flake.nix", "default.nix", "shell.nix" },
-        filetypes = { "nix" },
-        settings = {
-          nix = {
-            format = {
-              enable = true,
-            },
-          },
-        },
-      }
-
-      vim.diagnostic.config({ virtual_lines = true })
-      vim.lsp.enable({ "luals", "nil_ls", "nixd", "pyright", "ruff", "bashls", "clangd" })
-
-      -- C/C++ Auto-formatting configuration
-      local conform = require("conform")
-      conform.setup({
-        formatters_by_ft = {
-          c = { "clang-format" },
-          cpp = { "clang-format" },
-          h = { "clang-format" },
-          hpp = { "clang-format" },
-        },
-        formatters = {
-          ["clang-format"] = {
-            command = "clang-format",
-            args = { "--style=file" },
-          },
-        },
-        format_on_save = {
-          timeout_ms = 500,
-          lsp_fallback = true,
-        },
-      })
-
+      ${builtins.readFile ../../../utilities/nvim/lua/user/config/lsp.lua}
+      ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/conform.lua}
       -- Conditional competitive programming configuration
       if vim.env.CP_ENV then
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
