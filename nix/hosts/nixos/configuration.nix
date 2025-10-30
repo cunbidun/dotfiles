@@ -204,7 +204,6 @@
         (action.id == "org.freedesktop.login1.suspend" ||
          action.id == "org.freedesktop.login1.suspend-multiple-sessions")
         && subject.isInGroup("wheel")
-        && subject.active   // optionally check session is active
       ) {
         return polkit.Result.YES;
       }
