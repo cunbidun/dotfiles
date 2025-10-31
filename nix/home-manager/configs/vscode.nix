@@ -506,6 +506,7 @@ in {
         "vscodevim.vim"
         "akamud.vscode-theme-onedark"
         "akamud.vscode-theme-onelight"
+        "huytd.nord-light"
       ];
     };
   };
