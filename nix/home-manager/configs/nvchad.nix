@@ -3,8 +3,11 @@
   config,
   pkgs,
   lib,
+  userdata,
   ...
-}: {
+}: let
+  inherit (pkgs.stdenv) isLinux;
+in {
   imports = [
     inputs.nix4nvchad.homeManagerModule
   ];
@@ -66,11 +69,10 @@
     hm-activation = true;
   };
 
-  home.activation.writeNvimTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.updateNvimTheme = lib.mkIf isLinux ''
     shopt -s nullglob
     for addr in "$XDG_RUNTIME_DIR"/nvim.*; do
-      # If there were no matches, the loop will be skipped entirely.
-      nvim --server "$addr" --remote-send ":lua require('nvchad.utils').reload()<CR>"
+      /etc/profiles/per-user/${userdata.username}/bin/nvim --server "$addr" --remote-send ":lua require('nvchad.utils').reload()<CR>"
     done
   '';
 }
