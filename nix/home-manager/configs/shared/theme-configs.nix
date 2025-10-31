@@ -9,9 +9,9 @@
       scheme = "nord-light";
       wallpaper = ../../../../wallpapers/thuonglam.jpeg;
       vscodeTheme = "Nord Light";
-      nvimTheme = "nord";
+      nvimTheme = "onenord_light";
       hyprpanelTheme = "nord";
-      vicinaeTheme = "onenord_light";
+      vicinaeTheme = "nord_light";
       chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
     };
     dark = {
