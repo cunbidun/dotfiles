@@ -67,7 +67,7 @@ in {
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end
     '';
-    backup = false;
+    backup = true;
     hm-activation = true;
   };
 
