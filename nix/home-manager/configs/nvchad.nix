@@ -44,10 +44,11 @@
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/terminal.lua}
       }
     '';
+
     chadrcConfig = ''
       local M = {}
       M.base46 = {
-        theme = "vscode_dark",
+        theme = "vscode_dark";
       }
       return M
     '';
@@ -64,4 +65,12 @@
     backup = false;
     hm-activation = true;
   };
+
+  home.activation.writeNvimTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    shopt -s nullglob
+    for addr in "$XDG_RUNTIME_DIR"/nvim.*; do
+      # If there were no matches, the loop will be skipped entirely.
+      nvim --server "$addr" --remote-send ":lua require('nvchad.utils').reload()<CR>"
+    done
+  '';
 }

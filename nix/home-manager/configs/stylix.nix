@@ -57,6 +57,13 @@
     home.file.".local/etc/chrome-policy.json" = lib.mkForce {
       text = chromeConfig.mkChromePolicy extensionList;
     };
+    programs.nvchad.chadrcConfig = lib.mkForce ''
+      local M = {}
+      M.base46 = {
+        theme = "${themeConfig.nvimTheme}";
+      }
+      return M
+    '';
   };
 
   # Generate specializations for each theme/polarity combination
