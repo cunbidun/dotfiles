@@ -115,11 +115,11 @@ in {
         "image/png" = ["feh.desktop"];
         "text/plain" = ["nvim.desktop"];
         "inode/directory" = ["yazi.desktop"];
-        "text/html" = ["google-chrome-beta.desktop"];
-        "application/xhtml+xml" = ["google-chrome-beta.desktop"];
-        "application/x-www-form-urlencoded" = ["google-chrome-beta.desktop"];
-        "x-scheme-handler/http" = ["google-chrome-beta.desktop"];
-        "x-scheme-handler/https" = ["google-chrome-beta.desktop"];
+        "text/html" = ["google-chrome.desktop"];
+        "application/xhtml+xml" = ["google-chrome.desktop"];
+        "application/x-www-form-urlencoded" = ["google-chrome.desktop"];
+        "x-scheme-handler/http" = ["google-chrome.desktop"];
+        "x-scheme-handler/https" = ["google-chrome.desktop"];
       };
     };
 

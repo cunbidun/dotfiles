@@ -86,12 +86,6 @@
     vicinae = {
       url = "github:vicinaehq/vicinae/v0.15.5";
     };
-
-    browser-previews = {
-      url = "github:nix-community/browser-previews";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

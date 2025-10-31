@@ -6,7 +6,7 @@
   ...
 }: let
   scripts = import ../../scripts.nix {pkgs = pkgs;};
-  defaultBrowserCmd = "google-chrome-beta";
+  defaultBrowserCmd = "google-chrome";
   defaultBrowserLabel = "Chromium";
 in {
   programs.hyprpanel = {

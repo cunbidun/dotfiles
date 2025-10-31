@@ -6,8 +6,8 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
-  chromePackage = inputs.browser-previews.packages.${pkgs.system}.google-chrome-beta;
-  chromeBinary = "${chromePackage}/bin/google-chrome-beta";
+  chromePackage = pkgs.nixpkgs-master.google-chrome;
+  chromeBinary = "${chromePackage}/bin/google-chrome";
 
   # Import shared Chrome configuration
   chromeConfig = import ./shared/chrome-config.nix;
@@ -55,7 +55,6 @@ in {
   home.file.".local/etc/chrome-policy.json" = lib.mkIf isLinux {
     text = chromeConfig.mkChromePolicy chromeConfig.baseExtensions;
   };
-  # run google-chrome-beta --refresh-platform-policy --no-startup-window when switching themes
   home.activation.refresh_chrome_policy = lib.mkIf isLinux ''
     ${chromeBinary} --refresh-platform-policy --no-startup-window || true
   '';
