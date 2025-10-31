@@ -62,6 +62,6 @@
       end
     '';
     backup = false;
-    hm-activation = true;
+    hm-activation = false;
   };
 }
