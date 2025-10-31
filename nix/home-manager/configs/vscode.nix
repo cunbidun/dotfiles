@@ -504,7 +504,8 @@ in {
         "tamasfe.even-better-toml"
         "timonwong.shellcheck"
         "vscodevim.vim"
-        "zhuangtongfa.material-theme"
+        "akamud.vscode-theme-onedark"
+        "akamud.vscode-theme-onelight"
       ];
     };
   };
