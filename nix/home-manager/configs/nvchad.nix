@@ -46,11 +46,9 @@
     '';
     chadrcConfig = ''
       local M = {}
-
-      M.ui = {
-        theme = "vscode-dark"
+      M.base46 = {
+        theme = "vscode_light",
       }
-
       return M
     '';
 
