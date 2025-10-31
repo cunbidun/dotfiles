@@ -44,10 +44,10 @@ in {
 
     extraPlugins = ''
       return {
-        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/terminal.lua}
-        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/flash.lua}
-        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/aw-awatcher.lua}
-        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/nvim-surround.lua}
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/terminal.lua},
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/flash.lua},
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/aw-awatcher.lua},
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/nvim-surround.lua},
       }
     '';
 

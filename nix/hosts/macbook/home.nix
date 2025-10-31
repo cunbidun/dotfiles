@@ -42,7 +42,11 @@ in {
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = userdata.name;
-    userEmail = userdata.email;
+    settings = {
+      user = {
+        name = userdata.name;
+        email = userdata.email;
+      };
+    };
   };
 }

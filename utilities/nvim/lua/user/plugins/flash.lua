@@ -39,6 +39,5 @@
             require("flash").toggle()
         end,
         desc = "Toggle Flash Search"
-    }}
-,
+    }},
 }
