@@ -44,6 +44,15 @@
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/terminal.lua}
       }
     '';
+    chadrcConfig = ''
+      local M = {}
+
+      M.ui = {
+        theme = "vscode-dark"
+      }
+
+      return M
+    '';
 
     extraConfig = ''
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/lsp.lua}
