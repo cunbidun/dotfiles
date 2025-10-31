@@ -72,22 +72,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # +----------------+
-    # | Neovim plugins |
-    # +----------------+
-    auto-dark-mode-nvim = {
-      url = "github:f-person/auto-dark-mode.nvim";
-      flake = false;
-    };
-    copilot-lua = {
-      url = "github:zbirenbaum/copilot.lua";
-      flake = false;
-    };
-    blink-copilot = {
-      url = "github:fang2hou/blink-copilot";
-      flake = false;
-    };
-
     # +-- MacOS specific --+
     mac-app-util.url = "github:hraban/mac-app-util";
 

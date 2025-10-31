@@ -96,22 +96,6 @@
         "type": "github"
       }
     },
-    "auto-dark-mode-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1754250335,
-        "narHash": "sha256-PhhOlq4byctWJ5rLe3cifImH56vR2+k3BZGDZdQvjng=",
-        "owner": "f-person",
-        "repo": "auto-dark-mode.nvim",
-        "rev": "e300259ec777a40b4b9e3c8e6ade203e78d15881",
-        "type": "github"
-      },
-      "original": {
-        "owner": "f-person",
-        "repo": "auto-dark-mode.nvim",
-        "type": "github"
-      }
-    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -180,22 +164,6 @@
         "type": "github"
       }
     },
-    "blink-copilot": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1759208401,
-        "narHash": "sha256-s57/vIMvWoumP/Sp+3JMv0bHOf4rq33aEWPMLJdsBpk=",
-        "owner": "fang2hou",
-        "repo": "blink-copilot",
-        "rev": "5d35fd07fcc148be20442da1bdd2407e03263d7d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fang2hou",
-        "repo": "blink-copilot",
-        "type": "github"
-      }
-    },
     "browser-previews": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -251,22 +219,6 @@
       "original": {
         "owner": "sadjow",
         "repo": "codex-nix",
-        "type": "github"
-      }
-    },
-    "copilot-lua": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1760726160,
-        "narHash": "sha256-LM7JFBhBQ9uSWODzVJYT29cT6ra5fLFz/5uoto4/K30=",
-        "owner": "zbirenbaum",
-        "repo": "copilot.lua",
-        "rev": "3123983d00ae6859f8bc987d14ebb524bb41b618",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zbirenbaum",
-        "repo": "copilot.lua",
         "type": "github"
       }
     },
@@ -1725,11 +1677,8 @@
       "inputs": {
         "Hyprspace": "Hyprspace",
         "apple-fonts": "apple-fonts",
-        "auto-dark-mode-nvim": "auto-dark-mode-nvim",
-        "blink-copilot": "blink-copilot",
         "browser-previews": "browser-previews",
         "codex-nix": "codex-nix",
-        "copilot-lua": "copilot-lua",
         "disko": "disko",
         "home-manager": "home-manager",
         "home-manager-rpi5": "home-manager-rpi5",
