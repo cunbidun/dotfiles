@@ -11,7 +11,7 @@
       vscodeTheme = "Nord Light";
       nvimTheme = "nord";
       hyprpanelTheme = "nord";
-      vicinaeTheme = "nord_light";
+      vicinaeTheme = "onenord_light";
       chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
     };
     dark = {
