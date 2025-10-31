@@ -47,7 +47,7 @@
     chadrcConfig = ''
       local M = {}
       M.base46 = {
-        theme = "vscode_light",
+        theme = "vscode_dark",
       }
       return M
     '';
