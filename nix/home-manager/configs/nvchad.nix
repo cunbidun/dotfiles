@@ -47,7 +47,7 @@
     chadrcConfig = ''
       local M = {}
       M.base46 = {
-        theme = "vscode_dark",
+        theme = "vscode_light",
       }
       return M
     '';
@@ -61,7 +61,7 @@
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end
     '';
-    backup = true;
+    backup = false;
     hm-activation = true;
   };
 }
