@@ -1,5 +1,5 @@
-return {
-  "vim-plugins/aw-watcher.nvim",
+{
+  "niklaswimmer/aw-watcher.nvim",
   opts = { -- required, but can be empty table: {}
     -- add any options here
     -- for example:

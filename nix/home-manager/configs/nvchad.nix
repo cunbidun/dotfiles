@@ -45,6 +45,9 @@ in {
     extraPlugins = ''
       return {
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/terminal.lua}
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/flash.lua}
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/aw-awatcher.lua}
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/nvim-surround.lua}
       }
     '';
 
@@ -59,8 +62,7 @@ in {
     extraConfig = ''
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/lsp.lua}
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/keymaps.lua}
-      ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/conform.lua}
-      -- Conditional competitive programming configuration
+      ${builtins.readFile ../../../utilities/nvim/lua/user/config/conform.lua}
       if vim.env.CP_ENV then
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end

@@ -1,5 +1,5 @@
-return {
-  "vim-plugins/flash.nvim",
+{
+  "folke/flash.nvim",
   event = "VeryLazy",
   ---@type Flash.Config
   opts = {},
