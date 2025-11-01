@@ -218,8 +218,10 @@ in {
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = userdata.name;
-    userEmail = userdata.email;
+    settings = {
+      user.name = userdata.name;
+      user.email = userdata.email;
+    };
   };
   programs.bat = {
     enable = true;

@@ -5,30 +5,15 @@
   inputs,
   ...
 }: {
+  imports = [
+    ../shared/nix-config.nix
+  ];
+
   security.pam.services.sudo_local.touchIdAuth = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [pkgs.neovim pkgs.git];
-
-  # Necessary for using flakes on this system.
-  nix = {
-    optimise.automatic = true;
-    # TODO: this some how break 'nix develop'
-    # https://github.com/maralorn/nix-output-monitor/issues/166
-    # https://github.com/maralorn/nix-output-monitor/issues/140
-    # package = inputs.nix-monitored.packages.${pkgs.system}.default;
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
-    };
-    settings = {
-      experimental-features = "nix-command flakes pipe-operators";
-      accept-flake-config = true;
-      builders-use-substitutes = true;
-      trusted-users = ["root" "@wheel"]; # removed unused 'builder'
-    };
-  };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina

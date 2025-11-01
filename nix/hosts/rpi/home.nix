@@ -32,8 +32,10 @@ in {
 
   programs.git = {
     enable = true;
-    userName = userdata.name;
-    userEmail = userdata.email;
+    settings = {
+      user.name = userdata.name;
+      user.email = userdata.email;
+    };
   };
 
   home.stateVersion = "25.05";
