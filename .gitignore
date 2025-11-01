@@ -56,3 +56,4 @@ types
 node_modules
 
 result
+.nix-cache
