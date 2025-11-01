@@ -15,6 +15,8 @@ in {
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.self.homeManagerModules.theme-manager
+    inputs.sops-nix.homeManagerModules.sops
+    inputs.opnix.homeManagerModules.default
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/kitty.nix
     ../../home-manager/configs/hyprland/hyprland.nix

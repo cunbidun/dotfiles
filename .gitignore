@@ -57,3 +57,6 @@ node_modules
 
 result
 .nix-cache
+secrets/*.dec
+secrets/*.backup
+secrets/*.bak

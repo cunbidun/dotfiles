@@ -13,6 +13,8 @@
     ./hardware-configuration.nix
     ./uxplay.nix
     ../shared/nix-config.nix
+    inputs.sops-nix.nixosModules.sops
+    inputs.opnix.nixosModules.default
   ];
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
@@ -109,10 +111,37 @@
   };
 
   # To search for packages run 'nix search'. For example, 'nix search nixpkgs bazel'
-  environment.systemPackages = with pkgs; [
-    neovim
-    git
-  ];
+  environment.systemPackages =
+    (with pkgs; [
+      neovim
+      git
+      _1password-cli
+      sops
+    ])
+    ++ [
+      inputs.opnix.packages.${pkgs.system}.default
+    ];
+
+  services.onepassword-secrets = {
+    enable = true;
+    users = [userdata.username];
+    secrets.sopsAgeKey = {
+      reference = "op://Infrastructure/SOPS Age Key/private key";
+      path = "/var/lib/sops-nix/keys.txt";
+      owner = "root";
+      group = "root";
+      mode = "0600";
+    };
+  };
+
+  sops = {
+    defaultSopsFile = ../../../secrets/global.yaml;
+    age.keyFile = config.services.onepassword-secrets.secretPaths.sopsAgeKey;
+    secrets.geolocation = {
+      path = "/etc/geolocation";
+      mode = "0600";
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -197,13 +226,7 @@
       "opt/chrome/policies/managed/10-base.json".source = "/home/${userdata.username}/.local/etc/chrome-policy.json";
     }
     // lib.optionalAttrs (! config.services.geoclue2.enableWifi) {
-      "geolocation".text = ''
-        # Statue of Liberty
-        40.6893129   # latitude
-        -74.0445531  # longitude
-        96           # altitude
-        1.83         # accuracy radius
-      '';
+      "geolocation".source = config.sops.secrets.geolocation.path;
       "geoclue/conf.d/00-config.conf".text = ''
         [static-source]
         enable=true

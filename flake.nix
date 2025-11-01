@@ -67,6 +67,16 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    opnix = {
+      url = "github:brizzbuzz/opnix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
