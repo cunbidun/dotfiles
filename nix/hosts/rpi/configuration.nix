@@ -5,9 +5,11 @@
   lib,
   ...
 }: {
-  imports = import ./adblock ++ [
-    ../shared/nix-config.nix
-  ];
+  imports =
+    import ./adblock
+    ++ [
+      ../shared/nix-config.nix
+    ];
 
   nixpkgs.config.allowUnfree = true;
 
