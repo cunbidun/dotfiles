@@ -77,7 +77,7 @@ in {
     # check if XDG_RUNTIME_DIR is set before using it
     if [ -n "$XDG_RUNTIME_DIR" ]; then
       for addr in "$XDG_RUNTIME_DIR"/nvim.*; do
-        /etc/profiles/per-user/${userdata.username}/bin/nvim --server "$addr" --remote-send ":lua require('nvchad.utils').apply_theme()<CR>"
+        /etc/profiles/per-user/${userdata.username}/bin/nvim --server "$addr" --remote-send ":lua require('nvchad.utils').reload()<CR>"
       done
     fi
   '';
