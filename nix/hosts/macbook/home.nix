@@ -13,7 +13,7 @@
 in {
   imports = [
     ../../home-manager/configs/zsh.nix
-    ../../home-manager/configs/nvim.nix
+    ../../home-manager/configs/nvchad.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/vscode.nix
     inputs.self.homeManagerModules.theme-manager
