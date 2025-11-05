@@ -507,6 +507,7 @@ in {
         "akamud.vscode-theme-onedark"
         "akamud.vscode-theme-onelight"
         "huytd.nord-light"
+        "MS-vsliveshare.vsliveshare"
       ];
     };
   };
