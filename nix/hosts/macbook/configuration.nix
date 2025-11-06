@@ -177,6 +177,7 @@
     brews = [
       "displayplacer"
       "libmagic"
+      "uv"
     ];
 
     # `brew install --cask`
