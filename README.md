@@ -36,3 +36,6 @@ To bootstrap nix on MacOS with my dotfiles, follow these steps:
 
 #### To update the system
 After bootstrapping, you can update your system by running `~/dotfiles/scripts/switch.sh`
+
+## Docs
+- [Signal bridge setup](docs/signal-bridge.md)
