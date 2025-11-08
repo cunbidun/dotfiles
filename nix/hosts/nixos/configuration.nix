@@ -169,6 +169,18 @@
     settings.KbdInteractiveAuthentication = false;
   };
 
+  security.sudo.extraRules = [
+    {
+      users = [userdata.username];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/reboot";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
+
   services.udev.extraRules = ''
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
