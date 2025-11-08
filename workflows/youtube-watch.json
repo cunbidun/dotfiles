@@ -2,75 +2,79 @@
   "name": "YouTube Channel Notification",
   "nodes": [
     {
+      "id": "1",
+      "name": "Check Every 30m",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [-200, 0],
       "parameters": {
         "triggerTimes": [
           {
             "mode": "everyX",
-            "value": 30,
-            "unit": "minutes"
+            "unit": "minutes",
+            "value": 30
           }
         ]
-      },
-      "type": "n8n-nodes-base.cron",
-      "typeVersion": 1,
-      "position": [
-        -200,
-        0
-      ],
-      "name": "Check Every 30m"
+      }
     },
     {
+      "id": "2",
+      "name": "Set Channel",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [20, 0],
       "parameters": {
         "values": {
           "string": [
             {
               "name": "channelId",
               "value": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+            },
+            {
+              "name": "signalNumber",
+              "value": "+15550001111"
+            },
+            {
+              "name": "signalApiUrl",
+              "value": "http://127.0.0.1:8080"
+            }
+          ],
+          "json": [
+            {
+              "name": "signalRecipients",
+              "value": "[\"+15550002222\"]"
             }
           ]
         },
         "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 2,
-      "position": [
-        20,
-        0
-      ],
-      "name": "Set Channel"
+      }
     },
     {
+      "id": "3",
+      "name": "Read RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [260, 0],
       "parameters": {
         "url": "={{ 'https://www.youtube.com/feeds/videos.xml?channel_id=' + $json.channelId }}",
         "options": {
-          "includeOnlyNew": true,
-          "download": true
+          "download": true,
+          "includeOnlyNew": true
         }
-      },
-      "type": "n8n-nodes-base.rssFeedRead",
-      "typeVersion": 1,
-      "position": [
-        260,
-        0
-      ],
-      "name": "Read RSS"
+      }
     },
     {
+      "id": "4",
+      "name": "Send Signal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [500, 0],
       "parameters": {
-        "fromEmail": "n8n@example.com",
-        "toEmail": "you@example.com",
-        "subject": "New video: {{$json[\"title\"]}}",
-        "text": "{{$json[\"title\"]}}\n{{$json[\"link\"]}}\nPublished: {{$json[\"isoDate\"]}}"
-      },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2,
-      "position": [
-        500,
-        0
-      ],
-      "name": "Send Email",
-      "credentials": {
-        "smtp": "SMTP Account"
+        "url": "={{ $node[\"Set Channel\"].json.signalApiUrl + \"/v2/send\" }}",
+        "requestMethod": "POST",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"number\": \"{{$node[\\\"Set Channel\\\"].json.signalNumber}}\",\n  \"recipients\": {{$node[\"Set Channel\"].json.signalRecipients}},\n  \"message\": \"📺 New video from {{$node[\\\"Set Channel\\\"].json.channelId}}\\\\n{{$json.title}}\\\\n{{$json.link}}\"\n}"
       }
     }
   ],
@@ -101,7 +105,7 @@
       "main": [
         [
           {
-            "node": "Send Email",
+            "node": "Send Signal",
             "type": "main",
             "index": 0
           }

@@ -15,6 +15,7 @@ in {
     ++ [
       ../shared/nix-config.nix
       ./services/n8n.nix
+      ./services/signal-rest.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -114,6 +115,8 @@ in {
     port = n8nPort;
     publicBaseUrl = n8nBaseUrl;
   };
+
+  services.signalRest.enable = true;
 
   programs.zsh.enable = true;
 }
