@@ -36,12 +36,12 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.51.1/?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.52.0/?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     xremap-flake = {
-      url = "github:xremap/nix-flake/226fcadfe1d810a89ce318f6a304df3caf7f9cd7";
+      url = "github:xremap/nix-flake/066fd14ac7dd";
       inputs.hyprland.follows = "hyprland";
     };
     hyprfocus = {
@@ -94,7 +94,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.15.5";
+      url = "github:vicinaehq/vicinae/v0.16.2";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
