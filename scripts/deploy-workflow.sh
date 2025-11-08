@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -euox pipefail
 
 if [[ $# -lt 1 ]]; then
   echo "Usage: $(basename "$0") <workflow.json> [workflow-id]" >&2
@@ -11,6 +11,7 @@ workflow_file=$1
 
 workflow_id="${2:-${WORKFLOW_ID:-}}"
 base_url="${N8N_BASE_URL:-https://rpi5.tail9b4f4d.ts.net:5678}"
+api_path="${N8N_API_PATH:-/api/v1}"
 
 auth_args=()
 api_key="${N8N_API_KEY:-}"
@@ -34,10 +35,10 @@ fi
 
 if [[ -n "$workflow_id" ]]; then
   method="PATCH"
-  url="${base_url}/rest/workflows/${workflow_id}"
+  url="${base_url}${api_path}/workflows/${workflow_id}"
 else
   method="POST"
-  url="${base_url}/rest/workflows"
+  url="${base_url}${api_path}/workflows"
 fi
 
 curl -fsSL \
