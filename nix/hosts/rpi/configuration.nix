@@ -113,10 +113,6 @@ in {
     enable = true;
     port = n8nPort;
     publicBaseUrl = n8nBaseUrl;
-    ssl = {
-      enable = true;
-      domain = tailHost;
-    };
   };
 
   programs.zsh.enable = true;

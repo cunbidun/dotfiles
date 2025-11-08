@@ -43,85 +43,28 @@ in {
       default = null;
       description = "Externally reachable URL used for webhook callbacks and editor links.";
     };
-
-    ssl = {
-      enable = mkEnableOption "terminate HTTPS directly in the n8n container";
-
-      domain = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description =
-          "Domain name encoded into the TLS certificate. Defaults to <hostname>.<tailnetDomain> when available.";
-      };
-
-      certDir = mkOption {
-        type = types.str;
-        default = "/var/lib/tailscale/n8n";
-        description = "Directory on the host that stores TLS certificate material.";
-      };
-
-      certFile = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description = "Absolute path to the TLS certificate file. Defaults to <certDir>/cert.pem.";
-      };
-
-      keyFile = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description = "Absolute path to the TLS private key file. Defaults to <certDir>/key.pem.";
-      };
-
-      manageCert = mkOption {
-        type = types.bool;
-        default = true;
-        description = "Automatically issue/renew the certificate via `tailscale cert` when true.";
-      };
-    };
   };
 
   config = mkIf cfg.enable (let
     portStr = toString cfg.port;
-    sslEnabled = cfg.ssl.enable;
-    sslCertFile =
-      if cfg.ssl.certFile != null then cfg.ssl.certFile else "${cfg.ssl.certDir}/cert.pem";
-    sslKeyFile =
-      if cfg.ssl.keyFile != null then cfg.ssl.keyFile else "${cfg.ssl.certDir}/key.pem";
-    defaultTailHost =
+    sslCertDir = "/var/lib/tailscale/n8n";
+    sslCertFile = "${sslCertDir}/cert.pem";
+    sslKeyFile = "${sslCertDir}/key.pem";
+    tailHost =
       if tailnetDomain == null
       then null
       else "${config.networking.hostName}.${tailnetDomain}";
-    sslDomain = if cfg.ssl.domain != null then cfg.ssl.domain else defaultTailHost;
-    protocol = if sslEnabled then "https" else "http";
+    protocol = "https";
     publicUrl =
       if cfg.publicBaseUrl != null then cfg.publicBaseUrl
-      else if sslEnabled && sslDomain != null then "${protocol}://${sslDomain}:${portStr}"
+      else if tailHost != null then "${protocol}://${tailHost}:${portStr}"
       else "${protocol}://localhost:${portStr}";
-    sslMountDirs =
-      if sslEnabled
-      then
-        let
-          certDirHost = builtins.dirOf sslCertFile;
-          keyDirHost = builtins.dirOf sslKeyFile;
-        in
-          unique (
-            if certDirHost == keyDirHost
-            then [certDirHost]
-            else [certDirHost keyDirHost]
-          )
-      else [];
+    sslMountDirs = [sslCertDir];
   in {
     assertions = [
       {
-        assertion = !(sslEnabled && cfg.ssl.manageCert && sslDomain == null);
-        message =
-          "services.n8nSimple.ssl.domain (or userdata.tailnetDomain) must be set when enabling managed TLS.";
-      }
-      {
-        assertion = !(sslEnabled && !cfg.ssl.manageCert
-          && (cfg.ssl.certFile == null || cfg.ssl.keyFile == null));
-        message =
-          "Provide services.n8nSimple.ssl.certFile/keyFile when disabling managed TLS certificates.";
+        assertion = tailHost != null;
+        message = "userdata.tailnetDomain must be set to issue Tailscale certificates for n8n.";
       }
     ];
 
@@ -129,10 +72,11 @@ in {
       [
         "d ${dataDir} 0777 root root -"
       ]
-      ++ optional (sslEnabled && cfg.ssl.manageCert)
-      "d ${cfg.ssl.certDir} 0750 ${userdata.username} root -";
+      ++ [
+        "d ${sslCertDir} 0750 ${userdata.username} root -"
+      ];
 
-    systemd.services."tailscale-cert-n8n" = mkIf (sslEnabled && cfg.ssl.manageCert) {
+    systemd.services."tailscale-cert-n8n" = {
       description = "Fetch/refresh Tailscale TLS cert for n8n";
       after = ["network-online.target" "tailscale.service"];
       wants = ["network-online.target"];
@@ -148,7 +92,7 @@ in {
         ${pkgs.tailscale}/bin/tailscale cert \
           --cert-file "$tmpdir/cert.pem" \
           --key-file  "$tmpdir/key.pem" \
-          ${sslDomain}
+          ${tailHost}
 
         changed=0
         if [ ! -f ${sslCertFile} ] || ! ${pkgs.diffutils}/bin/cmp -s "$tmpdir/cert.pem" ${sslCertFile}; then
@@ -168,7 +112,7 @@ in {
       wantedBy = ["multi-user.target"];
     };
 
-    systemd.timers."tailscale-cert-n8n" = mkIf (sslEnabled && cfg.ssl.manageCert) {
+    systemd.timers."tailscale-cert-n8n" = {
       wantedBy = ["timers.target"];
       timerConfig = {
         OnCalendar = "daily";
@@ -176,7 +120,7 @@ in {
       };
     };
 
-    systemd.services.podman-n8n = mkIf (sslEnabled && cfg.ssl.manageCert) {
+    systemd.services.podman-n8n = {
       requires = ["tailscale-cert-n8n.service"];
       after = ["tailscale-cert-n8n.service"];
     };
@@ -225,7 +169,7 @@ in {
           N8N_PORT = portStr;
           N8N_EDITOR_BASE_URL = publicUrl;
           WEBHOOK_URL = publicUrl;
-          N8N_SECURE_COOKIE = if sslEnabled then "true" else "false";
+          N8N_SECURE_COOKIE = "true";
           N8N_DIAGNOSTICS_ENABLED = "false";
           N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
           N8N_TEMPLATES_ENABLED = "false";
@@ -237,7 +181,7 @@ in {
           GENERIC_TIMEZONE = timezone;
           TZ = timezone;
         }
-        // optionalAttrs sslEnabled {
+        // {
           N8N_SSL_CERT = sslCertFile;
           N8N_SSL_KEY = sslKeyFile;
         };
