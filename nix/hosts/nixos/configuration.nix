@@ -139,7 +139,9 @@
     age.keyFile = config.services.onepassword-secrets.secretPaths.sopsAgeKey;
     secrets.geolocation = {
       path = "/etc/geolocation";
-      mode = "0600";
+      owner = "geoclue";
+      group = "geoclue";
+      mode = "0666";
     };
   };
 
