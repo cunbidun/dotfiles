@@ -1,0 +1,116 @@
+{
+  "name": "YouTube Channel Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": [
+          {
+            "mode": "everyX",
+            "value": 30,
+            "unit": "minutes"
+          }
+        ]
+      },
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        0
+      ],
+      "name": "Check Every 30m"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "channelId",
+              "value": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        20,
+        0
+      ],
+      "name": "Set Channel"
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://www.youtube.com/feeds/videos.xml?channel_id=' + $json.channelId }}",
+        "options": {
+          "includeOnlyNew": true,
+          "download": true
+        }
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [
+        260,
+        0
+      ],
+      "name": "Read RSS"
+    },
+    {
+      "parameters": {
+        "fromEmail": "n8n@example.com",
+        "toEmail": "you@example.com",
+        "subject": "New video: {{$json[\"title\"]}}",
+        "text": "{{$json[\"title\"]}}\n{{$json[\"link\"]}}\nPublished: {{$json[\"isoDate\"]}}"
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        500,
+        0
+      ],
+      "name": "Send Email",
+      "credentials": {
+        "smtp": "SMTP Account"
+      }
+    }
+  ],
+  "connections": {
+    "Check Every 30m": {
+      "main": [
+        [
+          {
+            "node": "Set Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Channel": {
+      "main": [
+        [
+          {
+            "node": "Read RSS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read RSS": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}

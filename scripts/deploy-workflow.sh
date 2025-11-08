@@ -15,8 +15,18 @@ base_url="${N8N_BASE_URL:-https://rpi5.tail9b4f4d.ts.net:5678}"
 auth_args=()
 if [[ -n "${N8N_API_KEY:-}" ]]; then
   auth_args+=(-H "X-N8N-API-KEY: ${N8N_API_KEY}")
-elif [[ -n "${N8N_BASIC_AUTH:-}" ]]; then
-  auth_args+=(-u "${N8N_BASIC_AUTH}")
+else
+  basic_auth="${N8N_BASIC_AUTH:-}"
+  if [[ -z "$basic_auth" && -x "$(command -v op 2>/dev/null)" ]]; then
+    op_email="$(op read op://Private/n8n/email 2>/dev/null || true)"
+    op_password="$(op read op://Private/n8n/password 2>/dev/null || true)"
+    if [[ -n "$op_email" && -n "$op_password" ]]; then
+      basic_auth="${op_email}:${op_password}"
+    fi
+  fi
+  if [[ -n "$basic_auth" ]]; then
+    auth_args+=(-u "$basic_auth")
+  fi
 fi
 
 if [[ -z "$workflow_id" ]]; then
