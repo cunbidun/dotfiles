@@ -1,0 +1,172 @@
+{
+  "updatedAt": "2025-11-08T22:11:55.241Z",
+  "createdAt": "2025-11-08T17:30:09.146Z",
+  "id": "XRqp0ghHd2CX822C",
+  "name": "YouTube Channel Notification",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ 'https://www.youtube.com/feeds/videos.xml?channel_id=' + $json.channelId }}",
+        "options": {}
+      },
+      "id": "6a137afd-1743-4ea8-a13e-0aa1a1152774",
+      "name": "Read RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "channelId",
+              "value": "UCHnyfMqiRRG1u-2MsSQLbXA"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aa98b875-3457-47fc-9e7b-329340250f2c",
+      "name": "Set Channel",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        256,
+        -16
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "64c4d2c1-acf9-4a17-8996-9796fbd79a17",
+      "name": "Check Every 30m",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8080/v2/send",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"+16173966428\",\n  \"recipients\": [\"+16173966428\"],\n  \"message\": \"New video from {{ $json.author }}: {{ $json.title }} {{ $json.link }}\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        688,
+        -16
+      ],
+      "id": "20b6bef4-9faf-4b93-b39d-1f488d6717ae",
+      "name": "HTTP Request"
+    }
+  ],
+  "connections": {
+    "Read RSS": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Channel": {
+      "main": [
+        [
+          {
+            "node": "Read RSS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Every 30m": {
+      "main": [
+        [
+          {
+            "node": "Set Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "d0d118c4-3a1d-48c2-b9d5-de1c13a9d2b6",
+  "versionCounter": 2,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-08T17:30:09.146Z",
+      "createdAt": "2025-11-08T17:30:09.146Z",
+      "role": "workflow:owner",
+      "workflowId": "XRqp0ghHd2CX822C",
+      "projectId": "XnYga8mp2YT9uqGA",
+      "project": {
+        "updatedAt": "2025-11-08T15:53:25.957Z",
+        "createdAt": "2025-11-08T15:12:31.360Z",
+        "id": "XnYga8mp2YT9uqGA",
+        "name": "Ha Duy Pham <cunbidun@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "projectRelations": [
+          {
+            "updatedAt": "2025-11-08T15:12:31.360Z",
+            "createdAt": "2025-11-08T15:12:31.360Z",
+            "userId": "653ace46-34a4-4f9c-b7b2-51248b2c54ae",
+            "projectId": "XnYga8mp2YT9uqGA",
+            "user": {
+              "updatedAt": "2025-11-08T22:33:24.883Z",
+              "createdAt": "2025-11-08T15:12:30.147Z",
+              "id": "653ace46-34a4-4f9c-b7b2-51248b2c54ae",
+              "email": "cunbidun@gmail.com",
+              "firstName": "Ha Duy",
+              "lastName": "Pham",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2025-11-08T15:53:30.316Z",
+                "personalization_survey_n8n_version": "1.118.2"
+              },
+              "settings": {
+                "userActivated": false
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2025-11-08",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": []
+}
