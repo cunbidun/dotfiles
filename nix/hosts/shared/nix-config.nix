@@ -19,7 +19,7 @@
       experimental-features = "nix-command flakes pipe-operators";
       accept-flake-config = true;
       builders-use-substitutes = true;
-      trusted-users = ["root" "@wheel"];
+      trusted-users = ["root" "@wheel" "cunbidun"];
       eval-cache = true;
     };
   };
