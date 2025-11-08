@@ -35,7 +35,7 @@ in {
 
     virtualisation.oci-containers.containers.signal-cli-rest = {
       autoStart = true;
-      image = "ghcr.io/bbernhard/signal-cli-rest-api:latest";
+      image = "docker.io/bbernhard/signal-cli-rest-api:latest";
       ports = [
         "127.0.0.1:${toString cfg.port}:8080"
       ];
