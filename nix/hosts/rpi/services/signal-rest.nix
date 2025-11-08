@@ -17,7 +17,7 @@ in {
 
     mode = mkOption {
       type = types.enum ["normal" "native" "json-rpc"];
-      default = "native";
+      default = "json-rpc";
       description = "Execution mode for signal-cli-rest-api (see upstream docs).";
     };
 

@@ -2,11 +2,6 @@
   "name": "YouTube Channel Notification",
   "nodes": [
     {
-      "id": "1",
-      "name": "Check Every 30m",
-      "type": "n8n-nodes-base.cron",
-      "typeVersion": 1,
-      "position": [-200, 0],
       "parameters": {
         "triggerTimes": [
           {
@@ -15,24 +10,27 @@
             "value": 30
           }
         ]
-      }
+      },
+      "id": "64c4d2c1-acf9-4a17-8996-9796fbd79a17",
+      "name": "Check Every 30m",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -16
+      ]
     },
     {
-      "id": "2",
-      "name": "Set Channel",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 2,
-      "position": [20, 0],
       "parameters": {
         "values": {
           "string": [
             {
               "name": "channelId",
-              "value": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+              "value": "UCHnyfMqiRRG1u-2MsSQLbXA"
             },
             {
               "name": "signalNumber",
-              "value": "+15550001111"
+              "value": "+15550000000"
             },
             {
               "name": "signalApiUrl",
@@ -42,42 +40,57 @@
           "json": [
             {
               "name": "signalRecipients",
-              "value": "[\"+15550002222\"]"
+              "value": "[\"+15550000001\"]"
             }
           ]
-        },
-        "options": {}
-      }
+        }
+      },
+      "id": "aa98b875-3457-47fc-9e7b-329340250f2c",
+      "name": "Set Channel",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        256,
+        -16
+      ]
     },
     {
-      "id": "3",
-      "name": "Read RSS",
-      "type": "n8n-nodes-base.rssFeedRead",
-      "typeVersion": 1,
-      "position": [260, 0],
       "parameters": {
         "url": "={{ 'https://www.youtube.com/feeds/videos.xml?channel_id=' + $json.channelId }}",
         "options": {
           "download": true,
           "includeOnlyNew": true
         }
-      }
+      },
+      "id": "6a137afd-1743-4ea8-a13e-0aa1a1152774",
+      "name": "Read RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -16
+      ]
     },
     {
-      "id": "4",
-      "name": "Send Signal",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "position": [500, 0],
       "parameters": {
         "url": "={{ $node[\"Set Channel\"].json.signalApiUrl + \"/v2/send\" }}",
+        "authentication": "none",
         "requestMethod": "POST",
         "jsonParameters": true,
         "options": {},
         "bodyParametersJson": "={\n  \"number\": \"{{$node[\\\"Set Channel\\\"].json.signalNumber}}\",\n  \"recipients\": {{$node[\"Set Channel\"].json.signalRecipients}},\n  \"message\": \"📺 New video from {{$node[\\\"Set Channel\\\"].json.channelId}}\\\\n{{$json.title}}\\\\n{{$json.link}}\"\n}"
-      }
+      },
+      "id": "b1a8849b-8103-4b19-8f3c-ed8621c1e602",
+      "name": "Send Signal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        704,
+        -16
+      ]
     }
   ],
+  "pinData": {},
   "connections": {
     "Check Every 30m": {
       "main": [
@@ -105,7 +118,7 @@
       "main": [
         [
           {
-            "node": "Send Signal",
+            "node": "Send Email",
             "type": "main",
             "index": 0
           }
@@ -113,8 +126,14 @@
       ]
     }
   },
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "active": false
+  "versionId": "26dfa463-0aad-4c24-9f34-ff95ae47a1d5",
+  "meta": {
+    "instanceId": "61aad32bad2e19d6ac9926f773c0c561df5db1c251ab08083817331201a35ddc"
+  },
+  "id": "XRqp0ghHd2CX822C",
+  "tags": []
 }
