@@ -7,6 +7,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux isDarwin;
+  pokemonExtensionId = "a2cd0c72-8b73-4610-b0d9-f838a519fccf";
 in {
   services.vicinae = {
     enable = true;
@@ -52,5 +53,11 @@ in {
     Install = {
       WantedBy = ["default.target"];
     };
+  };
+
+  home.activation = lib.mkIf config.services.vicinae.enable {
+    removePokemonExtension = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      rm -rf "$HOME/.local/share/vicinae/extensions/${pokemonExtensionId}"
+    '';
   };
 }
