@@ -1,4 +1,3 @@
 [
   ./adguard.nix
-  ./pihole.nix
 ]

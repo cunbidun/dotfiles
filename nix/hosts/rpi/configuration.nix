@@ -4,7 +4,12 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  tailnetDomain = userdata.tailnetDomain or "tail9b4f4d.ts.net";
+  tailHost = "${config.networking.hostName}.${tailnetDomain}";
+  n8nPort = 5678;
+  n8nBaseUrl = "https://${tailHost}:${builtins.toString n8nPort}";
+in {
   imports =
     import ./adblock
     ++ [
@@ -104,7 +109,15 @@
   # From your devices, you can enable Tailscale VPN to use Pi-hole for DNS.
   services.adguard.enable = true;
 
-  services.n8n.enable = true;
+  services.n8nSimple = {
+    enable = true;
+    port = n8nPort;
+    publicBaseUrl = n8nBaseUrl;
+    ssl = {
+      enable = true;
+      domain = tailHost;
+    };
+  };
 
   programs.zsh.enable = true;
 }
