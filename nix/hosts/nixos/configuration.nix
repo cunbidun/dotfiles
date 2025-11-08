@@ -20,7 +20,6 @@
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   # Bootloader.
-  boot.kernelPackages = pkgs.nixpkgs-stable.linuxPackages_6_12; # Use the LTS kernel for better stability.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = ["uinput" "i2c-dev" "ip_tables" "iptable_nat"];

@@ -128,6 +128,8 @@ in {
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
         "stayfocused,class:^(tofi.*)$"
+        "stayfocused,title:^(Vicinae Launcher)$"
+        "noborder,title:^(Vicinae Launcher)$"
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
         "workspace 8 silent,class:^([Ss]team)$"
 
@@ -218,7 +220,6 @@ in {
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
-      bind = $mainMod, V, exec,  cliphist list | tofi --prompt-text "select clipboard:" --height=25% --horizontal=false --result-spacing=5 | cliphist decode | wl-copy
 
       bind = $mainMod, slash, layoutmsg, togglesplit
       bind = $mainMod, F, togglefloating,
@@ -315,8 +316,6 @@ in {
 
       # sets repeatable binds for resizing the active window
       bind=,r,exec,hyprctl reload && notify-send -t 1000 'Hyprland reloaded'
-      bind=,l,exec,loginctl lock-session
-      bind=SHIFT,L,exec,${lib.getExe scripts.prompt} 'Do you want to suspend?' 'sleep 0.6 && loginctl lock-session && sleep 1 && systemctl suspend -i'
       bind=$mainMod SHIFT, Q, exec, ${lib.getExe scripts.prompt} 'Do you want to exit?' 'uwsm stop'
 
       # use reset to go back to the global submap
