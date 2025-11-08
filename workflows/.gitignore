@@ -1,0 +1,4 @@
+# Plaintext workflows (unencrypted) - these should not be committed
+# Only encrypted workflows (*.json without plaintext data) should be committed
+*.plaintext.json
+*.tmp.json
