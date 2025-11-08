@@ -3,64 +3,8 @@
   "nodes": [
     {
       "parameters": {
-        "triggerTimes": [
-          {
-            "mode": "everyX",
-            "unit": "minutes",
-            "value": 30
-          }
-        ]
-      },
-      "id": "64c4d2c1-acf9-4a17-8996-9796fbd79a17",
-      "name": "Check Every 30m",
-      "type": "n8n-nodes-base.cron",
-      "typeVersion": 1,
-      "position": [
-        32,
-        -16
-      ]
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "channelId",
-              "value": "UCHnyfMqiRRG1u-2MsSQLbXA"
-            },
-            {
-              "name": "signalNumber",
-              "value": "+15550000000"
-            },
-            {
-              "name": "signalApiUrl",
-              "value": "http://127.0.0.1:8080"
-            }
-          ],
-          "json": [
-            {
-              "name": "signalRecipients",
-              "value": "[\"+15550000001\"]"
-            }
-          ]
-        }
-      },
-      "id": "aa98b875-3457-47fc-9e7b-329340250f2c",
-      "name": "Set Channel",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 2,
-      "position": [
-        256,
-        -16
-      ]
-    },
-    {
-      "parameters": {
         "url": "={{ 'https://www.youtube.com/feeds/videos.xml?channel_id=' + $json.channelId }}",
-        "options": {
-          "download": true,
-          "includeOnlyNew": true
-        }
+        "options": {}
       },
       "id": "6a137afd-1743-4ea8-a13e-0aa1a1152774",
       "name": "Read RSS",
@@ -73,30 +17,62 @@
     },
     {
       "parameters": {
-        "url": "={{ $node[\"Set Channel\"].json.signalApiUrl + \"/v2/send\" }}",
-        "authentication": "none",
-        "requestMethod": "POST",
-        "jsonParameters": true,
-        "options": {},
-        "bodyParametersJson": "={\n  \"number\": \"{{$node[\\\"Set Channel\\\"].json.signalNumber}}\",\n  \"recipients\": {{$node[\"Set Channel\"].json.signalRecipients}},\n  \"message\": \"📺 New video from {{$node[\\\"Set Channel\\\"].json.channelId}}\\\\n{{$json.title}}\\\\n{{$json.link}}\"\n}"
+        "values": {
+          "string": [
+            {
+              "name": "channelId",
+              "value": "UCHnyfMqiRRG1u-2MsSQLbXA"
+            }
+          ]
+        },
+        "options": {}
       },
-      "id": "b1a8849b-8103-4b19-8f3c-ed8621c1e602",
-      "name": "Send Signal",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
+      "id": "aa98b875-3457-47fc-9e7b-329340250f2c",
+      "name": "Set Channel",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
       "position": [
-        704,
+        256,
         -16
       ]
+    },
+    {
+      "parameters": {},
+      "id": "64c4d2c1-acf9-4a17-8996-9796fbd79a17",
+      "name": "Check Every 30m",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8080/v2/send",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"+16173966428\",\n  \"recipients\": [\"+16173966428\"],\n  \"message\": \"New video from {{ $json.author }}: {{ $json.title }} {{ $json.link }}\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        688,
+        -16
+      ],
+      "id": "20b6bef4-9faf-4b93-b39d-1f488d6717ae",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
   "connections": {
-    "Check Every 30m": {
+    "Read RSS": {
       "main": [
         [
           {
-            "node": "Set Channel",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -114,15 +90,20 @@
         ]
       ]
     },
-    "Read RSS": {
+    "Check Every 30m": {
       "main": [
         [
           {
-            "node": "Send Email",
+            "node": "Set Channel",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
       ]
     }
   },
@@ -132,6 +113,7 @@
   },
   "versionId": "26dfa463-0aad-4c24-9f34-ff95ae47a1d5",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "61aad32bad2e19d6ac9926f773c0c561df5db1c251ab08083817331201a35ddc"
   },
   "id": "XRqp0ghHd2CX822C",
