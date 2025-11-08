@@ -9,6 +9,7 @@
     import ./adblock
     ++ [
       ../shared/nix-config.nix
+      ./services/n8n.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -42,14 +43,12 @@
     };
   };
 
-  services = {
-    openssh = {
-      enable = true;
-      settings = {
-        PermitRootLogin = "yes";
-        PasswordAuthentication = false;
-        KbdInteractiveAuthentication = false;
-      };
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "yes";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
     };
   };
 
@@ -104,6 +103,8 @@
   # Optionally enable Override local DNS.
   # From your devices, you can enable Tailscale VPN to use Pi-hole for DNS.
   services.adguard.enable = true;
+
+  services.n8n.enable = true;
 
   programs.zsh.enable = true;
 }
