@@ -9,7 +9,120 @@ with lib; let
   cfg = config.services.n8nSimple;
   dataDir = cfg.dataDir;
   timezone = userdata.timeZone or "UTC";
-  tailnetDomain = userdata.tailnetDomain or null;
+  tailnetDomain =
+    userdata.tailnetDomain
+    or (throw "userdata.tailnetDomain must be set for services.n8nSimple");
+  portStr = toString cfg.port;
+  sslCertDir = "/var/lib/tailscale/n8n";
+  sslCertFile = "${sslCertDir}/cert.pem";
+  sslKeyFile = "${sslCertDir}/key.pem";
+  tailHost = "${config.networking.hostName}.${tailnetDomain}";
+  publicUrl = "https://${tailHost}:${portStr}";
+  sslMountDirs = [sslCertDir];
+
+  n8nDataDir = "${dataDir}/n8n";
+  postgresDataDir = "${dataDir}/postgres";
+  redisDataDir = "${dataDir}/redis";
+  signalDataDir = "/var/lib/signal-cli-rest";
+  composeProjectName = "n8n";
+  databaseUser = "n8n";
+  databaseName = "n8n";
+  databasePassword = "n8n-secret";
+
+  composeFormat = pkgs.formats.yaml {};
+  composeConfig = {
+    services = {
+      postgres = {
+        image = "docker.io/library/postgres:16-alpine";
+        restart = "unless-stopped";
+        network_mode = "host";
+        environment = {
+          POSTGRES_DB = databaseName;
+          POSTGRES_USER = databaseUser;
+          POSTGRES_PASSWORD = databasePassword;
+        };
+        command = [
+          "postgres"
+          "-c"
+          "listen_addresses=127.0.0.1"
+        ];
+        volumes = [
+          "${postgresDataDir}:/var/lib/postgresql/data"
+        ];
+      };
+
+      redis = {
+        image = "docker.io/library/redis:7-alpine";
+        restart = "unless-stopped";
+        network_mode = "host";
+        command = [
+          "redis-server"
+          "--appendonly"
+          "yes"
+          "--bind"
+          "127.0.0.1"
+          "--protected-mode"
+          "yes"
+        ];
+        volumes = [
+          "${redisDataDir}:/data"
+        ];
+      };
+
+      signal = {
+        image = "docker.io/bbernhard/signal-cli-rest-api:latest";
+        restart = "unless-stopped";
+        network_mode = "host";
+        volumes = [
+          "${signalDataDir}:/home/.local/share/signal-cli"
+        ];
+        environment = {MODE = "json-rpc";};
+      };
+
+      n8n = {
+        image = cfg.image;
+        restart = "unless-stopped";
+        depends_on = ["postgres" "redis" "signal"];
+        network_mode = "host";
+        environment = {
+          DB_TYPE = "postgresdb";
+          DB_POSTGRESDB_HOST = "127.0.0.1";
+          DB_POSTGRESDB_PORT = "5432";
+          DB_POSTGRESDB_DATABASE = databaseName;
+          DB_POSTGRESDB_USER = databaseUser;
+          DB_POSTGRESDB_PASSWORD = databasePassword;
+          EXECUTIONS_MODE = "queue";
+          QUEUE_BULL_REDIS_HOST = "127.0.0.1";
+          QUEUE_BULL_REDIS_PORT = "6379";
+          N8N_BASIC_AUTH_ACTIVE = "false";
+          N8N_PROTOCOL = "https";
+          N8N_HOST = cfg.host;
+          N8N_PORT = portStr;
+          N8N_EDITOR_BASE_URL = publicUrl;
+          WEBHOOK_URL = publicUrl;
+          N8N_SECURE_COOKIE = "true";
+          N8N_DIAGNOSTICS_ENABLED = "false";
+          N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
+          N8N_TEMPLATES_ENABLED = "false";
+          N8N_DIAGNOSTICS_CONFIG_FRONTEND = "";
+          N8N_DIAGNOSTICS_CONFIG_BACKEND = "";
+          N8N_RUNNERS_ENABLED = "true";
+          N8N_BLOCK_ENV_ACCESS_IN_NODE = "true";
+          N8N_GIT_NODE_DISABLE_BARE_REPOS = "true";
+          GENERIC_TIMEZONE = timezone;
+          TZ = timezone;
+          N8N_SSL_CERT = sslCertFile;
+          N8N_SSL_KEY = sslKeyFile;
+        };
+        volumes =
+          [
+            "${n8nDataDir}:/home/node/.n8n"
+          ]
+          ++ (map (dir: "${dir}:${dir}:ro") sslMountDirs);
+      };
+    };
+  };
+  composeFile = composeFormat.generate "n8n-compose.yaml" composeConfig;
 in {
   options.services.n8nSimple = {
     enable = mkEnableOption "simple n8n workflow automation server (container-backed)";
@@ -37,44 +150,20 @@ in {
       default = "0.0.0.0";
       description = "Host/interface n8n binds to inside the container.";
     };
-
-    publicBaseUrl = mkOption {
-      type = types.nullOr types.str;
-      default = null;
-      description = "Externally reachable URL used for webhook callbacks and editor links.";
-    };
   };
 
   config = mkIf cfg.enable (let
-    portStr = toString cfg.port;
-    sslCertDir = "/var/lib/tailscale/n8n";
-    sslCertFile = "${sslCertDir}/cert.pem";
-    sslKeyFile = "${sslCertDir}/key.pem";
-    tailHost =
-      if tailnetDomain == null
-      then null
-      else "${config.networking.hostName}.${tailnetDomain}";
-    protocol = "https";
-    publicUrl =
-      if cfg.publicBaseUrl != null then cfg.publicBaseUrl
-      else if tailHost != null then "${protocol}://${tailHost}:${portStr}"
-      else "${protocol}://localhost:${portStr}";
-    sslMountDirs = [sslCertDir];
-  in {
-    assertions = [
-      {
-        assertion = tailHost != null;
-        message = "userdata.tailnetDomain must be set to issue Tailscale certificates for n8n.";
-      }
+    directories = [
+      dataDir
+      n8nDataDir
+      postgresDataDir
+      redisDataDir
+      signalDataDir
     ];
-
+  in {
     systemd.tmpfiles.rules =
-      [
-        "d ${dataDir} 0777 root root -"
-      ]
-      ++ [
-        "d ${sslCertDir} 0750 ${userdata.username} root -"
-      ];
+      (map (dir: "d ${dir} 0777 root root -") directories)
+      ++ ["d ${sslCertDir} 0750 ${userdata.username} root -"];
 
     systemd.services."tailscale-cert-n8n" = {
       description = "Fetch/refresh Tailscale TLS cert for n8n";
@@ -106,7 +195,8 @@ in {
         ${pkgs.coreutils}/bin/install -Dm640 -o ${userdata.username} -g root "$tmpdir/key.pem" ${sslKeyFile}
 
         if [ "$changed" -eq 1 ]; then
-          echo "n8n TLS material updated; restart podman-n8n.service to pick up the change." >&2
+          echo "n8n TLS material updated; restarting n8n-compose.service to pick up the change." >&2
+          ${pkgs.systemd}/bin/systemctl try-restart n8n-compose.service
         fi
       '';
       wantedBy = ["multi-user.target"];
@@ -120,71 +210,31 @@ in {
       };
     };
 
-    systemd.services.podman-n8n = {
+    systemd.services.n8n-compose = {
+      description = "n8n automation stack (Podman Compose)";
       requires = ["tailscale-cert-n8n.service"];
-      after = ["tailscale-cert-n8n.service"];
-    };
-
-    services.postgresql = {
-      enable = true;
-      package = pkgs.postgresql_16;
-      ensureDatabases = ["n8n"];
-      ensureUsers = [
-        {
-          name = "n8n";
-          ensureDBOwnership = true;
-        }
+      after = ["tailscale-cert-n8n.service" "network-online.target"];
+      wants = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
+      path = [
+        pkgs.podman
+        pkgs.podman-compose
+        pkgs.coreutils
+        pkgs.bash
       ];
-      # Limit to local connections and allow passwordless access from the host.
-      settings.listen_addresses = lib.mkForce "127.0.0.1";
-      authentication = ''
-        local   n8n     n8n                     trust
-        host    n8n     n8n     127.0.0.1/32    trust
-      '';
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.podman-compose}/bin/podman-compose -f ${composeFile} -p ${composeProjectName} up -d --remove-orphans";
+        ExecStop = "${pkgs.podman-compose}/bin/podman-compose -f ${composeFile} -p ${composeProjectName} down";
+        TimeoutStartSec = 600;
+        TimeoutStopSec = 120;
+      };
+      environment = {
+        PODMAN_SYSTEMD_UNIT = "%n";
+      };
     };
 
     virtualisation.podman.enable = mkDefault true;
-    virtualisation.oci-containers.backend = mkDefault "podman";
-    virtualisation.oci-containers.containers.n8n = {
-      autoStart = true;
-      image = cfg.image;
-      volumes =
-        [
-          "${dataDir}:/home/node/.n8n"
-        ]
-        ++ (map (dir: "${dir}:${dir}:ro") sslMountDirs);
-      extraOptions = [
-        "--network=host"
-      ];
-      environment =
-        {
-          DB_TYPE = "postgresdb";
-          DB_POSTGRESDB_HOST = "127.0.0.1";
-          DB_POSTGRESDB_PORT = "5432";
-          DB_POSTGRESDB_DATABASE = "n8n";
-          DB_POSTGRESDB_USER = "n8n";
-          N8N_BASIC_AUTH_ACTIVE = "false";
-          N8N_PROTOCOL = protocol;
-          N8N_HOST = cfg.host;
-          N8N_PORT = portStr;
-          N8N_EDITOR_BASE_URL = publicUrl;
-          WEBHOOK_URL = publicUrl;
-          N8N_SECURE_COOKIE = "true";
-          N8N_DIAGNOSTICS_ENABLED = "false";
-          N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
-          N8N_TEMPLATES_ENABLED = "false";
-          N8N_DIAGNOSTICS_CONFIG_FRONTEND = "";
-          N8N_DIAGNOSTICS_CONFIG_BACKEND = "";
-          N8N_RUNNERS_ENABLED = "true";
-          N8N_BLOCK_ENV_ACCESS_IN_NODE = "true";
-          N8N_GIT_NODE_DISABLE_BARE_REPOS = "true";
-          GENERIC_TIMEZONE = timezone;
-          TZ = timezone;
-        }
-        // {
-          N8N_SSL_CERT = sslCertFile;
-          N8N_SSL_KEY = sslKeyFile;
-        };
-    };
   });
 }

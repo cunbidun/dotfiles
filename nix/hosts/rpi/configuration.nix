@@ -4,19 +4,11 @@
   pkgs,
   lib,
   ...
-}: let
-  tailnetDomain = userdata.tailnetDomain or "tail9b4f4d.ts.net";
-  tailHost = "${config.networking.hostName}.${tailnetDomain}";
-  n8nPort = 5678;
-  n8nBaseUrl = "https://${tailHost}:${builtins.toString n8nPort}";
-in {
-  imports =
-    import ./adblock
-    ++ [
-      ../shared/nix-config.nix
-      ./services/n8n.nix
-      ./services/signal-rest.nix
-    ];
+}: {
+  imports = (import ./adblock) ++ [
+    ../shared/nix-config.nix
+    ./services/n8n.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -110,13 +102,7 @@ in {
   # From your devices, you can enable Tailscale VPN to use Pi-hole for DNS.
   services.adguard.enable = true;
 
-  services.n8nSimple = {
-    enable = true;
-    port = n8nPort;
-    publicBaseUrl = n8nBaseUrl;
-  };
-
-  services.signalRest.enable = true;
+  services.n8nSimple.enable = true;
 
   programs.zsh.enable = true;
 }
