@@ -103,7 +103,7 @@ with lib; let
         volumes = [
           "${signalDataDir}:/home/.local/share/signal-cli"
         ];
-        environment = {MODE = "json-rpc";};
+        environment = {MODE = "normal";};
       };
 
       n8n = let
@@ -146,10 +146,9 @@ with lib; let
             N8N_SSL_CERT = sslCertFile;
             N8N_SSL_KEY = sslKeyFile;
           };
-        volumes =
-          [
-            "${n8nDataDir}:/home/node/.n8n"
-          ]
+        volumes = [
+          "${n8nDataDir}:/home/node/.n8n"
+        ]
           ++ (map (dir: "${dir}:${dir}:ro") sslMountDirs);
       };
 

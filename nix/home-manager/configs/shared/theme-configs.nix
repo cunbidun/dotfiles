@@ -11,7 +11,7 @@
       vscodeTheme = "Nord Light";
       nvimTheme = "onenord_light";
       hyprpanelTheme = "nord";
-      vicinaeTheme = "nord_light";
+      vicinaeTheme = "nord-light";
       chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
     };
     dark = {
@@ -20,7 +20,7 @@
       vscodeTheme = "Nord";
       nvimTheme = "nord";
       hyprpanelTheme = "nord";
-      vicinaeTheme = "nord_dark";
+      vicinaeTheme = "nord";
       chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
     };
   };
@@ -31,7 +31,7 @@
       vscodeTheme = "Catppuccin Latte";
       nvimTheme = "catppuccin";
       hyprpanelTheme = "catppuccin_mocha";
-      vicinaeTheme = "catppuccin_latte";
+      vicinaeTheme = "catppuccin-latte";
       chromeExtension = "jhjnalhegpceacdhbplhnakmkdliaddd"; # Catppuccin extension
     };
     dark = {
