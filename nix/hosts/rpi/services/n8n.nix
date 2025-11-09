@@ -30,6 +30,33 @@ with lib; let
   databasePassword = "n8n-secret";
 
   composeFormat = pkgs.formats.yaml {};
+  commonEnv = {
+    DB_TYPE = "postgresdb";
+    DB_POSTGRESDB_HOST = "127.0.0.1";
+    DB_POSTGRESDB_PORT = "5432";
+    DB_POSTGRESDB_DATABASE = databaseName;
+    DB_POSTGRESDB_USER = databaseUser;
+    DB_POSTGRESDB_PASSWORD = databasePassword;
+    EXECUTIONS_MODE = "queue";
+    QUEUE_BULL_REDIS_HOST = "127.0.0.1";
+    QUEUE_BULL_REDIS_PORT = "6379";
+    N8N_BASIC_AUTH_ACTIVE = "false";
+    N8N_EDITOR_BASE_URL = publicUrl;
+    WEBHOOK_URL = publicUrl;
+    N8N_SECURE_COOKIE = "true";
+    N8N_DIAGNOSTICS_ENABLED = "false";
+    N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
+    N8N_TEMPLATES_ENABLED = "false";
+    N8N_DIAGNOSTICS_CONFIG_FRONTEND = "";
+    N8N_DIAGNOSTICS_CONFIG_BACKEND = "";
+    N8N_BLOCK_ENV_ACCESS_IN_NODE = "true";
+    N8N_GIT_NODE_DISABLE_BARE_REPOS = "true";
+    N8N_HOST = cfg.host;
+    N8N_PORT = portStr;
+    GENERIC_TIMEZONE = timezone;
+    TZ = timezone;
+  };
+
   composeConfig = {
     services = {
       postgres = {
@@ -79,12 +106,8 @@ with lib; let
         environment = {MODE = "json-rpc";};
       };
 
-      n8n = {
-        image = cfg.image;
-        restart = "unless-stopped";
-        depends_on = ["postgres" "redis" "signal"];
-        network_mode = "host";
-        environment = {
+      n8n = let
+        commonEnv = {
           DB_TYPE = "postgresdb";
           DB_POSTGRESDB_HOST = "127.0.0.1";
           DB_POSTGRESDB_PORT = "5432";
@@ -95,7 +118,6 @@ with lib; let
           QUEUE_BULL_REDIS_HOST = "127.0.0.1";
           QUEUE_BULL_REDIS_PORT = "6379";
           N8N_BASIC_AUTH_ACTIVE = "false";
-          N8N_PROTOCOL = "https";
           N8N_HOST = cfg.host;
           N8N_PORT = portStr;
           N8N_EDITOR_BASE_URL = publicUrl;
@@ -106,19 +128,46 @@ with lib; let
           N8N_TEMPLATES_ENABLED = "false";
           N8N_DIAGNOSTICS_CONFIG_FRONTEND = "";
           N8N_DIAGNOSTICS_CONFIG_BACKEND = "";
-          N8N_RUNNERS_ENABLED = "true";
           N8N_BLOCK_ENV_ACCESS_IN_NODE = "true";
           N8N_GIT_NODE_DISABLE_BARE_REPOS = "true";
           GENERIC_TIMEZONE = timezone;
           TZ = timezone;
-          N8N_SSL_CERT = sslCertFile;
-          N8N_SSL_KEY = sslKeyFile;
         };
+      in {
+        image = cfg.image;
+        restart = "unless-stopped";
+        depends_on = ["postgres" "redis" "signal"];
+        network_mode = "host";
+        environment =
+          commonEnv
+          // {
+            N8N_PROTOCOL = "https";
+            N8N_RUNNERS_ENABLED = "true";
+            N8N_SSL_CERT = sslCertFile;
+            N8N_SSL_KEY = sslKeyFile;
+          };
         volumes =
           [
             "${n8nDataDir}:/home/node/.n8n"
           ]
           ++ (map (dir: "${dir}:${dir}:ro") sslMountDirs);
+      };
+
+      worker = {
+        image = cfg.image;
+        restart = "unless-stopped";
+        depends_on = ["postgres" "redis"];
+        network_mode = "host";
+        command = ["worker"];
+        environment =
+          commonEnv
+          // {
+            N8N_RUNNERS_ENABLED = "false";
+            N8N_PROTOCOL = "http";
+          };
+        volumes = [
+          "${n8nDataDir}:/home/node/.n8n"
+        ];
       };
     };
   };
