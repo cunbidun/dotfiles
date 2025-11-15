@@ -77,8 +77,10 @@ in {
     # check if XDG_RUNTIME_DIR is set before using it
     if [ -n "$XDG_RUNTIME_DIR" ]; then
       for addr in "$XDG_RUNTIME_DIR"/nvim.*; do
-        /etc/profiles/per-user/${userdata.username}/bin/nvim --server "$addr" --remote-expr "luaeval('require(\"nvchad.utils\").reload() or \"\"')"
+        /etc/profiles/per-user/${userdata.username}/bin/nvim --server "$addr" --remote-expr "luaeval('require(\"nvchad.utils\").reload() or \"\"')" || true
       done
+    else
+      echo "XDG_RUNTIME_DIR is not set; skipping Neovim theme update."
     fi
   '';
 }
