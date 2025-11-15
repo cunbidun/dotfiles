@@ -1,0 +1,42 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        types: [text]
+        exclude: ^(generated/|result)
+      - id: end-of-file-fixer
+        name: End of file fixer
+        types: [text]
+        exclude: ^(generated/|result)
+
+  # Spelling check
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+      - id: codespell
+        name: Spelling check
+        types: [text]
+        exclude: ^(generated/|result|\.git|flake\.lock)
+
+  # Shell script checks
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: Shell script lint
+        types: [shell]
+        args: [--severity=warning]
+
+  # Markdown linting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.37.0
+    hooks:
+      - id: markdownlint
+        name: Markdown lint
+        types: [markdown]
+        args: [--ignore, "MD013", --ignore, "MD033"]
