@@ -468,7 +468,7 @@ in {
         "everforest.darkWorkbench" = "flat";
       };
       # to search extensions: https://nix-community.github.io/nix4vscode/
-      extensions = pkgs.nix4vscode.forVscodeVersion "1.106.0-20251103" [
+      extensions = pkgs.nix4vscode.forVscodeVersionPrerelease vscodeVersion.version [
         "sainnhe.everforest"
         "activitywatch.aw-watcher-vscode"
         "arcticicestudio.nord-visual-studio-code"
