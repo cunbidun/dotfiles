@@ -5,7 +5,27 @@
 }: let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
-  vscodeVersion = pkgs.nixpkgs-master.vscode;
+  vscodePackage = pkgs.nixpkgs-master.vscode;
+  vscodeProductPath = "${vscodePackage}/lib/vscode/resources/app/product.json";
+  # compute the full version including the date if available from product.json
+  # for example "1.106.0-20251111"
+  # to check the version run
+  # nix build .#nixosConfigurations.nixos.pkgs.nixpkgs-master.vscode
+  # less result/lib/vscode/resources/app/product.json
+  vscodeFullVersion = let
+    product =
+      if builtins.pathExists vscodeProductPath
+      then lib.importJSON vscodeProductPath
+      else null;
+    date =
+      if product != null && product ? date
+      then lib.replaceStrings ["-"] [""] (builtins.substring 0 10 product.date)
+      else null;
+  in
+    if date != null && date != ""
+    then "${vscodePackage.version}-${date}"
+    else vscodePackage.version;
+
   # Common keybindings for both platforms
   commonKeybindings = [
     # Navigation keys
@@ -356,7 +376,7 @@
 in {
   programs.vscode = {
     enable = true;
-    package = vscodeVersion;
+    package = vscodePackage;
     mutableExtensionsDir = false;
 
     profiles.default = {
@@ -468,7 +488,7 @@ in {
         "everforest.darkWorkbench" = "flat";
       };
       # to search extensions: https://nix-community.github.io/nix4vscode/
-      extensions = pkgs.nix4vscode.forVscodeVersion "1.106.0-20251103" [
+      extensions = pkgs.nix4vscode.forVscodeVersion vscodeFullVersion [
         "sainnhe.everforest"
         "activitywatch.aw-watcher-vscode"
         "arcticicestudio.nord-visual-studio-code"
