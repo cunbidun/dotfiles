@@ -137,11 +137,10 @@ in {
         "float,class:^(chrome-.*messenger.*)$"
 
         # 1Password rules
-        "float,class:^(.*1Password.*)$"
-        "pin,class:^(.*1Password.*)$"
-        "center,class:^(.*1Password.*)$"
-        "size 50% 50%,class:^(.*1Password.*)$"
-        # "stayfocused,class:^(.*1Password.*)$"
+        "float,class:^(.*1password.*)$"
+        "pin,class:^(.*1password.*)$"
+        "center,class:^(.*1password.*)$"
+        "size 50% 50%,class:^(.*1password.*)$"
 
         # File
         "float,title:^(FileChooser)$"
