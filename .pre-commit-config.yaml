@@ -1,6 +1,14 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
+  # Secret detection
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        name: Detect secrets
+        exclude: ^(generated/|result|\.git|flake\.lock)
+
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
@@ -12,6 +20,9 @@ repos:
       - id: end-of-file-fixer
         name: End of file fixer
         types: [text]
+        exclude: ^(generated/|result)
+      - id: detect-private-key
+        name: Detect private keys
         exclude: ^(generated/|result)
 
   # Spelling check

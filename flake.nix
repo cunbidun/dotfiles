@@ -266,6 +266,15 @@
           type = "app";
           program = "${script}/bin/flake-input-versions";
         };
+        precommit = let
+          script = pkgs.writeShellScriptBin "precommit-run" ''
+            cd "$(git rev-parse --show-toplevel)"
+            ${pkgs.pre-commit}/bin/pre-commit "$@"
+          '';
+        in {
+          type = "app";
+          program = "${script}/bin/precommit-run";
+        };
       });
   };
 }
