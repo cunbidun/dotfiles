@@ -67,6 +67,7 @@ in {
       if vim.env.CP_ENV then
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end
+      require("nvchad.utils").reload()
     '';
     backup = true;
     hm-activation = true;
