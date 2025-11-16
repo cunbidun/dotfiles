@@ -92,9 +92,6 @@
         "xremap",
         "yazi"
     ],
-    "editor.fontSize": 13,
-    "terminal.integrated.fontSize": 13,
-    "chat.tools.autoApprove": true,
     "github.copilot.nextEditSuggestions.enabled": true,
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "chat.agent.maxRequests": 100,
