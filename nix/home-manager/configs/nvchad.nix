@@ -69,7 +69,7 @@ in {
       end
       require("nvchad.utils").reload()
     '';
-    backup = true;
+    backup = false;
     hm-activation = true;
   };
 
