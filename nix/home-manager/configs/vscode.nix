@@ -6,7 +6,12 @@
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
   vscodePackage = pkgs.nixpkgs-master.vscode;
-  vscodeProductPath = "${vscodePackage}/lib/vscode/resources/app/product.json";
+  vscodeProductPath =
+    if isLinux
+    then "${vscodePackage}/lib/vscode/resources/app/product.json"
+    else if isDarwin
+    then "${vscodePackage}/Applications/Visual Studio Code.app/Contents/Resources/app/product.json"
+    else null;
   # compute the full version including the date if available from product.json
   # for example "1.106.0-20251111"
   # to check the version run
@@ -14,7 +19,7 @@
   # less result/lib/vscode/resources/app/product.json
   vscodeFullVersion = let
     product =
-      if builtins.pathExists vscodeProductPath
+      if vscodeProductPath != null && builtins.pathExists vscodeProductPath
       then lib.importJSON vscodeProductPath
       else null;
     date =
