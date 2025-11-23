@@ -30,14 +30,9 @@
       if polarity == "light"
       then "prefer-light"
       else "prefer-dark";
-    # Get theme-specific extension if defined
-    themeExtension = themeConfig.chromeExtension or null;
 
     # Add theme extension to the list if defined
-    extensionList =
-      if themeExtension != null
-      then chromeConfig.baseExtensions ++ [themeExtension]
-      else chromeConfig.baseExtensions;
+    extensionList = chromeConfig.baseExtensions ++ (lib.optional (themeConfig ? chromeExtension) themeConfig.chromeExtension);
   in {
     dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
     services.vicinae.settings.theme.name = themeConfig.vicinaeTheme;
@@ -81,20 +76,6 @@
         themeConfig)
   ) {} (lib.attrNames themeConfigs);
 
-  # Generate nvim theme mappings from themeConfigs for both light and dark variants
-  nvimThemeMappings = lib.foldl' (
-    acc: themeName: let
-      themeConfig = themeConfigs.${themeName};
-    in
-      acc
-      // {
-        # Map light variants
-        "${themeName}-light" = themeConfig.light.nvimTheme;
-        # Map dark variants
-        "${themeName}-dark" = themeConfig.dark.nvimTheme;
-      }
-  ) {} (lib.attrNames themeConfigs);
-
   # Function to get scheme name from base16 scheme file
   getSchemeNameFromFile = schemeFile: let
     schemeContent = builtins.readFile "${pkgs.base16-schemes}/share/themes/${schemeFile}.yaml";
@@ -105,49 +86,22 @@
     then builtins.head schemeMatch
     else schemeFile; # fallback to filename if parsing fails
 
-  # Function to get VSCode theme from scheme name
-  getVscodeTheme = schemeName: let
-    # Get all theme configurations (both light and dark)
-    allConfigs = lib.flatten (
-      lib.mapAttrsToList (
-        themeName: themeConfig:
-          lib.mapAttrsToList (polarity: config: config) themeConfig
-      )
-      themeConfigs
-    );
-    # Find the matching theme config by inferred scheme name
-    findThemeConfig =
-      lib.findFirst (
-        entry: (getSchemeNameFromFile entry.scheme) == schemeName
-      )
-      null
-      allConfigs;
-  in
-    if findThemeConfig != null
-    then findThemeConfig.vscodeTheme
-    else "Default Dark Modern"; # fallback
+  # Get all theme configurations (both light and dark)
+  allThemeConfigs = lib.flatten (
+    lib.mapAttrsToList (
+      themeName: themeConfig:
+        lib.mapAttrsToList (polarity: config: config) themeConfig
+    )
+    themeConfigs
+  );
 
-  # Function to get HyprPanel theme from scheme name
-  getHyprpanelTheme = schemeName: let
-    # Get all theme configurations (both light and dark)
-    allConfigs = lib.flatten (
-      lib.mapAttrsToList (
-        themeName: themeConfig:
-          lib.mapAttrsToList (polarity: config: config) themeConfig
-      )
-      themeConfigs
-    );
-    # Find the matching theme config by inferred scheme name
-    findThemeConfig =
-      lib.findFirst (
-        entry: (getSchemeNameFromFile entry.scheme) == schemeName
-      )
-      null
-      allConfigs;
-  in
-    if findThemeConfig != null
-    then findThemeConfig.hyprpanelTheme
-    else "monochrome"; # fallback
+  # Find the matching theme config by inferred scheme name
+  currentThemeConfig =
+    lib.findFirst (
+      entry: (getSchemeNameFromFile entry.scheme) == config.lib.stylix.colors.scheme-name
+    )
+    null
+    allThemeConfigs;
 in {
   services.darkman = {
     enable = isLinux;
@@ -172,7 +126,6 @@ in {
     enable = isLinux;
     enableTray = isLinux; # Enable tray icon on Linux systems
     themes = builtins.attrNames themeConfigs;
-    nvimThemeMap = nvimThemeMappings;
     hookScriptContent = ''
       #!/usr/bin/env bash
       /etc/profiles/per-user/${userdata.username}/bin/theme-switch
@@ -243,12 +196,19 @@ in {
 
   programs.vscode = {
     profiles.default.userSettings = {
-      "workbench.colorTheme" = getVscodeTheme config.lib.stylix.colors.scheme-name;
+      "workbench.colorTheme" =
+        if currentThemeConfig != null
+        then currentThemeConfig.vscodeTheme
+        else "Default Dark Modern";
     };
   };
 
   programs.hyprpanel = {
-    settings = lib.importJSON "${pkgs.hyprpanel}/share/themes/${getHyprpanelTheme config.lib.stylix.colors.scheme-name}.json";
+    settings = lib.importJSON "${pkgs.hyprpanel}/share/themes/${
+      if currentThemeConfig != null
+      then currentThemeConfig.hyprpanelTheme
+      else "monochrome"
+    }.json";
   };
 
   wayland.windowManager.hyprland.settings.group.groupbar = {
