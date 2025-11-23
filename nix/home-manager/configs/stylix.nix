@@ -199,7 +199,7 @@ in {
       "workbench.colorTheme" =
         if currentThemeConfig != null
         then currentThemeConfig.vscodeTheme
-        else "Default Dark Modern";
+        else themeConfigs.default.dark.vscodeTheme;
     };
   };
 
@@ -207,7 +207,7 @@ in {
     settings = lib.importJSON "${pkgs.hyprpanel}/share/themes/${
       if currentThemeConfig != null
       then currentThemeConfig.hyprpanelTheme
-      else "monochrome"
+      else themeConfigs.default.dark.hyprpanelTheme
     }.json";
   };
 
