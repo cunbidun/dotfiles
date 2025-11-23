@@ -36,6 +36,7 @@ in {
     ../../home-manager/configs/stylix.nix
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/chromium.nix
+    ../../home-manager/configs/uxplay.nix
   ];
 
   # Home Manager needs a bit of information about you and the
