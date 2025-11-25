@@ -101,6 +101,8 @@
       "input"
       "i2c"
       "docker"
+      "render"
+      "video"
     ];
     packages = with pkgs; [
       jdk17
