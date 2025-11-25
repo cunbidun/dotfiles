@@ -73,6 +73,12 @@ in {
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/lsp.lua}
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/keymaps.lua}
       ${builtins.readFile ../../../utilities/nvim/lua/user/config/conform.lua}
+      -- Disable Lazy change-detection prompts (see NvChad discussion #2428)
+      pcall(function()
+        local lazy_config = require("lazy.core.config")
+        lazy_config.options.change_detection.notify = false
+        lazy_config.options.change_detection.enabled = false
+      end)
       if vim.env.CP_ENV then
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end
