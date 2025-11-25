@@ -2,34 +2,37 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
   vscodePackage = pkgs.nixpkgs-master.vscode;
   vscodeProductPath =
-    if isLinux
-    then "${vscodePackage}/lib/vscode/resources/app/product.json"
-    else if isDarwin
-    then "${vscodePackage}/Applications/Visual Studio Code.app/Contents/Resources/app/product.json"
-    else null;
+    if isLinux then
+      "${vscodePackage}/lib/vscode/resources/app/product.json"
+    else if isDarwin then
+      "${vscodePackage}/Applications/Visual Studio Code.app/Contents/Resources/app/product.json"
+    else
+      null;
   # compute the full version including the date if available from product.json
   # for example "1.106.0-20251111"
   # to check the version run
   # nix build .#nixosConfigurations.nixos.pkgs.nixpkgs-master.vscode
   # less result/lib/vscode/resources/app/product.json
-  vscodeFullVersion = let
-    product =
-      if vscodeProductPath != null && builtins.pathExists vscodeProductPath
-      then lib.importJSON vscodeProductPath
-      else null;
-    date =
-      if product != null && product ? date
-      then lib.replaceStrings ["-"] [""] (builtins.substring 0 10 product.date)
-      else null;
-  in
-    if date != null && date != ""
-    then "${vscodePackage.version}-${date}"
-    else vscodePackage.version;
+  vscodeFullVersion =
+    let
+      product =
+        if vscodeProductPath != null && builtins.pathExists vscodeProductPath then
+          lib.importJSON vscodeProductPath
+        else
+          null;
+      date =
+        if product != null && product ? date then
+          lib.replaceStrings [ "-" ] [ "" ] (builtins.substring 0 10 product.date)
+        else
+          null;
+    in
+    if date != null && date != "" then "${vscodePackage.version}-${date}" else vscodePackage.version;
 
   # Common keybindings for both platforms
   commonKeybindings = [
@@ -378,7 +381,8 @@
       when = "editorFocus || editorIsOpen";
     }
   ];
-in {
+in
+{
   programs.vscode = {
     enable = true;
     package = vscodePackage;
@@ -387,21 +391,13 @@ in {
     profiles.default = {
       keybindings =
         commonKeybindings
-        ++ (
-          if isLinux
-          then linuxKeybindings
-          else []
-        )
-        ++ (
-          if isDarwin
-          then macKeybindings
-          else []
-        );
+        ++ (if isLinux then linuxKeybindings else [ ])
+        ++ (if isDarwin then macKeybindings else [ ]);
 
       userSettings = {
         "editor.fontFamily" = "SFMono Nerd Font";
         "editor.minimap.enabled" = false;
-        "editor.rulers" = [120];
+        "editor.rulers" = [ 120 ];
         "files.saveConflictResolution" = "overwriteFileOnDisk";
         "terminal.integrated.defaultProfile.linux" = "zsh";
         "vim.leader" = " ";
@@ -411,45 +407,51 @@ in {
         };
         "vim.normalModeKeyBindings" = [
           {
-            before = ["<TAB>"];
-            commands = ["workbench.action.nextEditorInGroup"];
+            before = [ "<TAB>" ];
+            commands = [ "workbench.action.nextEditorInGroup" ];
             silent = true;
           }
           {
-            before = ["<S-TAB>"];
-            commands = ["workbench.action.previousEditorInGroup"];
+            before = [ "<S-TAB>" ];
+            commands = [ "workbench.action.previousEditorInGroup" ];
             silent = true;
           }
           {
-            before = ["<S-x>"];
-            commands = ["workbench.action.closeActiveEditor"];
+            before = [ "<S-x>" ];
+            commands = [ "workbench.action.closeActiveEditor" ];
             silent = true;
           }
         ];
         "vim.normalModeKeyBindingsNonRecursive" = [
           {
-            before = ["<leader>" "b"];
-            commands = ["workbench.action.toggleSidebarVisibility"];
+            before = [
+              "<leader>"
+              "b"
+            ];
+            commands = [ "workbench.action.toggleSidebarVisibility" ];
           }
           {
-            before = ["<leader>" "e"];
-            commands = ["workbench.files.action.showActiveFileInExplorer"];
+            before = [
+              "<leader>"
+              "e"
+            ];
+            commands = [ "workbench.files.action.showActiveFileInExplorer" ];
           }
           {
-            before = ["s"];
-            commands = ["flash-vscode.start"];
+            before = [ "s" ];
+            commands = [ "flash-vscode.start" ];
           }
           {
-            before = ["S"];
-            commands = ["flash-vscode.startSelection"];
+            before = [ "S" ];
+            commands = [ "flash-vscode.startSelection" ];
           }
           {
-            before = ["<BS>"];
-            commands = ["flash-vscode.backspace"];
+            before = [ "<BS>" ];
+            commands = [ "flash-vscode.backspace" ];
           }
           {
-            before = ["<C-o>"];
-            commands = ["workbench.action.navigateBack"];
+            before = [ "<C-o>" ];
+            commands = [ "workbench.action.navigateBack" ];
             silent = true;
           }
         ];
@@ -470,7 +472,10 @@ in {
           "powertools"
         ];
         "chat.tools.autoApprove" = true;
-        "black-formatter.args" = ["--line-length" "120"];
+        "black-formatter.args" = [
+          "--line-length"
+          "120"
+        ];
         "window.customMenuBarAltFocus" = false;
         "window.enableMenuBarMnemonics" = false;
         "diffEditor.hideUnchangedRegions.enabled" = true;
@@ -495,6 +500,7 @@ in {
       # to search extensions: https://nix-community.github.io/nix4vscode/
       extensions = pkgs.nix4vscode.forVscodeVersion vscodeFullVersion [
         "sainnhe.everforest"
+        "Google.colab"
         "activitywatch.aw-watcher-vscode"
         "arcticicestudio.nord-visual-studio-code"
         "bazelbuild.vscode-bazel"

@@ -100,5 +100,6 @@
     "chat.tools.terminal.autoApprove": {
         "/.*/": true
     },
-    "chat.tools.terminal.enableAutoApprove": true
+    "chat.tools.terminal.enableAutoApprove": true,
+    "chat.tools.terminal.blockDetectedFileWrites": "never"
 }

@@ -32,7 +32,7 @@ repos:
       - id: codespell
         name: Spelling check
         types: [text]
-        exclude: ^(generated/|result|\.git|flake\.lock)
+        exclude: ^(generated/|result|\.git|flake\.lock|\.vscode/)
 
   # Shell script checks
   - repo: https://github.com/shellcheck-py/shellcheck-py
