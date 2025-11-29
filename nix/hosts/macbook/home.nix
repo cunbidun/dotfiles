@@ -10,7 +10,6 @@
     pkgs = pkgs;
     inputs = inputs;
   };
-  defaultBrowser = package_config.defaultBrowser;
 in {
   imports = [
     ../../home-manager/configs/zsh.nix
@@ -53,6 +52,6 @@ in {
 
   home.activation.setDefaultBrowser = lib.hm.dag.entryAfter ["writeBoundary"] ''
     # Ensure Chrome is the default handler for HTTP/HTTPS
-    ${defaultBrowser}/bin/default-browser --identifier com.google.chrome
+    ${pkgs.mac-default-browser}/bin/default-browser --identifier com.google.chrome
   '';
 }

@@ -1062,6 +1062,23 @@
         "type": "github"
       }
     },
+    "mac-default-browser": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746147644,
+        "narHash": "sha256-h7glptU0UZ+k8YAAjMFS4vnbSVN75PvpYySCRQxeYEE=",
+        "owner": "macadmins",
+        "repo": "default-browser",
+        "rev": "7960506fa5de119f867a6785aafa776e948f5262",
+        "type": "github"
+      },
+      "original": {
+        "owner": "macadmins",
+        "ref": "v1.0.18",
+        "repo": "default-browser",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": "nixpkgs_10"
@@ -1752,6 +1769,7 @@
         "hyprland-contrib": "hyprland-contrib",
         "hyprpanel": "hyprpanel",
         "mac-app-util": "mac-app-util",
+        "mac-default-browser": "mac-default-browser",
         "nix-darwin": "nix-darwin",
         "nix-monitored": "nix-monitored",
         "nix4nvchad": "nix4nvchad",

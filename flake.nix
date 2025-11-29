@@ -84,6 +84,10 @@
 
     # +-- MacOS specific --+
     mac-app-util.url = "github:hraban/mac-app-util";
+    mac-default-browser = {
+      url = "github:macadmins/default-browser/v1.0.18";
+      flake = false;
+    };
 
     # +-- Raspberry Pi --+
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";

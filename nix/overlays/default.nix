@@ -6,4 +6,5 @@ in [
   inputs.nix4vscode.overlays.default
   (import ./theme-manager.nix)
   (import ./everforest-themes.nix)
+  (import ./mac-default-browser.nix inputs)
 ]
