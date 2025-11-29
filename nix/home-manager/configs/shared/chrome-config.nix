@@ -10,7 +10,6 @@
     "jkafdamincoabdjebhjmbiflploojgjf" # User-Agent Switcher
     "nglaklhklhcoonedhgnpgddginnjdadi" # ActivityWatch Web watcher
     "jgnfghanfbjmimbdmnjfofnbcgpkbegj" # KeePassHelper
-    "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
     "khncfooichmfjbepaaaebmommgaepoid" # Unhook – Remove YouTube Recommendations
     "gakohpplicjdhhfllilcjpfildodfnnn" # Carrot (contest rating predictor)
   ];

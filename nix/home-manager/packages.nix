@@ -52,26 +52,7 @@
     test -n "$*" && args=("$@")
     exec kitty -d "$PWD" -e "''${args[@]}"
   '';
-  defaultBrowser = pkgs.buildGoModule rec {
-    pname = "default-browser";
-    version = "1.0.18";
-    src = pkgs.fetchFromGitHub {
-      owner = "macadmins";
-      repo = "default-browser";
-      rev = "v${version}";
-      sha256 = "0hb0bq64b0i4cglzpr3vad4xpyg2ab0qq040y6j9yl9lsnk2bf47";
-    };
-    vendorHash = "sha256-m9bVRJua+YW2Zgp0GSRbrdKxQzoKMcYWo9DNHQNF1oU=";
-    ldflags = ["-s" "-w" "-X main.version=${version}"];
-    meta = with pkgs.lib; {
-      description = "CLI for setting the default browser on macOS";
-      homepage = "https://github.com/macadmins/default-browser";
-      license = licenses.mit;
-      platforms = platforms.darwin;
-    };
-  };
 in rec {
-  inherit defaultBrowser;
   default_packages = [
     # Utils
     pkgs.htop # An interactive process viewer
@@ -91,6 +72,7 @@ in rec {
 
     # AI/Development tools
     inputs.codex-nix.packages.${pkgs.system}.default
+    pkgs.pre-commit
   ];
 
   linux_packages = let
@@ -178,6 +160,5 @@ in rec {
   ];
 
   mac_packages = [
-    defaultBrowser
   ];
 }
