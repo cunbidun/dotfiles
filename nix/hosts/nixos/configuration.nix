@@ -147,6 +147,12 @@
     };
   };
 
+  # Ensure OpNix waits for actual connectivity before contacting 1Password
+  systemd.services.opnix-secrets = {
+    after = [ "network-online.target" "NetworkManager-wait-online.service" ];
+    wants = [ "network-online.target" "NetworkManager-wait-online.service" ];
+  };
+
   sops = {
     defaultSopsFile = ../../../secrets/global.yaml;
     age.keyFile = config.services.onepassword-secrets.secretPaths.sopsAgeKey;

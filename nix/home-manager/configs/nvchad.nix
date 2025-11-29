@@ -91,8 +91,9 @@ in {
   home.activation.updateNvimTheme = lib.mkIf isLinux ''
     shopt -s nullglob
     # check if XDG_RUNTIME_DIR is set before using it
-    if [ -n "$XDG_RUNTIME_DIR" ]; then
-      for addr in "$XDG_RUNTIME_DIR"/nvim.*; do
+    # Use ''${var:-} syntax to avoid "unbound variable" error with set -u
+    if [ -n "''${XDG_RUNTIME_DIR:-}" ]; then
+      for addr in "''${XDG_RUNTIME_DIR}"/nvim.*; do
         /etc/profiles/per-user/${userdata.username}/bin/nvim --server "$addr" --remote-expr "luaeval('require(\"nvchad.utils\").reload() or \"\"')" || true
       done
     else
