@@ -159,6 +159,14 @@ in {
 
     targets = {
       vscode.enable = false;
+
+      # Keep dialog buttons readable across light/dark by forcing them to use the
+      # dialog foreground color (stylix#1560).
+      gtk.extraCss = ''
+        .dialog-action-area > .text-button {
+          color: @dialog_fg_color;
+        }
+      '';
     };
 
     # https://github.com/phisch/phinger-cursors
