@@ -33,8 +33,8 @@
   hyprland-mode = pkgs.writeShellScriptBin "hyprland-mode" ''
     modes=("Competitive Programming (cp)" "Reset (normal)" "Gaming (gaming)")
 
-    # Convert the array to a newline-separated string
-    choice=$(printf "%s\n" "''${modes[@]}" | $PICKER --prompt-text "Select a mode:")
+    # Use Vicinae's dmenu to pick a mode (avoids the old tofi picker)
+    choice=$(printf "%s\n" "''${modes[@]}" | vicinae dmenu --placeholder "Select a mode" --section-title "Modes ({count})")
 
     if [ -z "$choice" ]; then
       echo "No mode was selected."

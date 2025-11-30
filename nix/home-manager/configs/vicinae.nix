@@ -61,8 +61,7 @@ in {
     '';
   };
 
-  # Force GLib terminal handler to use kitty with -e so Terminal=true apps launched
-  # via Vicinae (or portals) don't go through kitty's URL opener.
+  # GLib terminal handler must use kitty -e, not kitty +open, or Vicinae shows "Unknown URL type"
   dconf.settings."org/gnome/desktop/default-applications/terminal" = {
     exec = "kitty";
     exec-arg = "-e";
