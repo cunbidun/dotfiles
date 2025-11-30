@@ -26,7 +26,6 @@ in {
     ../../home-manager/configs/hyprland/hyprpaper.nix
     ../../home-manager/configs/nvchad.nix
     ../../home-manager/configs/tmux.nix
-    ../../home-manager/configs/tofi.nix
     ../../home-manager/configs/yazi.nix
     ../../home-manager/configs/hyprlock.nix
     ../../home-manager/configs/vicinae.nix
@@ -165,7 +164,6 @@ in {
       "uwsm/env" = {
         text = ''
           #!/usr/bin/env bash
-          export PICKER=tofi
           export TERMINAL=kitty
           export QT_QTA_PLATFORMTHEME=qt5ct
           export EDITOR=nvim

@@ -19,7 +19,7 @@ in {
         Service = {
           Type = "simple";
           WorkingDirectory = "%h";
-          ExecStart = "${lib.getExe' inputs.pyprland.packages.${pkgs.system}.pyprland "pypr"}";
+          ExecStart = "${lib.getExe' inputs.pyprland.packages.${pkgs.stdenv.hostPlatform.system}.pyprland "pypr"}";
           StandardOutput = "journal";
           StandardError = "journal";
           ExecStopPost = "/bin/sh -c 'rm -f \${XDG_RUNTIME_DIR}/hypr/\${HYPRLAND_INSTANCE_SIGNATURE}/.pyprland.sock'";

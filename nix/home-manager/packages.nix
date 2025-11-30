@@ -71,7 +71,7 @@ in rec {
     pkgs.ngrok
 
     # AI/Development tools
-    inputs.codex-nix.packages.${pkgs.system}.default
+    inputs.codex-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.pre-commit
   ];
 
@@ -99,11 +99,10 @@ in rec {
     pkgs.slurp # A tool to select a region on a screen
     pkgs.grim # A screen capture utility for Wayland
     pkgs.cliphist # A clipboard manager utility
-    inputs.pyprland.packages.${pkgs.system}.pyprland # pyprland
+    inputs.pyprland.packages.${pkgs.stdenv.hostPlatform.system}.pyprland # pyprland
     pkgs.hyprpicker # A launcher/menu program for Hyprland
-    pkgs.tofi # A launcher/menu program for Wayland
     pkgs.wev # An event daemon for Wayland
-    inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop # Hyprland contrib package for hyprprop
+    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.hyprprop # Hyprland contrib package for hyprprop
     (pkgs.espanso.override {
       x11Support = false;
       waylandSupport = true;
@@ -132,9 +131,9 @@ in rec {
     pkgs.cantarell-fonts # Cantarell fonts
     pkgs.noto-fonts-color-emoji # Noto Color Emoji fonts
     pkgs.iosevka # Iosevka monospace fonts
-    inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd
-    inputs.apple-fonts.packages.${pkgs.system}.sf-mono-nerd
-    inputs.apple-fonts.packages.${pkgs.system}.ny-nerd
+    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd
+    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd
+    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd
 
     # Messaging
     pkgs.signal-desktop # Signal Desktop messaging app

@@ -13,7 +13,7 @@ in {
     enable = true;
     autoStart = true;
     # Use vicinae's own package from its flake to match the cache
-    package = inputs.vicinae.packages.${pkgs.system}.default;
+    package = inputs.vicinae.packages.${pkgs.stdenv.hostPlatform.system}.default;
     # Hyprland 0.52 started validating exclusive edge anchors and
     # LayerShellQt (used by Vicinae) currently violates that contract,
     # so disable layer shell until upstream fixes the issue.

@@ -24,7 +24,7 @@
   };
 in {
   programs.yazi = {
-    package = inputs.yazi.packages.${pkgs.system}.default;
+    package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.default;
     shellWrapperName = "y";
     enableZshIntegration = true;
     enable = true;

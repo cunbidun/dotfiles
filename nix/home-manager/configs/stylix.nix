@@ -153,6 +153,7 @@ in {
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {
+    enableReleaseChecks = false;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeConfigs.default.dark.scheme}.yaml";
     image = themeConfigs.default.dark.wallpaper;
 
@@ -178,17 +179,17 @@ in {
         desktop = 10;
       };
       serif = {
-        package = inputs.apple-fonts.packages.${pkgs.system}.ny-nerd;
+        package = inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd;
         name = "NewYork Nerd Font";
       };
 
       sansSerif = {
-        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
+        package = inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd;
         name = "SFProDisplay Nerd Font";
       };
 
       monospace = {
-        package = inputs.apple-fonts.packages.${pkgs.system}.sf-mono-nerd;
+        package = inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd;
         name = "SFMono Nerd Font";
       };
     };

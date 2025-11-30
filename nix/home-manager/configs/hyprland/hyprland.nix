@@ -10,7 +10,7 @@
 in {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 
     # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
     settings = {
@@ -127,7 +127,7 @@ in {
         "float,title:^(Open File)$"
         "noanim,class:^(ueberzugpp.*)$"
         "noanim,title:^(.*ueberzugpp.*)$"
-        "stayfocused,class:^(tofi.*)$"
+        "stayfocused,class:^(vicinae.*)$"
         "stayfocused,title:^(Vicinae Launcher)$"
         "noborder,title:^(Vicinae Launcher)$"
         "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
@@ -197,8 +197,8 @@ in {
     };
 
     plugins = [
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+      # inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
     ];
 
     extraConfig = ''
@@ -212,7 +212,7 @@ in {
 
       # Start Applications
       bind = $mainMod, Return, exec, $TERMINAL
-      bind = $mainMod, P, exec, tofi-drun
+      bind = $mainMod, P, exec, vicinae dmenu-apps
       bind = ALT, space, exec, vicinae toggle
       bind = CTRL, space, exec, vicinae toggle
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}

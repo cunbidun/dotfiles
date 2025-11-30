@@ -11,7 +11,7 @@
 in {
   programs.hyprpanel = {
     enable = true;
-    package = inputs.hyprpanel.packages.${pkgs.system}.default;
+    package = inputs.hyprpanel.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings = {
       bar = {
         workspaces = {
@@ -95,7 +95,7 @@ in {
                 tooltip = defaultBrowserLabel;
               };
               shortcut4 = {
-                command = "tofi-drun";
+                command = "vicinae dmenu-apps";
               };
             };
           };

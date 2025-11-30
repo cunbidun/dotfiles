@@ -33,7 +33,6 @@
   hyprland-mode = pkgs.writeShellScriptBin "hyprland-mode" ''
     modes=("Competitive Programming (cp)" "Reset (normal)" "Gaming (gaming)")
 
-    # Use Vicinae's dmenu to pick a mode (avoids the old tofi picker)
     choice=$(printf "%s\n" "''${modes[@]}" | vicinae dmenu --placeholder "Select a mode" --section-title "Modes ({count})")
 
     if [ -z "$choice" ]; then
@@ -65,20 +64,8 @@
   prompt = pkgs.writeShellScriptBin "prompt" ''
     #!/usr/bin/env bash
 
-    if [ $PICKER == "dmenu" ]; then
-    	extra_flags=("-i" "-p" "$1")
-    fi
-    if [ $PICKER == "wofi" ]; then
-    	extra_flags=("-p" "$1" "-dni" "-L" "4" "-W" "25%" "-k" "/dev/null")
-    fi
-
-    if [ $PICKER == "tofi" ]; then
-    	extra_flags=(--prompt-text "$1")
-    fi
-
-    # Usage:
-    # Prompt and execute command if "Yes" is selected
-    if [ "$(echo -e "No\nYes" | "$PICKER" "''${extra_flags[@]}")" = "Yes" ]; then
+    # Always use Vicinae's dmenu for confirmations
+    if [ "$(printf \"No\nYes\" | vicinae dmenu --placeholder \"$1\" --section-title \"Confirm\")" = "Yes" ]; then
       bash -c "$2"
     fi
   '';
