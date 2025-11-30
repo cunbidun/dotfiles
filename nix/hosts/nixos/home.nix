@@ -123,6 +123,8 @@ in {
         "application/x-www-form-urlencoded" = ["google-chrome.desktop"];
         "x-scheme-handler/http" = ["google-chrome.desktop"];
         "x-scheme-handler/https" = ["google-chrome.desktop"];
+        # Ensure Terminal=true desktop entries use kitty with -e (avoids vicinae "open URL" prompts)
+        "x-scheme-handler/terminal" = ["kitty.desktop"];
       };
     };
 

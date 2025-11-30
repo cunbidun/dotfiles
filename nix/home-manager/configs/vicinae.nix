@@ -60,4 +60,11 @@ in {
       rm -rf "$HOME/.local/share/vicinae/extensions/${pokemonExtensionId}"
     '';
   };
+
+  # Force GLib terminal handler to use kitty with -e so Terminal=true apps launched
+  # via Vicinae (or portals) don't go through kitty's URL opener.
+  dconf.settings."org/gnome/desktop/default-applications/terminal" = {
+    exec = "kitty";
+    exec-arg = "-e";
+  };
 }
