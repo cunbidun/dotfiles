@@ -49,6 +49,7 @@ in {
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/aw-awatcher.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/nvim-surround.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/bufdelete.lua},
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/nvimtree.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/sidekick.lua},
       }
     '';
@@ -84,8 +85,6 @@ in {
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end
       require("nvchad.utils").reload()
-      -- Ensure <leader>e toggles nvim-tree (override any defaults)
-      vim.keymap.set("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { silent = true, desc = "Toggle NvimTree" })
     '';
     backup = false;
     hm-activation = true;
