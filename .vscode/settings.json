@@ -100,5 +100,6 @@
         "/.*/": true
     },
     "chat.tools.terminal.enableAutoApprove": true,
-    "chat.tools.terminal.blockDetectedFileWrites": "never"
+    "chat.tools.terminal.blockDetectedFileWrites": "never",
+    "files.simpleDialog.enable": true
 }

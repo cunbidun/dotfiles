@@ -14,7 +14,7 @@
       "<leader>aa",
       function() require("sidekick.cli").toggle({ focus = true }) end,
       desc = "Sidekick: Toggle CLI",
-      mode = { "n", "t", "i", "x" },
+      mode = { "n", "t", "x" },
     },
     {
       "<leader>as",
