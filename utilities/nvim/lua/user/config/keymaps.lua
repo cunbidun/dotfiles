@@ -3,12 +3,12 @@ local binds = {
   { action = "<cmd>Telescope live_grep<cr>", key = "<leader>t", mode = "n" },
   { action = ":BufferLineCycleNext<CR>", key = "<TAB>", mode = "n" },
   { action = ":BufferLineCyclePrev<CR>", key = "<S-TAB>", mode = "n" },
-  { action = ":Bdelete<CR>", key = "<S-x>", mode = "n" },
+  { action = ":Bdelete<CR>", key = "X", mode = "n", options = { silent = true, desc = "Close buffer" } },
   { action = "<C-w>h", key = "<C-h>", mode = "n" },
   { action = "<C-w>j", key = "<C-j>", mode = "n" },
   { action = "<C-w>l", key = "<C-l>", mode = "n" },
   { action = "<C-w>k", key = "<C-k>", mode = "n" },
-  { action = "<Cmd>NvimTreeToggle<CR>", key = "<leader>e", mode = "n" },
+  { action = "<Cmd>NvimTreeToggle<CR>", key = "<leader>e", mode = "n", options = { silent = true, desc = "Toggle NvimTree" } },
 
   -- terminal navigation
   { action = "<C-\\><C-N><C-w>h", key = "<C-h>", mode = "t" },

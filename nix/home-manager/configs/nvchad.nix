@@ -48,6 +48,7 @@ in {
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/flash.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/aw-awatcher.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/nvim-surround.lua},
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/bufdelete.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/sidekick.lua},
       }
     '';
