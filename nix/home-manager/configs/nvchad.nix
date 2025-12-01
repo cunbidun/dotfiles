@@ -84,6 +84,8 @@ in {
         ${builtins.readFile ../../../utilities/nvim/lua/user/config/cp.lua}
       end
       require("nvchad.utils").reload()
+      -- Ensure <leader>e toggles nvim-tree (override any defaults)
+      vim.keymap.set("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { silent = true, desc = "Toggle NvimTree" })
     '';
     backup = false;
     hm-activation = true;
