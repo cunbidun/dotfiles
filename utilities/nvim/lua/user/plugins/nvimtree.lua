@@ -1,5 +1,5 @@
 -- Override nvim-tree keymap to use Toggle instead of Focus
-return {
+{
   "nvim-tree/nvim-tree.lua",
   keys = function(_, keys)
     -- drop any existing <leader>e mapping
