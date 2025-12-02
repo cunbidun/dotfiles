@@ -147,8 +147,6 @@ in rec {
     # GUI File manager
     pkgs.dconf-editor # GNOME's dconf editor
     pkgs.djvulibre
-    pkgs.gsettings-desktop-schemas
-    pkgs.gtk3
 
     # CLI File manager
     pkgs.ueberzugpp # A command-line UI library for image previews
