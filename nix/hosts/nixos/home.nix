@@ -133,7 +133,7 @@ in {
       "/usr/share"
       "${pkgs.glib.out}/share/gsettings-schemas"
       "${pkgs.gtk3}/share/gsettings-schemas/gtk+3-${pkgs.gtk3.version}"
-      "${pkgs.gsettings-desktop-schemas}"
+      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/gsettings-desktop-schemas-${pkgs.gsettings-desktop-schemas.version}"
     ];
     portal = {
       enable = true;
