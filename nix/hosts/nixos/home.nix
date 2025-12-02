@@ -132,7 +132,8 @@ in {
       "/usr/local/share"
       "/usr/share"
       "${pkgs.glib.out}/share/gsettings-schemas"
-      "${pkgs.gsettings-desktop-schemas}/share"
+      "${pkgs.gtk3}/share/gsettings-schemas/gtk+3-${pkgs.gtk3.version}"
+      "${pkgs.gsettings-desktop-schemas}"
     ];
     portal = {
       enable = true;
