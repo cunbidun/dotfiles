@@ -37,7 +37,7 @@
     # | Hyprland |
     # +----------+
     hyprland = {url = "github:hyprwm/Hyprland/v0.52.0/?submodules=1";};
-    pyprland = {url = "github:hyprland-community/pyprland";};
+    pyprland = {url = "github:hyprland-community/pyprland/2.5.0";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     xremap-flake = {

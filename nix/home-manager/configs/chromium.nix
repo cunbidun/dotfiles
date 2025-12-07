@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux;
-  chromePackage = pkgs.nixpkgs-master.google-chrome;
+  chromePackage = pkgs.google-chrome;
   chromeBinary = "${chromePackage}/bin/google-chrome-stable";
 
   # Import shared Chrome configuration

@@ -317,19 +317,6 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
-  networking.firewall.allowedTCPPortRanges = [
-    {
-      from = 1714;
-      to = 1764;
-    }
-  ];
-  networking.firewall.allowedUDPPortRanges = [
-    {
-      from = 1714;
-      to = 1764;
-    }
-  ];
-
   # Enable Stylix for system-wide theming
   # The actual theme configuration is in home-manager/configs/stylix.nix
   stylix = {
