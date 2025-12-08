@@ -71,9 +71,23 @@
   '';
 
   brightness-control = pkgs.writeShellScriptBin "brightness-control" ''
+    get_bus_num() {
+        if [ -f /tmp/dwm-i2c-bus ]; then
+            bus_num=$(cat /tmp/dwm-i2c-bus)
+            if [ -n "$bus_num" ]; then
+                echo "$bus_num"
+                return
+            fi
+        fi
+
+        bus_num=$(ddcutil detect --sleep-multiplier 0.01 2>/dev/null | grep "/dev/i2c-" | awk -F- '{print $NF}' | head -n1)
+        echo "$bus_num" > /tmp/dwm-i2c-bus
+        echo "$bus_num"
+    }
+
     # Function to display usage instructions
     usage() {
-        echo "Usage: $0 [increase|decrease|get] [optional amount]"
+        echo "Usage: $0 [increase|decrease|get] [optional amount] [json]"
         echo "Examples:"
         echo "  $0 get                # Get current brightness"
         echo "  $0 increase 10        # Increase brightness by 10"
@@ -89,14 +103,15 @@
             mx_brightness=$(cat "$BASE_PATH/max_brightness")
             percent=$((current_brightness * 100 / mx_brightness))
         else
-            if [ -f /tmp/dwm-i2c-bus ]; then
-                bus_num=$(cat /tmp/dwm-i2c-bus)
-            else
-                # If not, query ddcutil to get the bus number and save it to the file
-                bus_num=$(ddcutil detect --sleep-multiplier 0.01 | grep "/dev/i2c-" | awk -F- '{print $NF}')
-                echo "$bus_num" > /tmp/dwm-i2c-bus
-            fi
-            percent=$(ddcutil get 10 --sleep-multiplier .01 | awk '{ print $9 }' | cut -d ',' -f 1)
+            bus_num=$(get_bus_num)
+            percent=$(
+                ddcutil getvcp 10 --sleep-multiplier .01 --bus "$bus_num" 2>/dev/null |
+                    awk '/current value/ {gsub(",", "", $9); print $9}'
+            )
+        fi
+        # Normalize to an integer; fallback to 0 if parsing fails
+        if ! printf '%s' "$percent" | grep -Eq '^[0-9]+$'; then
+            percent=0
         fi
         echo "$percent"
     }
@@ -141,21 +156,14 @@
         # Check if the brightness has changed
         if [ "$new_b" -ne "$current_b" ]; then
             echo "Setting brightness to $new_b"
-            if [ -f /tmp/dwm-i2c-bus ]; then
-                bus_num=$(cat /tmp/dwm-i2c-bus)
-                if [ -z "$bus_num" ]; then
-                    echo "Bus number is empty in /tmp/dwm-i2c-bus. Querying ddcutil..."
-                    # Query ddcutil to get the bus number and save it to the file
-                    bus_num=$(ddcutil detect --sleep-multiplier 0.01 | grep "/dev/i2c-" | awk -F- '{print $NF}')
-                    echo "$bus_num" >/tmp/dwm-i2c-bus
-                fi
-            else
-                # If not, query ddcutil to get the bus number and save it to the file
-                bus_num=$(ddcutil detect --sleep-multiplier 0.01 | grep "/dev/i2c-" | awk -F- '{print $NF}')
-                echo "$bus_num" >/tmp/dwm-i2c-bus
-            fi
+            bus_num=$(get_bus_num)
             ddcutil setvcp 10 "$new_b" --bus "$bus_num" --sleep-multiplier 0.01
             pkill -SIGRTMIN+16 waybar
+            # notify hyprpanel custom module listener
+            signal_file=/tmp/hyprpanel/brightness.signal
+            mkdir -p "$(dirname "$signal_file")"
+            echo "$new_b" >"$signal_file"
+            touch "$signal_file"
         else
             echo "Brightness is already at the desired level ($current_b), no change needed."
         fi
@@ -164,7 +172,12 @@
     # Main script logic
     case "$1" in
         get)
-            get_brightness
+            value="$(get_brightness)"
+            if [ "''${2:-}" = "json" ]; then
+                printf '{"percentage":%s}\n' "$value"
+            else
+                echo "$value"
+            fi
             ;;
         increase|decrease)
             change_brightness "$@"

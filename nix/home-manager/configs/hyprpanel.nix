@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  scripts = import ../../scripts.nix {pkgs = pkgs;};
+  scripts = import ../scripts.nix {pkgs = pkgs;};
   defaultBrowserCmd = "google-chrome-stable";
   defaultBrowserLabel = "Chromium";
 in {
@@ -52,7 +52,7 @@ in {
           "0" = {
             left = ["dashboard" "workspaces" "submap" "windowtitle"];
             middle = ["media"];
-            right = ["volume" "network" "bluetooth" "custom/polarity" "hypridle" "systray" "clock" "notifications"];
+            right = ["custom/brightness" "volume" "network" "bluetooth" "hypridle" "systray" "clock" "notifications"];
           };
         };
 
@@ -185,6 +185,20 @@ in {
         osd = {
           radius = "0em";
         };
+      };
+    };
+  };
+
+  xdg.configFile."hyprpanel/modules.json".text = builtins.toJSON {
+    "custom/brightness" = {
+      execute = "${lib.getExe scripts.brightness-control} get json";
+      signalPath = "/tmp/hyprpanel/brightness.signal";
+      executeOnAction = "${lib.getExe scripts.brightness-control} get json";
+      label = "{percentage}%";
+      icon = ["󰃞" "󰃟" "󰃠" "󰃝"];
+      actions = {
+        onScrollUp = "${lib.getExe scripts.brightness-control} increase 5";
+        onScrollDown = "${lib.getExe scripts.brightness-control} decrease 5";
       };
     };
   };
