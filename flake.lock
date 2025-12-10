@@ -899,14 +899,17 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1765168388,
-        "narHash": "sha256-Z17j659GfMwbj2KoKqK/c6HOxJrkteRnA7EFLXdN+Xo=",
-        "path": "/home/cunbidun/.tmp/HyprPanel",
-        "type": "path"
+        "lastModified": 1765342799,
+        "narHash": "sha256-1ItPWmzyUMPY8jN+VCKhZSwmDuzadm9DYRCYafKV5DQ=",
+        "owner": "cunbidun",
+        "repo": "HyprPanel",
+        "rev": "6ec3b8d23d5843fe8338d8b04dfcff699afb46a4",
+        "type": "github"
       },
       "original": {
-        "path": "/home/cunbidun/.tmp/HyprPanel",
-        "type": "path"
+        "owner": "cunbidun",
+        "repo": "HyprPanel",
+        "type": "github"
       }
     },
     "hyprtoolkit": {
