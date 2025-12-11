@@ -134,6 +134,7 @@ in rec {
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd
+    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Messaging
     pkgs.signal-desktop # Signal Desktop messaging app
