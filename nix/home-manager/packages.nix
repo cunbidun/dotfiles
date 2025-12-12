@@ -130,6 +130,9 @@ in rec {
     pkgs.liberation_ttf # Liberation TrueType fonts
     pkgs.cantarell-fonts # Cantarell fonts
     pkgs.noto-fonts-color-emoji # Noto Color Emoji fonts
+    pkgs.noto-fonts-cjk-sans # CJK fallback sans + mono variants
+    pkgs.noto-fonts-cjk-serif # CJK fallback serif
+    pkgs.wqy_zenhei # Extra Chinese glyph coverage
     pkgs.iosevka # Iosevka monospace fonts
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd

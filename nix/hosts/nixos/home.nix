@@ -80,7 +80,25 @@ in {
   # +--------------------+
   # |    Linux Config    |
   # +--------------------+
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    # Ensure CJK fallback so Chinese glyphs render in terminals/editors.
+    defaultFonts = {
+      sansSerif = [
+        "SFProDisplay Nerd Font"
+        "Noto Sans CJK SC"
+      ];
+      serif = [
+        "NewYork Nerd Font"
+        "Noto Serif CJK SC"
+      ];
+      monospace = [
+        "SFMono Nerd Font"
+        "Noto Sans Mono CJK SC"
+      ];
+      emoji = [ "Noto Color Emoji" ];
+    };
+  };
 
   home.file = {
     ".config/starship.toml".source = ../../../utilities/starship/starship.toml;
