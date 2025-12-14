@@ -160,6 +160,7 @@ in rec {
     pkgs.yt-dlp # A command-line tool to download videos from YouTube and other sites
 
     pkgs.newsboat # An RSS feed reader
+    pkgs.redisinsight
   ];
 
   mac_packages = [
