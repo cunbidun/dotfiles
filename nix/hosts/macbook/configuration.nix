@@ -178,6 +178,7 @@
       "displayplacer"
       "libmagic"
       "uv"
+      "aws-cdk"
     ];
 
     # `brew install --cask`
@@ -196,6 +197,7 @@
       "activitywatch"
       "vlc"
       "google-chrome"
+      "redis-insight"
     ];
     global.autoUpdate = true;
   };
