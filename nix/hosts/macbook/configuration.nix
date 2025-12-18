@@ -198,6 +198,8 @@
       "vlc"
       "google-chrome"
       "redis-insight"
+      "slack"
+      "docker-desktop"
     ];
     global.autoUpdate = true;
   };
