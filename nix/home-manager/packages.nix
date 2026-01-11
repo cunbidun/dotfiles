@@ -73,6 +73,11 @@ in rec {
     # AI/Development tools
     inputs.codex-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.pre-commit
+
+    # Shared fonts between Linux and Mac
+    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd
+    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd
+    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd
   ];
 
   linux_packages = let
@@ -134,9 +139,6 @@ in rec {
     pkgs.noto-fonts-cjk-serif # CJK fallback serif
     pkgs.wqy_zenhei # Extra Chinese glyph coverage
     pkgs.iosevka # Iosevka monospace fonts
-    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd
-    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd
-    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd
     inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Messaging

@@ -4,7 +4,8 @@
   userdata,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ../shared/nix-config.nix
   ];
@@ -13,7 +14,10 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [pkgs.neovim pkgs.git];
+  environment.systemPackages = [
+    pkgs.neovim
+    pkgs.git
+  ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
@@ -83,35 +87,55 @@
         "118" = {
           enabled = true;
           value = {
-            parameters = [49 18 524288]; # Option + 1
+            parameters = [
+              49
+              18
+              524288
+            ]; # Option + 1
             type = "standard";
           };
         };
         "119" = {
           enabled = true;
           value = {
-            parameters = [50 19 524288]; # Option + 2
+            parameters = [
+              50
+              19
+              524288
+            ]; # Option + 2
             type = "standard";
           };
         };
         "120" = {
           enabled = true;
           value = {
-            parameters = [51 20 524288]; # Option + 3
+            parameters = [
+              51
+              20
+              524288
+            ]; # Option + 3
             type = "standard";
           };
         };
         "121" = {
           enabled = true;
           value = {
-            parameters = [52 21 524288]; # Option + 4
+            parameters = [
+              52
+              21
+              524288
+            ]; # Option + 4
             type = "standard";
           };
         };
         "122" = {
           enabled = true;
           value = {
-            parameters = [53 21 524288]; # Option + 5
+            parameters = [
+              53
+              21
+              524288
+            ]; # Option + 5
             type = "standard";
           };
         };
@@ -119,7 +143,11 @@
         "32" = {
           enabled = true;
           value = {
-            parameters = [65535 48 524288]; # 48 is Tab key
+            parameters = [
+              65535
+              48
+              524288
+            ]; # 48 is Tab key
             type = "standard";
           };
         };
@@ -127,7 +155,11 @@
         "60" = {
           enabled = true;
           value = {
-            parameters = [49 49 524288]; # 49 is Space, 524288 is Option modifier
+            parameters = [
+              49
+              49
+              524288
+            ]; # 49 is Space, 524288 is Option modifier
             type = "standard";
           };
         };
@@ -135,7 +167,11 @@
         "31" = {
           enabled = true;
           value = {
-            parameters = [115 1 655360]; # 1 is 'S', 655360 is Option(524288) + Shift(131072)
+            parameters = [
+              115
+              1
+              655360
+            ]; # 1 is 'S', 655360 is Option(524288) + Shift(131072)
             type = "standard";
           };
         };
@@ -162,7 +198,7 @@
 
     # example of adding a tap
     # taps = ["homebrew/cask-fonts" "dimentium/autoraise" "nikitabobko/tap" "homebrew/services"];
-    taps = [];
+    taps = [ ];
 
     # `brew install`
     # Example of installing a package and starting a service
@@ -188,7 +224,6 @@
       "spotify"
       "alt-tab"
       "signal"
-      "messenger"
       "obsidian"
       "discord"
       "monitorcontrol"
@@ -200,6 +235,8 @@
       "redis-insight"
       "slack"
       "docker-desktop"
+      "libreoffice"
+      "datagrip"
     ];
     global.autoUpdate = true;
   };
