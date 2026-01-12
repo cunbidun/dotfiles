@@ -108,58 +108,58 @@ in {
         mfact = 0.5;
       };
 
-      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-      windowrulev2 = [
+      # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
+      windowrule = [
         # Game rules
-        "noborder,class:^(dota2)$"
-        "noblur,class:^(dota2)$"
-        "noshadow,class:^(dota2)$"
-        "workspace 8 silent,class:^(dota2)$"
-        "workspace 8 silent,class:^(cs2)$"
-        "noborder,class:^(cs2)$"
-        "noblur,class:^(cs2)$"
-        "noshadow,class:^(cs2)$"
+        "match:class ^(dota2)$, decorate off"
+        "match:class ^(dota2)$, no_blur on"
+        "match:class ^(dota2)$, no_shadow on"
+        "match:class ^(dota2)$, workspace 8 silent"
+        "match:class ^(cs2)$, workspace 8 silent"
+        "match:class ^(cs2)$, decorate off"
+        "match:class ^(cs2)$, no_blur on"
+        "match:class ^(cs2)$, no_shadow on"
 
         # Scratchpad rules
-        "float,title:^(Spotify Premium)$"
-        "float,class:^([Ss]ignal)$"
-        "float,class:^(obsidian)$"
-        "float,title:^(Scratchpad)$"
-        "float,title:^(Open File)$"
-        "noanim,class:^(ueberzugpp.*)$"
-        "noanim,title:^(.*ueberzugpp.*)$"
-        "stayfocused,class:^(vicinae.*)$"
-        "stayfocused,title:^(Vicinae Launcher)$"
-        "noborder,title:^(Vicinae Launcher)$"
-        "workspace 1 silent,class:^(Code)$,title:(.*dotfiles.*Visual Studio Code.*)"
-        "workspace 8 silent,class:^([Ss]team)$"
+        "match:title ^(Spotify Premium)$, float on"
+        "match:class ^([Ss]ignal)$, float on"
+        "match:class ^(obsidian)$, float on"
+        "match:title ^(Scratchpad)$, float on"
+        "match:title ^(Open File)$, float on"
+        "match:class ^(ueberzugpp.*)$, no_anim on"
+        "match:title ^(.*ueberzugpp.*)$, no_anim on"
+        "match:class ^(vicinae.*)$, stay_focused on"
+        "match:title ^(Vicinae Launcher)$, stay_focused on"
+        "match:title ^(Vicinae Launcher)$, decorate off"
+        "match:class ^(Code)$ match:title (.*dotfiles.*Visual Studio Code.*), workspace 1 silent"
+        "match:class ^([Ss]team)$, workspace 8 silent"
 
         # Messenger PWA
-        "float,class:^(chrome-.*messenger.*)$"
+        "match:class ^(chrome-.*messenger.*)$, float on"
 
         # 1Password rules
-        "float,class:^(.*1password.*)$"
-        "pin,class:^(.*1password.*)$"
-        "center,class:^(.*1password.*)$"
-        "size 50% 50%,class:^(.*1password.*)$"
+        "match:class ^(.*1password.*)$, float on"
+        "match:class ^(.*1password.*)$, pin on"
+        "match:class ^(.*1password.*)$, center on"
+        "match:class ^(.*1password.*)$, size 50% 50%"
 
         # File
-        "float,title:^(FileChooser)$"
-        "pin,title:^(FileChooser)$"
-        "float,title:^(FileExplorer)$"
-        "float,class:^(xdg-desktop-portal-gtk)$"
-        "pin,class:^(xdg-desktop-portal-gtk)$"
+        "match:title ^(FileChooser)$, float on"
+        "match:title ^(FileChooser)$, pin on"
+        "match:title ^(FileExplorer)$, float on"
+        "match:class ^(xdg-desktop-portal-gtk)$, float on"
+        "match:class ^(xdg-desktop-portal-gtk)$, pin on"
 
         # Waybar popup
-        "float,title:^(Bluetooth Devices)$"
-        "size 50% 50%,title:^(__waybar_popup)$"
-        "float,title:^(__waybar_popup)$"
-        "pin,title:^(__waybar_popup)$"
+        "match:title ^(Bluetooth Devices)$, float on"
+        "match:title ^(__waybar_popup)$, size 50% 50%"
+        "match:title ^(__waybar_popup)$, float on"
+        "match:title ^(__waybar_popup)$, pin on"
 
         # WMs
-        "float,class:^(spicy)$"
-        "noborder,class:^(spicy)$"
-        "noblur,class:^(spicy)$"
+        "match:class ^(spicy)$, float on"
+        "match:class ^(spicy)$, decorate off"
+        "match:class ^(spicy)$, no_blur on"
       ];
 
       bindle = [

@@ -1,6 +1,9 @@
 {pkgs, ...}: {
   services.hyprpaper = {
     enable = true;
+    settings = {
+      splash = false;
+    };
   };
 
   # One-shot service to restart hyprpaper
