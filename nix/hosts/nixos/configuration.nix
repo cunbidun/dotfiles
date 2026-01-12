@@ -177,7 +177,7 @@
   programs.uwsm.enable = true;
   services.greetd = {
     enable = true;
-    settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
+    settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm -eD Hyprland start default'";
   };
   security.pam.services.greetd.enableGnomeKeyring = true;
   security.pam.services.hyprlock.enableGnomeKeyring = true;
