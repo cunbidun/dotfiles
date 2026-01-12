@@ -163,6 +163,8 @@ in rec {
 
     pkgs.newsboat # An RSS feed reader
     pkgs.redisinsight
+    pkgs.jetbrains.datagrip
+    pkgs.podman-desktop
   ];
 
   mac_packages = [
