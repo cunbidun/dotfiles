@@ -203,6 +203,24 @@
         diskoPath = ./nix/hosts/nixos/disko.nix;
       };
 
+      home-server = mkNixosHost {
+        system = "x86_64-linux";
+        hostPath = ./nix/hosts/home-server/configuration.nix;
+        homePath = ./nix/hosts/home-server/home.nix;
+        diskoPath = ./nix/hosts/home-server/disko.nix;
+      };
+
+      minimal = nixpkgs-unstable.lib.nixosSystem {
+        system = "x86_64-linux";
+        pkgs = mkPkgs "x86_64-linux";
+        specialArgs = {
+          inherit inputs userdata;
+        };
+        modules = [
+          ./nix/hosts/minimal/configuration.nix
+        ];
+      };
+
       rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
         specialArgs = inputs // {inherit userdata;};
         trustCaches = true;
