@@ -90,6 +90,12 @@
     trustedInterfaces = ["tailscale0"];
   };
 
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
+
   # Enable zsh
   programs.zsh.enable = true;
 
