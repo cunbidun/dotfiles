@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
     ./uxplay.nix
     ../shared/nix-config.nix
+    ../shared/common.nix
     inputs.sops-nix.nixosModules.sops
     inputs.opnix.nixosModules.default
   ];
@@ -31,27 +32,7 @@
   boot.blacklistedKernelModules = ["wacom"];
 
   networking.hostName = "nixos"; # Define your hostname.
-
-  # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = userdata.timeZone;
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -118,8 +99,6 @@
 
       # pkgs.winboat
     ];
-    shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
   };
 
   # To search for packages run 'nix search'. For example, 'nix search nixpkgs bazel'
@@ -167,7 +146,6 @@
   # started in user sessions.
   # programs.mtr.enable = true;
   programs.dconf.enable = true;
-  programs.zsh.enable = true;
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -181,13 +159,6 @@
   };
   security.pam.services.greetd.enableGnomeKeyring = true;
   security.pam.services.hyprlock.enableGnomeKeyring = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-  };
 
   security.sudo.extraRules = [
     {
@@ -216,15 +187,12 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
-  virtualisation = {
-    podman = {
-      enable = true;
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings = {
-        dns_enabled = true;
-      };
+  virtualisation.podman = {
+    enable = true;
+    # Required for containers under podman-compose to be able to talk to each other.
+    defaultNetwork.settings = {
+      dns_enabled = true;
     };
-    docker.enable = true;
   };
   services.usbmuxd.enable = true;
 
@@ -235,8 +203,6 @@
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     polkitPolicyOwners = ["${userdata.username}"];
   };
-  # Enable Polkit
-  security.polkit.enable = true;
   security.polkit.adminIdentities = [
     "unix-group:wheel"
   ];
@@ -287,7 +253,6 @@
   };
 
   hardware.opentabletdriver.enable = true;
-  services.tailscale.enable = true;
   console = {
     earlySetup = true;
     packages = with pkgs; [terminus_font];
@@ -298,20 +263,6 @@
   # https://discourse.nixos.org/t/distrobox-podman-oci-permission-error/64943/10
   security.lsm = lib.mkForce [];
 
-  # Sets up all the libraries to load
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      stdenv.cc.cc
-      fuse3
-      icu
-      zlib
-      nss
-      openssl
-      curl
-      expat
-    ];
-  };
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play

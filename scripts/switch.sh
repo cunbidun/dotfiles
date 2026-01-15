@@ -46,7 +46,7 @@ done
 # Check if profile_name is provided
 if [[ -z "$profile_name" ]]; then
   echo "Usage: $0 [--no-commit] [--commit-message <message>] [--build-only] [--copy-back] <profile_name>"
-  echo "  <profile_name> can be 'macbook-m1' or 'nixos'"
+  echo "  <profile_name> can be 'macbook-m1', 'nixos', or 'home-server'"
   echo "  --build-only: Build configuration without switching"
   echo "  --copy-back: Copy generated configuration files back to repository (default: false)"
   exit 1
@@ -117,8 +117,15 @@ if [ "$os" = "Darwin" ]; then
   fi
 else
   echo "Detected non-macOS; running nixos-rebuild $operation_desc..."
-  if sudo nixos-rebuild --log-format internal-json "$operation" --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
-    switch_success=true
+  if [ "$profile_name" = "home-server" ]; then
+    echo "Using remote target-host for home-server..."
+    if nixos-rebuild --log-format internal-json "$operation" --flake ~/dotfiles"#$profile_name" --target-host root@home-server --cores 0 |& nom --json; then
+      switch_success=true
+    fi
+  else
+    if sudo nixos-rebuild --log-format internal-json "$operation" --flake ~/dotfiles"#$profile_name" --cores 0 |& nom --json; then
+      switch_success=true
+    fi
   fi
 fi
 
