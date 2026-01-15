@@ -300,6 +300,15 @@
           type = "app";
           program = "${script}/bin/precommit-run";
         };
+        switch = let
+          pythonWithDeps = pkgs.python3.withPackages (ps: with ps; []);
+          script = pkgs.writeShellScriptBin "nix-switch" ''
+            exec ${pythonWithDeps}/bin/python3 ${./scripts/switch.py} "$@"
+          '';
+        in {
+          type = "app";
+          program = "${script}/bin/nix-switch";
+        };
       });
   };
 }

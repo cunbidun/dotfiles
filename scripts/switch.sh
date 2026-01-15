@@ -231,10 +231,10 @@ echo "NixOS switch successful."
 git add -A
 if [ "$commit_changes" = true ]; then
   if [ -n "$nixos_version" ]; then
-    # Append NixOS version to the commit message if available
-    commit_message="$commit_message (nixos version: $nixos_version)"
+    # Append profile and NixOS version to the commit message if available
+    commit_message="$commit_message (profile: $profile_name, nixos version: $nixos_version)"
   else
-    commit_message="$commit_message (no nixos version detected)"
+    commit_message="$commit_message (profile: $profile_name)"
   fi
 
   if ! git diff-index --quiet HEAD --; then
