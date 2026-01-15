@@ -16,6 +16,7 @@ in {
     ../../home-manager/configs/nvchad.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/vscode.nix
+    ../../home-manager/configs/shared/git.nix
     inputs.self.homeManagerModules.theme-manager
     inputs.stylix.homeModules.stylix
     inputs.mac-app-util.homeManagerModules.default

@@ -181,7 +181,13 @@ copy_files_to_git_root() {
 # Get the current NixOS system profile version (e.g., system-1526-link)
 nixos_version=""
 if [ "$os" != "Darwin" ]; then
-  nixos_version=$(basename "$(readlink /nix/var/nix/profiles/system)" | sed 's/-link$//')
+  if [ "$profile_name" = "home-server" ]; then
+    # Get version from remote home-server
+    nixos_version=$(ssh root@home-server "basename \"\$(readlink /nix/var/nix/profiles/system)\" | sed 's/-link$//'")
+  else
+    # Get version from local system
+    nixos_version=$(basename "$(readlink /nix/var/nix/profiles/system)" | sed 's/-link$//')
+  fi
 fi
 
 # Only copy files back if the --copy-back option is enabled
@@ -224,18 +230,21 @@ fi
 echo "NixOS switch successful."
 git add -A
 if [ "$commit_changes" = true ]; then
-  if ! git diff-index --quiet HEAD --; then
+  if [ -n "$nixos_version" ]; then
     # Append NixOS version to the commit message if available
-    if [ -n "$nixos_version" ]; then
-      git commit -m "$commit_message (nixos version: $nixos_version)"
-      echo "Committed changes with message: $commit_message (nixos version: $nixos_version)"
-    else
-      git commit -m "$commit_message"
-      echo "Committed changes with message: $commit_message"
-    fi
+    commit_message="$commit_message (nixos version: $nixos_version)"
+  else
+    commit_message="$commit_message (no nixos version detected)"
+  fi
+
+  if ! git diff-index --quiet HEAD --; then
+    echo "Committed changes with message: $commit_message"
+    git commit -m "$commit_message"
+    echo "Committed changes with message: $commit_message"
   else
     echo "No changes to commit after successful switch."
   fi
+
 else
   echo "--no-commit flag set; skipping commit."
 fi

@@ -36,6 +36,7 @@ in {
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/chromium.nix
     ../../home-manager/configs/uxplay.nix
+    ../../home-manager/configs/shared/git.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -96,7 +97,7 @@ in {
         "SFMono Nerd Font"
         "Noto Sans Mono CJK SC"
       ];
-      emoji = [ "Noto Color Emoji" ];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -238,13 +239,6 @@ in {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = userdata.name;
-      user.email = userdata.email;
-    };
-  };
   programs.bat = {
     enable = true;
   };

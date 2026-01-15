@@ -15,6 +15,7 @@ in {
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/nvchad.nix
+    ../../home-manager/configs/shared/git.nix
   ];
   home.username = userdata.username;
   home.homeDirectory = "/home/${userdata.username}";
@@ -28,12 +29,6 @@ in {
     VISUAL = "nvim";
     LANG = "en_US.UTF-8";
     TERM = "xterm-256color";
-  };
-
-  programs.git = {
-    enable = true;
-    userName = userdata.name;
-    userEmail = userdata.email;
   };
 
   home.stateVersion = "25.05";
