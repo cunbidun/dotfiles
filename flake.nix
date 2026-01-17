@@ -83,11 +83,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     # +-- MacOS specific --+
     mac-app-util.url = "github:hraban/mac-app-util";
     mac-default-browser = {

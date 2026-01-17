@@ -132,16 +132,14 @@ in rec {
     pkgs.adw-gtk3
 
     # Font
-    # making this stable to avoid frequent rebuilds
-    pkgs.nixpkgs-stable.liberation_ttf # Liberation TrueType fonts
-    pkgs.nixpkgs-stable.cantarell-fonts # Cantarell fonts
-    pkgs.nixpkgs-stable.noto-fonts-color-emoji # Noto Color Emoji fonts
-    pkgs.nixpkgs-stable.noto-fonts-cjk-sans # CJK fallback sans + mono variants
-    pkgs.nixpkgs-stable.noto-fonts-cjk-serif # CJK fallback serif
-    pkgs.nixpkgs-stable.wqy_zenhei # Extra Chinese glyph coverage
-    pkgs.nixpkgs-stable.iosevka # Iosevka monospace fonts
-
-    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # making this stable to avoid frequent repatching
+    pkgs.liberation_ttf # Liberation TrueType fonts
+    pkgs.cantarell-fonts # Cantarell fonts
+    pkgs.noto-fonts-color-emoji # Noto Color Emoji fonts
+    pkgs.noto-fonts-cjk-sans # CJK fallback sans + mono variants
+    pkgs.noto-fonts-cjk-serif # CJK fallback serif
+    pkgs.wqy_zenhei # Extra Chinese glyph coverage
+    pkgs.iosevka # Iosevka monospace fonts
 
     # Messaging
     pkgs.signal-desktop # Signal Desktop messaging app
@@ -164,8 +162,10 @@ in rec {
     pkgs.yt-dlp # A command-line tool to download videos from YouTube and other sites
 
     pkgs.newsboat # An RSS feed reader
-    pkgs.redisinsight
-    pkgs.jetbrains.datagrip
+
+    # use stable redisinsight to avoid frequent repatching
+    pkgs.nixpkgs-stable.redisinsight
+    pkgs.nixpkgs-stable.jetbrains.datagrip
     pkgs.libreoffice
   ];
 
