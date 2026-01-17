@@ -28,7 +28,10 @@
     nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-25.05";};
     nix-darwin = {url = "github:LnL7/nix-darwin";};
     home-manager = {url = "github:nix-community/home-manager";};
-    apple-fonts = {url = "github:Lyndeno/apple-fonts.nix";};
+    apple-fonts = {
+      url = "github:Lyndeno/apple-fonts.nix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -37,7 +40,7 @@
     # | Hyprland |
     # +----------+
     hyprland = {url = "github:hyprwm/Hyprland/v0.53.1/?submodules=1";};
-    pyprland = {url = "github:hyprland-community/pyprland/2.5.0";};
+    pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     xremap-flake = {
@@ -54,7 +57,7 @@
     # +--------+
     # | Others |
     # +--------+
-    yazi = {url = "github:sxyazi/yazi/v25.5.31";};
+    yazi = {url = "github:sxyazi/yazi";};
     stylix = {url = "github:nix-community/stylix";};
     hyprpanel = {
       url = "github:cunbidun/HyprPanel";
@@ -101,7 +104,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.16.2";
+      url = "github:vicinaehq/vicinae/v0.18.3";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";

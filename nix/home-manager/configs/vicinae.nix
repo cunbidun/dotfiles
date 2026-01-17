@@ -11,13 +11,18 @@
 in {
   services.vicinae = {
     enable = true;
-    autoStart = true;
+    systemd = {
+      enable = true;
+      autoStart = true;
+      environment = {
+        USE_LAYER_SHELL = 1;
+      };
+    };
     # Use vicinae's own package from its flake to match the cache
     package = inputs.vicinae.packages.${pkgs.stdenv.hostPlatform.system}.default;
     # Hyprland 0.52 started validating exclusive edge anchors and
     # LayerShellQt (used by Vicinae) currently violates that contract,
     # so disable layer shell until upstream fixes the issue.
-    useLayerShell = false;
     settings = {
       faviconService = "twenty"; # twenty | google | none
       font.size = 11;

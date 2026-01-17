@@ -132,13 +132,15 @@ in rec {
     pkgs.adw-gtk3
 
     # Font
-    pkgs.liberation_ttf # Liberation TrueType fonts
-    pkgs.cantarell-fonts # Cantarell fonts
-    pkgs.noto-fonts-color-emoji # Noto Color Emoji fonts
-    pkgs.noto-fonts-cjk-sans # CJK fallback sans + mono variants
-    pkgs.noto-fonts-cjk-serif # CJK fallback serif
-    pkgs.wqy_zenhei # Extra Chinese glyph coverage
-    pkgs.iosevka # Iosevka monospace fonts
+    # making this stable to avoid frequent rebuilds
+    pkgs.nixpkgs-stable.liberation_ttf # Liberation TrueType fonts
+    pkgs.nixpkgs-stable.cantarell-fonts # Cantarell fonts
+    pkgs.nixpkgs-stable.noto-fonts-color-emoji # Noto Color Emoji fonts
+    pkgs.nixpkgs-stable.noto-fonts-cjk-sans # CJK fallback sans + mono variants
+    pkgs.nixpkgs-stable.noto-fonts-cjk-serif # CJK fallback serif
+    pkgs.nixpkgs-stable.wqy_zenhei # Extra Chinese glyph coverage
+    pkgs.nixpkgs-stable.iosevka # Iosevka monospace fonts
+
     inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Messaging
