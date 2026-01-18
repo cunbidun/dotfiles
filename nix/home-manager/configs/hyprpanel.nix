@@ -21,13 +21,13 @@ in {
           show_numbered = false;
           showWsIcons = true;
           workspaceIconMap = {
-            "1" = "1";
+            "1" = "SYS";
             "2" = "2";
             "3" = "3";
             "4" = "4";
             "5" = "WEB";
-            "6" = "EXTRA";
-            "7" = "QUANT";
+            "6" = "VN";
+            "7" = "Q&Q";
             "8" = "GAME";
             "9" = "VI";
           };
