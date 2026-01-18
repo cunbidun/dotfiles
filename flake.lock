@@ -1704,7 +1704,10 @@
         "stylix": "stylix",
         "vicinae": "vicinae",
         "xremap-flake": "xremap-flake",
-        "yazi": "yazi"
+        "yazi": "yazi",
+        "yazi-bunny": "yazi-bunny",
+        "yazi-plugins": "yazi-plugins",
+        "yazi-restore": "yazi-restore"
       }
     },
     "rust-overlay": {
@@ -2294,6 +2297,54 @@
         "owner": "sxyazi",
         "ref": "v26.1.4",
         "repo": "yazi",
+        "type": "github"
+      }
+    },
+    "yazi-bunny": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767929010,
+        "narHash": "sha256-hTD/gW+xdz5rN3e/hyI9U/E17MlKgDd9sTnfES7SxCo=",
+        "owner": "stelcodes",
+        "repo": "bunny.yazi",
+        "rev": "6ee99bc743be6a4cbda3e2e44ca8d59e757c5e51",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stelcodes",
+        "repo": "bunny.yazi",
+        "type": "github"
+      }
+    },
+    "yazi-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768720217,
+        "narHash": "sha256-60xxQZlXsKs7F/TJdRkhgZpTXas6rUvJUb0rvwZIozo=",
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "rev": "de339764c315059014245a8f5245298a2d29f7e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "type": "github"
+      }
+    },
+    "yazi-restore": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767698462,
+        "narHash": "sha256-1qi7wnFAc8z9mFq1mbBQqQIsSe5uyTogmsSiNXS7F0w=",
+        "owner": "boydaihungst",
+        "repo": "restore.yazi",
+        "rev": "4eda0bf047f014622348390d8db0e2e1b6d036f0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "boydaihungst",
+        "repo": "restore.yazi",
         "type": "github"
       }
     }

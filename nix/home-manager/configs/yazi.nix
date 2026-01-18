@@ -3,26 +3,7 @@
   lib,
   pkgs,
   ...
-}: let
-  plugins-repo = pkgs.fetchFromGitHub {
-    owner = "yazi-rs";
-    repo = "plugins";
-    rev = "b12a9ab085a8c2fe2b921e1547ee667b714185f9";
-    hash = "sha256-LWN0riaUazQl3llTNNUMktG+7GLAHaG/IxNj1gFhDRE=";
-  };
-  restore = pkgs.fetchFromGitHub {
-    owner = "boydaihungst";
-    repo = "restore.yazi";
-    rev = "328dd888c1e2b9b0cb5dc806f099e3164e179620";
-    hash = "sha256-3Z8P25u9bffdjrPjxLRWUQn6MdBS+vyElUBkgV4EUwY=";
-  };
-  bunny = pkgs.fetchFromGitHub {
-    owner = "stelcodes";
-    repo = "bunny.yazi";
-    rev = "a64f32a30101c1a7fe27507e7880653779f54d0a";
-    hash = "sha256-d1FiwYPKdvN7amOWO5PJLxA3dDkPvaUNpNjwF32Ukns=";
-  };
-in {
+}: {
   programs.yazi = {
     package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.default;
     shellWrapperName = "y";
@@ -151,12 +132,12 @@ in {
       ];
     };
     plugins = {
-      restore = restore;
-      bunny = bunny;
+      restore = inputs.yazi-restore;
+      bunny = inputs.yazi-bunny;
 
-      git = "${plugins-repo}/git.yazi";
-      full-border = "${plugins-repo}/full-border.yazi";
-      chmod = "${plugins-repo}/chmod.yazi";
+      git = "${inputs.yazi-plugins}/git.yazi";
+      full-border = "${inputs.yazi-plugins}/full-border.yazi";
+      chmod = "${inputs.yazi-plugins}/chmod.yazi";
     };
   };
 }

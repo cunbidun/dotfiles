@@ -58,6 +58,18 @@
     # | Others |
     # +--------+
     yazi = {url = "github:sxyazi/yazi/v26.1.4";};
+    yazi-plugins = {
+      url = "github:yazi-rs/plugins";
+      flake = false;
+    };
+    yazi-restore = {
+      url = "github:boydaihungst/restore.yazi";
+      flake = false;
+    };
+    yazi-bunny = {
+      url = "github:stelcodes/bunny.yazi";
+      flake = false;
+    };
     stylix = {url = "github:nix-community/stylix";};
     hyprpanel = {
       url = "github:cunbidun/HyprPanel";
