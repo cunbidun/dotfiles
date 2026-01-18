@@ -57,7 +57,7 @@
     # +--------+
     # | Others |
     # +--------+
-    yazi = {url = "github:sxyazi/yazi";};
+    yazi = {url = "github:sxyazi/yazi/v26.1.4";};
     stylix = {url = "github:nix-community/stylix";};
     hyprpanel = {
       url = "github:cunbidun/HyprPanel";
