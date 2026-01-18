@@ -413,6 +413,7 @@ in {
         "vim.handleKeys" = {
           "J" = false;
           "gJ" = false;
+          "<C-p>" = false;
         };
         "vim.normalModeKeyBindings" = [
           {
