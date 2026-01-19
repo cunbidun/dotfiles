@@ -180,7 +180,6 @@
     {
       command = "-workbench.action.quickOpen";
       key = "ctrl+p";
-      when = "terminalFocus";
     }
     {
       command = "workbench.action.terminal.kill";
