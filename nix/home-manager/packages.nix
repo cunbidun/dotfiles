@@ -91,6 +91,7 @@ in rec {
     theme-switch
     yazi-wrapper
     xdg-terminal-exec
+    pkgs.spotify
     pkgs.blender # A 3D modeling and animation software
     # TODO: Java 8 is not working
     # pkgs.prismlauncher
