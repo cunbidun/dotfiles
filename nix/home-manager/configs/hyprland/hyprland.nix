@@ -275,7 +275,6 @@ in {
       #-----------------------------------+
       # will start a submap called "group" |
       #-----------------------------------+
-      bind = $mainMod, t, exec, sleep 0.1 && hyprctl dispatch submap reset
       bind = $mainMod, t, submap, group
       submap=group
 
