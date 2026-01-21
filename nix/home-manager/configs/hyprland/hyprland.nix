@@ -272,9 +272,38 @@ in {
       bind = $mainMod SHIFT, M, exec, ${lib.getExe scripts.minimize-window}
       # bind = $mainMod, Tab, overview:toggle
 
-      # Group
-      bind = $mainMod, t, togglegroup
-      bind = $mainMod SHIFT, t, moveoutofgroup
+      #-----------------------------------+
+      # will start a submap called "group" |
+      #-----------------------------------+
+      bind = $mainMod, t, exec, sleep 0.1 && hyprctl dispatch submap reset
+      bind = $mainMod, t, submap, group
+      submap=group
+
+      # Group operations
+      bind=,t,togglegroup
+      bind=,t,submap,reset
+      bind=,o,moveoutofgroup
+      bind=,o,submap,reset
+
+      # Move into group (direction-based)
+      bind=,h,moveintogroup,l
+      bind=,h,submap,reset
+      bind=,j,moveintogroup,d
+      bind=,j,submap,reset
+      bind=,k,moveintogroup,u
+      bind=,k,submap,reset
+      bind=,l,moveintogroup,r
+      bind=,l,submap,reset
+
+      # Navigate between windows in group
+      bind=,n,changegroupactive,f
+      bind=,p,changegroupactive,b
+
+      # use escape to go back to the global submap
+      bind=,escape,submap,reset
+
+      # will reset the submap, meaning end the current one and return to the global one
+      submap=reset
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = $mainMod, mouse:272, movewindow
