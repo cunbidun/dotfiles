@@ -36,7 +36,6 @@ in {
       misc = {
         enable_swallow = true;
         swallow_exception_regex = "wev|^(.*[Yy]azi.*)$|ranger|^(.*nvim.*)$|^(.*Competitive Programming.*)$";
-        swallow_regex = "^(.*[Yy]azi.*)$";
         disable_hyprland_logo = true;
         focus_on_activate = true;
       };
