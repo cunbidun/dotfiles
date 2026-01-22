@@ -410,6 +410,8 @@ in {
           "ms-python.black-formatter"
           "ms-python.isort"
           "ms-python.vscode-python-envs"
+          "github.copilot"
+          "github.copilot-chat"
         ];
         "editor.fontFamily" = "SFMono Nerd Font";
         "editor.minimap.enabled" = false;
