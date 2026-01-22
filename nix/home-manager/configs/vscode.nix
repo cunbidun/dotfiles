@@ -403,6 +403,14 @@ in {
         );
 
       userSettings = {
+        "remote.SSH.defaultExtensions" = [
+          "ms-python.python"
+          "ms-python.vscode-pylance"
+          "ms-python.debugpy"
+          "ms-python.black-formatter"
+          "ms-python.isort"
+          "ms-python.vscode-python-envs"
+        ];
         "editor.fontFamily" = "SFMono Nerd Font";
         "editor.minimap.enabled" = false;
         "editor.rulers" = [120];
