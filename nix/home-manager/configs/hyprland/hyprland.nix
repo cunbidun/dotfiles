@@ -271,6 +271,8 @@ in {
       bind = $mainMod SHIFT, M, exec, ${lib.getExe scripts.minimize-window}
       # bind = $mainMod, Tab, overview:toggle
 
+      bind = $mainMod CONTROL, S, toggleswallow
+
       #-----------------------------------+
       # will start a submap called "group" |
       #-----------------------------------+
@@ -326,24 +328,6 @@ in {
       bind = $mainMod, l, movefocus, r
       bind = $mainMod, k, movefocus, u
       bind = $mainMod, j, movefocus, d
-
-      # use reset to go back to the global submap
-      bind=,escape,submap,reset
-
-      # will reset the submap, meaning end the current one and return to the global one
-      submap=reset
-
-      #--------------------------------------+
-      # will start a submap called "session" |
-      #--------------------------------------+
-      bind = $mainMod CONTROL, S, exec, sleep 1 && hyprctl dispatch submap reset
-      bind = $mainMod CONTROL,S,submap,session
-
-      submap=session
-
-      # sets repeatable binds for resizing the active window
-      bind=,r,exec,hyprctl reload && notify-send -t 1000 'Hyprland reloaded'
-      bind=$mainMod SHIFT, Q, exec, ${lib.getExe scripts.prompt} 'Do you want to exit?' 'uwsm stop'
 
       # use reset to go back to the global submap
       bind=,escape,submap,reset
