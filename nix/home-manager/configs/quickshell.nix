@@ -93,6 +93,18 @@ in {
     recursive = true;
   };
 
+  xdg.configFile."quickshell/ii/panelFamilies/IllogicalImpulseFamily.qml".text = ''
+    import QtQuick
+    import Quickshell
+
+    import qs.modules.common
+    import qs.modules.ii.overview
+
+    Scope {
+        PanelLoader { component: Overview {} }
+    }
+  '';
+
   xdg.configFile."illogical-impulse/config.json".text = builtins.toJSON configOverrides;
 
   systemd.user.services.quickshell = {
