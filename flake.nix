@@ -42,7 +42,10 @@
     hyprland = {url = "github:hyprwm/Hyprland/v0.53.1/?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
-    quickshell = {url = "github:quickshell-mirror/quickshell/db1777c20b936a86528c1095cbcb1ebd92801402";};
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell/db1777c20b936a86528c1095cbcb1ebd92801402";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     dots-hyprland = {
       url = "git+https://github.com/end-4/dots-hyprland.git?submodules=1";
       flake = false;
