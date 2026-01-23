@@ -13,7 +13,6 @@
     dontBuild = true;
 
     nativeBuildInputs = [
-      qsPkgs.makeWrapper
       qsPkgs.qt6.wrapQtAppsHook
     ];
 
@@ -44,9 +43,11 @@
 
     installPhase = ''
       mkdir -p $out/bin
-      makeWrapper ${inputs.quickshell.packages.${system}.default}/bin/qs $out/bin/qs \
-          --prefix XDG_DATA_DIRS : ${qsPkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${qsPkgs.gsettings-desktop-schemas.name}
-      chmod +x $out/bin/qs
+      ln -s ${inputs.quickshell.packages.${system}.default}/bin/qs $out/bin/qs
+      qtWrapperArgs+=(
+        --prefix XDG_DATA_DIRS : ${qsPkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${qsPkgs.gsettings-desktop-schemas.name}
+      )
+      wrapQtApp $out/bin/qs
     '';
   };
 
