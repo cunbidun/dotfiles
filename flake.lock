@@ -246,19 +246,14 @@
     "dots-hyprland": {
       "flake": false,
       "locked": {
-        "lastModified": 1769126799,
-        "narHash": "sha256-v/VwDphmB+pdp51d65feDAXYLxU3juUIOIvVVT43oP4=",
-        "ref": "refs/heads/main",
-        "rev": "1b4c439c3e8286809747becfc59461b484345bfa",
-        "revCount": 5856,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/end-4/dots-hyprland.git"
+        "lastModified": 1769217569,
+        "narHash": "sha256-Pjsi/0vxyfcBeeSP9pghdZtQbpIW31k2H3u9nsDAWcE=",
+        "path": "/home/cunbidun/dotfiles/local-sources/dots-hyprland",
+        "type": "path"
       },
       "original": {
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/end-4/dots-hyprland.git"
+        "path": "/home/cunbidun/dotfiles/local-sources/dots-hyprland",
+        "type": "path"
       }
     },
     "firefox-gnome-theme": {

@@ -47,7 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     dots-hyprland = {
-      url = "git+https://github.com/end-4/dots-hyprland.git?submodules=1";
+      url = "path:/home/cunbidun/dotfiles/local-sources/dots-hyprland";
       flake = false;
     };
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
@@ -145,6 +145,7 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
+        backupFileExtension = "bak";
         users.${userdata.username} = import configPath;
         extraSpecialArgs = {
           inherit inputs;

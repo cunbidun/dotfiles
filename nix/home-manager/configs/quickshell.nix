@@ -1,4 +1,9 @@
-{inputs, pkgs, lib, ...}: let
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: let
   system = pkgs.stdenv.hostPlatform.system;
   qsPkgs = import inputs.quickshell.inputs.nixpkgs {inherit system;};
   qsWrapper = qsPkgs.stdenv.mkDerivation {
@@ -58,26 +63,24 @@
     overview = {
       enable = true;
     };
-    dock = {
-      enable = false;
-    };
-    sidebar = {
-      keepRightSidebarLoaded = false;
-      cornerOpen = {
-        enable = false;
-      };
-    };
-    bar = {
-      autoHide = {
-        enable = true;
-        pushWindows = false;
-        showWhenPressingSuper = {
-          enable = false;
-          delay = 0;
-        };
-      };
-    };
   };
+
+  iiConfig = pkgs.runCommand "quickshell-ii-overview-only" {} ''
+    mkdir -p $out
+    cp -R ${inputs.dots-hyprland}/dots/.config/quickshell/ii/. $out/
+    chmod -R u+w $out
+    cat > $out/panelFamilies/IllogicalImpulseFamily.qml <<'EOF'
+    import QtQuick
+    import Quickshell
+
+    import qs.modules.common
+    import qs.modules.ii.overview
+
+    Scope {
+        PanelLoader { component: Overview {} }
+    }
+    EOF
+  '';
 
   unitSection = {
     After = ["graphical-session.target"];
@@ -89,23 +92,14 @@ in {
   home.packages = [qsWrapper];
 
   xdg.configFile."quickshell/ii" = {
-    source = "${inputs.dots-hyprland}/dots/.config/quickshell/ii";
+    source = iiConfig;
     recursive = true;
   };
 
-  xdg.configFile."quickshell/ii/panelFamilies/IllogicalImpulseFamily.qml".text = ''
-    import QtQuick
-    import Quickshell
-
-    import qs.modules.common
-    import qs.modules.ii.overview
-
-    Scope {
-        PanelLoader { component: Overview {} }
-    }
-  '';
-
-  xdg.configFile."illogical-impulse/config.json".text = builtins.toJSON configOverrides;
+  xdg.configFile."illogical-impulse/config.json" = {
+    text = builtins.toJSON configOverrides;
+    force = true;
+  };
 
   systemd.user.services.quickshell = {
     Unit = unitSection;

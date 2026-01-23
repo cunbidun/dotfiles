@@ -153,6 +153,11 @@
     withUWSM = true;
   };
   programs.uwsm.enable = true;
+
+  # KDE Plasma
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.defaultSession = "hyprland"; # or "plasma" to default to KDE
+
   services.greetd = {
     enable = true;
     settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --time-format '%A, %B %e, %Y -- %I:%M:%S %p' --cmd 'uwsm start default'";
