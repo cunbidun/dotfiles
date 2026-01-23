@@ -217,6 +217,7 @@ in {
       bind = ALT, space, exec, vicinae toggle
       bind = CTRL, space, exec, vicinae toggle
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
+      bind = $mainMod, Tab, exec, qs -c ii ipc call search workspacesToggle
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png

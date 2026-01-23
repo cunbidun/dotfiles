@@ -42,6 +42,11 @@
     hyprland = {url = "github:hyprwm/Hyprland/v0.53.1/?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
+    quickshell = {url = "github:quickshell-mirror/quickshell/db1777c20b936a86528c1095cbcb1ebd92801402";};
+    dots-hyprland = {
+      url = "github:end-4/dots-hyprland";
+      flake = false;
+    };
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     xremap-flake = {
       url = "github:xremap/nix-flake";
