@@ -247,16 +247,18 @@
       "flake": false,
       "locked": {
         "lastModified": 1769126799,
-        "narHash": "sha256-PtPWkyczFIRvBWe/8PRfzMpkHSb+UI0opCV34j4vgTg=",
-        "owner": "end-4",
-        "repo": "dots-hyprland",
+        "narHash": "sha256-v/VwDphmB+pdp51d65feDAXYLxU3juUIOIvVVT43oP4=",
+        "ref": "refs/heads/main",
         "rev": "1b4c439c3e8286809747becfc59461b484345bfa",
-        "type": "github"
+        "revCount": 5856,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/end-4/dots-hyprland.git"
       },
       "original": {
-        "owner": "end-4",
-        "repo": "dots-hyprland",
-        "type": "github"
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/end-4/dots-hyprland.git"
       }
     },
     "firefox-gnome-theme": {

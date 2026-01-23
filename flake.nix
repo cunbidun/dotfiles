@@ -44,7 +44,7 @@
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     quickshell = {url = "github:quickshell-mirror/quickshell/db1777c20b936a86528c1095cbcb1ebd92801402";};
     dots-hyprland = {
-      url = "github:end-4/dots-hyprland?submodules=1";
+      url = "git+https://github.com/end-4/dots-hyprland.git?submodules=1";
       flake = false;
     };
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
