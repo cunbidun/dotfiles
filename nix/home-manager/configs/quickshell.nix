@@ -1,7 +1,9 @@
 {inputs, pkgs, lib, ...}: let
-  qsWrapper = pkgs.stdenv.mkDerivation {
+  system = pkgs.stdenv.hostPlatform.system;
+  qsPkgs = import inputs.quickshell.inputs.nixpkgs {inherit system;};
+  qsWrapper = qsPkgs.stdenv.mkDerivation {
     name = "illogical-impulse-quickshell-wrapper";
-    meta = with pkgs.lib; {
+    meta = with qsPkgs.lib; {
       description = "Quickshell bundled Qt deps for home-manager usage";
       license = licenses.gpl3Only;
     };
@@ -11,12 +13,12 @@
     dontBuild = true;
 
     nativeBuildInputs = [
-      pkgs.makeWrapper
-      pkgs.qt6.wrapQtAppsHook
+      qsPkgs.makeWrapper
+      qsPkgs.qt6.wrapQtAppsHook
     ];
 
-    buildInputs = with pkgs; [
-      inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    buildInputs = with qsPkgs; [
+      inputs.quickshell.packages.${system}.default
       kdePackages.qtwayland
       kdePackages.qtpositioning
       kdePackages.qtlocation
@@ -42,8 +44,8 @@
 
     installPhase = ''
       mkdir -p $out/bin
-      makeWrapper ${inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/qs $out/bin/qs \
-        --prefix XDG_DATA_DIRS : ${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}
+      makeWrapper ${inputs.quickshell.packages.${system}.default}/bin/qs $out/bin/qs \
+          --prefix XDG_DATA_DIRS : ${qsPkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${qsPkgs.gsettings-desktop-schemas.name}
       chmod +x $out/bin/qs
     '';
   };
