@@ -387,10 +387,6 @@ in {
       bind = SHIFT, 4, exec, ${lib.getExe scripts.wsctl} move 4
       bind = SHIFT, 5, exec, ${lib.getExe scripts.wsctl} move 5
 
-      # Main
-      bind = , w, exec, ${lib.getExe scripts.wsctl} main
-      bind = SHIFT, w, exec, ${lib.getExe scripts.wsctl} main-move
-
       # Exit
       bind = , escape, submap, reset
       submap = reset
