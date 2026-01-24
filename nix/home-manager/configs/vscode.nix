@@ -283,11 +283,6 @@
       command = "workbench.action.findInFiles";
     }
     {
-      key = "alt+shift+f";
-      command = "workbench.view.search";
-      when = "workbench.view.search.active && neverMatch =~ /doesNotMatch/";
-    }
-    {
       key = "alt+shift+e";
       command = "workbench.view.explorer";
       when = "viewContainer.workbench.view.explorer.enabled";
