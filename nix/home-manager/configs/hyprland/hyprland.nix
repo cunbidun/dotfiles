@@ -368,7 +368,9 @@ in {
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
 
-      # Workspace control submap
+      #--------------------------+
+      # Start a workspace submap |
+      #--------------------------+
       bind = $mainMod, W, exec, sleep 1 && hyprctl dispatch submap reset
       bind = $mainMod, W, submap, ws
       submap = ws
@@ -396,6 +398,11 @@ in {
       bind = , 1, submap, reset
       bind = SHIFT, 5, exec, ${lib.getExe scripts.wsctl} move 5
       bind = , 1, submap, reset
+
+      bine = , w, exec, ${lib.getExe scripts.wsctl} main
+      bine = , w, submap, reset
+      bine = SHIFT, w, exec, ${lib.getExe scripts.wsctl} main-move
+      bine = SHIFT, w, submap, reset
 
       # Exit
       bind = , escape, submap, reset
