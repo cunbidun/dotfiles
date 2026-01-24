@@ -4,26 +4,6 @@
 # to get the theme name: https://github.com/tinted-theming/schemes
 # to get hyprpanel themes: https://github.com/Jas-SinghFSU/HyprPanel/tree/master/themes
 {
-  nord = {
-    light = {
-      scheme = "nord-light";
-      wallpaper = ../../../../wallpapers/thuonglam.jpeg;
-      vscodeTheme = "Nord Light";
-      nvimTheme = "onenord_light";
-      hyprpanelTheme = "nord";
-      vicinaeTheme = "nord-light";
-      chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
-    };
-    dark = {
-      scheme = "nord";
-      wallpaper = ../../../../wallpapers/Astronaut.png;
-      vscodeTheme = "Nord";
-      nvimTheme = "nord";
-      hyprpanelTheme = "nord";
-      vicinaeTheme = "nord";
-      chromeExtension = "abehfkkfjlplnjadfcjiflnejblfmmpj"; # Nord extension
-    };
-  };
   catppuccin = {
     light = {
       scheme = "catppuccin-latte";
@@ -42,46 +22,6 @@
       hyprpanelTheme = "catppuccin_mocha";
       vicinaeTheme = "catppuccin-mocha";
       chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
-    };
-  };
-  everforest = {
-    light = {
-      scheme = "everforest-light";
-      wallpaper = ../../../../wallpapers/fog_forest_2.png;
-      vscodeTheme = "Everforest Light";
-      nvimTheme = "everforest_light";
-      hyprpanelTheme = "everforest";
-      vicinaeTheme = "vicinae-light";
-      chromeExtension = "dlcadbmcfambdjhecipbnolmjchgnode"; # Everforest Chrome Theme
-    };
-    dark = {
-      scheme = "everforest-dark";
-      wallpaper = ../../../../wallpapers/fog_forest_2.png;
-      vscodeTheme = "Everforest Dark";
-      nvimTheme = "everforest";
-      hyprpanelTheme = "everforest";
-      vicinaeTheme = "vicinae-dark";
-      chromeExtension = "dlcadbmcfambdjhecipbnolmjchgnode"; # Everforest Chrome Theme
-    };
-  };
-  onedark = {
-    light = {
-      scheme = "one-light";
-      wallpaper = ../../../../wallpapers/thuonglam.jpeg;
-      vscodeTheme = "Atom One Light";
-      nvimTheme = "one_light";
-      hyprpanelTheme = "one_dark";
-      vicinaeTheme = "one-dark";
-      chromeExtension = "ajamefcbfaiolpnjelkafhjdninoclhc"; # seri's dark theme (Atom One Dark based)
-    };
-    dark = {
-      scheme = "onedark";
-      wallpaper = ../../../../wallpapers/Astronaut.png;
-      vscodeTheme = "Atom One Dark";
-      nvimTheme = "onedark";
-      hyprpanelTheme = "one_dark";
-      vicinaeTheme = "one-dark";
-      chromeExtension = "kjboibophcgchimahpicagheccpnjnhi"; # seri's dark theme (Atom One Dark based)
     };
   };
   default = {
