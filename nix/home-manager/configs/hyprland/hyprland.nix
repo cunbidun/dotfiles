@@ -375,17 +375,27 @@ in {
 
       # Go to sub-workspaces
       bind = , 1, exec, ${lib.getExe scripts.wsctl} goto 1
+      bind = , 1, submap, reset
       bind = , 2, exec, ${lib.getExe scripts.wsctl} goto 2
+      bind = , 1, submap, reset
       bind = , 3, exec, ${lib.getExe scripts.wsctl} goto 3
+      bind = , 1, submap, reset
       bind = , 4, exec, ${lib.getExe scripts.wsctl} goto 4
+      bind = , 1, submap, reset
       bind = , 5, exec, ${lib.getExe scripts.wsctl} goto 5
+      bind = , 1, submap, reset
 
       # Move window to sub-workspaces
       bind = SHIFT, 1, exec, ${lib.getExe scripts.wsctl} move 1
+      bind = , 1, submap, reset
       bind = SHIFT, 2, exec, ${lib.getExe scripts.wsctl} move 2
+      bind = , 1, submap, reset
       bind = SHIFT, 3, exec, ${lib.getExe scripts.wsctl} move 3
+      bind = , 1, submap, reset
       bind = SHIFT, 4, exec, ${lib.getExe scripts.wsctl} move 4
+      bind = , 1, submap, reset
       bind = SHIFT, 5, exec, ${lib.getExe scripts.wsctl} move 5
+      bind = , 1, submap, reset
 
       # Exit
       bind = , escape, submap, reset
