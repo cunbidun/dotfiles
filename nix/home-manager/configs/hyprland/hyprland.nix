@@ -258,7 +258,6 @@ in {
       bind = $mainMod, q, workspace, 7
       bind = $mainMod, g, workspace, 8
       bind = $mainMod, 9, workspace, 9
-      bind = $mainMod CONTROL, M, exec, ${lib.getExe scripts.toggle-minimize-window}
 
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
       bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
@@ -270,7 +269,6 @@ in {
       bind = $mainMod SHIFT, q, movetoworkspacesilent, 7
       bind = $mainMod SHIFT, g, movetoworkspacesilent, 8
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
-      bind = $mainMod SHIFT, M, exec, ${lib.getExe scripts.minimize-window}
       # bind = $mainMod, Tab, overview:toggle
 
       #-----------------------------------+

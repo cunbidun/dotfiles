@@ -188,19 +188,6 @@
     esac
   '';
 
-  minimize-window = pkgs.writeShellScriptBin "minimize-window" ''
-    current_workspace=$(hyprctl activeworkspace | grep "workspace ID" | head -n 1 | awk '{print $3}')
-
-    # Transfers the window to/from a designated workspace based on the visibility status of that workspace.
-    # Why can't we use 'hyprctl dispatch movetoworkspacesilent "special:minimized_$current_workspace"' instead?
-    # Because we need to be able to move the window back from the special workspace
-
-    pypr toggle_special "minimized_$current_workspace"'';
-
-  toggle-minimize-window =
-    pkgs.writeShellScriptBin "toggle-minimize-window" ''
-      hyprctl dispatch togglespecialworkspace "minimized_$(hyprctl activeworkspace -j | jq '.id')"'';
-
   wsctl =
     pkgs.writers.writePython3Bin "wsctl" {
       flakeIgnore = ["E501"];
