@@ -200,4 +200,86 @@
   toggle-minimize-window =
     pkgs.writeShellScriptBin "toggle-minimize-window" ''
       hyprctl dispatch togglespecialworkspace "minimized_$(hyprctl activeworkspace -j | jq '.id')"'';
+
+  wsctl =
+    pkgs.writers.writePython3Bin "wsctl" {
+      flakeIgnore = ["E501"];
+    } ''
+      import json
+      import re
+      import subprocess
+      import sys
+
+      ACTIVE_RE = re.compile(r"^(?P<proj>\d+)(?:\[(?P<sub>[^\]]+)\])?$")
+
+
+      def run(cmd, inp=None):
+          p = subprocess.run(
+              cmd,
+              input=(inp.encode() if inp else None),
+              stdout=subprocess.PIPE,
+              stderr=subprocess.PIPE,
+          )
+          if p.returncode != 0:
+              raise RuntimeError(
+                  p.stderr.decode(errors="ignore").strip() or "command failed"
+              )
+          return p.stdout.decode(errors="ignore")
+
+
+      def hyprj(args):
+          return json.loads(run(["hyprctl"] + args))
+
+
+      def current_project():
+          name = str(hyprj(["activeworkspace", "-j"]).get("name", "")).strip()
+          m = ACTIVE_RE.match(name)
+          if not m:
+              raise RuntimeError(f"bad ws name: {name!r}")
+          return m.group("proj")
+
+
+      def main():
+          if len(sys.argv) < 2:
+              print(
+                  "usage: wsctl goto N | move N | main | main-move",
+                  file=sys.stderr,
+              )
+              return 1
+
+          cmd = sys.argv[1]
+          proj = current_project()
+
+          if cmd == "goto":
+              sub = sys.argv[2]
+              target = f"{proj}[{sub}]"
+              run(["hyprctl", "dispatch", "workspace", f"name:{target}"])
+              return 0
+
+          if cmd == "move":
+              sub = sys.argv[2]
+              target = f"{proj}[{sub}]"
+              run(["hyprctl", "dispatch", "movetoworkspace", f"name:{target}"])
+              return 0
+
+          if cmd == "main":
+              target = f"{proj}[main]"
+              run(["hyprctl", "dispatch", "workspace", f"name:{target}"])
+              return 0
+
+          if cmd == "main-move":
+              target = f"{proj}[main]"
+              run(["hyprctl", "dispatch", "movetoworkspace", f"name:{target}"])
+              return 0
+
+          raise RuntimeError(f"unknown command: {cmd}")
+
+
+      if __name__ == "__main__":
+          try:
+              raise SystemExit(main())
+          except Exception as e:
+              print(f"[wsctl] {e}", file=sys.stderr)
+              raise SystemExit(1)
+    '';
 }

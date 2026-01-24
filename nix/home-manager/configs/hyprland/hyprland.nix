@@ -253,7 +253,7 @@ in {
       bind = $mainMod, 2, workspace, 2
       bind = $mainMod, 3, workspace, 3
       bind = $mainMod, 4, workspace, 4
-      bind = $mainMod, w, workspace, 5
+      bind = $mainMod, 5, workspace, 5
       bind = $mainMod, a, workspace, 6
       bind = $mainMod, q, workspace, 7
       bind = $mainMod, g, workspace, 8
@@ -265,7 +265,7 @@ in {
       bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
       bind = $mainMod SHIFT, 3, movetoworkspacesilent, 3
       bind = $mainMod SHIFT, 4, movetoworkspacesilent, 4
-      bind = $mainMod SHIFT, w, movetoworkspacesilent, 5
+      bind = $mainMod SHIFT, 5, movetoworkspacesilent, 5
       bind = $mainMod SHIFT, a, movetoworkspacesilent, 6
       bind = $mainMod SHIFT, q, movetoworkspacesilent, 7
       bind = $mainMod SHIFT, g, movetoworkspacesilent, 8
@@ -367,6 +367,33 @@ in {
 
       # will reset the submap, meaning end the current one and return to the global one
       submap=reset
+
+      # Workspace control submap
+      bind = $mainMod, W, exec, sleep 1 && hyprctl dispatch submap reset
+      bind = $mainMod, W, submap, ws
+      submap = ws
+
+      # Go to sub-workspaces
+      bind = , 1, exec, ${lib.getExe scripts.wsctl} goto 1
+      bind = , 2, exec, ${lib.getExe scripts.wsctl} goto 2
+      bind = , 3, exec, ${lib.getExe scripts.wsctl} goto 3
+      bind = , 4, exec, ${lib.getExe scripts.wsctl} goto 4
+      bind = , 5, exec, ${lib.getExe scripts.wsctl} goto 5
+
+      # Move window to sub-workspaces
+      bind = SHIFT, 1, exec, ${lib.getExe scripts.wsctl} move 1
+      bind = SHIFT, 2, exec, ${lib.getExe scripts.wsctl} move 2
+      bind = SHIFT, 3, exec, ${lib.getExe scripts.wsctl} move 3
+      bind = SHIFT, 4, exec, ${lib.getExe scripts.wsctl} move 4
+      bind = SHIFT, 5, exec, ${lib.getExe scripts.wsctl} move 5
+
+      # Main
+      bind = , w, exec, ${lib.getExe scripts.wsctl} main
+      bind = SHIFT, w, exec, ${lib.getExe scripts.wsctl} main-move
+
+      # Exit
+      bind = , escape, submap, reset
+      submap = reset
 
       # scratchpad
       bind = $mainMod, Grave, exec, pypr toggle term
