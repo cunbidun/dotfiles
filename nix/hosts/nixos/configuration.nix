@@ -278,6 +278,10 @@
       chromium.enable = false;
     };
   };
+  programs.localsend = {
+    enable = true;
+    openFirewall = true; # opens port 53317 for receiving
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
