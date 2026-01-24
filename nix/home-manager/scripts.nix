@@ -242,7 +242,7 @@
       def main():
           if len(sys.argv) < 2:
               print(
-                  "usage: wsctl goto N | move N",
+                  "usage: wsctl goto N | move N | main | main-move",
                   file=sys.stderr,
               )
               return 1
@@ -259,6 +259,16 @@
           if cmd == "move":
               sub = sys.argv[2]
               target = f"{proj}[{sub}]"
+              run(["hyprctl", "dispatch", "movetoworkspace", f"name:{target}"])
+              return 0
+
+          if cmd == "main":
+              target = f"{proj}"
+              run(["hyprctl", "dispatch", "workspace", f"name:{target}"])
+              return 0
+
+          if cmd == "main-move":
+              target = f"{proj}"
               run(["hyprctl", "dispatch", "movetoworkspace", f"name:{target}"])
               return 0
 
