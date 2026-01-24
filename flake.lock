@@ -1688,27 +1688,6 @@
         "type": "github"
       }
     },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1761821581,
-        "narHash": "sha256-nLuc6jA7z+H/6bHPEBSOYPbz7RtvNCZiTKmYItJuBmM=",
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "rev": "db1777c20b936a86528c1095cbcb1ebd92801402",
-        "type": "github"
-      },
-      "original": {
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "rev": "db1777c20b936a86528c1095cbcb1ebd92801402",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "Hyprspace": "Hyprspace",
@@ -1735,7 +1714,6 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "opnix": "opnix",
         "pyprland": "pyprland",
-        "quickshell": "quickshell",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "vicinae": "vicinae",
