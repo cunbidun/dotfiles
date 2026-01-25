@@ -65,7 +65,8 @@
       export PATH=$PATH:$HOME/.cargo/bin
 
       eval "$(starship init zsh)"
-      eval "$(atuin init zsh)"
+      eval "$(atuin init zsh --disable-up-arrow)"
+
     '';
   };
   programs.eza.enable = true;
