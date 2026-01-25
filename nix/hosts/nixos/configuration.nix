@@ -88,7 +88,6 @@
       jdk17
       xdg-utils
       desktop-file-utils
-      distrobox
 
       # Container
       podman-tui
@@ -259,10 +258,6 @@
     packages = with pkgs; [terminus_font];
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   };
-
-  # TODO: Remove this once nixpkgs fixes the issue with podman OCI permissions
-  # https://discourse.nixos.org/t/distrobox-podman-oci-permission-error/64943/10
-  security.lsm = lib.mkForce [];
 
   programs.steam = {
     enable = true;
