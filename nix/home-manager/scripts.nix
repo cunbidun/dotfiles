@@ -246,7 +246,7 @@
           if cmd == "move":
               sub = sys.argv[2]
               target = f"{proj}[{sub}]"
-              run(["hyprctl", "dispatch", "movetoworkspace", f"name:{target}"])
+              run(["hyprctl", "dispatch", "movetoworkspacesilent", f"name:{target}"])
               return 0
 
           if cmd == "main":
@@ -256,7 +256,7 @@
 
           if cmd == "main-move":
               target = f"{proj}"
-              run(["hyprctl", "dispatch", "movetoworkspace", f"name:{target}"])
+              run(["hyprctl", "dispatch", "movetoworkspacesilent", f"name:{target}"])
               return 0
 
           raise RuntimeError(f"unknown command: {cmd}")
