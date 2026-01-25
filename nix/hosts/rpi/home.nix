@@ -20,7 +20,6 @@ in {
   home.username = userdata.username;
   home.homeDirectory = "/home/${userdata.username}";
   home.packages = package_config.default_packages;
-  programs.atuin.enable = true;
 
   home.file = {
     ".config/starship.toml".source = ../../../utilities/starship/starship.toml;

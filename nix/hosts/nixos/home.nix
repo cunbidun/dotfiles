@@ -243,6 +243,7 @@ in {
     enable = true;
   };
   programs.hyprcursor-phinger.enable = true;
+  programs.atuin.enable = true;
   programs.zoxide.enable = true;
 
   # This value determines the Home Manager release that your
