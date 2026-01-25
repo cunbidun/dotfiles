@@ -20,6 +20,7 @@ in {
 
   home.username = userdata.username;
   home.homeDirectory = "/home/${userdata.username}";
+  programs.atuin.enable = true;
 
   # Only include default packages, no GUI packages
   home.packages = package_config.default_packages;

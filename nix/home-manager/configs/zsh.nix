@@ -65,6 +65,7 @@
       export PATH=$PATH:$HOME/.cargo/bin
 
       eval "$(starship init zsh)"
+      eval "$(atuin init zsh)"
     '';
   };
   programs.eza.enable = true;
