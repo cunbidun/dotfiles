@@ -169,7 +169,7 @@ in rec {
     pkgs.nixpkgs-stable.redisinsight
     pkgs.nixpkgs-stable.jetbrains.datagrip
     pkgs.libreoffice
-    pkgs.zoom
+    pkgs.zoom-us
   ];
 
   mac_packages = [
