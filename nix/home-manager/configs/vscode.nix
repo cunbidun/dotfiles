@@ -517,7 +517,7 @@ in {
       };
       # to search extensions: https://nix-community.github.io/nix4vscode/
       extensions = pkgs.nix4vscode.forVscodeVersion vscodeFullVersion [
-        "sainnhe.everforest"
+        "esbenp.prettier-vscode"
         "Google.colab"
         "activitywatch.aw-watcher-vscode"
         "arcticicestudio.nord-visual-studio-code"
