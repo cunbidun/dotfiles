@@ -412,6 +412,7 @@ in {
           "ms-python.vscode-python-envs"
           "github.copilot"
           "github.copilot-chat"
+          "esbenp.prettier-vscode"
         ];
         "editor.fontFamily" = "SFMono Nerd Font";
         "editor.minimap.enabled" = false;
