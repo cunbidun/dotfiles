@@ -111,7 +111,7 @@
     home-manager-rpi5 = {url = "github:nix-community/home-manager/release-25.05";};
 
     codex-nix = {
-      url = "github:sadjow/codex-nix";
+      url = "github:liammcdermott/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
