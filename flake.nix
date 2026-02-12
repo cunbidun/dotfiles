@@ -42,10 +42,6 @@
     hyprland = {url = "github:hyprwm/Hyprland/v0.53.1/?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
-    dots-hyprland = {
-      url = "path:/home/cunbidun/dotfiles/local-sources/dots-hyprland";
-      flake = false;
-    };
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     xremap-flake = {
       url = "github:xremap/nix-flake";

@@ -5,6 +5,6 @@ targetName: input: (self: super: {
     super."${targetName}" or {}
     // import input {
       inherit (super) system;
-      config = super.config;
+      config.allowUnfree = super.config.allowUnfree or false;
     };
 })
