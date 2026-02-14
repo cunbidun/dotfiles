@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
-  vscodePackage = pkgs.vscode;
+  vscodePackage = pkgs.nixpkgs-master.vscode;
   vscodeProductPath =
     if isLinux
     then "${vscodePackage}/lib/vscode/resources/app/product.json"
@@ -512,7 +512,7 @@ in {
         "everforest.darkWorkbench" = "flat";
       };
       # to search extensions: https://nix-community.github.io/nix4vscode/
-      extensions = pkgs.nix4vscode.forVscode [
+      extensions = pkgs.nix4vscode.forVscodeVersion vscodeFullVersion [
         "esbenp.prettier-vscode"
         "Google.colab"
         "activitywatch.aw-watcher-vscode"
