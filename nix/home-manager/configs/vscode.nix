@@ -410,7 +410,6 @@ in {
           "ms-python.black-formatter"
           "ms-python.isort"
           "ms-python.vscode-python-envs"
-          "github.copilot"
           "github.copilot-chat"
           "esbenp.prettier-vscode"
         ];
@@ -528,7 +527,6 @@ in {
         "charliermarsh.ruff"
         "cunbidun.flash-vscode"
         "foxundermoon.shell-format"
-        "github.copilot"
         "github.copilot-chat"
         "github.vscode-pull-request-github"
         "james-yu.latex-workshop"
