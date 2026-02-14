@@ -5,7 +5,24 @@
 }: let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
-  vscodePackage = pkgs.nixpkgs-master.vscode;
+  vscodePackage =
+    (pkgs.vscode.override {
+      isInsiders = true;
+      # Upstream Linux insiders archives currently ship `bin/code` instead of
+      # `bin/code-insiders`; force the source executable name accordingly.
+      sourceExecutableName = "code";
+    })
+    .overrideAttrs (old:
+      lib.optionalAttrs isLinux {
+        postInstall =
+          (old.postInstall or "")
+          + ''
+            # nixpkgs fixup still references lib/vscode/code-insiders on Linux.
+            if [ -e "$out/lib/vscode/code" ] && [ ! -e "$out/lib/vscode/code-insiders" ]; then
+              ln -s code "$out/lib/vscode/code-insiders"
+            fi
+          '';
+      });
   vscodeProductPath =
     if isLinux
     then "${vscodePackage}/lib/vscode/resources/app/product.json"
