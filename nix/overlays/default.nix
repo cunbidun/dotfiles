@@ -3,6 +3,7 @@ inputs: let
 in [
   (mkSubPkgsOverlay "nixpkgs-master" inputs.nixpkgs-master)
   (mkSubPkgsOverlay "nixpkgs-stable" inputs.nixpkgs-stable)
+  (import inputs.vscode-insiders)
   inputs.nix4vscode.overlays.default
   (import ./theme-manager.nix)
   (import ./mac-default-browser.nix inputs)

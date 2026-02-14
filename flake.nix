@@ -9,6 +9,7 @@
       "https://winapps.cachix.org/"
       "https://vicinae.cachix.org"
       "https://codex-cli.cachix.org"
+      "https://noel.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -18,6 +19,7 @@
       "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
       "codex-cli.cachix.org-1:BH31Jb2xSzV+9BFgVfR9j7TDW3L8CSMziFdfLrKEKIk="
+      "noel.cachix.org-1:pQHbMJOB5h5VqYi3RV0Vv0EaeHfxARxgOhE9j013XwQ="
     ];
     connect-timeout = 5;
   };
@@ -93,6 +95,10 @@
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    vscode-insiders = {
+      url = "github:auguwu/vscode-insiders-nix";
+      inputs.nixpkgs.follows = "nixpkgs-master";
     };
 
     # +-- MacOS specific --+

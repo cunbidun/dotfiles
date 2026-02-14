@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
-  vscodePackage = pkgs.nixpkgs-master.vscode;
+  vscodePackage = pkgs.vscode-insiders;
   vscodeProductPath =
     if isLinux
     then "${vscodePackage}/lib/vscode/resources/app/product.json"
@@ -512,47 +512,50 @@ in {
         "everforest.darkWorkbench" = "flat";
       };
       # to search extensions: https://nix-community.github.io/nix4vscode/
-      extensions = pkgs.nix4vscode.forVscodeVersion vscodeFullVersion [
-        "esbenp.prettier-vscode"
-        "Google.colab"
-        "activitywatch.aw-watcher-vscode"
-        "arcticicestudio.nord-visual-studio-code"
-        "bazelbuild.vscode-bazel"
-        "bbenoist.nix"
-        "catppuccin.catppuccin-vsc"
-        "charliermarsh.ruff"
-        "cunbidun.flash-vscode"
-        "foxundermoon.shell-format"
-        "github.copilot-chat"
-        "github.vscode-pull-request-github"
-        "james-yu.latex-workshop"
-        "kamadorueda.alejandra"
-        "ms-python.black-formatter"
-        "ms-python.debugpy"
-        "ms-python.isort"
-        "ms-python.python"
-        "ms-python.vscode-pylance"
-        "ms-python.vscode-python-envs"
-        "ms-toolsai.datawrangler"
-        "ms-toolsai.jupyter"
-        "ms-toolsai.jupyter-keymap"
-        "ms-toolsai.jupyter-renderers"
-        "ms-toolsai.vscode-jupyter-cell-tags"
-        "ms-toolsai.vscode-jupyter-slideshow"
-        "ms-vscode-remote.remote-ssh"
-        "ms-vscode-remote.remote-ssh-edit"
-        "ms-vscode.cpptools"
-        "ms-vscode.remote-explorer"
-        "pkief.material-icon-theme"
-        "streetsidesoftware.code-spell-checker"
-        "tamasfe.even-better-toml"
-        "timonwong.shellcheck"
-        "vscodevim.vim"
-        "akamud.vscode-theme-onedark"
-        "akamud.vscode-theme-onelight"
-        "huytd.nord-light"
-        "MS-vsliveshare.vsliveshare"
-      ];
+      extensions =
+        pkgs.nix4vscode.forVscodeVersion vscodeFullVersion [
+          "esbenp.prettier-vscode"
+          "Google.colab"
+          "activitywatch.aw-watcher-vscode"
+          "arcticicestudio.nord-visual-studio-code"
+          "bazelbuild.vscode-bazel"
+          "bbenoist.nix"
+          "catppuccin.catppuccin-vsc"
+          "charliermarsh.ruff"
+          "cunbidun.flash-vscode"
+          "foxundermoon.shell-format"
+          "github.vscode-pull-request-github"
+          "james-yu.latex-workshop"
+          "kamadorueda.alejandra"
+          "ms-python.black-formatter"
+          "ms-python.debugpy"
+          "ms-python.isort"
+          "ms-python.python"
+          "ms-python.vscode-pylance"
+          "ms-python.vscode-python-envs"
+          "ms-toolsai.datawrangler"
+          "ms-toolsai.jupyter"
+          "ms-toolsai.jupyter-keymap"
+          "ms-toolsai.jupyter-renderers"
+          "ms-toolsai.vscode-jupyter-cell-tags"
+          "ms-toolsai.vscode-jupyter-slideshow"
+          "ms-vscode-remote.remote-ssh"
+          "ms-vscode-remote.remote-ssh-edit"
+          "ms-vscode.cpptools"
+          "ms-vscode.remote-explorer"
+          "pkief.material-icon-theme"
+          "streetsidesoftware.code-spell-checker"
+          "tamasfe.even-better-toml"
+          "timonwong.shellcheck"
+          "vscodevim.vim"
+          "akamud.vscode-theme-onedark"
+          "akamud.vscode-theme-onelight"
+          "huytd.nord-light"
+          "MS-vsliveshare.vsliveshare"
+        ]
+        ++ pkgs.nix4vscode.forVscodeVersionPrerelease vscodeFullVersion [
+          "github.copilot-chat"
+        ];
     };
   };
 }

@@ -1234,11 +1234,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1771040203,
-        "narHash": "sha256-eT3p5hruxS6EbGpxaQYcvARgA5gp9J+B7l00m89p8dQ=",
+        "lastModified": 1771101921,
+        "narHash": "sha256-i69D3AiiCPga5iZO6kwp0JT3lyJqntsFS02FaZIq7PQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "10249e64a9b381da1f7c0d80eef53493043a616c",
+        "rev": "8d59d792cce114b2e008f2d2e031e458b1b25bd4",
         "type": "github"
       },
       "original": {
@@ -1703,6 +1703,7 @@
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "vicinae": "vicinae",
+        "vscode-insiders": "vscode-insiders",
         "xremap-flake": "xremap-flake",
         "yazi": "yazi",
         "yazi-bunny": "yazi-bunny",
@@ -2197,6 +2198,26 @@
         "owner": "vicinaehq",
         "ref": "v0.18.3",
         "repo": "vicinae",
+        "type": "github"
+      }
+    },
+    "vscode-insiders": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-master"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771056778,
+        "narHash": "sha256-c7cF4Gh6O/2OzDElcBgcyro2d3Xa4ciIHLxtG/iMrMg=",
+        "owner": "auguwu",
+        "repo": "vscode-insiders-nix",
+        "rev": "c4549ed0af9a3f18cf5fa6cddbc7a141848ddb35",
+        "type": "github"
+      },
+      "original": {
+        "owner": "auguwu",
+        "repo": "vscode-insiders-nix",
         "type": "github"
       }
     },
