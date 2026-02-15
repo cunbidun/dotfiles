@@ -50,7 +50,6 @@ def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
         "~/.config/Code/User/keybindings.json",
         "~/.config/Code/User/settings.json",
         # Common configs
-        "~/.config/git/config",
         "~/.config/starship.toml",
         "~/.config/tmux/tmux.conf",
         "~/.config/nvim",
