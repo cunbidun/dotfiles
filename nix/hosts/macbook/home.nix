@@ -50,6 +50,7 @@ in {
       };
     };
   };
+  programs.atuin.enable = true;
 
   home.activation.setDefaultBrowser = lib.hm.dag.entryAfter ["writeBoundary"] ''
     # Ensure Chrome is the default handler for HTTP/HTTPS
