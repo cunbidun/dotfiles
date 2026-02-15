@@ -98,7 +98,7 @@
     };
     vscode-insiders = {
       url = "github:auguwu/vscode-insiders-nix";
-      inputs.nixpkgs.follows = "nixpkgs-master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # +-- MacOS specific --+

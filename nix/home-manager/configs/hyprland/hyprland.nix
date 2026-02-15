@@ -198,7 +198,7 @@ in {
     };
 
     plugins = [
-      # inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+      inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
       # inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
     ];
 
