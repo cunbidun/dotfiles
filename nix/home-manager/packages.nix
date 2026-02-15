@@ -78,7 +78,6 @@ in rec {
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd
     inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd
-    pkgs.libreoffice
   ];
 
   linux_packages = let

@@ -39,8 +39,10 @@ in {
 
       # Debugging
       lldb # LLDB debugger
+    ]
+    ++ (lib.optionals isLinux [
       gdb # GDB debugger
-    ];
+    ]);
 
     extraPlugins = ''
       return {

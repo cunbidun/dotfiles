@@ -4,8 +4,7 @@
   userdata,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ../shared/nix-config.nix
   ];
@@ -198,7 +197,7 @@
 
     # example of adding a tap
     # taps = ["homebrew/cask-fonts" "dimentium/autoraise" "nikitabobko/tap" "homebrew/services"];
-    taps = [ ];
+    taps = [];
 
     # `brew install`
     # Example of installing a package and starting a service
@@ -258,6 +257,7 @@
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+  system.defaults.CustomUserPreferences.NSGlobalDomain.AppleReduceDesktopTinting = true;
 
   services.tailscale = {
     enable = true;
