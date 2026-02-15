@@ -74,11 +74,3 @@ nixos-rebuild --log-format internal-json switch --flake .#rpi5 --target-host roo
 ```
 
 **Note:** Replace `192.168.1.165` with your Pi's actual IP address.
-
-## n8n service
-
-The Pi now runs n8n plus a local PostgreSQL instance:
-
-- PostgreSQL listens on `127.0.0.1:5432` with a `n8n` database/user (no password; access is limited to localhost).
-- The n8n container listens on `0.0.0.0:5678` and stores state under `/var/lib/n8n`.
-- Manage it like any other OCI container service: `sudo systemctl status podman-n8n.service`, restart with `sudo systemctl restart podman-n8n.service`.
