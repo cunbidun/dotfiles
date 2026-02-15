@@ -18,6 +18,7 @@ in {
     inputs.sops-nix.homeManagerModules.sops
     inputs.opnix.homeManagerModules.default
     ../../home-manager/configs/zsh.nix
+    ../../home-manager/configs/starship.nix
     ../../home-manager/configs/kitty.nix
     ../../home-manager/configs/hyprland/hyprland.nix
     ../../home-manager/configs/hyprpanel.nix
@@ -102,13 +103,12 @@ in {
   };
 
   home.file = {
-    ".config/starship.toml".source = ../../../utilities/starship/starship.toml;
-
     # Custom desktop files
     ".local/share/applications/uxplay.desktop".source = ../../../utilities/desktops/uxplay.desktop;
 
     ".config/tmuxinator".source = ../../../utilities/tmuxinator;
   };
+
 
   qt = {enable = true;};
 

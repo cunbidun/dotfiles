@@ -13,6 +13,7 @@
 in {
   imports = [
     ../../home-manager/configs/zsh.nix
+    ../../home-manager/configs/starship.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/nvchad.nix
     ../../home-manager/configs/shared/git.nix
@@ -21,9 +22,6 @@ in {
   home.homeDirectory = "/home/${userdata.username}";
   home.packages = package_config.default_packages;
 
-  home.file = {
-    ".config/starship.toml".source = ../../../utilities/starship/starship.toml;
-  };
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";

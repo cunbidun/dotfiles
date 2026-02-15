@@ -29,12 +29,10 @@
   nixpkgs.hostPlatform = pkgs.stdenv.hostPlatform;
 
   users.users.${userdata.username} = {
-    description = "${userdata.name}";
+    description = userdata.name;
     home = "/Users/${userdata.username}";
     shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYi6b9Qaa6hF5PXkaTinS131ESVKDkQTOWCcvD8JmZ3"
-    ];
+    openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
   };
 
   system.primaryUser = "${userdata.username}";

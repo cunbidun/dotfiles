@@ -13,6 +13,7 @@
 in {
   imports = [
     ../../home-manager/configs/zsh.nix
+    ../../home-manager/configs/starship.nix
     ../../home-manager/configs/nvchad.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/vscode.nix
@@ -35,9 +36,9 @@ in {
   };
 
   home.file = {
-    ".config/starship.toml".source = ../../../utilities/starship/starship.toml;
     ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
   };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
