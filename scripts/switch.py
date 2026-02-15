@@ -39,36 +39,45 @@ def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
     dest_dir = git_root / "generated" / profile
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    if not is_darwin:
+    # Define files to copy based on OS
+    if is_darwin:
+        files = [
+            "~/Library/Application Support/Code/User/keybindings.json",
+            "~/Library/Application Support/Code/User/settings.json",
+        ]
+        cp_flags = ["-R"]
+    else:
         files = [
             "~/.config/Code/User/keybindings.json",
             "~/.config/Code/User/settings.json",
             "~/.config/tmux/tmux.conf",
             "~/.config/nvim",
         ]
-        for file in files:
-            src = Path(file).expanduser()
-            if src.exists():
-                dest = dest_dir / src.relative_to(Path.home())
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                run_cmd(["cp", "-r", "--remove-destination", str(src), str(dest)])
+        cp_flags = ["-r", "--remove-destination"]
 
-        ext_dir = Path.home() / ".vscode/extensions"
-        if ext_dir.exists():
+    # Copy files
+    for file in files:
+        src = Path(file).expanduser()
+        if src.exists():
+            rel_path = src.relative_to(Path.home())
+            dest = dest_dir / "$HOME" / rel_path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            run_cmd(["cp", *cp_flags, str(src), str(dest)])
+
+    # Dump VS Code extensions list
+    code_cmd = None
+    for cmd in ["code-insiders", "code"]:
+        result = run_cmd(["which", cmd], capture=True, check=False)
+        if result.returncode == 0:
+            code_cmd = cmd
+            break
+    
+    if code_cmd:
+        result = run_cmd([code_cmd, "--list-extensions"], capture=True, check=False)
+        if result.returncode == 0:
             ext_list = dest_dir / "vscode/extensions.txt"
             ext_list.parent.mkdir(parents=True, exist_ok=True)
-            ext_list.write_text("\n".join(sorted(d.name for d in ext_dir.iterdir())))
-    else:
-        files = [
-            "~/Library/Application Support/Code/User/keybindings.json",
-            "~/Library/Application Support/Code/User/settings.json",
-        ]
-        for file in files:
-            src = Path(file).expanduser()
-            if src.exists():
-                dest = dest_dir / src.relative_to(Path.home())
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                run_cmd(["cp", "-R", str(src), str(dest)])
+            ext_list.write_text(result.stdout)
 
 
 def main():
@@ -79,6 +88,7 @@ def main():
                        help="Custom commit message")
     parser.add_argument("--build-only", action="store_true", help="Build without switching")
     parser.add_argument("--copy-back", action="store_true", help="Copy generated files back to repository")
+    parser.add_argument("--copy-back-only", action="store_true", help="Only copy files back, skip build/switch")
 
     args = parser.parse_args()
 
@@ -92,6 +102,26 @@ def main():
         return 1
 
     os.chdir(git_root)
+
+    # Handle copy-back-only mode
+    if args.copy_back_only:
+        import shutil
+        shutil.rmtree(git_root / "generated" / args.profile, ignore_errors=True)
+        print(f"Removed old generated files for {args.profile}.")
+        copy_files_back(git_root, args.profile, is_darwin)
+        print("Copy-back completed.")
+        
+        # Commit if requested
+        run_cmd(["git", "add", "-A"])
+        if not args.no_commit:
+            result = run_cmd(["git", "diff-index", "--quiet", "HEAD", "--"], check=False)
+            if result.returncode != 0:
+                commit_msg = f"{args.commit_message} (profile: {args.profile}, copy-back only)"
+                run_cmd(["git", "commit", "-m", commit_msg])
+                print(f"Committed: {commit_msg}")
+            else:
+                print("No changes to commit.")
+        return 0
 
     # Stage all changes
     run_cmd(["git", "add", "-A"])

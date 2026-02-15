@@ -105,7 +105,6 @@ in {
     ".config/tmuxinator".source = ../../../utilities/tmuxinator;
   };
 
-
   qt = {enable = true;};
 
   gtk = {

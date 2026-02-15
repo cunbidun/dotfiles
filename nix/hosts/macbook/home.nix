@@ -39,7 +39,6 @@ in {
     ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
   };
 
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   programs.git = {

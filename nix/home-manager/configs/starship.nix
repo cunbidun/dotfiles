@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   programs.starship = {
     enable = true;
     settings = {
@@ -105,11 +105,11 @@
       custom = {
         git_remote = {
           command = ''
-remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
-if [ -n "$remote_branch" ]; then
-  echo "$remote_branch"
-fi
-'';
+            remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+            if [ -n "$remote_branch" ]; then
+              echo "$remote_branch"
+            fi
+          '';
           require_repo = true;
           when = true;
           format = "[$output]($style)";
@@ -125,8 +125,8 @@ fi
 
         git_commit_time = {
           command = ''
-git log -1 --format=%cd --date=format-local:'%Y-%m-%d %H:%M:%S' 2>/dev/null
-'';
+            git log -1 --format=%cd --date=format-local:'%Y-%m-%d %H:%M:%S' 2>/dev/null
+          '';
           require_repo = true;
           when = true;
           format = "[$output]($style)";
@@ -135,8 +135,8 @@ git log -1 --format=%cd --date=format-local:'%Y-%m-%d %H:%M:%S' 2>/dev/null
 
         git_commit_message = {
           command = ''
-git log -1 --format=%s 2>/dev/null
-'';
+            git log -1 --format=%s 2>/dev/null
+          '';
           require_repo = true;
           when = true;
           format = "[$output]($style)";

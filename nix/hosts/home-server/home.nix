@@ -26,7 +26,6 @@ in {
   # Only include default packages, no GUI packages
   home.packages = package_config.default_packages;
 
-
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
