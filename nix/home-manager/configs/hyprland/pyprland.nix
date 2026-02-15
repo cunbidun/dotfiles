@@ -48,7 +48,13 @@ in {
           unfocus = "";
           size = "50% 50%";
           position = "25% 25%";
-          excludes = ["*"];
+          excludes = [
+            "messenger"
+            "spotify"
+            "signal"
+            "file"
+            "obsidian"
+          ];
           hysteresis = 0;
         };
 
@@ -59,7 +65,13 @@ in {
           lazy = true;
           size = "50% 50%";
           position = "25% 25%";
-          excludes = ["*"];
+          excludes = [
+            "term"
+            "spotify"
+            "signal"
+            "file"
+            "obsidian"
+          ];
           class = "re:chrome-.*messenger.*";
           match_by = "class";
           hysteresis = 0;
@@ -73,7 +85,13 @@ in {
           lazy = true;
           size = "50% 50%";
           position = "25% 25%";
-          excludes = ["*"];
+          excludes = [
+            "term"
+            "messenger"
+            "signal"
+            "file"
+            "obsidian"
+          ];
           hysteresis = 0;
         };
 
@@ -84,7 +102,13 @@ in {
           lazy = true;
           size = "50% 50%";
           position = "25% 25%";
-          excludes = ["*"];
+          excludes = [
+            "term"
+            "messenger"
+            "spotify"
+            "file"
+            "obsidian"
+          ];
           hysteresis = 0;
         };
 
@@ -105,7 +129,13 @@ in {
           lazy = true;
           size = "75% 75%";
           position = "12% 12%";
-          excludes = ["*"];
+          excludes = [
+            "term"
+            "messenger"
+            "spotify"
+            "signal"
+            "file"
+          ];
           hysteresis = 0;
         };
       };
