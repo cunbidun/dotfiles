@@ -42,11 +42,6 @@
   # This configuration sets up keyboard shortcuts for switching between workspaces/desktops
   # and moving windows to specific workspaces using Option and Option+Shift key combinations.
   #
-  # Symbolic Hotkey IDs Reference:
-  # - Community documentation: https://github.com/mathiasbynens/dotfiles/blob/master/macos/defaults.sh
-  # - macOS defaults reference: https://macos-defaults.com/
-  # - To verify current settings: defaults read com.apple.symbolichotkeys AppleSymbolicHotKeys
-  #
   # Modifier Key Values:
   # - None:           0
   # - Shift:          131072
@@ -77,20 +72,6 @@
   # - 33: Application Windows
   # - 36: Move Left a Space
   # - 37: Move Right a Space
-  #
-  # References & Verification:
-  # - Apple does NOT officially document these IDs
-  # - Sources: Reverse-engineered from ~/Library/Preferences/.GlobalPreferences.plist
-  # - Community docs: https://github.com/mathiasbynens/dotfiles (main .macos file)
-  # - Karabiner-Elements: https://github.com/pqrs-org/Karabiner-Elements
-  # - macOS defaults: https://macos-defaults.com/
-  #
-  # To verify/extract IDs from your system:
-  # $ defaults read .GlobalPreferences AppleSymbolicHotKeys
-  # $ cat ~/Library/Preferences/.GlobalPreferences.plist | grep -A5 AppleSymbolicHotKeys
-  #
-  # TODO: Create script to verify these IDs match system defaults for this macOS version
-  # TODO: Verify and add support for Spaces 6-8
   #
   # To debug current settings:
   # $ defaults read com.apple.symbolichotkeys.plist AppleSymbolicHotKeys
@@ -150,62 +131,6 @@
               22
               524288
             ]; # Option + 5
-            type = "standard";
-          };
-        };
-        # Move window to Space (Option+Shift + 1-5)
-        "126" = {
-          enabled = true;
-          value = {
-            parameters = [
-              49
-              18
-              655360
-            ]; # Option+Shift + 1
-            type = "standard";
-          };
-        };
-        "127" = {
-          enabled = true;
-          value = {
-            parameters = [
-              50
-              19
-              655360
-            ]; # Option+Shift + 2
-            type = "standard";
-          };
-        };
-        "128" = {
-          enabled = true;
-          value = {
-            parameters = [
-              51
-              20
-              655360
-            ]; # Option+Shift + 3
-            type = "standard";
-          };
-        };
-        "129" = {
-          enabled = true;
-          value = {
-            parameters = [
-              52
-              21
-              655360
-            ]; # Option+Shift + 4
-            type = "standard";
-          };
-        };
-        "130" = {
-          enabled = true;
-          value = {
-            parameters = [
-              53
-              22
-              655360
-            ]; # Option+Shift + 5
             type = "standard";
           };
         };
