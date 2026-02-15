@@ -11,7 +11,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./uxplay.nix
     ../shared/nix-config.nix
     ../shared/common.nix
     inputs.sops-nix.nixosModules.sops

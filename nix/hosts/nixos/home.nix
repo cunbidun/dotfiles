@@ -36,7 +36,6 @@ in {
     ../../home-manager/configs/stylix.nix
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/chromium.nix
-    ../../home-manager/configs/uxplay.nix
     ../../home-manager/configs/shared/git.nix
   ];
 
@@ -103,9 +102,6 @@ in {
   };
 
   home.file = {
-    # Custom desktop files
-    ".local/share/applications/uxplay.desktop".source = ../../../utilities/desktops/uxplay.desktop;
-
     ".config/tmuxinator".source = ../../../utilities/tmuxinator;
   };
 

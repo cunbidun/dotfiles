@@ -4,11 +4,11 @@
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
       palette = "default";
-      format = builtins.concatStringsSep "\n" [
-        "[\u250C\u2500\u257C\\[$username@$hostname\\](\u257E\u2500\u257C(\\[$status\\])(\\[$jobs\\]))\u257E\u2500\u257C\\[$time\\](\u257E\u2500\u257C\\[$cmd_duration\\])](frame)"
-        "[\u2514\u2500\u257C\\[$directory\\]](frame)"
-        "([ \u2570\u257C(\\[$git_branch\\])(\u257E\u2500\u257C$git_status)(\u257E\u2500\u257C\\[$git_state\\])(\u257E\u2500\u257C\\[\${custom.git_remote}\\])](frame))\${custom.line_break}([ \u2570\u257C\\[\${custom.git_commit_message}\\]\u257E\u2500\u257C$git_commit\u257E\u2500\u257C\\[\${custom.git_commit_time}\\]](frame))\${custom.line_break}\u25B6 $python$conda"
-      ];
+      format =
+        "[┌─╼\\[$username@$hostname\\](╾─╼(\\[$status\\])(\\[$jobs\\]))╾─╼\\[$time\\](╾─╼\\[$cmd_duration\\])](frame)\n"
+        + "[└─╼\\[$directory\\]](frame)\n"
+        + "([ ╰╼(\\[$git_branch\\])(╾─╼$git_status)(╾─╼\\[$git_state\\])(╾─╼\\[\\${"$"}{custom.git_remote}\\])](frame))\\${"$"}{custom.line_break}"
+        + "([ ╰╼\\[\\${"$"}{custom.git_commit_message}\\]╾─╼$git_commit╾─╼\\[\\${"$"}{custom.git_commit_time}\\]](frame))\\${"$"}{custom.line_break}▶ $python$conda";
 
       conda = {
         ignore_base = false;
@@ -58,7 +58,7 @@
       git_status = {
         untracked = "?\${count}";
         modified = "[*\${count}](yellow)";
-        deleted = "\u2718\${count}";
+        deleted = "✘\${count}";
         conflicted = "C";
         stashed = "S";
         diverged = "[D+\${ahead_count}-\${behind_count}](red)";
