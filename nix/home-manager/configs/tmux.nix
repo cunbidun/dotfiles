@@ -16,7 +16,6 @@
     ${pkgs.tmux}/bin/tmux source-file ${tmuxConfigPath}
     ${pkgs.tmux}/bin/tmux display-message "tmux config reloaded"
   '';
-
 in {
   programs.tmux = {
     enable = true;
@@ -27,14 +26,14 @@ in {
     keyMode = "vi";
     terminal = "xterm-256color";
     shell = "${pkgs.zsh}/bin/zsh";
-    
+
     # Native options for pane navigation/resizing (replaces h/j/k/l and H/J/K/L bindings)
     customPaneNavigationAndResize = true;
     resizeAmount = 2;
-    
+
     # Native plugin management
-    plugins = [ pkgs.tmuxPlugins.extrakto ];
-    
+    plugins = [pkgs.tmuxPlugins.extrakto];
+
     extraConfig = ''
       set -ga terminal-overrides ",xterm-256color:Tc"
       set -g renumber-windows on
@@ -65,7 +64,6 @@ in {
     '';
   };
 
-
   systemd.user.services.tmux-reload = {
     Unit = {
       Description = "Reload tmux after config updates";
@@ -89,5 +87,4 @@ in {
       WantedBy = ["default.target"];
     };
   };
-
 }
