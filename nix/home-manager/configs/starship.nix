@@ -7,8 +7,8 @@
       format =
         "[┌─╼\\[$username@$hostname\\](╾─╼(\\[$status\\])(\\[$jobs\\]))╾─╼\\[$time\\](╾─╼\\[$cmd_duration\\])](frame)\n"
         + "[└─╼\\[$directory\\]](frame)\n"
-        + "([ ╰╼(\\[$git_branch\\])(╾─╼$git_status)(╾─╼\\[$git_state\\])(╾─╼\\[\\${"$"}{custom.git_remote}\\])](frame))\\${"$"}{custom.line_break}"
-        + "([ ╰╼\\[\\${"$"}{custom.git_commit_message}\\]╾─╼$git_commit╾─╼\\[\\${"$"}{custom.git_commit_time}\\]](frame))\\${"$"}{custom.line_break}▶ $python$conda";
+        + "([ ╰╼(\\[$git_branch\\])(╾─╼$git_status)(╾─╼\\[$git_state\\])(╾─╼\\[${"$"}{custom.git_remote}\\])](frame))${"$"}{custom.line_break}"
+        + "([ ╰╼\\[${"$"}{custom.git_commit_message}\\]╾─╼$git_commit╾─╼\\[${"$"}{custom.git_commit_time}\\]](frame))${"$"}{custom.line_break}▶ $python$conda";
 
       conda = {
         ignore_base = false;
