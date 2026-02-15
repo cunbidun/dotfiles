@@ -58,7 +58,6 @@ in rec {
     pkgs.htop # An interactive process viewer
     pkgs.tree # A recursive directory listing program
     pkgs.tmux # A terminal multiplexer
-    pkgs.tmuxinator # A tmux session manager
     pkgs.wget # A command-line tool for retrieving files over HTTP/HTTPS/FTP
     pkgs.jq # A lightweight and flexible command-line JSON processor
     pkgs.ncdu # A disk usage analyzer

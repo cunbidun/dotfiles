@@ -1,0 +1,9 @@
+[gpg]
+	format = "openpgp"
+
+[gpg "openpgp"]
+	program = "/nix/store/60vj4a86fsy68x1lnb3519vx40l3zmda-gnupg-2.4.8/bin/gpg"
+
+[user]
+	email = "cunbidun@gmail.com"
+	name = "Duy Pham"

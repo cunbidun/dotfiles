@@ -1,0 +1,112 @@
+"$schema" = "https://starship.rs/config-schema.json"
+format = "[┌─╼\\[$username@$hostname\\](╾─╼(\\[$status\\])(\\[$jobs\\]))╾─╼\\[$time\\](╾─╼\\[$cmd_duration\\])](frame)\n[└─╼\\[$directory\\]](frame)\n([ ╰╼(\\[$git_branch\\])(╾─╼$git_status)(╾─╼\\[$git_state\\])(╾─╼\\[${custom.git_remote}\\])](frame))${custom.line_break}([ ╰╼\\[${custom.git_commit_message}\\]╾─╼$git_commit╾─╼\\[${custom.git_commit_time}\\]](frame))${custom.line_break}▶ $python$conda"
+palette = "default"
+
+[cmd_duration]
+disabled = false
+format = "[tooks $duration]($style)"
+min_time = 0
+show_milliseconds = true
+style = "blue"
+
+[conda]
+format = "[\\($environment\\)]($style) "
+ignore_base = false
+style = "green"
+
+[custom.git_commit_message]
+command = "git log -1 --format=%s 2>/dev/null\n"
+format = "[$output]($style)"
+require_repo = true
+style = "cyan"
+when = true
+
+[custom.git_commit_time]
+command = "git log -1 --format=%cd --date=format-local:'%Y-%m-%d %H:%M:%S' 2>/dev/null\n"
+format = "[$output]($style)"
+require_repo = true
+style = "cyan"
+when = true
+
+[custom.git_remote]
+command = "remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)\nif [ -n \"$remote_branch\" ]; then\n  echo \"$remote_branch\"\nfi\n"
+format = "[$output]($style)"
+require_repo = true
+style = "white"
+when = true
+
+[custom.line_break]
+command = "echo ''"
+format = "\n"
+require_repo = true
+when = true
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style)"
+style = "blue"
+truncate_to_repo = false
+truncation_length = 100
+
+[git_branch]
+always_show_remote = true
+format = "[$branch]($style)"
+style = "green"
+
+[git_commit]
+commit_hash_length = 50
+format = "\\[[$hash]($style)\\](\\[[$tag](green)\\])"
+only_detached = false
+style = "cyan"
+tag_disabled = false
+tag_symbol = ""
+
+[git_state]
+format = "[$state( $progress_current/$progress_total)]($style)"
+style = "yellow"
+
+[git_status]
+ahead = "+${count}"
+behind = "-${count}"
+conflicted = "C"
+deleted = "✘${count}"
+diverged = "[D+${ahead_count}-${behind_count}](red)"
+format = "(\\[[$all_status]($style)\\])(\\[[[u](blue)$ahead_behind](white)\\])"
+modified = "[*${count}](yellow)"
+staged = "[+${count}](green)"
+stashed = "S"
+style = "red"
+untracked = "?${count}"
+up_to_date = "="
+
+[hostname]
+format = "[$hostname]($style)"
+ssh_only = false
+style = "blue"
+
+[jobs]
+format = "[$number]($style)"
+number_threshold = 1
+style = "blue"
+
+[palettes.default]
+frame = "#434c5e"
+
+[python]
+format = "[${pyenv_prefix}(${version} )]($style)[(\\(${virtualenv}\\) )]($style)"
+style = "yellow"
+
+[status]
+disabled = false
+format = "[$status]($style)"
+style = "red"
+
+[time]
+disabled = false
+format = "[$time]($style)"
+style = "blue"
+
+[username]
+format = "[$user]($style)"
+show_always = true
+style_root = "red bold"
+style_user = "blue"
