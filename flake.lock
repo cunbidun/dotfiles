@@ -1232,21 +1232,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-master": {
-      "locked": {
-        "lastModified": 1771471241,
-        "narHash": "sha256-88PTLQgdWRR4AqFQa3FsWxI0JhLjfuGpp2VjBL4WokM=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "5097fa073dd6827e70f7573d650e177038d3c905",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1767313136,
@@ -1695,7 +1680,6 @@
         "nix4nvchad": "nix4nvchad",
         "nix4vscode": "nix4vscode",
         "nixos-raspberrypi": "nixos-raspberrypi",
-        "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "opnix": "opnix",
