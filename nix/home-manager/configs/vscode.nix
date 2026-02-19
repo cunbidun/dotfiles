@@ -11,7 +11,7 @@
   # compute the full version including the date if available from product.json
   # for example "1.106.0-20251111"
   # to check the version run
-  # nix build .#nixosConfigurations.nixos.pkgs.nixpkgs-master.vscode
+  # nix build .#nixosConfigurations.nixos.pkgs.vscode-insiders.vscode
   # less result/lib/vscode/resources/app/product.json
   vscodeFullVersion = let
     product =

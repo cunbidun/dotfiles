@@ -35,7 +35,6 @@ warning: Git tree '/home/cunbidun/dotfiles' is dirty
 | nix4nvchad         | https://github.com/nix-community/nix4nvchad                      | 9d91858966b5                                                   |
 | nix4vscode         | https://github.com/nix-community/nix4vscode                      | ce1055f41c6f                                                   |
 | nixos-raspberrypi  | https://github.com/nvmd/nixos-raspberrypi/tree/main              | main (09c214a30e5a)                                            |
-| nixpkgs-master     | https://github.com/nixos/nixpkgs                                 | 85f3b3e9fed2 -> b665e98e4cb4                                   |
 | nixpkgs-stable     | https://github.com/nixos/nixpkgs/tree/nixos-25.05                | nixos-25.05 (daf6dc47aa4b) -> nixos-25.05 (6faeb062ee4c)       |
 | nixpkgs-unstable   | https://github.com/nixos/nixpkgs/tree/nixos-unstable             | nixos-unstable (08dacfca559e) -> nixos-unstable (ae814fd3904b) |
 | opnix              | https://github.com/brizzbuzz/opnix                               | 48fdb078b5a1                                                   |
