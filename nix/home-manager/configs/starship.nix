@@ -1,9 +1,9 @@
-{...}: {
+{lib, ...}: {
   programs.starship = {
     enable = true;
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
-      palette = "default";
+      palette = lib.mkForce "default";
       format =
         "[┌─╼\\[$username@$hostname\\](╾─╼(\\[$status\\])(\\[$jobs\\]))╾─╼\\[$time\\](╾─╼\\[$cmd_duration\\])](frame)\n"
         + "[└─╼\\[$directory\\]](frame)\n"
@@ -83,7 +83,7 @@
       };
 
       cmd_duration = {
-        format = "[tooks $duration]($style)";
+        format = "[took $duration]($style)";
         style = "blue";
         disabled = false;
         min_time = 0;

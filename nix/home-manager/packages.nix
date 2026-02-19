@@ -91,8 +91,6 @@ in rec {
     xdg-terminal-exec
     pkgs.spotify
     pkgs.blender # A 3D modeling and animation software
-    # TODO: Java 8 is not working
-    # pkgs.prismlauncher
     pkgs.glib
     pkgs.trash-cli
     pkgs.dig

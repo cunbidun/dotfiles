@@ -106,6 +106,7 @@
       git
       _1password-cli
       sops
+      xdg-desktop-portal-termfilechooser
     ])
     ++ [
       inputs.opnix.packages.${pkgs.stdenv.hostPlatform.system}.default
