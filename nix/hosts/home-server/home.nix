@@ -13,6 +13,7 @@
 in {
   imports = [
     ../../home-manager/configs/zsh.nix
+    ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/nvchad.nix

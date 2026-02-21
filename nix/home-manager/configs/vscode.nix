@@ -469,7 +469,6 @@ in {
             silent = true;
           }
         ];
-        "git.blame.editorDecoration.enabled" = false;
         "vim.useSystemClipboard" = true;
         "flash-vscode.caseSensitive" = false;
         "workbench.iconTheme" = "material-icon-theme";
