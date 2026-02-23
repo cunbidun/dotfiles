@@ -51,11 +51,11 @@ export const optionalDependencies: Dependency[] = [
         description: 'For the snapshot shortcut',
     },
     {
-        package: 'brightnessctl',
+        package: 'brightness-control',
         required: false,
         type: 'executable',
-        check: ['brightnessctl'],
-        description: 'To control keyboard and screen brightness',
+        check: ['brightness-control'],
+        description: 'To control monitor brightness',
     },
     {
         package: 'btop',
@@ -77,13 +77,6 @@ export const optionalDependencies: Dependency[] = [
         type: 'executable',
         check: ['hyprpicker'],
         description: 'To use the preset color picker shortcut',
-    },
-    {
-        package: 'matugen',
-        required: false,
-        type: 'executable',
-        check: ['matugen'],
-        description: 'To use wallpaper-based color schemes',
     },
     {
         package: 'bluez',

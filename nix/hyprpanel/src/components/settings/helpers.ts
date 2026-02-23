@@ -2,7 +2,6 @@ export const settingsPages = ['Configuration', 'Theming'] as const;
 
 export const themePages = [
     'General Settings',
-    'Matugen Settings',
     'Bar',
     'Notifications',
     'OSD',

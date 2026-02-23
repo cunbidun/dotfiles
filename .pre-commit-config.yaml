@@ -34,7 +34,7 @@ repos:
         name: Spelling check
         types: [text]
         exclude: ^(generated/|result|\.git|flake\.lock|\.vscode/)
-        args: [--ignore-words-list=iterm]
+        args: [--ignore-words=.codespell-ignore-words]
 
   # Shell script checks
   - repo: https://github.com/shellcheck-py/shellcheck-py

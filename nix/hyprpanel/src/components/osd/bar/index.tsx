@@ -7,7 +7,7 @@ export const OSDBar = ({ orientation }: OSDBarProps): JSX.Element => {
     const barOrientation = orientation === 'vertical' ? Gtk.Orientation.VERTICAL : Gtk.Orientation.HORIZONTAL;
 
     return (
-        <box className={'osd-bar-container'}>
+        <box className={'osd-bar-inner'} valign={Gtk.Align.CENTER}>
             <LevelBar
                 className={'osd-bar'}
                 orientation={barOrientation}

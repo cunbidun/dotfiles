@@ -38,6 +38,10 @@ export const openDropdownMenu = async (
         } else {
             console.error(`Unknown error occurred: ${error}`);
         }
+
+        // Fallback: still open the requested menu even if precise positioning fails.
+        closeAllMenus();
+        App.toggle_window(window);
     }
 };
 

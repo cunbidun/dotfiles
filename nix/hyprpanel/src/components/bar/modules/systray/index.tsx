@@ -12,6 +12,7 @@ const { ignore, customIcons } = options.bar.systray;
 const createMenu = (menuModel: Gio.MenuModel, actionGroup: Gio.ActionGroup | null): Gtk.Menu => {
     const menu = Gtk.Menu.new_from_model(menuModel);
     menu.insert_action_group('dbusmenu', actionGroup);
+    menu.get_style_context().add_class('systray-popup-menu');
 
     return menu;
 };

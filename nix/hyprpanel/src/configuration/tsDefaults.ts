@@ -23,23 +23,42 @@ const tsDefaults: Record<string, unknown> = {
         autoHide: 'never',
         notifications: {
             show_total: false,
-            hideCountWhenZero: false,
+            hideCountWhenZero: true,
         },
         media: {
             show_label: true,
-        },
-        network: {
-            truncation_size: 15,
         },
         launcher: {
             icon: '',
         },
         layouts: {
             '0': {
-                left: ['dashboard', 'workspaces', 'submap', 'windowtitle'],
-                middle: ['media'],
-                right: ['custom/brightness', 'volume', 'network', 'bluetooth', 'hypridle', 'systray', 'clock', 'notifications'],
+                left: ['workspaces', 'submap', 'windowtitle'],
+                middle: [],
+                right: [
+                    'systray',
+                    'separator',
+                    'dashboard',
+                    'separator',
+                    'notifications',
+                    'clock',
+                ],
             },
+        },
+        volume: {
+            label: false,
+        },
+        network: {
+            truncation_size: 15,
+            label: false,
+        },
+        bluetooth: {
+            label: false,
+        },
+        clock: {
+            showIcon: false,
+            showTime: true,
+            format: '%a %b %-d %I:%M %p',
         },
         customModules: {
             submap: {
@@ -96,11 +115,12 @@ const tsDefaults: Record<string, unknown> = {
             },
             buttons: {
                 radius: '0em',
-                padding_x: '0.7rem',
+                padding_x: '0.6rem',
                 padding_y: '0em',
                 y_margins: '0.1em',
                 separator: {
-                    margins: '0.15em',
+                    margins: '0.25em',
+                    width: '0.08em',
                 },
                 workspaces: {
                     enableBorder: false,
@@ -170,6 +190,9 @@ const tsDefaults: Record<string, unknown> = {
             border_radius: '0em',
         },
         osd: {
+            orientation: 'horizontal',
+            location: 'top right',
+            margins: '0.8em 12em 0 0',
             radius: '0em',
         },
     },

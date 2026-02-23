@@ -2,6 +2,8 @@ import { bind, Variable } from 'astal';
 import { Widget } from 'astal/gtk3';
 import AstalWp from 'gi://AstalWp?version=0.1';
 import BrightnessService from 'src/services/system/brightness';
+import { resolveOsdIcon } from '../iconResolver';
+import { osdContext } from '../state';
 
 const wireplumber = AstalWp.get_default() as AstalWp.Wp;
 const audioService = wireplumber.audio;
@@ -18,30 +20,26 @@ const brightnessService = BrightnessService.getInstance();
  * @returns An object containing the micVariable and speakerVariable, which are derived variables for microphone and speaker status.
  */
 export const setupOsdIcon = (self: Widget.Label): void => {
-    self.hook(brightnessService, 'notify::screen', () => {
-        self.label = '󱍖';
-    });
-
-    self.hook(brightnessService, 'notify::kbd', () => {
-        self.label = '󰥻';
-    });
-
-    const micVariable = Variable.derive(
-        [bind(audioService.defaultMicrophone, 'volume'), bind(audioService.defaultMicrophone, 'mute')],
-        () => {
-            self.label = audioService.defaultMicrophone.mute ? '󰍭' : '󰍬';
-        },
-    );
-
-    const speakerVariable = Variable.derive(
-        [bind(audioService.defaultSpeaker, 'volume'), bind(audioService.defaultSpeaker, 'mute')],
-        () => {
-            self.label = audioService.defaultSpeaker.mute ? '󰝟' : '󰕾';
+    const iconBinding = Variable.derive(
+        [
+            bind(osdContext),
+            bind(brightnessService, 'screen'),
+            bind(brightnessService, 'kbd'),
+            bind(audioService.defaultSpeaker, 'volume'),
+            bind(audioService.defaultSpeaker, 'mute'),
+        ],
+        (context) => {
+            self.label = resolveOsdIcon({
+                context,
+                screenBrightness: brightnessService.screen,
+                keyboardBrightness: brightnessService.kbd,
+                speakerVolume: audioService.defaultSpeaker.volume,
+                speakerMuted: audioService.defaultSpeaker.mute,
+            });
         },
     );
 
     self.connect('destroy', () => {
-        micVariable.drop();
-        speakerVariable.drop();
+        iconBinding.drop();
     });
 };

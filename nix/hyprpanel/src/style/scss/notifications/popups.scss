@@ -64,6 +64,7 @@
     font-size: 0.84em;
     margin-bottom: 1em;
     font-weight: 600;
+    color: $notification-text;
 }
 
 .notification-card-actions {
@@ -85,6 +86,10 @@
     &:hover {
         background: transparentize($notification-actions-background, 0.6);
     }
+}
+
+.notification-action-buttons-label {
+    color: $notification-actions-text;
 }
 
 .notification-icon {

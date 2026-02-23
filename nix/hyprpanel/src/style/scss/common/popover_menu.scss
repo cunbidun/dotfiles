@@ -39,6 +39,16 @@ window.popup {
         }
     }
 
+    menu.systray-popup-menu {
+        menuitem {
+            padding: 0.24em * $popoverScaling 0.28em * $popoverScaling;
+
+            label {
+                font-size: 1rem * $popoverScaling;
+            }
+        }
+    }
+
     separator {
         background-color: transparentize(if($bar-menus-monochrome, $bar-menus-text, $bar-menus-popover-text), 0.7);
         min-height: 0.075em * $popoverScaling;

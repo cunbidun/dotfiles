@@ -1,11 +1,12 @@
 import { bind, Variable } from 'astal';
-import { Widget } from 'astal/gtk3';
+import { App, Widget } from 'astal/gtk3';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 import AstalWp from 'gi://AstalWp?version=0.1';
 import options from 'src/configuration';
 import { GdkMonitorService } from 'src/services/display/monitor';
 import BrightnessService from 'src/services/system/brightness';
 import { OsdRevealerController } from './revealer/revealerController';
+import { pulseBarLauncherIcon, setOsdContext } from './state';
 
 const wireplumber = AstalWp.get_default() as AstalWp.Wp;
 const audioService = wireplumber.audio;
@@ -15,6 +16,17 @@ const hyprlandService = AstalHyprland.get_default();
 const { enable, active_monitor, monitor } = options.theme.osd;
 
 const osdController = OsdRevealerController.getInstance();
+const FEEDBACK_MS = 500;
+
+const isPowerUiVisible = (): boolean => {
+    const powerWindows = ['dashboardmenu', 'powermenu', 'verification'];
+    const visibleWindowNames = new Set(
+        App.get_windows()
+            .filter((window) => window.visible && typeof window.name === 'string')
+            .map((window) => window.name as string),
+    );
+    return powerWindows.some((windowName) => visibleWindowNames.has(windowName));
+};
 
 /**
  * Determines which monitor the OSD should appear on based on user configuration.
@@ -58,27 +70,40 @@ export const getOsdMonitor = (): Variable<number> => {
  */
 export const revealerSetup = (self: Widget.Revealer): void => {
     osdController.setRevealer(self);
-
-    const handleReveal = (): void => {
-        osdController.show();
+    const pulseBriefly = (): void => {
+        pulseBarLauncherIcon(FEEDBACK_MS);
+    };
+    const showFeedbackPopup = (): void => {
+        if (isPowerUiVisible()) {
+            return;
+        }
+        osdController.show(FEEDBACK_MS);
     };
 
-    self.hook(enable, handleReveal);
-    self.hook(brightnessService, 'notify::screen', handleReveal);
-    self.hook(brightnessService, 'notify::kbd', handleReveal);
-
-    const microphoneBinding = Variable.derive(
-        [bind(audioService.defaultMicrophone, 'volume'), bind(audioService.defaultMicrophone, 'mute')],
-        handleReveal,
-    );
+    self.hook(enable, () => {
+        osdController.show();
+    });
+    self.hook(brightnessService, 'notify::screen', () => {
+        setOsdContext('brightness');
+        pulseBriefly();
+        showFeedbackPopup();
+    });
+    self.hook(brightnessService, 'notify::kbd', () => {
+        setOsdContext('keyboard-brightness');
+        pulseBriefly();
+        showFeedbackPopup();
+    });
 
     const speakerBinding = Variable.derive(
         [bind(audioService.defaultSpeaker, 'volume'), bind(audioService.defaultSpeaker, 'mute')],
-        handleReveal,
+        () => {
+            setOsdContext('volume');
+            pulseBriefly();
+            showFeedbackPopup();
+        },
     );
 
     self.connect('destroy', () => {
-        microphoneBinding.drop();
         speakerBinding.drop();
         osdController.onRevealerDestroy(self);
     });

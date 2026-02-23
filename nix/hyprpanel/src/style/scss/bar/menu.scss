@@ -1,7 +1,21 @@
 .bar-menu_label {
     color: if($bar-buttons-monochrome, $bar-buttons-icon, $bar-buttons-dashboard-icon);
-    font-size: 1.3em;
+    font-size: 1.5em;
     border-radius: $bar-buttons-radius;
+}
+
+.bar-menu_pct {
+    color: if($bar-buttons-monochrome, $bar-buttons-icon, $bar-buttons-dashboard-icon);
+    font-size: 0.94em;
+    font-weight: 700;
+    margin-left: 0em;
+    opacity: 0;
+    transition: 120ms;
+}
+
+.bar-menu_pct-active {
+    margin-left: 0.72em;
+    opacity: 1;
 }
 
 .bar_item_box_visible.style2.dashboard {

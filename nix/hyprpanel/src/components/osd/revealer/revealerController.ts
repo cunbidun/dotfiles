@@ -53,7 +53,7 @@ export class OsdRevealerController {
      * Reveals the OSD temporarily and sets up auto-hide behavior
      * Respects enable state and startup delay before allowing reveal
      */
-    public show(): void {
+    public show(hideDelayMs?: number): void {
         const enableRevealer = enable.get();
         if (!this._allowReveal || this._currentRevealer === undefined || !enableRevealer) {
             return;
@@ -66,7 +66,7 @@ export class OsdRevealerController {
             this._autoHideTimeout = undefined;
         }
 
-        const hideDelay = duration.get();
+        const hideDelay = hideDelayMs ?? duration.get();
         const revealer = this._currentRevealer;
 
         this._autoHideTimeout = timeout(hideDelay, () => {

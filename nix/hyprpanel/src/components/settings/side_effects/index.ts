@@ -2,9 +2,6 @@ import { Opt } from 'src/lib/options';
 import options from 'src/configuration';
 
 const { show_numbered, show_icons, showWsIcons, showApplicationIcons } = options.bar.workspaces;
-const { monochrome: monoBar } = options.theme.bar.buttons;
-const { monochrome: monoMenu } = options.theme.bar.menus;
-const { matugen } = options.theme;
 
 /**
  * Turns off the specified option variables when the source value is true.
@@ -59,13 +56,4 @@ showApplicationIcons.subscribe(() => {
     }
 });
 
-/* ================================================== */
-/*                MATUGEN SIDE EFFECTS                */
-/* ================================================== */
-
-matugen.subscribe(() => {
-    if (matugen.get() === true) {
-        monoBar.set(false);
-        monoMenu.set(false);
-    }
-});
+/* Keep menu/bar monochrome toggles independent from wallpaper tooling. */

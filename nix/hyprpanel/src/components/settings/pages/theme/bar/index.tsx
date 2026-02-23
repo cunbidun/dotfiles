@@ -61,7 +61,6 @@ export const BarTheme = (): JSX.Element => {
                     opt={options.theme.bar.buttons.monochrome}
                     title="Use Global Colors"
                     type="boolean"
-                    disabledBinding={options.theme.matugen}
                 />
                 <Option opt={options.theme.bar.buttons.background} title="Button Background" type="color" />
                 <Option opt={options.theme.bar.buttons.borderColor} title="Button Border" type="color" />

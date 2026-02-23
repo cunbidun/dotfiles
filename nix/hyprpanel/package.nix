@@ -5,7 +5,6 @@
   astal,
   bluez,
   bluez-tools,
-  brightnessctl,
   btop,
   dart-sass,
   glib,
@@ -20,7 +19,6 @@
   libgtop,
   libnotify,
   libsoup_3,
-  matugen,
   networkmanager,
   pywal,
   python3,
@@ -57,7 +55,6 @@ ags.bundle {
 
     bluez
     bluez-tools
-    brightnessctl
     btop
     dart-sass
     glib
@@ -69,7 +66,6 @@ ags.bundle {
     libgtop
     libnotify
     libsoup_3
-    matugen
     networkmanager
     pywal
     swww

@@ -29,7 +29,6 @@ export const dropdownMenuList = [
     'calendarmenu',
     'energymenu',
     'powerdropdownmenu',
-    'settings-dialog',
 ] as const;
 
 export const isDropdownMenu = (name: string): name is DropdownMenuList => {

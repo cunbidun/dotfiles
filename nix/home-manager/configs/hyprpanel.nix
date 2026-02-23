@@ -30,7 +30,6 @@
       bluez
       bluez-tools
       bash
-      brightnessctl
       btop
       coreutils
       ddcutil
@@ -49,7 +48,6 @@
       libgtop
       libnotify
       libsoup_3
-      matugen
       networkmanager
       pywal
       procps
@@ -126,18 +124,18 @@
       watch_targets+=("$stylix_state_dir")
     fi
 
-    ${pkgs.inotify-tools}/bin/inotifywait \
-      --monitor \
+    while ${pkgs.inotify-tools}/bin/inotifywait \
+      --quiet \
       --recursive \
-      --event close_write,create,delete,move \
-      --exclude '(^|/)(\\.git|node_modules|dist)(/|$)|(~$|\\.sw.$)' \
-      "''${watch_targets[@]}" | while read -r _; do
+      --event close_write,delete,move \
+      --exclude '(^|/)(\\.git|node_modules|dist|config)(/|$)|(^|/)\\.goutputstream-.*|(~$|\\.sw.$)' \
+      "''${watch_targets[@]}"; do
       now_ms="$(${pkgs.coreutils}/bin/date +%s%3N)"
       if [ "$last_restart" -ne 0 ] && [ "$((now_ms - last_restart))" -lt "$debounce_ms" ]; then
         continue
       fi
       last_restart="$now_ms"
-      ${pkgs.systemd}/bin/systemctl --user restart ags.service
+      ${pkgs.systemd}/bin/systemctl --user restart ags.service || true
     done
   '';
 in {

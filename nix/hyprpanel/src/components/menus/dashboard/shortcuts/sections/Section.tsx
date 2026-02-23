@@ -9,7 +9,6 @@ import {
     RightShortcut3,
 } from '../buttons/ShortcutButtons';
 import { LeftColumn, RightColumn } from './Column';
-import { SettingsButton } from '../buttons/SettingsButton';
 import { RecordingButton } from '../buttons/RecordingButton';
 import options from 'src/configuration';
 
@@ -82,7 +81,6 @@ export const RightShortcuts = (): JSX.Element => {
                     >
                         <LeftColumn isVisible={true}>
                             <RightShortcut1 />
-                            <SettingsButton />
                         </LeftColumn>
                         <RightColumn>
                             <RightShortcut3 />

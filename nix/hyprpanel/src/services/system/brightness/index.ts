@@ -1,16 +1,46 @@
-import { exec, GObject, monitorFile, property, readFileAsync, register } from 'astal';
+import { exec, GObject, property, register } from 'astal';
 import { SystemUtilities } from 'src/core/system/SystemUtilities';
 
-const isBrightnessAvailable = SystemUtilities.checkExecutable(['brightnessctl']);
+const resolveBrightnessCommand = (): string => {
+    try {
+        return exec(
+            "bash -lc 'if [ -n \"$HYPRPANEL_BRIGHTNESS_CONTROL\" ] && [ -x \"$HYPRPANEL_BRIGHTNESS_CONTROL\" ]; then printf \"%s\" \"$HYPRPANEL_BRIGHTNESS_CONTROL\"; elif command -v brightness-control >/dev/null 2>&1; then command -v brightness-control; fi'",
+        ).trim();
+    } catch {
+        return '';
+    }
+};
 
-const get = (args: string): number => (isBrightnessAvailable ? Number(exec(`brightnessctl ${args}`)) : 0);
-const screen = isBrightnessAvailable ? exec('bash -c "ls -w1 /sys/class/backlight | head -1"') : '';
-const kbd = isBrightnessAvailable
-    ? exec('bash -c "ls -w1 /sys/class/leds | grep \'::kbd_backlight$\' | head -1"')
-    : '';
+const brightnessCommand = resolveBrightnessCommand();
+const isBrightnessAvailable = brightnessCommand.length > 0;
+
+const readBrightnessPercent = (): number => {
+    if (!isBrightnessAvailable) {
+        return 0;
+    }
+
+    try {
+        const out = exec(
+            `bash -lc '"${brightnessCommand}" get 2>/dev/null || "${brightnessCommand}" get json 2>/dev/null || true'`,
+        ).trim();
+
+        if (/^\d+$/.test(out)) {
+            return Number(out);
+        }
+
+        const jsonMatch = out.match(/"percentage"\s*:\s*(\d+)/);
+        if (jsonMatch?.[1] !== undefined) {
+            return Number(jsonMatch[1]);
+        }
+    } catch {
+        return 0;
+    }
+
+    return 0;
+};
 
 /**
- * Service for managing screen and keyboard backlight brightness
+ * Service for managing brightness via brightness-control.
  */
 @register({ GTypeName: 'Brightness' })
 export default class BrightnessService extends GObject.Object {
@@ -18,21 +48,8 @@ export default class BrightnessService extends GObject.Object {
 
     constructor() {
         super();
-
-        const screenPath = `/sys/class/backlight/${screen}/brightness`;
-        const kbdPath = `/sys/class/leds/${kbd}/brightness`;
-
-        monitorFile(screenPath, async (f) => {
-            const v = await readFileAsync(f);
-            this.#screen = Number(v) / this.#screenMax;
-            this.notify('screen');
-        });
-
-        monitorFile(kbdPath, async (f) => {
-            const v = await readFileAsync(f);
-            this.#kbd = Number(v) / this.#kbdMax;
-            this.notify('kbd');
-        });
+        this.#syncScreen();
+        setInterval(() => this.#syncScreen(), 1500);
     }
 
     /**
@@ -47,10 +64,21 @@ export default class BrightnessService extends GObject.Object {
         return BrightnessService.instance;
     }
 
-    #kbdMax = kbd?.length ? get(`--device ${kbd} max`) : 0;
-    #kbd = kbd?.length ? get(`--device ${kbd} get`) : 0;
-    #screenMax = screen?.length ? get(`--device ${screen} max`) : 0;
-    #screen = screen?.length ? get(`--device ${screen} get`) / (get(`--device ${screen} max`) || 1) : 0;
+    #kbdMax = 0;
+    #kbd = 0;
+    #screen = isBrightnessAvailable ? readBrightnessPercent() / 100 : 0;
+
+    #syncScreen(): void {
+        if (!isBrightnessAvailable) {
+            return;
+        }
+
+        const next = Math.max(0, Math.min(100, readBrightnessPercent())) / 100;
+        if (Math.abs(next - this.#screen) >= 0.001) {
+            this.#screen = next;
+            this.notify('screen');
+        }
+    }
 
     /**
      * Gets the keyboard backlight brightness level
@@ -78,12 +106,7 @@ export default class BrightnessService extends GObject.Object {
      * @param value - The brightness value to set (0 to maximum)
      */
     public set kbd(value: number) {
-        if (value < 0 || value > this.#kbdMax || !kbd?.length) return;
-
-        SystemUtilities.sh(`brightnessctl -d ${kbd} s ${value} -q`).then(() => {
-            this.#kbd = value;
-            this.notify('kbd');
-        });
+        if (value < 0 || value > this.#kbdMax) return;
     }
 
     /**
@@ -92,7 +115,7 @@ export default class BrightnessService extends GObject.Object {
      * @param percent - The brightness percentage to set (0-1)
      */
     public set screen(percent: number) {
-        if (!screen?.length) return;
+        if (!isBrightnessAvailable) return;
 
         let brightnessPct = percent;
 
@@ -100,11 +123,16 @@ export default class BrightnessService extends GObject.Object {
 
         if (percent > 1) brightnessPct = 1;
 
-        SystemUtilities.sh(`brightnessctl set ${Math.round(brightnessPct * 100)}% -d ${screen} -q`).then(
-            () => {
-                this.#screen = brightnessPct;
-                this.notify('screen');
-            },
-        );
+        const target = Math.round(brightnessPct * 100);
+        const current = Math.round(this.#screen * 100);
+        const delta = target - current;
+        if (delta === 0) return;
+
+        const cmd = delta > 0 ? 'increase' : 'decrease';
+        const amount = Math.abs(delta);
+
+        SystemUtilities.bash`"${brightnessCommand}" ${cmd} ${amount}`.then(() => {
+            this.#syncScreen();
+        });
     }
 }

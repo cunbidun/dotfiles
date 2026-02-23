@@ -28,7 +28,6 @@ export const MenuTheme = (): JSX.Element => {
                     opt={options.theme.bar.menus.monochrome}
                     title="Use Global Colors"
                     type="boolean"
-                    disabledBinding={options.theme.matugen}
                 />
                 <Option
                     opt={options.wallpaper.pywal}
@@ -39,7 +38,7 @@ export const MenuTheme = (): JSX.Element => {
                 <Option
                     opt={options.wallpaper.enable}
                     title="Apply Wallpapers"
-                    subtitle="Whether to apply the wallpaper or to only use it for Matugen color generation."
+                    subtitle="Whether to apply the wallpaper."
                     type="boolean"
                 />
                 <Option

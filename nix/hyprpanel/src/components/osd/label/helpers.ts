@@ -3,6 +3,7 @@ import { Widget } from 'astal/gtk3';
 import AstalWp from 'gi://AstalWp?version=0.1';
 import options from 'src/configuration';
 import BrightnessService from 'src/services/system/brightness';
+import { osdContext } from '../state';
 
 const wireplumber = AstalWp.get_default() as AstalWp.Wp;
 const audioService = wireplumber.audio;
@@ -17,56 +18,41 @@ const brightnessService = BrightnessService.getInstance();
  * @param self The Widget.Label instance to set up.
  */
 export const setupOsdLabel = (self: Widget.Label): void => {
-    self.hook(brightnessService, 'notify::screen', () => {
-        self.className = self.className.replace(/\boverflow\b/, '').trim();
-        self.label = `${Math.round(brightnessService.screen * 100)}`;
-    });
+    const labelBinding = Variable.derive(
+        [
+            bind(osdContext),
+            bind(brightnessService, 'screen'),
+            bind(brightnessService, 'kbd'),
+            bind(audioService.defaultSpeaker, 'volume'),
+            bind(audioService.defaultSpeaker, 'mute'),
+        ],
+        (context) => {
+            if (context === 'brightness') {
+                self.className = self.className.replace(/\boverflow\b/, '').trim();
+                self.label = `${Math.round(brightnessService.screen * 100)}`;
+                return;
+            }
 
-    self.hook(brightnessService, 'notify::kbd', () => {
-        self.className = self.className.replace(/\boverflow\b/, '').trim();
-        self.label = `${Math.round(brightnessService.kbd * 100)}`;
-    });
+            if (context === 'keyboard-brightness') {
+                self.className = self.className.replace(/\boverflow\b/, '').trim();
+                self.label = `${Math.round(brightnessService.kbd * 100)}`;
+                return;
+            }
 
-    const micVolumeBinding = Variable.derive([bind(audioService.defaultMicrophone, 'volume')], () => {
-        self.toggleClassName('overflow', audioService.defaultMicrophone.volume > 1);
-        self.label = `${Math.round(audioService.defaultMicrophone.volume * 100)}`;
-    });
-
-    const micMuteBinding = Variable.derive([bind(audioService.defaultMicrophone, 'mute')], () => {
-        self.toggleClassName(
-            'overflow',
-            audioService.defaultMicrophone.volume > 1 &&
-                (!options.theme.osd.muted_zero.value || audioService.defaultMicrophone.mute === false),
-        );
-        const inputVolume =
-            options.theme.osd.muted_zero.value && audioService.defaultMicrophone.mute !== false
-                ? 0
-                : Math.round(audioService.defaultMicrophone.volume * 100);
-        self.label = `${inputVolume}`;
-    });
-
-    const speakerVolumeBinding = Variable.derive([bind(audioService.defaultSpeaker, 'volume')], () => {
-        self.toggleClassName('overflow', audioService.defaultSpeaker.volume > 1);
-        self.label = `${Math.round(audioService.defaultSpeaker.volume * 100)}`;
-    });
-
-    const speakerMuteBinding = Variable.derive([bind(audioService.defaultSpeaker, 'mute')], () => {
-        self.toggleClassName(
-            'overflow',
-            audioService.defaultSpeaker.volume > 1 &&
-                (!options.theme.osd.muted_zero.value || audioService.defaultSpeaker.mute === false),
-        );
-        const speakerVolume =
-            options.theme.osd.muted_zero.value && audioService.defaultSpeaker.mute !== false
-                ? 0
-                : Math.round(audioService.defaultSpeaker.volume * 100);
-        self.label = `${speakerVolume}`;
-    });
+            self.toggleClassName(
+                'overflow',
+                audioService.defaultSpeaker.volume > 1 &&
+                    (!options.theme.osd.muted_zero.value || audioService.defaultSpeaker.mute === false),
+            );
+            const speakerVolume =
+                options.theme.osd.muted_zero.value && audioService.defaultSpeaker.mute !== false
+                    ? 0
+                    : Math.round(audioService.defaultSpeaker.volume * 100);
+            self.label = `${speakerVolume}`;
+        },
+    );
 
     self.connect('destroy', () => {
-        micVolumeBinding.drop();
-        micMuteBinding.drop();
-        speakerVolumeBinding.drop();
-        speakerMuteBinding.drop();
+        labelBinding.drop();
     });
 };

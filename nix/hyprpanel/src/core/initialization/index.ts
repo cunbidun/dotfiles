@@ -5,7 +5,6 @@ import { forMonitors } from 'src/components/bar/utils/monitors';
 import { DropdownMenus, StandardWindows } from 'src/components/menus';
 import { handleRealization } from 'src/components/menus/shared/dropdown/helpers/helpers';
 import Notifications from 'src/components/notifications';
-import OSD from 'src/components/osd/index';
 import { isDropdownMenu } from 'src/components/settings/constants.js';
 import { SettingsDialogLoader } from 'src/components/settings/lazyLoader';
 import options from 'src/configuration';
@@ -13,6 +12,7 @@ import { initializeSystemBehaviors } from 'src/core/behaviors';
 import { JSXElement } from 'src/core/types';
 import { Timer } from 'src/lib/performance/timer';
 import { BarRefreshManager } from 'src/services/display/bar/refreshManager';
+import osdFeedbackService from 'src/services/system/osdFeedback';
 
 /**
  * Manages the complete initialization sequence for HyprPanel.
@@ -29,7 +29,7 @@ export class InitializationService {
             await Timer.measureAsync('Startup scripts', () => this._initializeStartupScripts());
 
             Timer.measureSync('Notifications', () => Notifications());
-            Timer.measureSync('OSD', () => OSD());
+            Timer.measureSync('Feedback', () => osdFeedbackService.initialize());
 
             await Timer.measureAsync('Bars', async () => {
                 const bars = await forMonitors(Bar);

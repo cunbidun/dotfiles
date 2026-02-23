@@ -7,96 +7,77 @@
         margin: $osd-margins;
         opacity: $osd-opacity * 0.01;
         box-shadow: if($osd-enableShadow, $osd-shadow, 0 0 0 0);
-        border-radius: $osd-radius;
+        background: transparent;
     }
 
-    .osd-label-container {
-        border-top: $osd-border-size solid $osd-border-color;
-        border-bottom: if($osd-orientation == 'horizontal', $osd-border-size solid $osd-border-color, 0em);
-        border-left: if($osd-orientation == 'vertical', $osd-border-size solid $osd-border-color, 0em);
-        border-right: $osd-border-size solid $osd-border-color;
-        background: $osd-bar_container;
+    .osd-shell {
+        min-height: 2.32em;
+        padding: 0.2em 0.56em;
+        border-radius: 999px;
+        border: max($osd-border-size, 0.08em) solid rgba(255, 255, 255, 0.14);
+        background: rgba(14, 18, 24, 0.9);
+    }
 
-        border-radius: if(
-            $osd-orientation == 'vertical',
-            $osd-radius $osd-radius 0em 0em,
-            0em $osd-radius $osd-radius 0em
-        );
+    .osd-icon {
+        min-width: 1.5em;
+        margin-right: 0.52em;
+        color: $osd-icon;
+        font-size: 1.08em;
+    }
 
-        .osd-label {
-            font-size: 1em;
-            padding-top: if($osd-orientation == 'vertical', 1em, 0em);
-            padding-right: if($osd-orientation == 'horizontal', 1em, 0em);
-            color: $osd-label;
+    .osd-bar-inner {
+        margin-right: 0.52em;
+        min-height: 1.7em;
+    }
 
-            &.overflow {
-                color: $osd-bar_overflow_color;
+    .osd-bar {
+        levelbar * {
+            transition: 140ms;
+        }
+
+        trough {
+            min-height: if($osd-orientation == 'vertical', 9em, 0.3em);
+            min-width: if($osd-orientation == 'horizontal', 10.6em, 0);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.24);
+        }
+
+        block {
+            border-radius: 999px;
+
+            &.empty {
+                background: rgba(255, 255, 255, 0.24);
+            }
+
+            &.filled {
+                background: $osd-bar_color;
             }
         }
-    }
 
-    .osd-icon-container {
-        border-top: if($osd-orientation == 'horizontal', $osd-border-size solid $osd-border-color, 0em);
-        border-bottom: $osd-border-size solid $osd-border-color;
-        border-left: $osd-border-size solid $osd-border-color;
-        border-right: if($osd-orientation == 'vertical', $osd-border-size solid $osd-border-color, 0em);
-        background: $osd-icon_container;
-
-        border-radius: if(
-            $osd-orientation == 'vertical',
-            0em 0em $osd-radius $osd-radius,
-            $osd-radius 0em 0em $osd-radius
-        );
-
-        .osd-icon {
-            font-size: 2.1em;
-            padding: if($osd-orientation == 'vertical', 0.2em 0em, 0em 0.4em);
-            color: $osd-icon;
-        }
-    }
-
-    .osd-bar-container {
-        border-top: if($osd-orientation == 'horizontal', $osd-border-size solid $osd-border-color, 0em);
-        border-bottom: if($osd-orientation == 'horizontal', $osd-border-size solid $osd-border-color, 0em);
-        border-left: if($osd-orientation == 'vertical', $osd-border-size solid $osd-border-color, 0em);
-        border-right: if($osd-orientation == 'vertical', $osd-border-size solid $osd-border-color, 0em);
-        padding: 1.25em;
-        background: $osd-bar_container;
-
-        .osd-bar {
-            levelbar * {
-                transition: 200ms;
-            }
-
-            trough {
-                min-height: if($osd-orientation == 'vertical', 10em, 0);
-                min-width: if($osd-orientation == 'horizontal', 10em, 0);
-            }
-
+        &.overflow {
             block {
-                border-radius: $osd-radius * 0.5;
-
                 &.empty {
-                    background: $osd-bar_empty_color;
+                    background: $osd-bar_color;
                 }
 
                 &.filled {
-                    background: $osd-bar_color;
-                    padding: 0.45em;
+                    background: $osd-bar_overflow_color;
                 }
             }
+        }
+    }
 
-            &.overflow {
-                block {
-                    &.empty {
-                        background: $osd-bar_color;
-                    }
+    .osd-label {
+        min-width: 2.35em;
+        padding: 0.12em 0.48em;
+        border-radius: 999px;
+        font-size: 0.86em;
+        font-weight: 700;
+        color: $osd-label;
+        background: rgba(255, 255, 255, 0.12);
 
-                    &.filled {
-                        background: $osd-bar_overflow_color;
-                    }
-                }
-            }
+        &.overflow {
+            color: $osd-bar_overflow_color;
         }
     }
 }

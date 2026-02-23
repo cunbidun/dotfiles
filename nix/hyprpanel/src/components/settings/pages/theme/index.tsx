@@ -4,7 +4,6 @@ import { Gtk } from 'astal/gtk3';
 import { isPrimaryClick } from 'src/lib/events/mouse';
 import { StackTransitionMap } from 'src/components/settings/constants';
 import { MenuTheme } from './menus';
-import { Matugen } from './menus/matugen';
 import { BarTheme } from './bar';
 import { NotificationsTheme } from './notifications';
 import { OsdTheme } from './osd';
@@ -64,7 +63,6 @@ export const ThemesMenu = (): JSX.Element => {
                 vexpand={false}
             >
                 <MenuTheme />
-                <Matugen />
                 <BarTheme />
                 <NotificationsTheme />
                 <OsdTheme />

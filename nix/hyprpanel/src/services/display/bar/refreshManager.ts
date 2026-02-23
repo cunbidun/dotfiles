@@ -3,11 +3,10 @@ import { Bar } from 'src/components/bar';
 import { forMonitors } from 'src/components/bar/utils/monitors';
 import { GdkMonitorService } from 'src/services/display/monitor';
 import Notifications from 'src/components/notifications';
-import OSD from 'src/components/osd/index';
 
 /**
  * Manages dynamic refresh of monitor-dependent components when monitor configuration changes.
- * Handles bars, notifications, OSD, and other monitor-aware components.
+ * Handles bars, notifications, and other monitor-aware components.
  * Includes debouncing, error recovery, and prevents concurrent refresh operations.
  */
 export class BarRefreshManager {
@@ -63,7 +62,6 @@ export class BarRefreshManager {
         try {
             this._destroyBars();
             this._destroyNotificationWindow();
-            this._destroyOsdWindow();
 
             const gdkMonitorService = GdkMonitorService.getInstance();
             gdkMonitorService.reset();
@@ -71,7 +69,6 @@ export class BarRefreshManager {
             await forMonitors(Bar);
 
             Notifications();
-            OSD();
         } catch (error) {
             console.error('[MonitorRefresh] Error during component refresh:', error);
         } finally {
@@ -104,14 +101,4 @@ export class BarRefreshManager {
         }
     }
 
-    /**
-     * Removes the OSD indicator window from the display
-     * Prepares for recreation on the appropriate monitor after configuration changes
-     */
-    private _destroyOsdWindow(): void {
-        const osdWindow = App.get_window('indicator');
-        if (osdWindow !== null) {
-            osdWindow.destroy();
-        }
-    }
 }

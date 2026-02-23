@@ -30,7 +30,6 @@ const {
     applicationIconFallback,
 } = options.bar.workspaces;
 const { available, active, occupied } = options.bar.workspaces.icons;
-const { matugen } = options.theme;
 const { smartHighlight } = options.theme.bar.buttons.workspaces;
 
 initWorkspaceEvents();
@@ -56,7 +55,6 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
             bind(applicationIconMap),
             bind(applicationIconEmptyWorkspace),
             bind(applicationIconFallback),
-            bind(matugen),
             bind(smartHighlight),
             bind(hyprlandService, 'clients'),
             bind(hyprlandService, 'monitors'),
@@ -86,7 +84,6 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
             applicationIconMapping: ApplicationIcons,
             applicationIconEmptyWorkspace: string,
             applicationIconFallback: string,
-            matugenEnabled: boolean,
             smartHighlightEnabled: boolean,
             clients: AstalHyprland.Client[],
             monitorList: AstalHyprland.Monitor[],
@@ -123,7 +120,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                             valign={Gtk.Align.CENTER}
                             css={
                                 `margin: 0rem ${0.375 * spacingValue}rem;` +
-                                `${displayWorkspaceIcons && !matugenEnabled ? getWsColor(workspaceIconMapping, wsId, smartHighlightEnabled, monitor) : ''}`
+                                `${displayWorkspaceIcons ? getWsColor(workspaceIconMapping, wsId, smartHighlightEnabled, monitor) : ''}`
                             }
                             className={renderClassnames(
                                 displayIcons,

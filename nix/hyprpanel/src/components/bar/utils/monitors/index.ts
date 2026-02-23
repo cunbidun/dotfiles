@@ -73,7 +73,7 @@ const _getResolveLayoutForMonitor = (monitor: number, layouts: BarLayouts): [str
             {
                 left: ['dashboard', 'workspaces', 'windowtitle'],
                 middle: ['media'],
-                right: ['volume', 'network', 'bluetooth', 'battery', 'systray', 'clock', 'notifications'],
+                right: ['volume', 'battery', 'systray', 'clock', 'notifications'],
             },
         ];
     }
@@ -100,7 +100,7 @@ const _getResolveLayoutForMonitor = (monitor: number, layouts: BarLayouts): [str
         {
             left: ['dashboard', 'workspaces', 'windowtitle'],
             middle: ['media'],
-            right: ['volume', 'network', 'bluetooth', 'battery', 'systray', 'clock', 'notifications'],
+            right: ['volume', 'battery', 'systray', 'clock', 'notifications'],
         },
     ];
 };

@@ -3,7 +3,8 @@
 }
 
 .dashboard-content-items {
-    min-width: 28.5em;
+    min-width: 25.2em;
+    min-height: 25.2em;
     background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-dashboard-background-color);
     border: $bar-menus-border-size solid
         if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-dashboard-border-color);
@@ -221,24 +222,58 @@
     .controls-container {
         &.dashboard-card {
             margin-top: 0em;
+            padding: 1.1em;
         }
 
-        button {
-            padding: 0em;
-            min-height: 3em;
-            min-width: 3.8em;
+        .dashboard-control-main-row {
+            margin-bottom: 0.55em;
+        }
 
-            label {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-buttons-text,
-                    $bar-menus-menu-dashboard-controls-wifi-text
-                );
-                font-size: 1.6em;
+        .dashboard-control-left-column {
+            min-width: 10.8em;
+            margin-right: 0.55em;
+
+            button:not(:last-child) {
+                margin-bottom: 0.45em;
+            }
+        }
+
+        .dashboard-control-quick-row {
+            margin-bottom: 0.55em;
+        }
+
+        .dashboard-control-tile {
+            min-height: 3.35em;
+            padding: 0.4em 0.55em;
+            border-radius: $bar-menus-buttons-radius;
+
+            .dashboard-control-tile-content {
+                min-height: 2.45em;
             }
 
-            &:not(:last-child) {
-                margin-right: 1em;
+            .control-tile-icon {
+                color: if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text);
+                font-size: 1.05em;
+                margin-right: 0.48em;
+            }
+
+            .control-tile-copy {
+                padding-top: 0.03em;
+            }
+
+            .control-tile-title {
+                color: if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text);
+                font-size: 0.82em;
+                font-weight: 600;
+            }
+
+            .control-tile-subtitle {
+                color: transparentize(
+                    if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text),
+                    0.2
+                );
+                font-size: 0.72em;
+                margin-top: 0.02em;
             }
 
             &.wifi {
@@ -257,83 +292,28 @@
                 );
             }
 
-            &.notifications {
-                background: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-buttons-default,
-                    $bar-menus-menu-dashboard-controls-notifications-background
-                );
-            }
+            &:hover {
+                &.wifi {
+                    background: transparentize(
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-default,
+                            $bar-menus-menu-dashboard-controls-wifi-background
+                        ),
+                        0.22
+                    );
+                }
 
-            &.playback {
-                background: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-buttons-default,
-                    $bar-menus-menu-dashboard-controls-volume-background
-                );
-            }
-
-            &.input {
-                background: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-buttons-default,
-                    $bar-menus-menu-dashboard-controls-input-background
-                );
-            }
-
-            &.wifi:hover {
-                background: transparentize(
-                    if(
-                        $bar-menus-monochrome,
-                        $bar-menus-buttons-default,
-                        $bar-menus-menu-dashboard-controls-wifi-background
-                    ),
-                    0.5
-                );
-            }
-
-            &.bluetooth:hover {
-                background: transparentize(
-                    if(
-                        $bar-menus-monochrome,
-                        $bar-menus-buttons-default,
-                        $bar-menus-menu-dashboard-controls-bluetooth-background
-                    ),
-                    0.5
-                );
-            }
-
-            &.notifications:hover {
-                background: transparentize(
-                    if(
-                        $bar-menus-monochrome,
-                        $bar-menus-buttons-default,
-                        $bar-menus-menu-dashboard-controls-notifications-background
-                    ),
-                    0.5
-                );
-            }
-
-            &.playback:hover {
-                background: transparentize(
-                    if(
-                        $bar-menus-monochrome,
-                        $bar-menus-buttons-default,
-                        $bar-menus-menu-dashboard-controls-volume-background
-                    ),
-                    0.5
-                );
-            }
-
-            &.input:hover {
-                background: transparentize(
-                    if(
-                        $bar-menus-monochrome,
-                        $bar-menus-buttons-default,
-                        $bar-menus-menu-dashboard-controls-input-background
-                    ),
-                    0.5
-                );
+                &.bluetooth {
+                    background: transparentize(
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-default,
+                            $bar-menus-menu-dashboard-controls-bluetooth-background
+                        ),
+                        0.22
+                    );
+                }
             }
 
             &.disabled {
@@ -342,59 +322,231 @@
                     $bar-menus-buttons-disabled,
                     $bar-menus-menu-dashboard-controls-disabled
                 );
+            }
+        }
 
-                &.wifi:hover {
-                    background: transparentize(
-                        if(
-                            $bar-menus-monochrome,
-                            $bar-menus-buttons-default,
-                            $bar-menus-menu-dashboard-controls-wifi-background
-                        ),
-                        0.5
+        .dashboard-control-audio-card {
+            background: if(
+                $bar-menus-monochrome,
+                $bar-menus-buttons-default,
+                $bar-menus-menu-dashboard-controls-volume-background
+            );
+            border-radius: $bar-menus-buttons-radius;
+            padding: 0.5em 0.55em;
+            min-height: 7.15em;
+
+            .dashboard-control-audio-header {
+                background: transparent;
+                padding: 0em;
+                min-height: 3.35em;
+                border-radius: $bar-menus-buttons-radius * 0.75;
+            }
+
+            .dashboard-control-audio-header-content {
+                .dashboard-control-audio-icon {
+                    color: if(
+                        $bar-menus-monochrome,
+                        $bar-menus-buttons-text,
+                        $bar-menus-menu-dashboard-controls-wifi-text
                     );
+                    font-size: 1.2em;
+                    margin-right: 0.55em;
+                    margin-left: 0.1em;
                 }
 
-                &.bluetooth:hover {
-                    background: transparentize(
-                        if(
+                .dashboard-control-audio-copy {
+                    .dashboard-control-audio-title {
+                        color: if(
                             $bar-menus-monochrome,
-                            $bar-menus-buttons-default,
-                            $bar-menus-menu-dashboard-controls-bluetooth-background
-                        ),
-                        0.5
+                            $bar-menus-buttons-text,
+                            $bar-menus-menu-dashboard-controls-wifi-text
+                        );
+                        font-size: 0.85em;
+                        font-weight: 700;
+                    }
+
+                    .dashboard-control-audio-subtitle {
+                        color: transparentize(
+                            if(
+                                $bar-menus-monochrome,
+                                $bar-menus-buttons-text,
+                                $bar-menus-menu-dashboard-controls-wifi-text
+                            ),
+                            0.2
+                        );
+                        font-size: 0.74em;
+                    }
+                }
+            }
+
+            .dashboard-control-audio-controls {
+                margin-top: 0.36em;
+
+                .dashboard-control-audio-control {
+                    min-height: 2.05em;
+                    min-width: 0em;
+                    margin: 0em 0.14em;
+                    border-radius: $bar-menus-buttons-radius * 0.65;
+                    color: if(
+                        $bar-menus-monochrome,
+                        $bar-menus-buttons-text,
+                        $bar-menus-menu-dashboard-controls-wifi-text
                     );
+
+                    &.enabled {
+                        background: transparentize(#ffffff, 0.88);
+                    }
+
+                    &.playpause {
+                        background: transparentize(#ffffff, 0.78);
+                    }
+
+                    &.disabled {
+                        background: transparentize(#ffffff, 0.95);
+                        color: transparentize(
+                            if(
+                                $bar-menus-monochrome,
+                                $bar-menus-buttons-text,
+                                $bar-menus-menu-dashboard-controls-wifi-text
+                            ),
+                            0.45
+                        );
+                    }
+                }
+            }
+
+            &:hover {
+                background: transparentize(
+                    if(
+                        $bar-menus-monochrome,
+                        $bar-menus-buttons-default,
+                        $bar-menus-menu-dashboard-controls-volume-background
+                    ),
+                    0.22
+                );
+            }
+        }
+
+        .dashboard-control-chip {
+            min-height: 2.3em;
+            padding: 0.24em 0.5em;
+            border-radius: $bar-menus-buttons-radius;
+
+            .dashboard-control-chip-content {
+                .txt-icon {
+                    margin-right: 0.35em;
+                    font-size: 1.05em;
                 }
 
-                &.notifications:hover {
-                    background: transparentize(
-                        if(
-                            $bar-menus-monochrome,
-                            $bar-menus-buttons-default,
-                            $bar-menus-menu-dashboard-controls-notifications-background
-                        ),
-                        0.5
+                label {
+                    color: if(
+                        $bar-menus-monochrome,
+                        $bar-menus-buttons-text,
+                        $bar-menus-menu-dashboard-controls-wifi-text
                     );
+                    font-size: 0.84em;
+                    font-weight: 600;
                 }
+            }
 
-                &.playback:hover {
-                    background: transparentize(
-                        if(
-                            $bar-menus-monochrome,
-                            $bar-menus-buttons-default,
-                            $bar-menus-menu-dashboard-controls-volume-background
-                        ),
-                        0.5
-                    );
-                }
+            &.recording {
+                background: if(
+                    $bar-menus-monochrome,
+                    $bar-menus-buttons-default,
+                    $bar-menus-menu-dashboard-controls-input-background
+                );
+            }
 
-                &.input:hover {
+            &:hover {
+                &.recording {
                     background: transparentize(
                         if(
                             $bar-menus-monochrome,
                             $bar-menus-buttons-default,
                             $bar-menus-menu-dashboard-controls-input-background
                         ),
-                        0.5
+                        0.32
+                    );
+                }
+            }
+        }
+
+        .dashboard-control-slider {
+            background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-dashboard-card-color);
+            border-radius: $bar-menus-card_radius;
+            padding: 0.55em 0.7em;
+
+            &:not(:last-child) {
+                margin-bottom: 0.55em;
+            }
+
+            .dashboard-control-slider-icon {
+                color: mix(
+                    #ffffff,
+                    if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text),
+                    78%
+                );
+                font-size: 1.1em;
+                margin-right: 0.5em;
+            }
+
+            .dashboard-control-slider-title {
+                color: mix(
+                    #ffffff,
+                    if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text),
+                    82%
+                );
+                font-size: 0.96em;
+                font-weight: 700;
+            }
+
+            .dashboard-control-slider-value {
+                color: mix(#ffffff, if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-dashboard-profile-name), 85%);
+                font-size: 0.92em;
+                font-weight: 700;
+            }
+
+            .dashboard-control-slider-track {
+                margin: 0.4em 0.2em 0.1em 0.2em;
+
+                trough {
+                    background: transparentize(#ffffff, 0.8);
+                    border-radius: 9999px;
+                    min-height: 0.42em;
+                }
+
+                slider {
+                    background: #f6f7fb;
+                    box-shadow: inset 0 0 0 1px transparentize(#0b0d10, 0.75);
+                }
+            }
+
+            .dashboard-control-slider-track.brightness trough {
+                highlight,
+                progress {
+                    background: mix(
+                        #ffffff,
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-default,
+                            $bar-menus-menu-dashboard-controls-wifi-background
+                        ),
+                        22%
+                    );
+                }
+            }
+
+            .dashboard-control-slider-track.volume trough {
+                highlight,
+                progress {
+                    background: mix(
+                        #ffffff,
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-default,
+                            $bar-menus-menu-dashboard-controls-volume-background
+                        ),
+                        20%
                     );
                 }
             }

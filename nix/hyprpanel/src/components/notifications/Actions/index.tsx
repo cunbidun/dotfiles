@@ -4,6 +4,8 @@ import AstalNotifd from 'gi://AstalNotifd?version=0.1';
 import { isPrimaryClick } from 'src/lib/events/mouse';
 
 const ActionButton = ({ notification, action }: ActionButtonProps): JSX.Element => {
+    const actionLabel = action.label.trim().length > 0 ? action.label : 'Open';
+
     return (
         <button
             className={'notification-action-buttons'}
@@ -27,7 +29,7 @@ const ActionButton = ({ notification, action }: ActionButtonProps): JSX.Element 
             <box halign={Gtk.Align.CENTER} hexpand>
                 <label
                     className={'notification-action-buttons-label'}
-                    label={action.label}
+                    label={actionLabel}
                     hexpand
                     max_width_chars={15}
                     truncate

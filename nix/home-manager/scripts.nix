@@ -22,12 +22,7 @@
     done
   '';
   toggle-volume = pkgs.writeShellScriptBin "toggle_volume" ''
-    pamixer -t;
-    if [ "$(pamixer --get-mute)" = true ]; then
-    	icon="[Muted] "
-    fi
-    vol="$icon$(pamixer --get-volume)"
-    notify-send --hint=string:x-stack-tag:volume "volume: $vol" -t 1000 -a "System"
+    pamixer -t
   '';
 
   hyprland-mode = pkgs.writeShellScriptBin "hyprland-mode" ''
@@ -71,17 +66,31 @@
   '';
 
   brightness-control = pkgs.writeShellScriptBin "brightness-control" ''
+    CACHE_FILE="''${XDG_RUNTIME_DIR:-/tmp}/hyprpanel-ddc-bus"
+    DDC_SLEEP_MULTIPLIER="''${HYPRPANEL_DDC_SLEEP_MULTIPLIER:-0.3}"
+
+    detect_bus_num() {
+        ddcutil detect --sleep-multiplier "$DDC_SLEEP_MULTIPLIER" 2>/dev/null |
+            grep "/dev/i2c-" | awk -F- '{print $NF}' | head -n1
+    }
+
     get_bus_num() {
-        if [ -f /tmp/dwm-i2c-bus ]; then
-            bus_num=$(cat /tmp/dwm-i2c-bus)
+        if [ -n "''${HYPRPANEL_DDC_BUS:-}" ]; then
+            echo "$HYPRPANEL_DDC_BUS"
+            return
+        fi
+
+        if [ -f "$CACHE_FILE" ]; then
+            bus_num=$(cat "$CACHE_FILE")
             if [ -n "$bus_num" ]; then
                 echo "$bus_num"
                 return
             fi
         fi
 
-        bus_num=$(ddcutil detect --sleep-multiplier 0.01 2>/dev/null | grep "/dev/i2c-" | awk -F- '{print $NF}' | head -n1)
-        echo "$bus_num" > /tmp/dwm-i2c-bus
+        bus_num=$(detect_bus_num)
+        mkdir -p "$(dirname "$CACHE_FILE")"
+        echo "$bus_num" > "$CACHE_FILE"
         echo "$bus_num"
     }
 
@@ -92,7 +101,22 @@
         echo "  $0 get                # Get current brightness"
         echo "  $0 increase 10        # Increase brightness by 10"
         echo "  $0 decrease 5         # Decrease brightness by 5"
+        echo ""
+        echo "Optional env:"
+        echo "  HYPRPANEL_DDC_BUS=7                  # Pin monitor i2c bus"
+        echo "  HYPRPANEL_DDC_SLEEP_MULTIPLIER=0.3   # ddcutil timing multiplier"
         exit 1
+    }
+
+    run_ddcutil_get() {
+        local bus_num="$1"
+        ddcutil getvcp 10 --sleep-multiplier "$DDC_SLEEP_MULTIPLIER" --bus "$bus_num" 2>/dev/null
+    }
+
+    run_ddcutil_set() {
+        local bus_num="$1"
+        local target="$2"
+        ddcutil setvcp 10 "$target" --noverify --bus "$bus_num" --sleep-multiplier "$DDC_SLEEP_MULTIPLIER"
     }
 
     # Function to get current brightness
@@ -104,10 +128,14 @@
             percent=$((current_brightness * 100 / mx_brightness))
         else
             bus_num=$(get_bus_num)
-            percent=$(
-                ddcutil getvcp 10 --sleep-multiplier .01 --bus "$bus_num" 2>/dev/null |
-                    awk '/current value/ {gsub(",", "", $9); print $9}'
-            )
+            output=$(run_ddcutil_get "$bus_num")
+            if [ -z "$output" ]; then
+                bus_num=$(detect_bus_num)
+                mkdir -p "$(dirname "$CACHE_FILE")"
+                echo "$bus_num" > "$CACHE_FILE"
+                output=$(run_ddcutil_get "$bus_num")
+            fi
+            percent=$(printf '%s\n' "$output" | awk '/current value/ {gsub(",", "", $9); print $9}')
         fi
         # Normalize to an integer; fallback to 0 if parsing fails
         if ! printf '%s' "$percent" | grep -Eq '^[0-9]+$'; then
@@ -157,7 +185,12 @@
         if [ "$new_b" -ne "$current_b" ]; then
             echo "Setting brightness to $new_b"
             bus_num=$(get_bus_num)
-            ddcutil setvcp 10 "$new_b" --bus "$bus_num" --sleep-multiplier 0.01
+            if ! run_ddcutil_set "$bus_num" "$new_b"; then
+                bus_num=$(detect_bus_num)
+                mkdir -p "$(dirname "$CACHE_FILE")"
+                echo "$bus_num" > "$CACHE_FILE"
+                run_ddcutil_set "$bus_num" "$new_b"
+            fi
             pkill -SIGRTMIN+16 waybar
             # notify hyprpanel custom module listener
             signal_file=/tmp/hyprpanel/brightness.signal
