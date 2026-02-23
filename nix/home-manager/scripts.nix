@@ -67,6 +67,7 @@
 
   brightness-control = pkgs.writeShellScriptBin "brightness-control" ''
     CACHE_FILE="''${XDG_RUNTIME_DIR:-/tmp}/hyprpanel-ddc-bus"
+    BRIGHTNESS_CACHE_FILE="''${XDG_RUNTIME_DIR:-/tmp}/hyprpanel-brightness"
     DDC_SLEEP_MULTIPLIER="''${HYPRPANEL_DDC_SLEEP_MULTIPLIER:-0.3}"
 
     detect_bus_num() {
@@ -92,6 +93,23 @@
         mkdir -p "$(dirname "$CACHE_FILE")"
         echo "$bus_num" > "$CACHE_FILE"
         echo "$bus_num"
+    }
+
+    read_cached_brightness() {
+        if [ -f "$BRIGHTNESS_CACHE_FILE" ]; then
+            cached_value=$(cat "$BRIGHTNESS_CACHE_FILE" 2>/dev/null || true)
+            if printf '%s' "$cached_value" | grep -Eq '^[0-9]+$'; then
+                echo "$cached_value"
+                return 0
+            fi
+        fi
+        return 1
+    }
+
+    write_cached_brightness() {
+        value="$1"
+        mkdir -p "$(dirname "$BRIGHTNESS_CACHE_FILE")"
+        printf '%s\n' "$value" > "$BRIGHTNESS_CACHE_FILE"
     }
 
     # Function to display usage instructions
@@ -121,6 +139,11 @@
 
     # Function to get current brightness
     get_brightness() {
+        if cached_value=$(read_cached_brightness); then
+            echo "$cached_value"
+            return
+        fi
+
         if [[ $(uname -r) == *asahi* ]]; then
             BASE_PATH="/sys/class/backlight/apple-panel-bl/"
             current_brightness=$(cat "$BASE_PATH/brightness")
@@ -141,6 +164,7 @@
         if ! printf '%s' "$percent" | grep -Eq '^[0-9]+$'; then
             percent=0
         fi
+        write_cached_brightness "$percent"
         echo "$percent"
     }
 
@@ -184,6 +208,8 @@
         # Check if the brightness has changed
         if [ "$new_b" -ne "$current_b" ]; then
             echo "Setting brightness to $new_b"
+            # Update cache first so readers can react immediately.
+            write_cached_brightness "$new_b"
             bus_num=$(get_bus_num)
             if ! run_ddcutil_set "$bus_num" "$new_b"; then
                 bus_num=$(detect_bus_num)
