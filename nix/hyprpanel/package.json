@@ -1,0 +1,31 @@
+{
+    "name": "hyprpanel",
+    "version": "1.0.0",
+    "description": "A customizable panel built for Hyprland.",
+    "main": "app.ts",
+    "scripts": {
+        "lint": "eslint --config .eslintrc.json .",
+        "lint:fix": "eslint --config .eslintrc.json . --fix",
+        "format": "prettier --write 'modules/**/*.ts'",
+        "knip": "knip"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "astal": "/usr/share/astal/gjs"
+    },
+    "devDependencies": {
+        "@types/node": "^22.15.17",
+        "@typescript-eslint/eslint-plugin": "^8.5.0",
+        "@typescript-eslint/parser": "^8.5.0",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-import": "^2.30.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "knip": "^5.55.1",
+        "prettier": "^3.3.3",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "5.7.3"
+    }
+}

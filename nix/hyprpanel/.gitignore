@@ -1,0 +1,11 @@
+.weather.json
+node_modules
+prepare
+
+@girs
+
+**/.claude/settings.local.json
+
+.direnv/
+
+pnpm-lock.yaml

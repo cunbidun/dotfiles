@@ -1,257 +1,193 @@
 {
-  pkgs,
-  inputs,
-  config,
   lib,
+  pkgs,
+  config,
   ...
 }: let
-  scripts = import ../scripts.nix {pkgs = pkgs;};
-  defaultBrowserCmd = "google-chrome-stable";
-  defaultBrowserLabel = "Chromium";
+  scripts = import ../scripts.nix {inherit pkgs;};
+  brightnessControlExe = lib.getExe scripts.brightness-control;
+  repoPath = "${config.home.homeDirectory}/dotfiles/nix/hyprpanel";
+  agsProjectPath = "${config.home.homeDirectory}/.config/ags/hyprpanel";
+  stylixStatePath = "${config.home.homeDirectory}/.local/state/stylix";
+
+  runtimeDeps = with pkgs;
+    [
+      ags
+
+      astal.apps
+      astal.battery
+      astal.bluetooth
+      astal.cava
+      astal.hyprland
+      astal.io
+      astal.mpris
+      astal.network
+      astal.notifd
+      astal.powerprofiles
+      astal.tray
+      astal.wireplumber
+
+      bluez
+      bluez-tools
+      bash
+      brightnessctl
+      btop
+      coreutils
+      ddcutil
+      dart-sass
+      findutils
+      glib
+      glib-networking
+      gnome-bluetooth
+      gawk
+      gnugrep
+      gnused
+      grimblast
+      gtksourceview3
+      gvfs
+      hyprpicker
+      libgtop
+      libnotify
+      libsoup_3
+      matugen
+      networkmanager
+      pywal
+      procps
+      swww
+      upower
+      wireplumber
+      wl-clipboard
+      systemd
+      which
+
+      (python3.withPackages (ps: with ps; [dbus-python pygobject3]))
+    ]
+    ++ lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [
+      gpu-screen-recorder
+    ];
+
+  giTypelibPath = lib.makeSearchPathOutput "lib" "lib/girepository-1.0" runtimeDeps;
+  libPath = lib.makeLibraryPath runtimeDeps;
+  binPath = lib.makeBinPath runtimeDeps;
+  depPaths = lib.concatStringsSep " " (map toString runtimeDeps);
+
+  agsRunScript = pkgs.writeShellScriptBin "ags-run-hyprpanel" ''
+    set -eo pipefail
+
+    export GIO_EXTRA_MODULES='${pkgs.glib-networking}/lib/gio/modules'
+    if [ -n "''${GI_TYPELIB_PATH:-}" ]; then
+      export GI_TYPELIB_PATH='${giTypelibPath}':"$GI_TYPELIB_PATH"
+    else
+      export GI_TYPELIB_PATH='${giTypelibPath}'
+    fi
+
+    if [ -n "''${LD_LIBRARY_PATH:-}" ]; then
+      export LD_LIBRARY_PATH='${libPath}':"$LD_LIBRARY_PATH"
+    else
+      export LD_LIBRARY_PATH='${libPath}'
+    fi
+    export PATH='${binPath}:$PATH'
+
+    xdg_data_dirs=()
+    for dep in ${depPaths}; do
+      if [ -d "$dep/share" ]; then
+        xdg_data_dirs+=("$dep/share")
+      fi
+      if [ -d "$dep/share/gsettings-schemas" ]; then
+        for schema_root in "$dep"/share/gsettings-schemas/*; do
+          if [ -d "$schema_root" ]; then
+            xdg_data_dirs+=("$schema_root")
+          fi
+        done
+      fi
+    done
+    if [ "''${#xdg_data_dirs[@]}" -gt 0 ]; then
+      export XDG_DATA_DIRS="$(IFS=:; echo "''${xdg_data_dirs[*]}")''${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}"
+    fi
+
+    cd '${agsProjectPath}'
+    exec ${pkgs.ags}/bin/ags run app.ts
+  '';
+
+  agsWatchScript = pkgs.writeShellScript "ags-watch-hyprpanel" ''
+    set -euo pipefail
+
+    watch_dir='${agsProjectPath}'
+    stylix_state_dir='${stylixStatePath}'
+    last_restart=0
+    debounce_ms=800
+
+    watch_targets=("$watch_dir")
+    if [ -L "$watch_dir" ]; then
+      watch_dir="$(readlink -f "$watch_dir")"
+      watch_targets=("$watch_dir")
+    fi
+    if [ -d "$stylix_state_dir" ]; then
+      watch_targets+=("$stylix_state_dir")
+    fi
+
+    ${pkgs.inotify-tools}/bin/inotifywait \
+      --monitor \
+      --recursive \
+      --event close_write,create,delete,move \
+      --exclude '(^|/)(\\.git|node_modules|dist)(/|$)|(~$|\\.sw.$)' \
+      "''${watch_targets[@]}" | while read -r _; do
+      now_ms="$(${pkgs.coreutils}/bin/date +%s%3N)"
+      if [ "$last_restart" -ne 0 ] && [ "$((now_ms - last_restart))" -lt "$debounce_ms" ]; then
+        continue
+      fi
+      last_restart="$now_ms"
+      ${pkgs.systemd}/bin/systemctl --user restart ags.service
+    done
+  '';
 in {
-  programs.hyprpanel = {
-    enable = true;
-    package = inputs.hyprpanel.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    settings = {
-      bar = {
-        workspaces = {
-          ignored = "-\\d+";
-          numbered_active_indicator = "highlight";
-          show_icons = false;
-          show_numbered = false;
-          showWsIcons = true;
-          workspaceIconMap = {
-            "1" = "SYS";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
-            "5" = "WEB";
-            "6" = "VN";
-            "7" = "Q&Q";
-            "8" = "GAME";
-            "9" = "VI";
-          };
-          workspaces = 9;
-          spacing = 1;
-        };
-        autoHide = "never";
-        notifications = {
-          show_total = false;
-          hideCountWhenZero = false;
-        };
-        media = {
-          show_label = true;
-        };
-        network = {
-          truncation_size = 15;
-        };
-        launcher = {
-          icon = "";
-        };
-        layouts = {
-          "0" = {
-            left = ["dashboard" "workspaces" "submap" "windowtitle"];
-            middle = ["media"];
-            right = ["custom/brightness" "volume" "network" "bluetooth" "hypridle" "systray" "clock" "notifications"];
-          };
-        };
-
-        customModules = {
-          submap = {
-            label = true;
-            showSubmapName = true;
-            enabledIcon = "󰌐";
-            disabledIcon = "󰌌";
-            enabledText = "Submap On";
-            disabledText = "Submap Off";
-          };
-        };
-      };
-
-      menus = {
-        clock = {
-          time = {
-            hideSeconds = false;
-            military = false;
-          };
-          weather = {
-            enabled = true;
-            location = "10001";
-            unit = "metric";
-            key = "18314f574825468496c183537250502";
-          };
-        };
-        media = {
-          displayTime = false;
-        };
-        volume = {
-          raiseMaximumVolume = true;
-        };
-        dashboard = {
-          shortcuts = {
-            left = {
-              shortcut1 = {
-                command = defaultBrowserCmd;
-                tooltip = defaultBrowserLabel;
-              };
-              shortcut4 = {
-                command = "vicinae dmenu-apps";
-              };
-            };
-          };
-        };
-      };
-
-      theme = {
-        bar = {
-          transparent = false;
-          floating = false;
-          enableShadow = false;
-          outer_spacing = "0.5em";
-          border = {
-            width = "0em";
-          };
-          buttons = {
-            radius = "0em";
-            padding_x = "0.7rem";
-            padding_y = "0em";
-            y_margins = "0.1em";
-            separator = {
-              margins = "0.15em";
-            };
-            workspaces = {
-              enableBorder = false;
-              numbered_active_highlight_border = "0em";
-              numbered_active_highlight_padding = "0.4em";
-              numbered_inactive_padding = "0.4em";
-              fontSize = "1em";
-            };
-            media = {
-              enableBorder = false;
-            };
-            windowtitle = {
-              spacing = "1em";
-            };
-            modules.hypridle.spacing = "0.5em";
-          };
-          menus = {
-            card_radius = "0em";
-            border = {
-              radius = "0em";
-              size = "0em";
-            };
-            popover = {
-              radius = "0em";
-            };
-            tooltip = {
-              radius = "0em";
-            };
-            scroller = {
-              radius = "0em";
-            };
-            slider = {
-              slider_radius = "0rem";
-              progress_radius = "0rem";
-            };
-            progressbar = {
-              radius = "0rem";
-            };
-            buttons = {
-              radius = "0em";
-            };
-            switch = {
-              radius = "0em";
-              slider_radius = "0em";
-            };
-            menu = {
-              dashboard = {
-                profile = {
-                  radius = "0em";
-                };
-              };
-            };
-          };
-        };
-        font = {
-          name = "SFMono Nerd Font";
-          label = "SFMono Nerd Font Medium";
-          size = "13px";
-          weight = "400";
-          style = "normal";
-        };
-        notification = {
-          border_radius = "0em";
-        };
-        osd = {
-          radius = "0em";
-        };
-      };
-    };
+  # Make the AGS source mutable in-place via out-of-store symlink.
+  xdg.configFile."ags/hyprpanel" = {
+    force = true;
+    source = config.lib.file.mkOutOfStoreSymlink repoPath;
   };
 
-  xdg.configFile."hyprpanel/modules.json".text = builtins.toJSON {
-    "custom/brightness" = {
-      execute = "${lib.getExe scripts.brightness-control} get json";
-      signalPath = "/tmp/hyprpanel/brightness.signal";
-      executeOnAction = "${lib.getExe scripts.brightness-control} get json";
-      label = "{percentage}%";
-      icon = ["󰃞" "󰃟" "󰃠" "󰃝"];
-      actions = {
-        onScrollUp = "${lib.getExe scripts.brightness-control} increase 5";
-        onScrollDown = "${lib.getExe scripts.brightness-control} decrease 5";
-      };
-    };
-  };
+  home.packages = [
+    pkgs.ags
+  ];
 
-  # One-shot service to restart hyprpanel
-  systemd.user.services.hyprpanel-restart = {
+  systemd.user.services.ags = {
     Unit = {
-      Description = "Restart hyprpanel service";
+      Description = "AGS (HyprPanel config from source)";
+      After = ["graphical-session.target"];
+      Wants = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
     };
     Service = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.systemd}/bin/systemctl --user restart hyprpanel.service";
-    };
-  };
-
-  # Path watcher to restart hyprpanel when config changes
-  systemd.user.paths.hyprpanel-config-watcher = {
-    Unit = {
-      Description = "Watch hyprpanel config file for changes";
-    };
-    Path = {
-      # Watch both the file and the directory to catch file recreations
-      PathModified = "%h/.config/hyprpanel/config.json";
-      PathChanged = "%h/.config/hyprpanel";
-      Unit = "hyprpanel-restart.service";
+      ExecStart = lib.getExe agsRunScript;
+      Environment = [
+        "HYPRPANEL_CONFIG_DIR=${agsProjectPath}/config"
+        "HYPRPANEL_BRIGHTNESS_CONTROL=${brightnessControlExe}"
+      ];
+      KillMode = "mixed";
+      TimeoutStopSec = 2;
+      Restart = "on-failure";
+      RestartSec = 1;
     };
     Install = {
       WantedBy = ["graphical-session.target"];
     };
   };
 
-  systemd.user.services.hyprpanel = {
-    Service = {
-      RestartSec = 1;
-      TimeoutStopSec = 1;
-    };
+  systemd.user.services.ags-watch = {
     Unit = {
-      # Disable automatic restarts on config changes
-      X-Restart-Triggers = lib.mkForce [];
+      Description = "Watch AGS HyprPanel source and restart AGS on change";
+      After = ["graphical-session.target"];
+      Wants = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.bash}/bin/bash ${agsWatchScript}";
+      Restart = "always";
+      RestartSec = 1;
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
     };
   };
-
-  # Add missing required dependencies for HyprPanel
-  home.packages = with pkgs; [
-    # Required dependencies
-    libgtop
-    gnome.gvfs
-    gtksourceview # gtksourceview3 maps to gtksourceview
-    libsoup_3 # libsoup3 maps to libsoup_3
-
-    # Optional dependencies
-    python312Packages.gpustat # python-gpustat for GPU usage tracking
-    wf-recorder # For built-in screen recorder
-    power-profiles-daemon # Switch power profiles
-  ];
 }

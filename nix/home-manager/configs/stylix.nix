@@ -212,14 +212,6 @@ in {
     };
   };
 
-  programs.hyprpanel = {
-    settings = lib.importJSON "${pkgs.hyprpanel}/share/themes/${
-      if currentThemeConfig != null
-      then currentThemeConfig.hyprpanelTheme
-      else themeConfigs.default.dark.hyprpanelTheme
-    }.json";
-  };
-
   wayland.windowManager.hyprland.settings.group.groupbar = {
     # white text on green background
     "col.active" = lib.mkForce "rgb(${config.lib.stylix.colors.base0C})";

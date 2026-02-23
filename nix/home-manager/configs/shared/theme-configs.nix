@@ -1,6 +1,6 @@
 # Centralized theme configuration
 # This is the single source of truth for all theme mappings across the system
-# Used by stylix.nix, hyprpanel.nix, and any other theme-aware configurations
+# Used by stylix.nix and any other theme-aware configurations
 # to get the theme name: https://github.com/tinted-theming/schemes
 # to get hyprpanel themes: https://github.com/Jas-SinghFSU/HyprPanel/tree/master/themes
 {

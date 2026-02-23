@@ -72,9 +72,6 @@
       flake = false;
     };
     stylix = {url = "github:nix-community/stylix";};
-    hyprpanel = {
-      url = "github:cunbidun/HyprPanel";
-    };
 
     nix-monitored = {
       url = "github:ners/nix-monitored";

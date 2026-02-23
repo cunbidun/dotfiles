@@ -60,3 +60,9 @@ result
 secrets/*.dec
 secrets/*.backup
 secrets/*.bak
+
+# Keep vendored HyprPanel sources available to flakes/Nix builds.
+!nix/hyprpanel/src/lib/
+!nix/hyprpanel/src/lib/**
+!nix/hyprpanel/src/**/types/
+!nix/hyprpanel/src/**/types/**
