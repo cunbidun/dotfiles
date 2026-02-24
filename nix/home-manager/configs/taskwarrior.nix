@@ -10,6 +10,7 @@ in {
   home.packages = with pkgs; [
     taskwarrior3
     timewarrior
+    python3
   ];
 
   home.sessionVariables = {
@@ -30,46 +31,9 @@ in {
     data.location=${timewarriorDataDir}
   '';
 
-  # Taskwarrior hook: start/stop Timewarrior whenever task start state changes.
+  # Official upstream Taskwarrior hook shipped by Timewarrior docs.
   home.file.".local/share/task/hooks/on-modify.timewarrior" = {
     executable = true;
-    text = ''
-      #!${pkgs.bash}/bin/bash
-      set -euo pipefail
-
-      old_json="$(${pkgs.coreutils}/bin/head -n1)"
-      new_json="$(${pkgs.coreutils}/bin/head -n1)"
-
-      # Pass through task JSON no matter what.
-      passthrough() {
-        printf '%s\n' "$new_json"
-      }
-
-      old_uuid="$(${pkgs.jq}/bin/jq -r '.uuid // empty' <<<"$old_json")"
-      new_uuid="$(${pkgs.jq}/bin/jq -r '.uuid // empty' <<<"$new_json")"
-      old_start="$(${pkgs.jq}/bin/jq -r '.start // empty' <<<"$old_json")"
-      new_start="$(${pkgs.jq}/bin/jq -r '.start // empty' <<<"$new_json")"
-
-      # Build a conservative tag set for time tracking.
-      project_tag="$(${pkgs.jq}/bin/jq -r '.project // empty' <<<"$new_json")"
-      description_tag="$(${pkgs.jq}/bin/jq -r '.description // empty' <<<"$new_json" | ${pkgs.gnused}/bin/sed 's/[^[:alnum:]]\+/_/g' | ${pkgs.coreutils}/bin/cut -c1-40)"
-
-      if [[ -z "$old_start" && -n "$new_start" ]]; then
-        tags=("+task")
-        [[ -n "$new_uuid" ]] && tags+=("+uuid_''${new_uuid}")
-        [[ -n "$project_tag" ]] && tags+=("+project_''${project_tag}")
-        [[ -n "$description_tag" ]] && tags+=("+task_''${description_tag}")
-        ${pkgs.timewarrior}/bin/timew start :yes "''${tags[@]}" >/dev/null 2>&1 || true
-      elif [[ -n "$old_start" && -z "$new_start" ]]; then
-        # Stop only the interval that carries this task UUID tag.
-        if [[ -n "$old_uuid" ]]; then
-          ${pkgs.timewarrior}/bin/timew stop :yes +uuid_"''${old_uuid}" >/dev/null 2>&1 || true
-        else
-          ${pkgs.timewarrior}/bin/timew stop :yes >/dev/null 2>&1 || true
-        fi
-      fi
-
-      passthrough
-    '';
+    source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
   };
 }
