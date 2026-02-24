@@ -65,8 +65,12 @@ in {
 
       (
         export TASK_AUTOSYNC_HOOK=1
-        exec ${pkgs.taskwarrior3}/bin/task rc.hooks=0 rc.verbose=nothing sync
-      ) >/dev/null 2>&1 &
+        export TASKRC="${config.xdg.configHome}/task/taskrc"
+        export TASKDATA="${taskDataDir}"
+        ${pkgs.coreutils}/bin/mkdir -p "${config.xdg.stateHome}"
+        ${pkgs.taskwarrior3}/bin/task rc.hooks=0 rc.verbose=nothing sync \
+          >>"${config.xdg.stateHome}/task-autosync.log" 2>&1
+      ) &
     '';
   };
 }
