@@ -38,6 +38,7 @@ in {
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/chromium.nix
     ../../home-manager/configs/minecraft.nix
+    ../../home-manager/configs/taskwarrior.nix
     ../../home-manager/configs/shared/git.nix
   ];
 

@@ -1,4 +1,4 @@
-import { bind, Variable } from 'astal';
+import { bind, timeout, Variable } from 'astal';
 import { App, Widget } from 'astal/gtk3';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 import AstalWp from 'gi://AstalWp?version=0.1';
@@ -80,9 +80,6 @@ export const revealerSetup = (self: Widget.Revealer): void => {
         osdController.show(FEEDBACK_MS);
     };
 
-    self.hook(enable, () => {
-        osdController.show();
-    });
     self.hook(brightnessService, 'notify::screen', () => {
         setOsdContext('brightness');
         pulseBriefly();
@@ -94,9 +91,18 @@ export const revealerSetup = (self: Widget.Revealer): void => {
         showFeedbackPopup();
     });
 
+    let speakerFeedbackReady = false;
+    // Ignore startup signal bursts from WirePlumber when AGS reloads.
+    const speakerStartupGuard = timeout(1200, () => {
+        speakerFeedbackReady = true;
+    });
     const speakerBinding = Variable.derive(
         [bind(audioService.defaultSpeaker, 'volume'), bind(audioService.defaultSpeaker, 'mute')],
         () => {
+            if (!speakerFeedbackReady) {
+                return;
+            }
+
             setOsdContext('volume');
             pulseBriefly();
             showFeedbackPopup();
@@ -104,6 +110,7 @@ export const revealerSetup = (self: Widget.Revealer): void => {
     );
 
     self.connect('destroy', () => {
+        speakerStartupGuard.cancel();
         speakerBinding.drop();
         osdController.onRevealerDestroy(self);
     });
