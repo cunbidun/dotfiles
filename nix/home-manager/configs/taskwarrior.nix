@@ -43,4 +43,30 @@ in {
     executable = true;
     source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
   };
+
+  # Auto-sync after each task edit (add/modify/start/stop/done/delete).
+  home.file.".local/share/task/hooks/on-modify.sync" = {
+    executable = true;
+    text = ''
+      #!${pkgs.bash}/bin/bash
+      set -euo pipefail
+
+      # Hook protocol: first line is "old", second line is "new".
+      old_json="$(${pkgs.coreutils}/bin/head -n1)"
+      new_json="$(${pkgs.coreutils}/bin/head -n1)"
+
+      # Always pass the new task object through.
+      printf '%s\n' "$new_json"
+
+      # Avoid recursive hook invocations and keep edits snappy.
+      if [[ "''${TASK_AUTOSYNC_HOOK:-0}" = "1" ]]; then
+        exit 0
+      fi
+
+      (
+        export TASK_AUTOSYNC_HOOK=1
+        exec ${pkgs.taskwarrior3}/bin/task rc.hooks=0 rc.verbose=nothing sync
+      ) >/dev/null 2>&1 &
+    '';
+  };
 }
