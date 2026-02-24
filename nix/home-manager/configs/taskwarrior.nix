@@ -50,12 +50,14 @@ in {
       #!${pkgs.bash}/bin/bash
       set -euo pipefail
 
-      # Hook protocol: first line is "old", second line is "new".
-      old_json="$(${pkgs.coreutils}/bin/head -n1)"
-      new_json="$(${pkgs.coreutils}/bin/head -n1)"
-
-      # Always pass the new task object through.
-      printf '%s\n' "$new_json"
+      # Hook input can vary by operation; always pass through one JSON task.
+      input="$(${pkgs.coreutils}/bin/cat)"
+      if [[ -n "$input" ]]; then
+        passthrough_json="$(printf '%s\n' "$input" | ${pkgs.coreutils}/bin/tail -n1)"
+      else
+        passthrough_json='{"description":"","status":"pending"}'
+      fi
+      printf '%s\n' "$passthrough_json"
 
       # Avoid recursive hook invocations and keep edits snappy.
       if [[ "''${TASK_AUTOSYNC_HOOK:-0}" = "1" ]]; then
