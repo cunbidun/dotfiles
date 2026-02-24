@@ -44,33 +44,6 @@ in {
     source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
   };
 
-  # Auto-sync after each task edit (add/modify/start/stop/done/delete).
-  home.file.".local/share/task/hooks/on-add.sync" = {
-    executable = true;
-    text = ''
-      #!${pkgs.bash}/bin/bash
-      set -euo pipefail
-
-      # Hook protocol: on-add receives only the new task JSON.
-      new_json="$(${pkgs.coreutils}/bin/head -n1)"
-      printf '%s\n' "$new_json"
-
-      # Avoid recursive hook invocations and keep edits snappy.
-      if [[ "''${TASK_AUTOSYNC_HOOK:-0}" = "1" ]]; then
-        exit 0
-      fi
-
-      (
-        export TASK_AUTOSYNC_HOOK=1
-        export TASKRC="${config.xdg.configHome}/task/taskrc"
-        export TASKDATA="${taskDataDir}"
-        ${pkgs.coreutils}/bin/mkdir -p "${config.xdg.stateHome}"
-        ${pkgs.taskwarrior3}/bin/task rc.hooks=0 rc.verbose=nothing sync \
-          >>"${config.xdg.stateHome}/task-autosync.log" 2>&1
-      ) &
-    '';
-  };
-
   home.file.".local/share/task/hooks/on-modify.sync" = {
     executable = true;
     text = ''
@@ -98,5 +71,33 @@ in {
           >>"${config.xdg.stateHome}/task-autosync.log" 2>&1
       ) &
     '';
+  };
+
+  systemd.user.services.taskwarrior-sync = {
+    Unit = {
+      Description = "Taskwarrior periodic sync";
+    };
+    Service = {
+      Type = "oneshot";
+      Environment = [
+        "TASKRC=${config.xdg.configHome}/task/taskrc"
+        "TASKDATA=${taskDataDir}"
+      ];
+      ExecStart = "${pkgs.taskwarrior3}/bin/task rc.hooks=0 rc.verbose=nothing sync";
+    };
+  };
+
+  systemd.user.timers.taskwarrior-sync = {
+    Unit = {
+      Description = "Run Taskwarrior sync every 3 seconds";
+    };
+    Timer = {
+      OnBootSec = "3s";
+      OnUnitActiveSec = "3s";
+      Unit = "taskwarrior-sync.service";
+    };
+    Install = {
+      WantedBy = ["timers.target"];
+    };
   };
 }
