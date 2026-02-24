@@ -29,8 +29,8 @@ in {
     # TaskChampion sync server
     sync.server.url=http://home-server.${userdata.tailnetDomain}:10222
     sync.server.client_id=9f4cf274-651d-4c8b-a6b7-1a8ddf4af7bc
-    # Set this to the same secret on every replica:
-    # sync.encryption_secret=REPLACE_ME
+    # Required by Taskwarrior server sync; plaintext here by design for trusted env.
+    sync.encryption_secret=trusted-tailnet-sync-secret
   '';
 
   # Keep default Timewarrior config path declarative and pin its data location.
