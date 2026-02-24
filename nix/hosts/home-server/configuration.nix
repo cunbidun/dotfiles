@@ -34,6 +34,15 @@
   services.tailscale.useRoutingFeatures = "client";
   services.tailscale.openFirewall = true;
 
+  # Taskwarrior 3 sync backend (TaskChampion server)
+  services.taskchampion-sync-server = {
+    enable = true;
+    host = "0.0.0.0";
+    port = 10222;
+    # Leave unrestricted for now; access control can be tightened by allowClientIds.
+    allowClientIds = [];
+  };
+
   # Firewall
   networking.firewall = {
     enable = true;
