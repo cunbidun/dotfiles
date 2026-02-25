@@ -7,7 +7,7 @@ import { BrightnessSlider } from './Slider';
 
 const canAdjustBrightness =
     SystemUtilities.runCommand(
-        'bash -lc \'command -v brightnessctl >/dev/null 2>&1\'',
+        'bash -lc \'command -v brightnessctl >/dev/null 2>&1 && brightnessctl --class=backlight -m >/dev/null 2>&1\'',
     ).exitCode === 0;
 
 const Brightness = (): JSX.Element => {
@@ -16,7 +16,7 @@ const Brightness = (): JSX.Element => {
             <box className={'menu-section-container brightness unavailable'} vertical>
                 <BrightnessHeader />
                 <box className={'menu-items-section'} valign={Gtk.Align.FILL} vexpand vertical>
-                    <label className={'dim'} hexpand label={'brightnessctl is missing'} />
+                    <label className={'dim'} hexpand label={'No backlight device found'} />
                 </box>
             </box>
         );
