@@ -26,7 +26,7 @@
     "uinput"
     "i2c-dev"
     "ddcci"
-    "ddcci_backlight"
+    "ddcci-backlight"
     "ip_tables"
     "iptable_nat"
   ];
