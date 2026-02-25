@@ -25,9 +25,12 @@
   boot.kernelModules = [
     "uinput"
     "i2c-dev"
+    "ddcci"
+    "ddcci_backlight"
     "ip_tables"
     "iptable_nat"
   ];
+  boot.extraModulePackages = [config.boot.kernelPackages.ddcci-driver];
   boot.blacklistedKernelModules = ["wacom"];
 
   networking.hostName = "nixos"; # Define your hostname.
