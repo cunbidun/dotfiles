@@ -7,7 +7,7 @@ if ! command -v brightnessctl >/dev/null 2>&1; then
     exit 0
 fi
 
-pct="$(brightnessctl --class=backlight -m 2>/dev/null | head -n1 | cut -d, -f4 | tr -d '%')"
+pct="$(brightnessctl -m 2>/dev/null | cut -d, -f4 | tr -d '%')"
 if ! printf "%s" "$pct" | grep -Eq "^[0-9]+$"; then
     pct=0
 fi
@@ -19,8 +19,8 @@ if [ "$pct" -gt 100 ]; then
 fi
 printf "{\\"percentage\\":%s}\\n" "$pct"
 '`;
-    const brightnessIncrease = `bash -lc 'command -v brightnessctl >/dev/null 2>&1 && brightnessctl --class=backlight set +5%'`;
-    const brightnessDecrease = `bash -lc 'command -v brightnessctl >/dev/null 2>&1 && brightnessctl --class=backlight set 5%-'`;
+    const brightnessIncrease = `bash -lc 'command -v brightnessctl >/dev/null 2>&1 && brightnessctl set +5%'`;
+    const brightnessDecrease = `bash -lc 'command -v brightnessctl >/dev/null 2>&1 && brightnessctl set 5%-'`;
 
     return {
         'custom/brightness': {

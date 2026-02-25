@@ -10,19 +10,7 @@ const resolveBrightnessCommand = (): string => {
 };
 
 const brightnessCommand = resolveBrightnessCommand();
-const brightnessArgs = '--class=backlight';
-const isBrightnessAvailable = (() => {
-    if (brightnessCommand.length === 0) {
-        return false;
-    }
-
-    try {
-        const out = exec(`bash -lc '"${brightnessCommand}" ${brightnessArgs} -m 2>/dev/null || true'`).trim();
-        return out.length > 0;
-    } catch {
-        return false;
-    }
-})();
+const isBrightnessAvailable = brightnessCommand.length > 0;
 const DEBUG_TAG = '[hyprpanel-brightness]';
 
 const readBrightnessPercent = (): number => {
@@ -31,7 +19,7 @@ const readBrightnessPercent = (): number => {
     }
 
     try {
-        const out = exec(`bash -lc '"${brightnessCommand}" ${brightnessArgs} -m 2>/dev/null || true'`).trim();
+        const out = exec(`bash -lc '"${brightnessCommand}" -m 2>/dev/null || true'`).trim();
         const fields = out.split(',');
         if (fields.length >= 4) {
             const percent = fields[3]?.replace('%', '').trim() ?? '';
@@ -144,7 +132,7 @@ export default class BrightnessService extends GObject.Object {
         console.log(
             `${DEBUG_TAG} set screen: current=${current} target=${target} arg=${adjustArg}`,
         );
-        SystemUtilities.bash`"${brightnessCommand}" ${brightnessArgs} set ${adjustArg}`.then(() => {
+        SystemUtilities.bash`"${brightnessCommand}" set ${adjustArg}`.then(() => {
             this.#syncScreen();
         });
     }
