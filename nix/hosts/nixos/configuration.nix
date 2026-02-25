@@ -107,6 +107,7 @@
     (with pkgs; [
       neovim
       git
+      brightnessctl
       _1password-cli
       sops
       xdg-desktop-portal-termfilechooser
