@@ -1,34 +1,58 @@
-import { bind } from 'astal';
+import { bind, Variable } from 'astal';
 import { Gtk } from 'astal/gtk3';
-import { cpuService, gpuService, handleClick, ramService, storageService } from './helpers';
+import { cpuService, gpuService, handleClick, networkService, ramService, storageService } from './helpers';
 import { Binding } from 'astal';
 import { renderResourceLabel } from 'src/components/bar/utils/systemResource';
 import options from 'src/configuration';
 import { isPrimaryClick } from 'src/lib/events/mouse';
+import { uptime } from 'src/services/system/uptime';
 
 const { enable_gpu } = options.menus.dashboard.stats;
+const loadAverage = Variable('').poll(5000, 'cut -d" " -f1-3 /proc/loadavg');
 
-const StatBar = ({ icon, value, label, stat }: StatBarProps): JSX.Element => {
-    return (
-        <box vertical>
-            <box className={`stat ${stat}`} valign={Gtk.Align.CENTER} hexpand>
-                <button>
-                    <label className={'txt-icon'} label={icon} />
-                </button>
-                <button
-                    onClick={(_, self) => {
-                        if (isPrimaryClick(self)) {
-                            handleClick();
-                        }
-                    }}
-                >
-                    <levelbar className={'stats-bar'} value={value} valign={Gtk.Align.CENTER} hexpand />
-                </button>
-            </box>
-            <box halign={Gtk.Align.END}>
-                <label className={`stat-value ${stat}`} label={label} />
-            </box>
+const usageTone = (percent: number): 'ok' | 'warn' | 'hot' => {
+    if (percent < 70) return 'ok';
+    if (percent < 90) return 'warn';
+    return 'hot';
+};
+
+const alignRate = (rate: string, width = 8): string => {
+    const clean = rate.trim();
+    if (clean.length >= width) {
+        return clean;
+    }
+    return `${' '.repeat(width - clean.length)}${clean}`;
+};
+
+const StatRow = ({ icon, title, value, stat, tone = 'ok', clickable = false }: StatRowProps): JSX.Element => {
+    const row = (
+        <box className={`stat-row ${stat}`} valign={Gtk.Align.CENTER} halign={Gtk.Align.FILL} hexpand>
+            <label className={'txt-icon stat-icon'} label={icon} />
+            <label className={'stat-title'} label={title} />
+            <label className={'stat-metric'} hexpand halign={Gtk.Align.END} xalign={1} label={value} />
         </box>
+    );
+
+    if (!clickable) {
+        return row;
+    }
+
+    const toneClassName =
+        typeof tone === 'string' ? `stat-row-btn ${tone}` : bind(tone).as((level) => `stat-row-btn ${level}`);
+
+    return (
+        <button
+            className={toneClassName}
+            hexpand
+            halign={Gtk.Align.FILL}
+            onClick={(_, event) => {
+                if (isPrimaryClick(event)) {
+                    handleClick();
+                }
+            }}
+        >
+            {row}
+        </button>
     );
 };
 
@@ -43,11 +67,13 @@ export const GpuStat = (): JSX.Element => {
                 gpuService.initialize();
 
                 return (
-                    <StatBar
+                    <StatRow
                         icon={'󰢮'}
                         stat={'gpu'}
-                        value={bind(gpuService.gpu)}
-                        label={bind(gpuService.gpu).as((gpuUsage) => `${Math.floor(gpuUsage * 100)}%`)}
+                        title={'GPU'}
+                        value={bind(gpuService.gpu).as((gpuUsage) => `${Math.floor(gpuUsage * 100)}%`)}
+                        tone={bind(gpuService.gpu).as((gpuUsage) => usageTone(Math.floor(gpuUsage * 100)))}
+                        clickable
                     />
                 );
             })}
@@ -59,11 +85,13 @@ export const CpuStat = (): JSX.Element => {
     cpuService.initialize();
 
     return (
-        <StatBar
+        <StatRow
             icon={''}
             stat={'cpu'}
-            value={bind(cpuService.cpu).as((cpuUsage) => Math.round(cpuUsage) / 100)}
-            label={bind(cpuService.cpu).as((cpuUsage) => `${Math.round(cpuUsage)}%`)}
+            title={'CPU'}
+            value={bind(cpuService.cpu).as((cpuUsage) => `${Math.round(cpuUsage)}%`)}
+            tone={bind(cpuService.cpu).as((cpuUsage) => usageTone(Math.round(cpuUsage)))}
+            clickable
         />
     );
 };
@@ -72,13 +100,13 @@ export const RamStat = (): JSX.Element => {
     ramService.initialize();
 
     return (
-        <StatBar
+        <StatRow
             icon={''}
             stat={'ram'}
-            value={bind(ramService.ram).as((ramUsage) => ramUsage.percentage / 100)}
-            label={bind(ramService.ram).as(
-                (ramUsage) => `${renderResourceLabel('used/total', ramUsage, true)}`,
-            )}
+            title={'RAM'}
+            value={bind(ramService.ram).as((ramUsage) => renderResourceLabel('used/total', ramUsage, true))}
+            tone={bind(ramService.ram).as((ramUsage) => usageTone(ramUsage.percentage))}
+            clickable
         />
     );
 };
@@ -87,20 +115,62 @@ export const StorageStat = (): JSX.Element => {
     storageService.initialize();
 
     return (
-        <StatBar
+        <StatRow
             icon={'󰋊'}
             stat={'storage'}
-            value={bind(storageService.storage).as((storageUsage) => storageUsage.percentage / 100)}
-            label={bind(storageService.storage).as((storageUsage) =>
-                renderResourceLabel('used/total', storageUsage, true),
-            )}
+            title={'Disk'}
+            value={bind(storageService.storage).as((storageUsage) => renderResourceLabel('used/total', storageUsage, true))}
+            tone={bind(storageService.storage).as((storageUsage) => usageTone(storageUsage.percentage))}
+            clickable
         />
     );
 };
 
-interface StatBarProps {
+export const NetworkStat = (): JSX.Element => {
+    networkService.initialize();
+
+    return (
+        <StatRow
+            icon={'󰤨'}
+            stat={'network'}
+            title={'Net'}
+            value={bind(networkService.network).as((net) => {
+                const inRate = alignRate(`↓ ${net.in}`, 10);
+                const outRate = alignRate(`↑ ${net.out}`, 10);
+                return `${inRate}   ${outRate}`;
+            })}
+        />
+    );
+};
+
+export const UptimeStat = (): JSX.Element => {
+    return (
+        <StatRow
+            icon={'󱫐'}
+            stat={'uptime'}
+            title={'Uptime'}
+            value={bind(uptime).as((mins) => {
+                const totalMins = Math.max(0, Math.floor(mins));
+                const days = Math.floor(totalMins / 1440);
+                const hours = Math.floor((totalMins % 1440) / 60);
+                const minutes = totalMins % 60;
+                if (days > 0) return `${days}d ${hours}h ${minutes}m`;
+                if (hours > 0) return `${hours}h ${minutes}m`;
+                return `${minutes}m`;
+            })}
+        />
+    );
+};
+
+export const LoadStat = (): JSX.Element => {
+    return <StatRow icon={'󰾆'} stat={'load'} title={'Load'} value={bind(loadAverage)} />;
+};
+
+interface StatRowProps {
     icon: string;
     stat: string;
-    value: Binding<number> | number;
-    label: Binding<string> | string;
+    title: string;
+    value: Binding<string> | string;
+    tone?: Binding<'ok' | 'warn' | 'hot'> | 'ok' | 'warn' | 'hot';
+    clickable?: boolean;
 }

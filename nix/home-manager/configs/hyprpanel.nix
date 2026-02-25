@@ -49,6 +49,7 @@
       networkmanager
       pywal
       procps
+      rocmPackages.rocm-smi
       swww
       upower
       wireplumber

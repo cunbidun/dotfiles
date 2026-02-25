@@ -2,18 +2,11 @@ import { Dependency } from './types';
 
 export const optionalDependencies: Dependency[] = [
     {
-        package: 'python',
+        package: 'rocm-smi',
         required: false,
         type: 'executable',
-        check: ['python', 'python3'],
-        description: 'GPU usage tracking (NVidia only)',
-    },
-    {
-        package: 'python-gpustat',
-        required: false,
-        type: 'executable',
-        check: ['gpustat'],
-        description: 'GPU usage tracking (NVidia only)',
+        check: ['rocm-smi'],
+        description: 'GPU usage tracking (AMD ROCm)',
     },
     {
         package: 'pywal',

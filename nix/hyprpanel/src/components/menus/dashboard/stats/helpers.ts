@@ -3,6 +3,7 @@ import { App } from 'astal/gtk3';
 import options from 'src/configuration';
 import CpuUsageService from 'src/services/system/cpuUsage';
 import GpuUsageService from 'src/services/system/gpuUsage';
+import NetworkUsageService from 'src/services/system/networkUsage';
 import RamUsageService from 'src/services/system/ramUsage';
 import StorageService from 'src/services/system/storage';
 
@@ -14,6 +15,7 @@ export const gpuService = new GpuUsageService();
 export const cpuService = new CpuUsageService();
 export const ramService = new RamUsageService();
 export const storageService = new StorageService({ pathsToMonitor: paths });
+export const networkService = new NetworkUsageService({ frequency: interval });
 
 /**
  * Handles the click event for the dashboard menu.
@@ -36,6 +38,7 @@ const monitorInterval = (): void => {
         ramService.updateTimer(interval.get());
         cpuService.updateTimer(interval.get());
         storageService.frequency = interval.get();
+        networkService.updateTimer(interval.get());
     });
 };
 
@@ -51,6 +54,7 @@ const monitorStatsEnabled = (): void => {
             cpuService.stopPoller();
             gpuService.stopPoller();
             storageService.stopPoller();
+            networkService.stopPoller();
             return;
         }
 
@@ -61,6 +65,7 @@ const monitorStatsEnabled = (): void => {
         ramService.startPoller();
         cpuService.startPoller();
         storageService.startPoller();
+        networkService.startPoller();
     });
 };
 
@@ -86,11 +91,13 @@ const monitorGpuTrackingEnabled = (): void => {
  */
 export const setupDashboardMonitoring = (): void => {
     storageService.round = true;
+    networkService.setShouldRound(true);
 
     if (enabled.get()) {
         ramService.startPoller();
         cpuService.startPoller();
         storageService.startPoller();
+        networkService.startPoller();
     }
 
     if (enabled.get() && enable_gpu.get()) {

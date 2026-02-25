@@ -68,8 +68,8 @@
       "submap": {
         "label": true,
         "showSubmapName": true,
-        "enabledIcon": "󰌐",
-        "disabledIcon": "󰌌",
+        "enabledIcon": "󰌌",
+        "disabledIcon": "󰌐",
         "enabledText": "Submap On",
         "disabledText": "Submap Off"
       }

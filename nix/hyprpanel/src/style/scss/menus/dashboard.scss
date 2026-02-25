@@ -3,13 +3,14 @@
 }
 
 .dashboard-content-items {
-    min-width: 25.2em;
+    min-width: 29.5em;
     min-height: 25.2em;
-    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-dashboard-background-color);
-    border: $bar-menus-border-size solid
-        if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-dashboard-border-color);
+    background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-dashboard-background-color), 0.08);
+    border: 1px solid
+        transparentize(if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-dashboard-border-color), 0.5);
     border-radius: $bar-menus-border-radius;
     opacity: $bar-menus-opacity * 0.01;
+    padding: 0.75em 0em;
 
     button {
         border-radius: $bar-menus-buttons-radius;
@@ -17,9 +18,10 @@
 
     .dashboard-card {
         background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-dashboard-card-color);
-        margin: 0em 1.3em;
+        margin: 0em 0.85em;
         border-radius: $bar-menus-card_radius;
-        padding: 1.5em;
+        border: 1px solid transparentize(#ffffff, 0.9);
+        padding: 1.2em;
     }
 
     .profile-picture-container {
@@ -230,8 +232,8 @@
         }
 
         .dashboard-control-left-column {
-            min-width: 10.8em;
-            margin-right: 0.55em;
+            min-width: 9.4em;
+            margin-right: 0.7em;
 
             button:not(:last-child) {
                 margin-bottom: 0.45em;
@@ -263,8 +265,8 @@
 
             .control-tile-title {
                 color: if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text);
-                font-size: 0.82em;
-                font-weight: 600;
+                font-size: 0.96em;
+                font-weight: 700;
             }
 
             .control-tile-subtitle {
@@ -332,7 +334,8 @@
                 $bar-menus-menu-dashboard-controls-volume-background
             );
             border-radius: $bar-menus-buttons-radius;
-            padding: 0.5em 0.55em;
+            min-width: 13.8em;
+            padding: 0.5em 0.7em;
             min-height: 7.15em;
 
             .dashboard-control-audio-header {
@@ -361,7 +364,7 @@
                             $bar-menus-buttons-text,
                             $bar-menus-menu-dashboard-controls-wifi-text
                         );
-                        font-size: 0.85em;
+                        font-size: 0.96em;
                         font-weight: 700;
                     }
 
@@ -628,139 +631,43 @@
 
     .stats-container {
         margin-top: 0em;
+        padding: 0.9em 1em;
 
-        .stat {
-            label {
-                margin-right: 0.75em;
-                font-size: 1.3em;
-                min-width: 1.65em;
+        .stat-row-btn {
+            background: transparent;
+            padding: 0;
+            min-height: 1.7em;
+
+            &.warn .stat-metric {
+                color: #f2cf64;
             }
 
-            &.cpu label {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-icons-active,
-                    $bar-menus-menu-dashboard-monitors-cpu-icon
-                );
-            }
-
-            &.ram label {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-icons-active,
-                    $bar-menus-menu-dashboard-monitors-ram-icon
-                );
-            }
-
-            &.gpu label {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-icons-active,
-                    $bar-menus-menu-dashboard-monitors-gpu-icon
-                );
-            }
-
-            &.storage label {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-icons-active,
-                    $bar-menus-menu-dashboard-monitors-disk-icon
-                );
-            }
-
-            .stats-bar {
-                levelbar * {
-                    transition: 200ms;
-                }
-
-                trough {
-                    min-height: 1.05em;
-                }
-
-                block {
-                    border-radius: $bar-menus-progressbar-radius;
-
-                    &.empty {
-                        background: if(
-                            $bar-menus-monochrome,
-                            $bar-menus-progressbar-background,
-                            $bar-menus-menu-dashboard-monitors-bar_background
-                        );
-                    }
-
-                    &.filled {
-                        padding-left: 0.85em;
-                    }
-                }
-            }
-
-            &.cpu .stats-bar block.filled {
-                background: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-progressbar-foreground,
-                    $bar-menus-menu-dashboard-monitors-cpu-bar
-                );
-            }
-
-            &.ram .stats-bar block.filled {
-                background: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-progressbar-foreground,
-                    $bar-menus-menu-dashboard-monitors-ram-bar
-                );
-            }
-
-            &.gpu .stats-bar block.filled {
-                background: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-progressbar-foreground,
-                    $bar-menus-menu-dashboard-monitors-gpu-bar
-                );
-            }
-
-            &.storage .stats-bar block.filled {
-                background: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-progressbar-foreground,
-                    $bar-menus-menu-dashboard-monitors-disk-bar
-                );
+            &.hot .stat-metric {
+                color: #ff7e79;
             }
         }
 
-        .stat-value {
-            margin-bottom: 0.5em;
-            font-size: 0.9em;
+        .stat-row {
+            min-height: 1.7em;
+            margin-top: 0.18em;
+            margin-bottom: 0.18em;
 
-            &.cpu {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-label,
-                    $bar-menus-menu-dashboard-monitors-cpu-label
-                );
+            .stat-icon {
+                min-width: 1.45em;
+                margin-right: 0.35em;
+                font-size: 1.08em;
             }
 
-            &.ram {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-label,
-                    $bar-menus-menu-dashboard-monitors-ram-label
-                );
+            .stat-title {
+                font-size: 0.96em;
+                font-weight: 700;
+                margin-right: 0.2em;
             }
 
-            &.gpu {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-label,
-                    $bar-menus-menu-dashboard-monitors-gpu-label
-                );
-            }
-
-            &.storage {
-                color: if(
-                    $bar-menus-monochrome,
-                    $bar-menus-label,
-                    $bar-menus-menu-dashboard-monitors-disk-label
-                );
+            .stat-metric {
+                font-size: 0.92em;
+                margin-bottom: 0em;
+                font-family: 'JetBrainsMono Nerd Font Propo', monospace;
             }
         }
     }
@@ -768,12 +675,12 @@
 
 .dashboard-content-items > :not(:first-child):not(:last-child) {
     margin-top: 0;
-    margin-bottom: 0.65em;
+    margin-bottom: 0.55em;
 }
 
 .dashboard-content-items > :first-child {
-    margin-top: 1.3em;
-    margin-bottom: 0.65em;
+    margin-top: 0.9em;
+    margin-bottom: 0.55em;
 }
 
 .dashboard-content-items > :last-child {

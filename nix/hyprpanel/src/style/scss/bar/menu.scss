@@ -1,6 +1,10 @@
 .bar-menu_label {
     color: if($bar-buttons-monochrome, $bar-buttons-icon, $bar-buttons-dashboard-icon);
-    font-size: 1.5em;
+    font-size: 1.25em;
+    min-width: 1.2em;
+    min-height: 1.2em;
+    padding-left: 0.04em;
+    padding-right: 0.04em;
     border-radius: $bar-buttons-radius;
 }
 

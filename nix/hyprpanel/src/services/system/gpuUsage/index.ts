@@ -1,9 +1,41 @@
 import { bind, exec, Variable } from 'astal';
 import { FunctionPoller } from 'src/lib/poller/FunctionPoller';
-import { GpuServiceCtor, GPUStat } from './types';
+import { GpuServiceCtor } from './types';
+
+const resolveRocmSmiCommand = (): string => {
+    try {
+        const detected = exec("bash -lc 'command -v rocm-smi || true'").trim();
+        if (detected.length > 0) {
+            return detected;
+        }
+    } catch {
+        // Fall through to static guesses.
+    }
+
+    try {
+        const user = exec("bash -lc 'printf %s \"${USER:-}\"'").trim();
+        const guesses = [
+            user ? `/etc/profiles/per-user/${user}/bin/rocm-smi` : '',
+            '/run/current-system/sw/bin/rocm-smi',
+        ].filter((path) => path.length > 0);
+
+        for (const guess of guesses) {
+            const exists = exec(`bash -lc 'test -x "${guess}" && echo yes || true'`).trim();
+            if (exists === 'yes') {
+                return guess;
+            }
+        }
+    } catch {
+        return '';
+    }
+
+    return '';
+};
+
+const rocmSmiCommand = resolveRocmSmiCommand();
 
 /**
- * Service for monitoring GPU usage percentage using gpustat
+ * Service for monitoring GPU usage percentage using ROCm SMI.
  */
 class GpuUsageService {
     private _updateFrequency: Variable<number>;
@@ -41,26 +73,45 @@ class GpuUsageService {
     }
 
     /**
-     * Calculates average GPU usage across all available GPUs
+     * Calculates average GPU usage across all available GPUs.
      *
      * @returns GPU usage as a decimal between 0 and 1
      */
     private _calculateUsage(): number {
         try {
-            const gpuStats = exec('gpustat --json');
-            if (typeof gpuStats !== 'string') {
+            if (!rocmSmiCommand) {
                 return 0;
             }
 
-            const data = JSON.parse(gpuStats);
+            const output = exec(`"${rocmSmiCommand}" --showuse --json`);
+            if (typeof output !== 'string') {
+                return 0;
+            }
 
-            const totalGpu = 100;
-            const usedGpu =
-                data.gpus.reduce((acc: number, gpu: GPUStat) => {
-                    return acc + gpu['utilization.gpu'];
-                }, 0) / data.gpus.length;
+            const jsonLine = output
+                .split('\n')
+                .map((line) => line.trim())
+                .find((line) => line.startsWith('{') && line.endsWith('}'));
+            if (!jsonLine) {
+                return 0;
+            }
 
-            return this._divide([totalGpu, usedGpu]);
+            const data = JSON.parse(jsonLine) as Record<string, Record<string, string | number>>;
+            const cards = Object.values(data);
+            if (!cards.length) {
+                return 0;
+            }
+
+            const usageValues = cards
+                .map((card) => Number(card['GPU use (%)']))
+                .filter((value) => Number.isFinite(value));
+            if (!usageValues.length) {
+                return 0;
+            }
+
+            const usedGpu = usageValues.reduce((acc, value) => acc + value, 0) / usageValues.length;
+
+            return this._percentToDecimal(usedGpu);
         } catch (error) {
             if (error instanceof Error) {
                 console.error('Error getting GPU stats:', error.message);
@@ -72,13 +123,11 @@ class GpuUsageService {
     }
 
     /**
-     * Converts usage percentage to decimal
-     *
-     * @param values - Tuple of [total, used] values
-     * @returns Usage as decimal between 0 and 1
+     * Converts usage percentage [0..100] to decimal [0..1].
      */
-    private _divide([total, free]: number[]): number {
-        return free / total;
+    private _percentToDecimal(percent: number): number {
+        const clamped = Math.max(0, Math.min(100, percent));
+        return clamped / 100;
     }
 
     /**

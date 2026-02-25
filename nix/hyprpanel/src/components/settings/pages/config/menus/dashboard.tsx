@@ -63,7 +63,7 @@ export const DashboardMenuSettings = (): JSX.Element => {
                 <Option
                     opt={options.menus.dashboard.stats.enable_gpu}
                     title="Track GPU"
-                    subtitle="Only for NVidia + python-gpustat"
+                    subtitle="Uses rocm-smi for AMD GPU usage"
                     type="boolean"
                 />
                 <Option

@@ -15,7 +15,7 @@ export default {
     stats: {
         enabled: opt(true),
         interval: opt(2000),
-        enable_gpu: opt(false),
+        enable_gpu: opt(true),
     },
     recording: {
         path: opt('$HOME/Videos/Screencasts'),
