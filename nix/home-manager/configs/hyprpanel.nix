@@ -4,8 +4,6 @@
   config,
   ...
 }: let
-  scripts = import ../scripts.nix {inherit pkgs;};
-  brightnessControlExe = lib.getExe scripts.brightness-control;
   repoPath = "${config.home.homeDirectory}/dotfiles/nix/hyprpanel";
   agsProjectPath = "${config.home.homeDirectory}/.config/ags/hyprpanel";
   stylixStatePath = "${config.home.homeDirectory}/.local/state/stylix";
@@ -32,7 +30,6 @@
       bash
       btop
       coreutils
-      ddcutil
       dart-sass
       findutils
       glib
@@ -160,7 +157,6 @@ in {
       ExecStart = lib.getExe agsRunScript;
       Environment = [
         "HYPRPANEL_CONFIG_DIR=${agsProjectPath}/config"
-        "HYPRPANEL_BRIGHTNESS_CONTROL=${brightnessControlExe}"
       ];
       KillMode = "mixed";
       TimeoutStopSec = 2;

@@ -114,8 +114,6 @@ in rec {
     # System
     pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
     pkgs.libnotify # A library for sending desktop notifications
-    pkgs.ddcutil # A monitor control tool
-
     # Shell
     pkgs.obs-studio # A free and open-source video recording and live streaming software
     pkgs.lazygit # A simple terminal UI for git commands

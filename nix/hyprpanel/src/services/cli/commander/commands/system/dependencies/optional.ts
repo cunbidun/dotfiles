@@ -51,10 +51,10 @@ export const optionalDependencies: Dependency[] = [
         description: 'For the snapshot shortcut',
     },
     {
-        package: 'brightness-control',
+        package: 'brightnessctl',
         required: false,
         type: 'executable',
-        check: ['brightness-control'],
+        check: ['brightnessctl'],
         description: 'To control monitor brightness',
     },
     {

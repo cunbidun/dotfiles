@@ -3,9 +3,7 @@ import { SystemUtilities } from 'src/core/system/SystemUtilities';
 
 const resolveBrightnessCommand = (): string => {
     try {
-        return exec(
-            "bash -lc 'if [ -n \"$HYPRPANEL_BRIGHTNESS_CONTROL\" ] && [ -x \"$HYPRPANEL_BRIGHTNESS_CONTROL\" ]; then printf \"%s\" \"$HYPRPANEL_BRIGHTNESS_CONTROL\"; elif command -v brightness-control >/dev/null 2>&1; then command -v brightness-control; fi'",
-        ).trim();
+        return exec("bash -lc 'command -v brightnessctl || true'").trim();
     } catch {
         return '';
     }
@@ -20,17 +18,13 @@ const readBrightnessPercent = (): number => {
     }
 
     try {
-        const out = exec(
-            `bash -lc '"${brightnessCommand}" get 2>/dev/null || "${brightnessCommand}" get json 2>/dev/null || true'`,
-        ).trim();
-
-        if (/^\d+$/.test(out)) {
-            return Number(out);
-        }
-
-        const jsonMatch = out.match(/"percentage"\s*:\s*(\d+)/);
-        if (jsonMatch?.[1] !== undefined) {
-            return Number(jsonMatch[1]);
+        const out = exec(`bash -lc '"${brightnessCommand}" -m 2>/dev/null || true'`).trim();
+        const fields = out.split(',');
+        if (fields.length >= 4) {
+            const percent = fields[3]?.replace('%', '').trim() ?? '';
+            if (/^\d+$/.test(percent)) {
+                return Number(percent);
+            }
         }
     } catch {
         return 0;
@@ -40,7 +34,7 @@ const readBrightnessPercent = (): number => {
 };
 
 /**
- * Service for managing brightness via brightness-control.
+ * Service for managing brightness via brightnessctl.
  */
 @register({ GTypeName: 'Brightness' })
 export default class BrightnessService extends GObject.Object {
@@ -128,10 +122,9 @@ export default class BrightnessService extends GObject.Object {
         const delta = target - current;
         if (delta === 0) return;
 
-        const cmd = delta > 0 ? 'increase' : 'decrease';
         const amount = Math.abs(delta);
-
-        SystemUtilities.bash`"${brightnessCommand}" ${cmd} ${amount}`.then(() => {
+        const adjustArg = delta > 0 ? `+${amount}%` : `${amount}%-`;
+        SystemUtilities.bash`"${brightnessCommand}" set ${adjustArg}`.then(() => {
             this.#syncScreen();
         });
     }

@@ -229,8 +229,8 @@ in {
       # bind = $mainMod SHIFT, Q, exec, touch ~/dotfiles/window_manager/hyprland/linux/.config/hypr/hyprland.conf
 
       # Media
-      bindle=,XF86MonBrightnessDown, exec, ${lib.getExe scripts.brightness-control} decrease 5
-      bindle=,XF86MonBrightnessUp, exec, ${lib.getExe scripts.brightness-control} increase 5
+      bindle=,XF86MonBrightnessDown, exec, brightnessctl set 5%-
+      bindle=,XF86MonBrightnessUp, exec, brightnessctl set +5%
 
       # Move focus with mainMod + arrow keys
       bind = $mainMod, h, movefocus, l
