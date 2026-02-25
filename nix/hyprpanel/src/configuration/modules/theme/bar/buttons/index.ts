@@ -16,7 +16,6 @@ import separator from './separator';
 import worldclock from './worldclock';
 import cava from './cava';
 import hypridle from './hypridle';
-import hyprsunset from './hyprsunset';
 import submap from './submap';
 import power from './power';
 import weather from './weather';
@@ -73,7 +72,6 @@ export default {
         weather: weather,
         power: power,
         submap: submap,
-        hyprsunset: hyprsunset,
         hypridle: hypridle,
         cava: cava,
         worldclock: worldclock,

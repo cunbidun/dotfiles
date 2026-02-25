@@ -5,7 +5,6 @@ import { Clock } from '../modules/clock';
 import { Cpu } from '../modules/cpu';
 import { CpuTemp } from '../modules/cputemp';
 import { Hypridle } from '../modules/hypridle';
-import { Hyprsunset } from '../modules/hyprsunset';
 import { KbInput } from '../modules/kblayout';
 import { Media } from '../modules/media';
 import { Menu } from '../modules/menu';
@@ -52,7 +51,6 @@ export function getCoreWidgets(): Record<string, WidgetFactory> {
         submap: () => WidgetContainer(Submap()),
         weather: () => WidgetContainer(Weather()),
         power: () => WidgetContainer(Power()),
-        hyprsunset: () => WidgetContainer(Hyprsunset()),
         hypridle: () => WidgetContainer(Hypridle()),
         cava: () => WidgetContainer(Cava()),
         worldclock: () => WidgetContainer(WorldClock()),

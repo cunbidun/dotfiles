@@ -359,31 +359,6 @@ $style-module-defaults: (
 
 /*
  * #################################
- * #      Hyprsunset Styling       #
- * #################################
- */
-@include styleModule(
-    'hyprsunset',
-    (
-        'text-color': $bar-buttons-modules-hyprsunset-text,
-        'icon-color': $bar-buttons-modules-hyprsunset-icon,
-        'icon-background': $bar-buttons-modules-hyprsunset-icon_background,
-        'label-background': $bar-buttons-modules-hyprsunset-background,
-        'inner-spacing': $bar-buttons-modules-hyprsunset-spacing,
-        'border-enabled': $bar-buttons-modules-hyprsunset-enableBorder,
-        'border-color': $bar-buttons-modules-hyprsunset-border,
-        'icon-size': 1.15em,
-    )
-);
-
-.module-icon.hyprsunset {
-    min-height: 1em;
-    min-width: 0.9em;
-    margin-top: 0.02em;
-}
-
-/*
- * #################################
  * #       Hypridle Styling        #
  * #################################
  */

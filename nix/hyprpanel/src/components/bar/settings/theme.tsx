@@ -217,30 +217,6 @@ export const CustomModuleTheme = (): JSX.Element => {
                 />
                 <Option opt={options.theme.bar.buttons.modules.weather.border} title="Border" type="color" />
 
-                {/* Hyprsunset Module Section */}
-                <Header title="Hyprsunset" />
-                <Option opt={options.theme.bar.buttons.modules.hyprsunset.text} title="Text" type="color" />
-                <Option opt={options.theme.bar.buttons.modules.hyprsunset.icon} title="Icon" type="color" />
-                <Option
-                    opt={options.theme.bar.buttons.modules.hyprsunset.background}
-                    title="Label Background"
-                    type="color"
-                />
-                <Option
-                    opt={options.theme.bar.buttons.modules.hyprsunset.icon_background}
-                    title="Icon Background"
-                    subtitle={
-                        'Applies a background color to the icon section of the button.\n' +
-                        "Requires 'split' button styling."
-                    }
-                    type="color"
-                />
-                <Option
-                    opt={options.theme.bar.buttons.modules.hyprsunset.border}
-                    title="Border"
-                    type="color"
-                />
-
                 {/* Hypridle Module Section */}
                 <Header title="Hypridle" />
                 <Option opt={options.theme.bar.buttons.modules.hypridle.text} title="Text" type="color" />

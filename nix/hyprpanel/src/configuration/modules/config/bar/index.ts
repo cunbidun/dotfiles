@@ -7,7 +7,6 @@ import clock from './clock';
 import cpu from './cpu';
 import cpuTemp from './cpuTemp';
 import hypridle from './hypridle';
-import hyprsunset from './hyprsunset';
 import kbLayout from './kbLayout';
 import launcher from './launcher';
 import layouts from './layouts';
@@ -56,7 +55,6 @@ export default {
         submap,
         weather,
         power,
-        hyprsunset,
         hypridle,
         cava,
         worldclock,

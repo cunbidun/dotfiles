@@ -75,11 +75,17 @@ in {
   };
   services.gammastep = {
     enable = true;
+    tray = false;
     provider = "geoclue2";
     temperature = {
       day = 6000;
     };
   };
+
+  # Ensure old user-enabled tray applet doesn't keep autostarting.
+  home.activation.disableGammastepIndicator = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    run systemctl --user disable --now gammastep-indicator.service >/dev/null 2>&1 || true
+  '';
 
   # +--------------------+
   # |    Linux Config    |
