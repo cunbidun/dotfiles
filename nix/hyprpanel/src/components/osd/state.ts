@@ -13,6 +13,7 @@ export const setOsdContext = (nextContext: OsdContext): void => {
 
 export const pulseBarLauncherIcon = (holdMs?: number): void => {
     const effectiveHoldMs = holdMs ?? BAR_LAUNCHER_ICON_HOLD_MS;
+    console.log(`[hyprpanel-osd] pulse launcher icon: hold=${effectiveHoldMs}ms context=${osdContext.get()}`);
     barLauncherDynamicActive.set(true);
 
     if (clearBarLauncherOverrideTimeout) {

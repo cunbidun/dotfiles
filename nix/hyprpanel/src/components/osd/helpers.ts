@@ -81,11 +81,13 @@ export const revealerSetup = (self: Widget.Revealer): void => {
     };
 
     self.hook(brightnessService, 'notify::screen', () => {
+        console.log('[hyprpanel-osd] notify::screen received');
         setOsdContext('brightness');
         pulseBriefly();
         showFeedbackPopup();
     });
     self.hook(brightnessService, 'notify::kbd', () => {
+        console.log('[hyprpanel-osd] notify::kbd received');
         setOsdContext('keyboard-brightness');
         pulseBriefly();
         showFeedbackPopup();
@@ -103,6 +105,7 @@ export const revealerSetup = (self: Widget.Revealer): void => {
                 return;
             }
 
+            console.log('[hyprpanel-osd] speaker update received');
             setOsdContext('volume');
             pulseBriefly();
             showFeedbackPopup();

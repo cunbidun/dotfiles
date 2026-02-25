@@ -28,6 +28,7 @@
       bluez
       bluez-tools
       bash
+      brightnessctl
       btop
       coreutils
       dart-sass

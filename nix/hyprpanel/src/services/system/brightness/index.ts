@@ -11,6 +11,7 @@ const resolveBrightnessCommand = (): string => {
 
 const brightnessCommand = resolveBrightnessCommand();
 const isBrightnessAvailable = brightnessCommand.length > 0;
+const DEBUG_TAG = '[hyprpanel-brightness]';
 
 const readBrightnessPercent = (): number => {
     if (!isBrightnessAvailable) {
@@ -42,8 +43,9 @@ export default class BrightnessService extends GObject.Object {
 
     constructor() {
         super();
+        console.log(`${DEBUG_TAG} init: available=${isBrightnessAvailable} cmd="${brightnessCommand}"`);
         this.#syncScreen();
-        setInterval(() => this.#syncScreen(), 1500);
+        setInterval(() => this.#syncScreen(), 200);
     }
 
     /**
@@ -69,6 +71,9 @@ export default class BrightnessService extends GObject.Object {
 
         const next = Math.max(0, Math.min(100, readBrightnessPercent())) / 100;
         if (Math.abs(next - this.#screen) >= 0.001) {
+            console.log(
+                `${DEBUG_TAG} poll change: ${Math.round(this.#screen * 100)} -> ${Math.round(next * 100)}`,
+            );
             this.#screen = next;
             this.notify('screen');
         }
@@ -124,6 +129,9 @@ export default class BrightnessService extends GObject.Object {
 
         const amount = Math.abs(delta);
         const adjustArg = delta > 0 ? `+${amount}%` : `${amount}%-`;
+        console.log(
+            `${DEBUG_TAG} set screen: current=${current} target=${target} arg=${adjustArg}`,
+        );
         SystemUtilities.bash`"${brightnessCommand}" set ${adjustArg}`.then(() => {
             this.#syncScreen();
         });
