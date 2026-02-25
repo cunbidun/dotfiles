@@ -59,21 +59,9 @@ export const WifiButton = (): JSX.Element => {
                 (isEnabled) => `dashboard-control-tile wifi ${!isEnabled ? 'disabled' : ''}`,
             )}
             onButtonPressEvent={(clicked, event) => {
-                const button = event.get_button()[1];
-
-                if (button === Gdk.BUTTON_PRIMARY) {
-                    void openDropdownMenu(clicked, event, 'networkmenu');
-                    return;
-                }
-
-                if (button !== Gdk.BUTTON_SECONDARY) return;
-
-                const wifi = networkService.wifi;
-                if (wifi === null) return;
-
-                wifi.set_enabled(!wifi.enabled);
+                if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
+                void openDropdownMenu(clicked, event, 'networkmenu');
             }}
-            tooltipText={'Left click: open Wi-Fi menu, right click: toggle Wi-Fi'}
             hexpand
         >
             <box className={'dashboard-control-tile-content'} valign={Gtk.Align.FILL} vexpand>
@@ -98,18 +86,9 @@ export const BluetoothButton = (): JSX.Element => {
                 (isEnabled) => `dashboard-control-tile bluetooth ${!isEnabled ? 'disabled' : ''}`,
             )}
             onButtonPressEvent={(clicked, event) => {
-                const button = event.get_button()[1];
-
-                if (button === Gdk.BUTTON_PRIMARY) {
-                    void openDropdownMenu(clicked, event, 'bluetoothmenu');
-                    return;
-                }
-
-                if (button === Gdk.BUTTON_SECONDARY) {
-                    bluetoothService.toggle();
-                }
+                if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
+                void openDropdownMenu(clicked, event, 'bluetoothmenu');
             }}
-            tooltipText={'Left click: open Bluetooth menu, right click: toggle Bluetooth'}
             hexpand
         >
             <box className={'dashboard-control-tile-content'} valign={Gtk.Align.FILL} vexpand>
@@ -156,7 +135,6 @@ export const AudioControllerCard = (): JSX.Element => {
                     if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
                     void openDropdownMenu(clicked, event, 'mediamenu');
                 }}
-                tooltipText={'Open Media Menu'}
             >
                 <box className={'dashboard-control-audio-header-content'} hexpand>
                     <label
@@ -193,7 +171,6 @@ export const AudioControllerCard = (): JSX.Element => {
                             player.previous();
                         }
                     }}
-                    tooltipText={'Previous Track'}
                     hexpand
                 >
                     <icon icon={icons.mpris.prev} />
@@ -209,9 +186,6 @@ export const AudioControllerCard = (): JSX.Element => {
                             player.play_pause();
                         }
                     }}
-                    tooltipText={bind(playbackStatus).as((status) =>
-                        status === AstalMpris.PlaybackStatus.PLAYING ? 'Pause' : 'Play',
-                    )}
                     hexpand
                 >
                     <icon icon={audioPlaybackIcon} />
@@ -229,7 +203,6 @@ export const AudioControllerCard = (): JSX.Element => {
                             player.next();
                         }
                     }}
-                    tooltipText={'Next Track'}
                     hexpand
                 >
                     <icon icon={icons.mpris.next} />
@@ -259,7 +232,6 @@ export const RecordingButton = (): JSX.Element => {
 
                 executeCommand(`${SRC_DIR}/scripts/screen_record.sh start region "${sanitizedPath}"`);
             }}
-            tooltipText={'Toggle Screen Recording'}
             hexpand
         >
             <box className={'dashboard-control-chip-content'}>
