@@ -3,6 +3,7 @@ import { opt } from 'src/lib/options';
 export default {
     label: opt(true),
     showSubmapName: opt(true),
+    showWhenDefault: opt(false),
     enabledIcon: opt('󰌐'),
     disabledIcon: opt('󰌌'),
     enabledText: opt('Submap On'),

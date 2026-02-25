@@ -4,7 +4,6 @@ import { bind, Variable } from 'astal';
 import { Astal } from 'astal/gtk3';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 import options from 'src/configuration';
-import { capitalizeFirstLetter } from 'src/lib/string/formatters';
 import { BarBoxChild } from 'src/components/bar/types';
 import { InputHandlerService } from '../../utils/input/inputHandler';
 
@@ -14,6 +13,7 @@ const hyprlandService = AstalHyprland.get_default();
 const {
     label,
     showSubmapName,
+    showWhenDefault,
     enabledIcon,
     disabledIcon,
     enabledText,
@@ -42,7 +42,7 @@ export const Submap = (): BarBoxChild => {
         [bind(submapStatus), bind(enabledText), bind(disabledText), bind(showSubmapName)],
         (status, enabled, disabled, showSmName) => {
             if (showSmName) {
-                return capitalizeFirstLetter(status);
+                return status;
             }
             return isSubmapEnabled(status, enabled, disabled);
         },
@@ -53,6 +53,10 @@ export const Submap = (): BarBoxChild => {
             return isSubmapEnabled(status, enabled, disabled);
         },
     );
+    const submapVisible = Variable.derive(
+        [bind(submapStatus), bind(showWhenDefault)],
+        (status, showDefault) => showDefault || status !== 'default',
+    );
 
     let inputHandlerBindings: Variable<void>;
 
@@ -62,6 +66,7 @@ export const Submap = (): BarBoxChild => {
         label: submapLabel(),
         showLabelBinding: bind(label),
         boxClass: 'submap',
+        isVis: bind(submapVisible),
         props: {
             setup: (self: Astal.Button) => {
                 inputHandlerBindings = inputHandler.attachHandlers(self, {
@@ -86,6 +91,7 @@ export const Submap = (): BarBoxChild => {
                 inputHandlerBindings.drop();
                 submapLabel.drop();
                 submapIcon.drop();
+                submapVisible.drop();
             },
         },
     });

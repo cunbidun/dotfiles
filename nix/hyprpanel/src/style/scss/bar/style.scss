@@ -310,6 +310,15 @@ $style-module-defaults: (
     )
 );
 
+/* Keep a clearer gap between submap icon and name. */
+.module-label.submap {
+    margin-left: $bar-buttons-modules-submap-spacing + 0.2em;
+}
+
+.style2 .module-label.submap {
+    padding-left: ($bar-buttons-modules-submap-spacing * 1.5) + 0.2em;
+}
+
 /*
  * #################################
  * #    Weather Module Styling     #
