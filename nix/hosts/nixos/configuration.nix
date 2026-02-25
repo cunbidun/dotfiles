@@ -179,6 +179,29 @@
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
+
+  # Bind DDC/CI-capable display buses so ddcci_backlight can expose native
+  # entries under /sys/class/backlight for external monitors.
+  systemd.services.ddcci-bind = {
+    description = "Bind DDC/CI displays to ddcci driver";
+    after = ["systemd-modules-load.service"];
+    wants = ["systemd-modules-load.service"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    path = with pkgs; [coreutils gnugrep];
+    script = ''
+      shopt -s nullglob
+      for i2c_path in /sys/class/drm/card*-*/i2c-*; do
+        bus_num="$(basename "$i2c_path" | cut -d- -f2)"
+        new_device="/sys/bus/i2c/devices/i2c-$bus_num/new_device"
+        [ -w "$new_device" ] || continue
+        echo "ddcci 0x37" > "$new_device" 2>/dev/null || true
+      done
+    '';
+  };
   security.pam.services.hyprlock = {};
   # rtkit is optional but recommended
   security.rtkit.enable = true;
