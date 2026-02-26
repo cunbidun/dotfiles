@@ -143,6 +143,13 @@
       group = "geoclue";
       mode = "0666";
     };
+    secrets.hyprpanel_weather_api_key = {
+      sopsFile = ../../../secrets/hyprpanel.yaml;
+      path = "/etc/hyprpanel/weather_api_key";
+      owner = userdata.username;
+      group = "users";
+      mode = "0400";
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

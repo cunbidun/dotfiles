@@ -22,7 +22,7 @@
     },
     "autoHide": "never",
     "notifications": {
-      "show_total": false,
+      "show_total": true,
       "hideCountWhenZero": true
     },
     "media": {
@@ -85,7 +85,7 @@
         "enabled": true,
         "location": "10001",
         "unit": "metric",
-        "key": "18314f574825468496c183537250502"
+        "key": "/etc/hyprpanel/weather_api_key"
       }
     },
     "media": {

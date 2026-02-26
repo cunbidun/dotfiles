@@ -2,6 +2,7 @@ import { execAsync } from 'astal';
 import { App } from 'astal/gtk3';
 import options from 'src/configuration';
 import CpuUsageService from 'src/services/system/cpuUsage';
+import CpuTempService from 'src/services/system/cputemp';
 import GpuUsageService from 'src/services/system/gpuUsage';
 import NetworkUsageService from 'src/services/system/networkUsage';
 import RamUsageService from 'src/services/system/ramUsage';
@@ -13,6 +14,7 @@ const { paths } = options.bar.customModules.storage;
 
 export const gpuService = new GpuUsageService();
 export const cpuService = new CpuUsageService();
+export const cpuTempService = new CpuTempService({ frequency: interval });
 export const ramService = new RamUsageService();
 export const storageService = new StorageService({ pathsToMonitor: paths });
 export const networkService = new NetworkUsageService({ frequency: interval });
@@ -37,6 +39,7 @@ const monitorInterval = (): void => {
     interval.subscribe(() => {
         ramService.updateTimer(interval.get());
         cpuService.updateTimer(interval.get());
+        cpuTempService.updateFrequency(interval.get());
         storageService.frequency = interval.get();
         networkService.updateTimer(interval.get());
     });
@@ -52,6 +55,7 @@ const monitorStatsEnabled = (): void => {
         if (!enabled.get()) {
             ramService.stopPoller();
             cpuService.stopPoller();
+            cpuTempService.stopPoller();
             gpuService.stopPoller();
             storageService.stopPoller();
             networkService.stopPoller();
@@ -64,6 +68,7 @@ const monitorStatsEnabled = (): void => {
 
         ramService.startPoller();
         cpuService.startPoller();
+        cpuTempService.startPoller();
         storageService.startPoller();
         networkService.startPoller();
     });
@@ -96,6 +101,7 @@ export const setupDashboardMonitoring = (): void => {
     if (enabled.get()) {
         ramService.startPoller();
         cpuService.startPoller();
+        cpuTempService.startPoller();
         storageService.startPoller();
         networkService.startPoller();
     }

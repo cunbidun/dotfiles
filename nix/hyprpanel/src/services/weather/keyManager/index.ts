@@ -48,21 +48,26 @@ export class WeatherApiKeyManager {
 
         try {
             const fileContentArray = GLib.file_get_contents(weatherKey)[1];
-            const fileContent = new TextDecoder().decode(fileContentArray);
+            const fileContent = new TextDecoder().decode(fileContentArray).trim();
 
             if (!fileContent) {
                 console.error('weather_api_key file is empty');
                 return '';
             }
 
-            const parsedContent = JSON.parse(fileContent);
+            // Preferred format: JSON file with { "weather_api_key": "..." }.
+            try {
+                const parsedContent = JSON.parse(fileContent);
 
-            if (parsedContent.weather_api_key !== undefined) {
-                return parsedContent.weather_api_key;
+                if (parsedContent.weather_api_key !== undefined) {
+                    return String(parsedContent.weather_api_key);
+                }
+            } catch {
+                // Fall through and treat file content as plain API key.
             }
 
-            console.error('weather_api_key is missing in the JSON content');
-            return '';
+            // Plain text fallback for secret files that contain only the key.
+            return fileContent;
         } catch (error) {
             console.error(`Failed to read or parse weather key file: ${error}`);
             return '';

@@ -1,6 +1,6 @@
 import { bind, Variable } from 'astal';
 import { Gtk } from 'astal/gtk3';
-import { cpuService, gpuService, handleClick, networkService, ramService, storageService } from './helpers';
+import { cpuService, cpuTempService, gpuService, handleClick, networkService, ramService, storageService } from './helpers';
 import { Binding } from 'astal';
 import { renderResourceLabel } from 'src/components/bar/utils/systemResource';
 import options from 'src/configuration';
@@ -81,6 +81,37 @@ export const GpuStat = (): JSX.Element => {
     );
 };
 
+const gpuTempTone = (tempC: number): 'ok' | 'warn' | 'hot' => {
+    if (tempC < 70) return 'ok';
+    if (tempC < 85) return 'warn';
+    return 'hot';
+};
+
+export const GpuTempStat = (): JSX.Element => {
+    return (
+        <box>
+            {bind(enable_gpu).as((enabled) => {
+                if (!enabled) {
+                    return <box />;
+                }
+
+                gpuService.initialize();
+
+                return (
+                    <StatRow
+                        icon={''}
+                        stat={'gputemp'}
+                        title={'GPU Temp'}
+                        value={bind(gpuService.gpuTemp).as((tempC) => `${Math.round(tempC)}C`)}
+                        tone={bind(gpuService.gpuTemp).as((tempC) => gpuTempTone(Math.round(tempC)))}
+                        clickable
+                    />
+                );
+            })}
+        </box>
+    );
+};
+
 export const CpuStat = (): JSX.Element => {
     cpuService.initialize();
 
@@ -91,6 +122,21 @@ export const CpuStat = (): JSX.Element => {
             title={'CPU'}
             value={bind(cpuService.cpu).as((cpuUsage) => `${Math.round(cpuUsage)}%`)}
             tone={bind(cpuService.cpu).as((cpuUsage) => usageTone(Math.round(cpuUsage)))}
+            clickable
+        />
+    );
+};
+
+export const CpuTempStat = (): JSX.Element => {
+    cpuTempService.initialize();
+
+    return (
+        <StatRow
+            icon={''}
+            stat={'cputemp'}
+            title={'CPU Temp'}
+            value={bind(cpuTempService.temperature).as((tempC) => `${Math.round(tempC)}C`)}
+            tone={bind(cpuTempService.temperature).as((tempC) => gpuTempTone(Math.round(tempC)))}
             clickable
         />
     );

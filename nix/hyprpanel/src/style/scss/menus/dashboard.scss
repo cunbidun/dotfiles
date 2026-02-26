@@ -441,7 +441,7 @@
 
             .dashboard-control-chip-content {
                 .txt-icon {
-                    margin-right: 0.35em;
+                    margin-right: 0.52em;
                     font-size: 1.05em;
                 }
 
@@ -472,6 +472,14 @@
                 );
             }
 
+            &.inhibitor {
+                background: if(
+                    $bar-menus-monochrome,
+                    $bar-menus-buttons-default,
+                    $bar-menus-menu-dashboard-controls-input-background
+                );
+            }
+
             &:hover {
                 &.recording {
                     background: transparentize(
@@ -494,9 +502,28 @@
                         0.32
                     );
                 }
+
+                &.inhibitor {
+                    background: transparentize(
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-default,
+                            $bar-menus-menu-dashboard-controls-input-background
+                        ),
+                        0.32
+                    );
+                }
             }
 
             &.gammastep.active {
+                background: if(
+                    $bar-menus-monochrome,
+                    $bar-menus-buttons-default,
+                    $bar-menus-menu-dashboard-controls-input-background
+                );
+            }
+
+            &.inhibitor.active {
                 background: if(
                     $bar-menus-monochrome,
                     $bar-menus-buttons-default,

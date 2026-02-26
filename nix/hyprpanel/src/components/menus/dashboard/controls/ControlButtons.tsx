@@ -11,8 +11,8 @@ import { isPrimaryClick } from 'src/lib/events/mouse';
 import { activePlayer, canGoNext, canGoPrevious, mediaArtist, mediaTitle, playbackStatus } from 'src/services/media';
 import BrightnessService from 'src/services/system/brightness';
 import { BashPoller } from 'src/lib/poller/BashPoller';
-import { executeCommand, getRecordingPath, isRecording } from '../shortcuts/helpers';
-import { isWifiEnabled } from './helpers';
+import { executeCommand, getRecordingPath, isRecording, isWifiEnabled } from './helpers';
+import { idleInhibit } from 'src/lib/window/visibility';
 
 const wireplumber = AstalWp.get_default() as AstalWp.Wp;
 const audioService = wireplumber.audio;
@@ -276,6 +276,24 @@ export const GammaStepButton = (): JSX.Element => {
                     label={bind(isGammaStepEnabled).as((enabled) => (enabled ? '󰖔' : '󰖨'))}
                 />
                 <label label={bind(isGammaStepEnabled).as((enabled) => (enabled ? 'Sunset On' : 'Sunset Off'))} />
+            </box>
+        </button>
+    );
+};
+
+export const InhibitorButton = (): JSX.Element => {
+    return (
+        <button
+            className={bind(idleInhibit).as((enabled) => `dashboard-control-chip inhibitor ${enabled ? 'active' : ''}`)}
+            onClick={(_, event) => {
+                if (!isPrimaryClick(event)) return;
+                idleInhibit.set(!idleInhibit.get());
+            }}
+            hexpand
+        >
+            <box className={'dashboard-control-chip-content'}>
+                <label className={'txt-icon'} label={bind(idleInhibit).as((enabled) => (enabled ? '󰅶' : '󰾪'))} />
+                <label label={bind(idleInhibit).as((enabled) => (enabled ? 'Inhibit On' : 'Inhibit Off'))} />
             </box>
         </button>
     );

@@ -19,7 +19,7 @@ const osdController = OsdRevealerController.getInstance();
 const FEEDBACK_MS = 500;
 
 const isPowerUiVisible = (): boolean => {
-    const powerWindows = ['dashboardmenu', 'powermenu', 'verification'];
+    const powerWindows = ['dashboardmenu', 'verification'];
     const visibleWindowNames = new Set(
         App.get_windows()
             .filter((window) => window.visible && typeof window.name === 'string')

@@ -40,9 +40,11 @@ const rocmSmiCommand = resolveRocmSmiCommand();
 class GpuUsageService {
     private _updateFrequency: Variable<number>;
     private _gpuPoller: FunctionPoller<number, []>;
+    private _gpuTempPoller: FunctionPoller<number, []>;
     private _isInitialized = false;
 
     public _gpu = Variable<number>(0);
+    public _gpuTemp = Variable<number>(0);
 
     constructor({ frequency }: GpuServiceCtor = {}) {
         this._updateFrequency = frequency ?? Variable(2000);
@@ -54,6 +56,13 @@ class GpuUsageService {
             bind(this._updateFrequency),
             this._calculateUsage,
         );
+        this._calculateTemp = this._calculateTemp.bind(this);
+        this._gpuTempPoller = new FunctionPoller<number, []>(
+            this._gpuTemp,
+            [],
+            bind(this._updateFrequency),
+            this._calculateTemp,
+        );
     }
 
     /**
@@ -61,6 +70,7 @@ class GpuUsageService {
      */
     public refresh(): void {
         this._gpu.set(this._calculateUsage());
+        this._gpuTemp.set(this._calculateTemp());
     }
 
     /**
@@ -70,6 +80,15 @@ class GpuUsageService {
      */
     public get gpu(): Variable<number> {
         return this._gpu;
+    }
+
+    /**
+     * Gets the GPU temperature variable in Celsius.
+     *
+     * @returns Variable containing GPU temperature in C
+     */
+    public get gpuTemp(): Variable<number> {
+        return this._gpuTemp;
     }
 
     /**
@@ -123,6 +142,71 @@ class GpuUsageService {
     }
 
     /**
+     * Calculates average GPU temperature across all available GPUs.
+     *
+     * @returns Temperature in Celsius
+     */
+    private _calculateTemp(): number {
+        try {
+            if (!rocmSmiCommand) {
+                return 0;
+            }
+
+            const output = exec(`"${rocmSmiCommand}" --showtemp --json`);
+            if (typeof output !== 'string') {
+                return 0;
+            }
+
+            const jsonLine = output
+                .split('\n')
+                .map((line) => line.trim())
+                .find((line) => line.startsWith('{') && line.endsWith('}'));
+            if (!jsonLine) {
+                return 0;
+            }
+
+            const data = JSON.parse(jsonLine) as Record<string, Record<string, string | number>>;
+            const cards = Object.values(data);
+            if (!cards.length) {
+                return 0;
+            }
+
+            const tempValues = cards
+                .map((card) => {
+                    const edge = Number(card['Temperature (Sensor edge) (C)']);
+                    if (Number.isFinite(edge)) {
+                        return edge;
+                    }
+
+                    const junction = Number(card['Temperature (Sensor junction) (C)']);
+                    if (Number.isFinite(junction)) {
+                        return junction;
+                    }
+
+                    const firstTempValue = Object.entries(card).find(([key, value]) => {
+                        return key.includes('Temperature') && Number.isFinite(Number(value));
+                    });
+
+                    return firstTempValue ? Number(firstTempValue[1]) : Number.NaN;
+                })
+                .filter((value) => Number.isFinite(value));
+
+            if (!tempValues.length) {
+                return 0;
+            }
+
+            return tempValues.reduce((acc, value) => acc + value, 0) / tempValues.length;
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error('Error getting GPU temperature:', error.message);
+            } else {
+                console.error('Unknown error getting GPU temperature');
+            }
+            return 0;
+        }
+    }
+
+    /**
      * Converts usage percentage [0..100] to decimal [0..1].
      */
     private _percentToDecimal(percent: number): number {
@@ -145,6 +229,7 @@ class GpuUsageService {
     public initialize(): void {
         if (!this._isInitialized) {
             this._gpuPoller.initialize();
+            this._gpuTempPoller.initialize();
             this._isInitialized = true;
         }
     }
@@ -154,6 +239,7 @@ class GpuUsageService {
      */
     public stopPoller(): void {
         this._gpuPoller.stop();
+        this._gpuTempPoller.stop();
     }
 
     /**
@@ -161,6 +247,7 @@ class GpuUsageService {
      */
     public startPoller(): void {
         this._gpuPoller.start();
+        this._gpuTempPoller.start();
     }
 
     /**
@@ -168,7 +255,9 @@ class GpuUsageService {
      */
     public destroy(): void {
         this._gpuPoller.stop();
+        this._gpuTempPoller.stop();
         this._gpu.drop();
+        this._gpuTemp.drop();
         this._updateFrequency.drop();
     }
 }

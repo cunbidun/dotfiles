@@ -1,4 +1,3 @@
-import PowerMenu from './power/index.js';
 import Verification from './power/verification.js';
 import AudioMenu from './audio/index.js';
 import NetworkMenu from './network/index.js';
@@ -22,4 +21,4 @@ export const DropdownMenus = [
     PowerDropdown,
 ];
 
-export const StandardWindows = [PowerMenu, Verification];
+export const StandardWindows = [Verification];

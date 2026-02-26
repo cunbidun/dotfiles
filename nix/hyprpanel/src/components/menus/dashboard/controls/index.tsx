@@ -4,12 +4,13 @@ import {
     BrightnessSliderCard,
     BluetoothButton,
     GammaStepButton,
+    InhibitorButton,
     gammaStepPoller,
     RecordingButton,
     VolumeSliderCard,
     WifiButton,
 } from './ControlButtons';
-import { recordingPoller } from '../shortcuts/helpers';
+import { recordingPoller } from './helpers';
 import { JSXElement } from 'src/core/types';
 
 export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
@@ -40,6 +41,7 @@ export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
             </box>
             <box className={'dashboard-control-quick-row'} homogeneous>
                 <RecordingButton />
+                <InhibitorButton />
                 <GammaStepButton />
             </box>
             <BrightnessSliderCard />

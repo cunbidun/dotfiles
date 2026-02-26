@@ -1,5 +1,5 @@
 import { Gtk } from 'astal/gtk3';
-import { CpuStat, GpuStat, LoadStat, NetworkStat, RamStat, StorageStat, UptimeStat } from './StatBars';
+import { CpuStat, CpuTempStat, GpuStat, GpuTempStat, LoadStat, NetworkStat, RamStat, StorageStat, UptimeStat } from './StatBars';
 import { setupDashboardMonitoring } from './helpers';
 import { JSXElement } from 'src/core/types';
 
@@ -19,8 +19,10 @@ export const Stats = ({ isEnabled }: StatsProps): JSXElement => {
             vertical
         >
             <CpuStat />
+            <CpuTempStat />
             <RamStat />
             <GpuStat />
+            <GpuTempStat />
             <StorageStat />
             <NetworkStat />
             <UptimeStat />
