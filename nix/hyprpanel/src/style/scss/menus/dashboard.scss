@@ -10,7 +10,7 @@
         transparentize(if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-dashboard-border-color), 0.5);
     border-radius: $bar-menus-border-radius;
     opacity: $bar-menus-opacity * 0.01;
-    padding: 0.75em 0em;
+    padding: 0.5em 0em;
 
     button {
         border-radius: $bar-menus-buttons-radius;
@@ -18,7 +18,7 @@
 
     .dashboard-card {
         background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-dashboard-card-color);
-        margin: 0em 0.85em;
+        margin: 0em $menu-panel-outer-margin;
         border-radius: $bar-menus-card_radius;
         border: 1px solid transparentize(#ffffff, 0.9);
         padding: 1.2em;
@@ -242,6 +242,10 @@
 
         .dashboard-control-quick-row {
             margin-bottom: 0.55em;
+
+            button:not(:last-child) {
+                margin-right: 0.45em;
+            }
         }
 
         .dashboard-control-tile {
@@ -460,6 +464,14 @@
                 );
             }
 
+            &.gammastep {
+                background: if(
+                    $bar-menus-monochrome,
+                    $bar-menus-buttons-default,
+                    $bar-menus-menu-dashboard-controls-input-background
+                );
+            }
+
             &:hover {
                 &.recording {
                     background: transparentize(
@@ -471,6 +483,25 @@
                         0.32
                     );
                 }
+
+                &.gammastep {
+                    background: transparentize(
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-default,
+                            $bar-menus-menu-dashboard-controls-input-background
+                        ),
+                        0.32
+                    );
+                }
+            }
+
+            &.gammastep.active {
+                background: if(
+                    $bar-menus-monochrome,
+                    $bar-menus-buttons-default,
+                    $bar-menus-menu-dashboard-controls-input-background
+                );
             }
         }
 
@@ -673,22 +704,6 @@
     }
 }
 
-.dashboard-content-items > :not(:first-child):not(:last-child) {
-    margin-top: 0;
-    margin-bottom: 0.55em;
-}
-
-.dashboard-content-items > :first-child {
-    margin-top: 0.9em;
-    margin-bottom: 0.55em;
-}
-
-.dashboard-content-items > :last-child {
-    margin-top: 0;
-    margin-bottom: 1.3em;
-}
-
-.dashboard-content-items > :only-child {
-    margin-top: 1.3em;
-    margin-bottom: 1.3em;
+.dashboard-content-items > * {
+    margin: 0.55em 0em;
 }

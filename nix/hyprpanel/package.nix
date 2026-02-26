@@ -16,17 +16,25 @@
   gtksourceview3,
   gvfs,
   hyprpicker,
+  jq,
   libgtop,
   libnotify,
   libsoup_3,
   networkmanager,
+  pulseaudio,
   pywal,
   python3,
+  slurp,
   swww,
   stdenv,
   upower,
+  vlc,
+  wf-recorder,
   wireplumber,
   wl-clipboard,
+  xdg-utils,
+  yazi,
+  kitty,
   writeShellScript,
 
   enableCuda ? config.cudaSupport,
@@ -63,15 +71,23 @@ ags.bundle {
     gtksourceview3
     gvfs
     hyprpicker
+    jq
     libgtop
     libnotify
     libsoup_3
     networkmanager
+    pulseaudio
     pywal
+    slurp
     swww
     upower
+    vlc
+    wf-recorder
     wireplumber
     wl-clipboard
+    xdg-utils
+    yazi
+    kitty
     (python3.withPackages (
       ps:
       with ps;

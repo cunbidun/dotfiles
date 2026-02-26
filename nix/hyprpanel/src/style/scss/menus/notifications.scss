@@ -17,14 +17,14 @@
     }
 
     .menu-content-container.notifications {
-        margin: 1em;
+        margin: $menu-panel-outer-margin;
         margin-bottom: 0em;
         min-height: 4em;
     }
 
     .notification-menu-controls {
         background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-notifications-card);
-        margin: 1em 1em;
+        margin: $menu-panel-outer-margin $menu-panel-outer-margin;
         margin-bottom: 0.5em;
         border-radius: $bar-menus-card_radius;
         padding: 0.4em 0.75em;
@@ -67,7 +67,7 @@
             $bar-menus-dropdownmenu-divider,
             $bar-menus-menu-notifications-switch_divider
         );
-        margin: 0em 1em;
+        margin: 0em $menu-panel-outer-margin;
     }
 
     .menu-switch.notifications {
@@ -174,18 +174,18 @@
 }
 
 .notification-label-container {
-    margin-bottom: 8em;
+    margin-bottom: 2.5em;
 
     label {
         color: if($bar-menus-monochrome, $bar-menus-feinttext, $bar-menus-menu-notifications-no_notifications_label);
     }
 
     .bell {
-        font-size: 10em * $bar-menus-menu-notifications-scaling * 0.01;
+        font-size: 4.8em * $bar-menus-menu-notifications-scaling * 0.01;
     }
 
     .message {
-        font-size: 1.5em * $bar-menus-menu-notifications-scaling * 0.01;
+        font-size: 1.05em * $bar-menus-menu-notifications-scaling * 0.01;
     }
 }
 

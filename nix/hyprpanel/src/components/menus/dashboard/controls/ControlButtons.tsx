@@ -10,6 +10,7 @@ import icons from 'src/lib/icons/icons';
 import { isPrimaryClick } from 'src/lib/events/mouse';
 import { activePlayer, canGoNext, canGoPrevious, mediaArtist, mediaTitle, playbackStatus } from 'src/services/media';
 import BrightnessService from 'src/services/system/brightness';
+import { BashPoller } from 'src/lib/poller/BashPoller';
 import { executeCommand, getRecordingPath, isRecording } from '../shortcuts/helpers';
 import { isWifiEnabled } from './helpers';
 
@@ -19,6 +20,7 @@ const networkService = AstalNetwork.get_default();
 const bluetoothService = AstalBluetooth.get_default();
 const brightnessService = BrightnessService.getInstance();
 const { raiseMaximumVolume } = options.menus.volume;
+const hyprsunsetPollingInterval = Variable(2000);
 
 const wifiSubtitle = Variable.derive(
     [bind(isWifiEnabled), bind(networkService, 'state'), bind(networkService, 'connectivity')],
@@ -237,6 +239,43 @@ export const RecordingButton = (): JSX.Element => {
             <box className={'dashboard-control-chip-content'}>
                 <label className={'txt-icon'} label={'󰑊'} />
                 <label label={bind(isRecording).as((recording) => (recording ? 'Stop' : 'Recording'))} />
+            </box>
+        </button>
+    );
+};
+
+export const isGammaStepEnabled = Variable(false);
+
+export const gammaStepPoller = new BashPoller<boolean, []>(
+    isGammaStepEnabled,
+    [],
+    bind(hyprsunsetPollingInterval),
+    'systemctl --user is-active hyprsunset.service >/dev/null && echo active || echo inactive',
+    (output) => output.trim() === 'active',
+);
+
+export const GammaStepButton = (): JSX.Element => {
+    return (
+        <button
+            className={bind(isGammaStepEnabled).as((enabled) => `dashboard-control-chip gammastep ${enabled ? 'active' : ''}`)}
+            onClick={(_, event) => {
+                if (!isPrimaryClick(event)) return;
+
+                const enabled = isGammaStepEnabled.get();
+                const command = enabled
+                    ? 'systemctl --user stop hyprsunset.service'
+                    : 'systemctl --user start hyprsunset.service';
+                executeCommand(command);
+                isGammaStepEnabled.set(!enabled);
+            }}
+            hexpand
+        >
+            <box className={'dashboard-control-chip-content'}>
+                <label
+                    className={'txt-icon'}
+                    label={bind(isGammaStepEnabled).as((enabled) => (enabled ? '󰖔' : '󰖨'))}
+                />
+                <label label={bind(isGammaStepEnabled).as((enabled) => (enabled ? 'Sunset On' : 'Sunset Off'))} />
             </box>
         </button>
     );

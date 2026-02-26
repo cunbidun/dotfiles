@@ -1,5 +1,15 @@
+$calendar-ui-scale: 1;
+$calendar-card-gap: 0.65em;
+$calendar-time-size: 2.9em;
+$calendar-period-size: 1.2em;
+$calendar-weather-icon-size: 3.05em;
+$calendar-weather-temp-size: 1.65em;
+$calendar-weather-condition-size: 0.86em;
+$calendar-weather-stats-size: 0.82em;
+$calendar-hourly-icon-size: 1.18em;
+
 .calendar-menu-content * {
-    font-size: $font-size * $bar-menus-menu-clock-scaling * 0.01;
+    font-size: $font-size * $bar-menus-menu-clock-scaling * 0.01 * $calendar-ui-scale;
 }
 
 .calendar-content-container {
@@ -15,16 +25,21 @@
 
 .calendar-menu-item-container {
     border-radius: $bar-menus-card_radius;
-    margin-bottom: 1.35em;
+    margin-bottom: $calendar-card-gap;
     background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-clock-card-color);
+    border: none;
+
+    &:last-child {
+        margin-bottom: 0em;
+    }
 }
 
 .calendar-content-items {
-    margin: 1.35em;
+    margin: $menu-panel-outer-margin;
 }
 
 .calendar-container-box {
-    margin: 0.75em;
+    margin: $menu-panel-outer-margin;
     margin-bottom: 0em;
 }
 
@@ -72,108 +87,124 @@
     min-height: 8em;
 
     .clock-content-time {
-        font-size: 4em;
+        font-size: $calendar-time-size;
         color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-time-time);
     }
 
     .clock-content-period {
-        font-size: 1.75em;
+        font-size: $calendar-period-size;
         margin-bottom: 1.35em;
         margin-right: -0.875em;
         color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-time-timeperiod);
     }
 }
 
-.calendar-menu-item-container {
-    margin-bottom: 0.65em;
-    &:last-child {
-        margin-bottom: 0em;
-    }
-}
-
 .weather-container-box {
-    margin: 1.5em;
-    margin-top: 2.5em;
+    margin: 0.65em;
     min-width: 3em;
+
+    .calendar-menu-weather.today {
+        padding: 0.15em 0.15em 0.45em 0.15em;
+    }
+
+    .calendar-menu-weather.today.icon.container {
+        min-width: 3.6em;
+        margin-right: 0.75em;
+    }
 
     .calendar-menu-weather.today.icon {
         label {
-            color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-weather-icon);
-            font-size: 5em;
+            color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-time-time);
+            font-size: $calendar-weather-icon-size;
         }
     }
 
     .calendar-menu-weather.today.temp.label {
-        color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-clock-weather-temperature);
+        color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-text);
         margin-left: 0.2em;
-        font-size: 2.5em;
+        font-size: $calendar-weather-temp-size;
+        font-weight: 700;
 
         &.icon {
-            font-size: 2.5em;
+            font-size: $calendar-weather-temp-size;
         }
     }
 
     .calendar-menu-weather.today.condition.label {
-        color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-weather-status);
-        font-size: 1.5em;
-        margin-bottom: 0.4em;
+        color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
+        font-size: $calendar-weather-condition-size;
+        margin-bottom: 0.2em;
+        letter-spacing: 0.015em;
     }
 
     .calendar-menu-weather.today.temp.label.icon.weather-color.red {
-        color: if(
-            $bar-menus-monochrome,
-            $bar-menus-icons-active,
-            $bar-menus-menu-clock-weather-thermometer-extremelyhot
-        );
+        color: $red;
     }
 
     .calendar-menu-weather.today.temp.label.icon.weather-color.orange {
-        color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-weather-thermometer-hot);
+        color: $peach;
     }
 
     .calendar-menu-weather.today.temp.label.icon.weather-color.lavender {
-        color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-weather-thermometer-moderate);
+        color: $lavender;
     }
 
     .calendar-menu-weather.today.temp.label.icon.weather-color.blue {
-        color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-weather-thermometer-cold);
+        color: $blue;
     }
 
     .calendar-menu-weather.today.temp.label.icon.weather-color.sky {
-        color: if(
-            $bar-menus-monochrome,
-            $bar-menus-icons-active,
-            $bar-menus-menu-clock-weather-thermometer-extremelycold
-        );
+        color: $sky;
     }
 }
 
 .calendar-menu-weather.today.stats.container {
-    margin-bottom: 0.75em;
-    color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-weather-stats);
+    margin-bottom: 0.25em;
+    color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
+    font-size: $calendar-weather-stats-size;
+
+    .weather {
+        min-height: 1.35em;
+    }
 
     .weather.label {
-        margin-left: 0.35em;
+        margin-left: 0.3em;
+        font-weight: 600;
     }
 }
 
 .menu-separator.weather {
-    margin: 1.5em 0em;
+    margin: 0.35em 0em 0.5em 0em;
+    min-height: 0.06em;
+    background: transparentize(if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-border-color), 0.65);
+}
+
+.hourly-weather-container {
+    margin: 0em 0.05em 0.1em 0.05em;
+}
+
+.hourly-weather-item {
+    padding: 0.28em 0.22em;
+    border-radius: 0.34em;
 }
 
 .hourly-weather-time {
-    color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-weather-hourly-time);
-    margin-bottom: 0.5em;
+    color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
+    margin-bottom: 0.24em;
+    font-size: 0.84em;
+    font-weight: 600;
 }
 
 .hourly-weather-icon {
-    color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-weather-hourly-icon);
-    margin-bottom: 0.25em;
-    font-size: 1.8em;
+    color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-icons-active);
+    margin-bottom: 0.08em;
+    font-size: $calendar-hourly-icon-size;
 }
 
 .hourly-weather-temp {
-    color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-weather-hourly-temperature);
+    color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
+    font-size: 0.9em;
+    font-weight: 600;
 }
 
 .weather.precip.icon {

@@ -3,6 +3,8 @@ import {
     AudioControllerCard,
     BrightnessSliderCard,
     BluetoothButton,
+    GammaStepButton,
+    gammaStepPoller,
     RecordingButton,
     VolumeSliderCard,
     WifiButton,
@@ -13,10 +15,12 @@ import { JSXElement } from 'src/core/types';
 export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
     if (!isEnabled) {
         recordingPoller.stop();
+        gammaStepPoller.stop();
         return null;
     }
 
     recordingPoller.initialize();
+    gammaStepPoller.initialize();
 
     return (
         <box
@@ -34,8 +38,9 @@ export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
                 </box>
                 <AudioControllerCard />
             </box>
-            <box className={'dashboard-control-quick-row'}>
+            <box className={'dashboard-control-quick-row'} homogeneous>
                 <RecordingButton />
+                <GammaStepButton />
             </box>
             <BrightnessSliderCard />
             <VolumeSliderCard />

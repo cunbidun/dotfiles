@@ -73,17 +73,25 @@ in {
             SUPER_L: ALT_L
     '';
   };
-  services.gammastep = {
+  services.hyprsunset = {
     enable = true;
-    tray = false;
-    provider = "geoclue2";
-    temperature = {
-      day = 6000;
+    settings = {
+      profile = [
+        {
+          time = "06:00";
+          identity = true;
+        }
+        {
+          time = "18:00";
+          temperature = 4500;
+        }
+      ];
     };
   };
 
-  # Ensure old user-enabled tray applet doesn't keep autostarting.
+  # Ensure old user-enabled tray applet and gammastep service don't keep autostarting.
   home.activation.disableGammastepIndicator = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    run systemctl --user disable --now gammastep.service >/dev/null 2>&1 || true
     run systemctl --user disable --now gammastep-indicator.service >/dev/null 2>&1 || true
   '';
 

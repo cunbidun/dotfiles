@@ -62,7 +62,7 @@
     "clock": {
       "showIcon": false,
       "showTime": true,
-      "format": "%a %b %-d %I:%M %p"
+      "format": "%a %b %-d %I:%M:%S %p"
     },
     "customModules": {
       "submap": {

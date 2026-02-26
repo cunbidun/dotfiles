@@ -125,8 +125,8 @@ stopRecording() {
         -i video-x-generic \
         -a "Screen Recorder" \
         -t 10000 \
-        --action="scriptAction:-xdg-open $(dirname "$outputPath")=Open Directory" \
-        --action="scriptAction:-xdg-open $outputPath=Play"
+        --action="scriptAction:-xdg-open \"$(dirname "$outputPath")\"=Open Directory" \
+        --action="scriptAction:-xdg-open \"$outputPath\"=Play"
 }
 
 # Handle script arguments

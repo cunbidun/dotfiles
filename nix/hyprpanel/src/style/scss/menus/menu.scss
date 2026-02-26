@@ -1,3 +1,5 @@
+$menu-panel-outer-margin: 0.65em;
+
 .menu-slider {
     trough {
         border-radius: $bar-menus-slider-progress-radius;
@@ -93,7 +95,7 @@
 }
 
 .menu-section-container {
-    margin: 1em 0em;
+    margin: 0.75em 0em;
 
     .menu-label {
         color: $text;
@@ -106,7 +108,7 @@
         border-radius: $bar-menus-card_radius;
         border-bottom-left-radius: 0em;
         border-bottom-right-radius: 0em;
-        margin: 0em 1em;
+        margin: 0em $menu-panel-outer-margin;
         min-height: 2em;
     }
 
@@ -119,7 +121,7 @@
     }
 
     &:nth-child(2) {
-        margin-top: 1em;
+        margin-top: 0.75em;
     }
 
     .menu-items-section {
@@ -128,14 +130,14 @@
         border-top-left-radius: 0em;
         border-top-right-radius: 0em;
         padding: 0.9em;
-        margin: 0em 1em;
+        margin: 0em $menu-panel-outer-margin;
     }
 }
 
 .menu-active {
     font-size: 0.9em;
     font-weight: bold;
-    margin: 0rem 1em;
+    margin: 0rem $menu-panel-outer-margin;
     margin-bottom: 0.9em;
 }
 
@@ -233,7 +235,7 @@
 }
 
 .menu-label {
-    margin: 0.5em 1em;
+    margin: 0.5em $menu-panel-outer-margin;
     color: $sky;
 }
 
