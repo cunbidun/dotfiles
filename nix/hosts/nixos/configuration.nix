@@ -186,47 +186,12 @@
   services.udev.extraRules = ''
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-    ACTION=="add|change", SUBSYSTEM=="drm", KERNEL=="card*-DP-*", ATTR{status}=="connected", TAG+="systemd", ENV{SYSTEMD_WANTS}+="ddcci-bind@%k.service"
   '';
 
-  # Bind a single connected DRM connector to ddcci (for ddcci_backlight).
-  # Triggered by udev with %k, e.g. ddcci-bind@card1-DP-3.service.
-  systemd.services."ddcci-bind@" = {
-    description = "Bind DDC/CI display on %I";
-    after = ["systemd-modules-load.service"];
-    wants = ["systemd-modules-load.service"];
-    serviceConfig = {
-      Type = "oneshot";
-    };
-    script = ''
-      connector="%i"
-      connector_path="/sys/class/drm/$connector"
-      [ -d "$connector_path" ] || exit 0
-      [ -r "$connector_path/status" ] || exit 0
-      [ "$(cat "$connector_path/status")" = "connected" ] || exit 0
-
-      shopt -s nullglob
-      for i2c_path in "$connector_path"/i2c-*; do
-        bus_num="$(basename "$i2c_path" | cut -d- -f2)"
-        dev_path="/sys/bus/i2c/devices/$bus_num-0037"
-        delete_device="/sys/bus/i2c/devices/i2c-$bus_num/delete_device"
-        new_device="/sys/bus/i2c/devices/i2c-$bus_num/new_device"
-
-        # Remove stale probe records with no bound driver so rebind can work.
-        if [ -e "$dev_path" ] && [ ! -e "$dev_path/driver" ] && [ -w "$delete_device" ]; then
-          echo 0x37 > "$delete_device" 2>/dev/null || true
-        fi
-
-        [ -w "$new_device" ] || continue
-        echo "ddcci 0x37" > "$new_device" 2>/dev/null || true
-      done
-    '';
-  };
-
-  # Initial pass at boot for already-connected outputs, then udev handles
-  # hotplug/change events.
-  systemd.services.ddcci-bind-bootstrap = {
-    description = "Bind DDC/CI displays on connected outputs at boot";
+  # Keep ddcci backlight available on external monitors: only touch connected
+  # DP buses, clear stale failed probes, and retry periodically.
+  systemd.services.ddcci-refresh = {
+    description = "Refresh DDC/CI backlight devices";
     after = ["systemd-modules-load.service" "systemd-udev-settle.service" "graphical.target"];
     wants = ["systemd-modules-load.service" "systemd-udev-settle.service"];
     wantedBy = ["multi-user.target"];
@@ -235,13 +200,54 @@
     };
     script = ''
       shopt -s nullglob
+      connected_buses=""
+
       for status_path in /sys/class/drm/card*-DP-*/status; do
         [ -r "$status_path" ] || continue
         [ "$(cat "$status_path")" = "connected" ] || continue
-        connector="$(basename "$(dirname "$status_path")")"
-        systemctl start "ddcci-bind@$connector.service" || true
+        connector_dir="$(dirname "$status_path")"
+
+        for i2c_path in "$connector_dir"/i2c-*; do
+          bus_num="$(basename "$i2c_path" | cut -d- -f2)"
+          connected_buses="$connected_buses $bus_num"
+
+          dev_path="/sys/bus/i2c/devices/$bus_num-0037"
+          delete_device="/sys/bus/i2c/devices/i2c-$bus_num/delete_device"
+          new_device="/sys/bus/i2c/devices/i2c-$bus_num/new_device"
+
+          if [ -e "$dev_path" ] && [ ! -e "$dev_path/driver" ] && [ -w "$delete_device" ]; then
+            echo 0x37 > "$delete_device" 2>/dev/null || true
+            sleep 0.2
+          fi
+
+          [ -e "$dev_path/driver" ] && continue
+          [ -w "$new_device" ] || continue
+          echo "ddcci 0x37" > "$new_device" 2>/dev/null || true
+        done
+      done
+
+      # Remove stale ddcci clients on disconnected buses.
+      for stale in /sys/bus/i2c/devices/*-0037; do
+        [ -e "$stale" ] || continue
+        bus_num="$(basename "$stale" | cut -d- -f1)"
+        delete_device="/sys/bus/i2c/devices/i2c-$bus_num/delete_device"
+
+        case " $connected_buses " in
+          *" $bus_num "*) continue ;;
+        esac
+
+        [ -w "$delete_device" ] && echo 0x37 > "$delete_device" 2>/dev/null || true
       done
     '';
+  };
+
+  systemd.timers.ddcci-refresh = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnBootSec = "20s";
+      OnUnitActiveSec = "20s";
+      Unit = "ddcci-refresh.service";
+    };
   };
   security.pam.services.hyprlock = {};
   # rtkit is optional but recommended
