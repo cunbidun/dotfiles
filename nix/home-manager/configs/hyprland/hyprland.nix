@@ -31,7 +31,12 @@ in {
         "uwsm finalize"
       ];
 
-      env = ["HYPRCURSOR_THEME,hyprcursor-phinger" "HYPRCURSOR_SIZE,24"];
+      env = [
+        "HYPRCURSOR_THEME,hyprcursor-phinger"
+        "HYPRCURSOR_SIZE,24"
+        "XCURSOR_THEME,phinger-cursors-dark"
+        "XCURSOR_SIZE,24"
+      ];
 
       misc = {
         enable_swallow = true;
