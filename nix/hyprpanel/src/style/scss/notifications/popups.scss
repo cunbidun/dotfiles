@@ -3,8 +3,8 @@
     background: $notification-background;
     margin: 0.45em;
     border: 0.15em solid transparentize($notification-border, 0.5);
-    min-width: 26em;
-    min-height: 4em;
+    min-width: 23em;
+    min-height: 3.25em;
     border-radius: $notification-border_radius;
     opacity: $notification-opacity * 0.01;
     margin: if($notification-enableShadow, $notification-shadowMargins, 0px);
@@ -20,15 +20,15 @@
 }
 
 .notification-card-image-container {
-    margin: 0.65em 0.65em;
+    margin: 0.45em 0.45em;
     border-radius: 0.4em;
 }
 
 .notification-card-image {
     border-radius: 0.4em;
-    min-width: 2.5em;
-    min-height: 2.5em;
-    padding: 0.85em 0.85em;
+    min-width: 2.05em;
+    min-height: 2.05em;
+    padding: 0.45em 0.45em;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -37,50 +37,51 @@
         min-width: 0em;
         padding: 0em;
         min-height: 0em;
-        font-size: 3em;
+        font-size: 2.2em;
     }
 }
 
 .notification-card-content {
     min-width: 2.9em;
     min-height: 2.9em;
-    padding: 0.5em 0.5em;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding: 0.4em 0.3em;
+    margin-right: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
 .notification-card-content.noimg {
-    margin-left: 0.5em;
-    margin-top: 0.15em;
+    margin-left: 0.2em;
+    margin-top: 0.1em;
 }
 
 .notification-card-header-label {
-    font-size: 0.95em;
-    margin-bottom: 0.5em;
+    font-size: 0.89em;
+    margin-bottom: 0.2em;
     color: $notification-label;
 }
 
 .notification-card-body-label {
-    font-size: 0.84em;
-    margin-bottom: 1em;
-    font-weight: 600;
+    font-size: 0.79em;
+    margin-bottom: 0.35em;
+    font-weight: 500;
     color: $notification-text;
 }
 
 .notification-card-actions {
-    margin-top: 0.25em;
-    margin-bottom: 0.4em;
+    margin-top: 0.12em;
+    margin-bottom: 0.16em;
 }
 
 .notification-action-buttons {
     color: $notification-actions-text;
     background: $notification-actions-background;
-    min-width: 4em;
-    min-height: 1.65em;
+    min-width: 3.4em;
+    min-height: 1.45em;
     border-radius: $bar-menus-buttons-radius;
+    padding: 0.02em 0.2em;
 
     &:not(:last-child) {
-        margin-right: 2rem;
+        margin-right: 0.38em;
     }
 
     &:hover {
@@ -94,25 +95,25 @@
 
 .notification-icon {
     color: $notification-labelicon;
-    margin-bottom: 0.4em;
-    min-width: 1em;
-    min-height: 1em;
-    font-size: 1.3em;
+    margin-bottom: 0.12em;
+    min-width: 0.9em;
+    min-height: 0.9em;
+    font-size: 1.02em;
 }
 
 .notification-time {
-    font-size: 0.85em;
+    font-size: 0.76em;
     color: $notification-time;
 }
 
 .close-notification-button {
     background: $notification-close_button-background;
     color: $notification-close_button-label;
-    min-width: 2.1em;
+    min-width: 1.55em;
     border-radius: 0rem $notification-border_radius * 0.7 $notification-border_radius * 0.7 0em;
 
     label {
-        font-size: 1.5em;
+        font-size: 1.15em;
     }
 
     &:hover {

@@ -3,8 +3,19 @@ import { Gtk } from 'astal/gtk3';
 import { isAnImage } from 'src/lib/validation/images';
 import { notifHasImg } from '../helpers';
 
+const isFileUrl = (value: string | null | undefined): boolean => {
+    return typeof value === 'string' && value.startsWith('file://');
+};
+
+const imageUrlFor = (notification: AstalNotifd.Notification): string => {
+    return notification.image || notification.appIcon;
+};
+
 const ImageItem = ({ notification }: ImageProps): JSX.Element => {
-    if (notification.appIcon && !isAnImage(notification.appIcon)) {
+    const imageUrl = imageUrlFor(notification);
+    const appIconIsImage = isAnImage(notification.appIcon) || isFileUrl(notification.appIcon);
+
+    if (notification.appIcon && !appIconIsImage) {
         return (
             <icon
                 className={'notification-card-image icon'}
@@ -21,7 +32,7 @@ const ImageItem = ({ notification }: ImageProps): JSX.Element => {
             halign={Gtk.Align.CENTER}
             vexpand={false}
             css={`
-                background-image: url('${notification.image || notification.appIcon}');
+                background-image: url('${imageUrl}');
             `}
         />
     );

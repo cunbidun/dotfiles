@@ -2,7 +2,7 @@ import AstalNotifd from 'gi://AstalNotifd?version=0.1';
 import options from 'src/configuration';
 import { GLib } from 'astal';
 import { Gtk } from 'astal/gtk3';
-import { notifHasImg, escapeMarkup } from '../helpers';
+import { notifHasImg, escapeMarkup, normalizeNotificationText } from '../helpers';
 import { getNotificationIcon } from 'src/lib/shared/notifications';
 
 const { military } = options.menus.clock.time;
@@ -33,17 +33,19 @@ const NotificationIcon = ({ notification }: HeaderProps): JSX.Element => {
 };
 
 const SummaryLabel = ({ notification }: HeaderProps): JSX.Element => {
+    const summary = normalizeNotificationText(notification.summary);
+
     return (
         <box className={'notification-card-header'} halign={Gtk.Align.START} valign={Gtk.Align.START} hexpand>
             <label
                 className={'notification-card-header-label'}
                 halign={Gtk.Align.START}
-                onRealize={(self) => self.set_markup(escapeMarkup(notification.summary))}
-                label={escapeMarkup(notification.summary)}
-                maxWidthChars={!notifHasImg(notification) ? 30 : 19}
+                onRealize={(self) => self.set_markup(escapeMarkup(summary))}
+                label={escapeMarkup(summary)}
+                maxWidthChars={!notifHasImg(notification) ? 42 : 30}
                 hexpand
                 vexpand
-                truncate
+                lines={2}
                 wrap
             />
         </box>
@@ -60,7 +62,6 @@ const TimeLabel = ({ notification }: HeaderProps): JSX.Element => {
             className={'notification-card-header menu'}
             halign={Gtk.Align.END}
             valign={Gtk.Align.START}
-            hexpand
         >
             <label className={'notification-time'} label={time(notification.time)} vexpand />
         </box>

@@ -111,3 +111,14 @@ export const trackAutoTimeout = (): void => {
 export const escapeMarkup = (text: string): string => {
     return GLib.markup_escape_text(text, -1);
 };
+
+/**
+ * Normalizes notification text to avoid rendering raw HTML payloads from apps.
+ * Keeps plain text readable and safe for Pango markup.
+ */
+export const normalizeNotificationText = (text: string): string => {
+    // Strip simple HTML tags frequently embedded by web-app notifications.
+    const withoutTags = text.replace(/<[^>]*>/g, ' ');
+    // Collapse excessive whitespace/newlines after tag removal.
+    return withoutTags.replace(/\s+/g, ' ').trim();
+};

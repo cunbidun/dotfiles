@@ -192,8 +192,8 @@
   # entries under /sys/class/backlight for external monitors.
   systemd.services.ddcci-bind = {
     description = "Bind DDC/CI displays to ddcci driver";
-    after = ["systemd-modules-load.service"];
-    wants = ["systemd-modules-load.service"];
+    after = ["systemd-modules-load.service" "systemd-udev-settle.service"];
+    wants = ["systemd-modules-load.service" "systemd-udev-settle.service"];
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "oneshot";
@@ -202,6 +202,16 @@
     path = with pkgs; [coreutils gnugrep];
     script = ''
       shopt -s nullglob
+      # On newer kernels, ddcci auto-probe is disabled. Wait for DRM connectors
+      # to expose i2c buses before manually binding ddcci devices.
+      deadline=$((SECONDS + 20))
+      while :; do
+        drm_i2c_paths=(/sys/class/drm/card*-*/i2c-*)
+        [ "''${#drm_i2c_paths[@]}" -gt 0 ] && break
+        [ "$SECONDS" -ge "$deadline" ] && break
+        sleep 1
+      done
+
       for i2c_path in /sys/class/drm/card*-*/i2c-*; do
         bus_num="$(basename "$i2c_path" | cut -d- -f2)"
         new_device="/sys/bus/i2c/devices/i2c-$bus_num/new_device"
