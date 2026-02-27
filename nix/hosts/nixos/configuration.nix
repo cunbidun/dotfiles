@@ -192,9 +192,8 @@
   # DP buses, clear stale failed probes, and retry periodically.
   systemd.services.ddcci-refresh = {
     description = "Refresh DDC/CI backlight devices";
-    after = ["systemd-modules-load.service" "systemd-udev-settle.service" "graphical.target"];
+    after = ["systemd-modules-load.service" "systemd-udev-settle.service"];
     wants = ["systemd-modules-load.service" "systemd-udev-settle.service"];
-    wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "oneshot";
     };
