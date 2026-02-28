@@ -226,6 +226,7 @@ in {
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
+      bind = $mainMod CTRL SHIFT, S, exec, ${lib.getExe scripts."screenshot-copy-upload"}
 
       bind = $mainMod, slash, layoutmsg, togglesplit
       bind = $mainMod, F, togglefloating,

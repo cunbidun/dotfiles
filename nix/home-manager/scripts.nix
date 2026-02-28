@@ -65,6 +65,35 @@
     fi
   '';
 
+  screenshot-copy-upload = pkgs.writeShellApplication {
+    name = "screenshot-copy-upload";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.grim
+      pkgs.openssh
+      pkgs.slurp
+      pkgs.wl-clipboard
+    ];
+    text = ''
+      set -euo pipefail
+
+      remote_target="home-server"
+      remote_dir="/home/cunbidun/Pictures/Screenshots/llm-shots"
+      local_dir="$HOME/Pictures/Screenshots"
+      mkdir -p "$local_dir"
+
+      file_name="llm-shot_$(date +%Y-%m-%d_%H-%M-%S).png"
+      local_path="$local_dir/$file_name"
+      remote_path="$remote_dir/$file_name"
+      region="$(slurp)"
+
+      grim -g "$region" - | tee "$local_path" | wl-copy -t image/png
+      ssh "$remote_target" mkdir -p -- "$remote_dir"
+      scp -q "$local_path" "$remote_target:$remote_path"
+      printf "%s" "$remote_target:$remote_path" | wl-copy
+    '';
+  };
+
   wsctl =
     pkgs.writers.writePython3Bin "wsctl" {
       flakeIgnore = ["E501"];
