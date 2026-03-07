@@ -203,7 +203,8 @@ in {
     };
 
     plugins = [
-      inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+      # Temporarily disabled: upstream hyprfocus currently fails to build against Hyprland v0.54.0.
+      # inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
       # inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
     ];
 

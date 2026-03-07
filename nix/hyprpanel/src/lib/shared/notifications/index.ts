@@ -4,18 +4,24 @@ import { iconExists } from 'src/lib/icons/helpers';
 import icons from 'src/lib/icons/icons';
 
 const normalizeName = (name: string): string => name.toLowerCase().replace(/\s+/g, '_');
+const MAX_CLEAR_DURATION_MS = 300;
+
+const normalizeNotificationFilter = (filter: string[]): Set<string> => {
+    return new Set(filter.map(normalizeName));
+};
 
 export const removingNotifications = Variable(false);
 
 export const isNotificationIgnored = (
     notification: AstalNotifd.Notification | null,
     filter: string[],
+    normalizedFilter?: Set<string>,
 ): boolean => {
     if (!notification) {
         return false;
     }
 
-    const notificationFilters = new Set(filter.map(normalizeName));
+    const notificationFilters = normalizedFilter ?? normalizeNotificationFilter(filter);
     const normalizedAppName = normalizeName(notification.app_name);
 
     return notificationFilters.has(normalizedAppName);
@@ -25,8 +31,10 @@ export const filterNotifications = (
     notifications: AstalNotifd.Notification[],
     filter: string[],
 ): AstalNotifd.Notification[] => {
-    const filteredNotifications = notifications.filter((notif: AstalNotifd.Notification) => {
-        return !isNotificationIgnored(notif, filter);
+    const notificationFilters = normalizeNotificationFilter(filter);
+
+    const filteredNotifications = notifications.filter((notif) => {
+        return !isNotificationIgnored(notif, filter, notificationFilters);
     });
 
     return filteredNotifications;
@@ -57,9 +65,27 @@ export const clearNotifications = async (
     delay: number,
 ): Promise<void> => {
     removingNotifications.set(true);
-    for (const notification of notifications) {
-        notification.dismiss();
-        await new Promise((resolve) => setTimeout(resolve, delay));
+    try {
+        const notificationCount = notifications.length;
+
+        if (notificationCount <= 0) {
+            return;
+        }
+
+        const baseDelay = Math.max(0, delay);
+        const effectiveDelay =
+            baseDelay === 0
+                ? 0
+                : Math.min(baseDelay, Math.max(1, Math.floor(MAX_CLEAR_DURATION_MS / notificationCount)));
+
+        for (const notification of notifications) {
+            notification.dismiss();
+
+            if (effectiveDelay > 0) {
+                await new Promise((resolve) => setTimeout(resolve, effectiveDelay));
+            }
+        }
+    } finally {
+        removingNotifications.set(false);
     }
-    removingNotifications.set(false);
 };

@@ -40,7 +40,7 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.53.1/?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.54.0/?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
@@ -58,7 +58,7 @@
     # +--------+
     # | Others |
     # +--------+
-    yazi = {url = "github:sxyazi/yazi/v26.1.4";};
+    yazi = {url = "github:sxyazi/yazi/v26.1.22";};
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
@@ -113,7 +113,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.18.3";
+      url = "github:vicinaehq/vicinae/v0.20.1";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";

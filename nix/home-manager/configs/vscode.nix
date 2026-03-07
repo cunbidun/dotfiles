@@ -409,6 +409,8 @@ in {
           "github.copilot-chat"
           "esbenp.prettier-vscode"
         ];
+        "remote.autoForwardPorts" = false;
+        "remote.restoreForwardedPorts" = false;
         "editor.fontFamily" = "SFMono Nerd Font";
         "editor.minimap.enabled" = false;
         "editor.rulers" = [120];
