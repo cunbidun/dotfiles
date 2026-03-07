@@ -505,6 +505,7 @@ in {
         };
         "python.languageServer" = "Default";
         "python.pyrefly.disableLanguageServices" = true;
+        "python.terminal.activateEnvironment" = false;
         "security.workspace.trust.untrustedFiles" = "open";
         "terminal.integrated.enableMultiLinePasteWarning" = "never";
         "git.blame.editorDecoration.enabled" = true;

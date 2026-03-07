@@ -19,6 +19,7 @@ import hypridle from './hypridle';
 import submap from './submap';
 import power from './power';
 import weather from './weather';
+import sshForwarding from './sshForwarding';
 import updates from './updates';
 import kbLayout from './kbLayout';
 import netstat from './netstat';
@@ -71,6 +72,7 @@ export default {
         updates: updates,
         weather: weather,
         power: power,
+        sshForwarding: sshForwarding,
         submap: submap,
         hypridle: hypridle,
         cava: cava,

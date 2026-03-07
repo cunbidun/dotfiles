@@ -29,6 +29,7 @@ export const dropdownMenuList = [
     'calendarmenu',
     'energymenu',
     'powerdropdownmenu',
+    'sshforwardingmenu',
 ] as const;
 
 export const isDropdownMenu = (name: string): name is DropdownMenuList => {

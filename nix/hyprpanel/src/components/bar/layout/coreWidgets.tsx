@@ -2,6 +2,7 @@ import { Clock } from '../modules/clock';
 import { Menu } from '../modules/menu';
 import { Notifications } from '../modules/notifications';
 import { ModuleSeparator } from '../modules/separator';
+import { SshForwarding } from '../modules/sshForwarding';
 import { Submap } from '../modules/submap';
 import { SysTray } from '../modules/systray';
 import { ClientTitle } from '../modules/window_title';
@@ -17,6 +18,7 @@ export function getCoreWidgets(): Record<string, WidgetFactory> {
         notifications: () => WidgetContainer(Notifications()),
         clock: () => WidgetContainer(Clock()),
         systray: () => WidgetContainer(SysTray()),
+        sshforwarding: () => WidgetContainer(SshForwarding()),
         submap: () => WidgetContainer(Submap()),
         separator: () => ModuleSeparator(),
     };

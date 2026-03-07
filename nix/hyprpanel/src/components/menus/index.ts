@@ -8,6 +8,7 @@ import CalendarMenu from './calendar/index.js';
 import EnergyMenu from './energy/index.js';
 import DashboardMenu from './dashboard/index.js';
 import PowerDropdown from './powerDropdown/index.js';
+import SshForwardingMenu from './sshForwarding/index.js';
 
 export const DropdownMenus = [
     AudioMenu,
@@ -19,6 +20,7 @@ export const DropdownMenus = [
     EnergyMenu,
     DashboardMenu,
     PowerDropdown,
+    SshForwardingMenu,
 ];
 
 export const StandardWindows = [Verification];

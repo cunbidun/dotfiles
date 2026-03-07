@@ -1,0 +1,218 @@
+@import './menu.scss';
+
+.menu-items.ssh-forwarding {
+    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-cards);
+    border-color: $bar-menus-border-color;
+    opacity: $bar-menus-opacity * 0.01;
+}
+
+.menu-items-container.ssh-forwarding {
+    min-width: 19em;
+    font-size: 1.3em;
+
+    .ssh-forwarding-panel {
+        background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-cards);
+        border-radius: $bar-menus-card_radius;
+        padding: 0.75em;
+
+        &:not(:last-child) {
+            margin-bottom: 0.7em;
+        }
+    }
+
+    .ssh-forwarding-panel.create:not(:last-child) {
+        margin-bottom: 0;
+    }
+
+    .ssh-forwarding-panel-header {
+        margin-bottom: 0.55em;
+    }
+
+    .ssh-forwarding-panel-icon {
+        min-width: 2.25rem;
+        min-height: 2.25rem;
+        font-size: 1.05em;
+        border-radius: $bar-menus-card_radius;
+        background: $bar-menus-buttons-default;
+        color: $bar-menus-buttons-text;
+        margin-right: 0.55em;
+    }
+
+    .ssh-forwarding-panel-title {
+        font-size: 0.98em;
+        font-weight: 700;
+        color: $text;
+    }
+
+    .ssh-forwarding-panel-subtitle {
+        font-size: 0.84em;
+        color: $overlay0;
+        margin-top: 0.05em;
+    }
+
+    .ssh-forwarding-row {
+        margin-bottom: 0.45em;
+        background: transparentize($mantle, 0.45);
+        border-radius: $bar-menus-card_radius;
+        padding: 0.35em 0.5em;
+    }
+
+    .menu-label {
+        color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
+    }
+
+    .ssh-forwarding-host {
+        color: $bar-menus-text;
+    }
+
+    .ssh-forwarding-host-picker {
+        border-radius: $bar-menus-card_radius;
+        padding: 0.05em 0;
+    }
+
+    .ssh-forwarding-cycle {
+        color: $bar-menus-icons-passive;
+        min-width: 1.2em;
+        min-height: 1.6em;
+        border: 1px solid transparent;
+        box-shadow: none;
+        outline: none;
+
+        &:hover {
+            color: $bar-menus-icons-active;
+        }
+
+        &:focus,
+        &:active {
+            border-color: transparent;
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .ssh-forwarding-input {
+        background: transparent;
+        color: $bar-menus-text;
+        border-radius: $bar-menus-card_radius;
+        border: 1px solid transparent;
+        padding: 0.1em 0.2em;
+        min-width: 7em;
+        box-shadow: none;
+        outline: none;
+
+        &:focus,
+        &:active {
+            border-color: transparentize($overlay0, 0.65);
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .ssh-forwarding-error {
+        color: $overlay0;
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
+
+        &.visible {
+            color: $red;
+        }
+    }
+
+    .ssh-forwarding-main-action {
+        background: transparentize($mantle, 0.45);
+        color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-text);
+        border-radius: $bar-menus-card_radius;
+        border: 1px solid transparent;
+        padding: 0.25em 0.5em;
+        margin-top: 0.15em;
+        min-height: 2rem;
+        box-shadow: none;
+        outline: none;
+
+        &:hover {
+            color: if($bar-menus-monochrome, $bar-menus-iconbuttons-active, $bar-menus-iconbuttons-active);
+            background: transparentize($mantle, 0.35);
+        }
+
+        &:focus,
+        &:active {
+            border-color: transparentize($overlay0, 0.65);
+            box-shadow: none;
+            outline: none;
+        }
+
+        > box {
+            min-height: 1.5rem;
+        }
+    }
+
+    .ssh-forwarding-action-label {
+        font-weight: 700;
+        margin-left: 0;
+    }
+
+    .ssh-forwarding-current-list {
+        background: transparentize($mantle, 0.45);
+        border-radius: $bar-menus-card_radius;
+        padding: 0.2em 0.35em;
+    }
+
+    .ssh-forwarding-connection-row {
+        padding: 0.35em 0.2em;
+        min-height: 2.2rem;
+        border-radius: $bar-menus-card_radius;
+        box-shadow: none;
+        outline: none;
+
+        &:not(:last-child) {
+            margin-bottom: 0.2em;
+            border-bottom: 1px solid transparentize($surface2, 0.55);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .ssh-forwarding-connection-title {
+        color: $text;
+        font-weight: 700;
+    }
+
+    .ssh-forwarding-connection-subtitle {
+        color: $overlay0;
+        margin-top: 0.15em;
+        font-size: 0.92em;
+    }
+
+    .menu-icon-button.ssh-forwarding.close {
+        min-width: 1.8rem;
+        min-height: 1.8rem;
+        margin-left: 0.5em;
+        border-radius: $bar-menus-card_radius;
+        background: transparent;
+        border: 1px solid transparent;
+        box-shadow: none;
+        outline: none;
+        color: if($bar-menus-monochrome, $bar-menus-iconbuttons-passive, $bar-menus-iconbuttons-passive);
+
+        &:hover {
+            background: transparent;
+            color: if($bar-menus-monochrome, $bar-menus-iconbuttons-active, $bar-menus-iconbuttons-active);
+        }
+
+        &:focus,
+        &:active {
+            border-color: transparentize($overlay0, 0.65);
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .ssh-forwarding-close-label {
+        font-size: 1em;
+    }
+}

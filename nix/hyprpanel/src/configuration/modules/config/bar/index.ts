@@ -17,6 +17,7 @@ import network from './network';
 import notifications from './notifications';
 import power from './power';
 import ram from './ram';
+import sshForwarding from './sshForwarding';
 import storage from './storage';
 import submap from './submap';
 import systray from './systray';
@@ -55,6 +56,7 @@ export default {
         submap,
         weather,
         power,
+        sshForwarding,
         hypridle,
         cava,
         worldclock,

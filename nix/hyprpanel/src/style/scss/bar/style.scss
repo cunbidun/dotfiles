@@ -359,6 +359,25 @@ $style-module-defaults: (
 
 /*
  * #################################
+ * #   SSH Forwarding Styling      #
+ * #################################
+ */
+@include styleModule(
+    'sshforwarding',
+    (
+        'text-color': $bar-buttons-modules-sshForwarding-text,
+        'icon-color': $bar-buttons-modules-sshForwarding-icon,
+        'icon-background': $bar-buttons-modules-sshForwarding-icon_background,
+        'label-background': $bar-buttons-modules-sshForwarding-background,
+        'inner-spacing': $bar-buttons-modules-sshForwarding-spacing,
+        'border-enabled': $bar-buttons-modules-sshForwarding-enableBorder,
+        'border-color': $bar-buttons-modules-sshForwarding-border,
+        'icon-size': 1.15em,
+    )
+);
+
+/*
+ * #################################
  * #       Hypridle Styling        #
  * #################################
  */

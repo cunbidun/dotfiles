@@ -36,6 +36,7 @@ export type BarModule =
     | 'submap'
     | 'weather'
     | 'power'
+    | 'sshforwarding'
     | 'systray'
     | 'hypridle'
     | 'cava';
