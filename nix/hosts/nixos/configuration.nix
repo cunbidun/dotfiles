@@ -8,7 +8,135 @@
   userdata,
   lib,
   ...
-}: {
+}: let
+  brightnessctlDdcutil = pkgs.writeShellScriptBin "brightnessctl" ''
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    ddc="${pkgs.ddcutil}/bin/ddcutil"
+    class="backlight"
+    [ "''${1:-}" = "-c" ] && class="$2" && shift 2
+    [ "$class" = "backlight" ] || { echo "Failed to read any devices of class '$class'." >&2; exit 1; }
+    lock_file="/tmp/brightnessctl-ddcutil.lock"
+    exec 9>"$lock_file"
+    flock -w 2 9 || { echo "DDC bus busy." >&2; exit 1; }
+
+    bus_cache="/tmp/brightnessctl-ddcutil-bus"
+    state_cache="/tmp/brightnessctl-ddcutil-state"
+    bus="''${BRIGHTNESSCTL_DDCUTIL_BUS:-}"
+    if [ -z "$bus" ] && [ -r "$bus_cache" ]; then
+      bus="$(head -n1 "$bus_cache" | tr -cd '0-9')"
+    fi
+    if [ -z "$bus" ]; then
+      detect="$($ddc detect --brief 2>/dev/null || true)"
+      while IFS= read -r line; do
+        case "$line" in
+          *"/dev/i2c-"*)
+            bus="''${line##*/dev/i2c-}"
+            bus="''${bus%%[^0-9]*}"
+            break
+            ;;
+        esac
+      done <<<"$detect"
+      [ -n "$bus" ] && printf '%s\n' "$bus" > "$bus_cache" 2>/dev/null || true
+    fi
+    [ -n "$bus" ] || { echo "No DDC/CI display found." >&2; exit 1; }
+
+    get_vals() {
+      local out cur max
+      out="$($ddc --bus "$bus" --skip-ddc-checks --sleep-multiplier 0.1 --terse getvcp 10 2>/dev/null || true)"
+      read -r _ _ _ cur max <<<"$out"
+      [ -n "''${cur:-}" ] && [ -n "''${max:-}" ] || return 1
+      printf '%s %s\n' "$cur" "$max"
+    }
+
+    read_cache() {
+      local cur max cache_bus
+      [ -r "$state_cache" ] || return 1
+      read -r cur max cache_bus < "$state_cache" || return 1
+      [[ "$cur" =~ ^[0-9]+$ ]] || return 1
+      [[ "$max" =~ ^[0-9]+$ ]] || return 1
+      [ "$max" -gt 0 ] || return 1
+      [ "$cache_bus" = "$bus" ] || return 1
+      printf '%s %s\n' "$cur" "$max"
+    }
+
+    write_cache() {
+      local cur max
+      cur="$1"
+      max="$2"
+      printf '%s %s %s\n' "$cur" "$max" "$bus" > "$state_cache"
+    }
+
+    refresh_cache_async() {
+      (
+        out="$($ddc --bus "$bus" --skip-ddc-checks --sleep-multiplier 0.1 --terse getvcp 10 2>/dev/null || true)"
+        read -r _ _ _ cur max <<<"$out"
+        [[ "''${cur:-}" =~ ^[0-9]+$ ]] || exit 0
+        [[ "''${max:-}" =~ ^[0-9]+$ ]] || exit 0
+        [ "$max" -gt 0 ] || exit 0
+        write_cache "$cur" "$max"
+      ) >/dev/null 2>&1 &
+    }
+
+    case "''${1:-}" in
+      -m)
+        if ! read -r cur max < <(read_cache); then
+          read -r cur max < <(get_vals) || { echo "Error reading device: No such file or directory" >&2; exit 1; }
+          write_cache "$cur" "$max"
+        fi
+        pct=$(( cur * 100 / max ))
+        printf 'ddcutil::i2c-%s,backlight,%s,%s%%,%s\n' "$bus" "$cur" "$pct" "$max"
+        ;;
+      set)
+        arg="''${2:-}"
+        [ -n "$arg" ] || { echo "Usage: brightnessctl set <value>" >&2; exit 1; }
+        cached_cur=""
+        cached_max=""
+        if read -r cached_cur cached_max < <(read_cache); then
+          true
+        else
+          cached_cur=0
+          cached_max=100
+        fi
+        case "$arg" in
+          +*%)
+            n="''${arg#+}"
+            n="''${n%%%}"
+            $ddc --bus "$bus" --noverify --skip-ddc-checks --sleep-multiplier 0.1 setvcp 10 + "$n" >/dev/null
+            target=$(( cached_cur + (cached_max * n / 100) ))
+            [ "$target" -gt "$cached_max" ] && target="$cached_max"
+            write_cache "$target" "$cached_max"
+            refresh_cache_async
+            exit 0
+            ;;
+          *%-)
+            n="''${arg%%%-}"
+            n="''${n%%%}"
+            $ddc --bus "$bus" --noverify --skip-ddc-checks --sleep-multiplier 0.1 setvcp 10 - "$n" >/dev/null
+            target=$(( cached_cur - (cached_max * n / 100) ))
+            [ "$target" -lt 0 ] && target=0
+            write_cache "$target" "$cached_max"
+            refresh_cache_async
+            exit 0
+            ;;
+          *%)
+            n="''${arg%%%}"
+            target=$(( cached_max * n / 100 ))
+            ;;
+          *) echo "Unsupported set value: $arg" >&2; exit 1 ;;
+        esac
+        $ddc --bus "$bus" --noverify --skip-ddc-checks --sleep-multiplier 0.1 setvcp 10 "$target" >/dev/null
+        write_cache "$target" "$cached_max"
+        refresh_cache_async
+        ;;
+      *)
+        echo "Unsupported arguments: $*" >&2
+        exit 1
+        ;;
+    esac
+  '';
+in {
   imports = [
     ./hardware-configuration.nix
     ../shared/nix-config.nix
@@ -25,12 +153,9 @@
   boot.kernelModules = [
     "uinput"
     "i2c-dev"
-    "ddcci"
-    "ddcci-backlight"
     "ip_tables"
     "iptable_nat"
   ];
-  boot.extraModulePackages = [config.boot.kernelPackages.ddcci-driver];
   boot.blacklistedKernelModules = ["wacom"];
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -107,7 +232,8 @@
     (with pkgs; [
       neovim
       git
-      brightnessctl
+      brightnessctlDdcutil
+      ddcutil
       _1password-cli
       sops
       xdg-desktop-portal-termfilechooser
@@ -188,66 +314,6 @@
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
 
-  # Keep ddcci backlight available on external monitors: only touch connected
-  # DP buses, clear stale failed probes, and retry periodically.
-  systemd.services.ddcci-refresh = {
-    description = "Refresh DDC/CI backlight devices";
-    after = ["systemd-modules-load.service" "systemd-udev-settle.service"];
-    wants = ["systemd-modules-load.service" "systemd-udev-settle.service"];
-    serviceConfig = {
-      Type = "oneshot";
-    };
-    script = ''
-      shopt -s nullglob
-      connected_buses=""
-
-      for status_path in /sys/class/drm/card*-DP-*/status; do
-        [ -r "$status_path" ] || continue
-        [ "$(cat "$status_path")" = "connected" ] || continue
-        connector_dir="$(dirname "$status_path")"
-
-        for i2c_path in "$connector_dir"/i2c-*; do
-          bus_num="$(basename "$i2c_path" | cut -d- -f2)"
-          connected_buses="$connected_buses $bus_num"
-
-          dev_path="/sys/bus/i2c/devices/$bus_num-0037"
-          delete_device="/sys/bus/i2c/devices/i2c-$bus_num/delete_device"
-          new_device="/sys/bus/i2c/devices/i2c-$bus_num/new_device"
-
-          if [ -e "$dev_path" ] && [ ! -e "$dev_path/driver" ] && [ -w "$delete_device" ]; then
-            echo 0x37 > "$delete_device" 2>/dev/null || true
-            sleep 0.2
-          fi
-
-          [ -e "$dev_path/driver" ] && continue
-          [ -w "$new_device" ] || continue
-          echo "ddcci 0x37" > "$new_device" 2>/dev/null || true
-        done
-      done
-
-      # Remove stale ddcci clients on disconnected buses.
-      for stale in /sys/bus/i2c/devices/*-0037; do
-        [ -e "$stale" ] || continue
-        bus_num="$(basename "$stale" | cut -d- -f1)"
-        delete_device="/sys/bus/i2c/devices/i2c-$bus_num/delete_device"
-
-        case " $connected_buses " in
-          *" $bus_num "*) continue ;;
-        esac
-
-        [ -w "$delete_device" ] && echo 0x37 > "$delete_device" 2>/dev/null || true
-      done
-    '';
-  };
-
-  systemd.timers.ddcci-refresh = {
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      OnBootSec = "20s";
-      OnUnitActiveSec = "20s";
-      Unit = "ddcci-refresh.service";
-    };
-  };
   security.pam.services.hyprlock = {};
   # rtkit is optional but recommended
   security.rtkit.enable = true;

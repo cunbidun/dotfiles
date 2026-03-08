@@ -45,7 +45,7 @@ export default class BrightnessService extends GObject.Object {
         super();
         console.log(`${DEBUG_TAG} init: available=${isBrightnessAvailable} cmd="${brightnessCommand}"`);
         this.#syncScreen();
-        setInterval(() => this.#syncScreen(), 200);
+        setInterval(() => this.#syncScreen(), 1000);
     }
 
     /**

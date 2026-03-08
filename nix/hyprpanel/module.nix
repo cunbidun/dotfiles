@@ -34,7 +34,6 @@ in {
           bluez
           bluez-tools
           bash
-          brightnessctl
           btop
           coreutils
           dart-sass
@@ -97,7 +96,7 @@ in {
         else
           export LD_LIBRARY_PATH='${libPath}'
         fi
-        export PATH='${binPath}:$PATH'
+        export PATH='${binPath}:/run/current-system/sw/bin:$PATH'
 
         xdg_data_dirs=()
         for dep in ${depPaths}; do
