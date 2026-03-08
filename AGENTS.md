@@ -25,7 +25,6 @@ warning: Git tree '/home/cunbidun/dotfiles' is dirty
 | home-manager       | https://github.com/nix-community/home-manager                    | 0562fef070a1                                                   |
 | home-manager-rpi5  | https://github.com/nix-community/home-manager/tree/release-25.05 | release-25.05 (3b955f5f0a94)                                   |
 | hyprcursor-phinger | https://github.com/jappie3/hyprcursor-phinger                    | 2e244e3398a3                                                   |
-| hyprfocus          | https://github.com/daxisunder/hyprfocus                          | 12d581817bbb                                                   |
 | hyprland           | https://github.com/hyprwm/Hyprland/tree/v0.52.0                  | v0.52.0 (f56ec180d3a0)                                         |
 | hyprland-contrib   | https://github.com/hyprwm/contrib                                | 32e1a75b6555                                                   |
 | hyprpanel          | https://github.com/cunbidun/HyprPanel                            | 138bd5d72810                                                   |

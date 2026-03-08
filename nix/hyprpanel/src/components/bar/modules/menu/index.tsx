@@ -11,12 +11,22 @@ import { barLauncherDynamicActive, osdContext, type OsdContext } from 'src/compo
 import { runAsyncCommand } from '../../utils/input/commandExecutor';
 import { throttledScrollHandler } from '../../utils/input/throttle';
 import { openDropdownMenu } from '../../utils/menu';
+import { BashPoller } from 'src/lib/poller/BashPoller';
 
 const { rightClick, middleClick, scrollUp, scrollDown, autoDetectIcon, icon } = options.bar.launcher;
 const wireplumber = AstalWp.get_default() as AstalWp.Wp;
 const audioService = wireplumber.audio;
 const brightnessService = BrightnessService.getInstance();
 const mutedZero = options.theme.osd.muted_zero;
+const isRecording = Variable(false);
+const recordingPollingInterval = Variable(1000);
+const recordingPoller = new BashPoller<boolean, []>(
+    isRecording,
+    [],
+    bind(recordingPollingInterval),
+    `${SRC_DIR}/scripts/screen_record.sh status`,
+    (output) => output.trim() === 'recording',
+);
 
 const getContextPercent = (
     context: OsdContext,
@@ -52,6 +62,7 @@ const Menu = (): BarBoxChild => {
             bind(brightnessService, 'kbd'),
             bind(audioService.defaultSpeaker, 'volume'),
             bind(audioService.defaultSpeaker, 'mute'),
+            bind(isRecording),
         ],
         (
             autoDetect: boolean,
@@ -62,7 +73,12 @@ const Menu = (): BarBoxChild => {
             keyboardBrightness: number,
             speakerVolume: number,
             speakerMuted: boolean,
+            recording: boolean,
         ): string => {
+            if (recording) {
+                return '󰑊';
+            }
+
             if (dynamicActive) {
                 return resolveOsdIcon({
                     context,
@@ -86,6 +102,7 @@ const Menu = (): BarBoxChild => {
             bind(audioService.defaultSpeaker, 'volume'),
             bind(audioService.defaultSpeaker, 'mute'),
             bind(mutedZero),
+            bind(isRecording),
         ],
         (
             dynamicActive: boolean,
@@ -95,7 +112,12 @@ const Menu = (): BarBoxChild => {
             speakerVolume: number,
             speakerMuted: boolean,
             zeroWhenMuted: boolean,
+            recording: boolean,
         ): string => {
+            if (recording) {
+                return 'REC';
+            }
+
             if (!dynamicActive) {
                 return '';
             }
@@ -120,6 +142,10 @@ const Menu = (): BarBoxChild => {
         };
         return `dashboard ${styleMap[style]}`;
     });
+    const percentClassBinding = Variable.derive(
+        [bind(barLauncherDynamicActive), bind(isRecording)],
+        (active, recording) => (active || recording ? 'bar-menu_pct bar-menu_pct-active' : 'bar-menu_pct'),
+    );
 
     const component = (
         <box
@@ -127,15 +153,11 @@ const Menu = (): BarBoxChild => {
             onDestroy={() => {
                 iconBinding.drop();
                 percentBinding.drop();
+                percentClassBinding.drop();
             }}
         >
             <label className={'bar-button-icon dashboard txt-icon bar'} label={iconBinding()} />
-            <label
-                className={bind(barLauncherDynamicActive).as((active) =>
-                    active ? 'bar-menu_pct bar-menu_pct-active' : 'bar-menu_pct',
-                )}
-                label={percentBinding()}
-            />
+            <label className={percentClassBinding()} label={percentBinding()} />
         </box>
     );
 
@@ -146,6 +168,7 @@ const Menu = (): BarBoxChild => {
         props: {
             setup: (self: Astal.Button): void => {
                 let disconnectFunctions: (() => void)[] = [];
+                recordingPoller.initialize();
 
                 Variable.derive(
                     [
@@ -184,6 +207,10 @@ const Menu = (): BarBoxChild => {
                         );
                     },
                 );
+
+                self.connect('destroy', () => {
+                    recordingPoller.stop();
+                });
             },
         },
     };
