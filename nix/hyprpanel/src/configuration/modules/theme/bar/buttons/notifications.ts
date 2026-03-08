@@ -5,6 +5,7 @@ export default {
     enableBorder: opt(false),
     border: opt(primaryColors.lavender),
     background: opt(primaryColors.base2),
+    text: opt(primaryColors.lavender),
     icon: opt(primaryColors.lavender),
     icon_background: opt(primaryColors.base2),
     total: opt(primaryColors.lavender),

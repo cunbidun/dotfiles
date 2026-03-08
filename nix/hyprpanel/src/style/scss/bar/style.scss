@@ -8,9 +8,17 @@
     color: $text;
 }
 
-.module-icon {
+.module-icon,
+.bar-button-icon {
     font-size: 1em;
     min-width: 0.7em;
+}
+
+.no-icon {
+    .bar-button-label,
+    .module-label {
+        margin-left: 0;
+    }
 }
 
 .style2 {
@@ -87,19 +95,22 @@ $style-module-defaults: (
         }
     }
 
-    .module-label.#{$class} {
+    .module-label.#{$class},
+    .bar-button-label.#{$class} {
         color: if($bar-buttons-monochrome, $bar-buttons-text, $text-color);
         margin-left: $spacing;
         border-radius: $bar-buttons-radius;
     }
 
-    .module-icon.#{$class} {
+    .module-icon.#{$class},
+    .bar-button-icon.#{$class} {
         color: if($bar-buttons-monochrome, $bar-buttons-icon, $icon-color);
         font-size: if($icon-size, $icon-size, 1em);
     }
 
     .style2 {
-        .module-icon.#{$class} {
+        .module-icon.#{$class},
+        .bar-button-icon.#{$class} {
             background: if($bar-buttons-monochrome, $bar-buttons-icon_background, $icon-background);
             padding-right: $spacing;
             color: if($bar-buttons-monochrome, $bar-buttons-icon, $icon-color);
@@ -115,15 +126,25 @@ $style-module-defaults: (
             );
         }
 
-        .module-label.#{$class} {
+        .module-label.#{$class},
+        .bar-button-label.#{$class} {
             background: transparentize($label-background, $transparency-value);
             padding-left: $spacing * 1.5;
             margin-left: 0em;
             border-top-left-radius: 0em;
             border-bottom-left-radius: 0em;
         }
+
+        &.no-icon {
+            .module-label.#{$class},
+            .bar-button-label.#{$class} {
+                padding-left: $bar-buttons-padding_x;
+            }
+        }
+
         &.no-label.#{$class} {
-            .module-icon {
+            .module-icon.#{$class},
+            .bar-button-icon.#{$class} {
                 border-top-right-radius: if(
                     $border-enabled or $bar-buttons-enableBorders,
                     $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
@@ -138,6 +159,155 @@ $style-module-defaults: (
         }
     }
 }
+
+/*
+ * #################################
+ * #      Built-In Button Styles   #
+ * #################################
+ */
+@include styleModule(
+    'dashboard',
+    (
+        'text-color': $bar-buttons-dashboard-text,
+        'icon-color': $bar-buttons-dashboard-icon,
+        'icon-background': $bar-buttons-dashboard-icon_background,
+        'label-background': $bar-buttons-dashboard-background,
+        'inner-spacing': $bar-buttons-dashboard-spacing,
+        'border-enabled': $bar-buttons-dashboard-enableBorder,
+        'border-color': $bar-buttons-dashboard-border,
+        'icon-size': 1.25em,
+    )
+);
+
+@include styleModule(
+    'volume',
+    (
+        'text-color': $bar-buttons-volume-text,
+        'icon-color': $bar-buttons-volume-icon,
+        'icon-background': $bar-buttons-volume-icon_background,
+        'label-background': $bar-buttons-volume-background,
+        'inner-spacing': $bar-buttons-volume-spacing,
+        'border-enabled': $bar-buttons-volume-enableBorder,
+        'border-color': $bar-buttons-volume-border,
+        'icon-size': 1.3em,
+    )
+);
+
+@include styleModule(
+    'media',
+    (
+        'text-color': $bar-buttons-media-text,
+        'icon-color': $bar-buttons-media-icon,
+        'icon-background': $bar-buttons-media-icon_background,
+        'label-background': $bar-buttons-media-background,
+        'inner-spacing': $bar-buttons-media-spacing,
+        'border-enabled': $bar-buttons-media-enableBorder,
+        'border-color': $bar-buttons-media-border,
+        'icon-size': 1.2em,
+    )
+);
+
+@include styleModule(
+    'network',
+    (
+        'text-color': $bar-buttons-network-text,
+        'icon-color': $bar-buttons-network-icon,
+        'icon-background': $bar-buttons-network-icon_background,
+        'label-background': $bar-buttons-network-background,
+        'inner-spacing': $bar-buttons-network-spacing,
+        'border-enabled': $bar-buttons-network-enableBorder,
+        'border-color': $bar-buttons-network-border,
+        'icon-size': 1em,
+    )
+);
+
+@include styleModule(
+    'bluetooth',
+    (
+        'text-color': $bar-buttons-bluetooth-text,
+        'icon-color': $bar-buttons-bluetooth-icon,
+        'icon-background': $bar-buttons-bluetooth-icon_background,
+        'label-background': $bar-buttons-bluetooth-background,
+        'inner-spacing': $bar-buttons-bluetooth-spacing,
+        'border-enabled': $bar-buttons-bluetooth-enableBorder,
+        'border-color': $bar-buttons-bluetooth-border,
+        'icon-size': 1.15em,
+    )
+);
+
+@include styleModule(
+    'clock',
+    (
+        'text-color': $bar-buttons-clock-text,
+        'icon-color': $bar-buttons-clock-icon,
+        'icon-background': $bar-buttons-clock-icon_background,
+        'label-background': $bar-buttons-clock-background,
+        'inner-spacing': $bar-buttons-clock-spacing,
+        'border-enabled': $bar-buttons-clock-enableBorder,
+        'border-color': $bar-buttons-clock-border,
+        'icon-size': 1.2em,
+    )
+);
+
+@include styleModule(
+    'notifications',
+    (
+        'text-color': $bar-buttons-notifications-total,
+        'icon-color': $bar-buttons-notifications-icon,
+        'icon-background': $bar-buttons-notifications-icon_background,
+        'label-background': $bar-buttons-notifications-background,
+        'inner-spacing': $bar-buttons-notifications-spacing,
+        'border-enabled': $bar-buttons-notifications-enableBorder,
+        'border-color': $bar-buttons-notifications-border,
+        'icon-size': 1.3em,
+    )
+);
+
+.bar-button-label.notifications {
+    min-width: 1em;
+}
+
+@include styleModule(
+    'battery',
+    (
+        'text-color': $bar-buttons-battery-text,
+        'icon-color': $bar-buttons-battery-icon,
+        'icon-background': $bar-buttons-battery-icon_background,
+        'label-background': $bar-buttons-battery-background,
+        'inner-spacing': $bar-buttons-battery-spacing,
+        'border-enabled': $bar-buttons-battery-enableBorder,
+        'border-color': $bar-buttons-battery-border,
+        'icon-size': 1.15em,
+    )
+);
+
+@include styleModule(
+    'windowtitle',
+    (
+        'text-color': $bar-buttons-windowtitle-text,
+        'icon-color': $bar-buttons-windowtitle-icon,
+        'icon-background': $bar-buttons-windowtitle-icon_background,
+        'label-background': $bar-buttons-windowtitle-background,
+        'inner-spacing': $bar-buttons-windowtitle-spacing,
+        'border-enabled': $bar-buttons-windowtitle-enableBorder,
+        'border-color': $bar-buttons-windowtitle-border,
+        'icon-size': 1em,
+    )
+);
+
+@include styleModule(
+    'sshforwarding',
+    (
+        'text-color': $bar-buttons-sshforwarding-text,
+        'icon-color': $bar-buttons-sshforwarding-icon,
+        'icon-background': $bar-buttons-sshforwarding-icon_background,
+        'label-background': $bar-buttons-sshforwarding-background,
+        'inner-spacing': $bar-buttons-sshforwarding-spacing,
+        'border-enabled': $bar-buttons-sshforwarding-enableBorder,
+        'border-color': $bar-buttons-sshforwarding-border,
+        'icon-size': 1.3em,
+    )
+);
 
 /*
  * #################################
@@ -362,20 +532,6 @@ $style-module-defaults: (
  * #   SSH Forwarding Styling      #
  * #################################
  */
-@include styleModule(
-    'sshforwarding',
-    (
-        'text-color': $bar-buttons-modules-sshForwarding-text,
-        'icon-color': $bar-buttons-modules-sshForwarding-icon,
-        'icon-background': $bar-buttons-modules-sshForwarding-icon_background,
-        'label-background': $bar-buttons-modules-sshForwarding-background,
-        'inner-spacing': $bar-buttons-modules-sshForwarding-spacing,
-        'border-enabled': $bar-buttons-modules-sshForwarding-enableBorder,
-        'border-color': $bar-buttons-modules-sshForwarding-border,
-        'icon-size': 1.15em,
-    )
-);
-
 /*
  * #################################
  * #       Hypridle Styling        #

@@ -33,7 +33,7 @@ const ClientTitle = (): BarBoxChild => {
     }: ClientLabelProps): JSX.Element => {
         return (
             <label
-                className={`bar-button-label windowtitle ${showIcon ? '' : 'no-icon'}`}
+                className={'bar-button-label windowtitle'}
                 label={truncateTitle(
                     getTitle(client, useCustomTitle, useClassName),
                     truncate ? truncationSize : -1,
@@ -43,15 +43,15 @@ const ClientTitle = (): BarBoxChild => {
     };
 
     const componentClassName = Variable.derive(
-        [bind(options.theme.bar.buttons.style), bind(label)],
-        (style: string, showLabel: boolean) => {
+        [bind(options.theme.bar.buttons.style), bind(label), bind(icon)],
+        (style: string, showLabel: boolean, showIcon: boolean) => {
             const styleMap: Record<string, string> = {
                 default: 'style1',
                 split: 'style2',
                 wave: 'style3',
                 wave2: 'style3',
             };
-            return `windowtitle-container ${styleMap[style]} ${!showLabel ? 'no-label' : ''}`;
+            return `windowtitle ${styleMap[style]} ${!showLabel ? 'no-label' : ''} ${!showIcon ? 'no-icon' : ''}`;
         },
     );
 

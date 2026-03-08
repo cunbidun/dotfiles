@@ -129,7 +129,7 @@ const Menu = (): BarBoxChild => {
                 percentBinding.drop();
             }}
         >
-            <label className={'bar-menu_label bar-button_icon txt-icon bar'} label={iconBinding()} />
+            <label className={'bar-button-icon dashboard txt-icon bar'} label={iconBinding()} />
             <label
                 className={bind(barLauncherDynamicActive).as((active) =>
                     active ? 'bar-menu_pct bar-menu_pct-active' : 'bar-menu_pct',

@@ -73,55 +73,6 @@ $transparency-value-hover: 1 - $bar-button-background-hover-opacity-ratio;
         opacity: $bar-buttons-background_hover_opacity * 0.01;
     }
 
-    &.battery {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-battery-background),
-            $transparency-value
-        );
-    }
-
-    &.bluetooth {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-bluetooth-background),
-            $transparency-value
-        );
-    }
-
-    &.clock {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-clock-background),
-            $transparency-value
-        );
-    }
-
-    &.media {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-media-background),
-            $transparency-value
-        );
-    }
-
-    &.dashboard {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-dashboard-background),
-            $transparency-value
-        );
-    }
-
-    &.network {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-network-background),
-            $transparency-value
-        );
-    }
-
-    &.notifications {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-notifications-background),
-            $transparency-value
-        );
-    }
-
     &.systray {
         background-color: transparentize(
             if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-systray-background),
@@ -130,20 +81,6 @@ $transparency-value-hover: 1 - $bar-button-background-hover-opacity-ratio;
         &:hover {
             opacity: 1;
         }
-    }
-
-    &.volume {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-volume-background),
-            $transparency-value
-        );
-    }
-
-    &.windowtitle {
-        background-color: transparentize(
-            if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-windowtitle-background),
-            $transparency-value
-        );
     }
 
     &.workspaces {

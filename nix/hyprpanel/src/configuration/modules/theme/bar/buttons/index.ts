@@ -13,13 +13,13 @@ import battery from './battery';
 import clock from './clock';
 import notifications from './notifications';
 import separator from './separator';
+import sshForwarding from './sshForwarding';
 import worldclock from './worldclock';
 import cava from './cava';
 import hypridle from './hypridle';
 import submap from './submap';
 import power from './power';
 import weather from './weather';
-import sshForwarding from './sshForwarding';
 import updates from './updates';
 import kbLayout from './kbLayout';
 import netstat from './netstat';
@@ -60,6 +60,7 @@ export default {
     battery: battery,
     clock: clock,
     notifications: notifications,
+    sshforwarding: sshForwarding,
     separator: separator,
     modules: {
         microphone: microphone,
@@ -72,7 +73,6 @@ export default {
         updates: updates,
         weather: weather,
         power: power,
-        sshForwarding: sshForwarding,
         submap: submap,
         hypridle: hypridle,
         cava: cava,

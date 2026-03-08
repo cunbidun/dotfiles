@@ -22,7 +22,7 @@ const Network = (): BarBoxChild => {
     );
 
     const NetworkIcon = (): JSX.Element => (
-        <icon className={'bar-button-icon network-icon'} icon={iconBinding()} />
+        <icon className={'bar-button-icon network'} icon={iconBinding()} />
     );
 
     const networkLabel = Variable.derive(
@@ -43,18 +43,18 @@ const Network = (): BarBoxChild => {
             }
             if (primaryNetwork === AstalNetwork.Primary.WIRED) {
                 return (
-                    <label className={'bar-button-label network-label'} label={'Wired'.substring(0, tSize)} />
+                    <label className={'bar-button-label network'} label={'Wired'.substring(0, tSize)} />
                 );
             }
             const networkWifi = networkService.wifi;
             if (networkWifi !== null) {
                 if (!networkWifi.enabled) {
-                    return <label className={'bar-button-label network-label'} label="Off" />;
+                    return <label className={'bar-button-label network'} label="Off" />;
                 }
 
                 return (
                     <label
-                        className={'bar-button-label network-label'}
+                        className={'bar-button-label network'}
                         label={
                             networkWifi.active_access_point !== null
                                 ? `${trunc ? networkWifi.ssid.substring(0, tSize) : networkWifi.ssid}`
@@ -81,7 +81,7 @@ const Network = (): BarBoxChild => {
                 wave: 'style3',
                 wave2: 'style3',
             };
-            return `network-container ${styleMap[style]} ${!showLabel ? 'no-label' : ''}`;
+            return `network ${styleMap[style]} ${!showLabel ? 'no-label' : ''}`;
         },
     );
 

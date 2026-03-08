@@ -24,7 +24,7 @@ export const Notifications = (): BarBoxChild => {
                 wave: 'style3',
                 wave2: 'style3',
             };
-            return `notifications-container ${styleMap[style]} ${!showTotal ? 'no-label' : ''}`;
+            return `notifications ${styleMap[style]} ${!showTotal ? 'no-label' : ''}`;
         },
     );
 

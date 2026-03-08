@@ -30,7 +30,7 @@ const Clock = (): BarBoxChild => {
                 wave: 'style3',
                 wave2: 'style3',
             };
-            return `clock-container ${styleMap[btnStyle]} ${!shwLbl ? 'no-label' : ''} ${!shwIcn ? 'no-icon' : ''}`;
+            return `clock ${styleMap[btnStyle]} ${!shwLbl ? 'no-label' : ''} ${!shwIcn ? 'no-icon' : ''}`;
         },
     );
 

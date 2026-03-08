@@ -1,15 +1,5 @@
-.bar-menu_label {
-    color: if($bar-buttons-monochrome, $bar-buttons-icon, $bar-buttons-dashboard-icon);
-    font-size: 1.25em;
-    min-width: 1.2em;
-    min-height: 1.2em;
-    padding-left: 0.04em;
-    padding-right: 0.04em;
-    border-radius: $bar-buttons-radius;
-}
-
 .bar-menu_pct {
-    color: if($bar-buttons-monochrome, $bar-buttons-icon, $bar-buttons-dashboard-icon);
+    color: if($bar-buttons-monochrome, $bar-buttons-text, $bar-buttons-dashboard-text);
     font-size: 0.94em;
     font-weight: 700;
     margin-left: 0em;
@@ -20,25 +10,4 @@
 .bar-menu_pct-active {
     margin-left: 0.72em;
     opacity: 1;
-}
-
-.bar_item_box_visible.style2.dashboard {
-    background: if($bar-buttons-monochrome, $bar-buttons-icon_background, $bar-buttons-dashboard-background);
-
-    .bar-menu_label {
-        color: if($bar-buttons-monochrome, $bar-buttons-background, $bar-buttons-dashboard-icon);
-    }
-}
-
-.style2 .bar-menu_label {
-    padding: $bar-buttons-padding_y $bar-buttons-padding_x;
-}
-
-.bar_item_box_visible.dashboard {
-    border: if(
-        $bar-buttons-dashboard-enableBorder or $bar-buttons-enableBorders,
-        $bar-buttons-borderSize solid
-            if($bar-buttons-monochrome, $bar-buttons-borderColor, $bar-buttons-dashboard-border),
-        0em
-    );
 }

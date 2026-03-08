@@ -222,54 +222,49 @@
     }
 
     .controls-container {
+        $control-gap: 0.55em;
+        $control-tile-height: 3.55em;
+        $control-chip-height: $control-tile-height;
+        $control-icon-width: 1.35em;
+
         &.dashboard-card {
             margin-top: 0em;
             padding: 1.1em;
         }
 
-        .dashboard-control-main-row {
-            margin-bottom: 0.55em;
-        }
-
         .dashboard-control-left-column {
-            min-width: 8.6em;
-            margin-right: 0.7em;
-
-            button:not(:last-child) {
-                margin-bottom: 0.45em;
-            }
         }
 
         .dashboard-control-quick-row {
-            margin-bottom: 0.55em;
-
-            button:not(:last-child) {
-                margin-right: 0.45em;
+            > button {
+                min-width: 0;
+                min-height: $control-chip-height;
             }
         }
 
         .dashboard-control-tile {
-            min-height: 3.35em;
-            padding: 0.4em 0.55em;
+            min-height: $control-tile-height;
+            padding: 0.52em 0.65em;
             border-radius: $bar-menus-buttons-radius;
 
             .dashboard-control-tile-content {
-                min-height: 2.45em;
+                min-height: 2.5em;
             }
 
             .control-tile-icon {
                 color: if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text);
                 font-size: 1.05em;
-                margin-right: 0.48em;
+                min-width: $control-icon-width;
+                margin-right: 0.58em;
             }
 
             .control-tile-copy {
-                padding-top: 0.03em;
+                padding-top: 0.02em;
             }
 
             .control-tile-title {
                 color: if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text);
-                font-size: 0.96em;
+                font-size: 0.95em;
                 font-weight: 700;
             }
 
@@ -278,8 +273,8 @@
                     if($bar-menus-monochrome, $bar-menus-buttons-text, $bar-menus-menu-dashboard-controls-wifi-text),
                     0.2
                 );
-                font-size: 0.72em;
-                margin-top: 0.02em;
+                font-size: 0.74em;
+                margin-top: 0.06em;
             }
 
             &.wifi {
@@ -338,14 +333,13 @@
                 $bar-menus-menu-dashboard-controls-volume-background
             );
             border-radius: $bar-menus-buttons-radius;
-            min-width: 17.2em;
-            padding: 0.5em 0.7em;
-            min-height: 7.15em;
+            padding: 0.65em 0.8em;
+            min-height: ($control-tile-height * 2) + $control-gap;
 
             .dashboard-control-audio-header {
                 background: transparent;
                 padding: 0em;
-                min-height: 3.35em;
+                min-height: $control-tile-height;
                 border-radius: $bar-menus-buttons-radius * 0.75;
             }
 
@@ -356,9 +350,10 @@
                         $bar-menus-buttons-text,
                         $bar-menus-menu-dashboard-controls-wifi-text
                     );
-                    font-size: 1.2em;
-                    margin-right: 0.55em;
-                    margin-left: 0.1em;
+                    font-size: 1.16em;
+                    min-width: $control-icon-width;
+                    margin-right: 0.58em;
+                    margin-left: 0.02em;
                 }
 
                 .dashboard-control-audio-copy {
@@ -368,7 +363,7 @@
                             $bar-menus-buttons-text,
                             $bar-menus-menu-dashboard-controls-wifi-text
                         );
-                        font-size: 0.96em;
+                        font-size: 0.95em;
                         font-weight: 700;
                     }
 
@@ -382,17 +377,18 @@
                             0.2
                         );
                         font-size: 0.74em;
+                        margin-top: 0.06em;
                     }
                 }
             }
 
             .dashboard-control-audio-controls {
-                margin-top: 0.36em;
+                margin-top: 0.62em;
 
                 .dashboard-control-audio-control {
-                    min-height: 2.05em;
+                    min-height: 2.2em;
                     min-width: 0em;
-                    margin: 0em 0.14em;
+                    margin: 0em 0.16em;
                     border-radius: $bar-menus-buttons-radius * 0.65;
                     color: if(
                         $bar-menus-monochrome,
@@ -435,14 +431,17 @@
         }
 
         .dashboard-control-chip {
-            min-height: 2.3em;
-            padding: 0.24em 0.5em;
+            min-height: $control-chip-height;
+            padding: 0.52em 0.65em;
             border-radius: $bar-menus-buttons-radius;
 
             .dashboard-control-chip-content {
+                min-height: 2.5em;
+
                 .txt-icon {
-                    margin-right: 0.52em;
-                    font-size: 1.05em;
+                    min-width: 0;
+                    margin-right: 0;
+                    font-size: 1.1em;
                 }
 
                 label {
@@ -451,8 +450,8 @@
                         $bar-menus-buttons-text,
                         $bar-menus-menu-dashboard-controls-wifi-text
                     );
-                    font-size: 0.84em;
-                    font-weight: 600;
+                    font-size: 0.95em;
+                    font-weight: 700;
                 }
             }
 
@@ -473,6 +472,14 @@
             }
 
             &.inhibitor {
+                background: if(
+                    $bar-menus-monochrome,
+                    $bar-menus-buttons-default,
+                    $bar-menus-menu-dashboard-controls-input-background
+                );
+            }
+
+            &.colorpicker {
                 background: if(
                     $bar-menus-monochrome,
                     $bar-menus-buttons-default,
@@ -513,12 +520,39 @@
                         0.32
                     );
                 }
+
+                &.colorpicker {
+                    background: transparentize(
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-default,
+                            $bar-menus-menu-dashboard-controls-input-background
+                        ),
+                        0.32
+                    );
+                }
+
+                &.gammastep.active,
+                &.inhibitor.active {
+                    background: transparentize(
+                        if(
+                            $bar-menus-monochrome,
+                            $bar-menus-buttons-active,
+                            $bar-menus-menu-dashboard-controls-input-background
+                        ),
+                        0.22
+                    );
+                }
+
+                &.recording.active {
+                    background: transparentize($red, 0.2);
+                }
             }
 
             &.gammastep.active {
                 background: if(
                     $bar-menus-monochrome,
-                    $bar-menus-buttons-default,
+                    $bar-menus-buttons-active,
                     $bar-menus-menu-dashboard-controls-input-background
                 );
             }
@@ -526,19 +560,23 @@
             &.inhibitor.active {
                 background: if(
                     $bar-menus-monochrome,
-                    $bar-menus-buttons-default,
+                    $bar-menus-buttons-active,
                     $bar-menus-menu-dashboard-controls-input-background
                 );
+            }
+
+            &.recording.active {
+                background: $red;
             }
         }
 
         .dashboard-control-slider {
             background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-dashboard-card-color);
             border-radius: $bar-menus-card_radius;
-            padding: 0.55em 0.7em;
+            padding: 0.62em 0.78em;
 
             &:not(:last-child) {
-                margin-bottom: 0.55em;
+                margin-bottom: $control-gap;
             }
 
             .dashboard-control-slider-icon {

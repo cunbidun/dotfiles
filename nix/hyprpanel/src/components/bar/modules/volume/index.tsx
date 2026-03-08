@@ -42,7 +42,7 @@ const Volume = (): BarBoxChild => {
                 wave: 'style3',
                 wave2: 'style3',
             };
-            return `volume-container ${styleMap[style]} ${!showLabel ? 'no-label' : ''}`;
+            return `volume ${styleMap[style]} ${!showLabel ? 'no-label' : ''}`;
         },
     );
     const componentChildren = Variable.derive(

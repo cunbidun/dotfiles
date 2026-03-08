@@ -52,14 +52,14 @@ const Media = (): BarBoxChild => {
 
     const componentClassName = Variable.derive(
         [options.theme.bar.buttons.style, show_label],
-        (style: string) => {
+        (style: string, showLabel: boolean) => {
             const styleMap: Record<string, string> = {
                 default: 'style1',
                 split: 'style2',
                 wave: 'style3',
                 wave2: 'style3',
             };
-            return `media-container ${styleMap[style]}`;
+            return `media ${styleMap[style]} ${!showLabel ? 'no-label' : ''}`;
         },
     );
 
