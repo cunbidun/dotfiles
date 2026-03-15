@@ -13,7 +13,7 @@
       log = {
         enabled = true;
       };
-      manager = {
+      mgr = {
         show_hidden = true;
         sort_by = "mtime";
         sort_dir_first = true;
@@ -113,7 +113,7 @@
       })
     '';
     keymap = {
-      manager.prepend_keymap = [
+      mgr.prepend_keymap = [
         {
           on = "u";
           run = "plugin restore";
