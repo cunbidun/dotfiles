@@ -11,7 +11,7 @@
     enable = true;
     settings = {
       log = {
-        enabled = false;
+        enabled = true;
       };
       manager = {
         show_hidden = true;
