@@ -55,7 +55,20 @@ in {
     enable = true;
     yamlConfig = ''
       shared:
-        noSuperToCtrlApps: &noSuperToCtrlApps [kitty, steam, cs2, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, code, code-insiders, blender, prismlauncher, minecraft]
+        noSuperToCtrlApps: &noSuperToCtrlApps
+          - kitty
+          - steam
+          - cs2
+          - dota2
+          - qemu-system-x86_64
+          - qemu
+          - Qemu-system-x86_64
+          - code
+          - code-insiders
+          - blender
+          - prismlauncher
+          - minecraft
+          - "Minecraft 1.21.11"
 
       modmap:
         - name: Global
