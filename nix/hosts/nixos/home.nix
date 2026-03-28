@@ -54,6 +54,9 @@ in {
     watch = true;
     enable = true;
     yamlConfig = ''
+      shared:
+        noSuperToCtrlApps: &noSuperToCtrlApps [kitty, steam, cs2, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, code, code-insiders, blender, prismlauncher, minecraft]
+
       modmap:
         - name: Global
           application:
@@ -62,13 +65,13 @@ in {
 
         - name: Almost
           application:
-            not: [kitty, steam, cs2, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, code, code-insiders, blender]
+            not: *noSuperToCtrlApps
           remap:
             SUPER_L: CONTROL_L
 
         - name: Other
           application:
-            only: [kitty, steam, cs2, dota2, qemu-system-x86_64, qemu, Qemu-system-x86_64, code, code-insiders, blender]
+            only: *noSuperToCtrlApps
           remap:
             SUPER_L: ALT_L
     '';
@@ -122,6 +125,7 @@ in {
 
   gtk = {
     enable = true;
+    gtk4.theme = config.gtk.theme;
     gtk3 = {
       bookmarks = [
         "file:///home/${userdata.username}/Downloads"
