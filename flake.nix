@@ -105,7 +105,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.20.1";
+      url = "github:vicinaehq/vicinae/v0.20.9";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";

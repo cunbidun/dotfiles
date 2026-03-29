@@ -190,7 +190,6 @@ in {
       bind = $mainMod, Return, exec, $TERMINAL
       bind = $mainMod, P, exec, vicinae dmenu-apps
       bind = ALT, space, exec, vicinae toggle
-      bind = CTRL, space, exec, vicinae toggle
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
       bind = $mainMod, Tab, exec, qs -c ii ipc call search workspacesToggle
 

@@ -38,6 +38,7 @@ in {
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/chromium.nix
     ../../home-manager/configs/minecraft.nix
+    ../../home-manager/configs/xremap.nix
     ../../home-manager/configs/taskwarrior.nix
     ../../home-manager/configs/shared/git.nix
   ];
@@ -49,46 +50,6 @@ in {
 
   home.packages = package_config.default_packages ++ package_config.linux_packages;
 
-  services.xremap = {
-    withWlroots = true;
-    watch = true;
-    enable = true;
-    yamlConfig = ''
-      shared:
-        noSuperToCtrlApps: &noSuperToCtrlApps
-          - kitty
-          - steam
-          - cs2
-          - dota2
-          - qemu-system-x86_64
-          - qemu
-          - Qemu-system-x86_64
-          - code
-          - code-insiders
-          - blender
-          - prismlauncher
-          - minecraft
-          - "Minecraft 1.21.11"
-
-      modmap:
-        - name: Global
-          application:
-          remap:
-            ALT_L: SUPER_L
-
-        - name: Almost
-          application:
-            not: *noSuperToCtrlApps
-          remap:
-            SUPER_L: CONTROL_L
-
-        - name: Other
-          application:
-            only: *noSuperToCtrlApps
-          remap:
-            SUPER_L: ALT_L
-    '';
-  };
   services.hyprsunset = {
     enable = true;
     settings = {

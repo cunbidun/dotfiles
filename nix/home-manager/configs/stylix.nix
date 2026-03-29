@@ -32,7 +32,7 @@
       else "prefer-dark";
 
     # Add theme extension to the list if defined
-    extensionList = chromeConfig.baseExtensions ++ (lib.optional (themeConfig ? chromeExtension) themeConfig.chromeExtension);
+    extensionList = chromeConfig.baseExtensions ++ (lib.optional ((themeConfig.chromeExtension or null) != null) themeConfig.chromeExtension);
   in {
     dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
     services.vicinae.settings.theme.name = themeConfig.vicinaeTheme;
