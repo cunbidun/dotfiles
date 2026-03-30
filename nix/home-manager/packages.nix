@@ -160,6 +160,7 @@ in rec {
     pkgs.newsboat # An RSS feed reader
 
     # use stable redisinsight to avoid frequent repatching
+    pkgs.redisinsight
     pkgs.nixpkgs-stable.jetbrains.datagrip
     pkgs.libreoffice
     pkgs.zoom-us
