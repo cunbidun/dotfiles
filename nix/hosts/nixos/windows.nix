@@ -36,17 +36,18 @@
   # 5. If the Windows user is an administrator, OpenSSH may ignore
   #    %USERPROFILE%\.ssh\authorized_keys and require the public key in:
   #    C:\ProgramData\ssh\administrators_authorized_keys
-  windowsDriversIso = pkgs.runCommand "virtio-win-drivers.iso" {
-    nativeBuildInputs = [pkgs.xorriso];
-  } ''
-    mkdir -p iso-root
-    cp -r ${pkgs.virtio-win}/. iso-root/
-    xorriso -as mkisofs \
-      -J -R \
-      -V VIRTIO_WIN \
-      -o "$out" \
-      iso-root
-  '';
+  windowsDriversIso =
+    pkgs.runCommand "virtio-win-drivers.iso" {
+      nativeBuildInputs = [pkgs.xorriso];
+    } ''
+      mkdir -p iso-root
+      cp -r ${pkgs.virtio-win}/. iso-root/
+      xorriso -as mkisofs \
+        -J -R \
+        -V VIRTIO_WIN \
+        -o "$out" \
+        iso-root
+    '';
   windowsNetworkXml = pkgs.writeText "libvirt-${vmName}-network.xml" ''
     <network>
       <name>${vmName}</name>
@@ -141,18 +142,11 @@
         <controller type='pci' model='pcie-root-port'/>
         <controller type='sata' index='0'/>
         <controller type='virtio-serial' index='0'/>
-        <controller type='scsi' model='virtio-scsi'/>
         <interface type='network'>
           <mac address='52:54:00:76:11:01'/>
           <source network='${vmName}'/>
           <model type='virtio'/>
         </interface>
-        <serial type='pty'>
-          <target type='isa-serial' port='0'/>
-        </serial>
-        <console type='pty'>
-          <target type='serial' port='0'/>
-        </console>
         <channel type='unix'>
           <target type='virtio' name='org.qemu.guest_agent.0'/>
         </channel>
@@ -160,7 +154,6 @@
           <target type='virtio' name='com.redhat.spice.0'/>
         </channel>
         <input type='tablet' bus='usb'/>
-        <input type='mouse' bus='ps2'/>
         <input type='keyboard' bus='ps2'/>
         <tpm model='tpm-crb'>
           <backend type='emulator' version='2.0'/>
