@@ -239,8 +239,6 @@ in {
 
   environment.systemPackages = with pkgs; [
     virt-manager
-    virt-viewer
-    swtpm
   ];
 
   programs.virt-manager.enable = true;
