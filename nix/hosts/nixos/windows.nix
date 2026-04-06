@@ -9,33 +9,60 @@
   diskSize = "256G";
   memoryMiB = 12288;
   vcpuCount = 12;
+  intelIgdPciId = "8086:a780";
   windowsRoot = "/var/lib/libvirt/windows";
+  windowsSharePath = "/home/${userdata.username}/windows";
+  windowsShareTag = "hostwindows";
   windowsIsoPath = "${windowsRoot}/iso/windows11.iso";
   windowsDiskPath = "${windowsRoot}/${vmName}.qcow2";
   windowsNvramPath = "${windowsRoot}/${vmName}-VARS.fd";
   ovmfCodePath = "/run/libvirt/nix-ovmf/edk2-x86_64-secure-code.fd";
   ovmfVarsTemplate = "${pkgs.OVMFFull.fd}/FV/OVMF_VARS.fd";
-  # Host-side libvirt state is declarative below, but a fresh Windows reinstall
-  # still needs these guest-side steps:
+  intelIgdRom = pkgs.fetchurl {
+    url = "https://github.com/LongQT-sea/intel-igpu-passthru/releases/download/v0.1/Universal_noGOP_igd.rom";
+    sha256 = "d1c95f6062eba9d3164263bf11626d5d958d82439525d41570256e5a72d9b18f"; # pragma: allowlist secret
+  };
+  # Declarative here:
+  # - libvirt network, qcow2 disk creation, OVMF vars path, TPM, virtio devices
+  # - virtiofs share (${windowsSharePath} -> ${windowsShareTag})
+  # - Intel iGPU passthrough on the host and in the VM XML
+  # - Intel UPT mode details: Universal_noGOP_igd.rom, x-igd-opregion, maxphysaddr
+  # - no QXL/SPICE display path; normal GUI access is expected over RDP
   #
-  # 1. During Windows setup, load VirtIO drivers from the attached VIRTIO_WIN ISO:
+  # Still manual inside Windows after a reinstall:
+  # 1. During setup, load VirtIO drivers from VIRTIO_WIN:
   #    - storage: E:\viostor\w11\amd64
   #    - network: E:\NetKVM\w11\amd64
-  #
-  # 2. After first boot, install SPICE guest tools in Windows and reboot.
-  #
-  # 3. Install the newer QXL display driver from the VirtIO ISO and reboot:
-  #    pnputil /add-driver E:\qxldod\w10\amd64\qxldod.inf /install
-  #
-  # 4. If you want SSH again after reinstall:
+  # 2. Install the Intel iGPU driver from Intel's official download page using the
+  #    normal installer / installation assistant widget. Do not force random INF
+  #    packages manually for the passthrough GPU.
+  # 3. If you want SSH in the guest again:
   #    Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
   #    Start-Service sshd
   #    Set-Service -Name sshd -StartupType Automatic
   #    New-NetFirewallRule -Name sshd -DisplayName "OpenSSH Server" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
-  #
-  # 5. If the Windows user is an administrator, OpenSSH may ignore
+  # 4. If the Windows user is an administrator, OpenSSH may ignore
   #    %USERPROFILE%\.ssh\authorized_keys and require the public key in:
-  #    C:\ProgramData\ssh\administrators_authorized_keys
+  #    $pub = "ssh-ed25519 <your-public-key> <comment>"
+  #    Set-Content C:\ProgramData\ssh\administrators_authorized_keys $pub
+  #    icacls C:\ProgramData\ssh\administrators_authorized_keys /inheritance:r
+  #    icacls C:\ProgramData\ssh\administrators_authorized_keys /grant Administrators:F
+  #    icacls C:\ProgramData\ssh\administrators_authorized_keys /grant SYSTEM:F
+  #    Restart-Service sshd
+  # 5. If you want ${windowsSharePath} mounted in Windows as W::
+  #    winget install -e --id WinFsp.WinFsp --accept-source-agreements --accept-package-agreements --disable-interactivity
+  #    pnputil /add-driver E:\viofs\w11\amd64\viofs.inf /install
+  #    New-Item -ItemType Directory -Force "C:\Program Files\Virtio-Win\VioFS"
+  #    Copy-Item E:\viofs\w11\amd64\virtiofs.exe "C:\Program Files\Virtio-Win\VioFS\virtiofs.exe" -Force
+  #    sc create VirtioFsSvc binPath= "\"C:\Program Files\Virtio-Win\VioFS\virtiofs.exe\" -t ${windowsShareTag} -m W: -F NTFS" start= auto depend= VirtioFsDrv
+  #    sc start VirtioFsSvc
+  #
+  # One-off operational notes:
+  # - After changing VM hardware, remove stale saved state before booting:
+  #   virsh --connect qemu:///system managedsave-remove ${vmName}
+  # - After changing the virtiofs device or other VM hardware, do a full VM stop/start.
+  # - If RDP reports session handoff/continue warnings, log off stale console/RDP sessions in Windows.
+  #
   windowsDriversIso =
     pkgs.runCommand "virtio-win-drivers.iso" {
       nativeBuildInputs = [pkgs.xorriso];
@@ -62,7 +89,7 @@
     </network>
   '';
   windowsDomainXml = pkgs.writeText "libvirt-${vmName}.xml" ''
-    <domain type='kvm'>
+    <domain xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0' type='kvm'>
       <name>${vmName}</name>
       <uuid>${vmUuid}</uuid>
       <metadata>
@@ -70,9 +97,14 @@
       </metadata>
       <memory unit='MiB'>${toString memoryMiB}</memory>
       <currentMemory unit='MiB'>${toString memoryMiB}</currentMemory>
+      <memoryBacking>
+        <source type='memfd'/>
+        <access mode='shared'/>
+      </memoryBacking>
       <vcpu placement='static'>${toString vcpuCount}</vcpu>
       <cpu mode='host-passthrough' check='none' migratable='on'>
         <topology sockets='1' dies='1' clusters='1' cores='6' threads='2'/>
+        <maxphysaddr mode='passthrough' limit='39'/>
       </cpu>
       <os>
         <type arch='x86_64' machine='q35'>hvm</type>
@@ -137,9 +169,14 @@
           <target dev='sdb' bus='sata'/>
           <readonly/>
         </disk>
+        <filesystem type='mount' accessmode='passthrough'>
+          <driver type='virtiofs'/>
+          <binary path='${pkgs.virtiofsd}/bin/virtiofsd' xattr='on'/>
+          <source dir='${windowsSharePath}'/>
+          <target dir='${windowsShareTag}'/>
+        </filesystem>
         <controller type='usb' model='qemu-xhci' ports='15'/>
         <controller type='pci' model='pcie-root'/>
-        <controller type='pci' model='pcie-root-port'/>
         <controller type='sata' index='0'/>
         <controller type='virtio-serial' index='0'/>
         <interface type='network'>
@@ -147,39 +184,52 @@
           <source network='${vmName}'/>
           <model type='virtio'/>
         </interface>
+        <hostdev mode='subsystem' type='pci' managed='yes'>
+          <source>
+            <address domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+          </source>
+          <rom file='${intelIgdRom}'/>
+          <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+        </hostdev>
         <channel type='unix'>
           <target type='virtio' name='org.qemu.guest_agent.0'/>
-        </channel>
-        <channel type='spicevmc'>
-          <target type='virtio' name='com.redhat.spice.0'/>
         </channel>
         <input type='tablet' bus='usb'/>
         <input type='keyboard' bus='ps2'/>
         <tpm model='tpm-crb'>
           <backend type='emulator' version='2.0'/>
         </tpm>
-        <graphics type='spice' autoport='yes' listen='127.0.0.1'>
-          <listen type='address' address='127.0.0.1'/>
-          <image compression='off'/>
-          <gl enable='no'/>
-        </graphics>
-        <video>
-          <model type='qxl' ram='262144' vram='131072' vgamem='65536' heads='1' primary='yes'/>
-        </video>
-        <sound model='ich9'/>
-        <audio id='1' type='spice'/>
-        <redirdev bus='usb' type='spicevmc'/>
-        <redirdev bus='usb' type='spicevmc'/>
         <memballoon model='virtio'/>
         <rng model='virtio'>
           <backend model='random'>/dev/urandom</backend>
         </rng>
       </devices>
+      <qemu:override>
+        <qemu:device alias='hostdev0'>
+          <qemu:frontend>
+            <qemu:property name='x-igd-opregion' type='bool' value='true'/>
+          </qemu:frontend>
+        </qemu:device>
+      </qemu:override>
     </domain>
   '';
 in {
+  boot.initrd.kernelModules = [
+    "vfio"
+    "vfio_pci"
+    "vfio_iommu_type1"
+  ];
+
+  boot.blacklistedKernelModules = [
+    "i915"
+    "xe"
+  ];
+
   boot.kernelParams = [
     "kvm.ignore_msrs=1"
+    "intel_iommu=on"
+    "iommu=pt"
+    "vfio-pci.ids=${intelIgdPciId}"
   ];
 
   users.users.${userdata.username}.extraGroups = [
@@ -194,7 +244,6 @@ in {
   ];
 
   programs.virt-manager.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
 
   virtualisation.libvirtd = {
     enable = true;
