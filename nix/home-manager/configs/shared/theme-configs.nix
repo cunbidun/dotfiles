@@ -28,7 +28,7 @@
     light = {
       scheme = "standardized-light";
       wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
-      vscodeTheme = "Default Light Modern";
+      vscodeTheme = "Light Modern";
       nvimTheme = "vscode_light";
       hyprpanelTheme = "monochrome";
       vicinaeTheme = "vicinae-light";
@@ -37,7 +37,7 @@
     dark = {
       scheme = "standardized-dark";
       wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
-      vscodeTheme = "Default Dark Modern";
+      vscodeTheme = "Dark Modern";
       nvimTheme = "vscode_dark";
       hyprpanelTheme = "monochrome";
       vicinaeTheme = "vicinae-dark";
