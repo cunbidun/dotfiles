@@ -40,7 +40,7 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland/v0.54.1/?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.54.3/?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
@@ -105,7 +105,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.20.9";
+      url = "github:vicinaehq/vicinae/v0.20.12";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";

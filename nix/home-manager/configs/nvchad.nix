@@ -20,7 +20,7 @@ in {
       nixd # Nix language server
       lua-language-server # Lua LS
       python3 # Python
-      nodePackages.bash-language-server # Bash LS
+      bash-language-server # Bash LS
       clang-tools # C/C++ LSP
       cargo # Rust
 

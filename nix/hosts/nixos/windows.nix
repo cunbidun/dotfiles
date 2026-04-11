@@ -27,7 +27,7 @@
   # - virtiofs share (${windowsSharePath} -> ${windowsShareTag})
   # - Intel iGPU passthrough on the host and in the VM XML
   # - Intel UPT mode details: Universal_noGOP_igd.rom, x-igd-opregion, maxphysaddr
-  # - no QXL/SPICE display path; normal GUI access is expected over RDP
+  # - GUI access is expected over RDP
   #
   # Still manual inside Windows after a reinstall:
   # 1. During setup, load VirtIO drivers from VIRTIO_WIN:
