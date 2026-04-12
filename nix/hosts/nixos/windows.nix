@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   userdata,
   ...
@@ -9,6 +10,8 @@
   diskSize = "256G";
   memoryMiB = 12288;
   vcpuCount = 12;
+  lookingGlassMemMiB = 128; # 4K SDR per Looking Glass B7 sizing table.
+  lookingGlassMemBytes = lookingGlassMemMiB * 1024 * 1024;
   intelIgdPciId = "8086:a780";
   windowsRoot = "/var/lib/libvirt/windows";
   windowsSharePath = "/home/${userdata.username}/windows";
@@ -27,7 +30,9 @@
   # - virtiofs share (${windowsSharePath} -> ${windowsShareTag})
   # - Intel iGPU passthrough on the host and in the VM XML
   # - Intel UPT mode details: Universal_noGOP_igd.rom, x-igd-opregion, maxphysaddr
-  # - GUI access is expected over RDP
+  # - Looking Glass host-side support: client package, KVMFR module, /dev/kvmfr0,
+  #   and IVSHMEM device for 4K SDR capture
+  # - local-only SPICE control path for Looking Glass keyboard/mouse input
   #
   # Still manual inside Windows after a reinstall:
   # 1. During setup, load VirtIO drivers from VIRTIO_WIN:
@@ -36,12 +41,18 @@
   # 2. Install the Intel iGPU driver from Intel's official download page using the
   #    normal installer / installation assistant widget. Do not force random INF
   #    packages manually for the passthrough GPU.
-  # 3. If you want SSH in the guest again:
+  # 3. Install Looking Glass Host in Windows after the VM hardware change is active:
+  #    - attach a physical display or dummy plug to the passed-through Intel iGPU
+  #    - download the stable Windows Host Binary from https://looking-glass.io/downloads
+  #    - run the installer as administrator; for unattended install:
+  #      .\looking-glass-host-setup.exe /S
+  #    The B7 installer includes and installs the IVSHMEM driver.
+  # 4. If you want SSH in the guest again:
   #    Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
   #    Start-Service sshd
   #    Set-Service -Name sshd -StartupType Automatic
   #    New-NetFirewallRule -Name sshd -DisplayName "OpenSSH Server" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
-  # 4. If the Windows user is an administrator, OpenSSH may ignore
+  # 5. If the Windows user is an administrator, OpenSSH may ignore
   #    %USERPROFILE%\.ssh\authorized_keys and require the public key in:
   #    $pub = "ssh-ed25519 <your-public-key> <comment>"
   #    Set-Content C:\ProgramData\ssh\administrators_authorized_keys $pub
@@ -49,7 +60,7 @@
   #    icacls C:\ProgramData\ssh\administrators_authorized_keys /grant Administrators:F
   #    icacls C:\ProgramData\ssh\administrators_authorized_keys /grant SYSTEM:F
   #    Restart-Service sshd
-  # 5. If you want ${windowsSharePath} mounted in Windows as W::
+  # 6. If you want ${windowsSharePath} mounted in Windows as W::
   #    winget install -e --id WinFsp.WinFsp --accept-source-agreements --accept-package-agreements --disable-interactivity
   #    pnputil /add-driver E:\viofs\w11\amd64\viofs.inf /install
   #    New-Item -ItemType Directory -Force "C:\Program Files\Virtio-Win\VioFS"
@@ -61,7 +72,8 @@
   # - After changing VM hardware, remove stale saved state before booting:
   #   virsh --connect qemu:///system managedsave-remove ${vmName}
   # - After changing the virtiofs device or other VM hardware, do a full VM stop/start.
-  # - If RDP reports session handoff/continue warnings, log off stale console/RDP sessions in Windows.
+  # - Looking Glass will not replace the remote-display path until the Windows host
+  #   app is installed and running inside an interactive Windows session.
   #
   windowsDriversIso =
     pkgs.runCommand "virtio-win-drivers.iso" {
@@ -184,6 +196,10 @@
           <source network='${vmName}'/>
           <model type='virtio'/>
         </interface>
+        <graphics type='spice' autoport='yes' listen='127.0.0.1'>
+          <listen type='address' address='127.0.0.1'/>
+          <image compression='off'/>
+        </graphics>
         <hostdev mode='subsystem' type='pci' managed='yes'>
           <source>
             <address domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
@@ -194,12 +210,18 @@
         <channel type='unix'>
           <target type='virtio' name='org.qemu.guest_agent.0'/>
         </channel>
-        <input type='tablet' bus='usb'/>
-        <input type='keyboard' bus='ps2'/>
+        <channel type='spicevmc'>
+          <target type='virtio' name='com.redhat.spice.0'/>
+        </channel>
+        <input type='mouse' bus='virtio'/>
+        <input type='keyboard' bus='virtio'/>
+        <video>
+          <model type='vga'/>
+        </video>
         <tpm model='tpm-crb'>
           <backend type='emulator' version='2.0'/>
         </tpm>
-        <memballoon model='virtio'/>
+        <memballoon model='none'/>
         <rng model='virtio'>
           <backend model='random'>/dev/urandom</backend>
         </rng>
@@ -211,6 +233,12 @@
           </qemu:frontend>
         </qemu:device>
       </qemu:override>
+      <qemu:commandline>
+        <qemu:arg value='-device'/>
+        <qemu:arg value="{&quot;driver&quot;:&quot;ivshmem-plain&quot;,&quot;id&quot;:&quot;shmem0&quot;,&quot;memdev&quot;:&quot;looking-glass&quot;}"/>
+        <qemu:arg value='-object'/>
+        <qemu:arg value="{&quot;qom-type&quot;:&quot;memory-backend-file&quot;,&quot;id&quot;:&quot;looking-glass&quot;,&quot;mem-path&quot;:&quot;/dev/kvmfr0&quot;,&quot;size&quot;:${toString lookingGlassMemBytes},&quot;share&quot;:true}"/>
+      </qemu:commandline>
     </domain>
   '';
 in {
@@ -225,6 +253,18 @@ in {
     "xe"
   ];
 
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.kvmfr
+  ];
+
+  boot.kernelModules = [
+    "kvmfr"
+  ];
+
+  boot.extraModprobeConfig = ''
+    options kvmfr static_size_mb=${toString lookingGlassMemMiB}
+  '';
+
   boot.kernelParams = [
     "kvm.ignore_msrs=1"
     "intel_iommu=on"
@@ -238,6 +278,7 @@ in {
   ];
 
   environment.systemPackages = with pkgs; [
+    looking-glass-client
     virt-manager
   ];
 
@@ -248,8 +289,20 @@ in {
     qemu = {
       package = pkgs.qemu_kvm;
       swtpm.enable = true;
+      verbatimConfig = ''
+        cgroup_device_acl = [
+          "/dev/null", "/dev/full", "/dev/zero",
+          "/dev/random", "/dev/urandom",
+          "/dev/ptmx", "/dev/kvm",
+          "/dev/vfio/vfio", "/dev/kvmfr0"
+        ]
+      '';
     };
   };
+
+  services.udev.extraRules = ''
+    SUBSYSTEM=="kvmfr", OWNER="${userdata.username}", GROUP="kvm", MODE="0660"
+  '';
 
   systemd.tmpfiles.rules = [
     "d ${windowsRoot} 0755 root root -"
