@@ -88,6 +88,10 @@
       </metadata>
       <memory unit='MiB'>${toString memoryMiB}</memory>
       <currentMemory unit='MiB'>${toString memoryMiB}</currentMemory>
+      <memoryBacking>
+        <source type='memfd'/>
+        <access mode='shared'/>
+      </memoryBacking>
       <vcpu placement='static'>${toString vcpuCount}</vcpu>
       <cpu mode='host-passthrough' check='none' migratable='on'>
         <topology sockets='1' dies='1' clusters='1' cores='6' threads='2'/>
