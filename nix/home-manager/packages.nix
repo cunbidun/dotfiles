@@ -160,10 +160,10 @@ in rec {
     pkgs.newsboat # An RSS feed reader
 
     # use stable redisinsight to avoid frequent repatching
-    pkgs.redisinsight
+    pkgs.nixpkgs-stable.redisinsight
     pkgs.nixpkgs-stable.jetbrains.datagrip
-    pkgs.libreoffice
-    pkgs.zoom-us
+    pkgs.nixpkgs-stable.libreoffice
+    pkgs.nixpkgs-stable.zoom-us
   ];
 
   mac_packages = [
