@@ -133,12 +133,13 @@
       *)
         echo "Unsupported arguments: $*" >&2
         exit 1
-        ;;
+      ;;
     esac
   '';
 in {
   imports = [
     ./hardware-configuration.nix
+    # ./llm.nix
     ./windows.nix
     ../shared/nix-config.nix
     ../shared/common.nix
@@ -151,6 +152,7 @@ in {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [
     "uinput"
     "i2c-dev"
@@ -167,37 +169,6 @@ in {
     layout = "us";
     variant = "";
   };
-
-  # turn on for ollama
-  # services.ollama = {
-  #   package = pkgs.nixpkgs-master.ollama;
-  #   enable = true;
-  #   acceleration = "rocm";
-  #   loadModels = [
-  #     "gpt-oss:20b"
-  #   ];
-  #   environmentVariables = {
-  #     HSA_OVERRIDE_GFX_VERSION = "10.3.0";
-  #     OLLAMA_CONTEXT_LENGTH = "16384";
-  #   };
-  # };
-  # services.open-webui = {
-  #   package = pkgs.nixpkgs-master.open-webui;
-  #   enable = true;
-  #   host = "0.0.0.0";
-  #   port = 8000;
-  #   environment = {
-  #     WEBUI_AUTH = "False";
-  #     ENABLE_SIGNUP = "False";
-  #     ANONYMIZED_TELEMETRY = "False";
-  #     BYPASS_MODEL_ACCESS_CONTROL = "True";
-  #     DO_NOT_TRACK = "True";
-  #     SCARF_NO_ANALYTICS = "True";
-  #     FRONTEND_BUILD_DIR = "${config.services.open-webui.stateDir}/build";
-  #     DATA_DIR = "${config.services.open-webui.stateDir}/data";
-  #     STATIC_DIR = "${config.services.open-webui.stateDir}/static";
-  #   };
-  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userdata.username} = {

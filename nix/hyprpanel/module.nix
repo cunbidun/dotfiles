@@ -58,7 +58,7 @@ in {
           procps
           rocmPackages.rocm-smi
           slurp
-          swww
+          awww
           upower
           vlc
           wf-recorder

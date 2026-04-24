@@ -2,13 +2,13 @@ import GObject, { GLib, property, register, signal } from 'astal/gobject';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 import options from 'src/configuration';
 import { SystemUtilities } from 'src/core/system/SystemUtilities';
-import { SwwwDaemon } from './SwwwDaemon';
+import { AwwwDaemon } from './AwwwDaemon';
 
 const hyprlandService = AstalHyprland.get_default();
 const { EXISTS, IS_REGULAR } = GLib.FileTest;
 
 /**
- * Service for managing desktop wallpaper using swww daemon
+ * Service for managing desktop wallpaper using awww daemon
  */
 @register({ GTypeName: 'Wallpaper' })
 export class WallpaperService extends GObject.Object {
@@ -20,7 +20,7 @@ export class WallpaperService extends GObject.Object {
 
     private static _instance: WallpaperService;
     private _blockMonitor = false;
-    private _daemon = new SwwwDaemon();
+    private _daemon = new AwwwDaemon();
 
     constructor() {
         super();
@@ -78,18 +78,18 @@ export class WallpaperService extends GObject.Object {
     /**
      * Checks if the wallpaper service is currently running
      *
-     * @returns Whether swww daemon is active
+     * @returns Whether the wallpaper daemon is active
      */
     public isRunning(): boolean {
         return this._daemon.isRunning;
     }
 
     /**
-     * Applies the wallpaper using swww with a transition effect from cursor position
+     * Applies the wallpaper with a transition effect from cursor position
      */
     private _wallpaper(): void {
         if (!this._daemon.isRunning) {
-            console.warn('Cannot set wallpaper: swww-daemon is not running');
+            console.warn('Cannot set wallpaper: wallpaper daemon is not running');
             return;
         }
 
@@ -106,7 +106,7 @@ export class WallpaperService extends GObject.Object {
         try {
             const cursorPosition = hyprlandService.message('cursorpos');
             const transitionCmd = [
-                'swww',
+                'awww',
                 'img',
                 '--invert-y',
                 '--transition-type',

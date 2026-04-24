@@ -3,6 +3,7 @@
   config,
   ags,
   astal,
+  awww,
   bluez,
   bluez-tools,
   btop,
@@ -25,7 +26,6 @@
   pywal,
   python3,
   slurp,
-  swww,
   stdenv,
   upower,
   vlc,
@@ -79,7 +79,7 @@ ags.bundle {
     pulseaudio
     pywal
     slurp
-    swww
+    awww
     upower
     vlc
     wf-recorder
