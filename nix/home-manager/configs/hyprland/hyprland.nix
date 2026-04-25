@@ -202,6 +202,7 @@ in {
           animate_floating = true;
           animate_workspacechange = false;
           focus_animation = "shrink";
+          exclude_class = "^jetbrains-";
           bezier = "realsmooth, 0.28,0.29,0.69,1.08";
           flash = {
             flash_opacity = 0.95;

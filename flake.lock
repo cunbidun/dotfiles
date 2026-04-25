@@ -619,11 +619,11 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1777134342,
-        "narHash": "sha256-vjpU5wA53EBHfxPyLRen87nXnBcenkn3EfiSJZjAwRg=",
+        "lastModified": 1777135829,
+        "narHash": "sha256-pnevKKJdUyntFG3Uc9B3czy4oggItmmpKUiAUx7wIro=",
         "owner": "cunbidun",
         "repo": "hyprfocus",
-        "rev": "98b48f43b8436c8f7bb16410d1d4def78c2349a2",
+        "rev": "eb43e3d4e600f17191812dcd0850d891176bb2ff",
         "type": "github"
       },
       "original": {
