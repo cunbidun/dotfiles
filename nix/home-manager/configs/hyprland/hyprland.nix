@@ -172,9 +172,39 @@ in {
         ",XF86AudioLowerVolume, exec, ${lib.getExe scripts.decrease-volume}"
         ",XF86AudioMute, exec, ${lib.getExe scripts.toggle-volume}"
       ];
+
+      plugin = {
+        overview = {
+          showNewWorkspace = false;
+          exitOnSwitch = true;
+          workspaceBorderSize = 3;
+          workspaceActiveBorder = "rgb(88c0d0)";
+          panelColor = "rgba(00000000)";
+          affectStrut = true;
+        };
+        hyprfocus = {
+          enabled = true;
+          animate_floating = true;
+          animate_workspacechange = false;
+          focus_animation = "shrink";
+          bezier = "realsmooth, 0.28,0.29,0.69,1.08";
+          flash = {
+            flash_opacity = 0.95;
+          };
+          shrink = {
+            shrink_percentage = 0.99;
+            in_bezier = "realsmooth";
+            in_speed = 1;
+            out_bezier = "realsmooth";
+            out_speed = 2;
+          };
+        };
+      };
     };
 
     plugins = [
+      # inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+      inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
     ];
 
     extraConfig = ''
@@ -191,7 +221,7 @@ in {
       bind = $mainMod, P, exec, vicinae dmenu-apps
       bind = ALT, space, exec, vicinae toggle
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
-      bind = $mainMod, Tab, exec, qs -c ii ipc call search workspacesToggle
+      bind = $mainMod, Tab, overview:toggle
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
