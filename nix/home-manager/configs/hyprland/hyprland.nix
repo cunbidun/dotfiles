@@ -218,8 +218,8 @@ in {
     };
 
     plugins = [
-      # inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
-      inputs.hyprtasking.packages.${pkgs.stdenv.hostPlatform.system}.hyprtasking
+      inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+      # inputs.hyprtasking.packages.${pkgs.stdenv.hostPlatform.system}.hyprtasking
       # inputs.hypr-dynamic-cursors.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
     ];
 
@@ -237,8 +237,8 @@ in {
       bind = $mainMod, P, exec, vicinae dmenu-apps
       bind = ALT, space, exec, vicinae toggle
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
-      bind = $mainMod, Tab, hyprtasking:toggle, cursor
-      bind = , escape, hyprtasking:if_active, hyprtasking:toggle cursor
+      # bind = $mainMod, Tab, hyprtasking:toggle, cursor
+      # bind = , escape, hyprtasking:if_active, hyprtasking:toggle cursor
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
@@ -291,7 +291,6 @@ in {
       bind = $mainMod SHIFT, q, exec, ${lib.getExe scripts.wsctl} project-move 7
       bind = $mainMod SHIFT, g, exec, ${lib.getExe scripts.wsctl} project-move 8
       bind = $mainMod SHIFT, 9, exec, ${lib.getExe scripts.wsctl} project-move 9
-      # bind = $mainMod, Tab, hyprtasking:toggle, cursor
 
       #-----------------------------------+
       # will start a submap called "group" |

@@ -114,7 +114,13 @@ export class WorkspaceService {
         }
 
         return allPotentialWorkspaces
-            .filter((workspace) => !this._isWorkspaceIgnored(workspace))
+            .filter((workspace) => {
+                const workspaceName = allWorkspaceInstances.find(
+                    (workspaceInstance) => workspaceInstance.id === workspace,
+                )?.name;
+
+                return !this._isWorkspaceIgnored(workspace, workspaceName);
+            })
             .sort((a, b) => a - b);
     }
 
@@ -242,7 +248,11 @@ export class WorkspaceService {
 
         while (attempts < assignedOrOccupiedWorkspaces.length) {
             const targetWorkspaceNumber = assignedOrOccupiedWorkspaces[newIndex];
-            if (!this._isWorkspaceIgnored(targetWorkspaceNumber)) {
+            const targetWorkspaceName = allHyprlandWorkspaces.find(
+                (workspaceInstance) => workspaceInstance.id === targetWorkspaceNumber,
+            )?.name;
+
+            if (!this._isWorkspaceIgnored(targetWorkspaceNumber, targetWorkspaceName)) {
                 hyprlandService.dispatch('workspace', targetWorkspaceNumber.toString());
                 return;
             }
@@ -298,8 +308,14 @@ export class WorkspaceService {
      * @param workspaceNumber - The numeric representation of the workspace to check.
      * @returns `true` if the workspace should be ignored, otherwise `false`.
      */
-    private _isWorkspaceIgnored(workspaceNumber: number): boolean {
+    private _isWorkspaceIgnored(workspaceNumber: number, workspaceName?: string): boolean {
         if (this._ignored.get() === '') {
+            return false;
+        }
+
+        // Named project workspaces like "7" or "7[1]" should remain visible even if
+        // Hyprland internally assigns them a negative numeric id.
+        if (workspaceName !== undefined && /^\d+(?:\[[^\]]+\])?$/.test(workspaceName)) {
             return false;
         }
 

@@ -35,10 +35,35 @@
             background-color: transparent;
             min-width: 0em;
             min-height: 0em;
-            border-radius: 0em;
+            border-radius: $bar-buttons-workspaces-numbered_active_highlight_border;
             transition: 0ms;
             padding: 0em $bar-buttons-workspaces-numbered_inactive_padding;
             font-size: $bar-buttons-workspaces-fontSize;
+            color: $bar-buttons-workspaces-numbered_active_highlighted_text_color;
+
+            &.occupied {
+                color: $bar-buttons-workspaces-numbered_active_highlighted_text_color;
+            }
+
+            &.primary {
+                background-color: $bar-buttons-workspaces-primary;
+                color: $bar-buttons-workspaces-available;
+            }
+
+            &.primary.active {
+                background-color: $bar-buttons-workspaces-active;
+                color: $bar-buttons-workspaces-numbered_active_highlighted_text_color;
+            }
+
+            &.virtual {
+                background-color: $bar-buttons-workspaces-virtual;
+                color: $bar-buttons-workspaces-available;
+            }
+
+            &.virtual.active {
+                background-color: $bar-buttons-workspaces-active;
+                color: $bar-buttons-workspaces-numbered_active_highlighted_text_color;
+            }
         }
 
         &.underline {
@@ -49,18 +74,24 @@
 
         &.highlight {
             transition: 0ms;
-            color: $bar-buttons-workspaces-numbered_active_highlighted_text_color;
             border-radius: $bar-buttons-workspaces-numbered_active_highlight_border;
             background-color: $bar-buttons-workspaces-active;
             padding: 0em $bar-buttons-workspaces-numbered_active_highlight_padding;
+            color: $bar-buttons-workspaces-numbered_active_highlighted_text_color;
+
+            &.primary {
+                background-color: $bar-buttons-workspaces-active;
+            }
+
+            &.virtual {
+                background-color: $bar-buttons-workspaces-active;
+            }
         }
     }
 }
 
 .workspace-button {
     &:hover label {
-        color: $bar-buttons-workspaces-hover;
-
         &.default {
             background-color: $bar-buttons-workspaces-hover;
         }
@@ -74,8 +105,8 @@
 
     &:hover .can_highlight {
         background-color: $bar-buttons-workspaces-hover;
-        color: $bar-buttons-workspaces-numbered_active_highlighted_text_color;
         border-radius: $bar-buttons-workspaces-numbered_active_highlight_border;
+        color: $bar-buttons-workspaces-available;
     }
 }
 

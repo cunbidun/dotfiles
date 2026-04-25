@@ -87,15 +87,16 @@ export const getWsColor = (
         return '';
     }
 
+    const isWorkspaceActive =
+        workspaceName !== undefined
+            ? hyprlandService.focusedWorkspace?.name === workspaceName
+            : hyprlandService.focusedWorkspace?.id === i || isWorkspaceActiveOnMonitor(monitor, i);
+
     if (
         showWsIcons.get() &&
         smartHighlight &&
         wsActiveIndicator.get() === 'highlight' &&
-        (
-            (workspaceName !== undefined && hyprlandService.focusedWorkspace?.name === workspaceName) ||
-            hyprlandService.focusedWorkspace?.id === i ||
-            isWorkspaceActiveOnMonitor(monitor, i)
-        )
+        isWorkspaceActive
     ) {
         const iconColor = monochrome.get() ? background.get() : wsBackground.get();
         const iconBackground = hasColor && isValidGjsColor(iconEntry.color) ? iconEntry.color : active.get();
@@ -204,9 +205,9 @@ export const renderClassnames = (
     workspaceName?: string,
 ): string => {
     const isWorkspaceActive =
-        (workspaceName !== undefined && hyprlandService.focusedWorkspace?.name === workspaceName) ||
-        hyprlandService.focusedWorkspace?.id === i ||
-        isWorkspaceActiveOnMonitor(monitor, i);
+        workspaceName !== undefined
+            ? hyprlandService.focusedWorkspace?.name === workspaceName
+            : hyprlandService.focusedWorkspace?.id === i || isWorkspaceActiveOnMonitor(monitor, i);
     const isActive = isWorkspaceActive ? 'active' : '';
 
     if (showIcons) {

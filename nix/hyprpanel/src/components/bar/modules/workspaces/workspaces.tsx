@@ -136,6 +136,32 @@ const switchToProjectWorkspace = (workspaceId: number): void => {
     });
 };
 
+const sortProjectWorkspaceEntries = (
+    left: { name: string; parsed: { project: number; sub?: string } },
+    right: { name: string; parsed: { project: number; sub?: string } },
+): number => {
+    if (left.parsed.sub === undefined && right.parsed.sub !== undefined) {
+        return -1;
+    }
+
+    if (left.parsed.sub !== undefined && right.parsed.sub === undefined) {
+        return 1;
+    }
+
+    if (left.parsed.sub === undefined || right.parsed.sub === undefined) {
+        return left.name.localeCompare(right.name, undefined, { numeric: true });
+    }
+
+    const leftNumber = Number(left.parsed.sub);
+    const rightNumber = Number(right.parsed.sub);
+
+    if (Number.isFinite(leftNumber) && Number.isFinite(rightNumber)) {
+        return leftNumber - rightNumber;
+    }
+
+    return left.parsed.sub.localeCompare(right.parsed.sub, undefined, { numeric: true });
+};
+
 export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element => {
     const boxChildren = Variable.derive(
         [
@@ -232,16 +258,132 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                 const rememberedWorkspaceName =
                     activeWorkspaceName === undefined ? rememberedWorkspaces[`${wsId}`] : undefined;
                 const rememberedWorkspaceInfo = parseWorkspaceName(rememberedWorkspaceName);
+                const isFocusedProject = focusedWorkspaceInfo?.project === wsId;
                 const activeSubLabel =
-                    activeWorkspaceName !== undefined && workspaceBaseLabel.length > 0
+                    activeWorkspaceName !== undefined && workspaceBaseLabel.length > 0 && !isFocusedProject
                         ? `${workspaceBaseLabel}[${focusedWorkspaceInfo?.sub}]`
                         : undefined;
                 const rememberedSubLabel =
                     activeSubLabel === undefined &&
                     rememberedWorkspaceInfo?.sub !== undefined &&
-                    workspaceBaseLabel.length > 0
+                    workspaceBaseLabel.length > 0 &&
+                    !isFocusedProject
                         ? `${workspaceBaseLabel}[${rememberedWorkspaceInfo.sub}]`
                         : undefined;
+                const workspaceVariantClass =
+                    activeSubLabel !== undefined || rememberedSubLabel !== undefined
+                        ? 'virtual'
+                        : 'primary';
+                const projectWorkspaceEntries =
+                    isFocusedProject
+                        ? workspaceList
+                              .map((workspace) => {
+                                  const parsedWorkspace = parseWorkspaceName(workspace.name);
+
+                                  if (parsedWorkspace === undefined || parsedWorkspace.project !== wsId) {
+                                      return undefined;
+                                  }
+
+                                  return {
+                                      workspace,
+                                      name: workspace.name,
+                                      parsed: parsedWorkspace,
+                                  };
+                              })
+                              .filter(
+                                  (
+                                      workspaceEntry,
+                                  ): workspaceEntry is {
+                                      workspace: AstalHyprland.Workspace;
+                                      name: string;
+                                      parsed: { project: number; sub?: string };
+                                  } => workspaceEntry !== undefined,
+                              )
+                              .filter((workspaceEntry) => {
+                                  if (workspaceEntry.parsed.sub === undefined) {
+                                      return false;
+                                  }
+
+                                  return (
+                                      workspaceEntry.workspace.id === hyprlandService.focusedWorkspace?.id ||
+                                      workspaceEntry.workspace.get_clients().length > 0
+                                  );
+                              })
+                              .sort(sortProjectWorkspaceEntries)
+                        : [];
+
+                if (projectWorkspaceEntries.length > 0 && workspaceBaseLabel.length > 0) {
+                    const projectClients = clients.filter((client) => {
+                        const clientWorkspace = parseWorkspaceName(client?.workspace?.name);
+                        return clientWorkspace?.project === wsId;
+                    });
+                    const projectButton = (
+                        <button
+                            className={'workspace-button'}
+                            onClick={(_, event) => {
+                                if (isPrimaryClick(event)) {
+                                    hyprlandService.dispatch('workspace', wsId.toString());
+                                }
+                            }}
+                        >
+                            <label
+                                valign={Gtk.Align.CENTER}
+                                css={`margin: 0rem ${0.375 * spacingValue}rem;`}
+                                className={
+                                    renderClassnames(
+                                        displayIcons,
+                                        displayNumbered,
+                                        numberedActiveIndicator,
+                                        displayWorkspaceIcons,
+                                        smartHighlightEnabled,
+                                        monitor,
+                                        wsId,
+                                    ) + ' primary'
+                                }
+                                label={workspaceBaseLabel}
+                                setup={(self) => {
+                                    self.toggleClassName('occupied', projectClients.length > 0);
+                                }}
+                            />
+                        </button>
+                    );
+                    const virtualButtons = projectWorkspaceEntries.map((workspaceEntry) => (
+                        <button
+                            className={'workspace-button'}
+                            onClick={(_, event) => {
+                                if (isPrimaryClick(event)) {
+                                    hyprlandService.dispatch('workspace', `name:${workspaceEntry.name}`);
+                                }
+                            }}
+                        >
+                            <label
+                                valign={Gtk.Align.CENTER}
+                                css={`margin: 0rem ${0.375 * spacingValue}rem;`}
+                                className={
+                                    renderClassnames(
+                                        displayIcons,
+                                        displayNumbered,
+                                        numberedActiveIndicator,
+                                        displayWorkspaceIcons,
+                                        smartHighlightEnabled,
+                                        monitor,
+                                        wsId,
+                                        workspaceEntry.name,
+                                    ) + ' virtual'
+                                }
+                                label={`${workspaceBaseLabel}[${workspaceEntry.parsed.sub}]`}
+                                setup={(self) => {
+                                    self.toggleClassName(
+                                        'occupied',
+                                        workspaceEntry.workspace.get_clients().length > 0,
+                                    );
+                                }}
+                            />
+                        </button>
+                    ));
+
+                    return [projectButton, ...virtualButtons];
+                }
 
                 return (
                     <button
@@ -267,7 +409,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                                 monitor,
                                 wsId,
                                 activeWorkspaceName,
-                            )}
+                            ) + ` ${workspaceVariantClass}`}
                             label={
                                 activeSubLabel ??
                                 rememberedSubLabel ??
@@ -287,9 +429,10 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                                 )
                             }
                             setup={(self) => {
-                                const currentWsClients = clients.filter(
-                                    (client) => client?.workspace?.id === wsId,
-                                );
+                                const currentWsClients = clients.filter((client) => {
+                                    const clientWorkspace = parseWorkspaceName(client?.workspace?.name);
+                                    return clientWorkspace?.project === wsId;
+                                });
                                 self.toggleClassName('occupied', currentWsClients.length > 0);
                             }}
                         />
