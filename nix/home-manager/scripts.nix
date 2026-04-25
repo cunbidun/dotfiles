@@ -214,7 +214,13 @@
 
       def dispatch_workspace(project):
           remember_current_workspace()
-          run(["hyprctl", "dispatch", "workspace", resolve_project_target(project)])
+          current = current_workspace()
+          target = (
+              project
+              if str(current["project"]) == str(project)
+              else resolve_project_target(project)
+          )
+          run(["hyprctl", "dispatch", "workspace", target])
 
 
       def dispatch_move(project):
