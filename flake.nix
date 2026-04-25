@@ -45,7 +45,7 @@
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
     hyprfocus = {
-      url = "path:/home/cunbidun/.tmp/hyprfocus";
+      url = "github:cunbidun/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
     hyprtasking = {

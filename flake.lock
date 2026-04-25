@@ -619,14 +619,17 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1777132356,
-        "narHash": "sha256-mcDGGVF300lCq8HpUM+bkWXpmv3ejwQwUBZyb5wz/j4=",
-        "path": "/home/cunbidun/.tmp/hyprfocus",
-        "type": "path"
+        "lastModified": 1777134342,
+        "narHash": "sha256-vjpU5wA53EBHfxPyLRen87nXnBcenkn3EfiSJZjAwRg=",
+        "owner": "cunbidun",
+        "repo": "hyprfocus",
+        "rev": "98b48f43b8436c8f7bb16410d1d4def78c2349a2",
+        "type": "github"
       },
       "original": {
-        "path": "/home/cunbidun/.tmp/hyprfocus",
-        "type": "path"
+        "owner": "cunbidun",
+        "repo": "hyprfocus",
+        "type": "github"
       }
     },
     "hyprgraphics": {
