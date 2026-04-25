@@ -174,18 +174,6 @@ in {
       ];
 
       plugin = {
-        hyprtasking = {
-          layout = "grid";
-          gap_size = 20;
-          bg_color = "0xff26233a";
-          border_size = 4;
-          exit_on_hovered = false;
-          grid = {
-            rows = 3;
-            cols = 3;
-            loop = false;
-          };
-        };
         dynamic-cursors = {
           enabled = true;
           mode = "none";
@@ -194,7 +182,7 @@ in {
             threshold = 6.0;
             base = 4.0;
             speed = 4.0;
-            timeout = 2000;
+            timeout = 1000;
           };
         };
         hyprfocus = {
@@ -220,8 +208,7 @@ in {
 
     plugins = [
       inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
-      # inputs.hyprtasking.packages.${pkgs.stdenv.hostPlatform.system}.hyprtasking
-      # inputs.hypr-dynamic-cursors.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
+      inputs.hypr-dynamic-cursors.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
     ];
 
     extraConfig = ''
@@ -238,8 +225,6 @@ in {
       bind = $mainMod, P, exec, vicinae dmenu-apps
       bind = ALT, space, exec, vicinae toggle
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
-      # bind = $mainMod, Tab, hyprtasking:toggle, cursor
-      # bind = , escape, hyprtasking:if_active, hyprtasking:toggle cursor
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
