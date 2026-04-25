@@ -40,7 +40,7 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland?submodules=1";};
+    hyprland = {url = "github:hyprwm/Hyprland/v0.54.2?submodules=1";};
     pyprland = {url = "github:hyprland-community/pyprland";};
     hyprland-contrib = {url = "github:hyprwm/contrib";};
     hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
@@ -48,8 +48,12 @@
       url = "github:daxisunder/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
-    Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
+    hyprtasking = {
+      url = "github:raybbian/hyprtasking";
+      inputs.hyprland.follows = "hyprland";
+    };
+    hypr-dynamic-cursors = {
+      url = "github:VirtCode/hypr-dynamic-cursors";
       inputs.hyprland.follows = "hyprland";
     };
     xremap-flake = {

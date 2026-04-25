@@ -174,13 +174,28 @@ in {
       ];
 
       plugin = {
-        overview = {
-          showNewWorkspace = false;
-          exitOnSwitch = true;
-          workspaceBorderSize = 3;
-          workspaceActiveBorder = "rgb(88c0d0)";
-          panelColor = "rgba(00000000)";
-          affectStrut = true;
+        hyprtasking = {
+          layout = "grid";
+          gap_size = 20;
+          bg_color = "0xff26233a";
+          border_size = 4;
+          exit_on_hovered = false;
+          grid = {
+            rows = 3;
+            cols = 3;
+            loop = false;
+          };
+        };
+        dynamic-cursors = {
+          enabled = true;
+          mode = "none";
+          shake = {
+            enabled = true;
+            threshold = 6.0;
+            base = 4.0;
+            speed = 4.0;
+            timeout = 2000;
+          };
         };
         hyprfocus = {
           enabled = true;
@@ -204,7 +219,8 @@ in {
 
     plugins = [
       # inputs.hyprfocus.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
-      # inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
+      inputs.hyprtasking.packages.${pkgs.stdenv.hostPlatform.system}.hyprtasking
+      # inputs.hypr-dynamic-cursors.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
     ];
 
     extraConfig = ''
@@ -221,7 +237,8 @@ in {
       bind = $mainMod, P, exec, vicinae dmenu-apps
       bind = ALT, space, exec, vicinae toggle
       bind = $mainMod, M, exec, ${lib.getExe scripts.hyprland-mode}
-      bind = $mainMod, Tab, overview:toggle
+      bind = $mainMod, Tab, hyprtasking:toggle, cursor
+      bind = , escape, hyprtasking:if_active, hyprtasking:toggle cursor
 
       # Clipboard
       bind = $mainMod SHIFT, S, exec, slurp | grim -g - - | wl-copy -t image/png
@@ -274,7 +291,7 @@ in {
       bind = $mainMod SHIFT, q, exec, ${lib.getExe scripts.wsctl} project-move 7
       bind = $mainMod SHIFT, g, exec, ${lib.getExe scripts.wsctl} project-move 8
       bind = $mainMod SHIFT, 9, exec, ${lib.getExe scripts.wsctl} project-move 9
-      # bind = $mainMod, Tab, overview:toggle
+      # bind = $mainMod, Tab, hyprtasking:toggle, cursor
 
       #-----------------------------------+
       # will start a submap called "group" |
