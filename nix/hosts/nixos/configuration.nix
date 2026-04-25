@@ -139,7 +139,6 @@
 in {
   imports = [
     ./hardware-configuration.nix
-    # ./llm.nix
     ./windows.nix
     ../shared/nix-config.nix
     ../shared/common.nix

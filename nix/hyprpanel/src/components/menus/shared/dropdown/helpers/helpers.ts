@@ -10,7 +10,7 @@ import { calculateMenuPosition } from './locationHandler';
  * If an error occurs during the realization process, it logs the error message.
  *
  * The primary purpose of this function is to render the menus at least once to generate and calculate their
- * gemoetry. That way when they're opened later, they'll be displayed at the correct position.
+ * geometry. That way when they're opened later, they'll be displayed at the correct position.
  *
  * The menus are originally realized off-screen to prevent flickering when they're opened.
  *

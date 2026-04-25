@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.hyprpanel;
+  scripts = import ../home-manager/scripts.nix {inherit pkgs;};
 in {
   options.hyprpanel.enable = lib.mkEnableOption "AGS HyprPanel from nix/hyprpanel";
 
@@ -69,6 +70,7 @@ in {
           kitty
           systemd
           which
+          scripts.wsctl
 
           (python3.withPackages (ps: with ps; [dbus-python pygobject3]))
         ]

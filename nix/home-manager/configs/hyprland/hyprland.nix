@@ -224,26 +224,26 @@ in {
       bind = $mainMod CONTROL, j, swapwindow, d
 
       # Switch workspaces with mainMod + [0-9]
-      bind = $mainMod, 1, workspace, 1
-      bind = $mainMod, 2, workspace, 2
-      bind = $mainMod, 3, workspace, 3
-      bind = $mainMod, 4, workspace, 4
-      bind = $mainMod, 5, workspace, 5
-      bind = $mainMod, a, workspace, 6
-      bind = $mainMod, q, workspace, 7
-      bind = $mainMod, g, workspace, 8
-      bind = $mainMod, 9, workspace, 9
+      bind = $mainMod, 1, exec, ${lib.getExe scripts.wsctl} project 1
+      bind = $mainMod, 2, exec, ${lib.getExe scripts.wsctl} project 2
+      bind = $mainMod, 3, exec, ${lib.getExe scripts.wsctl} project 3
+      bind = $mainMod, 4, exec, ${lib.getExe scripts.wsctl} project 4
+      bind = $mainMod, 5, exec, ${lib.getExe scripts.wsctl} project 5
+      bind = $mainMod, a, exec, ${lib.getExe scripts.wsctl} project 6
+      bind = $mainMod, q, exec, ${lib.getExe scripts.wsctl} project 7
+      bind = $mainMod, g, exec, ${lib.getExe scripts.wsctl} project 8
+      bind = $mainMod, 9, exec, ${lib.getExe scripts.wsctl} project 9
 
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
-      bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
-      bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
-      bind = $mainMod SHIFT, 3, movetoworkspacesilent, 3
-      bind = $mainMod SHIFT, 4, movetoworkspacesilent, 4
-      bind = $mainMod SHIFT, 5, movetoworkspacesilent, 5
-      bind = $mainMod SHIFT, a, movetoworkspacesilent, 6
-      bind = $mainMod SHIFT, q, movetoworkspacesilent, 7
-      bind = $mainMod SHIFT, g, movetoworkspacesilent, 8
-      bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
+      bind = $mainMod SHIFT, 1, exec, ${lib.getExe scripts.wsctl} project-move 1
+      bind = $mainMod SHIFT, 2, exec, ${lib.getExe scripts.wsctl} project-move 2
+      bind = $mainMod SHIFT, 3, exec, ${lib.getExe scripts.wsctl} project-move 3
+      bind = $mainMod SHIFT, 4, exec, ${lib.getExe scripts.wsctl} project-move 4
+      bind = $mainMod SHIFT, 5, exec, ${lib.getExe scripts.wsctl} project-move 5
+      bind = $mainMod SHIFT, a, exec, ${lib.getExe scripts.wsctl} project-move 6
+      bind = $mainMod SHIFT, q, exec, ${lib.getExe scripts.wsctl} project-move 7
+      bind = $mainMod SHIFT, g, exec, ${lib.getExe scripts.wsctl} project-move 8
+      bind = $mainMod SHIFT, 9, exec, ${lib.getExe scripts.wsctl} project-move 9
       # bind = $mainMod, Tab, overview:toggle
 
       #-----------------------------------+

@@ -38,7 +38,7 @@ const isWorkspaceActiveOnMonitor = (monitor: number, i: number): boolean => {
  *
  * @returns The icon for the workspace as a string. If no icon is found, returns the workspace index as a string.
  */
-const getWsIcon = (wsIconMap: WorkspaceIconMap, i: number): string => {
+export const getWsIcon = (wsIconMap: WorkspaceIconMap, i: number): string => {
     const iconEntry = wsIconMap[i];
     const defaultIcon = `${i}`;
 
@@ -77,6 +77,7 @@ export const getWsColor = (
     i: number,
     smartHighlight: boolean,
     monitor: number,
+    workspaceName?: string,
 ): string => {
     const iconEntry = wsIconMap[i];
     const hasColor =
@@ -90,7 +91,11 @@ export const getWsColor = (
         showWsIcons.get() &&
         smartHighlight &&
         wsActiveIndicator.get() === 'highlight' &&
-        (hyprlandService.focusedWorkspace?.id === i || isWorkspaceActiveOnMonitor(monitor, i))
+        (
+            (workspaceName !== undefined && hyprlandService.focusedWorkspace?.name === workspaceName) ||
+            hyprlandService.focusedWorkspace?.id === i ||
+            isWorkspaceActiveOnMonitor(monitor, i)
+        )
     ) {
         const iconColor = monochrome.get() ? background.get() : wsBackground.get();
         const iconBackground = hasColor && isValidGjsColor(iconEntry.color) ? iconEntry.color : active.get();
@@ -196,9 +201,12 @@ export const renderClassnames = (
     smartHighlight: boolean,
     monitor: number,
     i: number,
+    workspaceName?: string,
 ): string => {
     const isWorkspaceActive =
-        hyprlandService.focusedWorkspace?.id === i || isWorkspaceActiveOnMonitor(monitor, i);
+        (workspaceName !== undefined && hyprlandService.focusedWorkspace?.name === workspaceName) ||
+        hyprlandService.focusedWorkspace?.id === i ||
+        isWorkspaceActiveOnMonitor(monitor, i);
     const isActive = isWorkspaceActive ? 'active' : '';
 
     if (showIcons) {

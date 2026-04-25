@@ -99,11 +99,15 @@
       flakeIgnore = ["E501"];
     } ''
       import json
+      import os
+      from pathlib import Path
       import re
       import subprocess
       import sys
 
       ACTIVE_RE = re.compile(r"^(?P<proj>\d+)(?:\[(?P<sub>[^\]]+)\])?$")
+      STATE_DIR = Path(os.environ.get("XDG_STATE_HOME", Path.home() / ".local" / "state")) / "wsctl"
+      STATE_FILE = STATE_DIR / "last-sub.json"
 
 
       def run(cmd, inp=None):
@@ -124,18 +128,104 @@
           return json.loads(run(["hyprctl"] + args))
 
 
-      def current_project():
-          name = str(hyprj(["activeworkspace", "-j"]).get("name", "")).strip()
-          m = ACTIVE_RE.match(name)
+      def parse_workspace_name(name):
+          workspace_name = str(name).strip()
+          m = ACTIVE_RE.match(workspace_name)
           if not m:
-              raise RuntimeError(f"bad ws name: {name!r}")
-          return m.group("proj")
+              raise RuntimeError(f"bad ws name: {workspace_name!r}")
+          return {
+              "project": m.group("proj"),
+              "sub": m.group("sub"),
+              "name": workspace_name,
+          }
+
+
+      def current_workspace():
+          name = str(hyprj(["activeworkspace", "-j"]).get("name", "")).strip()
+          return parse_workspace_name(name)
+
+
+      def current_project():
+          return current_workspace()["project"]
+
+
+      def ensure_state_dir():
+          STATE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+      def load_state():
+          if not STATE_FILE.exists():
+              return {}
+
+          try:
+              data = json.loads(STATE_FILE.read_text())
+          except Exception:
+              return {}
+
+          if not isinstance(data, dict):
+              return {}
+
+          return {
+              str(project): str(workspace_name)
+              for project, workspace_name in data.items()
+              if isinstance(project, str) and isinstance(workspace_name, str)
+          }
+
+
+      def save_state(state):
+          ensure_state_dir()
+          STATE_FILE.write_text(json.dumps(state))
+
+
+      def clear_project_memory(project):
+          state = load_state()
+          state.pop(str(project), None)
+          save_state(state)
+
+
+      def remember_workspace(workspace):
+          state = load_state()
+
+          if workspace["sub"] is None:
+              state.pop(workspace["project"], None)
+              save_state(state)
+              return
+
+          state[workspace["project"]] = workspace["name"]
+          save_state(state)
+
+
+      def remember_current_workspace():
+          remember_workspace(current_workspace())
+
+
+      def resolve_project_target(project):
+          project_name = str(project)
+          state = load_state()
+          remembered_name = state.get(project_name)
+
+          if remembered_name:
+              remembered_workspace = parse_workspace_name(remembered_name)
+              if remembered_workspace["project"] == project_name:
+                  return f"name:{remembered_name}"
+
+          return project_name
+
+
+      def dispatch_workspace(project):
+          remember_current_workspace()
+          run(["hyprctl", "dispatch", "workspace", resolve_project_target(project)])
+
+
+      def dispatch_move(project):
+          remember_current_workspace()
+          run(["hyprctl", "dispatch", "movetoworkspacesilent", resolve_project_target(project)])
 
 
       def main():
           if len(sys.argv) < 2:
               print(
-                  "usage: wsctl goto N | move N | main | main-move",
+                  "usage: wsctl goto N | move N | main | main-move | project N | project-move N | resolve N | remember",
                   file=sys.stderr,
               )
               return 1
@@ -145,24 +235,44 @@
 
           if cmd == "goto":
               sub = sys.argv[2]
+              remember_current_workspace()
               target = f"{proj}[{sub}]"
               run(["hyprctl", "dispatch", "workspace", f"name:{target}"])
               return 0
 
           if cmd == "move":
               sub = sys.argv[2]
+              remember_current_workspace()
               target = f"{proj}[{sub}]"
               run(["hyprctl", "dispatch", "movetoworkspacesilent", f"name:{target}"])
               return 0
 
           if cmd == "main":
+              clear_project_memory(proj)
               target = f"{proj}"
               run(["hyprctl", "dispatch", "workspace", f"name:{target}"])
               return 0
 
           if cmd == "main-move":
+              remember_current_workspace()
               target = f"{proj}"
               run(["hyprctl", "dispatch", "movetoworkspacesilent", f"name:{target}"])
+              return 0
+
+          if cmd == "project":
+              dispatch_workspace(sys.argv[2])
+              return 0
+
+          if cmd == "project-move":
+              dispatch_move(sys.argv[2])
+              return 0
+
+          if cmd == "resolve":
+              print(resolve_project_target(sys.argv[2]))
+              return 0
+
+          if cmd == "remember":
+              remember_current_workspace()
               return 0
 
           raise RuntimeError(f"unknown command: {cmd}")

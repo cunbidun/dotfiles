@@ -1,0 +1,4 @@
+[tool.codespell]
+ignore-words-list = "iterm,ags,AGS,trough,FileTest,Ot"
+ignore-regex = "FileTest|Ot"
+skip = "generated/,result,.git,flake.lock,.vscode"

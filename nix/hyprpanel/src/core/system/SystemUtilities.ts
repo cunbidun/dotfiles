@@ -24,7 +24,7 @@ export class SystemUtilities {
     }
 
     /*******************************************
-     *           Depndency Checking            *
+     *          Dependency Checking            *
      *******************************************/
 
     /**

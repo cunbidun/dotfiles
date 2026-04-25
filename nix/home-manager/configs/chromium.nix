@@ -49,6 +49,10 @@ in {
         name = "Zalo";
         url = "https://chat.zalo.me/";
       })
+      (mkChromePWA {
+        name = "Instagram";
+        url = "https://www.instagram.com/";
+      })
     ];
   };
   # Generate Chrome policy file in user home directory
