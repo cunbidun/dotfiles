@@ -1,5 +1,5 @@
 import { initWorkspaceEvents } from './helpers/utils';
-import { getAppIcon, getWsColor, getWsIcon, renderClassnames, renderLabel } from './helpers';
+import { getAppIcon, getWsIcon, renderClassnames, renderLabel } from './helpers';
 import { bind, execAsync, GLib, Variable } from 'astal';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 import { Gtk } from 'astal/gtk3';
@@ -398,10 +398,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                     >
                         <label
                             valign={Gtk.Align.CENTER}
-                            css={
-                                `margin: 0rem ${0.375 * spacingValue}rem;` +
-                                `${displayWorkspaceIcons ? getWsColor(workspaceIconMapping, wsId, smartHighlightEnabled, monitor, activeWorkspaceName ?? primaryWorkspaceName) : ''}`
-                            }
+                            css={`margin: 0rem ${0.375 * spacingValue}rem;`}
                             className={renderClassnames(
                                 displayIcons,
                                 displayNumbered,
