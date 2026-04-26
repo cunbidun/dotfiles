@@ -87,7 +87,6 @@ in {
           enabled = true;
           size = 8;
           passes = 1;
-          noise = 0.05;
         };
       };
 
