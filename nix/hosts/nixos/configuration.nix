@@ -143,7 +143,6 @@ in {
     ../shared/nix-config.nix
     ../shared/common.nix
     inputs.sops-nix.nixosModules.sops
-    inputs.opnix.nixosModules.default
   ];
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
@@ -199,41 +198,19 @@ in {
   };
 
   # To search for packages run 'nix search'. For example, 'nix search nixpkgs bazel'
-  environment.systemPackages =
-    (with pkgs; [
-      neovim
-      git
-      brightnessctlDdcutil
-      ddcutil
-      _1password-cli
-      sops
-      xdg-desktop-portal-termfilechooser
-    ])
-    ++ [
-      inputs.opnix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ];
-
-  services.onepassword-secrets = {
-    enable = true;
-    users = [userdata.username];
-    secrets.sopsAgeKey = {
-      reference = "op://Infrastructure/SOPS Age Key/private key";
-      path = "/var/lib/sops-nix/keys.txt";
-      owner = "root";
-      group = "root";
-      mode = "0600";
-    };
-  };
-
-  # Ensure OpNix waits for actual connectivity before contacting 1Password
-  systemd.services.opnix-secrets = {
-    after = ["network-online.target" "NetworkManager-wait-online.service"];
-    wants = ["network-online.target" "NetworkManager-wait-online.service"];
-  };
+  environment.systemPackages = with pkgs; [
+    neovim
+    git
+    brightnessctlDdcutil
+    ddcutil
+    _1password-cli
+    sops
+    xdg-desktop-portal-termfilechooser
+  ];
 
   sops = {
     defaultSopsFile = ../../../secrets/global.yaml;
-    age.keyFile = config.services.onepassword-secrets.secretPaths.sopsAgeKey;
+    age.keyFile = "/var/lib/sops-nix/keys.txt";
     secrets.geolocation = {
       path = "/etc/geolocation";
       owner = "geoclue";
@@ -359,7 +336,14 @@ in {
     enableWifi = false;
     submissionUrl = "https://api.beacondb.net/v2/geosubmit";
     geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+    appConfig."hyprsunset-geoclue" = {
+      isAllowed = true;
+      isSystem = false;
+    };
   };
+
+  # Don't start geoclue if the sops secret hasn't been decrypted yet
+  systemd.services.geoclue.unitConfig.ConditionPathExists = "/etc/geolocation";
 
   hardware.opentabletdriver.enable = true;
   console = {

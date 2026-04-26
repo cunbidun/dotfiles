@@ -16,7 +16,6 @@ in {
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.self.homeManagerModules.theme-manager
     inputs.sops-nix.homeManagerModules.sops
-    inputs.opnix.homeManagerModules.default
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix
@@ -42,6 +41,7 @@ in {
     ../../home-manager/configs/xremap.nix
     ../../home-manager/configs/taskwarrior.nix
     ../../home-manager/configs/shared/git.nix
+    ../../home-manager/configs/hyprsunset.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -50,22 +50,6 @@ in {
   home.homeDirectory = "/home/${userdata.username}";
 
   home.packages = package_config.default_packages ++ package_config.linux_packages;
-
-  services.hyprsunset = {
-    enable = true;
-    settings = {
-      profile = [
-        {
-          time = "06:00";
-          identity = true;
-        }
-        {
-          time = "18:00";
-          temperature = 4500;
-        }
-      ];
-    };
-  };
 
   # Ensure old user-enabled tray applet and gammastep service don't keep autostarting.
   home.activation.disableGammastepIndicator = lib.hm.dag.entryAfter ["writeBoundary"] ''
