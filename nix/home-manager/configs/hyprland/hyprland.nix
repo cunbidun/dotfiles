@@ -92,11 +92,14 @@ in {
 
       animations = {
         enabled = true;
-        bezier = "smooth, 0.22, 1, 0.36, 1";
+        bezier = [
+          "smooth, 0.22, 1, 0.36, 1"
+          "easeOutCubic, 0.33, 1, 0.68, 1"
+        ];
         animation = [
           "windows, 1, 4, smooth"
           "windowsIn, 1, 4, smooth, popin 75%"
-          "windowsOut, 1, 3, smooth"
+          "windowsOut, 1, 8, easeOutCubic, popin 85%"
           "windowsMove, 1, 5, smooth"
           "border, 1, 5, smooth"
           "fade, 1, 3, smooth"
