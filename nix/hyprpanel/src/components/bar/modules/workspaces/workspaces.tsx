@@ -259,6 +259,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                     activeWorkspaceName === undefined ? rememberedWorkspaces[`${wsId}`] : undefined;
                 const rememberedWorkspaceInfo = parseWorkspaceName(rememberedWorkspaceName);
                 const isFocusedProject = focusedWorkspaceInfo?.project === wsId;
+                const primaryWorkspaceName = workspaceBaseLabel.length > 0 ? `${wsId}` : undefined;
                 const activeSubLabel =
                     activeWorkspaceName !== undefined && workspaceBaseLabel.length > 0 && !isFocusedProject
                         ? `${workspaceBaseLabel}[${focusedWorkspaceInfo?.sub}]`
@@ -338,6 +339,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                                         smartHighlightEnabled,
                                         monitor,
                                         wsId,
+                                        primaryWorkspaceName,
                                     ) + ' primary'
                                 }
                                 label={workspaceBaseLabel}
@@ -398,7 +400,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                             valign={Gtk.Align.CENTER}
                             css={
                                 `margin: 0rem ${0.375 * spacingValue}rem;` +
-                                `${displayWorkspaceIcons ? getWsColor(workspaceIconMapping, wsId, smartHighlightEnabled, monitor, activeWorkspaceName) : ''}`
+                                `${displayWorkspaceIcons ? getWsColor(workspaceIconMapping, wsId, smartHighlightEnabled, monitor, activeWorkspaceName ?? primaryWorkspaceName) : ''}`
                             }
                             className={renderClassnames(
                                 displayIcons,
@@ -408,7 +410,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                                 smartHighlightEnabled,
                                 monitor,
                                 wsId,
-                                activeWorkspaceName,
+                                activeWorkspaceName ?? primaryWorkspaceName,
                             ) + ` ${workspaceVariantClass}`}
                             label={
                                 activeSubLabel ??

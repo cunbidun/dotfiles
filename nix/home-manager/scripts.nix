@@ -199,6 +199,35 @@
           remember_workspace(current_workspace())
 
 
+      def normalize_primary_workspace(project):
+          project_name = str(project)
+
+          for client in hyprj(["clients", "-j"]):
+              workspace = client.get("workspace") or {}
+              workspace_name = str(workspace.get("name", "")).strip()
+              workspace_id = workspace.get("id")
+
+              if workspace_name != project_name:
+                  continue
+
+              if not isinstance(workspace_id, int) or workspace_id >= 0:
+                  continue
+
+              address = str(client.get("address", "")).strip()
+
+              if not address:
+                  continue
+
+              run(
+                  [
+                      "hyprctl",
+                      "dispatch",
+                      "movetoworkspacesilent",
+                      f"{project_name},address:{address}",
+                  ]
+              )
+
+
       def resolve_project_target(project):
           project_name = str(project)
           state = load_state()
@@ -209,17 +238,18 @@
               if remembered_workspace["project"] == project_name:
                   return f"name:{remembered_name}"
 
+          normalize_primary_workspace(project_name)
           return project_name
 
 
       def dispatch_workspace(project):
           remember_current_workspace()
           current = current_workspace()
-          target = (
-              project
-              if str(current["project"]) == str(project)
-              else resolve_project_target(project)
-          )
+          if str(current["project"]) == str(project):
+              normalize_primary_workspace(project)
+              target = str(project)
+          else:
+              target = resolve_project_target(project)
           run(["hyprctl", "dispatch", "workspace", target])
 
 
@@ -255,14 +285,16 @@
 
           if cmd == "main":
               clear_project_memory(proj)
+              normalize_primary_workspace(proj)
               target = f"{proj}"
-              run(["hyprctl", "dispatch", "workspace", f"name:{target}"])
+              run(["hyprctl", "dispatch", "workspace", target])
               return 0
 
           if cmd == "main-move":
               remember_current_workspace()
+              normalize_primary_workspace(proj)
               target = f"{proj}"
-              run(["hyprctl", "dispatch", "movetoworkspacesilent", f"name:{target}"])
+              run(["hyprctl", "dispatch", "movetoworkspacesilent", target])
               return 0
 
           if cmd == "project":

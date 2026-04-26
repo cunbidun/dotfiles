@@ -85,21 +85,23 @@ in {
         rounding = 0;
         blur = {
           enabled = true;
-          size = 3;
-          passes = 1;
+          size = 8;
+          passes = 3;
+          noise = 0.05;
         };
       };
 
       animations = {
         enabled = true;
-        bezier = "myBezier, 0.05, 0.9, 0.05, 1.05";
+        bezier = "smooth, 0.22, 1, 0.36, 1";
         animation = [
-          "windows, 1, 5, myBezier"
-          "windowsOut, 1, 5, default, popin 80%"
-          "border, 1, 10, default"
-          "borderangle, 1, 8, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 5, default, fade"
+          "windows, 1, 4, smooth"
+          "windowsIn, 1, 4, smooth, popin 75%"
+          "windowsOut, 1, 3, smooth"
+          "windowsMove, 1, 5, smooth"
+          "border, 1, 5, smooth"
+          "fade, 1, 3, smooth"
+          "workspaces, 1, 5, smooth, slidefade 10%"
         ];
       };
 
@@ -189,18 +191,15 @@ in {
           enabled = true;
           animate_floating = true;
           animate_workspacechange = false;
-          focus_animation = "shrink";
+          focus_animation = "flash";
           exclude_class = "^jetbrains-";
           bezier = "realsmooth, 0.28,0.29,0.69,1.08";
           flash = {
-            flash_opacity = 0.95;
-          };
-          shrink = {
-            shrink_percentage = 0.99;
+            flash_opacity = 0.8;
             in_bezier = "realsmooth";
-            in_speed = 0.5;
+            in_speed = 0.25;
             out_bezier = "realsmooth";
-            out_speed = 1;
+            out_speed = 1.5;
           };
         };
       };
