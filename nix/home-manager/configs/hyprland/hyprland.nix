@@ -86,7 +86,7 @@ in {
         blur = {
           enabled = true;
           size = 8;
-          passes = 3;
+          passes = 2;
           noise = 0.05;
         };
       };
