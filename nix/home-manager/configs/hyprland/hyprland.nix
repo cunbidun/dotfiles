@@ -145,6 +145,7 @@ in {
 
         # Messenger PWA
         "match:class ^(chrome-.*messenger.*)$, float on"
+        "match:class ^(chrome-.*zalo.*)$, float on"
 
         # 1Password rules
         "match:class ^(.*1password.*)$, float on"
