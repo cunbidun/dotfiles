@@ -18,7 +18,6 @@
       import datetime
       import time
       import subprocess
-      import sys
 
       NIGHT_TEMP = ${toString nightTemp}
       HYPRCTL = "${hyprctl}"
@@ -81,32 +80,22 @@
           print(f"Location: {lat:.4f}, {lon:.4f}", flush=True)
           location = LocationInfo(latitude=lat, longitude=lon)
 
+          last_state = None  # True=night, False=day
+
           while True:
               now = datetime.datetime.now(datetime.timezone.utc)
               s = sun(location.observer, date=now.date())
               sunrise, sunset = s["sunrise"], s["sunset"]
-
               is_night = not (sunrise <= now < sunset)
-              apply_temperature(is_night)
-              print(
-                  f"{'Night' if is_night else 'Day'} mode applied (sunrise={sunrise.strftime('%H:%M')}, sunset={sunset.strftime('%H:%M')} UTC)",
-                  flush=True,
-              )
+              if is_night != last_state:
+                  apply_temperature(is_night)
+                  print(
+                      f"{'Night' if is_night else 'Day'} mode applied (sunrise={sunrise.strftime('%H:%M')}, sunset={sunset.strftime('%H:%M')} UTC)",
+                      flush=True,
+                  )
+                  last_state = is_night
 
-              if now < sunrise:
-                  next_event = sunrise
-              elif now < sunset:
-                  next_event = sunset
-              else:
-                  tomorrow = now.date() + datetime.timedelta(days=1)
-                  next_event = sun(location.observer, date=tomorrow)["sunrise"]
-
-              sleep_secs = max((next_event - now).total_seconds(), 60)
-              print(
-                  f"Next transition at {next_event.strftime('%H:%M UTC')}, sleeping {sleep_secs:.0f}s",
-                  flush=True,
-              )
-              time.sleep(sleep_secs)
+              time.sleep(10)
 
 
       main()

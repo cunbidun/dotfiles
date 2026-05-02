@@ -369,6 +369,8 @@ in {
       bind = , m, submap,reset
       bind = , s, exec, pypr toggle signal
       bind = , s, submap,reset
+      bind = , z, exec, pypr toggle zalo
+      bind = , z, submap,reset
       bind = , escape, submap, reset
 
       # will reset the submap, meaning end the current one and return to the global one

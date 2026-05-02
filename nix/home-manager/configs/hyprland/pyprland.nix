@@ -5,10 +5,12 @@
 }: let
   format = pkgs.formats.toml {};
   messengerDesktop = "messenger.desktop";
-  messengerLauncher = pkgs.writeShellScript "launch-messenger-pwa" ''
+  zaloDesktop = "zalo.desktop";
+  mkDesktopLauncher = desktopFile: scriptName:
+    pkgs.writeShellScript scriptName ''
     set -euo pipefail
 
-    target=${lib.escapeShellArg messengerDesktop}
+    target=${lib.escapeShellArg desktopFile}
 
     declare -a search_roots=()
 
@@ -31,6 +33,8 @@
     echo "Could not locate $target via known XDG data directories" >&2
     exit 1
   '';
+  messengerLauncher = mkDesktopLauncher messengerDesktop "launch-messenger-pwa";
+  zaloLauncher = mkDesktopLauncher zaloDesktop "launch-zalo-pwa";
 in {
   xdg.configFile = let
     pyprConfig = format.generate "pyprland.toml" {
@@ -50,6 +54,7 @@ in {
           position = "25% 25%";
           excludes = [
             "messenger"
+            "zalo"
             "spotify"
             "signal"
             "file"
@@ -67,12 +72,34 @@ in {
           position = "25% 25%";
           excludes = [
             "term"
+            "zalo"
             "spotify"
             "signal"
             "file"
             "obsidian"
           ];
           class = "re:chrome-.*messenger.*";
+          match_by = "class";
+          hysteresis = 0;
+          process_tracking = false;
+        };
+
+        zalo = {
+          command = "${zaloLauncher}";
+          animation = "";
+          unfocus = "";
+          lazy = true;
+          size = "50% 50%";
+          position = "25% 25%";
+          excludes = [
+            "term"
+            "messenger"
+            "spotify"
+            "signal"
+            "file"
+            "obsidian"
+          ];
+          class = "re:chrome-.*zalo.*";
           match_by = "class";
           hysteresis = 0;
           process_tracking = false;
@@ -88,6 +115,7 @@ in {
           excludes = [
             "term"
             "messenger"
+            "zalo"
             "signal"
             "file"
             "obsidian"
@@ -105,6 +133,7 @@ in {
           excludes = [
             "term"
             "messenger"
+            "zalo"
             "spotify"
             "file"
             "obsidian"
@@ -132,6 +161,7 @@ in {
           excludes = [
             "term"
             "messenger"
+            "zalo"
             "spotify"
             "signal"
             "file"
