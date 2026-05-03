@@ -146,6 +146,7 @@ in {
         # Messenger PWA
         "match:class ^(chrome-.*messenger.*)$, float on"
         "match:class ^(chrome-.*zalo.*)$, float on"
+        "match:class ^(chrome-.*chatgpt.*)$, float on"
 
         # 1Password rules
         "match:class ^(.*1password.*)$, float on"
@@ -370,6 +371,8 @@ in {
       bind = , m, submap,reset
       bind = , s, exec, pypr toggle signal
       bind = , s, submap,reset
+      bind = , c, exec, pypr toggle chatgpt
+      bind = , c, submap,reset
       bind = , z, exec, pypr toggle zalo
       bind = , z, submap,reset
       bind = , escape, submap, reset

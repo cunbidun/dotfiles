@@ -53,6 +53,10 @@ in {
         name = "Instagram";
         url = "https://www.instagram.com/";
       })
+      (mkChromePWA {
+        name = "ChatGPT";
+        url = "https://chatgpt.com/";
+      })
     ];
   };
   # Generate Chrome policy file in user home directory

@@ -6,6 +6,7 @@
   format = pkgs.formats.toml {};
   messengerDesktop = "messenger.desktop";
   zaloDesktop = "zalo.desktop";
+  chatgptDesktop = "chatgpt.desktop";
   mkDesktopLauncher = desktopFile: scriptName:
     pkgs.writeShellScript scriptName ''
     set -euo pipefail
@@ -35,6 +36,7 @@
   '';
   messengerLauncher = mkDesktopLauncher messengerDesktop "launch-messenger-pwa";
   zaloLauncher = mkDesktopLauncher zaloDesktop "launch-zalo-pwa";
+  chatgptLauncher = mkDesktopLauncher chatgptDesktop "launch-chatgpt-pwa";
 in {
   xdg.configFile = let
     pyprConfig = format.generate "pyprland.toml" {
@@ -55,6 +57,7 @@ in {
           excludes = [
             "messenger"
             "zalo"
+            "chatgpt"
             "spotify"
             "signal"
             "file"
@@ -73,6 +76,7 @@ in {
           excludes = [
             "term"
             "zalo"
+            "chatgpt"
             "spotify"
             "signal"
             "file"
@@ -94,12 +98,35 @@ in {
           excludes = [
             "term"
             "messenger"
+            "chatgpt"
             "spotify"
             "signal"
             "file"
             "obsidian"
           ];
           class = "re:chrome-.*zalo.*";
+          match_by = "class";
+          hysteresis = 0;
+          process_tracking = false;
+        };
+
+        chatgpt = {
+          command = "${chatgptLauncher}";
+          animation = "";
+          unfocus = "";
+          lazy = true;
+          size = "50% 50%";
+          position = "25% 25%";
+          excludes = [
+            "term"
+            "messenger"
+            "zalo"
+            "spotify"
+            "signal"
+            "file"
+            "obsidian"
+          ];
+          class = "re:chrome-.*chatgpt.*";
           match_by = "class";
           hysteresis = 0;
           process_tracking = false;
@@ -116,6 +143,7 @@ in {
             "term"
             "messenger"
             "zalo"
+            "chatgpt"
             "signal"
             "file"
             "obsidian"
@@ -134,6 +162,7 @@ in {
             "term"
             "messenger"
             "zalo"
+            "chatgpt"
             "spotify"
             "file"
             "obsidian"
@@ -162,6 +191,7 @@ in {
             "term"
             "messenger"
             "zalo"
+            "chatgpt"
             "spotify"
             "signal"
             "file"
