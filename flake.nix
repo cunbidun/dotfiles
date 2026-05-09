@@ -96,10 +96,6 @@
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    vscode-insiders = {
-      url = "github:auguwu/vscode-insiders-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
 
     # +-- MacOS specific --+
     mac-app-util.url = "github:hraban/mac-app-util";

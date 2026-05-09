@@ -1651,7 +1651,6 @@
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "vicinae": "vicinae",
-        "vscode-insiders": "vscode-insiders",
         "xremap-flake": "xremap-flake",
         "yazi": "yazi",
         "yazi-bunny": "yazi-bunny",
@@ -2113,26 +2112,6 @@
         "owner": "vicinaehq",
         "ref": "v0.20.12",
         "repo": "vicinae",
-        "type": "github"
-      }
-    },
-    "vscode-insiders": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1778316113,
-        "narHash": "sha256-JqORWwehnoTsROcMYE95JWw/Cfsk5i1MnqABuZRvank=",
-        "owner": "auguwu",
-        "repo": "vscode-insiders-nix",
-        "rev": "9ec8ccefe1fdd3c3e997de146311418b469d7c0b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "auguwu",
-        "repo": "vscode-insiders-nix",
         "type": "github"
       }
     },

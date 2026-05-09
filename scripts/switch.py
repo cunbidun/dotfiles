@@ -44,8 +44,6 @@ def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
         # macOS VS Code
         "~/Library/Application Support/Code/User/keybindings.json",
         "~/Library/Application Support/Code/User/settings.json",
-        "~/Library/Application Support/Code - Insiders/User/keybindings.json",
-        "~/Library/Application Support/Code - Insiders/User/settings.json",
         # Linux VS Code
         "~/.config/Code/User/keybindings.json",
         "~/.config/Code/User/settings.json",
@@ -68,12 +66,12 @@ def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
 
     # Dump VS Code extensions list
     code_cmd = None
-    for cmd in ["code-insiders", "code"]:
+    for cmd in ["code"]:
         result = run_cmd(["which", cmd], capture=True, check=False)
         if result.returncode == 0:
             code_cmd = cmd
             break
-    
+
     if code_cmd:
         result = run_cmd([code_cmd, "--list-extensions"], capture=True, check=False)
         if result.returncode == 0:
@@ -113,7 +111,7 @@ def main():
         print(f"Removed old generated files for {args.profile}.")
         copy_files_back(git_root, args.profile, is_darwin)
         print("Copy-back completed.")
-        
+
         # Commit if requested
         run_cmd(["git", "add", "-A"])
         if not args.no_commit:

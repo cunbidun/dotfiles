@@ -16,7 +16,6 @@
           - qemu
           - Qemu-system-x86_64
           - code
-          - code-insiders
           - blender
           - prismlauncher
           - minecraft
