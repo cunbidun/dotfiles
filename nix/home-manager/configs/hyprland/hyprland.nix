@@ -9,6 +9,7 @@
 }: let
   scripts = import ../../scripts.nix {pkgs = pkgs;};
   system = pkgs.stdenv.hostPlatform.system;
+  hyprfocus = inputs.hyprfocus.packages.${system}.hyprfocus;
 
   colors = config.lib.stylix.colors;
   rgb = color: "rgb(${color})";
@@ -50,6 +51,10 @@ in {
         hyprland_mode = "${lib.getExe scripts.hyprland-mode}",
         screenshot_copy_upload = "${lib.getExe scripts."screenshot-copy-upload"}",
         wsctl = "${lib.getExe scripts.wsctl}",
+      },
+
+      plugins = {
+        hyprfocus = "${hyprfocus}/lib/libhyprfocus.so",
       },
     }
   '';

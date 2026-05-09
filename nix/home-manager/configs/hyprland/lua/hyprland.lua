@@ -4,6 +4,8 @@ package.path = configHome .. "/hypr/?.lua;" .. package.path
 local nix = require("nix")
 local mainMod = "SUPER"
 
+hl.plugin.load(nix.plugins.hyprfocus)
+
 local function exec(cmd)
   return hl.dsp.exec_cmd(cmd)
 end
@@ -120,7 +122,22 @@ hl.config({
     mfact = 0.5,
   },
 
-  plugin = {},
+  plugin = {
+    hyprfocus = {
+      enabled = true,
+      animate_floating = true,
+      animate_workspacechange = false,
+      focus_animation = "flash",
+      exclude_class = "^jetbrains-",
+      flash = {
+        flash_opacity = 0.8,
+        in_bezier = "realsmooth",
+        in_speed = 0.25,
+        out_bezier = "realsmooth",
+        out_speed = 1.5,
+      },
+    },
+  },
 })
 
 hl.curve("smooth", { type = "bezier", points = { {0.22, 1}, {0.36, 1} } })

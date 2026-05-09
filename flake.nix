@@ -48,10 +48,6 @@
       url = "github:cunbidun/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
-    hyprtasking = {
-      url = "github:raybbian/hyprtasking";
-      inputs.hyprland.follows = "hyprland";
-    };
     hypr-dynamic-cursors = {
       url = "github:VirtCode/hypr-dynamic-cursors";
       inputs.hyprland.follows = "hyprland";
