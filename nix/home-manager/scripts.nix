@@ -128,6 +128,44 @@
           return json.loads(run(["hyprctl"] + args))
 
 
+      def lua_string(value):
+          return json.dumps(str(value))
+
+
+      def lua_table(fields):
+          def lua_value(value):
+              if isinstance(value, bool):
+                  return "true" if value else "false"
+              return lua_string(value)
+
+          return "{ " + ", ".join(
+              f"{key} = {lua_value(value)}"
+              for key, value in fields.items()
+          ) + " }"
+
+
+      def dispatch_lua(expr):
+          run(["hyprctl", "dispatch", expr])
+
+
+      def workspace_name(target):
+          name = str(target).strip()
+          if name.startswith("name:"):
+              return name.removeprefix("name:")
+          return name
+
+
+      def focus_workspace(target):
+          dispatch_lua(f"hl.dsp.focus({lua_table({'workspace': workspace_name(target)})})")
+
+
+      def move_window_to_workspace(target, window=None):
+          fields = {"workspace": workspace_name(target), "silent": True}
+          if window is not None:
+              fields["window"] = window
+          dispatch_lua(f"hl.dsp.window.move({lua_table(fields)})")
+
+
       def parse_workspace_name(name):
           workspace_name = str(name).strip()
           m = ACTIVE_RE.match(workspace_name)
@@ -218,14 +256,7 @@
               if not address:
                   continue
 
-              run(
-                  [
-                      "hyprctl",
-                      "dispatch",
-                      "movetoworkspacesilent",
-                      f"{project_name},address:{address}",
-                  ]
-              )
+              move_window_to_workspace(project_name, f"address:{address}")
 
 
       def resolve_project_target(project):
@@ -236,7 +267,7 @@
           if remembered_name:
               remembered_workspace = parse_workspace_name(remembered_name)
               if remembered_workspace["project"] == project_name:
-                  return f"name:{remembered_name}"
+                  return remembered_name
 
           normalize_primary_workspace(project_name)
           return project_name
@@ -250,12 +281,12 @@
               target = str(project)
           else:
               target = resolve_project_target(project)
-          run(["hyprctl", "dispatch", "workspace", target])
+          focus_workspace(target)
 
 
       def dispatch_move(project):
           remember_current_workspace()
-          run(["hyprctl", "dispatch", "movetoworkspacesilent", resolve_project_target(project)])
+          move_window_to_workspace(resolve_project_target(project))
 
 
       def main():
@@ -273,28 +304,28 @@
               sub = sys.argv[2]
               remember_current_workspace()
               target = f"{proj}[{sub}]"
-              run(["hyprctl", "dispatch", "workspace", f"name:{target}"])
+              focus_workspace(target)
               return 0
 
           if cmd == "move":
               sub = sys.argv[2]
               remember_current_workspace()
               target = f"{proj}[{sub}]"
-              run(["hyprctl", "dispatch", "movetoworkspacesilent", f"name:{target}"])
+              move_window_to_workspace(target)
               return 0
 
           if cmd == "main":
               clear_project_memory(proj)
               normalize_primary_workspace(proj)
               target = f"{proj}"
-              run(["hyprctl", "dispatch", "workspace", target])
+              focus_workspace(target)
               return 0
 
           if cmd == "main-move":
               remember_current_workspace()
               normalize_primary_workspace(proj)
               target = f"{proj}"
-              run(["hyprctl", "dispatch", "movetoworkspacesilent", target])
+              move_window_to_workspace(target)
               return 0
 
           if cmd == "project":

@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv) isLinux isDarwin;
-  vscodePackage = pkgs.vscode-insiders;
+  vscodePackage = pkgs.vscode;
   vscodeProductPath =
     if isLinux
     then "${vscodePackage}/lib/vscode/resources/app/product.json"

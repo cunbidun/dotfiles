@@ -1,10 +1,17 @@
-import { Variable } from 'astal';
+import { execAsync, Variable } from 'astal';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 import { range, unique } from 'src/lib/array/helpers';
 import options from 'src/configuration';
 import { WorkspaceMonitorMap, MonitorMap, WorkspaceRule } from './types';
 
 const hyprlandService = AstalHyprland.get_default();
+
+const focusWorkspace = (workspaceName: string): Promise<string> =>
+    execAsync([
+        'hyprctl',
+        'dispatch',
+        `hl.dsp.focus({ workspace = ${JSON.stringify(workspaceName.replace(/^name:/, ''))} })`,
+    ]);
 
 /**
  * Manages Hyprland workspace operations and monitor relationships, providing centralized
@@ -253,7 +260,9 @@ export class WorkspaceService {
             )?.name;
 
             if (!this._isWorkspaceIgnored(targetWorkspaceNumber, targetWorkspaceName)) {
-                hyprlandService.dispatch('workspace', targetWorkspaceNumber.toString());
+                focusWorkspace(targetWorkspaceNumber.toString()).catch((error) => {
+                    console.error(`Failed to switch to workspace ${targetWorkspaceNumber}: ${error}`);
+                });
                 return;
             }
             newIndex =

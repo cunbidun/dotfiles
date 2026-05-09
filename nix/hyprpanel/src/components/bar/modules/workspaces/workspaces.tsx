@@ -36,6 +36,13 @@ initWorkspaceEvents();
 
 const ACTIVE_WORKSPACE_NAME_RE = /^(?<project>\d+)(?:\[(?<sub>[^\]]+)\])?$/;
 
+const focusWorkspace = (workspaceName: string): Promise<string> =>
+    execAsync([
+        'hyprctl',
+        'dispatch',
+        `hl.dsp.focus({ workspace = ${JSON.stringify(workspaceName.replace(/^name:/, ''))} })`,
+    ]);
+
 const parseWorkspaceName = (
     workspaceName: string | null | undefined,
 ): { project: number; sub?: string } | undefined => {
@@ -132,7 +139,9 @@ const syncRememberedWorkspace = (
 const switchToProjectWorkspace = (workspaceId: number): void => {
     execAsync(['wsctl', 'project', `${workspaceId}`]).catch((error) => {
         console.error(`Failed to switch to remembered workspace ${workspaceId}: ${error}`);
-        hyprlandService.dispatch('workspace', workspaceId.toString());
+        focusWorkspace(workspaceId.toString()).catch((focusError) => {
+            console.error(`Failed to switch to workspace ${workspaceId}: ${focusError}`);
+        });
     });
 };
 
@@ -323,7 +332,7 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                             className={'workspace-button'}
                             onClick={(_, event) => {
                                 if (isPrimaryClick(event)) {
-                                    hyprlandService.dispatch('workspace', wsId.toString());
+                                    switchToProjectWorkspace(wsId);
                                 }
                             }}
                         >
@@ -354,7 +363,9 @@ export const WorkspaceModule = ({ monitor }: WorkspaceModuleProps): JSX.Element 
                             className={'workspace-button'}
                             onClick={(_, event) => {
                                 if (isPrimaryClick(event)) {
-                                    hyprlandService.dispatch('workspace', `name:${workspaceEntry.name}`);
+                                    focusWorkspace(workspaceEntry.name).catch((error) => {
+                                        console.error(`Failed to switch to workspace ${workspaceEntry.name}: ${error}`);
+                                    });
                                 }
                             }}
                         >
