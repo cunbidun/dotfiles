@@ -11,8 +11,6 @@
   system = pkgs.stdenv.hostPlatform.system;
 
   hyprfocus = inputs.hyprfocus.packages.${system}.hyprfocus;
-  hypr-dynamic-cursors = inputs.hypr-dynamic-cursors.packages.${system}.hypr-dynamic-cursors;
-
   colors = config.lib.stylix.colors;
   rgb = color: "rgb(${color})";
 in {
@@ -23,7 +21,6 @@ in {
 
     plugins = [
       hyprfocus
-      hypr-dynamic-cursors
     ];
 
     # Hyprland 0.55+ loads hyprland.lua instead of hyprland.conf when present.
@@ -154,17 +151,6 @@ in {
       },
 
       plugin = {
-        ["dynamic-cursors"] = {
-          enabled = true,
-          mode = "none",
-          shake = {
-            enabled = true,
-            threshold = 6.0,
-            base = 4.0,
-            speed = 4.0,
-            timeout = 1000,
-          },
-        },
         hyprfocus = {
           enabled = true,
           animate_floating = true,
@@ -196,7 +182,6 @@ in {
 
     hl.on("hyprland.start", function()
       hl.exec_cmd("hyprctl plugin load ${hyprfocus}/lib/libhyprfocus.so")
-      hl.exec_cmd("hyprctl plugin load ${hypr-dynamic-cursors}/lib/libhypr-dynamic-cursors.so")
       hl.exec_cmd("wl-paste --type text --watch cliphist store")
       hl.exec_cmd("wl-paste --type image --watch cliphist store")
       hl.exec_cmd("env > ''${XDG_RUNTIME_DIR}/hypr/hyprland-runtime-env")
