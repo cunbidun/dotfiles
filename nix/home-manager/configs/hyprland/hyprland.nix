@@ -10,7 +10,6 @@
   scripts = import ../../scripts.nix {pkgs = pkgs;};
   system = pkgs.stdenv.hostPlatform.system;
 
-  hyprfocus = inputs.hyprfocus.packages.${system}.hyprfocus;
   colors = config.lib.stylix.colors;
   rgb = color: "rgb(${color})";
 in {
@@ -19,9 +18,7 @@ in {
     systemd.enable = false;
     package = inputs.hyprland.packages.${system}.hyprland;
 
-    plugins = [
-      hyprfocus
-    ];
+    plugins = [];
 
     # Hyprland 0.55+ loads hyprland.lua instead of hyprland.conf when present.
     # Keep the HM module enabled for the package/session integration, but put the
@@ -150,23 +147,7 @@ in {
         mfact = 0.5,
       },
 
-      plugin = {
-        hyprfocus = {
-          enabled = true,
-          animate_floating = true,
-          animate_workspacechange = false,
-          focus_animation = "flash",
-          exclude_class = "^jetbrains-",
-          bezier = "realsmooth, 0.28,0.29,0.69,1.08",
-          flash = {
-            flash_opacity = 0.8,
-            in_bezier = "realsmooth",
-            in_speed = 0.25,
-            out_bezier = "realsmooth",
-            out_speed = 1.5,
-          },
-        },
-      },
+      plugin = {},
     })
 
     hl.curve("smooth", { type = "bezier", points = { {0.22, 1}, {0.36, 1} } })
@@ -181,7 +162,6 @@ in {
     hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "smooth", style = "slidefade 10%" })
 
     hl.on("hyprland.start", function()
-      hl.exec_cmd("hyprctl plugin load ${hyprfocus}/lib/libhyprfocus.so")
       hl.exec_cmd("wl-paste --type text --watch cliphist store")
       hl.exec_cmd("wl-paste --type image --watch cliphist store")
       hl.exec_cmd("env > ''${XDG_RUNTIME_DIR}/hypr/hyprland-runtime-env")
