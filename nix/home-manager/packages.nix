@@ -117,6 +117,7 @@ in rec {
     # Shell
     pkgs.obs-studio # A free and open-source video recording and live streaming software
     pkgs.lazygit # A simple terminal UI for git commands
+    pkgs.gh # GitHub CLI
     pkgs.git-lfs
     pkgs.pamixer # A CLI mixer for PulseAudio
     pkgs.arandr # A UI for managing displays

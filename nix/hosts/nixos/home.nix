@@ -159,6 +159,16 @@ in {
           export QT_QTA_PLATFORMTHEME=qt5ct
           export EDITOR=nvim
           export NIXOS_OZONE_WL=1
+          export XCURSOR_THEME=phinger-cursors-dark
+          export XCURSOR_SIZE=24
+        '';
+      };
+
+      "uwsm/env-hyprland" = {
+        text = ''
+          #!/usr/bin/env bash
+          export HYPRCURSOR_THEME=hyprcursor-phinger
+          export HYPRCURSOR_SIZE=24
         '';
       };
     };
@@ -201,7 +211,7 @@ in {
           "Hotkey/TogglePreedit" = {
             "0" = "Control+Super+space";
           };
-          Behavior.ActiveByDefault = true; # start IM on login
+          Behavior.ActiveByDefault = false; # keep keyboard-us active unless explicitly toggled
         };
       };
     };
