@@ -322,6 +322,10 @@ in {
       hl.bind("h", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
       hl.bind("k", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
       hl.bind("j", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+      hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "l" }))
+      hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "r" }))
+      hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "u" }))
+      hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "d" }))
       hl.bind("escape", hl.dsp.submap("reset"))
     end)
 
