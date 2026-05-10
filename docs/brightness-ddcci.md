@@ -17,12 +17,13 @@ Configured in `nix/hosts/nixos/configuration.nix`:
 
 - `boot.extraModulePackages = [ ddcci-driver ]`
 - `boot.kernelModules = [ "i2c-dev" "ddcci" "ddcci-backlight" ]`
-- udev starts `ddcci-backlight@%k.service` when an AMDGPU AUX I2C bus appears
-- the service writes `ddcci 0x37` to that bus `new_device`
+- `ddcci-backlight.timer` runs once per second while boot settles
+- `ddcci-backlight.service` is skipped once `/sys/class/backlight/ddcci*` exists
+- when missing, the service binds `ddcci 0x37` on AMDGPU AUX I2C buses
 
 ## Machine-Specific Parts
 
-This is currently matched to this machine's AMD GPU I2C adapter names:
+The service script matches this machine's AMD GPU I2C adapter names:
 
 ```text
 AMDGPU DM aux hw bus *
@@ -42,8 +43,7 @@ Check the new adapter names:
 for f in /sys/bus/i2c/devices/i2c-*/name; do echo "$f: $(cat "$f")"; done
 ```
 
-If the GPU exposes different names, update the udev `ATTR{name}` match in
-`nix/hosts/nixos/configuration.nix`.
+If names differ, update the `grep` adapter match in `configuration.nix`.
 
 If the backlight device name changes, HyprPanel should auto-detect it from
 `brightnessctl -m`; only scripts that hardcode `ddcci13` need updating.

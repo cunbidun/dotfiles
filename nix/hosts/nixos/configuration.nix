@@ -136,25 +136,41 @@
   services.udev.extraRules = ''
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-    SUBSYSTEM=="i2c", ACTION=="add", ATTR{name}=="AMDGPU DM aux hw bus *", TAG+="systemd", ENV{SYSTEMD_WANTS}+="ddcci-backlight@%k.service"
   '';
 
-  systemd.services."ddcci-backlight@" = {
-    description = "Expose DDC/CI monitor on %I as a Linux backlight device";
+  systemd.services.ddcci-backlight = {
+    description = "Expose DDC/CI monitors as Linux backlight devices";
     after = ["systemd-modules-load.service"];
+    unitConfig.ConditionPathExistsGlob = "!/sys/class/backlight/ddcci*";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.writeShellScript "ddcci-backlight-bind" ''
+      ExecStart = pkgs.writeShellScript "ddcci-backlight-bind" ''
         set -euo pipefail
 
-        bus="$1"
-        node="/sys/bus/i2c/devices/$bus/new_device"
-        device="/sys/bus/i2c/devices/$bus/''${bus#i2c-}-0037"
+        for name in /sys/bus/i2c/devices/i2c-*/name; do
+          [ -e "$name" ] || continue
+          grep -q '^AMDGPU DM aux hw bus ' "$name" || continue
 
-        if [ -w "$node" ] && [ ! -e "$device" ]; then
-          echo ddcci 0x37 > "$node" || true
-        fi
-      ''} %i";
+          bus_dir="''${name%/name}"
+          bus="''${bus_dir##*/}"
+          node="$bus_dir/new_device"
+          device="$bus_dir/''${bus#i2c-}-0037"
+
+          if [ -w "$node" ] && [ ! -e "$device" ]; then
+            echo ddcci 0x37 > "$node" || true
+          fi
+        done
+      '';
+    };
+  };
+
+  systemd.timers.ddcci-backlight = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnBootSec = "1s";
+      OnUnitActiveSec = "1s";
+      AccuracySec = "100ms";
+      Unit = "ddcci-backlight.service";
     };
   };
 
