@@ -158,40 +158,6 @@
     };
   };
 
-  systemd.services.ddcci-backlight-existing = {
-    description = "Expose already-present DDC/CI monitor buses as Linux backlight devices";
-    after = ["systemd-modules-load.service" "systemd-udev-settle.service"];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "ddcci-backlight-bind-existing" ''
-        set -euo pipefail
-
-        for name in /sys/bus/i2c/devices/i2c-*/name; do
-          [ -e "$name" ] || continue
-          grep -q '^AMDGPU DM aux hw bus ' "$name" || continue
-
-          bus="''${name%/name}"
-          bus="''${bus##*/}"
-          node="/sys/bus/i2c/devices/$bus/new_device"
-          device="/sys/bus/i2c/devices/$bus/''${bus#i2c-}-0037"
-
-          if [ -w "$node" ] && [ ! -e "$device" ]; then
-            echo ddcci 0x37 > "$node" || true
-          fi
-        done
-      '';
-    };
-  };
-
-  systemd.paths.ddcci-backlight-existing = {
-    description = "Watch for AMDGPU I2C adapters before binding DDC/CI backlights";
-    wantedBy = ["multi-user.target"];
-    pathConfig = {
-      PathExistsGlob = "/sys/bus/i2c/devices/i2c-*/name";
-      Unit = "ddcci-backlight-existing.service";
-    };
-  };
-
   security.pam.services.hyprlock = {};
   # rtkit is optional but recommended
   security.rtkit.enable = true;
