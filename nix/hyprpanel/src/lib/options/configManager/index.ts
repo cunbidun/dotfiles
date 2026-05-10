@@ -80,7 +80,7 @@ export class ConfigManager {
      * @param config - The configuration object to save
      */
     public writeConfig(config: Record<string, unknown>): void {
-        writeFile(this._configPath, JSON.stringify(config, null, 2));
+        writeFile(this._configPath, `${JSON.stringify(config, null, 2)}\n`);
     }
 
     /**

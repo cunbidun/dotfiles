@@ -136,26 +136,60 @@
   services.udev.extraRules = ''
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+    SUBSYSTEM=="i2c", ACTION=="add", ATTR{name}=="AMDGPU DM aux hw bus *", TAG+="systemd", ENV{SYSTEMD_WANTS}+="ddcci-backlight@%k.service"
   '';
 
-  systemd.services.ddcci-backlight = {
-    description = "Expose DDC/CI monitors as Linux backlight devices";
-    wantedBy = ["multi-user.target"];
+  systemd.services."ddcci-backlight@" = {
+    description = "Expose DDC/CI monitor on %I as a Linux backlight device";
     after = ["systemd-modules-load.service"];
-    serviceConfig.Type = "oneshot";
-    script = ''
-      set -euo pipefail
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.writeShellScript "ddcci-backlight-bind" ''
+        set -euo pipefail
 
-      for node in /sys/class/drm/card*-*/i2c-*/new_device; do
-        [ -e "$node" ] || continue
-        bus="''${node%/new_device}"
-        bus="''${bus##*/i2c-}"
-        device="/sys/bus/i2c/devices/i2c-$bus/$bus-0037"
+        bus="$1"
+        node="/sys/bus/i2c/devices/$bus/new_device"
+        device="/sys/bus/i2c/devices/$bus/''${bus#i2c-}-0037"
+
         if [ -w "$node" ] && [ ! -e "$device" ]; then
           echo ddcci 0x37 > "$node" || true
         fi
-      done
-    '';
+      ''} %I";
+    };
+  };
+
+  systemd.services.ddcci-backlight-existing = {
+    description = "Expose already-present DDC/CI monitor buses as Linux backlight devices";
+    after = ["systemd-modules-load.service" "systemd-udev-settle.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "ddcci-backlight-bind-existing" ''
+        set -euo pipefail
+
+        for name in /sys/bus/i2c/devices/i2c-*/name; do
+          [ -e "$name" ] || continue
+          grep -q '^AMDGPU DM aux hw bus ' "$name" || continue
+
+          bus="''${name%/name}"
+          bus="''${bus##*/}"
+          node="/sys/bus/i2c/devices/$bus/new_device"
+          device="/sys/bus/i2c/devices/$bus/''${bus#i2c-}-0037"
+
+          if [ -w "$node" ] && [ ! -e "$device" ]; then
+            echo ddcci 0x37 > "$node" || true
+          fi
+        done
+      '';
+    };
+  };
+
+  systemd.paths.ddcci-backlight-existing = {
+    description = "Watch for AMDGPU I2C adapters before binding DDC/CI backlights";
+    wantedBy = ["multi-user.target"];
+    pathConfig = {
+      PathExistsGlob = "/sys/bus/i2c/devices/i2c-*/name";
+      Unit = "ddcci-backlight-existing.service";
+    };
   };
 
   security.pam.services.hyprlock = {};
