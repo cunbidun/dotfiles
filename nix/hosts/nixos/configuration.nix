@@ -141,14 +141,20 @@
   systemd.services.ddcci-backlight = {
     description = "Expose DDC/CI monitors as Linux backlight devices";
     after = ["systemd-modules-load.service"];
-    unitConfig = {
-      ConditionPathExistsGlob = "!/sys/class/backlight/ddcci*";
-      StartLimitIntervalSec = 0;
-    };
+    unitConfig.StartLimitIntervalSec = 0;
     serviceConfig = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "ddcci-backlight-bind" ''
         set -euo pipefail
+
+        stop_timer() {
+          ${pkgs.systemd}/bin/systemctl stop ddcci-backlight.timer || true
+        }
+
+        if compgen -G "/sys/class/backlight/ddcci*" >/dev/null; then
+          stop_timer
+          exit 0
+        fi
 
         for name in /sys/bus/i2c/devices/i2c-*/name; do
           [ -e "$name" ] || continue
@@ -168,6 +174,10 @@
             echo ddcci 0x37 > "$node" || true
           fi
         done
+
+        if compgen -G "/sys/class/backlight/ddcci*" >/dev/null; then
+          stop_timer
+        fi
       '';
     };
   };

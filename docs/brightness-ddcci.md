@@ -18,7 +18,7 @@ Configured in `nix/hosts/nixos/configuration.nix`:
 - `boot.extraModulePackages = [ ddcci-driver ]`
 - `boot.kernelModules = [ "i2c-dev" "ddcci" "ddcci-backlight" ]`
 - `ddcci-backlight.timer` runs once per second while boot settles
-- `ddcci-backlight.service` is skipped once `/sys/class/backlight/ddcci*` exists
+- `ddcci-backlight.service` stops the timer once `/sys/class/backlight/ddcci*` exists
 - when missing, the service binds `ddcci 0x37` on AMDGPU AUX I2C buses
 
 ## Machine-Specific Parts
