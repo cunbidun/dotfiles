@@ -151,10 +151,20 @@
           ${pkgs.systemd}/bin/systemctl stop ddcci-backlight.timer || true
         }
 
-        if compgen -G "/sys/class/backlight/ddcci*" >/dev/null; then
+        has_backlight() {
+          for brightness in /sys/class/backlight/ddcci*/brightness; do
+            [ -e "$brightness" ] && return 0
+          done
+          return 1
+        }
+
+        if has_backlight; then
           stop_timer
           exit 0
         fi
+
+        state_dir="/run/ddcci-backlight"
+        mkdir -p "$state_dir"
 
         for name in /sys/bus/i2c/devices/i2c-*/name; do
           [ -e "$name" ] || continue
@@ -165,17 +175,30 @@
           node="$bus_dir/new_device"
           device="$bus_dir/''${bus#i2c-}-0037"
           delete="$bus_dir/delete_device"
+          marker="$state_dir/$bus"
 
-          if [ -e "$device" ] && [ -w "$delete" ]; then
-            echo 0x37 > "$delete" || true
+          if [ -e "$device" ]; then
+            if has_backlight; then
+              stop_timer
+              exit 0
+            fi
+
+            if [ -e "$marker" ] && [ -w "$delete" ]; then
+              echo 0x37 > "$delete" || true
+              rm -f "$marker"
+            else
+              touch "$marker"
+            fi
+            continue
           fi
 
-          if [ -w "$node" ] && [ ! -e "$device" ]; then
+          rm -f "$marker"
+          if [ -w "$node" ]; then
             echo ddcci 0x37 > "$node" || true
           fi
         done
 
-        if compgen -G "/sys/class/backlight/ddcci*" >/dev/null; then
+        if has_backlight; then
           stop_timer
         fi
       '';
