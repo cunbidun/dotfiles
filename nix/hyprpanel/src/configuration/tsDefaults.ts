@@ -33,7 +33,7 @@ const tsDefaults: Record<string, unknown> = {
         },
         layouts: {
             '0': {
-                left: ['workspaces', 'submap', 'windowtitle'],
+                left: ['workspaces', 'hyprlayout', 'submap', 'windowtitle'],
                 middle: [],
                 right: [
                     'systray',
@@ -68,6 +68,10 @@ const tsDefaults: Record<string, unknown> = {
                 disabledIcon: '󰌌',
                 enabledText: 'Submap On',
                 disabledText: 'Submap Off',
+            },
+            hyprlayout: {
+                label: true,
+                icon: '󰙀',
             },
         },
     },

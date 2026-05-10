@@ -35,6 +35,7 @@
       "0": {
         "left": [
           "workspaces",
+          "hyprlayout",
           "submap",
           "windowtitle"
         ],
@@ -73,6 +74,10 @@
         "disabledIcon": "󰌐",
         "enabledText": "Submap On",
         "disabledText": "Submap Off"
+      },
+      "hyprlayout": {
+        "label": true,
+        "icon": "󰙀"
       }
     }
   },

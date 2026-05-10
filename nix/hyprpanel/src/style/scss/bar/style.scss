@@ -480,6 +480,25 @@ $style-module-defaults: (
     )
 );
 
+/*
+ * #################################
+ * #   Hyprland Layout Styling     #
+ * #################################
+ */
+@include styleModule(
+    'hyprlayout',
+    (
+        'text-color': $bar-buttons-modules-hyprlayout-text,
+        'icon-color': $bar-buttons-modules-hyprlayout-icon,
+        'icon-background': $bar-buttons-modules-hyprlayout-icon_background,
+        'label-background': $bar-buttons-modules-hyprlayout-background,
+        'inner-spacing': $bar-buttons-modules-hyprlayout-spacing,
+        'border-enabled': $bar-buttons-modules-hyprlayout-enableBorder,
+        'border-color': $bar-buttons-modules-hyprlayout-border,
+        'icon-size': 1.2em,
+    )
+);
+
 /* Keep a clearer gap between submap icon and name. */
 .module-label.submap {
     margin-left: $bar-buttons-modules-submap-spacing + 0.2em;

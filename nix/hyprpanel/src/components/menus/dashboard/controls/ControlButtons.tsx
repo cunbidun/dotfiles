@@ -24,26 +24,12 @@ const hyprsunsetPollingInterval = Variable(2000);
 const colorPickerShortcut = options.menus.dashboard.shortcuts.right.shortcut1;
 export const CONTROL_CELL = 56;
 export const CONTROL_GAP = 5;
-export const CONTROL_TOTAL = (CONTROL_CELL * 4) + (CONTROL_GAP * 3);
 export const CONTROL_TILE = (CONTROL_CELL * 2) + CONTROL_GAP;
-export const CONTROL_MEDIA = CONTROL_TOTAL - CONTROL_TILE - CONTROL_GAP;
 const CONTROL_TITLE_MAX_CHARS = 12;
 const CONTROL_SUBTITLE_MAX_CHARS = 14;
 
-const applyControlCellWidth = (widget: Gtk.Widget): void => {
-    widget.set_size_request(CONTROL_CELL, -1);
-};
-
-const applyControlCellSquare = (widget: Gtk.Widget): void => {
-    widget.set_size_request(CONTROL_CELL, CONTROL_CELL);
-};
-
 const applyControlTileWidth = (widget: Gtk.Widget): void => {
     widget.set_size_request(CONTROL_TILE, -1);
-};
-
-const applyControlMediaWidth = (widget: Gtk.Widget): void => {
-    widget.set_size_request(CONTROL_MEDIA, -1);
 };
 
 const wifiSubtitle = Variable.derive(
@@ -176,7 +162,7 @@ const audioSubtitle = Variable.derive([bind(mediaArtist), bind(audioService.defa
 
 export const AudioControllerCard = (): JSX.Element => {
     return (
-        <box className={'dashboard-control-audio-card'} setup={applyControlMediaWidth} hexpand={false} vertical>
+        <box className={'dashboard-control-audio-card'} hexpand vertical>
             <button
                 className={'dashboard-control-audio-header'}
                 onButtonPressEvent={(clicked, event) => {
@@ -266,7 +252,6 @@ export const RecordingButton = (): JSX.Element => {
             className={bind(isRecording).as(
                 (recording) => `dashboard-control-chip recording ${recording ? 'active' : ''}`,
             )}
-            setup={applyControlCellSquare}
             onClick={(_, event) => {
                 if (!isPrimaryClick(event)) return;
 
@@ -281,7 +266,7 @@ export const RecordingButton = (): JSX.Element => {
 
                 executeCommand(`${SRC_DIR}/scripts/screen_record.sh start region "${sanitizedPath}"`);
             }}
-            hexpand={false}
+            hexpand
         >
             <box className={'dashboard-control-chip-content'} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
                 <label className={'txt-icon'} label={'󰑊'} />
@@ -304,7 +289,6 @@ export const GammaStepButton = (): JSX.Element => {
     return (
         <button
             className={bind(isGammaStepEnabled).as((enabled) => `dashboard-control-chip gammastep ${enabled ? 'active' : ''}`)}
-            setup={applyControlCellSquare}
             onClick={(_, event) => {
                 if (!isPrimaryClick(event)) return;
 
@@ -315,7 +299,7 @@ export const GammaStepButton = (): JSX.Element => {
                 executeCommand(command);
                 isGammaStepEnabled.set(!enabled);
             }}
-            hexpand={false}
+            hexpand
         >
             <box className={'dashboard-control-chip-content'} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
                 <label
@@ -331,12 +315,11 @@ export const InhibitorButton = (): JSX.Element => {
     return (
         <button
             className={bind(idleInhibit).as((enabled) => `dashboard-control-chip inhibitor ${enabled ? 'active' : ''}`)}
-            setup={applyControlCellSquare}
             onClick={(_, event) => {
                 if (!isPrimaryClick(event)) return;
                 idleInhibit.set(!idleInhibit.get());
             }}
-            hexpand={false}
+            hexpand
         >
             <box className={'dashboard-control-chip-content'} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
                 <label className={'txt-icon'} label={bind(idleInhibit).as((enabled) => (enabled ? '󰅶' : '󰾪'))} />
@@ -349,14 +332,13 @@ export const ColorPickerButton = (): JSX.Element => {
     return (
         <button
             className={'dashboard-control-chip colorpicker'}
-            setup={applyControlCellSquare}
             onClick={(_, event) => {
                 if (!isPrimaryClick(event)) return;
 
                 App.get_window('dashboardmenu')?.set_visible(false);
                 executeCommand(colorPickerShortcut.command.get());
             }}
-            hexpand={false}
+            hexpand
         >
             <box className={'dashboard-control-chip-content'} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
                 <label className={'txt-icon'} label={bind(colorPickerShortcut.icon)} />
@@ -367,7 +349,7 @@ export const ColorPickerButton = (): JSX.Element => {
 
 export const BrightnessSliderCard = (): JSX.Element => {
     return (
-        <box className={'dashboard-control-slider brightness'} vertical>
+        <box className={'dashboard-control-slider brightness'} hexpand vertical>
             <box>
                 <label className={'txt-icon dashboard-control-slider-icon'} label={'󰃠'} />
                 <label className={'dashboard-control-slider-title'} hexpand label={'Display'} />
@@ -397,7 +379,7 @@ export const BrightnessSliderCard = (): JSX.Element => {
 
 export const VolumeSliderCard = (): JSX.Element => {
     return (
-        <box className={'dashboard-control-slider volume'} vertical>
+        <box className={'dashboard-control-slider volume'} hexpand vertical>
             <box>
                 <label
                     className={'txt-icon dashboard-control-slider-icon'}

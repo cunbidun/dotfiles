@@ -104,8 +104,8 @@ hl.config({
     },
     blur = {
       enabled = true,
-      size = 8,
-      passes = 1,
+      size = 10,
+      passes = 3,
     },
   },
 
@@ -326,3 +326,52 @@ hl.bind(mainMod .. " + Grave", exec("pypr toggle term"))
 hl.bind(mainMod .. " + c", exec("pypr toggle messenger"))
 hl.bind(mainMod .. " + n", exec("pypr toggle obsidian"))
 hl.bind(mainMod .. " + e", exec("pypr toggle file"))
+
+local function place_tree(ctx, targets, area, i, side)
+  if i > #targets then
+    return
+  end
+
+  if i == #targets then
+    targets[i]:place(area)
+    return
+  end
+
+  if side == "v" then
+    targets[i]:place(ctx:split(area, "top", 0.5))
+    place_tree(ctx, targets, ctx:split(area, "bottom", 0.5), i + 1, "h")
+  else
+    targets[i]:place(ctx:split(area, "left", 0.5))
+    place_tree(ctx, targets, ctx:split(area, "right", 0.5), i + 1, "v")
+  end
+end
+
+hl.layout.register("editor_side_tree", {
+  recalculate = function(ctx)
+    local n = #ctx.targets
+    if n == 0 then
+      return
+    end
+
+    -- First window takes full screen.
+    if n == 1 then
+      ctx.targets[1]:place(ctx.area)
+      return
+    end
+
+    -- Main/editor is the first window, kept on the right 2/3.
+    local support_area = ctx:split(ctx.area, "left", 1.0 / 3.0)
+    local main_area    = ctx:split(ctx.area, "right", 2.0 / 3.0)
+
+    ctx.targets[1]:place(main_area)
+
+    -- Remaining windows tile inside the left 1/3.
+    place_tree(ctx, ctx.targets, support_area, 2, "v")
+  end,
+})
+
+
+hl.workspace_rule({ workspace = "1", layout = "lua:editor_side_tree" })
+hl.workspace_rule({ workspace = "7", layout = "scrolling" })
+hl.bind(mainMod .. " + p", hl.dsp.layout("promote"))
+hl.workspace_rule({ workspace = "9", layout = "lua:editor_side_tree" })

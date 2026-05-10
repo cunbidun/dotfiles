@@ -37,6 +37,7 @@ export type BarModule =
     | 'weather'
     | 'power'
     | 'sshforwarding'
+    | 'hyprlayout'
     | 'systray'
     | 'hypridle'
     | 'cava';

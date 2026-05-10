@@ -5,7 +5,6 @@ import {
     BrightnessSliderCard,
     CONTROL_GAP,
     CONTROL_TILE,
-    CONTROL_TOTAL,
     ColorPickerButton,
     GammaStepButton,
     InhibitorButton,
@@ -29,10 +28,6 @@ const applyControlRowGapHeight = (widget: Gtk.Widget): void => {
     widget.set_size_request(-1, CONTROL_GAP);
 };
 
-const applyControlsRowWidth = (widget: Gtk.Widget): void => {
-    widget.set_size_request(CONTROL_TOTAL, -1);
-};
-
 export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
     if (!isEnabled) {
         recordingPoller.stop();
@@ -46,13 +41,13 @@ export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
     return (
         <box
             className={'dashboard-card controls-container'}
-            halign={Gtk.Align.CENTER}
+            halign={Gtk.Align.FILL}
             valign={Gtk.Align.FILL}
-            hexpand={false}
+            hexpand
             expand
             vertical
         >
-            <box className={'dashboard-control-main-row'} hexpand={false} setup={applyControlsRowWidth}>
+            <box className={'dashboard-control-main-row'} hexpand>
                 <box
                     className={'dashboard-control-left-column'}
                     vertical
@@ -67,7 +62,7 @@ export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
                 <AudioControllerCard />
             </box>
             <box className={'dashboard-control-row-gap'} setup={applyControlRowGapHeight} />
-            <box className={'dashboard-control-quick-row'} hexpand={false} setup={applyControlsRowWidth}>
+            <box className={'dashboard-control-quick-row'} hexpand>
                 <RecordingButton />
                 <box className={'dashboard-control-gap'} setup={applyControlGapWidth} />
                 <ColorPickerButton />
@@ -77,11 +72,11 @@ export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
                 <GammaStepButton />
             </box>
             <box className={'dashboard-control-row-gap'} setup={applyControlRowGapHeight} />
-            <box className={'dashboard-control-slider-row volume'} hexpand={false} setup={applyControlsRowWidth}>
+            <box className={'dashboard-control-slider-row volume'} hexpand>
                 <VolumeSliderCard />
             </box>
             <box className={'dashboard-control-row-gap'} setup={applyControlRowGapHeight} />
-            <box className={'dashboard-control-slider-row brightness'} hexpand={false} setup={applyControlsRowWidth}>
+            <box className={'dashboard-control-slider-row brightness'} hexpand>
                 <BrightnessSliderCard />
             </box>
         </box>

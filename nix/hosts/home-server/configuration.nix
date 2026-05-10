@@ -34,6 +34,35 @@
   services.tailscale.useRoutingFeatures = "client";
   services.tailscale.openFirewall = true;
 
+  # File sharing over Tailscale.
+  services.samba = {
+    enable = true;
+    openFirewall = false;
+    settings = {
+      global = {
+        "map to guest" = "Bad User";
+        "server min protocol" = "SMB3";
+      };
+
+      shared = {
+        path = "/srv/storage/shared";
+        browsable = "yes";
+        writable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "guest only" = "yes";
+        "force user" = userdata.username;
+        "force group" = "users";
+        "create mask" = "0664";
+        "directory mask" = "0775";
+      };
+    };
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /srv/storage/shared 0775 ${userdata.username} users -"
+  ];
+
   # Taskwarrior 3 sync backend (TaskChampion server)
   services.taskchampion-sync-server = {
     enable = true;

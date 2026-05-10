@@ -151,7 +151,9 @@
       def workspace_name(target):
           name = str(target).strip()
           if name.startswith("name:"):
-              return name.removeprefix("name:")
+              return name
+          if ACTIVE_RE.match(name) and "[" in name:
+              return f"name:{name}"
           return name
 
 

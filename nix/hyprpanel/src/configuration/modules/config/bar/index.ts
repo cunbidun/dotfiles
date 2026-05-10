@@ -7,6 +7,7 @@ import clock from './clock';
 import cpu from './cpu';
 import cpuTemp from './cpuTemp';
 import hypridle from './hypridle';
+import hyprlayout from './hyprlayout';
 import kbLayout from './kbLayout';
 import launcher from './launcher';
 import layouts from './layouts';
@@ -58,6 +59,7 @@ export default {
         power,
         sshForwarding,
         hypridle,
+        hyprlayout,
         cava,
         worldclock,
     },

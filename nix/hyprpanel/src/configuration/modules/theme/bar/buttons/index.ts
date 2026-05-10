@@ -17,6 +17,7 @@ import sshForwarding from './sshForwarding';
 import worldclock from './worldclock';
 import cava from './cava';
 import hypridle from './hypridle';
+import hyprlayout from './hyprlayout';
 import submap from './submap';
 import power from './power';
 import weather from './weather';
@@ -75,6 +76,7 @@ export default {
         power: power,
         submap: submap,
         hypridle: hypridle,
+        hyprlayout: hyprlayout,
         cava: cava,
         worldclock: worldclock,
     },
