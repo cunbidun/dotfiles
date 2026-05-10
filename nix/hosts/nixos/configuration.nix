@@ -141,7 +141,10 @@
   systemd.services.ddcci-backlight = {
     description = "Expose DDC/CI monitors as Linux backlight devices";
     after = ["systemd-modules-load.service"];
-    unitConfig.ConditionPathExistsGlob = "!/sys/class/backlight/ddcci*";
+    unitConfig = {
+      ConditionPathExistsGlob = "!/sys/class/backlight/ddcci*";
+      StartLimitIntervalSec = 0;
+    };
     serviceConfig = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "ddcci-backlight-bind" ''
@@ -155,6 +158,11 @@
           bus="''${bus_dir##*/}"
           node="$bus_dir/new_device"
           device="$bus_dir/''${bus#i2c-}-0037"
+          delete="$bus_dir/delete_device"
+
+          if [ -e "$device" ] && [ -w "$delete" ]; then
+            echo 0x37 > "$delete" || true
+          fi
 
           if [ -w "$node" ] && [ ! -e "$device" ]; then
             echo ddcci 0x37 > "$node" || true
