@@ -34,7 +34,6 @@ export const HyprLayout = (): BarBoxChild => {
 
     const layoutModule = Module({
         textIcon: bind(icon),
-        tooltipText: layoutLabel(),
         label: layoutLabel(),
         showLabelBinding: bind(label),
         boxClass: 'hyprlayout',

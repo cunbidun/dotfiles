@@ -154,7 +154,7 @@
         if [ -w "$node" ] && [ ! -e "$device" ]; then
           echo ddcci 0x37 > "$node" || true
         fi
-      ''} %I";
+      ''} %i";
     };
   };
 
