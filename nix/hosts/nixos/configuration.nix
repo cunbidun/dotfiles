@@ -174,6 +174,7 @@
           bus="''${bus_dir##*/}"
           node="$bus_dir/new_device"
           device="$bus_dir/''${bus#i2c-}-0037"
+          ddcci_device="/sys/bus/ddcci/devices/ddcci''${bus#i2c-}"
           delete="$bus_dir/delete_device"
           marker="$state_dir/$bus"
 
@@ -186,14 +187,16 @@
             if [ -e "$marker" ] && [ -w "$delete" ]; then
               echo 0x37 > "$delete" || true
               rm -f "$marker"
+              for _ in 1 2 3 4 5 6 7 8 9 10; do
+                [ ! -e "$ddcci_device" ] && break
+                sleep 0.1
+              done
             else
               touch "$marker"
             fi
-            continue
           fi
 
-          rm -f "$marker"
-          if [ -w "$node" ]; then
+          if [ -w "$node" ] && [ ! -e "$device" ] && [ ! -e "$ddcci_device" ]; then
             echo ddcci 0x37 > "$node" || true
           fi
         done
