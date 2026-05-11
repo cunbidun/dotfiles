@@ -43,6 +43,32 @@ $calendar-hourly-icon-size: 1.18em;
     margin-bottom: 0em;
 }
 
+.calendar-menu-heading {
+    color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-calendar-yearmonth);
+    margin-bottom: 0.55em;
+}
+
+.calendar-menu-heading-group {
+    margin: 0em 0.45em;
+    min-width: 6.4em;
+}
+
+.calendar-menu-heading-button {
+    min-width: 1.25em;
+    padding: 0.25em 0em;
+    color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-calendar-paginator);
+    font-weight: 900;
+
+    label {
+        font-size: 1.25em;
+    }
+}
+
+.calendar-menu-heading-label {
+    font-size: 1.25em;
+    min-width: 3.9em;
+}
+
 .calendar-menu-widget {
     border-radius: 0.4em;
     color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-clock-calendar-days);
@@ -64,7 +90,8 @@ $calendar-hourly-icon-size: 1.18em;
     &.button {
         color: $text;
         font-weight: 900;
-        font-size: 900em;
+        min-width: 2em;
+        padding: 0em 0.35em;
     }
 
     &:hover {
