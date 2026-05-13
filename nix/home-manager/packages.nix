@@ -70,8 +70,8 @@ in rec {
     pkgs.ngrok
 
     # AI/Development tools
-    inputs.codex-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
     pkgs.pre-commit
 
     # Shared fonts between Linux and Mac
