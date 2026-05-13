@@ -31,7 +31,6 @@
 
     features = {
       multi_agent = true;
-      child_agents_md = true;
       apps = true;
     };
 
