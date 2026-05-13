@@ -16,6 +16,7 @@ in {
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.self.homeManagerModules.theme-manager
     inputs.sops-nix.homeManagerModules.sops
+    inputs.opnix.homeManagerModules.default
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix
@@ -42,6 +43,7 @@ in {
     ../../home-manager/configs/taskwarrior.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/hyprsunset.nix
+    ../../home-manager/configs/opencode.nix
   ];
 
   # Home Manager needs a bit of information about you and the
