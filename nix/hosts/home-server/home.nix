@@ -18,6 +18,7 @@ in {
     ../../home-manager/configs/tmux.nix
     ../../home-manager/configs/nvchad.nix
     ../../home-manager/configs/shared/git.nix
+    ../../home-manager/configs/llm_agent.nix
   ];
 
   home.username = userdata.username;

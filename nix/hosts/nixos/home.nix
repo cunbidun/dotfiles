@@ -41,7 +41,7 @@ in {
     ../../home-manager/configs/taskwarrior.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/hyprsunset.nix
-    ../../home-manager/configs/opencode.nix
+    ../../home-manager/configs/llm_agent.nix
   ];
 
   # Home Manager needs a bit of information about you and the
