@@ -7,6 +7,11 @@
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
   chromeDevToolsProfile = "${config.home.homeDirectory}/.cache/chrome-devtools-mcp/opencode-profile";
   npx = "${pkgs.nodejs_24}/bin/npx";
+  mcpPath = pkgs.lib.makeBinPath [
+    pkgs.nodejs_24
+    pkgs.bash
+    pkgs.coreutils
+  ];
 in {
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
@@ -22,7 +27,7 @@ in {
           "--no-usage-statistics"
           "--no-performance-crux"
         ];
-        environment.PATH = "${pkgs.nodejs_24}/bin";
+        environment.PATH = mcpPath;
         timeout = 20000;
         enabled = true;
       };
