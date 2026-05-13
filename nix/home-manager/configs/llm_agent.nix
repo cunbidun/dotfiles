@@ -6,6 +6,7 @@
   githubTokenPath = "${config.home.homeDirectory}/.config/opencode/github_read_only_token";
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
   chromeDevToolsProfile = "${config.home.homeDirectory}/.cache/chrome-devtools-mcp/opencode-profile";
+  codexChromeDevToolsProfile = "${config.home.homeDirectory}/.cache/chrome-devtools-mcp/codex-profile";
   npx = "${pkgs.nodejs_24}/bin/npx";
   lspPath = pkgs.lib.makeBinPath [
     pkgs.nixd
@@ -22,6 +23,49 @@
     pkgs.bash
     pkgs.coreutils
   ];
+  codexToml = pkgs.formats.toml {};
+  codexConfigFile = codexToml.generate "codex-config.toml" {
+    model = "gpt-5.5";
+    model_reasoning_effort = "medium";
+    personality = "pragmatic";
+
+    features = {
+      multi_agent = true;
+      child_agents_md = true;
+      apps = true;
+    };
+
+    shell_environment_policy = {
+      "inherit" = "all";
+      ignore_default_excludes = true;
+      experimental_use_profile = true;
+    };
+
+    sandbox_workspace_write.network_access = true;
+
+    mcp_servers."chrome-devtools" = {
+      command = npx;
+      args = [
+        "-y"
+        "chrome-devtools-mcp@latest"
+        "--executable-path=${chromeBinary}"
+        "--user-data-dir=${codexChromeDevToolsProfile}"
+        "--no-usage-statistics"
+        "--no-performance-crux"
+      ];
+      env.PATH = mcpPath;
+      startup_timeout_sec = 20;
+      tool_timeout_sec = 60;
+      enabled = true;
+    };
+
+    plugins = {
+      "gmail@openai-curated".enabled = true;
+      "github@openai-curated".enabled = true;
+    };
+
+    tui.model_availability_nux."gpt-5.5" = 4;
+  };
 in {
   home.packages = with pkgs; [
     nixd
@@ -104,5 +148,9 @@ in {
         enabled = true;
       };
     };
+  };
+  home.file.".codex/config.toml" = {
+    source = codexConfigFile;
+    force = true;
   };
 }

@@ -50,6 +50,49 @@ fresh install by reading it from your 1Password `Private` vault.
    sudo nixos-rebuild switch --flake .#nixos
    ```
 
+## Bootstrapping a remote host
+
+Remote hosts such as `home-server` also need the same Age private key at
+`/var/lib/sops-nix/keys.txt` before `sops-nix` can decrypt secrets during activation.
+
+1. **Apply the configuration once**. The build and copy can succeed, but activation may fail with:
+
+   ```text
+   sops-install-secrets: cannot read keyfile '/var/lib/sops-nix/keys.txt'
+   ```
+
+2. **Copy the existing local Age key to the remote host**:
+
+   ```bash
+   sudo cat /var/lib/sops-nix/keys.txt | ssh root@home-server \
+     'install -d -m 700 /var/lib/sops-nix && umask 077 && cat > /var/lib/sops-nix/keys.txt && chmod 600 /var/lib/sops-nix/keys.txt'
+   ```
+
+   If the local key is not available yet, read it from 1Password first:
+
+   ```bash
+   op read "op://Private/SOPS Age Key/private key" | ssh root@home-server \
+     'install -d -m 700 /var/lib/sops-nix && umask 077 && cat > /var/lib/sops-nix/keys.txt && chmod 600 /var/lib/sops-nix/keys.txt'
+   ```
+
+3. **Reapply the remote configuration**:
+
+   ```bash
+   nix run .#switch -- home-server
+   ```
+
+4. **Verify secrets and generated config without printing secret contents**:
+
+   ```bash
+   ssh root@home-server 'test -s /var/lib/sops-nix/keys.txt'
+   ssh root@home-server 'test -s /home/cunbidun/.config/opencode/github_read_only_token'
+   ssh root@home-server 'su - cunbidun -c "opencode debug config | jq -r \".lsp | keys | join(\\\",\\\")\""'
+   ```
+
+The OpenCode GitHub token is stored encrypted in `secrets/global.yaml` and written by `sops-nix` to
+`/home/cunbidun/.config/opencode/github_read_only_token`. 1Password only needs to keep the `SOPS Age Key`
+bootstrap item; the GitHub token does not need to be duplicated there.
+
 ## Encrypting the secret files
 
 Create or update the file with `sops`:
