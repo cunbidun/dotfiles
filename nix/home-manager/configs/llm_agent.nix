@@ -61,6 +61,8 @@
     plugins = {
       "gmail@openai-curated".enabled = true;
       "github@openai-curated".enabled = true;
+      "linear@openai-curated".enabled = true;
+      "google-calendar@openai-curated".enabled = true;
     };
 
     tui.model_availability_nux."gpt-5.5" = 4;
