@@ -21,15 +21,9 @@ in {
         nixd # Nix language server
         lua-language-server # Lua LS
         python3 # Python
-        pyright # Python LS
-        ruff # Python linter/LS
         bash-language-server # Bash LS
         clang-tools # C/C++ LSP
         cargo # Rust
-        typescript # TypeScript
-        typescript-language-server # TypeScript/React LS
-        vscode-langservers-extracted # JSON/CSS/HTML LS
-        yaml-language-server # YAML LS
 
         # Formatters
         stylua # Lua formatter
