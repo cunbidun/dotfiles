@@ -1512,6 +1512,26 @@
         "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
       }
     },
+    "opencode": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778630107,
+        "narHash": "sha256-GYg2RIUBNcnrHoBX1DnuVwnBxu1mEN+YzFQWy+/Utzc=",
+        "owner": "anomalyco",
+        "repo": "opencode",
+        "rev": "d8c8322ddf88ae3b27335b7c8f1bf5eb2d5fce01",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anomalyco",
+        "repo": "opencode",
+        "type": "github"
+      }
+    },
     "opnix": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -1619,6 +1639,7 @@
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "opencode": "opencode",
         "opnix": "opnix",
         "pyprland": "pyprland",
         "sops-nix": "sops-nix",

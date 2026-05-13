@@ -71,6 +71,7 @@ in rec {
 
     # AI/Development tools
     inputs.codex-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
     pkgs.pre-commit
 
     # Shared fonts between Linux and Mac

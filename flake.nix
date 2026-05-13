@@ -108,6 +108,10 @@
       url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    opencode = {
+      url = "github:anomalyco/opencode";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     vicinae = {
       url = "github:vicinaehq/vicinae/v0.20.12";
     };
