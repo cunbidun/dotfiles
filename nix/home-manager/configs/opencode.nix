@@ -1,15 +1,6 @@
 {config, ...}: let
   githubTokenPath = "${config.home.homeDirectory}/.config/opencode/github_read_only_token";
 in {
-  sops = {
-    defaultSopsFile = ../../../secrets/global.yaml;
-    age.keyFile = "/var/lib/sops-nix/keys.txt";
-    secrets.github_read_only_token = {
-      path = githubTokenPath;
-      mode = "0400";
-    };
-  };
-
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
     mcp.github = {
