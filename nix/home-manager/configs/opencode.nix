@@ -22,6 +22,7 @@ in {
           "--no-usage-statistics"
           "--no-performance-crux"
         ];
+        environment.PATH = "${pkgs.nodejs_24}/bin";
         timeout = 20000;
         enabled = true;
       };
