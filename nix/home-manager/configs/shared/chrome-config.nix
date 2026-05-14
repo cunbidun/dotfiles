@@ -12,6 +12,7 @@
     "jgnfghanfbjmimbdmnjfofnbcgpkbegj" # KeePassHelper
     "khncfooichmfjbepaaaebmommgaepoid" # Unhook – Remove YouTube Recommendations
     "gakohpplicjdhhfllilcjpfildodfnnn" # Carrot (contest rating predictor)
+    "cclelndahbckbenkjhflpdbgdldlbecc" # Get cookies.txt LOCALLY
   ];
 
   # Generate Chrome policy JSON
