@@ -83,11 +83,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    opnix = {
-      url = "github:brizzbuzz/opnix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -99,11 +94,6 @@
       url = "github:macadmins/default-browser/v1.0.18";
       flake = false;
     };
-
-    # +-- Raspberry Pi --+
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
-    home-manager-rpi5 = {url = "github:nix-community/home-manager/release-25.05";};
-
     llm-agents = {url = "github:numtide/llm-agents.nix";};
     vicinae = {
       url = "github:vicinaehq/vicinae/v0.20.12";
