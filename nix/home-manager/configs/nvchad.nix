@@ -54,6 +54,7 @@ in {
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/bufdelete.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/nvimtree.lua},
         ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/sidekick.lua},
+        ${builtins.readFile ../../../utilities/nvim/lua/user/plugins/multiple-cursors.lua},
       }
     '';
 
