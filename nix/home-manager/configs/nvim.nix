@@ -146,7 +146,14 @@
 
     ${lib.concatMapStrings (grammar: ''
         lang="${extractLang grammar}"
-        ln -s "${grammar}" "$out/nvim-treesitter-grammar-$lang"
+        target="$out/nvim-treesitter-grammar-$lang"
+
+        if [ -f "${grammar}/parser" ]; then
+          mkdir -p "$target/parser"
+          ln -s "${grammar}/parser" "$target/parser/$lang.so"
+        else
+          ln -s "${grammar}" "$target"
+        fi
       '')
       treesitter-grammars}
   '';
