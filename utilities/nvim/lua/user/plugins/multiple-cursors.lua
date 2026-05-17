@@ -1,6 +1,5 @@
 return {
   "brenton-leighton/multiple-cursors.nvim",
-  dir = vim.fn.stdpath("config") .. "/vendor/multiple-cursors.nvim",
   opts = {},
   keys = {
     {

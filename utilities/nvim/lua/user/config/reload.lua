@@ -41,9 +41,6 @@ local function refresh_special(module)
     require("user.theme").apply()
   elseif module == "user.config.keymaps" then
     require("user.config.keymaps")
-  elseif module == "user.tabufline.config" or module:match("^user%.tabufline") then
-    require("user.tabufline").setup()
-    vim.cmd("redrawtabline")
   elseif module == "user.config.conform" then
     require("user.config.conform")
   end

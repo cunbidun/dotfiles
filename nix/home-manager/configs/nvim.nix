@@ -7,43 +7,60 @@
 }: let
   inherit (pkgs.stdenv) isLinux;
 
-  nvim-plugin-list = with pkgs.vimPlugins; [
-    lazy-nvim
+  multiple-cursors-src = ../../../utilities/nvim/vendor/multiple-cursors.nvim;
 
-    # Navigation and search
-    flash-nvim
+  nvim-plugins = with pkgs.vimPlugins; [
+    {pkg = lazy-nvim; dir = "lazy.nvim";}
+    {pkg = LazyVim; dir = "LazyVim";}
+    {pkg = snacks-nvim; dir = "snacks.nvim";}
+    {pkg = which-key-nvim; dir = "which-key.nvim";}
+    {pkg = noice-nvim; dir = "noice.nvim";}
+    {pkg = trouble-nvim; dir = "trouble.nvim";}
+    {pkg = todo-comments-nvim; dir = "todo-comments.nvim";}
+    {pkg = flash-nvim; dir = "flash.nvim";}
+    {pkg = ts-comments-nvim; dir = "ts-comments.nvim";}
+    {pkg = lazydev-nvim; dir = "lazydev.nvim";}
+    {pkg = persistence-nvim; dir = "persistence.nvim";}
+    {pkg = tokyonight-nvim; dir = "tokyonight.nvim";}
 
-    # File explorer and buffers
-    nvim-web-devicons
-    mini-icons
+    {pkg = nvim-lspconfig; dir = "nvim-lspconfig";}
+    {pkg = mason-nvim; dir = "mason.nvim";}
+    {pkg = mason-lspconfig-nvim; dir = "mason-lspconfig.nvim";}
 
-    # Editing
-    nvim-autopairs
-    nvim-surround
-    comment-nvim
+    {pkg = nvim-treesitter; dir = "nvim-treesitter";}
+    {pkg = nvim-treesitter-textobjects; dir = "nvim-treesitter-textobjects";}
+    {pkg = nvim-ts-autotag; dir = "nvim-ts-autotag";}
 
-    # UI
-    lualine-nvim
-    which-key-nvim
-    nui-nvim
-    sqlite-lua
+    {pkg = conform-nvim; dir = "conform.nvim";}
+    {pkg = nvim-lint; dir = "nvim-lint";}
+    {pkg = gitsigns-nvim; dir = "gitsigns.nvim";}
 
-    # Git
-    gitsigns-nvim
+    {pkg = lualine-nvim; dir = "lualine.nvim";}
+    {pkg = bufferline-nvim; dir = "bufferline.nvim";}
+    {pkg = catppuccin-nvim; dir = "catppuccin";}
 
-    # LSP, completion, treesitter, formatting
-    blink-cmp
-    conform-nvim
-    nvim-treesitter
+    {pkg = mini-ai; dir = "mini.ai";}
+    {pkg = mini-pairs; dir = "mini.pairs";}
+    {pkg = mini-icons; dir = "mini.icons";}
+    {pkg = friendly-snippets; dir = "friendly-snippets";}
 
-    # Terminal and agents
-    sidekick-nvim
-    snacks-nvim
-    aw-watcher-nvim
+    {pkg = plenary-nvim; dir = "plenary.nvim";}
+    {pkg = nui-nvim; dir = "nui.nvim";}
+    {pkg = sqlite-lua; dir = "sqlite.lua";}
+    {pkg = grug-far-nvim; dir = "grug-far.nvim";}
 
-    # Themes
-    vscode-nvim
-    catppuccin-nvim
+    {pkg = nvim-web-devicons; dir = "nvim-web-devicons";}
+    {pkg = nvim-autopairs; dir = "nvim-autopairs";}
+    {pkg = comment-nvim; dir = "comment.nvim";}
+    {pkg = nvim-surround; dir = "nvim-surround";}
+
+    {pkg = blink-cmp; dir = "blink.cmp";}
+    {pkg = sidekick-nvim; dir = "sidekick.nvim";}
+    {pkg = aw-watcher-nvim; dir = "aw-watcher.nvim";}
+
+    # User-kept extra plugin not provided by LazyVim defaults.
+    {pkg = vscode-nvim; dir = "vscode.nvim";}
+    {pkg = multiple-cursors-src; dir = "multiple-cursors.nvim";}
   ];
 
   treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [
@@ -91,6 +108,7 @@
 
   tools = with pkgs; [
     cargo
+    gcc
     fd
     fzf
     ghostscript
@@ -137,9 +155,9 @@
     mkdir -p "$out"
 
     ${lib.concatMapStrings (plugin: ''
-        ln -s "${plugin}" "$out/${plugin.pname}"
+        ln -s "${plugin.pkg}" "$out/${plugin.dir}"
       '')
-      nvim-plugin-list}
+      nvim-plugins}
 
     ${lib.concatMapStrings (grammar: ''
         lang="${extractLang grammar}"
