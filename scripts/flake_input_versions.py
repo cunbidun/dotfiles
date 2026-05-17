@@ -257,7 +257,9 @@ def determine_remote_info(
         display = build_display(ref, base_rev)
         return VersionDetails(ref=ref, rev=base_rev, display=display), None
 
-    owner = locked.get("owner") or refreshed_locked.get("owner") or original.get("owner")
+    owner = (
+        locked.get("owner") or refreshed_locked.get("owner") or original.get("owner")
+    )
     repo = locked.get("repo") or refreshed_locked.get("repo") or original.get("repo")
     if not owner or not repo:
         display = build_display(ref, base_rev)
@@ -296,7 +298,9 @@ def determine_remote_info(
         pass
 
     display = build_display(ref, base_rev)
-    return VersionDetails(ref=ref, rev=base_rev, display=display), "unable to determine remote head"
+    return VersionDetails(
+        ref=ref, rev=base_rev, display=display
+    ), "unable to determine remote head"
 
 
 def gather_versions(
@@ -350,8 +354,12 @@ def format_table(rows: Tuple[InputVersion, ...]) -> str:
     color_versions = []
 
     for row in rows:
-        plain_text = build_version_text(row.current, row.remote, row.message, color=False)
-        color_text = build_version_text(row.current, row.remote, row.message, color=True)
+        plain_text = build_version_text(
+            row.current, row.remote, row.message, color=False
+        )
+        color_text = build_version_text(
+            row.current, row.remote, row.message, color=True
+        )
         table.add_row([row.name, row.url, plain_text])
         plain_versions.append(plain_text)
         color_versions.append(color_text)

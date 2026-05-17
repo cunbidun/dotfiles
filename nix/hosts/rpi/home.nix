@@ -15,7 +15,7 @@ in {
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/starship.nix
     ../../home-manager/configs/tmux.nix
-    ../../home-manager/configs/nvchad.nix
+    ../../home-manager/configs/nvim.nix
     ../../home-manager/configs/shared/git.nix
   ];
   home.username = userdata.username;

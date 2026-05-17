@@ -1,4 +1,4 @@
-{
+return {
   "akinsho/toggleterm.nvim",
   event = "BufEnter",
   config = function()

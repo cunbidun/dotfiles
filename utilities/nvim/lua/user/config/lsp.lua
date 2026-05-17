@@ -32,5 +32,33 @@ vim.lsp.config.nixd = {
   },
 }
 
+vim.lsp.config.nil_ls = {
+  cmd = { "nil" },
+  root_markers = { "flake.nix", "default.nix", "shell.nix" },
+  filetypes = { "nix" },
+}
+
+vim.lsp.config.pyright = {
+  cmd = { "pyright-langserver", "--stdio" },
+  root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
+  filetypes = { "python" },
+}
+
+vim.lsp.config.ruff = {
+  cmd = { "ruff", "server" },
+  root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
+  filetypes = { "python" },
+}
+
+vim.lsp.config.bashls = {
+  cmd = { "bash-language-server", "start" },
+  root_markers = { ".git" },
+  filetypes = { "bash", "sh" },
+}
+
 vim.diagnostic.config({ virtual_lines = true })
 vim.lsp.enable({ "luals", "nil_ls", "nixd", "pyright", "ruff", "bashls", "clangd" })
+
+vim.schedule(function()
+  vim.api.nvim_exec_autocmds("FileType", {})
+end)

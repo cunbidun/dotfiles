@@ -1,15 +1,13 @@
 local binds = {
   { action = "<cmd>Telescope find_files<cr>", key = "<leader>f", mode = "n" },
   { action = "<cmd>Telescope live_grep<cr>", key = "<leader>t", mode = "n" },
-  { action = ":BufferLineCycleNext<CR>", key = "<TAB>", mode = "n" },
-  { action = ":BufferLineCyclePrev<CR>", key = "<S-TAB>", mode = "n" },
-  { action = ":Bdelete<CR>", key = "X", mode = "n", options = { silent = true, desc = "Close buffer" } },
+  { action = function() require("user.tabufline").next() end, key = "<TAB>", mode = "n", options = { desc = "Next buffer" } },
+  { action = function() require("user.tabufline").prev() end, key = "<S-TAB>", mode = "n", options = { desc = "Previous buffer" } },
+  { action = function() require("user.tabufline").close_buffer() end, key = "X", mode = "n", options = { silent = true, desc = "Close buffer" } },
   { action = "<C-w>h", key = "<C-h>", mode = "n" },
   { action = "<C-w>j", key = "<C-j>", mode = "n" },
   { action = "<C-w>l", key = "<C-l>", mode = "n" },
   { action = "<C-w>k", key = "<C-k>", mode = "n" },
-  { action = "<Cmd>NvimTreeToggle<CR>", key = "<leader>e", mode = "n", options = { silent = true, desc = "Toggle NvimTree" } },
-
   -- terminal navigation
   { action = "<C-\\><C-N><C-w>h", key = "<C-h>", mode = "t" },
   { action = "<C-\\><C-N><C-w>j", key = "<C-j>", mode = "t" },
@@ -22,7 +20,7 @@ local binds = {
   { action = "<cmd>lua vim.lsp.buf.definition()<CR>", key = "gd", mode = "n" }, -- Hover documentation
   { action = "<cmd>lua vim.lsp.buf.hover()<CR>", key = "K", mode = "n" }, -- Go to implementation
   { action = "<cmd>lua vim.lsp.buf.implementation()<CR>", key = "gi", mode = "n" }, -- Signature help
-  { action = "<cmd>lua vim.lsp.buf.signature_help()<CR>", key = "<C-k>", mode = "n" }, -- Rename symbol
+  { action = "<cmd>lua vim.lsp.buf.signature_help()<CR>", key = "<leader>sh", mode = "n" }, -- Signature help
   { action = "<cmd>lua vim.lsp.buf.rename()<CR>", key = "<leader>rn", mode = "n" }, -- Code actions
   { action = "<cmd>lua vim.lsp.buf.code_action()<CR>", key = "<leader>ca", mode = "n" }, -- List references
   { action = "<cmd>lua vim.lsp.buf.references()<CR>", key = "gr", mode = "n" }, -- Open diagnostic float window

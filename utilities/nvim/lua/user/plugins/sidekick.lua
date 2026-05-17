@@ -1,4 +1,4 @@
-{
+return {
   "folke/sidekick.nvim",
   event = "VeryLazy",
   dependencies = {

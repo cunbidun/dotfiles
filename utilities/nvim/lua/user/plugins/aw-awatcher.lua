@@ -1,4 +1,4 @@
-{
+return {
   "niklaswimmer/aw-watcher.nvim",
   opts = { -- required, but can be empty table: {}
     -- add any options here
