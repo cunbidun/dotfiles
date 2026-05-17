@@ -89,6 +89,8 @@
     cargo
     fd
     fzf
+    lsof
+    lua5_1
     luarocks
     ripgrep
     tree-sitter
