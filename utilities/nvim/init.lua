@@ -26,7 +26,6 @@ local function with_dir(spec, dir)
 end
 
 require("lazy").setup({
-  with_dir(require("user.plugins.nvimtree"), "nvim-tree.lua"),
   with_dir({ "nvim-tree/nvim-web-devicons", lazy = true }, "nvim-web-devicons"),
   with_dir({ "echasnovski/mini.icons", lazy = true, opts = {} }, "mini.icons"),
   with_dir(require("user.plugins.lualine"), "lualine.nvim"),
@@ -35,9 +34,6 @@ require("lazy").setup({
   with_dir({ "numToStr/Comment.nvim", keys = { "gc", "gb" }, opts = {} }, "Comment.nvim"),
   with_dir(require("user.plugins.indent-blankline"), "indent-blankline.nvim"),
   with_dir({ "folke/which-key.nvim", event = "VeryLazy", opts = {} }, "which-key.nvim"),
-  with_dir({ "nvim-telescope/telescope.nvim", cmd = "Telescope", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
-    "telescope.nvim"),
-  with_dir({ "nvim-lua/plenary.nvim", lazy = true }, "plenary.nvim"),
   with_dir({ "saghen/blink.cmp", event = "InsertEnter", opts = {} }, "blink.cmp"),
   with_dir(require("user.plugins.treesitter"), "nvim-treesitter"),
   with_dir({ "stevearc/conform.nvim", event = "BufWritePre" }, "conform.nvim"),
@@ -49,8 +45,8 @@ require("lazy").setup({
   with_dir(require("user.plugins.aw-awatcher"), "aw-watcher.nvim"),
   with_dir(require("user.plugins.nvim-surround"), "nvim-surround"),
   with_dir(require("user.plugins.bufdelete"), "bufdelete.nvim"),
+  with_dir(require("user.plugins.snacks"), "snacks.nvim"),
   with_dir(require("user.plugins.sidekick"), "sidekick.nvim"),
-  with_dir({ "folke/snacks.nvim", lazy = true, priority = 1000 }, "snacks.nvim"),
   require("user.plugins.multiple-cursors"),
 }, {
   install = { missing = false },

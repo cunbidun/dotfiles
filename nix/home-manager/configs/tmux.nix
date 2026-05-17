@@ -24,7 +24,7 @@ in {
     baseIndex = 1;
     escapeTime = 10;
     keyMode = "vi";
-    terminal = "xterm-256color";
+    terminal = "tmux-256color";
     shell = "${pkgs.zsh}/bin/zsh";
 
     # Native options for pane navigation/resizing (replaces h/j/k/l and H/J/K/L bindings)
@@ -35,7 +35,7 @@ in {
     plugins = [pkgs.tmuxPlugins.extrakto];
 
     extraConfig = ''
-      set -ga terminal-overrides ",xterm-256color:Tc"
+      set -ga terminal-overrides ",tmux-256color:RGB"
       set -g renumber-windows on
       set -sg repeat-time 600
       setw -g xterm-keys on

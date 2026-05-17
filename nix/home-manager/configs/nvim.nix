@@ -12,11 +12,8 @@
 
     # Navigation and search
     flash-nvim
-    telescope-nvim
-    plenary-nvim
 
     # File explorer and buffers
-    nvim-tree-lua
     bufdelete-nvim
     nvim-web-devicons
     mini-icons
@@ -30,8 +27,8 @@
     lualine-nvim
     which-key-nvim
     indent-blankline-nvim
-    nvim-notify
     nui-nvim
+    sqlite-lua
 
     # Git
     gitsigns-nvim
@@ -54,12 +51,22 @@
 
   treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [
     bash
+    css
     lua
+    html
+    javascript
+    latex
     python
     nix
+    regex
+    scss
+    svelte
+    tsx
+    typst
+    vue
     c
     cpp
-  ];
+  ] ++ [pkgs.tree-sitter-grammars.tree-sitter-norg];
 
   formatters = with pkgs; [
     alejandra
@@ -89,10 +96,14 @@
     cargo
     fd
     fzf
+    ghostscript
     lsof
     lua5_1
     luarocks
+    mermaid-cli
     ripgrep
+    sqlite
+    tectonic
     tree-sitter
     copilot-language-server
   ] ++ lib.optionals isLinux (with pkgs; [
@@ -103,8 +114,14 @@
 
   debug-tools = lib.optionals isLinux (with pkgs; [gdb]) ++ [pkgs.lldb];
 
-  extractLang = grammar:
-    lib.removePrefix "vimplugin-treesitter-grammar-" grammar.name;
+  extractLang = grammar: let
+    name = grammar.name;
+  in
+    if lib.hasPrefix "vimplugin-treesitter-grammar-" name
+    then lib.removePrefix "vimplugin-treesitter-grammar-" name
+    else if lib.hasPrefix "tree-sitter-" name
+    then lib.removePrefix "tree-sitter-" name
+    else name;
 
   neovim-with-packages = pkgs.symlinkJoin {
     name = "neovim-with-packages";
