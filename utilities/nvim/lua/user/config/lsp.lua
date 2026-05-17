@@ -56,8 +56,22 @@ vim.lsp.config.bashls = {
   filetypes = { "bash", "sh" },
 }
 
+vim.lsp.config.copilot = {
+  cmd = { "copilot-language-server", "--stdio" },
+  root_markers = { ".git" },
+  filetypes = {
+    "bash",
+    "c",
+    "cpp",
+    "lua",
+    "nix",
+    "python",
+    "sh",
+  },
+}
+
 vim.diagnostic.config({ virtual_lines = true })
-vim.lsp.enable({ "luals", "nil_ls", "nixd", "pyright", "ruff", "bashls", "clangd" })
+vim.lsp.enable({ "luals", "nil_ls", "nixd", "pyright", "ruff", "bashls", "clangd", "copilot" })
 
 vim.schedule(function()
   vim.api.nvim_exec_autocmds("FileType", {})

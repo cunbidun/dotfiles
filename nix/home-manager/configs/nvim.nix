@@ -89,7 +89,10 @@
     cargo
     fd
     fzf
+    luarocks
     ripgrep
+    tree-sitter
+    copilot-language-server
   ] ++ lib.optionals isLinux (with pkgs; [
     wl-clipboard
     xclip
