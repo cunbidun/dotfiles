@@ -115,9 +115,11 @@
   debug-tools = lib.optionals isLinux (with pkgs; [gdb]) ++ [pkgs.lldb];
 
   extractLang = grammar: let
-    name = grammar.name;
+    name = if grammar ? pname then grammar.pname else grammar.name;
   in
-    if lib.hasPrefix "vimplugin-treesitter-grammar-" name
+    if lib.hasPrefix "nvim-treesitter-grammar-" name
+    then lib.removePrefix "nvim-treesitter-grammar-" name
+    else if lib.hasPrefix "vimplugin-treesitter-grammar-" name
     then lib.removePrefix "vimplugin-treesitter-grammar-" name
     else if lib.hasPrefix "tree-sitter-" name
     then lib.removePrefix "tree-sitter-" name
@@ -129,6 +131,7 @@
     buildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/nvim \
+        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [pkgs.sqlite]} \
         --prefix PATH : ${lib.makeBinPath (formatters ++ lsp-servers ++ linters ++ tools ++ debug-tools)}
     '';
   };

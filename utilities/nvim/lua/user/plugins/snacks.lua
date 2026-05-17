@@ -17,6 +17,12 @@ return {
     words = { enabled = true },
   },
   config = function(_, opts)
-    require("snacks").setup(opts)
+    local snacks = require("snacks")
+    snacks.setup(opts)
+
+    -- Ensure health checks see these UI integrations as active.
+    snacks.dashboard.setup()
+    snacks.picker.setup()
+    snacks.input.enable()
   end,
 }
