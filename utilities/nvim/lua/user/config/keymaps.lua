@@ -2,6 +2,7 @@ local binds = {
   { action = function() Snacks.picker.files() end, key = "<leader>f", mode = "n", options = { desc = "Find files" } },
   { action = function() Snacks.picker.grep() end, key = "<leader>t", mode = "n", options = { desc = "Live grep" } },
   { action = function() Snacks.explorer() end, key = "<leader>e", mode = "n", options = { desc = "Explorer" } },
+  { action = function() Snacks.terminal() end, key = "<C-\\>", mode = { "n", "t" }, options = { desc = "Toggle terminal" } },
   { action = function() require("user.tabufline").next() end, key = "<TAB>", mode = "n", options = { desc = "Next buffer" } },
   { action = function() require("user.tabufline").prev() end, key = "<S-TAB>", mode = "n", options = { desc = "Previous buffer" } },
   { action = function() require("user.tabufline").close_buffer() end, key = "X", mode = "n", options = { silent = true, desc = "Close buffer" } },

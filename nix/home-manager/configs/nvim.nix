@@ -14,7 +14,6 @@
     flash-nvim
 
     # File explorer and buffers
-    bufdelete-nvim
     nvim-web-devicons
     mini-icons
 
@@ -26,7 +25,6 @@
     # UI
     lualine-nvim
     which-key-nvim
-    indent-blankline-nvim
     nui-nvim
     sqlite-lua
 
@@ -39,7 +37,6 @@
     nvim-treesitter
 
     # Terminal and agents
-    toggleterm-nvim
     sidekick-nvim
     snacks-nvim
     aw-watcher-nvim

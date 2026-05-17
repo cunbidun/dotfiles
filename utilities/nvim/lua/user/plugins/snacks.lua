@@ -6,6 +6,8 @@ return {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
     explorer = { enabled = true },
+    bufdelete = { enabled = true },
+    indent = { enabled = true },
     image = { enabled = true },
     input = { enabled = true },
     notifier = { enabled = true },
@@ -14,6 +16,7 @@ return {
     scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
+    terminal = { enabled = true },
     words = { enabled = true },
   },
   config = function(_, opts)
