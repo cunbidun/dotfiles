@@ -7,9 +7,6 @@ return {
       globalstatus = true,
       section_separators = "",
       component_separators = "|",
-      disabled_filetypes = {
-        statusline = { "NvimTree" },
-      },
     },
     sections = {
       lualine_a = { "mode" },

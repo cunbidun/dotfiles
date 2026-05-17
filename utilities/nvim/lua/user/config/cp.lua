@@ -18,10 +18,14 @@ local function TermWrapper(command)
 
   local buf_id = get_terminal_buffers()
   if #buf_id > 0 then
-    vim.cmd(string.format("%sbdelete!", buf_id[1]))
+    vim.cmd(string.format("bdelete! %s", buf_id[1]))
   end
 
-  vim.cmd(string.format("TermExec direction=vertical cmd='%s'", command))
+  Snacks.terminal(command, {
+    win = { position = "right" },
+    start_insert = true,
+    auto_insert = true,
+  })
 end
 
 vim.api.nvim_create_user_command("Runscript", function()
@@ -67,22 +71,12 @@ for _, map in ipairs(binds) do
 end
 
 local function find_task_files()
-  require("telescope.builtin").find_files({
-    prompt_title = "Task Files",
-    find_command = {
-      "find",
-      "task",
-      "-type",
-      "f",
-      "!",
-      "-name",
-      "*.json",
-      "!",
-      "-path",
-      "*.dSYM*",
-      "!",
-      "-name",
-      ".gitkeep",
+  Snacks.picker.files({
+    cwd = "task",
+    hidden = true,
+    ignored = true,
+    matcher = {
+      exclude = { "%.json$", "%.dSYM", "^%.gitkeep$" },
     },
   })
 end

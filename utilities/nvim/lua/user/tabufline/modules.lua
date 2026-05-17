@@ -5,7 +5,6 @@ local tabufline = require("user.tabufline")
 local utils = require("user.tabufline.utils")
 
 local btn = utils.btn
-local strep = string.rep
 local style_buf = utils.style_buf
 local txt = utils.txt
 local opts = tabufline.opts
@@ -29,16 +28,6 @@ vim.cmd("function! UserTbGotoTab(tabnr,b,c,d) \n execute a:tabnr .. 'tabnext' \n
 vim.cmd("function! UserTbCloseAllBufs(a,b,c,d) \n lua require('user.tabufline').close_all_buffers() \n endfunction")
 vim.cmd("function! UserTbToggleTabs(a,b,c,d) \n let g:UserTbTabsToggled = !g:UserTbTabsToggled | redrawtabline \n endfunction")
 
-local function get_nvim_tree_width()
-  for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
-    if vim.bo[api.nvim_win_get_buf(win)].filetype == "NvimTree" then
-      return api.nvim_win_get_width(win)
-    end
-  end
-
-  return 0
-end
-
 local function available_space()
   local str = ""
 
@@ -53,8 +42,7 @@ local function available_space()
 end
 
 function M.treeOffset()
-  local w = get_nvim_tree_width()
-  return w == 0 and "" or "%#NvimTreeNormal#" .. strep(" ", w) .. "%#NvimTreeWinSeparator#" .. "|"
+  return ""
 end
 
 function M.buffers()

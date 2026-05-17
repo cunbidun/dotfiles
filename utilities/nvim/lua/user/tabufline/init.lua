@@ -114,7 +114,7 @@ local function setup_tracking()
 
   api.nvim_create_autocmd("FileType", {
     group = group,
-    pattern = { "qf", "NvimTree" },
+    pattern = { "qf" },
     callback = function()
       vim.opt_local.buflisted = false
     end,
