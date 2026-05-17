@@ -2,14 +2,12 @@
   config,
   userdata,
   pkgs,
-  lib,
   ...
-}: {
-  imports =
-    (import ./adblock)
-    ++ [
-      ../shared/nix-config.nix
-    ];
+}:
+{
+  imports = (import ./adblock) ++ [
+    ../shared/nix-config.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -26,11 +24,11 @@
         "docker"
       ];
       shell = pkgs.zsh;
-      openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
+      openssh.authorizedKeys.keys = userdata.authorizedKeys or [ ];
     };
 
     root = {
-      openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
+      openssh.authorizedKeys.keys = userdata.authorizedKeys or [ ];
     };
   };
 
@@ -58,9 +56,14 @@
   networking = {
     hostName = "rpi5";
     useNetworkd = true;
-    firewall.allowedUDPPorts = [53];
-    firewall.allowedTCPPorts = [53 80 443 3000];
-    firewall.trustedInterfaces = ["tailscale0"];
+    firewall.allowedUDPPorts = [ 53 ];
+    firewall.allowedTCPPorts = [
+      53
+      80
+      443
+      3000
+    ];
+    firewall.trustedInterfaces = [ "tailscale0" ];
   };
 
   systemd.network.networks = {

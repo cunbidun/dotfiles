@@ -1,16 +1,16 @@
 {
   pkgs,
-  config,
-  lib,
   inputs,
   userdata,
   ...
-}: let
+}:
+let
   package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
   };
-in {
+in
+{
   imports = [
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/starship.nix

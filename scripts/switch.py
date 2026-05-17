@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-"""NixOS/Darwin configuration switcher script."""
-
 import argparse
 import os
 import subprocess
@@ -9,7 +6,9 @@ from datetime import datetime
 from pathlib import Path
 
 
-def run_cmd(cmd: list[str], check: bool = True, capture: bool = False) -> subprocess.CompletedProcess:
+def run_cmd(
+    cmd: list[str], check: bool = True, capture: bool = False
+) -> subprocess.CompletedProcess:
     """Run a command with optional output capture."""
     kwargs = {"check": check, "text": True}
     if capture:
@@ -26,10 +25,18 @@ def get_git_root() -> Path:
 def get_nixos_version(profile: str) -> str:
     """Get the NixOS system version."""
     if profile == "home-server":
-        cmd = ["ssh", "root@home-server", "basename $(readlink /nix/var/nix/profiles/system) | sed 's/-link$//'"]
+        cmd = [
+            "ssh",
+            "root@home-server",
+            "basename $(readlink /nix/var/nix/profiles/system) | sed 's/-link$//'",
+        ]
         result = run_cmd(cmd, capture=True)
     else:
-        cmd = ["bash", "-c", "basename $(readlink /nix/var/nix/profiles/system) | sed 's/-link$//'"]
+        cmd = [
+            "bash",
+            "-c",
+            "basename $(readlink /nix/var/nix/profiles/system) | sed 's/-link$//'",
+        ]
         result = run_cmd(cmd, capture=True)
     return result.stdout.strip()
 
@@ -83,13 +90,30 @@ def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
 
 def main():
     parser = argparse.ArgumentParser(description="NixOS/Darwin configuration switcher")
-    parser.add_argument("profile", choices=["macbook-m1", "nixos", "home-server"], help="Configuration profile")
+    parser.add_argument(
+        "profile",
+        choices=["macbook-m1", "nixos", "home-server"],
+        help="Configuration profile",
+    )
     parser.add_argument("--no-commit", action="store_true", help="Skip git commit")
-    parser.add_argument("--commit-message", default=f"Auto commit: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
-                       help="Custom commit message")
-    parser.add_argument("--build-only", action="store_true", help="Build without switching")
-    parser.add_argument("--copy-back", action="store_true", help="Copy generated files back to repository")
-    parser.add_argument("--copy-back-only", action="store_true", help="Only copy files back, skip build/switch")
+    parser.add_argument(
+        "--commit-message",
+        default=f"Auto commit: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        help="Custom commit message",
+    )
+    parser.add_argument(
+        "--build-only", action="store_true", help="Build without switching"
+    )
+    parser.add_argument(
+        "--copy-back",
+        action="store_true",
+        help="Copy generated files back to repository",
+    )
+    parser.add_argument(
+        "--copy-back-only",
+        action="store_true",
+        help="Only copy files back, skip build/switch",
+    )
 
     args = parser.parse_args()
 
@@ -107,6 +131,7 @@ def main():
     # Handle copy-back-only mode
     if args.copy_back_only:
         import shutil
+
         shutil.rmtree(git_root / "generated" / args.profile, ignore_errors=True)
         print(f"Removed old generated files for {args.profile}.")
         copy_files_back(git_root, args.profile, is_darwin)
@@ -115,9 +140,13 @@ def main():
         # Commit if requested
         run_cmd(["git", "add", "-A"])
         if not args.no_commit:
-            result = run_cmd(["git", "diff-index", "--quiet", "HEAD", "--"], check=False)
+            result = run_cmd(
+                ["git", "diff-index", "--quiet", "HEAD", "--"], check=False
+            )
             if result.returncode != 0:
-                commit_msg = f"{args.commit_message} (profile: {args.profile}, copy-back only)"
+                commit_msg = (
+                    f"{args.commit_message} (profile: {args.profile}, copy-back only)"
+                )
                 run_cmd(["git", "commit", "-m", commit_msg])
                 print(f"Committed: {commit_msg}")
             else:
@@ -137,25 +166,56 @@ def main():
 
     try:
         if is_darwin:
-            cmd = ["sudo", "darwin-rebuild", operation, "--flake", flake_ref, "--cores", "0"]
+            cmd = [
+                "sudo",
+                "darwin-rebuild",
+                operation,
+                "--flake",
+                flake_ref,
+                "--cores",
+                "0",
+            ]
             run_cmd(cmd)
         else:
             if args.profile == "home-server":
                 print("Using remote target-host for home-server...")
-                cmd = ["nixos-rebuild", "--log-format", "internal-json", operation,
-                       "--flake", flake_ref, "--target-host", "root@home-server", "--cores", "0"]
+                cmd = [
+                    "nixos-rebuild",
+                    "--log-format",
+                    "internal-json",
+                    operation,
+                    "--flake",
+                    flake_ref,
+                    "--target-host",
+                    "root@home-server",
+                    "--cores",
+                    "0",
+                ]
                 # Pipe through nom
-                p1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                p1 = subprocess.Popen(
+                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+                )
                 p2 = subprocess.Popen(["nom", "--json"], stdin=p1.stdout)
                 p1.stdout.close()
                 p2.communicate()
                 if p2.returncode != 0:
                     raise subprocess.CalledProcessError(p2.returncode, cmd)
             else:
-                cmd = ["sudo", "nixos-rebuild", "--log-format", "internal-json", operation,
-                       "--flake", flake_ref, "--cores", "0"]
+                cmd = [
+                    "sudo",
+                    "nixos-rebuild",
+                    "--log-format",
+                    "internal-json",
+                    operation,
+                    "--flake",
+                    flake_ref,
+                    "--cores",
+                    "0",
+                ]
                 # Pipe through nom
-                p1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                p1 = subprocess.Popen(
+                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+                )
                 p2 = subprocess.Popen(["nom", "--json"], stdin=p1.stdout)
                 p1.stdout.close()
                 p2.communicate()
@@ -172,6 +232,7 @@ def main():
     # Copy files back if requested
     if args.copy_back:
         import shutil
+
         shutil.rmtree(git_root / "generated" / args.profile, ignore_errors=True)
         print(f"Removed old generated files for {args.profile}.")
         copy_files_back(git_root, args.profile, is_darwin)
@@ -196,7 +257,9 @@ def main():
                 except:
                     pass
 
-            commit_msg = f"{args.commit_message} (profile: {args.profile}{version_info})"
+            commit_msg = (
+                f"{args.commit_message} (profile: {args.profile}{version_info})"
+            )
             run_cmd(["git", "commit", "-m", commit_msg])
             print(f"Committed: {commit_msg}")
         else:

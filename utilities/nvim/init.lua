@@ -19,6 +19,7 @@ vim.opt.splitbelow = true
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3
 vim.opt.clipboard = "unnamedplus"
+vim.cmd.syntax("enable")
 
 local function with_dir(spec, dir)
   spec.dir = spec.dir or (plugin_root .. "/" .. dir)
@@ -33,7 +34,13 @@ require("lazy").setup({
   with_dir({ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} }, "nvim-autopairs"),
   with_dir({ "numToStr/Comment.nvim", keys = { "gc", "gb" }, opts = {} }, "Comment.nvim"),
   with_dir({ "folke/which-key.nvim", event = "VeryLazy", opts = {} }, "which-key.nvim"),
-  with_dir({ "saghen/blink.cmp", event = "InsertEnter", opts = {} }, "blink.cmp"),
+  with_dir({
+    "saghen/blink.cmp",
+    event = "InsertEnter",
+    opts = {
+      keymap = { preset = "super-tab" },
+    },
+  }, "blink.cmp"),
   with_dir(require("user.plugins.treesitter"), "nvim-treesitter"),
   with_dir({ "stevearc/conform.nvim", event = "BufWritePre" }, "conform.nvim"),
   with_dir({ "Mofiqul/vscode.nvim", lazy = false, priority = 1000 }, "vscode.nvim"),
