@@ -7,98 +7,264 @@
 }: let
   inherit (pkgs.stdenv) isLinux;
 
-  multiple-cursors-src = ../../../utilities/nvim/vendor/multiple-cursors.nvim;
+  terraform-compat = pkgs.writeShellScriptBin "terraform" ''
+    exec ${pkgs.opentofu}/bin/tofu "$@"
+  '';
 
   nvim-plugins = with pkgs.vimPlugins; [
-    {pkg = lazy-nvim; dir = "lazy.nvim";}
-    {pkg = LazyVim; dir = "LazyVim";}
-    {pkg = snacks-nvim; dir = "snacks.nvim";}
-    {pkg = which-key-nvim; dir = "which-key.nvim";}
-    {pkg = noice-nvim; dir = "noice.nvim";}
-    {pkg = trouble-nvim; dir = "trouble.nvim";}
-    {pkg = todo-comments-nvim; dir = "todo-comments.nvim";}
-    {pkg = flash-nvim; dir = "flash.nvim";}
-    {pkg = ts-comments-nvim; dir = "ts-comments.nvim";}
-    {pkg = lazydev-nvim; dir = "lazydev.nvim";}
-    {pkg = persistence-nvim; dir = "persistence.nvim";}
-    {pkg = tokyonight-nvim; dir = "tokyonight.nvim";}
+    {
+      pkg = lazy-nvim;
+      dir = "lazy.nvim";
+    }
+    {
+      pkg = LazyVim;
+      dir = "LazyVim";
+    }
+    {
+      pkg = snacks-nvim;
+      dir = "snacks.nvim";
+    }
+    {
+      pkg = which-key-nvim;
+      dir = "which-key.nvim";
+    }
+    {
+      pkg = noice-nvim;
+      dir = "noice.nvim";
+    }
+    {
+      pkg = trouble-nvim;
+      dir = "trouble.nvim";
+    }
+    {
+      pkg = todo-comments-nvim;
+      dir = "todo-comments.nvim";
+    }
+    {
+      pkg = flash-nvim;
+      dir = "flash.nvim";
+    }
+    {
+      pkg = ts-comments-nvim;
+      dir = "ts-comments.nvim";
+    }
+    {
+      pkg = lazydev-nvim;
+      dir = "lazydev.nvim";
+    }
+    {
+      pkg = persistence-nvim;
+      dir = "persistence.nvim";
+    }
+    {
+      pkg = tokyonight-nvim;
+      dir = "tokyonight.nvim";
+    }
 
-    {pkg = nvim-lspconfig; dir = "nvim-lspconfig";}
-    {pkg = mason-nvim; dir = "mason.nvim";}
-    {pkg = mason-lspconfig-nvim; dir = "mason-lspconfig.nvim";}
+    {
+      pkg = nvim-lspconfig;
+      dir = "nvim-lspconfig";
+    }
+    {
+      pkg = mason-nvim;
+      dir = "mason.nvim";
+    }
+    {
+      pkg = mason-lspconfig-nvim;
+      dir = "mason-lspconfig.nvim";
+    }
 
-    {pkg = nvim-treesitter; dir = "nvim-treesitter";}
-    {pkg = nvim-treesitter-textobjects; dir = "nvim-treesitter-textobjects";}
-    {pkg = nvim-ts-autotag; dir = "nvim-ts-autotag";}
+    {
+      pkg = nvim-treesitter;
+      dir = "nvim-treesitter";
+    }
+    {
+      pkg = nvim-treesitter-textobjects;
+      dir = "nvim-treesitter-textobjects";
+    }
+    {
+      pkg = nvim-ts-autotag;
+      dir = "nvim-ts-autotag";
+    }
 
-    {pkg = conform-nvim; dir = "conform.nvim";}
-    {pkg = nvim-lint; dir = "nvim-lint";}
-    {pkg = gitsigns-nvim; dir = "gitsigns.nvim";}
+    {
+      pkg = conform-nvim;
+      dir = "conform.nvim";
+    }
+    {
+      pkg = nvim-lint;
+      dir = "nvim-lint";
+    }
+    {
+      pkg = gitsigns-nvim;
+      dir = "gitsigns.nvim";
+    }
 
-    {pkg = lualine-nvim; dir = "lualine.nvim";}
-    {pkg = bufferline-nvim; dir = "bufferline.nvim";}
-    {pkg = catppuccin-nvim; dir = "catppuccin";}
+    {
+      pkg = lualine-nvim;
+      dir = "lualine.nvim";
+    }
+    {
+      pkg = bufferline-nvim;
+      dir = "bufferline.nvim";
+    }
+    {
+      pkg = catppuccin-nvim;
+      dir = "catppuccin";
+    }
 
-    {pkg = mini-ai; dir = "mini.ai";}
-    {pkg = mini-pairs; dir = "mini.pairs";}
-    {pkg = mini-icons; dir = "mini.icons";}
-    {pkg = friendly-snippets; dir = "friendly-snippets";}
+    {
+      pkg = mini-ai;
+      dir = "mini.ai";
+    }
+    {
+      pkg = mini-pairs;
+      dir = "mini.pairs";
+    }
+    {
+      pkg = mini-icons;
+      dir = "mini.icons";
+    }
+    {
+      pkg = friendly-snippets;
+      dir = "friendly-snippets";
+    }
 
-    {pkg = plenary-nvim; dir = "plenary.nvim";}
-    {pkg = nui-nvim; dir = "nui.nvim";}
-    {pkg = sqlite-lua; dir = "sqlite.lua";}
-    {pkg = grug-far-nvim; dir = "grug-far.nvim";}
+    {
+      pkg = plenary-nvim;
+      dir = "plenary.nvim";
+    }
+    {
+      pkg = nui-nvim;
+      dir = "nui.nvim";
+    }
+    {
+      pkg = sqlite-lua;
+      dir = "sqlite.lua";
+    }
+    {
+      pkg = grug-far-nvim;
+      dir = "grug-far.nvim";
+    }
+    {
+      pkg = render-markdown-nvim;
+      dir = "render-markdown.nvim";
+    }
 
-    {pkg = nvim-web-devicons; dir = "nvim-web-devicons";}
-    {pkg = nvim-autopairs; dir = "nvim-autopairs";}
-    {pkg = comment-nvim; dir = "comment.nvim";}
-    {pkg = nvim-surround; dir = "nvim-surround";}
+    {
+      pkg = nvim-web-devicons;
+      dir = "nvim-web-devicons";
+    }
+    {
+      pkg = nvim-autopairs;
+      dir = "nvim-autopairs";
+    }
+    {
+      pkg = comment-nvim;
+      dir = "comment.nvim";
+    }
+    {
+      pkg = nvim-surround;
+      dir = "nvim-surround";
+    }
 
-    {pkg = blink-cmp; dir = "blink.cmp";}
-    {pkg = sidekick-nvim; dir = "sidekick.nvim";}
-    {pkg = aw-watcher-nvim; dir = "aw-watcher.nvim";}
+    {
+      pkg = blink-cmp;
+      dir = "blink.cmp";
+    }
+    {
+      pkg = sidekick-nvim;
+      dir = "sidekick.nvim";
+    }
+    {
+      pkg = aw-watcher-nvim;
+      dir = "aw-watcher.nvim";
+    }
+    {
+      pkg = vim-dadbod;
+      dir = "vim-dadbod";
+    }
+    {
+      pkg = vim-dadbod-completion;
+      dir = "vim-dadbod-completion";
+    }
+    {
+      pkg = vim-dadbod-ui;
+      dir = "vim-dadbod-ui";
+    }
+    {
+      pkg = venv-selector-nvim;
+      dir = "venv-selector.nvim";
+    }
 
     # User-kept extra plugin not provided by LazyVim defaults.
-    {pkg = vscode-nvim; dir = "vscode.nvim";}
-    {pkg = multiple-cursors-src; dir = "multiple-cursors.nvim";}
+    {
+      pkg = vscode-nvim;
+      dir = "vscode.nvim";
+    }
   ];
 
-  treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [
-    bash
-    css
-    lua
-    html
-    javascript
-    latex
-    python
-    nix
-    regex
-    scss
-    svelte
-    tsx
-    typst
-    vue
-    c
-    cpp
-  ] ++ [pkgs.tree-sitter-grammars.tree-sitter-norg];
+  treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers;
+    [
+      bash
+      css
+      lua
+      html
+      javascript
+      latex
+      python
+      nix
+      regex
+      scss
+      svelte
+      tsx
+      typst
+      vue
+      c
+      cpp
+      yaml
+    ]
+    ++ lib.optionals (pkgs.vimPlugins.nvim-treesitter-parsers ? helm) [pkgs.vimPlugins.nvim-treesitter-parsers.helm]
+    ++ [pkgs.tree-sitter-grammars.tree-sitter-norg];
 
   formatters = with pkgs; [
     alejandra
     black
     clang-tools
+    fish
+    gofumpt
+    gotools
+    markdown-toc
+    markdownlint-cli2
+    nixfmt-rfc-style
+    packer
+    php84Packages.php-cs-fixer
+    prettier
     rustfmt
     shfmt
+    sqlfluff
     stylua
   ];
 
   lsp-servers = with pkgs; [
     bash-language-server
     clang-tools
+    docker-compose-language-service
+    gopls
+    helm-ls
     lua-language-server
+    marksman
     nil
     nixd
+    phpactor
+    prisma-language-server
     pyright
     ruff
+    taplo
+    terraform-ls
+    vscode-langservers-extracted
+    vtsls
+    yaml-language-server
   ];
 
   linters = with pkgs; [
@@ -106,31 +272,38 @@
     shellcheck
   ];
 
-  tools = with pkgs; [
-    cargo
-    gcc
-    fd
-    fzf
-    ghostscript
-    lsof
-    lua5_1
-    luarocks
-    mermaid-cli
-    ripgrep
-    sqlite
-    tectonic
-    tree-sitter
-    copilot-language-server
-  ] ++ lib.optionals isLinux (with pkgs; [
-    wl-clipboard
-    xclip
-    xsel
-  ]);
+  tools = with pkgs;
+    [
+      cargo
+      gcc
+      fd
+      fzf
+      ghostscript
+      lsof
+      lua5_1
+      luarocks
+      mermaid-cli
+      opentofu
+      ripgrep
+      sqlite
+      tectonic
+      terraform-compat
+      tree-sitter
+      copilot-language-server
+    ]
+    ++ lib.optionals isLinux (with pkgs; [
+      wl-clipboard
+      xclip
+      xsel
+    ]);
 
   debug-tools = lib.optionals isLinux (with pkgs; [gdb]) ++ [pkgs.lldb];
 
   extractLang = grammar: let
-    name = if grammar ? pname then grammar.pname else grammar.name;
+    name =
+      if grammar ? pname
+      then grammar.pname
+      else grammar.name;
   in
     if lib.hasPrefix "nvim-treesitter-grammar-" name
     then lib.removePrefix "nvim-treesitter-grammar-" name

@@ -35,6 +35,8 @@ in {
     plugins = [pkgs.tmuxPlugins.extrakto];
 
     extraConfig = ''
+      set -g default-terminal "tmux-256color"
+      set -g focus-events on
       set -ga terminal-overrides ",tmux-256color:RGB"
       set -g renumber-windows on
       set -sg repeat-time 600
