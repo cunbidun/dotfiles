@@ -30,6 +30,8 @@ require("lazy").setup({
 			},
 		},
 	},
+	{ import = "lazyvim.plugins.extras.ai.copilot-native" },
+	{ import = "lazyvim.plugins.extras.ai.sidekick" },
 	{ import = "lazyvim.plugins.extras.lang.python" },
 	{ import = "lazyvim.plugins.extras.lang.typescript" },
 	{ import = "lazyvim.plugins.extras.lang.json" },
