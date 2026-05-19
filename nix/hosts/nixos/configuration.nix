@@ -314,11 +314,6 @@
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
   # Enable Stylix for system-wide theming
   # The actual theme configuration is in home-manager/configs/stylix.nix
   stylix = {

@@ -9,9 +9,6 @@
       shared:
         noSuperToCtrlApps: &noSuperToCtrlApps
           - kitty
-          - steam
-          - cs2
-          - dota2
           - qemu-system-x86_64
           - qemu
           - Qemu-system-x86_64
