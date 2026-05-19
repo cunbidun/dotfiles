@@ -63,6 +63,7 @@
       "github@openai-curated".enabled = true;
       "linear@openai-curated".enabled = true;
       "google-calendar@openai-curated".enabled = true;
+      "google-drive@openai-curated".enabled = true;
       "slack@openai-curated".enabled = true;
     };
 
