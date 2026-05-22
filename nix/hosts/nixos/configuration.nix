@@ -143,7 +143,7 @@
     KERNEL=="uinput", GROUP="input", TAG+="uaccess"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
     # Allow browser WebHID access to Keychron K4 HE interfaces.
-    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0e40", TAG+="uaccess", GROUP="input", MODE="0660"
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ENV{ID_VENDOR_ID}=="3434", ENV{ID_MODEL_ID}=="0e40", TAG+="uaccess", GROUP="input", MODE="0660"
   '';
 
   systemd.services.ddcci-backlight = {
