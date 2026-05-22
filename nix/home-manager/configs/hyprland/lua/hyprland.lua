@@ -159,14 +159,6 @@ hl.on("hyprland.start", function()
 end)
 
 local windowRules = {
-  { match = { class = "^(dota2)$" }, decorate = false },
-  { match = { class = "^(dota2)$" }, no_blur = true },
-  { match = { class = "^(dota2)$" }, no_shadow = true },
-  { match = { class = "^(dota2)$" }, workspace = "8 silent" },
-  { match = { class = "^(cs2)$" }, workspace = "8 silent" },
-  { match = { class = "^(cs2)$" }, decorate = false },
-  { match = { class = "^(cs2)$" }, no_blur = true },
-  { match = { class = "^(cs2)$" }, no_shadow = true },
   { match = { title = "^(Spotify Premium)$" }, float = true },
   { match = { class = "^([Ss]ignal)$" }, float = true },
   { match = { class = "^(obsidian)$" }, float = true },

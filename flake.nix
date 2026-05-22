@@ -25,10 +25,18 @@
   };
 
   inputs = {
-    nixpkgs-unstable = {url = "github:nixos/nixpkgs/nixos-unstable";};
-    nixpkgs-stable = {url = "github:nixos/nixpkgs/nixos-25.05";};
-    nix-darwin = {url = "github:LnL7/nix-darwin";};
-    home-manager = {url = "github:nix-community/home-manager";};
+    nixpkgs-unstable = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+    nixpkgs-stable = {
+      url = "github:nixos/nixpkgs/nixos-25.05";
+    };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+    };
     apple-fonts = {
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -40,10 +48,18 @@
     # +----------+
     # | Hyprland |
     # +----------+
-    hyprland = {url = "github:hyprwm/Hyprland?submodules=1";};
-    pyprland = {url = "github:hyprland-community/pyprland";};
-    hyprland-contrib = {url = "github:hyprwm/contrib";};
-    hyprcursor-phinger = {url = "github:jappie3/hyprcursor-phinger";};
+    hyprland = {
+      url = "github:hyprwm/Hyprland?submodules=1";
+    };
+    pyprland = {
+      url = "github:hyprland-community/pyprland";
+    };
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+    };
+    hyprcursor-phinger = {
+      url = "github:jappie3/hyprcursor-phinger";
+    };
     hyprfocus = {
       url = "github:cunbidun/hyprfocus";
       inputs.hyprland.follows = "hyprland";
@@ -58,7 +74,9 @@
     # +--------+
     # | Others |
     # +--------+
-    yazi = {url = "github:sxyazi/yazi/v26.1.22";};
+    yazi = {
+      url = "github:sxyazi/yazi/v26.1.22";
+    };
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
@@ -71,7 +89,9 @@
       url = "github:stelcodes/bunny.yazi";
       flake = false;
     };
-    stylix = {url = "github:nix-community/stylix";};
+    stylix = {
+      url = "github:nix-community/stylix";
+    };
 
     nix-monitored = {
       url = "github:ners/nix-monitored";
@@ -94,9 +114,11 @@
       url = "github:macadmins/default-browser/v1.0.18";
       flake = false;
     };
-    llm-agents = {url = "github:numtide/llm-agents.nix";};
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+    };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.20.12";
+      url = "github:vicinaehq/vicinae/v0.21.0";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
@@ -104,143 +126,152 @@
     };
   };
 
-  outputs = {
-    nixpkgs-unstable,
-    nix-darwin,
-    home-manager,
-    ...
-  } @ inputs: let
-    userdata = import ./userdata.nix;
-    mkPkgs = system:
-      import nixpkgs-unstable {
-        inherit system;
-        overlays = import ./nix/overlays inputs;
-        config.allowUnfree = true;
-      };
+  outputs =
+    {
+      nixpkgs-unstable,
+      nix-darwin,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      userdata = import ./userdata.nix;
+      mkPkgs =
+        system:
+        import nixpkgs-unstable {
+          inherit system;
+          overlays = import ./nix/overlays inputs;
+          config.allowUnfree = true;
+        };
 
-    mkHomeManagerModule = configPath: {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        backupFileExtension = "bak";
-        users.${userdata.username} = import configPath;
-        extraSpecialArgs = {
-          inherit inputs;
-          userdata = userdata;
+      mkHomeManagerModule = configPath: {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "bak";
+          users.${userdata.username} = import configPath;
+          extraSpecialArgs = {
+            inherit inputs;
+            userdata = userdata;
+          };
         };
       };
-    };
 
-    mkDarwinSystem = {
-      system,
-      stateVersionNum,
-    }:
-      nix-darwin.lib.darwinSystem {
-        pkgs = mkPkgs system;
-        specialArgs = {
-          inherit inputs userdata;
-          stateVersion = stateVersionNum;
+      mkDarwinSystem =
+        {
+          system,
+          stateVersionNum,
+        }:
+        nix-darwin.lib.darwinSystem {
+          pkgs = mkPkgs system;
+          specialArgs = {
+            inherit inputs userdata;
+            stateVersion = stateVersionNum;
+          };
+          modules = [
+            inputs.mac-app-util.darwinModules.default
+            ./nix/hosts/macbook/configuration.nix
+            home-manager.darwinModules.home-manager
+            (mkHomeManagerModule ./nix/hosts/macbook/home.nix)
+          ];
         };
-        modules = [
-          inputs.mac-app-util.darwinModules.default
-          ./nix/hosts/macbook/configuration.nix
-          home-manager.darwinModules.home-manager
-          (mkHomeManagerModule ./nix/hosts/macbook/home.nix)
-        ];
-      };
 
-    mkNixosHost = {
-      system,
-      hostPath,
-      homePath,
-      diskoPath,
-    }:
-      nixpkgs-unstable.lib.nixosSystem {
-        pkgs = mkPkgs system;
-        specialArgs = {
-          inherit inputs userdata;
+      mkNixosHost =
+        {
+          system,
+          hostPath,
+          homePath,
+          diskoPath,
+        }:
+        nixpkgs-unstable.lib.nixosSystem {
+          pkgs = mkPkgs system;
+          specialArgs = {
+            inherit inputs userdata;
+          };
+          modules = [
+            inputs.disko.nixosModules.disko
+            inputs.stylix.nixosModules.stylix
+            diskoPath
+            hostPath
+            home-manager.nixosModules.home-manager
+            (mkHomeManagerModule homePath)
+          ];
         };
-        modules = [
-          inputs.disko.nixosModules.disko
-          inputs.stylix.nixosModules.stylix
-          diskoPath
-          hostPath
-          home-manager.nixosModules.home-manager
-          (mkHomeManagerModule homePath)
-        ];
-      };
-  in {
-    # for running commands like `nix eval .#inputs.hyprland.packages.x86_64-linux.hyprland`
-    inputs = inputs;
+    in
+    {
+      # for running commands like `nix eval .#inputs.hyprland.packages.x86_64-linux.hyprland`
+      inputs = inputs;
 
-    # Home Manager modules
-    homeManagerModules = {
-      theme-manager = import ./nix/theme-manager/hm-module.nix;
-    };
-
-    # -----------------------#
-    # macbook configurations #
-    # -----------------------#
-    darwinConfigurations = {
-      "macbook-m1" = mkDarwinSystem {
-        system = "aarch64-darwin";
-        stateVersionNum = 4;
-      };
-    };
-
-    # -----------------------#
-    #  nixos configurations  #
-    # -----------------------#
-    nixosConfigurations = {
-      nixos = mkNixosHost {
-        system = "x86_64-linux";
-        hostPath = ./nix/hosts/nixos/configuration.nix;
-        homePath = ./nix/hosts/nixos/home.nix;
-        diskoPath = ./nix/hosts/nixos/disko.nix;
+      # Home Manager modules
+      homeManagerModules = {
+        theme-manager = import ./nix/theme-manager/hm-module.nix;
       };
 
-      home-server = mkNixosHost {
-        system = "x86_64-linux";
-        hostPath = ./nix/hosts/home-server/configuration.nix;
-        homePath = ./nix/hosts/home-server/home.nix;
-        diskoPath = ./nix/hosts/home-server/disko.nix;
-      };
-
-      minimal = nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
-        pkgs = mkPkgs "x86_64-linux";
-        specialArgs = {
-          inherit inputs userdata;
+      # -----------------------#
+      # macbook configurations #
+      # -----------------------#
+      darwinConfigurations = {
+        "macbook-m1" = mkDarwinSystem {
+          system = "aarch64-darwin";
+          stateVersionNum = 4;
         };
-        modules = [
-          ./nix/hosts/minimal/configuration.nix
-        ];
       };
 
-      rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
-        specialArgs = inputs // {inherit userdata;};
-        trustCaches = true;
-        modules = [
-          ({nixos-raspberrypi, ...}: {
-            imports = with nixos-raspberrypi.nixosModules; [
-              raspberry-pi-5.base
-              raspberry-pi-5.page-size-16k
-              raspberry-pi-5.display-vc4
-            ];
-          })
-          inputs.disko.nixosModules.disko
-          ./nix/hosts/rpi/hardware-configuration.nix
-          ./nix/hosts/rpi/configuration.nix
-          inputs.home-manager-rpi5.nixosModules.home-manager
-          (mkHomeManagerModule ./nix/hosts/rpi/home.nix)
-          ({...}: {
-            nixpkgs.overlays =
-              import ./nix/overlays inputs
-              ++ [
-                (final: prev: {
-                  pythonPackagesExtensions =
-                    prev.pythonPackagesExtensions
-                    ++ [
+      # -----------------------#
+      #  nixos configurations  #
+      # -----------------------#
+      nixosConfigurations = {
+        nixos = mkNixosHost {
+          system = "x86_64-linux";
+          hostPath = ./nix/hosts/nixos/configuration.nix;
+          homePath = ./nix/hosts/nixos/home.nix;
+          diskoPath = ./nix/hosts/nixos/disko.nix;
+        };
+
+        home-server = mkNixosHost {
+          system = "x86_64-linux";
+          hostPath = ./nix/hosts/home-server/configuration.nix;
+          homePath = ./nix/hosts/home-server/home.nix;
+          diskoPath = ./nix/hosts/home-server/disko.nix;
+        };
+
+        minimal = nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+          pkgs = mkPkgs "x86_64-linux";
+          specialArgs = {
+            inherit inputs userdata;
+          };
+          modules = [
+            ./nix/hosts/minimal/configuration.nix
+          ];
+        };
+
+        rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
+          specialArgs = inputs // {
+            inherit userdata;
+          };
+          trustCaches = true;
+          modules = [
+            (
+              { nixos-raspberrypi, ... }:
+              {
+                imports = with nixos-raspberrypi.nixosModules; [
+                  raspberry-pi-5.base
+                  raspberry-pi-5.page-size-16k
+                  raspberry-pi-5.display-vc4
+                ];
+              }
+            )
+            inputs.disko.nixosModules.disko
+            ./nix/hosts/rpi/hardware-configuration.nix
+            ./nix/hosts/rpi/configuration.nix
+            inputs.home-manager-rpi5.nixosModules.home-manager
+            (mkHomeManagerModule ./nix/hosts/rpi/home.nix)
+            (
+              { ... }:
+              {
+                nixpkgs.overlays = import ./nix/overlays inputs ++ [
+                  (final: prev: {
+                    pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
                       (pythonFinal: pythonPrev: {
                         # Override markdown-it-py for all Python versions
                         markdown-it-py = pythonPrev."markdown-it-py".overridePythonAttrs (old: {
@@ -249,62 +280,84 @@
                         });
                       })
                     ];
-                })
-              ];
-          })
-        ];
+                  })
+                ];
+              }
+            )
+          ];
+        };
       };
-    };
 
-    # -----------------------#
-    #     runnable apps      #
-    # -----------------------#
-    apps = let
-      forAllSystems = f:
-        builtins.listToAttrs (map (system: {
-          name = system;
-          value = f system;
-        }) ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"]);
-    in
-      forAllSystems (system: let
-        pkgs = mkPkgs system;
-        themeManager = pkgs.theme-manager;
-      in {
-        theme-manager = {
-          type = "app";
-          program = "${themeManager}/bin/theme-manager";
-        };
-        themectl = {
-          type = "app";
-          program = "${themeManager}/bin/themectl";
-        };
-        flake-input-versions = let
-          pythonWithDeps = pkgs.python3.withPackages (ps: with ps; [texttable]);
-          script = pkgs.writeShellScriptBin "flake-input-versions" ''
-            exec ${pythonWithDeps}/bin/python3 ${./scripts/flake_input_versions.py} "$@"
-          '';
-        in {
-          type = "app";
-          program = "${script}/bin/flake-input-versions";
-        };
-        precommit = let
-          script = pkgs.writeShellScriptBin "precommit-run" ''
-            cd "$(git rev-parse --show-toplevel)"
-            ${pkgs.pre-commit}/bin/pre-commit "$@"
-          '';
-        in {
-          type = "app";
-          program = "${script}/bin/precommit-run";
-        };
-        switch = let
-          pythonWithDeps = pkgs.python3.withPackages (ps: with ps; []);
-          script = pkgs.writeShellScriptBin "nix-switch" ''
-            exec ${pythonWithDeps}/bin/python3 ${./scripts/switch.py} "$@"
-          '';
-        in {
-          type = "app";
-          program = "${script}/bin/nix-switch";
-        };
-      });
-  };
+      # -----------------------#
+      #     runnable apps      #
+      # -----------------------#
+      apps =
+        let
+          forAllSystems =
+            f:
+            builtins.listToAttrs (
+              map
+                (system: {
+                  name = system;
+                  value = f system;
+                })
+                [
+                  "x86_64-linux"
+                  "aarch64-linux"
+                  "aarch64-darwin"
+                  "x86_64-darwin"
+                ]
+            );
+        in
+        forAllSystems (
+          system:
+          let
+            pkgs = mkPkgs system;
+            themeManager = pkgs.theme-manager;
+          in
+          {
+            theme-manager = {
+              type = "app";
+              program = "${themeManager}/bin/theme-manager";
+            };
+            themectl = {
+              type = "app";
+              program = "${themeManager}/bin/themectl";
+            };
+            flake-input-versions =
+              let
+                pythonWithDeps = pkgs.python3.withPackages (ps: with ps; [ texttable ]);
+                script = pkgs.writeShellScriptBin "flake-input-versions" ''
+                  exec ${pythonWithDeps}/bin/python3 ${./scripts/flake_input_versions.py} "$@"
+                '';
+              in
+              {
+                type = "app";
+                program = "${script}/bin/flake-input-versions";
+              };
+            precommit =
+              let
+                script = pkgs.writeShellScriptBin "precommit-run" ''
+                  cd "$(git rev-parse --show-toplevel)"
+                  ${pkgs.pre-commit}/bin/pre-commit "$@"
+                '';
+              in
+              {
+                type = "app";
+                program = "${script}/bin/precommit-run";
+              };
+            switch =
+              let
+                pythonWithDeps = pkgs.python3.withPackages (ps: with ps; [ ]);
+                script = pkgs.writeShellScriptBin "nix-switch" ''
+                  exec ${pythonWithDeps}/bin/python3 ${./scripts/switch.py} "$@"
+                '';
+              in
+              {
+                type = "app";
+                program = "${script}/bin/nix-switch";
+              };
+          }
+        );
+    };
 }

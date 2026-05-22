@@ -32,6 +32,36 @@ require("lazy").setup({
 	},
 	{ import = "lazyvim.plugins.extras.ai.copilot-native" },
 	{ import = "lazyvim.plugins.extras.ai.sidekick" },
+	{ import = "lazyvim.plugins.extras.ai.copilot-chat" },
+	-- Override CopilotChat keys: sidekick owns <leader>aa, so remap chat toggle to <leader>ac
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		dir = root .. "/CopilotChat.nvim",
+		keys = {
+			{ "<leader>aa", false }, -- freed for sidekick
+			{
+				"<leader>ac",
+				function()
+					require("CopilotChat").toggle()
+				end,
+				desc = "Toggle Chat (CopilotChat)",
+				mode = { "n", "x" },
+			},
+		},
+	},
+	-- Configure codex CLI with dangerously-bypass-approvals flag
+	{
+		"folke/sidekick.nvim",
+		opts = function(_, opts)
+			opts.cli = opts.cli or {}
+			opts.cli.tools = opts.cli.tools or {}
+			opts.cli.tools.codex = vim.tbl_deep_extend("force", opts.cli.tools.codex or {}, {
+				cmd = { "codex", "--dangerously-bypass-approvals-and-sandbox" },
+				resume = { "resume" },
+			})
+			return opts
+		end,
+	},
 	{ import = "lazyvim.plugins.extras.lang.python" },
 	{ import = "lazyvim.plugins.extras.lang.typescript" },
 	{ import = "lazyvim.plugins.extras.lang.json" },
@@ -52,6 +82,7 @@ require("lazy").setup({
 	{ "mason-org/mason.nvim", enabled = false },
 	{ "mason-org/mason-lspconfig.nvim", enabled = false },
 	{ "nvim-treesitter/nvim-treesitter", enabled = false },
+	{ import = "user.plugins" },
 }, {
 	root = root,
 	install = { missing = false, colorscheme = {} },
@@ -92,40 +123,5 @@ vim.filetype.add({
 	},
 })
 
--- Keybindings
--- Snacks picker keybindings
-vim.keymap.set("n", "<leader>f", function() require("snacks").picker.files() end, { desc = "Find files" })
-vim.keymap.set("n", "<leader>t", function() require("snacks").picker.grep() end, { desc = "Live grep" })
-
--- Terminal keybindings
-vim.keymap.set({ "n", "t" }, "<C-\\>", function() require("snacks").terminal() end, { desc = "Toggle terminal" })
-
--- Buffer navigation
-vim.keymap.set("n", "<TAB>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<S-TAB>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
-vim.keymap.set("n", "X", function() require("snacks").bufdelete() end, { silent = true, desc = "Close buffer" })
-
--- Window navigation (normal mode)
-vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true })
-
--- Window navigation (terminal mode)
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", { noremap = true })
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { noremap = true })
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", { noremap = true })
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { noremap = true })
-
--- LSP keybindings
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "Signature help" })
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
-vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostics" })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+-- Keybindings (see keymaps.lua)
+require("user.keymaps")
