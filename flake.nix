@@ -267,7 +267,7 @@
             inputs.home-manager-rpi5.nixosModules.home-manager
             (mkHomeManagerModule ./nix/hosts/rpi/home.nix)
             (
-              { ... }:
+              { _ }:
               {
                 nixpkgs.overlays = import ./nix/overlays inputs ++ [
                   (final: prev: {
