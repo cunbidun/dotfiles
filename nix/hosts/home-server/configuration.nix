@@ -73,6 +73,7 @@
 
   systemd.tmpfiles.rules = [
     "d /srv/storage/shared 0775 ${userdata.username} users -"
+    "d /var/lib/9router 0750 root root -"
   ];
 
   # Taskwarrior 3 sync backend (TaskChampion server)
@@ -88,6 +89,27 @@
   networking.firewall = {
     enable = true;
     trustedInterfaces = ["tailscale0"];
+    allowedTCPPorts = [20128];
+  };
+
+  # 9router dashboard and OpenAI-compatible API endpoint.
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers."9router" = {
+      image = "decolua/9router:latest";
+      ports = [
+        "20128:20128"
+      ];
+      volumes = [
+        "/var/lib/9router:/app/data"
+      ];
+      environment = {
+        DATA_DIR = "/app/data";
+      };
+      extraOptions = [
+        "--pull=always"
+      ];
+    };
   };
 
   # Docker specific settings
