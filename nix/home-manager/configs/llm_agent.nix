@@ -4,6 +4,7 @@
   ...
 }: let
   githubTokenPath = "${config.home.homeDirectory}/.config/opencode/github_read_only_token";
+  ninerouterTokenPath = "${config.home.homeDirectory}/.config/opencode/ninerouter_api_key";
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
   chromeDevToolsProfile = "${config.home.homeDirectory}/.cache/chrome-devtools-mcp/opencode-profile";
   codexChromeDevToolsProfile = "${config.home.homeDirectory}/.cache/chrome-devtools-mcp/codex-profile";
@@ -25,9 +26,16 @@
   ];
   codexToml = pkgs.formats.toml {};
   codexConfigFile = codexToml.generate "codex-config.toml" {
-    model = "gpt-5.5";
+    model_provider = "9router";
+    model = "cx/gpt-5.5";
     model_reasoning_effort = "medium";
     personality = "pragmatic";
+
+    model_providers."9router" = {
+      name = "9router";
+      base_url = "http://home-server.tail9b4f4d.ts.net:20128/v1";
+      env_key = "NINEROUTER_API_KEY";
+    };
 
     features = {
       multi_agent = true;
@@ -67,7 +75,7 @@
       "slack@openai-curated".enabled = true;
     };
 
-    tui.model_availability_nux."gpt-5.5" = 4;
+    tui.model_availability_nux."cx/gpt-5.5" = 4;
   };
 in {
   home.packages = with pkgs; [
@@ -152,6 +160,13 @@ in {
       };
     };
   };
+
+  home.sessionVariablesExtra = ''
+    if [ -r "${ninerouterTokenPath}" ]; then
+      export NINEROUTER_API_KEY="$(tr -d '\n' < "${ninerouterTokenPath}")"
+    fi
+  '';
+
   home.file.".codex/config.toml" = {
     source = codexConfigFile;
     force = true;
