@@ -46,6 +46,10 @@
     initContent = ''
       ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
+      if [ -r "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]; then
+        . "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
+      fi
+
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
       [ -d "/snap/bin" ] && export PATH=$PATH:/snap/bin
 
