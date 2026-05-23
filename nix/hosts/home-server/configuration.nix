@@ -44,6 +44,12 @@
       group = "users";
       mode = "0400";
     };
+    secrets.ninerouter_api_key = {
+      path = "/home/${userdata.username}/.config/opencode/ninerouter_api_key";
+      owner = userdata.username;
+      group = "users";
+      mode = "0400";
+    };
   };
 
   # File sharing over Tailscale.

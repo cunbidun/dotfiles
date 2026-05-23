@@ -106,6 +106,12 @@
       group = "users";
       mode = "0400";
     };
+    secrets.ninerouter_api_key = {
+      path = "/home/${userdata.username}/.config/opencode/ninerouter_api_key";
+      owner = userdata.username;
+      group = "users";
+      mode = "0400";
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
