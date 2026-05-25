@@ -4,7 +4,8 @@
   userdata,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ../shared/nix-config.nix
   ];
@@ -32,7 +33,7 @@
     description = userdata.name;
     home = "/Users/${userdata.username}";
     shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = userdata.authorizedKeys or [];
+    openssh.authorizedKeys.keys = userdata.authorizedKeys or [ ];
   };
 
   system.primaryUser = "${userdata.username}";
@@ -193,7 +194,7 @@
 
     # example of adding a tap
     # taps = ["homebrew/cask-fonts" "dimentium/autoraise" "nikitabobko/tap" "homebrew/services"];
-    taps = [];
+    taps = [ ];
 
     # `brew install`
     # Example of installing a package and starting a service
@@ -232,6 +233,7 @@
       "docker-desktop"
       "libreoffice"
       "datagrip"
+      "codex-app"
     ];
     global.autoUpdate = true;
   };
