@@ -102,6 +102,23 @@ in
   };
 
   xdg = {
+    desktopEntries.claude-desktop = {
+      name = "Claude";
+      genericName = "Claude Desktop";
+      comment = "Claude Desktop (Wayland)";
+      exec = "env ELECTRON_OZONE_PLATFORM_HINT=wayland OZONE_PLATFORM=wayland NIXOS_OZONE_WL=1 claude-desktop --ozone-platform=wayland --enable-features=UseOzonePlatform,WaylandWindowDecorations %u";
+      terminal = false;
+      icon = "claude-desktop";
+      categories = [
+        "Office"
+        "Utility"
+      ];
+      mimeType = [ "x-scheme-handler/claude" ];
+      settings = {
+        StartupWMClass = "Claude";
+      };
+    };
+
     mimeApps = {
       enable = true;
       defaultApplications = {
