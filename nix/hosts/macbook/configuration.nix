@@ -234,6 +234,7 @@
       "libreoffice"
       "datagrip"
       "codex-app"
+      "claude"
     ];
     global.autoUpdate = true;
   };
