@@ -91,7 +91,7 @@ in rec {
     yazi-wrapper
     xdg-terminal-exec
     pkgs.spotify
-    pkgs.claude-desktop-fhs
+    inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop
     pkgs.blender # A 3D modeling and animation software
     pkgs.glib
     pkgs.trash-cli
