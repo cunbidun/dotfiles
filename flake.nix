@@ -75,7 +75,7 @@
     # | Others |
     # +--------+
     yazi = {
-      url = "github:sxyazi/yazi";
+      url = "github:sxyazi/yazi/v26.5.6";
     };
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
