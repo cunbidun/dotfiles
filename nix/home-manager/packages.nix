@@ -91,6 +91,7 @@ in rec {
     yazi-wrapper
     xdg-terminal-exec
     pkgs.spotify
+    pkgs.claude-desktop-fhs
     pkgs.blender # A 3D modeling and animation software
     pkgs.glib
     pkgs.trash-cli

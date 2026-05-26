@@ -117,6 +117,9 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
+    claude-desktop = {
+      url = "github:aaddrick/claude-desktop-debian";
+    };
     vicinae = {
       url = "github:vicinaehq/vicinae/v0.21.0";
     };
