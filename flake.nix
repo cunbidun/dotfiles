@@ -78,15 +78,17 @@
       url = "github:sxyazi/yazi/v26.5.6";
     };
     yazi-plugins = {
-      url = "github:yazi-rs/plugins";
+      # Pin plugin revisions so flake update doesn't silently drift plugins
+      # ahead of the pinned Yazi release.
+      url = "github:yazi-rs/plugins/5d5c4803dd12bab4e4f19d606f8db0c871e6bec5";
       flake = false;
     };
     yazi-restore = {
-      url = "github:boydaihungst/restore.yazi";
+      url = "github:boydaihungst/restore.yazi/0e0870460b9b74c5ae98b7f96c7c26a9a274ce6d";
       flake = false;
     };
     yazi-bunny = {
-      url = "github:stelcodes/bunny.yazi";
+      url = "github:stelcodes/bunny.yazi/71b14a3d624572f4884354c2e218296e9ece07cc";
       flake = false;
     };
     stylix = {

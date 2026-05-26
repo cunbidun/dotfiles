@@ -2168,6 +2168,7 @@
       "original": {
         "owner": "stelcodes",
         "repo": "bunny.yazi",
+        "rev": "71b14a3d624572f4884354c2e218296e9ece07cc",
         "type": "github"
       }
     },
@@ -2184,6 +2185,7 @@
       "original": {
         "owner": "yazi-rs",
         "repo": "plugins",
+        "rev": "5d5c4803dd12bab4e4f19d606f8db0c871e6bec5",
         "type": "github"
       }
     },
@@ -2200,6 +2202,7 @@
       "original": {
         "owner": "boydaihungst",
         "repo": "restore.yazi",
+        "rev": "0e0870460b9b74c5ae98b7f96c7c26a9a274ce6d",
         "type": "github"
       }
     }
