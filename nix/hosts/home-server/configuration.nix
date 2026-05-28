@@ -118,6 +118,27 @@
     };
   };
 
+  systemd.services.update-9router = {
+    description = "Update 9router container image";
+    after = ["docker.service"];
+    requires = ["docker.service"];
+    path = [pkgs.systemd];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      systemctl restart docker-9router.service
+    '';
+  };
+
+  systemd.timers.update-9router = {
+    description = "Update 9router container image daily";
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = "30m";
+    };
+  };
+
   # Docker specific settings
   virtualisation.docker.enableOnBoot = true;
 

@@ -10,6 +10,7 @@
     pkgs = pkgs;
     inputs = inputs;
   };
+  llm_agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in {
   imports = [
     ../../home-manager/configs/zsh.nix
@@ -26,7 +27,11 @@ in {
   programs.atuin.enable = true;
 
   # Only include default packages, no GUI packages
-  home.packages = package_config.default_packages;
+  home.packages =
+    package_config.default_packages
+    ++ [
+      llm_agents.claude-code
+    ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
