@@ -245,6 +245,17 @@ in
   };
   programs.hyprcursor-phinger.enable = true;
   programs.atuin.enable = true;
+
+  programs.ssh = {
+    enable = true;
+    matchBlocks."*" = {
+      serverAliveInterval = 20;
+      serverAliveCountMax = 3;
+      extraOptions = {
+        TCPKeepAlive = "yes";
+      };
+    };
+  };
   programs.zoxide.enable = true;
 
   # This value determines the Home Manager release that your
