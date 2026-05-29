@@ -64,6 +64,11 @@
       export PATH=$PATH:$HOME/.local/bin
       export PATH=$PATH:$HOME/.cargo/bin
 
+      # Prefer 1Password SSH agent when available.
+      if [ -S "$HOME/.1password/agent.sock" ]; then
+        export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+      fi
+
       eval "$(starship init zsh)"
       eval "$(atuin init zsh --disable-up-arrow)"
 

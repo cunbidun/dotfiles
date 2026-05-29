@@ -255,6 +255,14 @@ in
         TCPKeepAlive = "yes";
       };
     };
+    matchBlocks."github.com" = {
+      user = "git";
+      hostname = "github.com";
+      identitiesOnly = true;
+      extraOptions = {
+        IdentityAgent = "~/.1password/agent.sock";
+      };
+    };
   };
   programs.zoxide.enable = true;
 
