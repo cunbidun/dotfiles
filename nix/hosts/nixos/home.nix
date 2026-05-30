@@ -101,6 +101,15 @@ in {
   };
 
   xdg = {
+    dataFile = {
+      "icons/hicolor/16x16/apps/claude-desktop.png".source = ../../../icons/claude-desktop/16.png;
+      "icons/hicolor/24x24/apps/claude-desktop.png".source = ../../../icons/claude-desktop/24.png;
+      "icons/hicolor/32x32/apps/claude-desktop.png".source = ../../../icons/claude-desktop/32.png;
+      "icons/hicolor/48x48/apps/claude-desktop.png".source = ../../../icons/claude-desktop/48.png;
+      "icons/hicolor/64x64/apps/claude-desktop.png".source = ../../../icons/claude-desktop/64.png;
+      "icons/hicolor/256x256/apps/claude-desktop.png".source = ../../../icons/claude-desktop/256.png;
+    };
+
     desktopEntries.claude-desktop = {
       name = "Claude";
       genericName = "Claude Desktop";
