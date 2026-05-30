@@ -257,6 +257,12 @@ in
         IdentityAgent = "~/.1password/agent.sock";
       };
     };
+    # Named host entries are discovered by many tunnel UIs.
+    matchBlocks."home-server" = {
+      hostname = "home-server.tail9b4f4d.ts.net";
+      user = userdata.username;
+      port = 22;
+    };
   };
   programs.zoxide.enable = true;
 
