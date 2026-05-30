@@ -79,8 +79,8 @@ hl.config({
     kb_rules = "",
     repeat_rate = 50,
     repeat_delay = 200,
-    -- Avoid accidental focus jumps into stale terminals after wake/sleep.
-    follow_mouse = 0,
+    -- Keep focus following the mouse as before.
+    follow_mouse = 1,
     touchpad = {
       natural_scroll = true,
     },
