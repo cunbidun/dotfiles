@@ -88,21 +88,6 @@ def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
             print("Copied: VS Code extensions list")
 
 
-def run_flake_update(git_root: Path, inputs: list[str] | None) -> None:
-    """Update flake.lock for all or selected inputs before switch/build."""
-    if inputs is None:
-        return
-
-    cmd = ["nix", "flake", "update", "--flake", str(git_root)]
-    if inputs:
-        cmd.extend(inputs)
-        print(f"Updating flake inputs: {', '.join(inputs)}")
-    else:
-        print("Updating all flake inputs...")
-
-    run_cmd(cmd)
-
-
 def main():
     parser = argparse.ArgumentParser(description="NixOS/Darwin configuration switcher")
     parser.add_argument(
@@ -128,16 +113,6 @@ def main():
         "--copy-back-only",
         action="store_true",
         help="Only copy files back, skip build/switch",
-    )
-    parser.add_argument(
-        "--flake-update",
-        nargs="*",
-        metavar="INPUT",
-        help=(
-            "Run nix flake update before build/switch. "
-            "Pass input names to update specific inputs; "
-            "leave empty to update all inputs."
-        ),
     )
 
     args = parser.parse_args()
@@ -177,9 +152,6 @@ def main():
             else:
                 print("No changes to commit.")
         return 0
-
-    # Optionally refresh flake inputs before switch/build.
-    run_flake_update(git_root, args.flake_update)
 
     # Stage all changes
     run_cmd(["git", "add", "-A"])
