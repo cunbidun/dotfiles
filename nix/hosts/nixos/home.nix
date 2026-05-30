@@ -5,14 +5,12 @@
   inputs,
   userdata,
   ...
-}:
-let
+}: let
   package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
   };
-in
-{
+in {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
@@ -54,7 +52,7 @@ in
   home.packages = package_config.default_packages ++ package_config.linux_packages;
 
   # Ensure old user-enabled tray applet and gammastep service don't keep autostarting.
-  home.activation.disableGammastepIndicator = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.disableGammastepIndicator = lib.hm.dag.entryAfter ["writeBoundary"] ''
     run systemctl --user disable --now gammastep.service >/dev/null 2>&1 || true
     run systemctl --user disable --now gammastep-indicator.service >/dev/null 2>&1 || true
   '';
@@ -78,7 +76,7 @@ in
         "SFMono Nerd Font"
         "Noto Sans Mono CJK SC"
       ];
-      emoji = [ "Noto Color Emoji" ];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -114,7 +112,7 @@ in
         "Office"
         "Utility"
       ];
-      mimeType = [ "x-scheme-handler/claude" ];
+      mimeType = ["x-scheme-handler/claude"];
       settings = {
         StartupWMClass = "Claude";
       };
@@ -123,18 +121,18 @@ in
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = [ "org.gnome.Evince.desktop" ];
-        "image/jpeg" = [ "feh.desktop" ];
-        "image/png" = [ "feh.desktop" ];
-        "text/plain" = [ "nvim.desktop" ];
-        "inode/directory" = [ "yazi.desktop" ];
-        "text/html" = [ "google-chrome.desktop" ];
-        "application/xhtml+xml" = [ "google-chrome.desktop" ];
-        "application/x-www-form-urlencoded" = [ "google-chrome.desktop" ];
-        "x-scheme-handler/http" = [ "google-chrome.desktop" ];
-        "x-scheme-handler/https" = [ "google-chrome.desktop" ];
+        "application/pdf" = ["org.gnome.Evince.desktop"];
+        "image/jpeg" = ["feh.desktop"];
+        "image/png" = ["feh.desktop"];
+        "text/plain" = ["nvim.desktop"];
+        "inode/directory" = ["yazi.desktop"];
+        "text/html" = ["google-chrome.desktop"];
+        "application/xhtml+xml" = ["google-chrome.desktop"];
+        "application/x-www-form-urlencoded" = ["google-chrome.desktop"];
+        "x-scheme-handler/http" = ["google-chrome.desktop"];
+        "x-scheme-handler/https" = ["google-chrome.desktop"];
         # Point terminal handler at kitty -e; avoids Vicinae sending apps through kitty +open URL mode
-        "x-scheme-handler/terminal" = [ "kitty.desktop" ];
+        "x-scheme-handler/terminal" = ["kitty.desktop"];
       };
     };
 
@@ -155,10 +153,10 @@ in
       ];
     };
     portal.config = {
-      common.default = [ "hyprland;gtk" ];
-      hyprland.default = [ "hyprland" ];
-      hyprland."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-      common."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+      common.default = ["hyprland;gtk"];
+      hyprland.default = ["hyprland"];
+      hyprland."org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
+      common."org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
     };
 
     # https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser
@@ -200,7 +198,7 @@ in
     type = "fcitx5"; # tell HM which backend you want
     fcitx5 = {
       waylandFrontend = true; # flip to false on pure‑X11
-      addons = with pkgs; [ fcitx5-bamboo ]; # pull the Bamboo engine
+      addons = with pkgs; [fcitx5-bamboo]; # pull the Bamboo engine
 
       settings = {
         ## 1.  ~/.config/fcitx5/profile  ── engine list & order
@@ -225,7 +223,7 @@ in
             # Skip first input method while enumerating
             EnumerateSkipFirst = "False";
           };
-          "Hotkey/TriggerKeys" = { };
+          "Hotkey/TriggerKeys" = {};
           "Hotkey/EnumerateForwardKeys" = {
             "0" = "Super+space";
           };
@@ -237,7 +235,7 @@ in
       };
     };
   };
-  systemd.user.services.fcitx5-daemon = lib.mkForce { };
+  systemd.user.services.fcitx5-daemon = lib.mkForce {};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
