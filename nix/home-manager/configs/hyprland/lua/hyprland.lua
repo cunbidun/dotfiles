@@ -41,7 +41,7 @@ hl.config({
     swallow_exception_regex = "wev|^(.*[Yy]azi.*)$|ranger|^(.*nvim.*)$|^(.*Competitive Programming.*)$",
     swallow_regex = "kitty",
     disable_hyprland_logo = true,
-    focus_on_activate = false,
+    focus_on_activate = true,
     background_color = nix.colors.background,
   },
 
