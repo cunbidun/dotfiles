@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./9router.nix
     ../shared/nix-config.nix
     ../shared/common.nix
     inputs.sops-nix.nixosModules.sops
@@ -79,7 +80,6 @@
 
   systemd.tmpfiles.rules = [
     "d /srv/storage/shared 0775 ${userdata.username} users -"
-    "d /var/lib/9router 0750 root root -"
   ];
 
   # Taskwarrior 3 sync backend (TaskChampion server)
@@ -95,52 +95,7 @@
   networking.firewall = {
     enable = true;
     trustedInterfaces = ["tailscale0"];
-    allowedTCPPorts = [20128];
   };
-
-  # 9router dashboard and OpenAI-compatible API endpoint.
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers."9router" = {
-      image = "decolua/9router:latest";
-      ports = [
-        "20128:20128"
-      ];
-      volumes = [
-        "/var/lib/9router:/app/data"
-      ];
-      environment = {
-        DATA_DIR = "/app/data";
-      };
-      extraOptions = [
-        "--pull=always"
-      ];
-    };
-  };
-
-  systemd.services.update-9router = {
-    description = "Update 9router container image";
-    after = ["docker.service"];
-    requires = ["docker.service"];
-    path = [pkgs.systemd];
-    serviceConfig.Type = "oneshot";
-    script = ''
-      systemctl restart docker-9router.service
-    '';
-  };
-
-  systemd.timers.update-9router = {
-    description = "Update 9router container image daily";
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      OnCalendar = "daily";
-      Persistent = true;
-      RandomizedDelaySec = "30m";
-    };
-  };
-
-  # Docker specific settings
-  virtualisation.docker.enableOnBoot = true;
 
   # System state version
   system.stateVersion = "25.05";

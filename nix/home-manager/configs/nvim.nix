@@ -248,7 +248,6 @@ let
     markdown-toc
     markdownlint-cli2
     nixfmt
-    packer
     php84Packages.php-cs-fixer
     prettier
     rustfmt

@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   services.activitywatch = {
     enable = true;
-    package = pkgs.aw-server-rust;
-    watchers = {awatcher.package = pkgs.awatcher;};
+    package = pkgs.nixpkgs-stable.aw-server-rust;
+    watchers = {awatcher.package = pkgs.nixpkgs-stable.awatcher;};
   };
 
   # awatcher should start and stop depending on wayland-session.target

@@ -249,19 +249,20 @@ in
 
   programs.ssh = {
     enable = true;
-    matchBlocks."*" = {
-      serverAliveInterval = 20;
-      serverAliveCountMax = 3;
-      extraOptions = {
+    enableDefaultConfig = false;
+    settings = {
+      "*" = {
+        ServerAliveInterval = 20;
+        ServerAliveCountMax = 3;
         TCPKeepAlive = "yes";
         IdentityAgent = "~/.1password/agent.sock";
       };
-    };
-    # Named host entries are discovered by many tunnel UIs.
-    matchBlocks."home-server" = {
-      hostname = "home-server.tail9b4f4d.ts.net";
-      user = userdata.username;
-      port = 22;
+      # Named host entries are discovered by many tunnel UIs.
+      "home-server" = {
+        HostName = "home-server.tail9b4f4d.ts.net";
+        User = userdata.username;
+        Port = 22;
+      };
     };
   };
   programs.zoxide.enable = true;
