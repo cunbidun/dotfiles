@@ -1,7 +1,8 @@
 export type SystrayIconMap = {
     [key: string]: {
-        icon: string;
-        color: string;
-        size: string;
+        icon?: string;
+        color?: string;
+        size?: string;
+        file?: string;
     };
 };

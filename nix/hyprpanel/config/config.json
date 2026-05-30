@@ -79,6 +79,14 @@
         "label": true,
         "icon": "󰙀"
       }
+    },
+    "systray": {
+      "customIcons": {
+        "Claude_status_icon_.*": {
+          "file": "icons/claude-tray.svg",
+          "size": "16px"
+        }
+      }
     }
   },
   "menus": {

@@ -28,6 +28,20 @@ const MenuCustomIcon = ({ iconLabel, iconColor, iconSize, item }: MenuCustomIcon
     );
 };
 
+const MenuCustomFileIcon = ({ iconFile, iconSize, item }: MenuCustomFileIconProps): JSX.Element => {
+    const resolvedIconFile = iconFile.startsWith('/') ? iconFile : `${CONFIG_DIR}/${iconFile}`;
+    const gicon = new Gio.FileIcon({ file: Gio.File.new_for_path(resolvedIconFile) });
+
+    return (
+        <icon
+            className={'systray-icon'}
+            gicon={gicon}
+            css={iconSize ? `-gtk-icon-size: ${iconSize};` : ''}
+            tooltipMarkup={bind(item, 'tooltipMarkup')}
+        />
+    );
+};
+
 const MenuDefaultIcon = ({ item }: MenuEntryProps): JSX.Element => {
     return (
         <icon
@@ -99,16 +113,21 @@ const SysTray = (): BarBoxChild => {
                 if (matchedCustomIcon !== undefined) {
                     const iconLabel = custIcons[matchedCustomIcon].icon || '󰠫';
                     const iconColor = custIcons[matchedCustomIcon].color;
-                    const iconSize = custIcons[matchedCustomIcon].size || '1.3em';
+                    const iconSize = custIcons[matchedCustomIcon].size || '16px';
+                    const iconFile = custIcons[matchedCustomIcon].file;
 
                     return (
                         <MenuEntry item={item}>
-                            <MenuCustomIcon
-                                iconLabel={iconLabel}
-                                iconColor={iconColor}
-                                iconSize={iconSize}
-                                item={item}
-                            />
+                            {iconFile ? (
+                                <MenuCustomFileIcon iconFile={iconFile} iconSize={iconSize} item={item} />
+                            ) : (
+                                <MenuCustomIcon
+                                    iconLabel={iconLabel}
+                                    iconColor={iconColor}
+                                    iconSize={iconSize}
+                                    item={item}
+                                />
+                            )}
                         </MenuEntry>
                     );
                 }
@@ -145,7 +164,13 @@ const SysTray = (): BarBoxChild => {
 
 interface MenuCustomIconProps {
     iconLabel: string;
-    iconColor: string;
+    iconColor?: string;
+    iconSize: string;
+    item: AstalTray.TrayItem;
+}
+
+interface MenuCustomFileIconProps {
+    iconFile: string;
     iconSize: string;
     item: AstalTray.TrayItem;
 }
