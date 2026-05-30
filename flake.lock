@@ -2148,16 +2148,16 @@
         "systems": "systems_10"
       },
       "locked": {
-        "lastModified": 1778720893,
-        "narHash": "sha256-F034G8DctTGGi1ijekwkaXE4w5WZqHt2Hvvu8hqRfJE=",
+        "lastModified": 1779830962,
+        "narHash": "sha256-6+pS1QXOJsXDcmmRgnmMWxYY2Qgw7d/++KhnacNlZy8=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "eec0146346d0d64218c4a247c96516da17582f75",
+        "rev": "7745e8ed852596a41f4c80756c7cd0a0beeca162",
         "type": "github"
       },
       "original": {
         "owner": "vicinaehq",
-        "ref": "v0.21.0",
+        "ref": "v0.21.2",
         "repo": "vicinae",
         "type": "github"
       }
@@ -2282,17 +2282,17 @@
     "yazi-plugins": {
       "flake": false,
       "locked": {
-        "lastModified": 1778691457,
-        "narHash": "sha256-cZlnrlgv8+SFeNgIW69q//i/apcpvAv41q5W8bJwVaI=",
+        "lastModified": 1779792658,
+        "narHash": "sha256-BdisAHsLHNqtuDu8rtBZZaqiTeL60pQOWKsRct35VZM=",
         "owner": "yazi-rs",
         "repo": "plugins",
-        "rev": "5d5c4803dd12bab4e4f19d606f8db0c871e6bec5",
+        "rev": "c2c16c83dd6c754c38893030848a162bb2422ca2",
         "type": "github"
       },
       "original": {
         "owner": "yazi-rs",
         "repo": "plugins",
-        "rev": "5d5c4803dd12bab4e4f19d606f8db0c871e6bec5",
+        "rev": "c2c16c83dd6c754c38893030848a162bb2422ca2",
         "type": "github"
       }
     },

@@ -23,6 +23,8 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
+from urllib.error import URLError
+from urllib.request import Request, urlopen
 
 try:
     from texttable import Texttable
@@ -36,9 +38,11 @@ except ImportError as exc:  # pragma: no cover - dependency check
 
 
 TAG_PATTERNS = (
-    re.compile(r"^v?\d+(?:\.\d+)*(?:[-_][0-9A-Za-z]+)?$"),
+    re.compile(r"^v?\d+(?:\.\d+)*(?:[-+._][0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$"),
     re.compile(r"^\d+(?:\.\d+)*$"),
 )
+
+GIT_REV_PATTERN = re.compile(r"^[0-9a-f]{7,40}$")
 
 # ANSI handling
 COLOR_RESET = "\x1b[0m"
@@ -173,34 +177,62 @@ def run_flake_metadata(
     return data["locks"]["nodes"]
 
 
-def fetch_latest_tag(
+def fetch_latest_release_tag(
     owner: str,
     repo: str,
     *,
     env: Dict[str, str],
-) -> Optional[Tuple[str, str]]:
+) -> Optional[str]:
+    url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
+    request = Request(
+        url,
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "flake-inputs-report",
+        },
+    )
+    try:
+        with urlopen(request, timeout=20) as response:
+            payload = json.load(response)
+    except (URLError, TimeoutError, ValueError, OSError):
+        return None
+
+    tag = payload.get("tag_name")
+    if isinstance(tag, str) and tag:
+        return tag
+    return None
+
+
+def fetch_tag_commit(
+    owner: str,
+    repo: str,
+    ref: str,
+    *,
+    env: Dict[str, str],
+) -> Optional[str]:
     url = f"https://github.com/{owner}/{repo}.git"
     cmd = (
         "git",
         "ls-remote",
-        "--refs",
         "--tags",
-        "--sort=-v:refname",
         url,
     )
     try:
         stdout = run_command(cmd, env=env)
     except RuntimeError:
         return None
+
+    direct_commit: Optional[str] = None
     for line in stdout.strip().splitlines():
         if not line:
             continue
-        commit, ref = line.split("\t", 1)
-        tag = ref.split("/")[-1]
-        if tag.endswith("^{}"):
-            continue
-        return tag, commit
-    return None
+        commit, remote_ref = line.split("\t", 1)
+        if remote_ref == f"refs/tags/{ref}^{{}}":
+            return commit
+        if remote_ref == f"refs/tags/{ref}":
+            direct_commit = commit
+
+    return direct_commit
 
 
 def fetch_branch_head(
@@ -269,16 +301,22 @@ def determine_remote_info(
         )
 
     if is_probable_tag(ref):
-        latest_tag = fetch_latest_tag(owner, repo, env=env)
+        latest_tag = fetch_latest_release_tag(owner, repo, env=env)
         if not latest_tag:
             display = build_display(ref, base_rev)
             return (
                 VersionDetails(ref=ref, rev=base_rev, display=display),
-                "unable to resolve latest tag",
+                "unable to resolve latest release",
             )
-        tag, commit = latest_tag
-        display = build_display(tag, commit)
-        return VersionDetails(ref=tag, rev=commit, display=display), None
+        latest_commit = fetch_tag_commit(owner, repo, latest_tag, env=env)
+        if not latest_commit:
+            display = build_display(ref, base_rev)
+            return (
+                VersionDetails(ref=ref, rev=base_rev, display=display),
+                "unable to resolve latest release commit",
+            )
+        display = build_display(latest_tag, latest_commit)
+        return VersionDetails(ref=latest_tag, rev=latest_commit, display=display), None
 
     branch_rev = fetch_branch_head(owner, repo, ref, env=env)
     if branch_rev:
@@ -371,33 +409,38 @@ def format_table(rows: Tuple[InputVersion, ...]) -> str:
     return output
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--flake",
-        default=".",
-        help="Path to the flake (defaults to current directory).",
+def get_git_root() -> Path:
+    result = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"],
+        text=True,
+        capture_output=True,
+        check=True,
     )
-    parser.add_argument(
-        "--no-color",
-        action="store_true",
-        help="Disable ANSI color codes in output.",
-    )
-    args = parser.parse_args()
+    return Path(result.stdout.strip())
 
-    flake_dir = Path(args.flake).expanduser().resolve()
-    lock_path = flake_dir / "flake.lock"
-    if not lock_path.exists():
-        print(f"error: no flake.lock at {lock_path}", file=sys.stderr)
-        return 1
 
+def resolve_flake_dir(flake_arg: str) -> Path:
+    return Path(flake_arg).expanduser().resolve()
+
+
+def build_env(flake_dir: Path) -> Dict[str, str]:
     cache_dir = flake_dir / ".nix-cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
     env.setdefault("XDG_CACHE_HOME", str(cache_dir))
     env.setdefault("GIT_TERMINAL_PROMPT", "0")
+    return env
 
-    set_color_enabled(not args.no_color and sys.stdout.isatty())
+
+def show_status(flake_dir: Path, no_color: bool) -> int:
+    lock_path = flake_dir / "flake.lock"
+    if not lock_path.exists():
+        print(f"error: no flake.lock at {lock_path}", file=sys.stderr)
+        return 1
+
+    env = build_env(flake_dir)
+
+    set_color_enabled(not no_color and sys.stdout.isatty())
 
     try:
         nodes = load_lock_nodes(lock_path)
@@ -413,6 +456,234 @@ def main() -> int:
 
     versions = gather_versions(nodes=nodes, refreshed_nodes=refreshed_nodes, env=env)
     print(format_table(versions))
+    return 0
+
+
+def run_checked(cmd: list[str], *, cwd: Path) -> None:
+    subprocess.run(cmd, cwd=str(cwd), text=True, check=True)
+
+
+def run_capture(cmd: list[str], *, cwd: Path) -> str:
+    result = subprocess.run(
+        cmd,
+        cwd=str(cwd),
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    return result.stdout
+
+
+def update_flake_inputs(flake_dir: Path, inputs: Optional[list[str]]) -> None:
+    bump_pinned_flake_input_refs(flake_dir, inputs)
+
+    cmd = ["nix", "flake", "update", "--flake", str(flake_dir)]
+    if inputs:
+        cmd.extend(inputs)
+        print(f"Updating flake inputs: {', '.join(inputs)}")
+    else:
+        print("Updating all flake inputs")
+    run_checked(cmd, cwd=flake_dir)
+
+
+def bump_pinned_flake_input_refs(flake_dir: Path, selected_inputs: Optional[list[str]]) -> None:
+    lock_path = flake_dir / "flake.lock"
+    flake_nix_path = flake_dir / "flake.nix"
+
+    if not lock_path.exists() or not flake_nix_path.exists():
+        return
+
+    nodes = load_lock_nodes(lock_path)
+    env = build_env(flake_dir)
+    try:
+        refreshed_nodes = run_flake_metadata(str(flake_dir), refresh=True, env=env)
+    except Exception:
+        return
+
+    root_inputs = nodes.get("root", {}).get("inputs", {})
+    known_inputs = set(root_inputs.keys())
+
+    if selected_inputs:
+        unknown = [name for name in selected_inputs if name not in known_inputs]
+        if unknown:
+            raise SystemExit(f"Unknown flake input(s): {', '.join(unknown)}")
+        target_inputs = selected_inputs
+    else:
+        target_inputs = sorted(known_inputs)
+
+    content = flake_nix_path.read_text(encoding="utf-8")
+    changed = False
+
+    for input_name in target_inputs:
+        node_name = root_inputs.get(input_name)
+        if not node_name:
+            continue
+
+        node = nodes.get(node_name, {})
+        locked = node.get("locked", {})
+        original = node.get("original", {})
+
+        owner = locked.get("owner") or original.get("owner")
+        repo = locked.get("repo") or original.get("repo")
+        current_ref = original.get("ref") or locked.get("ref")
+        current_rev = locked.get("rev")
+
+        if not owner or not repo:
+            continue
+
+        remote_info, _ = determine_remote_info(node_name, node, refreshed_nodes, env=env)
+
+        pattern = re.compile(
+            rf'({re.escape(input_name)}\s*=\s*\{{[^}}]*?url\s*=\s*"github:{re.escape(owner)}/{re.escape(repo)}/)'
+            rf'([^"\n?]+)'
+            rf'([^"\n]*";)',
+            re.S,
+        )
+        match = pattern.search(content)
+        if not match:
+            continue
+
+        pinned_token = match.group(2)
+        new_token = None
+
+        # Tag-pinned input: github:owner/repo/vX.Y.Z
+        if current_ref and is_probable_tag(current_ref) and is_probable_tag(remote_info.ref):
+            if remote_info.ref != current_ref:
+                new_token = remote_info.ref
+
+        # Commit-pinned input: github:owner/repo/<rev>
+        elif is_git_rev(pinned_token) and is_git_rev(remote_info.rev):
+            if remote_info.rev != current_rev:
+                new_token = remote_info.rev
+
+        if not new_token:
+            continue
+
+        content, count = pattern.subn(rf"\g<1>{new_token}\g<3>", content, count=1)
+        if count > 0:
+            print(f"Bumping {input_name} ref in flake.nix: {pinned_token} -> {new_token}")
+            changed = True
+
+    if changed:
+        flake_nix_path.write_text(content, encoding="utf-8")
+
+
+def fetch_digest(flake_dir: Path, repository: str, tag: str) -> str:
+    payload = run_capture(
+        ["nix", "run", "nixpkgs#skopeo", "--", "inspect", f"docker://{repository}:{tag}"],
+        cwd=flake_dir,
+    )
+    digest = json.loads(payload).get("Digest")
+    if not digest:
+        raise RuntimeError(f"Unable to resolve digest for {repository}:{tag}")
+    return digest
+
+
+def update_container_inputs(flake_dir: Path, names: Optional[list[str]]) -> None:
+    input_file = flake_dir / "nix/hosts/home-server/container-images.json"
+    data = json.loads(input_file.read_text())
+
+    selected = names if names is not None else list(data.keys())
+    unknown = [name for name in selected if name not in data]
+    if unknown:
+        raise SystemExit(f"Unknown container input(s): {', '.join(unknown)}")
+
+    changed = False
+    for name in selected:
+        entry = data[name]
+        old_digest = entry.get("digest", "")
+        new_digest = fetch_digest(flake_dir, entry["repository"], entry["tag"])
+        if new_digest != old_digest:
+            print(f"Updating {name}: {old_digest} -> {new_digest}")
+            entry["digest"] = new_digest
+            changed = True
+        else:
+            print(f"{name} is already up to date ({new_digest})")
+
+    if changed:
+        input_file.write_text(json.dumps(data, indent=2) + "\n")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    subparsers = parser.add_subparsers(dest="command")
+
+    show_parser = subparsers.add_parser("show", help="Show flake input drift table")
+    show_parser.add_argument(
+        "--flake",
+        default=".",
+        help="Path to the flake (defaults to current directory).",
+    )
+    show_parser.add_argument(
+        "--no-color",
+        action="store_true",
+        help="Disable ANSI color codes in output.",
+    )
+
+    update_parser = subparsers.add_parser("update", help="Update flake and container inputs")
+    update_parser.add_argument(
+        "inputs",
+        nargs="*",
+        metavar="INPUT",
+        help="Positional flake input names to update (same as --flake).",
+    )
+    update_parser.add_argument(
+        "--flake",
+        nargs="*",
+        metavar="INPUT",
+        help="Update specific flake inputs (empty means all).",
+    )
+    update_parser.add_argument(
+        "--container",
+        nargs="*",
+        metavar="NAME",
+        help="Update specific container image entries (empty means all).",
+    )
+    update_parser.add_argument("--no-flake", action="store_true", help="Skip flake updates")
+    update_parser.add_argument("--no-container", action="store_true", help="Skip container image updates")
+    update_parser.add_argument(
+        "--flake-path",
+        default=None,
+        help="Path to the flake root (defaults to git root).",
+    )
+    update_parser.add_argument(
+        "--no-status",
+        action="store_true",
+        help="Skip status table after update.",
+    )
+    update_parser.add_argument(
+        "--no-color",
+        action="store_true",
+        help="Disable ANSI color codes in status output.",
+    )
+
+    args = parser.parse_args()
+    command = args.command or "show"
+
+    if command == "show":
+        flake_dir = resolve_flake_dir(args.flake)
+        return show_status(flake_dir, args.no_color)
+
+    flake_dir = resolve_flake_dir(args.flake_path) if args.flake_path else get_git_root()
+
+    selected_flake_inputs = args.flake if args.flake is not None else args.inputs
+
+    default_mode = args.flake is None and len(args.inputs) == 0 and args.container is None
+    run_flake = not args.no_flake and (default_mode or args.flake is not None or len(args.inputs) > 0)
+    run_container = not args.no_container and (default_mode or args.container is not None)
+
+    if not run_flake and not run_container:
+        print("Nothing to do")
+        return 0
+
+    if run_flake:
+        update_flake_inputs(flake_dir, selected_flake_inputs)
+    if run_container:
+        update_container_inputs(flake_dir, args.container)
+
+    if not args.no_status:
+        return show_status(flake_dir, args.no_color)
+
     return 0
 
 

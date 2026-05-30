@@ -81,7 +81,7 @@
     yazi-plugins = {
       # Pin plugin revisions so flake update doesn't silently drift plugins
       # ahead of the pinned Yazi release.
-      url = "github:yazi-rs/plugins/5d5c4803dd12bab4e4f19d606f8db0c871e6bec5";
+      url = "github:yazi-rs/plugins/c2c16c83dd6c754c38893030848a162bb2422ca2";
       flake = false;
     };
     yazi-restore = {
@@ -127,7 +127,7 @@
       url = "github:ilysenko/codex-desktop-linux";
     };
     vicinae = {
-      url = "github:vicinaehq/vicinae/v0.21.0";
+      url = "github:vicinaehq/vicinae/v0.21.2";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
@@ -327,14 +327,14 @@
             type = "app";
             program = "${themeManager}/bin/themectl";
           };
-          flake-input-versions = let
+          flake-input = let
             pythonWithDeps = pkgs.python3.withPackages (ps: with ps; [texttable]);
-            script = pkgs.writeShellScriptBin "flake-input-versions" ''
+            script = pkgs.writeShellScriptBin "flake-input" ''
               exec ${pythonWithDeps}/bin/python3 ${./scripts/flake_input_versions.py} "$@"
             '';
           in {
             type = "app";
-            program = "${script}/bin/flake-input-versions";
+            program = "${script}/bin/flake-input";
           };
           precommit = let
             script = pkgs.writeShellScriptBin "precommit-run" ''
@@ -353,15 +353,6 @@
           in {
             type = "app";
             program = "${script}/bin/nix-switch";
-          };
-          update-inputs = let
-            pythonWithDeps = pkgs.python3.withPackages (ps: with ps; []);
-            script = pkgs.writeShellScriptBin "update-inputs" ''
-              exec ${pythonWithDeps}/bin/python3 ${./scripts/update_inputs.py} "$@"
-            '';
-          in {
-            type = "app";
-            program = "${script}/bin/update-inputs";
           };
         }
       );
