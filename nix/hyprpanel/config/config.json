@@ -85,6 +85,10 @@
         "Claude_status_icon_.*": {
           "file": "icons/claude-tray.svg",
           "size": "16px"
+        },
+        "Codex_status_icon_.*": {
+          "file": "icons/codex-tray.svg",
+          "size": "16px"
         }
       }
     }
