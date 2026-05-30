@@ -49,6 +49,7 @@ in
   # paths it should manage.
   home.username = userdata.username;
   home.homeDirectory = "/home/${userdata.username}";
+  home.sessionVariables.SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
 
   home.packages = package_config.default_packages ++ package_config.linux_packages;
 
@@ -253,13 +254,6 @@ in
       serverAliveCountMax = 3;
       extraOptions = {
         TCPKeepAlive = "yes";
-      };
-    };
-    matchBlocks."github.com" = {
-      user = "git";
-      hostname = "github.com";
-      identitiesOnly = true;
-      extraOptions = {
         IdentityAgent = "~/.1password/agent.sock";
       };
     };
