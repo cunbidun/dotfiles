@@ -105,7 +105,7 @@ in {
       name = "Claude";
       genericName = "Claude Desktop";
       comment = "Claude Desktop (Wayland)";
-      exec = "env ELECTRON_OZONE_PLATFORM_HINT=wayland OZONE_PLATFORM=wayland NIXOS_OZONE_WL=1 claude-desktop --ozone-platform=wayland --enable-features=UseOzonePlatform,WaylandWindowDecorations %u";
+      exec = "env CLAUDE_USE_WAYLAND=1 claude-desktop %u";
       terminal = false;
       icon = "claude-desktop";
       categories = [
