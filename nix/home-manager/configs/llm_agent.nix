@@ -50,6 +50,7 @@
       experimental_use_profile = true;
     };
 
+    projects."${config.home.homeDirectory}".trust_level = "trusted";
     projects."${configHome}".trust_level = "trusted";
 
     sandbox_workspace_write.network_access = true;
