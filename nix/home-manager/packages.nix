@@ -159,7 +159,6 @@ in rec {
     pkgs.nixpkgs-stable.liberation_ttf # Stable to avoid frequent repatching
     pkgs.nixpkgs-stable.noto-fonts-cjk-sans
     pkgs.nixpkgs-stable.noto-fonts-cjk-serif
-    pkgs.noto-fonts-color-emoji
     pkgs.nixpkgs-stable.wqy_zenhei
 
     # Stable-pinned apps

@@ -3,11 +3,13 @@
   pkgs,
   ...
 }: let
-  githubTokenPath = "${config.home.homeDirectory}/.config/opencode/github_read_only_token";
-  ninerouterTokenPath = "${config.home.homeDirectory}/.config/opencode/ninerouter_api_key";
+  configHome = config.xdg.configHome;
+  cacheHome = config.xdg.cacheHome;
+  githubTokenPath = "${configHome}/opencode/github_read_only_token";
+  ninerouterTokenPath = "${configHome}/opencode/ninerouter_api_key";
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
-  chromeDevToolsProfile = "${config.home.homeDirectory}/.cache/chrome-devtools-mcp/opencode-profile";
-  codexChromeDevToolsProfile = "${config.home.homeDirectory}/.cache/chrome-devtools-mcp/codex-profile";
+  chromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/opencode-profile";
+  codexChromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/codex-profile";
   npx = "${pkgs.nodejs_24}/bin/npx";
   lspPath = pkgs.lib.makeBinPath [
     pkgs.nixd
@@ -47,6 +49,8 @@
       ignore_default_excludes = true;
       experimental_use_profile = true;
     };
+
+    projects."${configHome}".trust_level = "trusted";
 
     sandbox_workspace_write.network_access = true;
 
