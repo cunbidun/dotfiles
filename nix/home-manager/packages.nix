@@ -3,6 +3,8 @@
   inputs,
   ...
 }: let
+  system = pkgs.stdenv.hostPlatform.system;
+
   yazi-wrapper = pkgs.writeShellApplication {
     name = "yazi-wrapper";
     text = ''
@@ -54,122 +56,118 @@
   '';
 in rec {
   default_packages = [
-    # Utils
-    pkgs.htop # An interactive process viewer
-    pkgs.tree # A recursive directory listing program
-    pkgs.tmux # A terminal multiplexer
-    pkgs.wget # A command-line tool for retrieving files over HTTP/HTTPS/FTP
-    pkgs.jq # A lightweight and flexible command-line JSON processor
-    pkgs.ncdu # A disk usage analyzer
-    pkgs.zip # A compression and archive utility
-    pkgs.unzip # A decompression utility
+    # Core CLI utilities
+    pkgs.alejandra # Nix formatter
+    pkgs.htop # Interactive process viewer
+    pkgs.jq # JSON processor
+    pkgs.ncdu # Disk usage analyzer
+    pkgs.ngrok
+    pkgs.nix-output-monitor
+    pkgs.pre-commit
+    pkgs.pdfgrep
     pkgs.ripgrep
     pkgs.starship
-    pkgs.nix-output-monitor
-    pkgs.alejandra # nix formatter
-    pkgs.ngrok
+    pkgs.tmux # Terminal multiplexer
+    pkgs.tree # Recursive directory listing
+    pkgs.unzip
+    pkgs.wget
+    pkgs.yt-dlp
+    pkgs.zip
+    pkgs.gh # GitHub CLI
+    pkgs.git-lfs
+    pkgs.lazygit
+    pkgs.newsboat
 
-    # AI/Development tools
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
-    pkgs.pre-commit
+    # AI and development tooling
+    inputs.llm-agents.packages.${system}.codex
+    inputs.llm-agents.packages.${system}.opencode
+    inputs.llm-agents.packages.${system}.claude-code
 
     # Shared fonts between Linux and Mac
-    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd
-    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd
-    inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd
+    inputs.apple-fonts.packages.${system}.ny-nerd
+    inputs.apple-fonts.packages.${system}.sf-mono-nerd
+    inputs.apple-fonts.packages.${system}.sf-pro-nerd
   ];
 
   linux_packages = let
     theme-switch = pkgs.writeShellApplication {
       name = "theme-switch";
       text = builtins.readFile ../../scripts/theme-switch.sh;
-      runtimeInputs = [pkgs.gawk pkgs.gnugrep pkgs.systemdMinimal pkgs.darkman pkgs.theme-manager];
+      runtimeInputs = [
+        pkgs.darkman
+        pkgs.gawk
+        pkgs.gnugrep
+        pkgs.systemdMinimal
+        pkgs.theme-manager
+      ];
     };
   in [
+    # Local wrappers and scripts
     theme-switch
-    yazi-wrapper
     xdg-terminal-exec
-    pkgs.spotify
-    inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-fhs
-    inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop
-    pkgs.blender # A 3D modeling and animation software
-    pkgs.glib
-    pkgs.trash-cli
-    pkgs.dig
-    pkgs.inetutils
-    pkgs.eog
+    yazi-wrapper
+
+    # AI desktop apps
+    inputs.claude-desktop.packages.${system}.claude-desktop-fhs
+    inputs.codex-desktop-linux.packages.${system}.codex-desktop
 
     # Hyprland
-    pkgs.wl-clipboard # A command-line copy/paste tool for Wayland
-    pkgs.slurp # A tool to select a region on a screen
-    pkgs.grim # A screen capture utility for Wayland
-    pkgs.cliphist # A clipboard manager utility
-    inputs.pyprland.packages.${pkgs.stdenv.hostPlatform.system}.pyprland # pyprland
-    pkgs.hyprpicker # A launcher/menu program for Hyprland
-    pkgs.wev # An event daemon for Wayland
-    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.hyprprop # Hyprland contrib package for hyprprop
+    inputs.hyprland-contrib.packages.${system}.hyprprop
+    inputs.pyprland.packages.${system}.pyprland
+    pkgs.cliphist # Clipboard manager for Wayland
     (pkgs.espanso.override {
       x11Support = false;
       waylandSupport = true;
     })
+    pkgs.grim # Wayland screenshot utility
+    pkgs.hyprpicker
+    pkgs.slurp # Region selector for Wayland screenshots
+    pkgs.wev # Wayland event viewer
+    pkgs.wl-clipboard # Wayland clipboard tools
 
-    # System
-    pkgs.inotify-tools # A set of command-line utilities for monitoring file system events
-    pkgs.libnotify # A library for sending desktop notifications
-    # Shell
-    pkgs.obs-studio # A free and open-source video recording and live streaming software
-    pkgs.lazygit # A simple terminal UI for git commands
-    pkgs.gh # GitHub CLI
-    pkgs.git-lfs
-    pkgs.pamixer # A CLI mixer for PulseAudio
-    pkgs.arandr # A UI for managing displays
-    pkgs.vlc # A multimedia player
+    # Desktop and media apps
+    pkgs.arandr # Display management UI
+    pkgs.blender # 3D modeling and animation
+    pkgs.discord
+    pkgs.eog
+    pkgs.evince
+    pkgs.obs-studio
+    pkgs.obsidian
+    pkgs.signal-desktop
+    pkgs.slack
+    pkgs.spotify
+    pkgs.vlc
 
-    # Text editor
-    pkgs.pdfgrep # A tool to search text in PDF files
-
+    # Development and tooling
     pkgs.adw-gtk3
-
-    # Font
-    # making this stable to avoid frequent repatching
-    pkgs.liberation_ttf # Liberation TrueType fonts
-    pkgs.cantarell-fonts # Cantarell fonts
-    pkgs.noto-fonts-color-emoji # Noto Color Emoji fonts
-    pkgs.noto-fonts-cjk-sans # CJK fallback sans + mono variants
-    pkgs.noto-fonts-cjk-serif # CJK fallback serif
-    pkgs.wqy_zenhei # Extra Chinese glyph coverage
-    pkgs.iosevka # Iosevka monospace fonts
-
-    # Messaging
-    pkgs.signal-desktop # Signal Desktop messaging app
-    pkgs.discord # Discord messaging app
-    pkgs.slack # A messaging and collaboration platform
-
-    # Note
-    pkgs.obsidian # A knowledge base and note-taking app
-
-    ######## # Util ########
-    # GUI File manager
-    pkgs.dconf-editor # GNOME's dconf editor
+    pkgs.dconf-editor
+    pkgs.dig
     pkgs.djvulibre
+    pkgs.glib
+    pkgs.hwinfo
+    pkgs.imagemagick
+    pkgs.inetutils
+    pkgs.inotify-tools
+    pkgs.libnotify
+    pkgs.pamixer
+    pkgs.trash-cli
+    pkgs.ueberzugpp
 
-    # CLI File manager
-    pkgs.ueberzugpp # A command-line UI library for image previews
-    pkgs.evince # A document viewer
-    pkgs.hwinfo # A hardware information tool
-    pkgs.imagemagick # A suite of image manipulation tools
-    pkgs.yt-dlp # A command-line tool to download videos from YouTube and other sites
+    # Fonts
+    pkgs.nixpkgs-stable.cantarell-fonts
+    pkgs.nixpkgs-stable.iosevka
+    pkgs.nixpkgs-stable.liberation_ttf # Stable to avoid frequent repatching
+    pkgs.nixpkgs-stable.noto-fonts-cjk-sans
+    pkgs.nixpkgs-stable.noto-fonts-cjk-serif
+    pkgs.nixpkgs-stable.noto-fonts-color-emoji
+    pkgs.nixpkgs-stable.wqy_zenhei
 
-    pkgs.newsboat # An RSS feed reader
-
-    # use stable redisinsight to avoid frequent repatching
-    pkgs.nixpkgs-stable.redisinsight
+    # Stable-pinned apps
     pkgs.nixpkgs-stable.jetbrains.datagrip
     pkgs.nixpkgs-stable.libreoffice
+    pkgs.nixpkgs-stable.redisinsight
     pkgs.nixpkgs-stable.zoom-us
   ];
 
-  mac_packages = [
-  ];
+  mac_packages = [];
 }
