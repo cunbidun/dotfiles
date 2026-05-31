@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ./9router.nix
+    ./home-page.nix
     ../shared/nix-config.nix
     ../shared/common.nix
     inputs.sops-nix.nixosModules.sops
