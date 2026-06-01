@@ -37,4 +37,20 @@ in {
 
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
+
+  systemd.user.services.opencode-web = {
+    Unit = {
+      Description = "opencode web interface";
+      After = [ "network.target" ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode}/bin/opencode web --port 10300 --hostname 0.0.0.0";
+      Restart = "on-failure";
+      RestartSec = "5";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
 }
