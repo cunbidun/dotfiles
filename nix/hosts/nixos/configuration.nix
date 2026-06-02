@@ -36,6 +36,8 @@
   ];
   boot.blacklistedKernelModules = ["wacom"];
 
+  boot.kernel.sysctl."fs.inotify.max_user_watches" = 524288;
+
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
 
