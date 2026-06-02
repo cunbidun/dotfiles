@@ -97,13 +97,7 @@ in {
 
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
-    permission = {
-      edit = "allow";
-      bash = "allow";
-      read = "allow";
-      glob = "allow";
-      grep = "allow";
-    };
+    permission = "allow";
     plugin = [ "${inputs.obra-superpowers}/.opencode/plugins/superpowers.js" ];
     lsp = {
       nixd = {
