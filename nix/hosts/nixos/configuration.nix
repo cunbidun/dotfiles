@@ -329,6 +329,7 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
     targets = {
       chromium.enable = false;
+      kmscon.enable = false;
     };
   };
   programs.localsend = {

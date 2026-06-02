@@ -109,7 +109,10 @@ in rec {
 
     # AI desktop apps
     inputs.claude-desktop.packages.${system}.claude-desktop-fhs
-    inputs.codex-desktop-linux.packages.${system}.codex-desktop
+    # TODO: codex-desktop-linux hash mismatch for Codex.dmg (upstream needs update)
+    # specified: sha256-xGhTgxNq/IhSbFhBu4Sie2BxkOzqEeaPSeSTQce/34o=
+    # got:       sha256-IS65XSNCniACAsXE6fvaCUsCKe+RilaEuxwnFe3C3SQ=
+    # inputs.codex-desktop-linux.packages.${system}.codex-desktop
 
     # Hyprland
     inputs.hyprland-contrib.packages.${system}.hyprprop
