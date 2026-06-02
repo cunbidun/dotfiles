@@ -129,6 +129,10 @@
     vicinae = {
       url = "github:vicinaehq/vicinae/v0.21.0";
     };
+    obra-superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
   };
 
   outputs = {

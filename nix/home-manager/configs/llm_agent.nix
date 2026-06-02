@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   configHome = config.xdg.configHome;
@@ -96,6 +97,14 @@ in {
 
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
+    permission = {
+      edit = "allow";
+      bash = "allow";
+      read = "allow";
+      glob = "allow";
+      grep = "allow";
+    };
+    plugin = [ "${inputs.obra-superpowers}/.opencode/plugins/superpowers.js" ];
     lsp = {
       nixd = {
         command = ["${pkgs.nixd}/bin/nixd"];
@@ -164,6 +173,12 @@ in {
         enabled = true;
       };
     };
+  };
+
+  programs.opencode = {
+    enable = true;
+    package = inputs.llm-agents.packages.${pkgs.system}.opencode;
+    skills = "${inputs.obra-superpowers}/skills";
   };
 
   home.sessionVariablesExtra = ''
