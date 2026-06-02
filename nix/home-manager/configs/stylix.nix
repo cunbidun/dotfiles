@@ -151,6 +151,7 @@ in {
     image = themeConfigs.default.dark.wallpaper;
 
     targets = {
+      opencode.enable = false;
       vscode.enable = false;
 
       # Keep dialog buttons readable across light/dark by forcing them to use the

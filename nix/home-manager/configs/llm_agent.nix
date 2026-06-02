@@ -173,6 +173,9 @@ in {
     enable = true;
     package = inputs.llm-agents.packages.${pkgs.system}.opencode;
     skills = "${inputs.obra-superpowers}/skills";
+    settings = {
+      theme = "system";
+    };
   };
 
   home.sessionVariablesExtra = ''
