@@ -5,7 +5,8 @@
   lib,
   userdata,
   ...
-}: let
+}:
+let
   inherit (pkgs.stdenv) isLinux;
 
   # Theme configuration abstraction
@@ -25,77 +26,75 @@
   # lib.mkDefault value     | 1000              | Ship a safe default that users can override easily
   # lib.mkOverride N value  | N (you pick)      | Fine‑tune how strongly you want to win/lose merges
   # lib.mkForce value       | 50                | “Last word”—almost always beats everything else
-  mkSpecializationConfig = theme: polarity: themeConfig: let
-    colorScheme =
-      if polarity == "light"
-      then "prefer-light"
-      else "prefer-dark";
+  mkSpecializationConfig =
+    theme: polarity: themeConfig:
+    let
+      colorScheme = if polarity == "light" then "prefer-light" else "prefer-dark";
 
-    # Add theme extension to the list if defined
-    extensionList = chromeConfig.baseExtensions ++ (lib.optional ((themeConfig.chromeExtension or null) != null) themeConfig.chromeExtension);
-  in {
-    dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
-    services.vicinae.settings.theme.name = themeConfig.vicinaeTheme;
-    stylix = {
-      base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${themeConfig.scheme}.yaml";
-      image = lib.mkForce themeConfig.wallpaper;
+      # Add theme extension to the list if defined
+      extensionList =
+        chromeConfig.baseExtensions
+        ++ (lib.optional ((themeConfig.chromeExtension or null) != null) themeConfig.chromeExtension);
+    in
+    {
+      dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
+      services.vicinae.settings.theme.name = themeConfig.vicinaeTheme;
+      stylix = {
+        base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${themeConfig.scheme}.yaml";
+        image = lib.mkForce themeConfig.wallpaper;
+      };
+      home.activation.reconciliation_theme = lib.mkForce ''
+        #!/usr/bin/env bash
+        # no-op script to avoid double activation
+      '';
+
+      # Write the current theme name directly in the specialization
+      home.file.".local/state/stylix/current-theme-name.txt".text = lib.mkForce "${theme}-${polarity}";
+
+      # Override Chrome policy with theme-specific extensions
+      home.file.".local/etc/chrome-policy.json" = lib.mkForce {
+        text = chromeConfig.mkChromePolicy extensionList;
+      };
     };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-
-    # Write the current theme name directly in the specialization
-    home.file.".local/state/stylix/current-theme-name.txt".text = lib.mkForce "${theme}-${polarity}";
-
-    # Override Chrome policy with theme-specific extensions
-    home.file.".local/etc/chrome-policy.json" = lib.mkForce {
-      text = chromeConfig.mkChromePolicy extensionList;
-    };
-  };
 
   # Generate specializations for each theme/polarity combination
   generateSpecializations = lib.foldl' (
-    acc: themeName: let
+    acc: themeName:
+    let
       themeConfig = themeConfigs.${themeName};
     in
-      acc
-      // (lib.mapAttrs' (
-          polarity: config:
-            lib.nameValuePair "${themeName}-${polarity}" {
-              configuration = mkSpecializationConfig themeName polarity config;
-            }
-        )
-        themeConfig)
-  ) {} (lib.attrNames themeConfigs);
+    acc
+    // (lib.mapAttrs' (
+      polarity: config:
+      lib.nameValuePair "${themeName}-${polarity}" {
+        configuration = mkSpecializationConfig themeName polarity config;
+      }
+    ) themeConfig)
+  ) { } (lib.attrNames themeConfigs);
 
   # Function to get scheme name from base16 scheme file
-  getSchemeNameFromFile = schemeFile: let
-    schemeContent = builtins.readFile "${pkgs.base16-schemes}/share/themes/${schemeFile}.yaml";
-    # Extract scheme name from YAML (format: "name: \"Name\"")
-    schemeMatch = builtins.match ".*name: \"([^\"]+)\".*" schemeContent;
-  in
-    if schemeMatch != null
-    then builtins.head schemeMatch
-    else schemeFile; # fallback to filename if parsing fails
+  getSchemeNameFromFile =
+    schemeFile:
+    let
+      schemeContent = builtins.readFile "${pkgs.base16-schemes}/share/themes/${schemeFile}.yaml";
+      # Extract scheme name from YAML (format: "name: \"Name\"")
+      schemeMatch = builtins.match ".*name: \"([^\"]+)\".*" schemeContent;
+    in
+    if schemeMatch != null then builtins.head schemeMatch else schemeFile; # fallback to filename if parsing fails
 
   # Get all theme configurations (both light and dark)
   allThemeConfigs = lib.flatten (
     lib.mapAttrsToList (
-      themeName: themeConfig:
-        lib.mapAttrsToList (polarity: config: config) themeConfig
-    )
-    themeConfigs
+      themeName: themeConfig: lib.mapAttrsToList (polarity: config: config) themeConfig
+    ) themeConfigs
   );
 
   # Find the matching theme config by inferred scheme name
-  currentThemeConfig =
-    lib.findFirst (
-      entry: (getSchemeNameFromFile entry.scheme) == config.lib.stylix.colors.scheme-name
-    )
-    null
-    allThemeConfigs;
-in {
+  currentThemeConfig = lib.findFirst (
+    entry: (getSchemeNameFromFile entry.scheme) == config.lib.stylix.colors.scheme-name
+  ) null allThemeConfigs;
+in
+{
   services.darkman = {
     enable = isLinux;
 
@@ -153,7 +152,6 @@ in {
     targets = {
       opencode.enable = false;
       vscode.enable = false;
-      kitty.enable = false;
 
       # Keep dialog buttons readable across light/dark by forcing them to use the
       # dialog foreground color (stylix#1560).
@@ -201,9 +199,10 @@ in {
   programs.vscode = {
     profiles.default.userSettings = {
       "workbench.colorTheme" =
-        if currentThemeConfig != null
-        then currentThemeConfig.vscodeTheme
-        else themeConfigs.default.dark.vscodeTheme;
+        if currentThemeConfig != null then
+          currentThemeConfig.vscodeTheme
+        else
+          themeConfigs.default.dark.vscodeTheme;
     };
   };
 
