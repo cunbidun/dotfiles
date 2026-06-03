@@ -173,7 +173,7 @@ in {
     enable = true;
     package = inputs.llm-agents.packages.${pkgs.system}.opencode;
     skills = "${inputs.obra-superpowers}/skills";
-    settings = {
+    tui = {
       theme = "system";
     };
   };
