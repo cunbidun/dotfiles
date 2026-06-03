@@ -153,6 +153,7 @@ in {
     targets = {
       opencode.enable = false;
       vscode.enable = false;
+      kitty.enable = false;
 
       # Keep dialog buttons readable across light/dark by forcing them to use the
       # dialog foreground color (stylix#1560).
