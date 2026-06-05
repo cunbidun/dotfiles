@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  userdata,
   ...
 }: let
   configHome = config.xdg.configHome;
@@ -36,7 +37,7 @@
 
     model_providers."9router" = {
       name = "9router";
-      base_url = "http://home-server.tail9b4f4d.ts.net:20128/v1";
+      base_url = "http://home-server.${userdata.tailnetDomain}:20128/v1";
       env_key = "NINEROUTER_API_KEY";
     };
 

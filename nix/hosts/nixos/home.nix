@@ -257,7 +257,7 @@ in {
       };
       # Named host entries are discovered by many tunnel UIs.
       "home-server" = {
-        HostName = "home-server.tail9b4f4d.ts.net";
+        HostName = "home-server.${userdata.tailnetDomain}";
         User = userdata.username;
         Port = 22;
       };
