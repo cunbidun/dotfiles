@@ -92,7 +92,7 @@ def main():
     parser = argparse.ArgumentParser(description="NixOS/Darwin configuration switcher")
     parser.add_argument(
         "profile",
-        choices=["macbook-m1", "nixos", "home-server"],
+        choices=["macbook-m1", "nixos", "home-server", "test-vm"],
         help="Configuration profile",
     )
     parser.add_argument("--no-commit", action="store_true", help="Skip git commit")
@@ -177,8 +177,14 @@ def main():
             ]
             run_cmd(cmd)
         else:
-            if args.profile == "home-server":
-                print("Using remote target-host for home-server...")
+            if args.profile in ("home-server", "test-vm"):
+                if args.profile == "home-server":
+                    target = "root@home-server"
+                    ssh_opts = ""
+                else:
+                    target = "root@localhost"
+                    ssh_opts = "-p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+                print(f"Using remote target-host for {args.profile}...")
                 cmd = [
                     "nixos-rebuild",
                     "--log-format",
@@ -187,10 +193,14 @@ def main():
                     "--flake",
                     flake_ref,
                     "--target-host",
-                    "root@home-server",
+                    target,
+                    "--build-host",
+                    "localhost",
                     "--cores",
                     "0",
                 ]
+                if ssh_opts:
+                    cmd += ["--ssh-opts", ssh_opts]
                 # Pipe through nom
                 p1 = subprocess.Popen(
                     cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
