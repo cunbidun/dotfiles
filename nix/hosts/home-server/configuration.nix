@@ -36,22 +36,9 @@
   # home-server specific: act as a subnet/exit-node client
   services.tailscale.useRoutingFeatures = "client";
 
-  # Shared secrets used by Home Manager modules.
   sops = {
     defaultSopsFile = ../../../secrets/system.yaml;
     age.keyFile = "/var/lib/sops-nix/keys.txt";
-    secrets.github_read_only_token = {
-      path = "/home/${userdata.username}/.config/opencode/github_read_only_token";
-      owner = userdata.username;
-      group = "users";
-      mode = "0400";
-    };
-    secrets.ninerouter_api_key = {
-      path = "/home/${userdata.username}/.config/opencode/ninerouter_api_key";
-      owner = userdata.username;
-      group = "users";
-      mode = "0400";
-    };
   };
 
   # File sharing over Tailscale.
