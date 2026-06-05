@@ -293,14 +293,14 @@
             type = "app";
             program = "${themeManager}/bin/themectl";
           };
-          flake-input = let
+          flake-input-versions = let
             pythonWithDeps = pkgs.python3.withPackages (ps: with ps; [texttable]);
-            script = pkgs.writeShellScriptBin "flake-input" ''
+            script = pkgs.writeShellScriptBin "flake-input-versions" ''
               exec ${pythonWithDeps}/bin/python3 ${./scripts/flake_input_versions.py} "$@"
             '';
           in {
             type = "app";
-            program = "${script}/bin/flake-input";
+            program = "${script}/bin/flake-input-versions";
           };
           precommit = let
             script = pkgs.writeShellScriptBin "precommit-run" ''

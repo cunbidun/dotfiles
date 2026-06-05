@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ../../home-manager/profiles/linux.nix
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix
@@ -14,15 +15,9 @@
     ../../home-manager/configs/shared/git.nix
   ];
 
-  home.username = userdata.username;
-  home.homeDirectory = "/home/${userdata.username}";
-
-  programs.home-manager.enable = true;
-
   home.sessionVariables = {
     TERM = "xterm-256color";
   };
-  programs.atuin.enable = true;
   programs.zoxide.enable = true;
   programs.bat.enable = true;
 

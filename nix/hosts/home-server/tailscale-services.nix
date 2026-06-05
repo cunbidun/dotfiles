@@ -2,7 +2,6 @@
 let
   tailnet = userdata.tailnetDomain;
 
-  # Shared helper: exchange OAuth client credentials for a short-lived access token
   getToken = ''
     CURL="${pkgs.curl}/bin/curl"
     JQ="${pkgs.jq}/bin/jq"
@@ -16,31 +15,7 @@ let
     fi
   '';
 
-  # ── Auth key generation ───────────────────────────────────────────────────
-  # Generates a short-lived auth key at boot via OAuth. Written to /run (tmpfs)
-  # — never touches disk or git. Replaces the static home_server_key in sops.
-  authKeyScript = pkgs.writeShellScript "tailscale-authkey-gen" ''
-    ${getToken}
-
-    KEY=$($CURL -sf -X POST \
-      "https://api.tailscale.com/api/v2/tailnet/-/keys" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H "Content-Type: application/json" \
-      -d '{"capabilities":{"devices":{"create":{"reusable":true,"ephemeral":false,"tags":["tag:server"]}}},"expirySeconds":3600}' \
-      | $JQ -r '.key')
-
-    if [ -z "$KEY" ] || [ "$KEY" = "null" ]; then
-      echo "ERROR: failed to generate auth key"
-      exit 1
-    fi
-
-    echo -n "$KEY" > /run/tailscale-authkey
-    chmod 600 /run/tailscale-authkey
-    echo "OK: auth key written to /run/tailscale-authkey"
-  '';
-
   # ── ACL ──────────────────────────────────────────────────────────────────
-  # Source of truth for the tailnet policy. Synced to control plane on every switch.
   acl = {
     grants = [
       { src = ["*"]; dst = ["*"]; ip = ["*"]; }
@@ -137,22 +112,7 @@ let
   '';
 in
 {
-  sops.secrets.tailscale_client_id = {};
-  sops.secrets.tailscale_client_secret = {};
-
-  # Generate a fresh auth key before tailscaled-autoconnect runs
-  systemd.services.tailscale-authkey-gen = {
-    description = "Generate Tailscale auth key via OAuth";
-    before = [ "tailscaled-autoconnect.service" ];
-    after = [ "network-online.target" "sops-nix.service" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "tailscaled-autoconnect.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = authKeyScript;
-    };
-  };
+  imports = [ ../shared/tailscale-base.nix ];
 
   # Always restart on every nixos-rebuild switch
   system.activationScripts.tailscale-acl-sync = {

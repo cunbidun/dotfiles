@@ -33,11 +33,8 @@
   # SSH specific to home-server
   services.openssh.settings.PermitRootLogin = "yes";
 
-  # Tailscale specific to home-server
+  # home-server specific: act as a subnet/exit-node client
   services.tailscale.useRoutingFeatures = "client";
-  services.tailscale.openFirewall = true;
-  services.tailscale.authKeyFile = "/run/tailscale-authkey";
-  services.tailscale.extraUpFlags = [ "--advertise-tags=tag:server" ];
 
   # Shared secrets used by Home Manager modules.
   sops = {

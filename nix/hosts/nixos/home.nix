@@ -12,6 +12,7 @@
   };
 in {
   imports = [
+    ../../home-manager/profiles/linux.nix
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.self.homeManagerModules.theme-manager
@@ -43,10 +44,6 @@ in {
     ../../home-manager/configs/llm_agent.nix
   ];
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = userdata.username;
-  home.homeDirectory = "/home/${userdata.username}";
   home.sessionVariables.SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
 
   home.packages = package_config.default_packages ++ package_config.linux_packages;
@@ -237,13 +234,10 @@ in {
   };
   systemd.user.services.fcitx5-daemon = lib.mkForce {};
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
   programs.bat = {
     enable = true;
   };
   programs.hyprcursor-phinger.enable = true;
-  programs.atuin.enable = true;
 
   programs.ssh = {
     enable = true;

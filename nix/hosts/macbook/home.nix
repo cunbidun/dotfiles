@@ -12,6 +12,7 @@
   };
 in {
   imports = [
+    ../../home-manager/profiles/darwin.nix
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/starship.nix
     ../../home-manager/configs/nvim.nix
@@ -22,11 +23,6 @@ in {
     inputs.stylix.homeModules.stylix
     inputs.mac-app-util.homeManagerModules.default
   ];
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = userdata.username;
-  home.homeDirectory = "/Users/${userdata.username}";
-
   home.packages = package_config.default_packages ++ package_config.mac_packages;
   home.stateVersion = "23.11";
 
@@ -39,8 +35,6 @@ in {
     ".config/iterm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/iterm";
   };
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
   programs.git = {
     enable = true;
     settings = {
@@ -50,8 +44,6 @@ in {
       };
     };
   };
-  programs.atuin.enable = true;
-
   home.activation.setDefaultBrowser = lib.hm.dag.entryAfter ["writeBoundary"] ''
     # Ensure Chrome is the default handler for HTTP/HTTPS
     ${pkgs.mac-default-browser}/bin/default-browser --identifier com.google.chrome
