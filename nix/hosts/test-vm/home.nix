@@ -19,10 +19,8 @@
 
   programs.home-manager.enable = true;
 
-  # these plugins cause key doubling in the VM; not needed for bootstrap testing
-  programs.zsh.plugins = lib.mkForce [];
-  programs.zsh.syntaxHighlighting.enable = lib.mkForce false;
-  programs.zsh.autosuggestion.enable = lib.mkForce false;
+  # VM lacks kitty terminfo; fallback to xterm-256color so zsh plugins work
+  programs.zsh.envExtra = "export TERM=\${TERM:-xterm-256color}";
   programs.atuin.enable = true;
   programs.zoxide.enable = true;
   programs.bat.enable = true;
