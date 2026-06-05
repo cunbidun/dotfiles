@@ -237,6 +237,21 @@
         diskoPath = ./nix/hosts/home-server/disko.nix;
       };
 
+      test-vm = nixpkgs-unstable.lib.nixosSystem {
+        system = "x86_64-linux";
+        pkgs = mkPkgs "x86_64-linux";
+        specialArgs = {
+          inherit inputs userdata;
+        };
+        modules = [
+          inputs.disko.nixosModules.disko
+          ./nix/hosts/test-vm/disko.nix
+          ./nix/hosts/test-vm/configuration.nix
+          home-manager.nixosModules.home-manager
+          (mkHomeManagerModule ./nix/hosts/test-vm/home.nix)
+        ];
+      };
+
       minimal = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         pkgs = mkPkgs "x86_64-linux";
