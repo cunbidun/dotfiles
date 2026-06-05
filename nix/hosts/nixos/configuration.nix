@@ -87,7 +87,7 @@
   ];
 
   sops = {
-    defaultSopsFile = ../../../secrets/global.yaml;
+    defaultSopsFile = ../../../secrets/system.yaml;
     age.keyFile = "/var/lib/sops-nix/keys.txt";
     secrets.geolocation = {
       path = "/etc/geolocation";

@@ -55,7 +55,7 @@
   services.qemuGuest.enable = true;
 
   sops = {
-    defaultSopsFile = ../../../secrets/global.yaml;
+    defaultSopsFile = ../../../secrets/system.yaml;
     age.keyFile = "/var/lib/sops-nix/keys.txt";
     secrets.github_read_only_token = {
       owner = userdata.username;
