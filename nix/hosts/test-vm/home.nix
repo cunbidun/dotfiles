@@ -19,8 +19,9 @@
 
   programs.home-manager.enable = true;
 
-  # VM lacks kitty terminfo; fallback to xterm-256color so zsh plugins work
-  programs.zsh.envExtra = "export TERM=\${TERM:-xterm-256color}";
+  home.sessionVariables = {
+    TERM = "xterm-256color";
+  };
   programs.atuin.enable = true;
   programs.zoxide.enable = true;
   programs.bat.enable = true;
