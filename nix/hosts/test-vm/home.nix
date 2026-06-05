@@ -19,8 +19,10 @@
 
   programs.home-manager.enable = true;
 
-  # vi-mode causes key tripling in some terminals; not needed for a test VM
+  # these plugins cause key doubling in the VM; not needed for bootstrap testing
   programs.zsh.plugins = lib.mkForce [];
+  programs.zsh.syntaxHighlighting.enable = lib.mkForce false;
+  programs.zsh.autosuggestion.enable = lib.mkForce false;
   programs.atuin.enable = true;
   programs.zoxide.enable = true;
   programs.bat.enable = true;
