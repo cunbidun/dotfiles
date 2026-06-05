@@ -101,6 +101,10 @@
     trustedInterfaces = ["tailscale0"];
   };
 
+  environment.systemPackages = with pkgs; [
+    kitty.terminfo
+  ];
+
   # System state version
   system.stateVersion = "25.05";
 }

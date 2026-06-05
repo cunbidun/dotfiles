@@ -3,7 +3,6 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.nixos.org"
-      "https://nixos-raspberrypi.cachix.org"
       "https://hyprland.cachix.org"
       "https://yazi.cachix.org"
       "https://winapps.cachix.org/"
@@ -13,7 +12,6 @@
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
       "winapps.cachix.org-1:HI82jWrXZsQRar/PChgIx1unmuEsiQMQq+zt05CD36g="
@@ -200,6 +198,13 @@
           (mkHomeManagerModule homePath)
         ];
       };
+
+    minimalSystem = nixpkgs-unstable.lib.nixosSystem {
+      system = "x86_64-linux";
+      pkgs = mkPkgs "x86_64-linux";
+      specialArgs = { inherit inputs userdata; };
+      modules = [ ./nix/hosts/minimal/configuration.nix ];
+    };
   in {
     # for running commands like `nix eval .#inputs.hyprland.packages.x86_64-linux.hyprland`
     inputs = inputs;
@@ -252,62 +257,8 @@
         ];
       };
 
-      minimal = nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
-        pkgs = mkPkgs "x86_64-linux";
-        specialArgs = {
-          inherit inputs userdata;
-        };
-        modules = [
-          ./nix/hosts/minimal/configuration.nix
-        ];
-      };
+      minimal = minimalSystem;
 
-      rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
-        specialArgs =
-          inputs
-          // {
-            inherit userdata;
-          };
-        trustCaches = true;
-        modules = [
-          (
-            {nixos-raspberrypi, ...}: {
-              imports = with nixos-raspberrypi.nixosModules; [
-                raspberry-pi-5.base
-                raspberry-pi-5.page-size-16k
-                raspberry-pi-5.display-vc4
-              ];
-            }
-          )
-          inputs.disko.nixosModules.disko
-          ./nix/hosts/rpi/hardware-configuration.nix
-          ./nix/hosts/rpi/configuration.nix
-          inputs.home-manager-rpi5.nixosModules.home-manager
-          (mkHomeManagerModule ./nix/hosts/rpi/home.nix)
-          (
-            {_}: {
-              nixpkgs.overlays =
-                import ./nix/overlays inputs
-                ++ [
-                  (final: prev: {
-                    pythonPackagesExtensions =
-                      prev.pythonPackagesExtensions
-                      ++ [
-                        (pythonFinal: pythonPrev: {
-                          # Override markdown-it-py for all Python versions
-                          markdown-it-py = pythonPrev."markdown-it-py".overridePythonAttrs (old: {
-                            doCheck = false;
-                            doInstallCheck = false;
-                          });
-                        })
-                      ];
-                  })
-                ];
-            }
-          )
-        ];
-      };
     };
 
     # -----------------------#
@@ -370,6 +321,10 @@
             program = "${script}/bin/nix-switch";
           };
         }
+        // nixpkgs-unstable.lib.optionalAttrs (system == "x86_64-linux")
+            (import ./nix/apps/vm.nix { inherit pkgs; lib = nixpkgs-unstable.lib; })
       );
+
+    packages.x86_64-linux.minimal-iso = minimalSystem.config.system.build.isoImage;
   };
 }

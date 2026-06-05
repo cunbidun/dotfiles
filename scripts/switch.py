@@ -194,22 +194,22 @@ def main():
                     flake_ref,
                     "--target-host",
                     target,
-                    "--build-host",
-                    "localhost",
                     "--cores",
                     "0",
                 ]
+                env = os.environ.copy()
                 if ssh_opts:
-                    cmd += ["--ssh-opts", ssh_opts]
+                    env["NIX_SSHOPTS"] = ssh_opts
                 # Pipe through nom
                 p1 = subprocess.Popen(
-                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env
                 )
                 p2 = subprocess.Popen(["nom", "--json"], stdin=p1.stdout)
                 p1.stdout.close()
                 p2.communicate()
-                if p2.returncode != 0:
-                    raise subprocess.CalledProcessError(p2.returncode, cmd)
+                p1.wait()
+                if p1.returncode != 0 or p2.returncode != 0:
+                    raise subprocess.CalledProcessError(p1.returncode or p2.returncode, cmd)
             else:
                 cmd = [
                     "sudo",

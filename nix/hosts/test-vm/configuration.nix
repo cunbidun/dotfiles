@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ../shared/nix-config.nix
+    ../shared/tailscale-base.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -64,6 +65,7 @@
   environment.systemPackages = with pkgs; [
     git
     vim
+    kitty.terminfo
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

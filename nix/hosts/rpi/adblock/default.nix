@@ -1,3 +1,0 @@
-[
-  ./adguard.nix
-]
