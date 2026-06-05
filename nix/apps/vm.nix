@@ -5,7 +5,6 @@ let
     runtimeInputs = with pkgs; [ qemu netcat-openbsd git procps ];
     text = ''
       DISK="$HOME/tmp/test-vm.qcow2"
-      MON_SOCK="/tmp/qemu-mon.sock"
       SSH_PORT=2222
 
       [ -f "$DISK" ] && { echo "ERROR: $DISK exists. Run 'nix run .#vm-destroy' first."; exit 1; }
@@ -21,8 +20,7 @@ let
         -netdev "user,id=net0,hostfwd=tcp::$SSH_PORT-:22" \
         -device virtio-net-pci,netdev=net0 \
         -display none \
-        -monitor "unix:$MON_SOCK,server,nowait" \
-        -cpu host -daemonize -pidfile /tmp/test-vm.pid
+        -cpu host -daemonize
 
       until nc -z -w2 localhost "$SSH_PORT"; do sleep 2; done
       echo "Installer up — ssh -p $SSH_PORT root@localhost  |  nix run .#vm-deploy"
@@ -35,8 +33,6 @@ let
     text = ''
       REPO=$(git rev-parse --show-toplevel)
       DISK="$HOME/tmp/test-vm.qcow2"
-      MON_SOCK="/tmp/qemu-mon.sock"
-      PID_FILE="/tmp/test-vm.pid"
       SSH_PORT=2222
 
       if ! nc -z -w2 localhost "$SSH_PORT" 2>/dev/null; then
@@ -56,7 +52,6 @@ let
 
       echo "Rebooting into installed system..."
       pkill -f "test-vm.qcow2" || true
-      rm -f "$MON_SOCK"
       sleep 2
 
       qemu-system-x86_64 \
@@ -65,8 +60,7 @@ let
         -netdev "user,id=net0,hostfwd=tcp::$SSH_PORT-:22" \
         -device virtio-net-pci,netdev=net0 \
         -display none \
-        -monitor "unix:$MON_SOCK,server,nowait" \
-        -cpu host -daemonize -pidfile "$PID_FILE"
+        -cpu host -daemonize
 
       echo "Waiting for installed system to boot..."
       until nc -z -w2 localhost "$SSH_PORT"; do sleep 2; done
@@ -81,20 +75,8 @@ let
     runtimeInputs = with pkgs; [ procps ];
     text = ''
       DISK="$HOME/tmp/test-vm.qcow2"
-      PID_FILE="/tmp/test-vm.pid"
-      MON_SOCK="/tmp/qemu-mon.sock"
-
-      if [ -f "$PID_FILE" ]; then
-        PID=$(cat "$PID_FILE")
-        if kill -0 "$PID" 2>/dev/null; then
-          echo "Stopping VM (pid $PID)..."
-          kill "$PID"
-        fi
-        rm -f "$PID_FILE"
-      fi
 
       pkill -f "test-vm.qcow2" 2>/dev/null || true
-      rm -f "$MON_SOCK"
 
       if [ -f "$DISK" ]; then
         echo "Removing $DISK..."
