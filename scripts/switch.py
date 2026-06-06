@@ -114,6 +114,13 @@ def main():
         action="store_true",
         help="Only copy files back, skip build/switch",
     )
+    parser.add_argument(
+        "--max-jobs",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Max parallel nix build jobs (passed to nixos-rebuild as --option max-jobs N)",
+    )
 
     args = parser.parse_args()
 
@@ -163,6 +170,7 @@ def main():
     # Build/switch configuration
     operation = "build" if args.build_only else "switch"
     flake_ref = f"{git_root}#{args.profile}"
+    max_jobs_opts = ["--option", "max-jobs", str(args.max_jobs)] if args.max_jobs is not None else []
 
     try:
         if is_darwin:
@@ -196,7 +204,7 @@ def main():
                     target,
                     "--cores",
                     "0",
-                ]
+                ] + max_jobs_opts
                 env = os.environ.copy()
                 if ssh_opts:
                     env["NIX_SSHOPTS"] = ssh_opts
@@ -221,7 +229,7 @@ def main():
                     flake_ref,
                     "--cores",
                     "0",
-                ]
+                ] + max_jobs_opts
                 # Pipe through nom
                 p1 = subprocess.Popen(
                     cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
