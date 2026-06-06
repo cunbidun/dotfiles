@@ -171,7 +171,6 @@ rec {
       # Stable-pinned apps
       pkgs.nixpkgs-stable.jetbrains.datagrip
       pkgs.nixpkgs-stable.libreoffice
-      pkgs.nixpkgs-stable.redisinsight
       pkgs.nixpkgs-stable.zoom-us
     ];
 

@@ -36,23 +36,4 @@ return {
 			},
 		},
 	},
-	-- Explorer: make 'o' navigate into directories (same as Enter/l) instead of opening externally.
-	{
-		"folke/snacks.nvim",
-		opts = {
-			picker = {
-				sources = {
-					explorer = {
-						win = {
-							list = {
-								keys = {
-									["o"] = "confirm",
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	},
 }

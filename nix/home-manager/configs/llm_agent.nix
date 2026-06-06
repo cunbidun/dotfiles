@@ -4,7 +4,8 @@
   inputs,
   userdata,
   ...
-}: let
+}:
+let
   configHome = config.xdg.configHome;
   cacheHome = config.xdg.cacheHome;
   githubTokenPath = "${configHome}/opencode/github_read_only_token";
@@ -12,7 +13,7 @@
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
   chromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/opencode-profile";
   codexChromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/codex-profile";
-  npx = "${pkgs.nodejs_24}/bin/npx";
+  npx = "${pkgs.nodejs}/bin/npx";
   lspPath = pkgs.lib.makeBinPath [
     pkgs.nixd
     pkgs.pyright
@@ -24,11 +25,11 @@
     pkgs.dockerfile-language-server
   ];
   mcpPath = pkgs.lib.makeBinPath [
-    pkgs.nodejs_24
+    pkgs.nodejs
     pkgs.bash
     pkgs.coreutils
   ];
-  codexToml = pkgs.formats.toml {};
+  codexToml = pkgs.formats.toml { };
   codexConfigFile = codexToml.generate "codex-config.toml" {
     model_provider = "9router";
     model = "cx/gpt-5.5";
@@ -84,7 +85,8 @@
 
     tui.model_availability_nux."cx/gpt-5.5" = 4;
   };
-in {
+in
+{
   home.packages = with pkgs; [
     nixd
     pyright
@@ -102,41 +104,90 @@ in {
     plugin = [ "${inputs.obra-superpowers}/.opencode/plugins/superpowers.js" ];
     lsp = {
       nixd = {
-        command = ["${pkgs.nixd}/bin/nixd"];
-        extensions = [".nix"];
+        command = [ "${pkgs.nixd}/bin/nixd" ];
+        extensions = [ ".nix" ];
       };
       pyright = {
-        command = ["${pkgs.pyright}/bin/pyright-langserver" "--stdio"];
-        extensions = [".py" ".pyi"];
+        command = [
+          "${pkgs.pyright}/bin/pyright-langserver"
+          "--stdio"
+        ];
+        extensions = [
+          ".py"
+          ".pyi"
+        ];
       };
       lua-ls = {
-        command = ["${pkgs.lua-language-server}/bin/lua-language-server"];
-        extensions = [".lua"];
+        command = [ "${pkgs.lua-language-server}/bin/lua-language-server" ];
+        extensions = [ ".lua" ];
       };
       typescript = {
-        command = ["${pkgs.typescript-language-server}/bin/typescript-language-server" "--stdio"];
-        extensions = [".ts" ".tsx" ".js" ".jsx" ".mjs" ".cjs" ".mts" ".cts"];
+        command = [
+          "${pkgs.typescript-language-server}/bin/typescript-language-server"
+          "--stdio"
+        ];
+        extensions = [
+          ".ts"
+          ".tsx"
+          ".js"
+          ".jsx"
+          ".mjs"
+          ".cjs"
+          ".mts"
+          ".cts"
+        ];
         env.PATH = lspPath;
       };
       json = {
-        command = ["${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server" "--stdio"];
-        extensions = [".json" ".jsonc"];
+        command = [
+          "${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server"
+          "--stdio"
+        ];
+        extensions = [
+          ".json"
+          ".jsonc"
+        ];
       };
       yaml-ls = {
-        command = ["${pkgs.yaml-language-server}/bin/yaml-language-server" "--stdio"];
-        extensions = [".yaml" ".yml"];
+        command = [
+          "${pkgs.yaml-language-server}/bin/yaml-language-server"
+          "--stdio"
+        ];
+        extensions = [
+          ".yaml"
+          ".yml"
+        ];
       };
       css = {
-        command = ["${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server" "--stdio"];
-        extensions = [".css" ".scss" ".less"];
+        command = [
+          "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server"
+          "--stdio"
+        ];
+        extensions = [
+          ".css"
+          ".scss"
+          ".less"
+        ];
       };
       html = {
-        command = ["${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server" "--stdio"];
-        extensions = [".html" ".htm"];
+        command = [
+          "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server"
+          "--stdio"
+        ];
+        extensions = [
+          ".html"
+          ".htm"
+        ];
       };
       docker = {
-        command = ["${pkgs.dockerfile-language-server}/bin/docker-langserver" "--stdio"];
-        extensions = ["Dockerfile" ".dockerfile"];
+        command = [
+          "${pkgs.dockerfile-language-server}/bin/docker-langserver"
+          "--stdio"
+        ];
+        extensions = [
+          "Dockerfile"
+          ".dockerfile"
+        ];
       };
     };
     mcp = {
