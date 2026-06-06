@@ -125,3 +125,6 @@ vim.filetype.add({
 
 -- Keybindings (see keymaps.lua)
 require("user.keymaps")
+
+-- Competitive programming commands and keymaps
+require("user.config.cp")
