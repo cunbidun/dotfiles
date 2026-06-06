@@ -73,6 +73,12 @@ def is_probable_tag(ref: Optional[str]) -> bool:
     return any(pattern.match(ref) for pattern in TAG_PATTERNS)
 
 
+def is_git_rev(rev: Optional[str]) -> bool:
+    if not rev:
+        return False
+    return bool(GIT_REV_PATTERN.match(rev))
+
+
 def short_rev(rev: Optional[str]) -> str:
     if not rev:
         return "unknown"
@@ -386,6 +392,7 @@ def format_table(rows: Tuple[InputVersion, ...]) -> str:
     table = Texttable(max_width=0)
     table.set_deco(Texttable.HEADER | Texttable.VLINES | Texttable.BORDER)
     table.set_cols_align(["l", "l", "l"])
+    table.set_cols_dtype(["t", "t", "t"])
     table.header(["Input", "URL", "Version"])
 
     plain_versions = []
@@ -463,13 +470,14 @@ def run_checked(cmd: list[str], *, cwd: Path) -> None:
     subprocess.run(cmd, cwd=str(cwd), text=True, check=True)
 
 
-def run_capture(cmd: list[str], *, cwd: Path) -> str:
+def run_capture(cmd: list[str], *, cwd: Path, env: Optional[Dict[str, str]] = None) -> str:
     result = subprocess.run(
         cmd,
         cwd=str(cwd),
         text=True,
         capture_output=True,
         check=True,
+        env=env,
     )
     return result.stdout
 
@@ -569,9 +577,12 @@ def bump_pinned_flake_input_refs(flake_dir: Path, selected_inputs: Optional[list
 
 
 def fetch_digest(flake_dir: Path, repository: str, tag: str) -> str:
+    env = os.environ.copy()
+    env["CONTAINERS_REGISTRIES_CONF"] = "/dev/null"
     payload = run_capture(
         ["nix", "run", "nixpkgs#skopeo", "--", "inspect", f"docker://{repository}:{tag}"],
         cwd=flake_dir,
+        env=env,
     )
     digest = json.loads(payload).get("Digest")
     if not digest:

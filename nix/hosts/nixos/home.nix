@@ -13,6 +13,7 @@
 in {
   imports = [
     ../../home-manager/profiles/linux.nix
+    inputs.sops-nix.homeManagerModules.sops
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.self.homeManagerModules.theme-manager
@@ -83,7 +84,6 @@ in {
 
   gtk = {
     enable = true;
-    gtk4.theme = config.gtk.theme;
     gtk3 = {
       bookmarks = [
         "file:///home/${userdata.username}/Downloads"
@@ -258,6 +258,17 @@ in {
     };
   };
   programs.zoxide.enable = true;
+
+  sops = {
+    defaultSopsFile = ../../../secrets/user.yaml;
+    age.keyFile = "/var/lib/sops-nix/keys.txt";
+    secrets.github_read_only_token = {
+      path = "${config.home.homeDirectory}/.config/opencode/github_read_only_token";
+    };
+    secrets.ninerouter_api_key = {
+      path = "${config.home.homeDirectory}/.config/opencode/ninerouter_api_key";
+    };
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

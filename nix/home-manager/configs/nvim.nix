@@ -65,6 +65,10 @@
       dir = "nvim-lspconfig";
     }
     {
+      pkg = clangd_extensions-nvim;
+      dir = "clangd_extensions.nvim";
+    }
+    {
       pkg = mason-nvim;
       dir = "mason.nvim";
     }
