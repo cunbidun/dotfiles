@@ -5,7 +5,7 @@ local function TermWrapper(command)
 		local buffers = vim.api.nvim_list_bufs()
 		local terminal_buffers = {}
 		for _, buf in ipairs(buffers) do
-			if vim.api.nvim_buf_get_option(buf, "buftype") == "terminal" then
+			if vim.bo[buf].buftype == "terminal" then
 				table.insert(terminal_buffers, buf)
 			end
 		end
@@ -52,20 +52,6 @@ vim.api.nvim_create_user_command("DeleteTask", function()
 	TermWrapper(string.format('mv "%s" ~/.local/share/Trash/files/', vim.fn.expand("%:p:h")))
 end, {})
 
-local binds = {
-	{ action = "<cmd>Runscript<cr>", key = "<leader>cb", mode = "n", desc = "Build and Run" },
-	{ action = "<cmd>RunWithTerm<cr>", key = "<leader>cr", mode = "n", desc = "Build and Run in Terminal" },
-	{ action = "<cmd>RunWithDebug<cr>", key = "<leader>cd", mode = "n", desc = "Build and Run in Debug Mode" },
-	{ action = "<cmd>TaskConfig<cr>", key = "<leader>ct", mode = "n", desc = "Edit Task Info" },
-	{ action = "<cmd>ArchiveTask<cr>", key = "<leader>ca", mode = "n", desc = "Archive Task" },
-	{ action = "<cmd>TaskFiles<CR>", key = "<leader>cf", mode = "n", desc = "Find Task Files" },
-	{ action = "<cmd>NewTask<cr>", key = "<leader>cn", mode = "n", desc = "New Task" },
-}
-
-for _, map in ipairs(binds) do
-	vim.keymap.set(map.mode, map.key, map.action, map.options)
-end
-
 vim.api.nvim_create_user_command("TaskFiles", function()
 	Snacks.picker.files({
 		cwd = "task",
@@ -76,3 +62,13 @@ vim.api.nvim_create_user_command("TaskFiles", function()
 		},
 	})
 end, {})
+
+require("which-key").add({
+	{ "<leader>cb", "<cmd>Runscript<cr>",    desc = "Build and Run",              mode = "n", order = 1 },
+	{ "<leader>cr", "<cmd>RunWithTerm<cr>",  desc = "Build and Run in Terminal",  mode = "n", order = 2 },
+	{ "<leader>cd", "<cmd>RunWithDebug<cr>", desc = "Build and Run in Debug",     mode = "n", order = 3 },
+	{ "<leader>ct", "<cmd>TaskConfig<cr>",   desc = "Edit Task Info",             mode = "n", order = 4 },
+	{ "<leader>ca", "<cmd>ArchiveTask<cr>",  desc = "Archive Task",               mode = "n", order = 5 },
+	{ "<leader>cf", "<cmd>TaskFiles<cr>",    desc = "Find Task Files",            mode = "n", order = 6 },
+	{ "<leader>cn", "<cmd>NewTask<cr>",      desc = "New Task",                   mode = "n", order = 7 },
+})
