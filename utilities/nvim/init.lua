@@ -13,7 +13,9 @@ util.ls = function(path, fn)
 	end)
 end
 
-require("lazy").setup({
+local is_cp = os.getenv("CP_ENV") == "1"
+
+local plugins = {
 	{
 		"LazyVim/LazyVim",
 		dir = root .. "/LazyVim",
@@ -29,38 +31,6 @@ require("lazy").setup({
 				animate = { enabled = false },
 			},
 		},
-	},
-	{ import = "lazyvim.plugins.extras.ai.copilot-native" },
-	{ import = "lazyvim.plugins.extras.ai.sidekick" },
-	{ import = "lazyvim.plugins.extras.ai.copilot-chat" },
-	-- Override CopilotChat keys: sidekick owns <leader>aa, so remap chat toggle to <leader>ac
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		dir = root .. "/CopilotChat.nvim",
-		keys = {
-			{ "<leader>aa", false }, -- freed for sidekick
-			{
-				"<leader>ac",
-				function()
-					require("CopilotChat").toggle()
-				end,
-				desc = "Toggle Chat (CopilotChat)",
-				mode = { "n", "x" },
-			},
-		},
-	},
-	-- Configure codex CLI with dangerously-bypass-approvals flag
-	{
-		"folke/sidekick.nvim",
-		opts = function(_, opts)
-			opts.cli = opts.cli or {}
-			opts.cli.tools = opts.cli.tools or {}
-			opts.cli.tools.codex = vim.tbl_deep_extend("force", opts.cli.tools.codex or {}, {
-				cmd = { "codex", "--dangerously-bypass-approvals-and-sandbox" },
-				resume = { "resume" },
-			})
-			return opts
-		end,
 	},
 	{ import = "lazyvim.plugins.extras.lang.python" },
 	{ import = "lazyvim.plugins.extras.lang.typescript" },
@@ -83,7 +53,26 @@ require("lazy").setup({
 	{ "mason-org/mason-lspconfig.nvim", enabled = false },
 	{ "nvim-treesitter/nvim-treesitter", enabled = false },
 	{ import = "user.plugins" },
-}, {
+}
+
+vim.list_extend(plugins, {
+	{ import = "lazyvim.plugins.extras.ai.sidekick" },
+	-- Configure codex CLI with dangerously-bypass-approvals flag
+	{
+		"folke/sidekick.nvim",
+		opts = function(_, opts)
+			opts.cli = opts.cli or {}
+			opts.cli.tools = opts.cli.tools or {}
+			opts.cli.tools.codex = vim.tbl_deep_extend("force", opts.cli.tools.codex or {}, {
+				cmd = { "codex", "--dangerously-bypass-approvals-and-sandbox" },
+				resume = { "resume" },
+			})
+			return opts
+		end,
+	},
+})
+
+require("lazy").setup(plugins, {
 	root = root,
 	install = { missing = false, colorscheme = {} },
 	checker = { enabled = false },
@@ -126,5 +115,7 @@ vim.filetype.add({
 -- Keybindings (see keymaps.lua)
 require("user.keymaps")
 
--- Competitive programming commands and keymaps
-require("user.config.cp")
+-- Competitive programming commands and keymaps (only when CP_ENV=1)
+if is_cp then
+	require("user.config.competitive_programming")
+end

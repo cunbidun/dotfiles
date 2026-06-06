@@ -184,10 +184,6 @@
       dir = "sidekick.nvim";
     }
     {
-      pkg = CopilotChat-nvim;
-      dir = "CopilotChat.nvim";
-    }
-    {
       pkg = aw-watcher-nvim;
       dir = "aw-watcher.nvim";
     }
@@ -303,7 +299,6 @@
       tectonic
       terraform-compat
       tree-sitter
-      copilot-language-server
     ]
     ++ lib.optionals isLinux (
       with pkgs; [

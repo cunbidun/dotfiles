@@ -7,7 +7,7 @@
     };
     settings = {
       "confirm_os_window_close" = "0";
-      "auto_reload_config" = "0";
+      "auto_reload_config" = "-1";
     };
   };
 }
