@@ -36,4 +36,24 @@ return {
 			},
 		},
 	},
+	-- Hide __pycache__ and compiled Python files from the explorer.
+	{
+		"folke/snacks.nvim",
+		opts = {
+			picker = {
+				sources = {
+					explorer = {
+						exclude = { "__pycache__", "*.pyc" },
+					},
+				},
+			},
+		},
+	},
+	-- venv-selector: pick Python virtualenv (LazyVim python extra includes this).
+	{
+		"linux-cultist/venv-selector.nvim",
+		keys = {
+			{ "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv" },
+		},
+	},
 }
