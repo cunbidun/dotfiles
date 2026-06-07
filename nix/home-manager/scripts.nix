@@ -162,7 +162,7 @@
 
 
       def move_window_to_workspace(target, window=None):
-          fields = {"workspace": workspace_name(target), "silent": True}
+          fields = {"workspace": workspace_name(target), "follow": False}
           if window is not None:
               fields["window"] = window
           dispatch_lua(f"hl.dsp.window.move({lua_table(fields)})")
