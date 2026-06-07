@@ -37,6 +37,7 @@ return {
 		},
 	},
 	-- Hide __pycache__ and compiled Python files from the explorer.
+	-- git_status_hl colors filenames by git status (VS Code style).
 	{
 		"folke/snacks.nvim",
 		opts = {
@@ -44,6 +45,11 @@ return {
 				sources = {
 					explorer = {
 						exclude = { "__pycache__", "*.pyc" },
+					},
+				},
+				formatters = {
+					file = {
+						git_status_hl = true,
 					},
 				},
 			},
