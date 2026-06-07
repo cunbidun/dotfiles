@@ -8,11 +8,14 @@
     # package = inputs.nix-monitored.packages.${pkgs.stdenv.hostPlatform.system}.default;
     gc = {
       automatic = true;
-      # Darwin uses launchd calendar intervals; NixOS uses systemd OnCalendar strings
-      interval = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { Weekday = 6; Hour = 9; Minute = 0; };
-      dates = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "Sat 09:00";
       options = "--delete-older-than 30d";
-    };
+    } // (if pkgs.stdenv.hostPlatform.isDarwin then {
+      # macOS: launchd StartCalendarInterval format
+      interval = { Weekday = 6; Hour = 9; Minute = 0; };
+    } else {
+      # NixOS: systemd OnCalendar format
+      dates = "Sat 09:00";
+    });
     settings = {
       experimental-features = "nix-command flakes";
       accept-flake-config = true;

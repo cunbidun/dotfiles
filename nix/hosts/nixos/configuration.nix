@@ -109,6 +109,7 @@
   # started in user sessions.
   # programs.mtr.enable = true;
   programs.dconf.enable = true;
+  programs.steam.enable = true;
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
