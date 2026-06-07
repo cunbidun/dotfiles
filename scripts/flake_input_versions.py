@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
-Report current versus upstream versions for flake inputs.
+Report current versus upstream versions for flake inputs and container images.
 
 For each direct input declared by the flake this tool shows:
 * The locked version (tag + Nix commit when available).
 * The latest version upstream (tag + commit or branch head).
 * A color-coded status (green when up to date, yellow when newer upstream).
 * The source URL for quick navigation.
+
+Container images from nix/hosts/home-server/container-images.json are also
+included in the status table with digest and last-pushed date.
 
 Usage:
     ./scripts/flake_input_versions.py [--flake PATH] [--no-color]
@@ -83,6 +86,20 @@ def short_rev(rev: Optional[str]) -> str:
     if not rev:
         return "unknown"
     return rev[:12]
+
+
+def short_digest(digest: str) -> str:
+    if digest.startswith("sha256:"):
+        return f"sha256:{digest[7:15]}"
+    return short_rev(digest)
+
+
+def format_container_display(digest: str, last_pushed: Optional[str]) -> str:
+    short = short_digest(digest)
+    if last_pushed:
+        date = last_pushed[:10] if len(last_pushed) >= 10 else last_pushed
+        return f"{short} ({date})"
+    return short
 
 
 def build_display(ref: Optional[str], rev: Optional[str]) -> str:
@@ -439,6 +456,50 @@ def build_env(flake_dir: Path) -> Dict[str, str]:
     return env
 
 
+def gather_container_versions(flake_dir: Path) -> list[InputVersion]:
+    container_file = flake_dir / "nix/hosts/home-server/container-images.json"
+    if not container_file.exists():
+        return []
+
+    try:
+        data = json.loads(container_file.read_text())
+    except (json.JSONDecodeError, OSError):
+        return []
+
+    versions = []
+    for name, entry in data.items():
+        repository = entry.get("repository", "")
+        tag = entry.get("tag", "")
+        digest = entry.get("digest", "")
+        last_pushed = entry.get("lastPushed")
+
+        current_display = format_container_display(digest, last_pushed)
+        current_info = VersionDetails(ref=last_pushed, rev=digest, display=current_display)
+
+        try:
+            remote_digest, remote_pushed = fetch_container_registry_info(repository, tag)
+            remote_display = format_container_display(remote_digest, remote_pushed)
+            remote_info = VersionDetails(ref=remote_pushed, rev=remote_digest, display=remote_display)
+            remote_note: Optional[str] = None
+        except RuntimeError:
+            remote_info = current_info
+            remote_note = "unable to check registry"
+
+        url = build_container_web_url(repository)
+
+        versions.append(
+            InputVersion(
+                name=name,
+                url=url,
+                current=current_info,
+                remote=remote_info,
+                message=remote_note,
+            )
+        )
+
+    return versions
+
+
 def show_status(flake_dir: Path, no_color: bool) -> int:
     lock_path = flake_dir / "flake.lock"
     if not lock_path.exists():
@@ -462,7 +523,9 @@ def show_status(flake_dir: Path, no_color: bool) -> int:
         print(f"warning: unable to refresh metadata: {exc}", file=sys.stderr)
 
     versions = gather_versions(nodes=nodes, refreshed_nodes=refreshed_nodes, env=env)
-    print(format_table(versions))
+    container_versions = gather_container_versions(flake_dir)
+    all_versions = tuple(sorted(list(versions) + container_versions, key=lambda v: v.name))
+    print(format_table(all_versions))
     return 0
 
 
@@ -576,7 +639,63 @@ def bump_pinned_flake_input_refs(flake_dir: Path, selected_inputs: Optional[list
         flake_nix_path.write_text(content, encoding="utf-8")
 
 
-def fetch_digest(flake_dir: Path, repository: str, tag: str) -> str:
+def parse_container_repository(repository: str) -> tuple[str, str, str]:
+    """Parse a container repository string into (host, owner, repo_name).
+
+    Accepts formats like docker.io/owner/repo or owner/repo (implies Docker Hub).
+    """
+    parts = repository.split("/")
+    if len(parts) == 3:
+        return parts[0], parts[1], parts[2]
+    if len(parts) == 2:
+        return "docker.io", parts[0], parts[1]
+    if len(parts) == 1 and "/" not in repository:
+        return "docker.io", parts[0], parts[0]
+    raise RuntimeError(f"Unable to parse container repository: {repository}")
+
+
+def build_container_web_url(repository: str) -> str:
+    """Build a human-friendly web URL for a container repository."""
+    host, owner, repo = parse_container_repository(repository)
+    if host in ("docker.io", "index.docker.io"):
+        return f"https://hub.docker.com/r/{owner}/{repo}"
+    if host == "ghcr.io":
+        return f"https://github.com/{owner}/{repo}/pkgs/container/{repo}"
+    return repository
+
+
+def fetch_container_registry_info(repository: str, tag: str) -> tuple[str, str]:
+    """Fetch digest and tag_last_pushed from a container registry via HTTP API.
+
+    Currently supports Docker Hub via the hub.docker.com API.
+    Returns (digest, lastPushed) where lastPushed is an ISO-8601 timestamp string.
+    Raises RuntimeError if the registry is not supported or the request fails.
+    """
+    host, owner, repo_name = parse_container_repository(repository)
+
+    if host not in ("docker.io", "index.docker.io"):
+        raise RuntimeError(f"Registry not supported for HTTP check: {host}")
+
+    url = f"https://hub.docker.com/v2/repositories/{owner}/{repo_name}/tags/{tag}"
+    request = Request(url, headers={"User-Agent": "flake-inputs-report"})
+    try:
+        with urlopen(request, timeout=20) as response:
+            payload = json.load(response)
+    except (URLError, TimeoutError, ValueError, OSError) as exc:
+        raise RuntimeError(f"Unable to fetch tag info from Docker Hub: {exc}") from exc
+
+    digest = payload.get("digest", "")
+    if not digest:
+        raise RuntimeError(f"No digest in Docker Hub response for {repository}:{tag}")
+    last_pushed = payload.get("tag_last_pushed", "")
+    return digest, last_pushed or ""
+
+
+def fetch_container_info_skopeo(flake_dir: Path, repository: str, tag: str) -> tuple[str, str]:
+    """Fetch digest using skopeo (works for any registry, but lastPushed is unavailable).
+
+    Returns (digest, "").
+    """
     env = os.environ.copy()
     env["CONTAINERS_REGISTRIES_CONF"] = "/dev/null"
     payload = run_capture(
@@ -587,14 +706,14 @@ def fetch_digest(flake_dir: Path, repository: str, tag: str) -> str:
     digest = json.loads(payload).get("Digest")
     if not digest:
         raise RuntimeError(f"Unable to resolve digest for {repository}:{tag}")
-    return digest
+    return digest, ""
 
 
 def update_container_inputs(flake_dir: Path, names: Optional[list[str]]) -> None:
     input_file = flake_dir / "nix/hosts/home-server/container-images.json"
     data = json.loads(input_file.read_text())
 
-    selected = names if names is not None else list(data.keys())
+    selected = names if names else list(data.keys())
     unknown = [name for name in selected if name not in data]
     if unknown:
         raise SystemExit(f"Unknown container input(s): {', '.join(unknown)}")
@@ -602,14 +721,31 @@ def update_container_inputs(flake_dir: Path, names: Optional[list[str]]) -> None
     changed = False
     for name in selected:
         entry = data[name]
+        repository = entry["repository"]
+        tag = entry["tag"]
         old_digest = entry.get("digest", "")
-        new_digest = fetch_digest(flake_dir, entry["repository"], entry["tag"])
+
+        try:
+            new_digest, last_pushed = fetch_container_registry_info(repository, tag)
+        except RuntimeError:
+            new_digest, last_pushed = fetch_container_info_skopeo(flake_dir, repository, tag)
+
+        changed_entry = False
         if new_digest != old_digest:
             print(f"Updating {name}: {old_digest} -> {new_digest}")
             entry["digest"] = new_digest
-            changed = True
-        else:
+            changed_entry = True
+
+        if last_pushed and entry.get("lastPushed") != last_pushed:
+            print(f"Updating {name} lastPushed: {entry.get('lastPushed', 'N/A')} -> {last_pushed}")
+            entry["lastPushed"] = last_pushed
+            changed_entry = True
+
+        if not changed_entry:
             print(f"{name} is already up to date ({new_digest})")
+
+        if changed_entry:
+            changed = True
 
     if changed:
         input_file.write_text(json.dumps(data, indent=2) + "\n")

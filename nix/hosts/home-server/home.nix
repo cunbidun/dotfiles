@@ -13,7 +13,6 @@
 in {
   imports = [
     ../../home-manager/profiles/linux.nix
-    inputs.sops-nix.homeManagerModules.sops
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix
@@ -31,17 +30,6 @@ in {
     VISUAL = "nvim";
     LANG = "en_US.UTF-8";
     TERM = "xterm-256color";
-  };
-
-  sops = {
-    defaultSopsFile = ../../../secrets/user.yaml;
-    age.keyFile = "/var/lib/sops-nix/keys.txt";
-    secrets.github_read_only_token = {
-      path = "${config.home.homeDirectory}/.config/opencode/github_read_only_token";
-    };
-    secrets.ninerouter_api_key = {
-      path = "${config.home.homeDirectory}/.config/opencode/ninerouter_api_key";
-    };
   };
 
   home.stateVersion = "25.05";

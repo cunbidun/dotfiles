@@ -54,7 +54,7 @@ vim.api.nvim_create_user_command("TaskFiles", function()
 		cwd = "task",
 		hidden = true,
 		ignored = true,
-		exclude = { "*.json", ".gitkeep", "*.dSYM" },
+		exclude = { "*.json", ".gitkeep", "*.dSYM", "*.toml" },
 	})
 end, {})
 

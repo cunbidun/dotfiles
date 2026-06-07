@@ -13,7 +13,8 @@
     # package = inputs.nix-monitored.packages.${pkgs.stdenv.hostPlatform.system}.default;
     gc = {
       automatic = true;
-      options = "--delete-older-than 7d";
+      dates = "weekly";
+      options = "--delete-older-than 30d";
     };
     settings = {
       experimental-features = "nix-command flakes pipe-operators";

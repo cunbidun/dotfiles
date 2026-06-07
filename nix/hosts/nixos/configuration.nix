@@ -14,6 +14,7 @@
     ./windows.nix
     ../shared/nix-config.nix
     ../shared/common.nix
+    ../shared/user-secrets.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -98,20 +99,6 @@
     secrets.hyprpanel_weather_api_key = {
       sopsFile = ../../../secrets/hyprpanel.yaml;
       path = "/etc/hyprpanel/weather_api_key";
-      owner = userdata.username;
-      group = "users";
-      mode = "0400";
-    };
-    secrets.github_read_only_token = {
-      sopsFile = ../../../secrets/user.yaml;
-      path = "/home/${userdata.username}/.config/opencode/github_read_only_token";
-      owner = userdata.username;
-      group = "users";
-      mode = "0400";
-    };
-    secrets.ninerouter_api_key = {
-      sopsFile = ../../../secrets/user.yaml;
-      path = "/home/${userdata.username}/.config/opencode/ninerouter_api_key";
       owner = userdata.username;
       group = "users";
       mode = "0400";

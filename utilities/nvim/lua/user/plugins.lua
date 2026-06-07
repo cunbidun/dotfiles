@@ -55,11 +55,41 @@ return {
 			},
 		},
 	},
+	-- Suppress nvim 0.12 + noice incompatibility: vim._with fires cmdline_block_append
+	-- events via :append during BufReadPost which noice's handler can't handle safely.
+	{
+		"folke/noice.nvim",
+		opts = {
+			routes = {
+				{
+					filter = { event = "msg_show", find = "Vim%(append%)" },
+					opts = { skip = true },
+				},
+			},
+		},
+	},
 	-- venv-selector: pick Python virtualenv (LazyVim python extra includes this).
 	{
 		"linux-cultist/venv-selector.nvim",
 		keys = {
 			{ "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv" },
 		},
+	},
+	-- Move flash.treesitter off S so surround can use it
+	{
+		"folke/flash.nvim",
+		keys = {
+			{ "S", false },
+			{ "gS", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+		},
+	},
+	-- nvim-surround: ys/ds/cs/S for surround operations
+	{
+		"kylechui/nvim-surround",
+		dir = "~/.local/share/vim-plugins/nvim-surround",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup()
+		end,
 	},
 }

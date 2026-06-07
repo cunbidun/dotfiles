@@ -14,6 +14,14 @@
 in {
   systemd.user = {
     services = {
+      nix-gc = {
+        Unit.Description = "Nix garbage collection for home-manager generations";
+        Service = {
+          Type = "oneshot";
+          ExecStart = "/bin/sh -c '${pkgs.nix}/bin/nix-env -p %h/.local/state/nix/profiles/home-manager --delete-generations 30d && ${pkgs.nix}/bin/nix-collect-garbage'";
+        };
+      };
+
       pypr = {
         Unit = unit_section;
         Service = {
@@ -39,6 +47,17 @@ in {
           Slice = ["app-graphical.slice"];
         };
         Install = install_section;
+      };
+    };
+
+    timers = {
+      nix-gc = {
+        Unit.Description = "Weekly Nix garbage collection for home-manager generations";
+        Timer = {
+          OnCalendar = "weekly";
+          Persistent = true;
+        };
+        Install.WantedBy = ["timers.target"];
       };
     };
   };

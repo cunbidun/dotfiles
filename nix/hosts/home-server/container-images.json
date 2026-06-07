@@ -2,6 +2,7 @@
   "9router": {
     "repository": "docker.io/decolua/9router",
     "tag": "latest",
-    "digest": "sha256:9456a4e2b804257f3db7534b9e5aa1b99dab3b723407e73b70355508bb1fd0fa"
+    "digest": "sha256:210f06cd8a5ecfac20b96604ed92b5bd79722e5512f326d1fffbd2eeba22800f",
+    "lastPushed": "2026-06-06T09:32:59.212701Z"
   }
 }
