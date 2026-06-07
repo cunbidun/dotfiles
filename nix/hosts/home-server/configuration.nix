@@ -86,6 +86,12 @@
     trustedInterfaces = ["tailscale0"];
   };
 
+  virtualisation.docker.autoPrune = {
+    enable = true;
+    dates = "weekly";
+    flags = ["--volumes"];
+  };
+
   environment.systemPackages = with pkgs; [
     kitty.terminfo
   ];
