@@ -79,14 +79,13 @@ return {
 	{
 		"folke/flash.nvim",
 		keys = {
-			{ "S", false },
+			{ "S", false, mode = { "n", "o", "x" } },
 			{ "gS", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
 		},
 	},
 	-- nvim-surround: ys/ds/cs/S for surround operations
 	{
 		"kylechui/nvim-surround",
-		dir = "~/.local/share/vim-plugins/nvim-surround",
 		event = "VeryLazy",
 		config = function()
 			require("nvim-surround").setup()
