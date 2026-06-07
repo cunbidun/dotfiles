@@ -48,7 +48,7 @@
     # | Hyprland |
     # +----------+
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.55.2?submodules=1";
+      url = "github:hyprwm/Hyprland/v0.55.3?submodules=1";
     };
     pyprland = {
       url = "github:hyprland-community/pyprland";
