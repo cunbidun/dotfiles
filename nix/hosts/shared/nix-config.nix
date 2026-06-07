@@ -1,10 +1,5 @@
+{ pkgs, lib, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
   nix = {
     optimise.automatic = true;
     # TODO: this some how break 'nix develop'
@@ -13,14 +8,20 @@
     # package = inputs.nix-monitored.packages.${pkgs.stdenv.hostPlatform.system}.default;
     gc = {
       automatic = true;
-      dates = "weekly";
+      # Darwin uses launchd calendar intervals; NixOS uses systemd OnCalendar strings
+      interval = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { Weekday = 6; Hour = 9; Minute = 0; };
+      dates = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "Sat 09:00";
       options = "--delete-older-than 30d";
     };
     settings = {
-      experimental-features = "nix-command flakes pipe-operators";
+      experimental-features = "nix-command flakes";
       accept-flake-config = true;
       builders-use-substitutes = true;
-      trusted-users = ["root" "@wheel" "cunbidun"];
+      trusted-users = [
+        "root"
+        "@wheel"
+        "cunbidun"
+      ];
       eval-cache = true;
     };
   };
