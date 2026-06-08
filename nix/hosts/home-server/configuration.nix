@@ -71,6 +71,8 @@
     "d /srv/storage/shared 0775 ${userdata.username} users -"
   ];
 
+  users.users.nextcloud.extraGroups = ["users"];
+
   services.nextcloud = {
     enable = true;
     hostName = "files.${userdata.tailnetDomain}";
@@ -135,6 +137,32 @@
         set -eu
         nextcloud-occ app:disable password_policy || true
         nextcloud-occ user:resetpassword --password-from-env ${lib.escapeShellArg userdata.username}
+      '';
+    };
+  };
+
+  systemd.services.nextcloud-shared-storage = {
+    description = "Mount shared storage in Nextcloud";
+    after = ["nextcloud-password-reset.service"];
+    requires = ["nextcloud-password-reset.service"];
+    wantedBy = ["multi-user.target"];
+    path = [config.services.nextcloud.occ pkgs.jq];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "nextcloud";
+      ExecStart = pkgs.writeShellScript "nextcloud-shared-storage" ''
+        set -eu
+
+        nextcloud-occ app:enable files_external || true
+
+        if ! nextcloud-occ files_external:list ${lib.escapeShellArg userdata.username} --output=json \
+          | jq -e '.[] | select(.mount_point == "/Shared" and .configuration.datadir == "/srv/storage/shared")' >/dev/null; then
+          nextcloud-occ files_external:create Shared local null::null \
+            --user ${lib.escapeShellArg userdata.username} \
+            --config datadir=/srv/storage/shared
+        fi
+
+        nextcloud-occ files:scan --path=/${lib.escapeShellArg userdata.username}/files/Shared
       '';
     };
   };
