@@ -94,6 +94,11 @@ let
   servicesSyncScript = pkgs.writeShellScript "tailscale-services-sync" ''
     ${getToken}
     BASE="https://api.tailscale.com/api/v2/tailnet/-/services"
+    DEVICE_ID=$(${pkgs.tailscale}/bin/tailscale status --json | $JQ -r '.Self.ID')
+    if [ -z "$DEVICE_ID" ] || [ "$DEVICE_ID" = "null" ]; then
+      echo "ERROR: failed to determine local Tailscale device ID"
+      exit 1
+    fi
 
     ${lib.concatMapStrings (svc: ''
       echo "Syncing ${svc}..."
@@ -112,6 +117,12 @@ let
           -d '{"name":"${svc}","ports":["tcp:443"]}' \
           && echo "OK (created): ${svc}" || echo "WARN: failed to create ${svc}"
       fi
+
+      $CURL -sf -X POST "$BASE/${svc}/device/$DEVICE_ID/approved" \
+        -H "Authorization: Bearer $TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{"approved":true}' \
+        && echo "OK (approved): ${svc}" || echo "WARN: failed to approve ${svc} for $DEVICE_ID"
     '') (builtins.attrNames serveRoutes)}
   '';
 in
