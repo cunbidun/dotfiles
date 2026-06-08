@@ -71,24 +71,57 @@
     "d /srv/storage/shared 0775 ${userdata.username} users -"
   ];
 
-  systemd.services.filebrowser = {
-    description = "File Browser";
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      Type = "simple";
-      User = userdata.username;
-      StateDirectory = "filebrowser";
-      Restart = "on-failure";
-      ExecStart = lib.concatStringsSep " " [
-        "${pkgs.filebrowser}/bin/filebrowser"
-        "--database /var/lib/filebrowser/filebrowser.db"
-        "--port 16000"
-        "--root /srv/storage/shared"
-        "--address 127.0.0.1"
-        "--noauth"
-      ];
+  services.nextcloud = {
+    enable = true;
+    hostName = "files.${userdata.tailnetDomain}";
+    https = true;
+    package = pkgs.nextcloud32;
+    configureRedis = true;
+    enableImagemagick = true;
+    imaginary.enable = true;
+    maxUploadSize = "10G";
+    settings = {
+      default_phone_region = "US";
+      overwriteprotocol = "https";
+      trusted_proxies = ["127.0.0.1" "::1"];
     };
+    config = {
+      dbtype = "sqlite";
+      adminuser = userdata.username;
+      adminpassFile = "/var/lib/nextcloud/adminpass";
+    };
+  };
+
+  services.nginx.virtualHosts."files.${userdata.tailnetDomain}".listen = lib.mkForce [
+    {
+      addr = "127.0.0.1";
+      port = 16000;
+      ssl = false;
+    }
+  ];
+
+  systemd.services.nextcloud-adminpass-init = {
+    description = "Create initial Nextcloud admin password file";
+    before = ["nextcloud-setup.service"];
+    wantedBy = ["nextcloud-setup.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "nextcloud-adminpass-init" ''
+        set -eu
+        install -d -m 0750 -o nextcloud -g nextcloud /var/lib/nextcloud
+        if [ ! -s /var/lib/nextcloud/adminpass ]; then
+          umask 077
+          ${pkgs.openssl}/bin/openssl rand -base64 48 > /var/lib/nextcloud/adminpass
+        fi
+        chown nextcloud:nextcloud /var/lib/nextcloud/adminpass
+        chmod 0600 /var/lib/nextcloud/adminpass
+      '';
+    };
+  };
+
+  systemd.services.nextcloud-setup = {
+    after = ["nextcloud-adminpass-init.service"];
+    requires = ["nextcloud-adminpass-init.service"];
   };
 
   # Taskwarrior 3 sync backend (TaskChampion server)
