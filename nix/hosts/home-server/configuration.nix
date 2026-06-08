@@ -71,6 +71,26 @@
     "d /srv/storage/shared 0775 ${userdata.username} users -"
   ];
 
+  systemd.services.filebrowser = {
+    description = "File Browser";
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      Type = "simple";
+      User = userdata.username;
+      StateDirectory = "filebrowser";
+      Restart = "on-failure";
+      ExecStart = lib.concatStringsSep " " [
+        "${pkgs.filebrowser}/bin/filebrowser"
+        "--database /var/lib/filebrowser/filebrowser.db"
+        "--port 16000"
+        "--root /srv/storage/shared"
+        "--address 127.0.0.1"
+        "--noauth"
+      ];
+    };
+  };
+
   # Taskwarrior 3 sync backend (TaskChampion server)
   services.taskchampion-sync-server = {
     enable = true;

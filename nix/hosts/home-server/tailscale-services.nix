@@ -31,6 +31,9 @@ let
     tagOwners = {
       "tag:server" = ["autogroup:owner"];
     };
+    autoApprovers = {
+      services = lib.genAttrs (builtins.attrNames serveRoutes) (_: ["tag:server"]);
+    };
   };
 
   aclFile = pkgs.writeText "tailscale-acl.json" (builtins.toJSON acl);
@@ -47,8 +50,8 @@ let
       exit 1
     fi
 
-    LOCAL_NORM=$($JQ -Sc '{grants,ssh,tagOwners}' ${aclFile})
-    REMOTE_NORM=$(echo "$REMOTE" | $JQ -Sc '{grants,ssh,tagOwners}')
+    LOCAL_NORM=$($JQ -Sc '{grants,ssh,tagOwners,autoApprovers}' ${aclFile})
+    REMOTE_NORM=$(echo "$REMOTE" | $JQ -Sc '{grants,ssh,tagOwners,autoApprovers}')
 
     if [ "$LOCAL_NORM" = "$REMOTE_NORM" ]; then
       echo "OK: ACL unchanged, skipping"
@@ -68,6 +71,7 @@ let
   serveRoutes = {
     "svc:spending"      = { port = 3002;  };
     "svc:ai-proxy"      = { port = 20128; };
+    "svc:files"         = { port = 16000; };
     "svc:self-learning" = { port = 8765;  };
     "svc:opencode"      = { port = 10300; };
   };
