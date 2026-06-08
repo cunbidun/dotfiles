@@ -101,7 +101,7 @@
   ];
 
   systemd.services.nextcloud-adminpass-init = {
-    description = "Create initial Nextcloud admin password file";
+    description = "Create Nextcloud admin password file";
     before = ["nextcloud-setup.service"];
     wantedBy = ["nextcloud-setup.service"];
     serviceConfig = {
@@ -109,10 +109,7 @@
       ExecStart = pkgs.writeShellScript "nextcloud-adminpass-init" ''
         set -eu
         install -d -m 0750 -o nextcloud -g nextcloud /var/lib/nextcloud
-        if [ ! -s /var/lib/nextcloud/adminpass ]; then
-          umask 077
-          ${pkgs.openssl}/bin/openssl rand -base64 48 > /var/lib/nextcloud/adminpass
-        fi
+        printf '%s\n' '123456' > /var/lib/nextcloud/adminpass
         chown nextcloud:nextcloud /var/lib/nextcloud/adminpass
         chmod 0600 /var/lib/nextcloud/adminpass
       '';
@@ -122,6 +119,24 @@
   systemd.services.nextcloud-setup = {
     after = ["nextcloud-adminpass-init.service"];
     requires = ["nextcloud-adminpass-init.service"];
+  };
+
+  systemd.services.nextcloud-password-reset = {
+    description = "Set Nextcloud admin password";
+    after = ["nextcloud-setup.service"];
+    requires = ["nextcloud-setup.service"];
+    wantedBy = ["multi-user.target"];
+    path = [config.services.nextcloud.occ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "nextcloud";
+      Environment = "NC_PASS=123456";
+      ExecStart = pkgs.writeShellScript "nextcloud-password-reset" ''
+        set -eu
+        nextcloud-occ app:disable password_policy || true
+        nextcloud-occ user:resetpassword --password-from-env ${lib.escapeShellArg userdata.username}
+      '';
+    };
   };
 
   # Taskwarrior 3 sync backend (TaskChampion server)
