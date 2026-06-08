@@ -138,8 +138,18 @@ in
   # Apply serve routing on every boot/switch
   systemd.services.tailscale-serve-apply = {
     description = "Apply Tailscale serve routing config";
-    after = [ "tailscaled.service" "tailscaled-autoconnect.service" "network-online.target" ];
-    wants = [ "network-online.target" ];
+    after = [
+      "tailscaled.service"
+      "tailscaled-autoconnect.service"
+      "network-online.target"
+      "tailscale-acl-sync.service"
+      "tailscale-services-sync.service"
+    ];
+    wants = [
+      "network-online.target"
+      "tailscale-acl-sync.service"
+      "tailscale-services-sync.service"
+    ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
@@ -151,8 +161,8 @@ in
   # Sync service definitions to Tailscale control plane
   systemd.services.tailscale-services-sync = {
     description = "Sync Tailscale Service definitions to control plane";
-    after = [ "network-online.target" "sops-nix.service" ];
-    wants = [ "network-online.target" ];
+    after = [ "network-online.target" "sops-nix.service" "tailscale-acl-sync.service" ];
+    wants = [ "network-online.target" "tailscale-acl-sync.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
