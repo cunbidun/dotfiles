@@ -69,6 +69,7 @@
 
   systemd.tmpfiles.rules = [
     "d /srv/storage/shared 0775 ${userdata.username} users -"
+    "d /srv/storage/immich 0750 immich immich -"
   ];
 
   users.users.nextcloud.extraGroups = ["users"];
@@ -181,6 +182,16 @@
     enable = true;
     trustedInterfaces = ["tailscale0"];
   };
+
+  services.immich = {
+    enable = true;
+    host = "127.0.0.1";
+    port = 2283;
+    openFirewall = false;
+    mediaLocation = "/srv/storage/immich";
+    settings.server.externalDomain = "https://photos.${userdata.tailnetDomain}";
+  };
+
 
   virtualisation.docker.autoPrune = {
     enable = true;

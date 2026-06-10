@@ -74,6 +74,7 @@ let
     "svc:files"         = { port = 16000; };
     "svc:self-learning" = { port = 8765;  };
     "svc:opencode"      = { port = 10300; };
+    "svc:photos"        = { port = 2283;  };
   };
 
   serveScript = pkgs.writeShellScript "tailscale-serve-apply" ''
