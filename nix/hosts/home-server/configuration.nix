@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ./9router.nix
     ./home-page.nix
+    ./immich.nix
     ./tailscale-services.nix
     ../shared/nix-config.nix
     ../shared/common.nix
@@ -198,6 +199,29 @@
     dates = "weekly";
     flags = ["--volumes"];
   };
+
+  # docker system prune doesn't cover build cache — prune it separately
+  systemd.services.docker-builder-prune = {
+    description = "Prune docker build cache";
+    after = ["docker.service"];
+    requires = ["docker.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.docker}/bin/docker builder prune -af";
+    };
+  };
+  systemd.timers.docker-builder-prune = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "weekly";
+      Persistent = true;
+    };
+  };
+
+  # nix-gc only collects unreferenced paths; old system generations are GC roots
+  # and pin their closures until explicitly deleted — do that first
+  systemd.services.nix-gc.serviceConfig.ExecStartPre =
+    "${pkgs.nix}/bin/nix-env --delete-generations --profile /nix/var/nix/profiles/system +3";
 
   environment.systemPackages = with pkgs; [
     kitty.terminfo
