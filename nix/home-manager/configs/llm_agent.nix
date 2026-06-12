@@ -67,6 +67,7 @@ let
         "--user-data-dir=${codexChromeDevToolsProfile}"
         "--no-usage-statistics"
         "--no-performance-crux"
+        "--headless"
       ];
       env.PATH = mcpPath;
       startup_timeout_sec = 20;
@@ -201,6 +202,7 @@ in
           "--user-data-dir=${chromeDevToolsProfile}"
           "--no-usage-statistics"
           "--no-performance-crux"
+          "--headless"
         ];
         environment.PATH = mcpPath;
         timeout = 20000;
