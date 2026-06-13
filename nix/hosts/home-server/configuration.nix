@@ -15,6 +15,7 @@
     ../shared/nix-config.nix
     ../shared/common.nix
     ../shared/user-secrets.nix
+    ../shared/monitoring.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -223,6 +224,120 @@
   systemd.services.nix-gc.serviceConfig.ExecStartPre =
     "${pkgs.nix}/bin/nix-env --delete-generations --profile /nix/var/nix/profiles/system +3";
 
+  # ── Monitoring: Prometheus + Grafana ─────────────────────────────────────
+  services.prometheus = {
+    enable = true;
+    port = 9090;
+    retentionTime = "30d";
+      scrapeConfigs = [
+        {
+          job_name = "node";
+          scrape_interval = "15s";
+          static_configs = [
+          {
+            targets = [ "localhost:9100" ];
+            labels.nodename = "home-server";
+          }
+          {
+            targets = [ "100.71.251.100:9100" ];
+            labels.nodename = "nixos";
+          }
+        ];
+      }
+    ];
+  };
+
+  services.grafana = {
+    enable = true;
+    settings = {
+      server = {
+        http_addr = "127.0.0.1";
+        http_port = 3010;
+      };
+      security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
+      # Disable auth for LAN/Tailscale-only access
+      "auth.anonymous" = {
+        enabled = true;
+        org_role = "Admin";
+      };
+    };
+    provision = {
+      enable = true;
+      datasources.settings.datasources = [
+        {
+          name = "Prometheus";
+          type = "prometheus";
+          url = "http://localhost:9090";
+          isDefault = true;
+          jsonData = {
+            scrapeInterval = "15s";
+          };
+        }
+      ];
+      dashboards.settings.providers = [
+        {
+          name = "default";
+          options.path = "/etc/grafana/dashboards";
+        }
+      ];
+    };
+  };
+
+  # Node Exporter Full dashboard patched with single $host variable (nodename-based)
+  environment.etc."grafana/dashboards/node-exporter-full.json".source =
+    let
+      raw = pkgs.fetchurl {
+        url = "https://grafana.com/api/dashboards/1860/revisions/latest/download";
+        sha256 = "11hrll7fm626ikbva5md4gm0rca537vp4xsxa9sxl1pk15s6nk0q";
+      };
+
+      patchScript = pkgs.writeText "patch-dashboard.py" ''
+import json, re, sys
+
+with open(sys.argv[1]) as f:
+    data = json.load(f)
+
+for v in data["templating"]["list"]:
+    if v["name"] == "ds_prometheus":
+        v["current"] = {"text": "-- Default --", "value": "default"}
+
+data["templating"]["list"] = [
+    v for v in data["templating"]["list"] if v["name"] == "ds_prometheus"
+]
+data["templating"]["list"].append({
+    "name": "host",
+    "type": "query",
+    "query": {"query": "label_values(node_uname_info, nodename)",
+              "refId": "Prometheus-host-Variable-Query"},
+    "current": {"text": "home-server", "value": "home-server"},
+    "includeAll": False,
+    "multi": False,
+    "sort": 1,
+    "refresh": 2,
+    "hide": 0,
+})
+
+def patch_query(q):
+    pat = r"instance=\"\$node\"\s*,?\s*job=\"\$job\""
+    repl = "nodename=\"$host\""
+    return re.sub(pat, repl, q)
+
+for panel in data.get("panels", []):
+    for target in panel.get("targets", []):
+        if "expr" in target:
+            target["expr"] = patch_query(target["expr"])
+    for subpanel in panel.get("panels", []):
+        for target in subpanel.get("targets", []):
+            if "expr" in target:
+                target["expr"] = patch_query(target["expr"])
+
+with open(sys.argv[2], "w") as f:
+    json.dump(data, f, indent=2)
+      '';
+    in
+    pkgs.runCommand "node-exporter-full-patched.json" { buildInputs = [ pkgs.python3 ]; } ''
+      python3 ${patchScript} ${raw} $out
+    '';
   environment.systemPackages = with pkgs; [
     kitty.terminfo
   ];

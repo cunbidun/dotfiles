@@ -15,6 +15,7 @@
     ../shared/nix-config.nix
     ../shared/common.nix
     ../shared/user-secrets.nix
+    ../shared/monitoring.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
