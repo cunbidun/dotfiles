@@ -32,7 +32,6 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
     LANG = "en_US.UTF-8";
-    TERM = "xterm-256color";
   };
 
   home.stateVersion = "25.05";

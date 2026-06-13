@@ -72,6 +72,7 @@ rec {
     pkgs.tmux # Terminal multiplexer
     pkgs.tree # Recursive directory listing
     pkgs.unzip
+    pkgs.chafa # Image-to-text renderer for yazi image preview
     pkgs.wget
     pkgs.yt-dlp
     pkgs.zip

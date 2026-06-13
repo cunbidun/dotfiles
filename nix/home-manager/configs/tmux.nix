@@ -41,6 +41,7 @@ in {
       set -g renumber-windows on
       set -sg repeat-time 600
       setw -g xterm-keys on
+      set -g allow-passthrough on
 
       # -- key-bind --
       bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
