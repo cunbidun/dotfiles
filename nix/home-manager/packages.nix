@@ -2,8 +2,7 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   system = pkgs.stdenv.hostPlatform.system;
 
   yazi-wrapper = pkgs.writeShellApplication {
@@ -55,8 +54,7 @@ let
     test -n "$*" && args=("$@")
     exec kitty -d "$PWD" -e "''${args[@]}"
   '';
-in
-rec {
+in rec {
   default_packages = [
     # Core CLI utilities
     pkgs.alejandra # Nix formatter
@@ -72,7 +70,6 @@ rec {
     pkgs.tmux # Terminal multiplexer
     pkgs.tree # Recursive directory listing
     pkgs.unzip
-    pkgs.chafa # Image-to-text renderer for yazi image preview
     pkgs.wget
     pkgs.yt-dlp
     pkgs.zip
@@ -92,85 +89,83 @@ rec {
     inputs.apple-fonts.packages.${system}.sf-pro-nerd
   ];
 
-  linux_packages =
-    let
-      theme-switch = pkgs.writeShellApplication {
-        name = "theme-switch";
-        text = builtins.readFile ../../scripts/theme-switch.sh;
-        runtimeInputs = [
-          pkgs.darkman
-          pkgs.gawk
-          pkgs.gnugrep
-          pkgs.systemdMinimal
-          pkgs.theme-manager
-        ];
-      };
-    in
-    [
-      # Local wrappers and scripts
-      theme-switch
-      xdg-terminal-exec
-      yazi-wrapper
+  linux_packages = let
+    theme-switch = pkgs.writeShellApplication {
+      name = "theme-switch";
+      text = builtins.readFile ../../scripts/theme-switch.sh;
+      runtimeInputs = [
+        pkgs.darkman
+        pkgs.gawk
+        pkgs.gnugrep
+        pkgs.systemdMinimal
+        pkgs.theme-manager
+      ];
+    };
+  in [
+    # Local wrappers and scripts
+    theme-switch
+    xdg-terminal-exec
+    yazi-wrapper
 
-      # AI desktop apps
-      inputs.claude-desktop.packages.${system}.claude-desktop-fhs
-      inputs.codex-desktop-linux.packages.${system}.codex-desktop
+    # AI desktop apps
+    inputs.claude-desktop.packages.${system}.claude-desktop-fhs
+    inputs.codex-desktop-linux.packages.${system}.codex-desktop
 
-      # Hyprland
-      inputs.hyprland-contrib.packages.${system}.hyprprop
-      inputs.pyprland.packages.${system}.pyprland
-      pkgs.cliphist # Clipboard manager for Wayland
-      (pkgs.espanso.override {
-        x11Support = false;
-        waylandSupport = true;
-      })
-      pkgs.grim # Wayland screenshot utility
-      pkgs.hyprpicker
-      pkgs.slurp # Region selector for Wayland screenshots
-      pkgs.wev # Wayland event viewer
-      pkgs.wl-clipboard # Wayland clipboard tools
+    # Hyprland
+    inputs.hyprland-contrib.packages.${system}.hyprprop
+    inputs.pyprland.packages.${system}.pyprland
+    pkgs.cliphist # Clipboard manager for Wayland
+    (pkgs.espanso.override {
+      x11Support = false;
+      waylandSupport = true;
+    })
+    pkgs.grim # Wayland screenshot utility
+    pkgs.hyprpicker
+    pkgs.slurp # Region selector for Wayland screenshots
+    pkgs.wev # Wayland event viewer
+    pkgs.wl-clipboard # Wayland clipboard tools
 
-      # Desktop and media apps
-      pkgs.arandr # Display management UI
-      pkgs.blender # 3D modeling and animation
-      pkgs.discord
-      pkgs.eog
-      pkgs.evince
-      pkgs.obs-studio
-      pkgs.obsidian
-      pkgs.signal-desktop
-      pkgs.slack
-      pkgs.spotify
-      pkgs.vlc
+    # Desktop and media apps
+    pkgs.arandr # Display management UI
+    pkgs.blender # 3D modeling and animation
+    pkgs.discord
+    pkgs.eog
+    pkgs.evince
+    pkgs.obs-studio
+    pkgs.obsidian
+    pkgs.signal-desktop
+    pkgs.slack
+    pkgs.spotify
+    pkgs.vlc
 
-      # Development and tooling
-      pkgs.adw-gtk3
-      pkgs.dconf-editor
-      pkgs.dig
-      pkgs.djvulibre
-      pkgs.glib
-      pkgs.hwinfo
-      pkgs.imagemagick
-      pkgs.inetutils
-      pkgs.inotify-tools
-      pkgs.libnotify
-      pkgs.pamixer
-      pkgs.trash-cli
-      pkgs.ueberzugpp
+    # Development and tooling
+    pkgs.adw-gtk3
+    pkgs.dconf-editor
+    pkgs.dig
+    pkgs.djvulibre
+    pkgs.glib
+    pkgs.hwinfo
+    pkgs.imagemagick
+    pkgs.inetutils
+    pkgs.inotify-tools
+    pkgs.libnotify
+    pkgs.pamixer
+    pkgs.trash-cli
+    pkgs.ueberzugpp
 
-      # Fonts
-      pkgs.nixpkgs-stable.cantarell-fonts
-      pkgs.nixpkgs-stable.iosevka
-      pkgs.nixpkgs-stable.liberation_ttf # Stable to avoid frequent repatching
-      pkgs.nixpkgs-stable.noto-fonts-cjk-sans
-      pkgs.nixpkgs-stable.noto-fonts-cjk-serif
-      pkgs.nixpkgs-stable.wqy_zenhei
+    # Fonts
+    pkgs.nixpkgs-stable.cantarell-fonts
+    pkgs.nixpkgs-stable.iosevka
+    pkgs.nixpkgs-stable.liberation_ttf # Stable to avoid frequent repatching
+    pkgs.nixpkgs-stable.noto-fonts-cjk-sans
+    pkgs.nixpkgs-stable.noto-fonts-cjk-serif
+    pkgs.nixpkgs-stable.wqy_zenhei
 
-      # Stable-pinned apps
-      pkgs.nixpkgs-stable.jetbrains.datagrip
-      pkgs.nixpkgs-stable.libreoffice
-      pkgs.nixpkgs-stable.zoom-us
-    ];
+    # Stable-pinned apps
+    pkgs.nixpkgs-stable.jetbrains.datagrip
+    pkgs.nixpkgs-stable.libreoffice
+    pkgs.nixpkgs-stable.zoom-us
+  ];
 
-  mac_packages = [ ];
+  mac_packages = [];
 }
