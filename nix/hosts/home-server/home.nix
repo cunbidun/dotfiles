@@ -5,12 +5,14 @@
   inputs,
   userdata,
   ...
-}: let
+}:
+let
   package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
   };
-in {
+in
+{
   imports = [
     ../../home-manager/profiles/linux.nix
     ../../home-manager/configs/zsh.nix
@@ -20,6 +22,7 @@ in {
     ../../home-manager/configs/nvim.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/llm_agent.nix
+    ../../home-manager/configs/yazi.nix
   ];
 
   # Only include default packages, no GUI packages
@@ -41,7 +44,9 @@ in {
     };
     Service = {
       Type = "simple";
-      ExecStart = "${inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode}/bin/opencode web --port 10300 --hostname 0.0.0.0";
+      ExecStart = "${
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+      }/bin/opencode web --port 10300 --hostname 0.0.0.0";
       Restart = "on-failure";
       RestartSec = "5";
     };
