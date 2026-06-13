@@ -33,7 +33,6 @@
 
   # SSH specific to home-server
   services.openssh.settings.PermitRootLogin = "yes";
-  services.openssh.extraConfig = "AcceptEnv TERM_PROGRAM TERM_PROGRAM_VERSION";
 
   # home-server specific: act as a subnet/exit-node client
   services.tailscale.useRoutingFeatures = "client";

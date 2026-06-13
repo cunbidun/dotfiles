@@ -5,14 +5,12 @@
   inputs,
   userdata,
   ...
-}:
-let
+}: let
   package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
   };
-in
-{
+in {
   imports = [
     ../../home-manager/profiles/linux.nix
     ../../home-manager/configs/zsh.nix
@@ -39,7 +37,7 @@ in
   systemd.user.services.opencode-web = {
     Unit = {
       Description = "opencode web interface";
-      After = [ "network.target" ];
+      After = ["network.target"];
     };
     Service = {
       Type = "simple";
@@ -50,7 +48,7 @@ in
       RestartSec = "5";
     };
     Install = {
-      WantedBy = [ "default.target" ];
+      WantedBy = ["default.target"];
     };
   };
 }
