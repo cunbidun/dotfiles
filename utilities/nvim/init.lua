@@ -115,6 +115,9 @@ vim.filetype.add({
 -- Keybindings (see keymaps.lua)
 require("user.keymaps")
 
+-- Terminal module (multi-group terminal manager)
+require("user.terminal").setup()
+
 -- Competitive programming commands and keymaps (only when CP_ENV=1)
 if is_cp then
 	require("user.config.competitive_programming")

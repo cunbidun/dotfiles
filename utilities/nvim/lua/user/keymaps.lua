@@ -1,8 +1,3 @@
--- Terminal
-vim.keymap.set({ "n", "t" }, "<C-\\>", function()
-	require("snacks").terminal()
-end, { desc = "Toggle terminal" })
-
 -- Buffer navigation
 vim.keymap.set("n", "<TAB>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-TAB>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
