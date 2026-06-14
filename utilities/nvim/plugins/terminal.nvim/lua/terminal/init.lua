@@ -216,10 +216,20 @@ function M.on_click(minwid)
 end
 
 local function apply_winbar()
-  for _, win in ipairs(visible_terminal_wins()) do
+  local wins = visible_terminal_wins()
+  for i, win in ipairs(wins) do
     pcall(function()
-      vim.wo[win].winbar = WINBAR
+      vim.wo[win].winbar = i == 1 and WINBAR or ""
     end)
+  end
+end
+
+local function save_focus()
+  if active > 0 and groups[active] then
+    local buf = vim.api.nvim_get_current_buf()
+    if is_terminal_buf(buf) then
+      groups[active].focus = buf
+    end
   end
 end
 
@@ -264,6 +274,7 @@ local function hide_visible()
     return false
   end
 
+  save_focus()
   sync_active()
 
   for _, win in ipairs(wins) do
@@ -332,7 +343,8 @@ local function show_group(idx)
     vim.cmd("botright " .. split)
   end
 
-  vim.api.nvim_win_set_buf(0, g.bufs[1])
+  local target = is_terminal_buf(g.focus) and g.focus or g.bufs[1]
+  vim.api.nvim_win_set_buf(0, target)
 
   local inner = g.position == "right" and "split" or "vsplit"
 
@@ -408,6 +420,7 @@ local function switch(dir)
     return
   end
 
+  save_focus()
   hide_visible()
 
   active = ((active - 1 + dir) % #groups) + 1
@@ -438,6 +451,7 @@ function M.goto_group(idx)
     return
   end
 
+  save_focus()
   hide_visible()
 
   active = idx
