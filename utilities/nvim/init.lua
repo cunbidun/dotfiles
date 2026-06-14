@@ -70,6 +70,14 @@ vim.list_extend(plugins, {
 			return opts
 		end,
 	},
+	-- Local plugin: multi-group terminal manager
+	{
+		dir = vim.fn.stdpath("config") .. "/plugins/terminal.nvim",
+		lazy = false,
+		config = function()
+			require("terminal").setup()
+		end,
+	},
 })
 
 require("lazy").setup(plugins, {
@@ -114,9 +122,6 @@ vim.filetype.add({
 
 -- Keybindings (see keymaps.lua)
 require("user.keymaps")
-
--- Terminal module (multi-group terminal manager)
-require("user.terminal").setup()
 
 -- Competitive programming commands and keymaps (only when CP_ENV=1)
 if is_cp then

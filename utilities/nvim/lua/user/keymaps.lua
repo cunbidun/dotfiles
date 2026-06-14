@@ -1,3 +1,12 @@
+-- Terminal (multi-group terminal manager)
+local term = require("terminal")
+vim.keymap.set({ "n", "t" }, "<leader>tt", term.toggle, { desc = "Terminal toggle" })
+vim.keymap.set({ "n", "t" }, "<leader>ts", term.split, { desc = "Terminal split pane" })
+vim.keymap.set({ "n", "t" }, "<leader>tn", term.new_group, { desc = "Terminal new group" })
+vim.keymap.set({ "n", "t" }, "<leader>tl", term.next_group, { desc = "Terminal next group" })
+vim.keymap.set({ "n", "t" }, "<leader>th", term.prev_group, { desc = "Terminal prev group" })
+vim.keymap.set({ "n", "t" }, "<leader>ti", term.status, { desc = "Terminal status" })
+
 -- Buffer navigation
 vim.keymap.set("n", "<TAB>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-TAB>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })

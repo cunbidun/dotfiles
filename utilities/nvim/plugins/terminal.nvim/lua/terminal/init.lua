@@ -1,6 +1,6 @@
 local M = {}
 
-local MODULE = "user.terminal"
+local MODULE = "terminal"
 
 local groups = {}
 local active = 0
@@ -12,21 +12,9 @@ M._fallback_target = nil
 local WINBAR = "%{%v:lua.UserTerminalArea_winbar()%}"
 
 local function setup_highlights()
-  vim.api.nvim_set_hl(0, "TermGroupActive", {
-    fg = "#ffffff",
-    bg = "#0e639c",
-    bold = true,
-  })
-
-  vim.api.nvim_set_hl(0, "TermGroupInactive", {
-    fg = "#bbbbbb",
-    bg = "#2d2d2d",
-  })
-
-  vim.api.nvim_set_hl(0, "TermGroupFill", {
-    fg = "#858585",
-    bg = "#252526",
-  })
+  vim.api.nvim_set_hl(0, "TermGroupActive", { link = "TabLineSel" })
+  vim.api.nvim_set_hl(0, "TermGroupInactive", { link = "TabLine" })
+  vim.api.nvim_set_hl(0, "TermGroupFill", { link = "TabLineFill" })
 end
 
 local function is_terminal_buf(buf)
@@ -560,11 +548,7 @@ local function drop_buf_from_groups(buf)
   return owned
 end
 
-function M.setup(opts)
-  opts = opts or {}
-
-  MODULE = opts.module or MODULE
-
+function M.setup()
   setup_highlights()
 
   _G.UserTerminalArea_winbar = function()
@@ -663,7 +647,6 @@ function M.setup(opts)
         return
       end
 
-      -- Closing the only group should just hide it.
       if #groups < 2 then
         return
       end
@@ -685,43 +668,6 @@ function M.setup(opts)
       end, 30)
     end,
   })
-
-  local keys = opts.keys
-
-  if keys ~= false then
-    keys = vim.tbl_deep_extend("force", {
-      toggle = "<leader>tt",
-      split = "<leader>ts",
-      new_group = "<leader>tn",
-      next_group = "<leader>tl",
-      prev_group = "<leader>th",
-      status = "<leader>ti",
-    }, keys or {})
-
-    vim.keymap.set("n", keys.toggle, M.toggle, {
-      desc = "Terminal toggle",
-    })
-
-    vim.keymap.set("n", keys.split, M.split, {
-      desc = "Terminal split pane",
-    })
-
-    vim.keymap.set("n", keys.new_group, M.new_group, {
-      desc = "Terminal new group",
-    })
-
-    vim.keymap.set("n", keys.next_group, M.next_group, {
-      desc = "Terminal next group",
-    })
-
-    vim.keymap.set("n", keys.prev_group, M.prev_group, {
-      desc = "Terminal previous group",
-    })
-
-    vim.keymap.set("n", keys.status, M.status, {
-      desc = "Terminal status",
-    })
-  end
 end
 
 return M
