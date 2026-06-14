@@ -9,10 +9,21 @@ M._internal = false
 M._restoring = false
 M._fallback_target = nil
 
-local WINBAR = "%{%v:lua.UserTerminalArea_winbar()%}"
+local function hl_attr(name, attr)
+  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
+  return ok and hl[attr]
+end
 
 local function setup_highlights()
-  vim.api.nvim_set_hl(0, "TermGroupActive", { link = "TabLineSel" })
+  local accent = hl_attr("MiniIconsBlue", "fg") or hl_attr("Directory", "fg") or hl_attr("Title", "fg")
+  local base = hl_attr("Normal", "bg")
+
+  if accent and base then
+    vim.api.nvim_set_hl(0, "TermGroupActive", { bg = accent, fg = base, bold = true })
+  else
+    vim.api.nvim_set_hl(0, "TermGroupActive", { link = "TabLineSel" })
+  end
+
   vim.api.nvim_set_hl(0, "TermGroupInactive", { link = "TabLine" })
   vim.api.nvim_set_hl(0, "TermGroupFill", { link = "TabLineFill" })
 end
@@ -184,23 +195,36 @@ local function sync_active()
   }
 end
 
-function M.winbar()
+local function winbar_for(win, cur)
   if #groups == 0 then
     return ""
   end
+
+  local buf = vim.api.nvim_win_get_buf(win)
 
   local parts = {
     "%#TermGroupFill# term ",
   }
 
   for i, g in ipairs(groups) do
-    local hl = i == active and "%#TermGroupActive#" or "%#TermGroupInactive#"
-
     local label
-    if #g.bufs > 1 then
-      label = (" %d·%d "):format(i, #g.bufs)
+    local hl
+
+    if i == active then
+      local pane = 1
+
+      for j, b in ipairs(g.bufs) do
+        if b == buf then
+          pane = j
+          break
+        end
+      end
+
+      label = #g.bufs > 1 and (" %d.%d "):format(i, pane) or (" %d "):format(i)
+      hl = win == cur and "%#TermGroupActive#" or "%#TermGroupInactive#"
     else
-      label = (" %d "):format(i)
+      label = #g.bufs > 1 and (" %d·%d "):format(i, #g.bufs) or (" %d "):format(i)
+      hl = "%#TermGroupInactive#"
     end
 
     local click = ("%%%d@v:lua.UserTerminalArea_on_click@"):format(i)
@@ -216,10 +240,11 @@ function M.on_click(minwid)
 end
 
 local function apply_winbar()
-  local wins = visible_terminal_wins()
-  for i, win in ipairs(wins) do
+  local cur = vim.api.nvim_get_current_win()
+
+  for _, win in ipairs(visible_terminal_wins()) do
     pcall(function()
-      vim.wo[win].winbar = i == 1 and WINBAR or ""
+      vim.wo[win].winbar = winbar_for(win, cur)
     end)
   end
 end
@@ -343,14 +368,24 @@ local function show_group(idx)
     vim.cmd("botright " .. split)
   end
 
-  local target = g.focus and is_terminal_buf(g.focus) and g.focus or g.bufs[1]
-  vim.api.nvim_win_set_buf(0, target)
+  vim.api.nvim_win_set_buf(0, g.bufs[1])
 
   local inner = g.position == "right" and "split" or "vsplit"
+  local wins = { vim.api.nvim_get_current_win() }
 
   for i = 2, #g.bufs do
     vim.cmd(inner)
     vim.api.nvim_win_set_buf(0, g.bufs[i])
+    table.insert(wins, vim.api.nvim_get_current_win())
+  end
+
+  local target = g.focus and is_terminal_buf(g.focus) and g.focus or g.bufs[1]
+
+  for _, win in ipairs(wins) do
+    if vim.api.nvim_win_get_buf(win) == target then
+      vim.api.nvim_set_current_win(win)
+      break
+    end
   end
 
   apply_winbar()
@@ -412,6 +447,16 @@ function M.new_group()
   apply_winbar()
 end
 
+local function focus_group(idx)
+  save_focus()
+  hide_visible()
+
+  active = idx
+
+  show_group(active)
+  M.status()
+end
+
 local function switch(dir)
   prune_groups()
 
@@ -420,13 +465,7 @@ local function switch(dir)
     return
   end
 
-  save_focus()
-  hide_visible()
-
-  active = ((active - 1 + dir) % #groups) + 1
-
-  show_group(active)
-  M.status()
+  focus_group(((active - 1 + dir) % #groups) + 1)
 end
 
 function M.next_group()
@@ -451,13 +490,7 @@ function M.goto_group(idx)
     return
   end
 
-  save_focus()
-  hide_visible()
-
-  active = idx
-
-  show_group(active)
-  M.status()
+  focus_group(idx)
 end
 
 function M.status()
@@ -565,10 +598,6 @@ end
 function M.setup()
   setup_highlights()
 
-  _G.UserTerminalArea_winbar = function()
-    return require(MODULE).winbar()
-  end
-
   _G.UserTerminalArea_on_click = function(minwid, clicks, button, mods)
     return require(MODULE).on_click(minwid, clicks, button, mods)
   end
@@ -580,6 +609,15 @@ function M.setup()
   vim.api.nvim_create_autocmd("ColorScheme", {
     group = augroup,
     callback = setup_highlights,
+  })
+
+  vim.api.nvim_create_autocmd("WinEnter", {
+    group = augroup,
+    callback = function()
+      if #visible_terminal_wins() > 0 then
+        apply_winbar()
+      end
+    end,
   })
 
   vim.api.nvim_create_autocmd("TermClose", {
@@ -605,20 +643,13 @@ function M.setup()
       vim.defer_fn(function()
         prune_groups()
 
-        if #live_terminal_wins() > 0 then
-          sync_active()
-          apply_winbar()
-          M._restoring = false
-          return
-        end
-
         if #groups == 0 then
           M._restoring = false
           return
         end
 
         M._fallback_target = math.min(active, #groups)
-        restore_loop(1, 0)
+        restore_loop(0, 0)
       end, 30)
     end,
   })
