@@ -343,7 +343,7 @@ local function show_group(idx)
     vim.cmd("botright " .. split)
   end
 
-  local target = is_terminal_buf(g.focus) and g.focus or g.bufs[1]
+  local target = g.focus and is_terminal_buf(g.focus) and g.focus or g.bufs[1]
   vim.api.nvim_win_set_buf(0, target)
 
   local inner = g.position == "right" and "split" or "vsplit"
