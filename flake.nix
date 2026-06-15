@@ -48,7 +48,7 @@
     # | Hyprland |
     # +----------+
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.55.3?submodules=1";
+      url = "github:hyprwm/Hyprland/v0.55.4?submodules=1";
     };
     pyprland = {
       url = "github:hyprland-community/pyprland";
@@ -119,7 +119,7 @@
       url = "github:numtide/llm-agents.nix";
     };
     claude-desktop = {
-      url = "github:aaddrick/claude-desktop-debian/v2.0.18+claude1.11187.4";
+      url = "github:aaddrick/claude-desktop-debian/v2.0.19+claude1.11847.5";
     };
     codex-desktop-linux = {
       url = "github:ilysenko/codex-desktop-linux";
