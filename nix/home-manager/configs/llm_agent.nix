@@ -75,6 +75,12 @@ let
       enabled = true;
     };
 
+    mcp_servers."nixos" = {
+      command = "${pkgs.uv}/bin/uvx";
+      args = [ "mcp-nixos" ];
+      enabled = true;
+    };
+
     plugins = {
       "gmail@openai-curated".enabled = true;
       "github@openai-curated".enabled = true;
@@ -97,6 +103,7 @@ in
     vscode-langservers-extracted
     yaml-language-server
     dockerfile-language-server
+    uv
   ];
 
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
@@ -218,6 +225,12 @@ in
           X-MCP-Toolsets = "context,repos,issues,pull_requests,users";
           X-MCP-Readonly = "true";
         };
+        enabled = true;
+      };
+
+      nixos = {
+        type = "local";
+        command = [ "${pkgs.uv}/bin/uvx" "mcp-nixos" ];
         enabled = true;
       };
     };
