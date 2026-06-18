@@ -283,6 +283,8 @@
     };
   };
 
+  environment.etc."flake-source".source = inputs.self;
+
   # Node Exporter Full dashboard patched with single $host variable (nodename-based)
   environment.etc."grafana/dashboards/node-exporter-full.json".source =
     let
