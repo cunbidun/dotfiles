@@ -14,9 +14,13 @@
           - Qemu-system-x86_64
           - code
           - blender
+          - dota2
           - prismlauncher
           - minecraft
           - "Minecraft 1.21.11"
+
+        noAltToSuperApps: &noAltToSuperApps
+          - dota2
 
         noCtrlSpaceVicinaeApps: &noCtrlSpaceVicinaeApps
           - "/^Minecraft.*$/"
@@ -24,6 +28,7 @@
       modmap:
         - name: Global
           application:
+            not: *noAltToSuperApps
           remap:
             ALT_L: SUPER_L
 
