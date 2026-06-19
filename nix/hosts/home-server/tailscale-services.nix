@@ -2,18 +2,16 @@
 let
   tailnet = userdata.tailnetDomain;
 
-  getToken = ''
-    CURL="${pkgs.curl}/bin/curl"
-    JQ="${pkgs.jq}/bin/jq"
-    TOKEN=$($CURL -sf \
-      -d "client_id=$(cat ${config.sops.secrets.tailscale_client_id.path})" \
-      -d "client_secret=$(cat ${config.sops.secrets.tailscale_client_secret.path})" \
-      "https://api.tailscale.com/api/v2/oauth/token" | $JQ -r '.access_token')
-    if [ -z "$TOKEN" ] || [ "$TOKEN" = "null" ]; then
-      echo "ERROR: failed to obtain OAuth access token"
-      exit 1
-    fi
-  '';
+  tsLib = import ../shared/tailscale-lib.nix { inherit pkgs config; };
+  inherit (tsLib) getToken curl jq;
+  ts = "${pkgs.tailscale}/bin/tailscale";
+
+  # ── Tags ──────────────────────────────────────────────────────────────────
+  # Each host carries exactly ONE identity tag, all sourced from userdata so the
+  # literals live in exactly one place. `serverTags` is every host tag (used
+  # where a rule applies to all servers); `homeServerTag` is just this node.
+  homeServerTag = userdata.tailnetTags.homeServer;
+  serverTags    = builtins.attrValues userdata.tailnetTags;
 
   # ── ACL ──────────────────────────────────────────────────────────────────
   acl = {
@@ -26,28 +24,36 @@ let
     grants = [
       # You (Owner/Admins) and all of your own devices: full access.
       { src = ["autogroup:owner" "autogroup:admin"]; dst = ["*"]; ip = ["*"]; }
-      # Your tagged servers keep reaching everything (serve/services, etc.).
-      { src = ["tag:server"]; dst = ["*"]; ip = ["*"]; }
+      # The only outbound tailnet flow a server initiates: Prometheus on
+      # home-server scraping node_exporter (tcp:9100) on the hosts it monitors
+      # (see shared/monitoring.nix). Source is home-server alone (test-vm never
+      # scrapes); dst stays `*` because a scrape target — the `nixos` desktop —
+      # is an untagged personal device, so no host tag would match it.
+      { src = [homeServerTag]; dst = ["*"]; ip = ["tcp:9100"]; }
       # Guests: SSH to the home-server (tcp 22) and the ai-proxy service only.
       # Because grants also drive visibility, these are the ONLY things a guest
       # sees in their tailnet — every other machine and service stays hidden.
-      { src = ["group:guests"]; dst = ["tag:home-server"]; ip = ["tcp:22"]; }
+      { src = ["group:guests"]; dst = [homeServerTag]; ip = ["tcp:22"]; }
       { src = ["group:guests"]; dst = ["svc:ai-proxy"]; ip = ["tcp:443"]; }
     ];
 
     ssh = [
-      # You (Owner/Admins): full SSH incl. root into your tagged servers and
-      # your own machines. MUST stay `accept` (not `check`) so non-interactive
+      # You (Owner/Admins): full SSH incl. root into your tagged servers. MUST
+      # stay `accept` (not `check`) so non-interactive
       # `nixos-rebuild --target-host root@home-server` deploys keep working.
-      # `autogroup:admin` excludes guests (they are plain Members).
+      # `autogroup:admin` excludes guests (they are plain Members). Admin access
+      # to your own untagged devices is handled by the `check` rule below
+      # (Tailscale evaluates `check` before `accept`, so listing `autogroup:self`
+      # here would be dead config — the check rule wins for self anyway).
       {
         action = "accept";
         src    = ["autogroup:admin"];
-        dst    = ["tag:server" "tag:home-server" "autogroup:self"];
+        dst    = serverTags;
         users  = ["autogroup:nonroot" "root"];
       }
-      # Members: SSH into devices they own (guests own none, so this grants
-      # them nothing on the home-server).
+      # Members: SSH into devices they own. This can never reach the home-server
+      # regardless of who owns what — home-server is tagged, and tagged devices
+      # are never part of any user's `autogroup:self`.
       {
         action = "check";
         src    = ["autogroup:member"];
@@ -59,17 +65,16 @@ let
       {
         action = "accept";
         src    = ["group:guests"];
-        dst    = ["tag:home-server"];
+        dst    = [homeServerTag];
         users  = ["biduncun"];
       }
     ];
 
-    tagOwners = {
-      "tag:server"      = ["autogroup:owner"];
-      "tag:home-server" = ["autogroup:owner"];
-    };
+    tagOwners = lib.genAttrs serverTags (_: ["autogroup:owner"]);
     autoApprovers = {
-      services = lib.genAttrs (builtins.attrNames serveRoutes) (_: ["tag:server"]);
+      # Only the home-server publishes these services, so only it may
+      # auto-approve them (not every host tag, e.g. test-vm's tag:test-vm).
+      services = lib.genAttrs (builtins.attrNames serveRoutes) (_: [homeServerTag]);
     };
   };
 
@@ -78,7 +83,7 @@ let
   aclSyncScript = pkgs.writeShellScript "tailscale-acl-sync" ''
     ${getToken}
 
-    REMOTE=$($CURL -sf \
+    REMOTE=$(${curl} -sf \
       -H "Authorization: Bearer $TOKEN" \
       -H "Accept: application/json" \
       "https://api.tailscale.com/api/v2/tailnet/-/acl")
@@ -87,14 +92,22 @@ let
       exit 1
     fi
 
-    LOCAL_NORM=$($JQ -Sc '{groups,grants,ssh,tagOwners,autoApprovers}' ${aclFile})
-    REMOTE_NORM=$(echo "$REMOTE" | $JQ -Sc '{groups,grants,ssh,tagOwners,autoApprovers}')
+    # Compare only the keys this module actually manages, derived from the local
+    # ACL itself (not a hardcoded list) so adding e.g. `hosts`/`nodeAttrs` later
+    # is picked up automatically instead of being silently never pushed. The
+    # remote is projected onto our key set, dropping fields Tailscale maintains
+    # on its own (tests, derived defaults) that we don't want to diff against.
+    LOCAL_KEYS=$(${jq} -Sc 'keys' ${aclFile})
+    LOCAL_NORM=$(${jq} -Sc . ${aclFile})
+    REMOTE_NORM=$(printf '%s' "$REMOTE" | ${jq} -Sc \
+      --argjson keys "$LOCAL_KEYS" \
+      'with_entries(select(.key as $k | $keys | index($k) != null))')
 
     if [ "$LOCAL_NORM" = "$REMOTE_NORM" ]; then
       echo "OK: ACL unchanged, skipping"
     else
       echo "ACL differs, syncing..."
-      $CURL -sf -X POST \
+      ${curl} -sf -X POST \
         "https://api.tailscale.com/api/v2/tailnet/-/acl" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Content-Type: application/json" \
@@ -116,15 +129,13 @@ let
   };
 
   serveScript = pkgs.writeShellScript "tailscale-serve-apply" ''
-    TS="${pkgs.tailscale}/bin/tailscale"
-
     # Machine-level: hub at home-server.${tailnet}
-    $TS serve --bg --https=443 http://127.0.0.1:3001 2>/dev/null \
+    ${ts} serve --bg --https=443 http://127.0.0.1:3001 2>/dev/null \
       && echo "OK: machine-level serve"
 
     # Service-level: one command per service, idempotent
     ${lib.concatMapStrings (svc: let cfg = serveRoutes.${svc}; in ''
-      $TS serve --service=${svc} --bg --https=443 http://127.0.0.1:${toString cfg.port} 2>/dev/null \
+      ${ts} serve --service=${svc} --bg --https=443 http://127.0.0.1:${toString cfg.port} 2>/dev/null \
         && echo "OK: ${svc}"
     '') (builtins.attrNames serveRoutes)}
   '';
@@ -133,7 +144,7 @@ let
   servicesSyncScript = pkgs.writeShellScript "tailscale-services-sync" ''
     ${getToken}
     BASE="https://api.tailscale.com/api/v2/tailnet/-/services"
-    DEVICE_ID=$(${pkgs.tailscale}/bin/tailscale status --json | $JQ -r '.Self.ID')
+    DEVICE_ID=$(${ts} status --json | ${jq} -r '.Self.ID')
     if [ -z "$DEVICE_ID" ] || [ "$DEVICE_ID" = "null" ]; then
       echo "ERROR: failed to determine local Tailscale device ID"
       exit 1
@@ -141,23 +152,23 @@ let
 
     ${lib.concatMapStrings (svc: ''
       echo "Syncing ${svc}..."
-      EXISTING=$($CURL -sf -H "Authorization: Bearer $TOKEN" "$BASE/${svc}")
+      EXISTING=$(${curl} -sf -H "Authorization: Bearer $TOKEN" "$BASE/${svc}")
       if [ $? -eq 0 ]; then
-        ADDRS=$(echo "$EXISTING" | $JQ '.addrs')
-        $CURL -sf -X PUT "$BASE/${svc}" \
+        ADDRS=$(echo "$EXISTING" | ${jq} '.addrs')
+        ${curl} -sf -X PUT "$BASE/${svc}" \
           -H "Authorization: Bearer $TOKEN" \
           -H "Content-Type: application/json" \
           -d "{\"name\":\"${svc}\",\"ports\":[\"tcp:443\"],\"addrs\":$ADDRS}" \
           && echo "OK (updated): ${svc}" || echo "WARN: failed to update ${svc}"
       else
-        $CURL -sf -X PUT "$BASE/${svc}" \
+        ${curl} -sf -X PUT "$BASE/${svc}" \
           -H "Authorization: Bearer $TOKEN" \
           -H "Content-Type: application/json" \
           -d '{"name":"${svc}","ports":["tcp:443"]}' \
           && echo "OK (created): ${svc}" || echo "WARN: failed to create ${svc}"
       fi
 
-      $CURL -sf -X POST "$BASE/${svc}/device/$DEVICE_ID/approved" \
+      ${curl} -sf -X POST "$BASE/${svc}/device/$DEVICE_ID/approved" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Content-Type: application/json" \
         -d '{"approved":true}' \
@@ -168,15 +179,27 @@ in
 {
   imports = [ ../shared/tailscale-base.nix ];
 
-  # Give this node its own tag (so guest ACLs can target ONLY home-server,
-  # not other tag:server nodes like test-vm) and enable Tailscale SSH so the
-  # `users = ["biduncun"]` / no-root mapping is enforced by Tailscale.
-  myTailscale.tags = [ "tag:server" "tag:home-server" ];
+  # One identity tag for this node: `tag:home-server` (so guest ACLs can target
+  # ONLY home-server, not other hosts like test-vm). Rules that should apply to
+  # every server list `serverTags` (admin SSH, tagOwners) above. Also enable
+  # Tailscale SSH so the `users = ["biduncun"]` / no-root mapping is enforced
+  # by Tailscale.
+  myTailscale.tags = [ homeServerTag ];
   myTailscale.ssh = true;
 
-  # Always restart on every nixos-rebuild switch
-  system.activationScripts.tailscale-acl-sync = {
-    text = "systemctl restart tailscale-acl-sync || true";
+  # Force every sync oneshot to re-run on each nixos-rebuild switch. They are
+  # RemainAfterExit units, so without this they'd only re-run when their unit
+  # text changed — which is why serve/services didn't re-converge after the
+  # device was recreated. All three are idempotent; systemd orders them by their
+  # After= deps (serve-apply last). `|| true` keeps a failed sync from aborting
+  # the switch.
+  system.activationScripts.tailscale-sync = {
+    text = ''
+      systemctl restart \
+        tailscale-acl-sync.service \
+        tailscale-services-sync.service \
+        tailscale-serve-apply.service || true
+    '';
   };
 
   # The auth key (created in tailscale-base.nix) may carry tags that only

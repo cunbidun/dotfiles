@@ -27,12 +27,18 @@ VIPs and their own `*.<tailnet>.ts.net` hostnames.
 
 ## What Runs on Switch
 
-Three systemd oneshot units fire on every `nixos-rebuild switch`:
+Three systemd oneshot units fire on every `nixos-rebuild switch`. All three are
+`RemainAfterExit` oneshots, so a single `system.activationScripts.tailscale-sync`
+force-restarts all of them on each switch — otherwise they'd only re-run when
+their unit text changed (which is why serve/services failed to re-converge after
+the device was recreated). They're idempotent, and systemd orders them by their
+`After=` deps (serve-apply last).
 
 **`tailscale-acl-sync`**
-Fetches the remote ACL, compares it to the Nix-defined policy (normalised JSON),
-and POSTs only if they differ. Triggered via `system.activationScripts` so it
-always runs, not just when the unit changes.
+Fetches the remote ACL and compares it to the Nix-defined policy: the remote is
+projected onto whatever keys the local `acl` attr set defines (not a hardcoded
+list) and POSTed only if they differ, so new top-level ACL keys are picked up
+automatically.
 
 **`tailscale-serve-apply`**
 Runs `tailscale serve --bg --https=443` for the hub and each service. Idempotent —

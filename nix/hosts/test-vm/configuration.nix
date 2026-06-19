@@ -21,6 +21,10 @@
   networking.hostName = "test-vm";
   networking.networkmanager.enable = true;
 
+  # This node's single tailnet identity tag (owned + authorized by the ACL in
+  # home-server/tailscale-services.nix).
+  myTailscale.tags = [ userdata.tailnetTags.testVm ];
+
   time.timeZone = userdata.timeZone;
   i18n.defaultLocale = "en_US.UTF-8";
 

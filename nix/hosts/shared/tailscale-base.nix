@@ -2,6 +2,9 @@
 let
   cfg = config.myTailscale;
 
+  tsLib = import ./tailscale-lib.nix { inherit pkgs config; };
+  inherit (tsLib) getToken curl jq;
+
   # Auth-key creation payload. The tags listed here are the only tags the
   # generated key is allowed to advertise, so they must be a superset of
   # whatever the node advertises via --advertise-tags below.
@@ -14,28 +17,15 @@ let
     expirySeconds = 3600;
   };
 
-  getToken = ''
-    CURL="${pkgs.curl}/bin/curl"
-    JQ="${pkgs.jq}/bin/jq"
-    TOKEN=$($CURL -sf \
-      -d "client_id=$(cat ${config.sops.secrets.tailscale_client_id.path})" \
-      -d "client_secret=$(cat ${config.sops.secrets.tailscale_client_secret.path})" \
-      "https://api.tailscale.com/api/v2/oauth/token" | $JQ -r '.access_token')
-    if [ -z "$TOKEN" ] || [ "$TOKEN" = "null" ]; then
-      echo "ERROR: failed to obtain OAuth access token"
-      exit 1
-    fi
-  '';
-
   authKeyScript = pkgs.writeShellScript "tailscale-authkey-gen" ''
     ${getToken}
 
-    KEY=$($CURL -sf -X POST \
+    KEY=$(${curl} -sf -X POST \
       "https://api.tailscale.com/api/v2/tailnet/-/keys" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json" \
       -d '${createPayload}' \
-      | $JQ -r '.key')
+      | ${jq} -r '.key')
 
     if [ -z "$KEY" ] || [ "$KEY" = "null" ]; then
       echo "ERROR: failed to generate auth key"
@@ -51,7 +41,8 @@ in
   options.myTailscale = {
     tags = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ "tag:server" ];
+      # No default: every host declares its own identity tag (from
+      # userdata.tailnetTags) so there is no shared/generic fallback tag.
       description = ''
         Tailscale ACL tags this node advertises. Also authorized on the
         generated auth key, so the node may register/re-register with them.
