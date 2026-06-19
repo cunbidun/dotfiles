@@ -22,15 +22,12 @@ const brightnessService = BrightnessService.getInstance();
 const { raiseMaximumVolume } = options.menus.volume;
 const hyprsunsetPollingInterval = Variable(2000);
 const colorPickerShortcut = options.menus.dashboard.shortcuts.right.shortcut1;
+const isAudioOutputSelectorOpen = Variable(false);
 export const CONTROL_CELL = 56;
-export const CONTROL_GAP = 5;
+export const CONTROL_GAP = 9;
 export const CONTROL_TILE = (CONTROL_CELL * 2) + CONTROL_GAP;
 const CONTROL_TITLE_MAX_CHARS = 12;
 const CONTROL_SUBTITLE_MAX_CHARS = 14;
-
-const applyControlTileWidth = (widget: Gtk.Widget): void => {
-    widget.set_size_request(CONTROL_TILE, -1);
-};
 
 const wifiSubtitle = Variable.derive(
     [bind(isWifiEnabled), bind(networkService, 'state'), bind(networkService, 'connectivity')],
@@ -70,12 +67,11 @@ export const WifiButton = (): JSX.Element => {
             className={bind(isWifiEnabled).as(
                 (isEnabled) => `dashboard-control-tile wifi ${!isEnabled ? 'disabled' : ''}`,
             )}
-            setup={applyControlTileWidth}
             onButtonPressEvent={(clicked, event) => {
                 if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
                 void openDropdownMenu(clicked, event, 'networkmenu');
             }}
-            hexpand={false}
+            hexpand
         >
             <box className={'dashboard-control-tile-content'} valign={Gtk.Align.FILL} vexpand>
                 <label
@@ -110,12 +106,11 @@ export const BluetoothButton = (): JSX.Element => {
             className={bind(bluetoothService, 'isPowered').as(
                 (isEnabled) => `dashboard-control-tile bluetooth ${!isEnabled ? 'disabled' : ''}`,
             )}
-            setup={applyControlTileWidth}
             onButtonPressEvent={(clicked, event) => {
                 if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
                 void openDropdownMenu(clicked, event, 'bluetoothmenu');
             }}
-            hexpand={false}
+            hexpand
         >
             <box className={'dashboard-control-tile-content'} valign={Gtk.Align.FILL} vexpand>
                 <label
@@ -377,22 +372,88 @@ export const BrightnessSliderCard = (): JSX.Element => {
     );
 };
 
+const AudioOutputButton = ({ device }: AudioOutputButtonProps): JSX.Element => {
+    return (
+        <button
+            className={bind(device, 'isDefault').as(
+                (isDefault) => `dashboard-audio-output-button ${isDefault ? 'active' : ''}`,
+            )}
+            onClick={(_, event) => {
+                if (!isPrimaryClick(event)) return;
+                device.set_is_default(true);
+            }}
+            hexpand
+        >
+            <box className={'dashboard-audio-output-content'} hexpand>
+                <label className={'txt-icon dashboard-audio-output-icon'} label={''} />
+                <label
+                    className={'dashboard-audio-output-name'}
+                    halign={Gtk.Align.START}
+                    hexpand
+                    truncate
+                    label={bind(device, 'description')}
+                />
+                <label
+                    className={'txt-icon dashboard-audio-output-check'}
+                    label={bind(device, 'isDefault').as((isDefault) => (isDefault ? '' : ''))}
+                />
+            </box>
+        </button>
+    );
+};
+
+const AudioOutputSelector = (): JSX.Element => {
+    return (
+        <box className={'dashboard-audio-output-selector'} vertical>
+            <box className={'dashboard-audio-output-header'}>
+                <label className={'dashboard-audio-output-title'} halign={Gtk.Align.START} hexpand label={'Output'} />
+            </box>
+            <box className={'dashboard-audio-output-list'} vertical>
+                {bind(audioService, 'speakers').as((devices) => {
+                    if (devices === null || devices.length === 0) {
+                        return <label className={'dashboard-audio-output-empty'} label={'No output devices'} />;
+                    }
+
+                    return devices
+                        .slice()
+                        .sort((a, b) => a.description.localeCompare(b.description))
+                        .map((device) => <AudioOutputButton device={device} />);
+                })}
+            </box>
+        </box>
+    );
+};
+
 export const VolumeSliderCard = (): JSX.Element => {
     return (
         <box className={'dashboard-control-slider volume'} hexpand vertical>
-            <box>
-                <label
-                    className={'txt-icon dashboard-control-slider-icon'}
-                    label={bind(audioService.defaultSpeaker, 'mute').as((isMuted) => (isMuted ? '󰖁' : '󰕾'))}
-                />
-                <label className={'dashboard-control-slider-title'} hexpand label={'Sound'} />
-                <label
-                    className={'dashboard-control-slider-value'}
-                    label={bind(audioService.defaultSpeaker, 'volume').as((volume) => {
-                        return `${Math.round(volume * 100)}%`;
-                    })}
-                />
-            </box>
+            <button
+                className={bind(isAudioOutputSelectorOpen).as(
+                    (isOpen) => `dashboard-control-slider-header volume ${isOpen ? 'active' : ''}`,
+                )}
+                onClick={(_, event) => {
+                    if (!isPrimaryClick(event)) return;
+                    isAudioOutputSelectorOpen.set(!isAudioOutputSelectorOpen.get());
+                }}
+            >
+                <box hexpand>
+                    <label
+                        className={'txt-icon dashboard-control-slider-icon'}
+                        label={bind(audioService.defaultSpeaker, 'mute').as((isMuted) => (isMuted ? '󰖁' : '󰕾'))}
+                    />
+                    <label className={'dashboard-control-slider-title'} hexpand label={'Sound'} />
+                    <label
+                        className={'dashboard-control-slider-value'}
+                        label={bind(audioService.defaultSpeaker, 'volume').as((volume) => {
+                            return `${Math.round(volume * 100)}%`;
+                        })}
+                    />
+                    <label
+                        className={'txt-icon dashboard-control-slider-disclosure'}
+                        label={bind(isAudioOutputSelectorOpen).as((isOpen) => (isOpen ? '' : ''))}
+                    />
+                </box>
+            </button>
             <slider
                 value={bind(audioService.defaultSpeaker, 'volume')}
                 className={'menu-slider dashboard-control-slider-track volume'}
@@ -407,6 +468,13 @@ export const VolumeSliderCard = (): JSX.Element => {
                     }
                 }}
             />
+            <revealer revealChild={bind(isAudioOutputSelectorOpen)} transitionDuration={160}>
+                <AudioOutputSelector />
+            </revealer>
         </box>
     );
 };
+
+interface AudioOutputButtonProps {
+    device: AstalWp.Endpoint;
+}

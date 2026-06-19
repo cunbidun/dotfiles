@@ -24,6 +24,19 @@ const alignRate = (rate: string, width = 8): string => {
     return `${' '.repeat(width - clean.length)}${clean}`;
 };
 
+// Uniform-length unit suffixes so every rate is the same character count.
+// Without this, "bytes/s" (7) vs "KiB/s" (5) makes the column width change.
+const compactRate = (rate: string): string =>
+    rate
+        .replace(' bytes/s', ' B/s')
+        .replace(' KiB/s', ' K/s')
+        .replace(' MiB/s', ' M/s')
+        .replace(' GiB/s', ' G/s');
+
+// Widest possible field: "↓ 1023 B/s" / "↓ 1023 K/s" => 10 chars. Padding every
+// value to this fixed width keeps the panel from resizing as rates change.
+const NET_RATE_WIDTH = 10;
+
 const StatRow = ({ icon, title, value, stat, tone = 'ok', clickable = false }: StatRowProps): JSX.Element => {
     const row = (
         <box className={`stat-row ${stat}`} valign={Gtk.Align.CENTER} halign={Gtk.Align.FILL} hexpand>
@@ -181,9 +194,9 @@ export const NetworkStat = (): JSX.Element => {
             stat={'network'}
             title={'Net'}
             value={bind(networkService.network).as((net) => {
-                const inRate = alignRate(`↓ ${net.in}`, 10);
-                const outRate = alignRate(`↑ ${net.out}`, 10);
-                return `${inRate}   ${outRate}`;
+                const inRate = alignRate(`↓ ${compactRate(net.in)}`, NET_RATE_WIDTH);
+                const outRate = alignRate(`↑ ${compactRate(net.out)}`, NET_RATE_WIDTH);
+                return `${inRate}  ${outRate}`;
             })}
         />
     );

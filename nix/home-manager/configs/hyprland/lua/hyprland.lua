@@ -99,7 +99,7 @@ hl.config({
   },
 
   decoration = {
-    rounding = 0,
+    rounding = 8,
     shadow = {
       color = nix.colors.shadow,
     },

@@ -4,7 +4,6 @@ import {
     BluetoothButton,
     BrightnessSliderCard,
     CONTROL_GAP,
-    CONTROL_TILE,
     ColorPickerButton,
     GammaStepButton,
     InhibitorButton,
@@ -15,14 +14,6 @@ import {
 } from './ControlButtons';
 import { recordingPoller } from './helpers';
 import { JSXElement } from 'src/core/types';
-
-const applyControlColumnWidth = (widget: Gtk.Widget): void => {
-    widget.set_size_request(CONTROL_TILE, -1);
-};
-
-const applyControlGapWidth = (widget: Gtk.Widget): void => {
-    widget.set_size_request(CONTROL_GAP, -1);
-};
 
 const applyControlRowGapHeight = (widget: Gtk.Widget): void => {
     widget.set_size_request(-1, CONTROL_GAP);
@@ -47,28 +38,19 @@ export const Controls = ({ isEnabled }: ControlsProps): JSXElement => {
             expand
             vertical
         >
-            <box className={'dashboard-control-main-row'} hexpand>
-                <box
-                    className={'dashboard-control-left-column'}
-                    vertical
-                    hexpand={false}
-                    setup={applyControlColumnWidth}
-                >
+            <box className={'dashboard-control-main-row'} hexpand homogeneous spacing={CONTROL_GAP}>
+                <box className={'dashboard-control-left-column'} vertical hexpand>
                     <WifiButton />
                     <box className={'dashboard-control-row-gap'} setup={applyControlRowGapHeight} />
                     <BluetoothButton />
                 </box>
-                <box className={'dashboard-control-gap'} setup={applyControlGapWidth} />
                 <AudioControllerCard />
             </box>
             <box className={'dashboard-control-row-gap'} setup={applyControlRowGapHeight} />
-            <box className={'dashboard-control-quick-row'} hexpand>
+            <box className={'dashboard-control-quick-row'} hexpand homogeneous spacing={CONTROL_GAP}>
                 <RecordingButton />
-                <box className={'dashboard-control-gap'} setup={applyControlGapWidth} />
                 <ColorPickerButton />
-                <box className={'dashboard-control-gap'} setup={applyControlGapWidth} />
                 <InhibitorButton />
-                <box className={'dashboard-control-gap'} setup={applyControlGapWidth} />
                 <GammaStepButton />
             </box>
             <box className={'dashboard-control-row-gap'} setup={applyControlRowGapHeight} />
