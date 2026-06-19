@@ -41,6 +41,10 @@
   users.users.biduncun = {
     isNormalUser = true;
     description = "Tailnet guest (SSH-only, no privileges)";
+    # Fallback key auth (Tailscale SSH authenticates by tailnet identity).
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGsJD17wqDle1Euxu0eV5QJUlZQCMiC2dMMaWKcxDy/a phamtuanquang912002@gmail.com"
+    ];
   };
 
   # SSH specific to home-server
