@@ -96,3 +96,19 @@ when a tag is applied — hence the reusable auth key scoped to `tag:server`.
   this has no effect. Only matters if the machine is rebuilt from scratch with an
   expired key. Renew by generating a new reusable key in the admin console scoped to
   `tag:server`, updating `secrets/global.yaml` via sops, and switching.
+
+- Tailscale **prefs on an already-registered node** (advertised tags, `--ssh`, …) are
+  not reconciled by `nixos-rebuild`. NixOS's `tailscaled-autoconnect` only runs
+  `tailscale up` when the node is logged out, so on a *running* node a flag change in
+  Nix is a no-op until it re-authenticates. A from-scratch rebuild picks the new prefs
+  up automatically; only **in-place** changes to a live node need a manual re-register:
+
+  ```sh
+  # run over the LAN — enabling --ssh reroutes the tailnet SSH path and would drop you
+  ssh root@192.168.1.189
+  tailscale up --authkey="$(cat /run/tailscale-authkey)" \
+    --advertise-tags=tag:server,tag:home-server --ssh
+  ```
+
+  Re-registering can create a duplicate device (e.g. `home-server-1`) if the old one
+  still holds the name; delete the stale device via the API and re-register to reclaim it.

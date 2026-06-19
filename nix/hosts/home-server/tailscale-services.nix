@@ -179,6 +179,15 @@ in
     text = "systemctl restart tailscale-acl-sync || true";
   };
 
+  # The auth key (created in tailscale-base.nix) may carry tags that only
+  # become valid once the ACL declares their tagOwners. Order key generation
+  # after the ACL sync so minting a key for a brand-new tag never races the
+  # policy push (which otherwise fails key creation on a from-scratch deploy).
+  systemd.services.tailscale-authkey-gen = {
+    after = [ "tailscale-acl-sync.service" ];
+    wants = [ "tailscale-acl-sync.service" ];
+  };
+
   # Sync tailnet ACL/policy to control plane
   systemd.services.tailscale-acl-sync = {
     description = "Sync Tailscale ACL policy to control plane";
