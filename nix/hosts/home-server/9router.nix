@@ -116,7 +116,10 @@ in {
     backend = "docker";
     containers."9router" = {
       image = "${image.repository}:${image.tag}@${image.digest}";
-      pull = "missing";
+      # The service is restarted when the pinned digest changes. Pull on start so
+      # Docker resolves the new manifest to the current platform image instead
+      # of reusing an older cached digest for the tag.
+      pull = "always";
       ports = [
         "20128:20128"
       ];

@@ -81,6 +81,12 @@ let
       enabled = true;
     };
 
+    mcp_servers."github" = {
+      url = "https://api.githubcopilot.com/mcp/readonly";
+      bearer_token_env_var = "GITHUB_COPILOT_MCP_TOKEN";
+      enabled = true;
+    };
+
     plugins = {
       "gmail@openai-curated".enabled = true;
       "github@openai-curated".enabled = true;
@@ -248,6 +254,10 @@ in
   home.sessionVariablesExtra = ''
     if [ -r "${ninerouterTokenPath}" ]; then
       export NINEROUTER_API_KEY="$(tr -d '\n' < "${ninerouterTokenPath}")"
+    fi
+
+    if [ -r "${githubTokenPath}" ]; then
+      export GITHUB_COPILOT_MCP_TOKEN="$(tr -d '\n' < "${githubTokenPath}")"
     fi
   '';
 
