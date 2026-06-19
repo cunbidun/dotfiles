@@ -195,7 +195,7 @@ in
   # the switch.
   system.activationScripts.tailscale-sync = {
     text = ''
-      systemctl restart \
+      ${pkgs.systemd}/bin/systemctl restart \
         tailscale-acl-sync.service \
         tailscale-services-sync.service \
         tailscale-serve-apply.service || true
