@@ -28,11 +28,11 @@ let
       { src = ["autogroup:owner" "autogroup:admin"]; dst = ["*"]; ip = ["*"]; }
       # Your tagged servers keep reaching everything (serve/services, etc.).
       { src = ["tag:server"]; dst = ["*"]; ip = ["*"]; }
-      # Guests: reach ONLY the home-server, and ONLY on SSH (tcp 22).
-      # Because grants also drive visibility, this is the ONLY device a guest
-      # ever sees in their tailnet — the hub services and your other machines
-      # stay hidden.
+      # Guests: SSH to the home-server (tcp 22) and the ai-proxy service only.
+      # Because grants also drive visibility, these are the ONLY things a guest
+      # sees in their tailnet — every other machine and service stays hidden.
       { src = ["group:guests"]; dst = ["tag:home-server"]; ip = ["tcp:22"]; }
+      { src = ["group:guests"]; dst = ["svc:ai-proxy"]; ip = ["tcp:443"]; }
     ];
 
     ssh = [
