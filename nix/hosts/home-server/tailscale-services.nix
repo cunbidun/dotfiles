@@ -17,19 +17,56 @@ let
 
   # ── ACL ──────────────────────────────────────────────────────────────────
   acl = {
+    groups = {
+      # Limited tailnet guests. Add them in the Tailscale admin console as
+      # plain Members (NOT Admin/Owner) so they never see the admin console.
+      "group:guests" = [ "phamtuanquang912002@gmail.com" ];
+    };
+
     grants = [
-      { src = ["*"]; dst = ["*"]; ip = ["*"]; }
+      # You (Owner/Admins) and all of your own devices: full access.
+      { src = ["autogroup:owner" "autogroup:admin"]; dst = ["*"]; ip = ["*"]; }
+      # Your tagged servers keep reaching everything (serve/services, etc.).
+      { src = ["tag:server"]; dst = ["*"]; ip = ["*"]; }
+      # Guests: reach ONLY the home-server, and ONLY on SSH (tcp 22).
+      # Because grants also drive visibility, this is the ONLY device a guest
+      # ever sees in their tailnet — the hub services and your other machines
+      # stay hidden.
+      { src = ["group:guests"]; dst = ["tag:home-server"]; ip = ["tcp:22"]; }
     ];
+
     ssh = [
+      # You (Owner/Admins): full SSH incl. root into your tagged servers and
+      # your own machines. MUST stay `accept` (not `check`) so non-interactive
+      # `nixos-rebuild --target-host root@home-server` deploys keep working.
+      # `autogroup:admin` excludes guests (they are plain Members).
+      {
+        action = "accept";
+        src    = ["autogroup:admin"];
+        dst    = ["tag:server" "tag:home-server" "autogroup:self"];
+        users  = ["autogroup:nonroot" "root"];
+      }
+      # Members: SSH into devices they own (guests own none, so this grants
+      # them nothing on the home-server).
       {
         action = "check";
         src    = ["autogroup:member"];
         dst    = ["autogroup:self"];
         users  = ["autogroup:nonroot" "root"];
       }
+      # Guests: SSH into the home-server ONLY as the unprivileged `biduncun`
+      # account. Tailscale refuses any other login (including root).
+      {
+        action = "accept";
+        src    = ["group:guests"];
+        dst    = ["tag:home-server"];
+        users  = ["biduncun"];
+      }
     ];
+
     tagOwners = {
-      "tag:server" = ["autogroup:owner"];
+      "tag:server"      = ["autogroup:owner"];
+      "tag:home-server" = ["autogroup:owner"];
     };
     autoApprovers = {
       services = lib.genAttrs (builtins.attrNames serveRoutes) (_: ["tag:server"]);
@@ -50,8 +87,8 @@ let
       exit 1
     fi
 
-    LOCAL_NORM=$($JQ -Sc '{grants,ssh,tagOwners,autoApprovers}' ${aclFile})
-    REMOTE_NORM=$(echo "$REMOTE" | $JQ -Sc '{grants,ssh,tagOwners,autoApprovers}')
+    LOCAL_NORM=$($JQ -Sc '{groups,grants,ssh,tagOwners,autoApprovers}' ${aclFile})
+    REMOTE_NORM=$(echo "$REMOTE" | $JQ -Sc '{groups,grants,ssh,tagOwners,autoApprovers}')
 
     if [ "$LOCAL_NORM" = "$REMOTE_NORM" ]; then
       echo "OK: ACL unchanged, skipping"
@@ -130,6 +167,12 @@ let
 in
 {
   imports = [ ../shared/tailscale-base.nix ];
+
+  # Give this node its own tag (so guest ACLs can target ONLY home-server,
+  # not other tag:server nodes like test-vm) and enable Tailscale SSH so the
+  # `users = ["biduncun"]` / no-root mapping is enforced by Tailscale.
+  myTailscale.tags = [ "tag:server" "tag:home-server" ];
+  myTailscale.ssh = true;
 
   # Always restart on every nixos-rebuild switch
   system.activationScripts.tailscale-acl-sync = {

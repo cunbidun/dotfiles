@@ -33,6 +33,16 @@
     "docker"
   ];
 
+  # Dedicated, unprivileged landing account for tailnet guests. Tailscale SSH
+  # maps approved guests to this user. Deliberately NOT in `wheel`/`docker`,
+  # so there is no sudo and no path to root. No authorizedKeys: auth is handled
+  # by Tailscale SSH (the guest's tailnet identity), and plain OpenSSH login is
+  # impossible for this account.
+  users.users.biduncun = {
+    isNormalUser = true;
+    description = "Tailnet guest (SSH-only, no privileges)";
+  };
+
   # SSH specific to home-server
   services.openssh.settings.PermitRootLogin = "yes";
 
