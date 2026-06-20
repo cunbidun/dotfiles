@@ -177,7 +177,10 @@ let
   '';
 in
 {
-  imports = [ ../shared/tailscale-base.nix ];
+  imports = [
+    ../shared/sops-service.nix
+    ../shared/tailscale-base.nix
+  ];
 
   # One identity tag for this node: `tag:home-server` (so guest ACLs can target
   # ONLY home-server, not other hosts like test-vm). Rules that should apply to

@@ -4,8 +4,14 @@ This directory holds the encrypted payloads that `sops-nix` decrypts during syst
 The files checked into Git **must remain encrypted**; bootstrap with the steps below before running any
 `nixos-rebuild` or `home-manager switch`.
 
-`sops-nix` uses an Age key stored at `/var/lib/sops-nix/keys.txt`. You place it there once manually after a
-fresh install by reading it from your 1Password `Private` vault.
+System secrets and user secrets are decrypted by separate `sops-nix` activations:
+
+- `systemctl status sops-nix.service` decrypts `system.yaml` with `/var/lib/sops-nix/keys.txt`.
+- `systemctl --user status sops-nix.service` decrypts `user.yaml` with
+  `$HOME/.config/sops/age/keys.txt`.
+
+Both files contain the same Age private key from your 1Password `Private` vault, but permissions stay scoped
+to the service that reads them.
 
 ## 1Password + Age bootstrap
 
@@ -37,14 +43,18 @@ fresh install by reading it from your 1Password `Private` vault.
    sudo nixos-rebuild switch --flake .#nixos
    ```
 
-2. **Place the Age key** using your interactive 1Password session:
+2. **Place the Age key** for system and user activation using your interactive 1Password session:
 
    ```bash
    op read "op://Private/SOPS Age Key/private key" | sudo tee /var/lib/sops-nix/keys.txt
    sudo chmod 600 /var/lib/sops-nix/keys.txt
+
+   install -d -m 700 ~/.config/sops/age
+   op read "op://Private/SOPS Age Key/private key" > ~/.config/sops/age/keys.txt
+   chmod 600 ~/.config/sops/age/keys.txt
    ```
 
-3. **Reapply** so `sops-nix` can decrypt using the key:
+3. **Reapply** so both `sops-nix` services can decrypt using their keys:
 
    ```bash
    sudo nixos-rebuild switch --flake .#nixos
@@ -52,8 +62,8 @@ fresh install by reading it from your 1Password `Private` vault.
 
 ## Bootstrapping a remote host
 
-Remote hosts such as `home-server` also need the same Age private key at
-`/var/lib/sops-nix/keys.txt` before `sops-nix` can decrypt secrets during activation.
+Remote hosts such as `home-server` need the same Age private key at both service-specific paths before both
+`sops-nix` activations can decrypt secrets.
 
 1. **Apply the configuration once**. The build and copy can succeed, but activation may fail with:
 
@@ -66,6 +76,9 @@ Remote hosts such as `home-server` also need the same Age private key at
    ```bash
    sudo cat /var/lib/sops-nix/keys.txt | ssh root@home-server \
      'install -d -m 700 /var/lib/sops-nix && umask 077 && cat > /var/lib/sops-nix/keys.txt && chmod 600 /var/lib/sops-nix/keys.txt'
+
+   sudo cat /var/lib/sops-nix/keys.txt | ssh home-server \
+     'install -d -m 700 ~/.config/sops/age && umask 077 && cat > ~/.config/sops/age/keys.txt && chmod 600 ~/.config/sops/age/keys.txt'
    ```
 
    If the local key is not available yet, read it from 1Password first:
@@ -73,6 +86,9 @@ Remote hosts such as `home-server` also need the same Age private key at
    ```bash
    op read "op://Private/SOPS Age Key/private key" | ssh root@home-server \
      'install -d -m 700 /var/lib/sops-nix && umask 077 && cat > /var/lib/sops-nix/keys.txt && chmod 600 /var/lib/sops-nix/keys.txt'
+
+   op read "op://Private/SOPS Age Key/private key" | ssh home-server \
+     'install -d -m 700 ~/.config/sops/age && umask 077 && cat > ~/.config/sops/age/keys.txt && chmod 600 ~/.config/sops/age/keys.txt'
    ```
 
 3. **Reapply the remote configuration**:
@@ -85,13 +101,15 @@ Remote hosts such as `home-server` also need the same Age private key at
 
    ```bash
    ssh root@home-server 'test -s /var/lib/sops-nix/keys.txt'
+   ssh home-server 'test -s ~/.config/sops/age/keys.txt'
    ssh root@home-server 'test -s /home/cunbidun/.config/opencode/github_read_only_token'
    ssh root@home-server 'su - cunbidun -c "opencode debug config | jq -r \".lsp | keys | join(\\\",\\\")\""'
    ```
 
-The OpenCode GitHub token is stored encrypted in `secrets/global.yaml` and written by `sops-nix` to
-`/home/cunbidun/.config/opencode/github_read_only_token`. 1Password only needs to keep the `SOPS Age Key`
-bootstrap item; the GitHub token does not need to be duplicated there.
+The OpenCode GitHub token, ninerouter key, and HyprPanel weather key are stored encrypted in
+`secrets/user.yaml` and written by user `sops-nix` under `$HOME/.config`. The geolocation secret and
+system-service credentials are stored encrypted in `secrets/system.yaml`. 1Password only needs to keep the
+`SOPS Age Key` bootstrap item; service tokens do not need to be duplicated there.
 
 ## Encrypting the secret files
 
@@ -100,14 +118,14 @@ Create or update the file with `sops`:
 - **Create a new encrypted file**
 
   ```bash
-  sops --encrypt --in-place --age "$(cat secrets/age.pub)" secrets/global.yaml
+  sops --encrypt --in-place --age "$(cat secrets/age.pub)" secrets/user.yaml
   ```
 
 - **Modify the existing encrypted file**
 
   ```bash
-  SOPS_AGE_KEY="$(op read "op://Private/SOPS Age Key/private key")" sops secrets/global.yaml
+  SOPS_AGE_KEY="$(op read "op://Private/SOPS Age Key/private key")" sops secrets/user.yaml
   ```
 
-Running `sops secrets/global.yaml` opens your editor on the decrypted content and re-encrypts automatically
-when you save.
+Running `sops secrets/user.yaml` or `sops secrets/system.yaml` opens your editor on the decrypted content and
+re-encrypts automatically when you save.

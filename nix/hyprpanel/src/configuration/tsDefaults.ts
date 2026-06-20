@@ -85,7 +85,7 @@ const tsDefaults: Record<string, unknown> = {
                 enabled: true,
                 location: '10001',
                 unit: 'metric',
-                key: '/etc/hyprpanel/weather_api_key',
+                key: '/home/cunbidun/.config/hyprpanel/weather_api_key',
             },
         },
         media: {

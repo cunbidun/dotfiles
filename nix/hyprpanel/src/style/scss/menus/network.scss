@@ -22,12 +22,12 @@
     }
 
     .wifi-quick-page {
-        padding: 0.7em $menu-panel-outer-margin 0.75em $menu-panel-outer-margin;
+        padding: $menu-gap;
     }
 
     .wifi-quick-header {
         min-height: 2.3em;
-        margin-bottom: 0.55em;
+        margin-bottom: $menu-gap;
     }
 
     .wifi-quick-title {
@@ -102,7 +102,7 @@
     .wifi-quick-empty {
         color: $dash-subtext;
         font-size: 0.9em;
-        padding: 0.9em 0.75em;
+        padding: $menu-gap;
     }
 
     .wifi-settings-link {
@@ -110,7 +110,7 @@
         margin-right: 0em;
 
         &:not(:last-child) {
-            margin-bottom: 0.4em;
+            margin-bottom: $menu-gap;
         }
 
         &:hover,
@@ -124,7 +124,7 @@
     }
 
     .menu-items-section {
-        padding-bottom: 1.5em;
+        padding-bottom: $menu-gap;
     }
 
     .menu-label {
@@ -165,7 +165,7 @@
     }
 
     .menu-section-container.wifi {
-        margin-top: 0.65em;
+        margin-top: $menu-gap;
 
         .menu-items-section {
             // Same list height as the bluetooth menu so the panels match.
@@ -219,8 +219,8 @@
         color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-network-text);
         border-radius: $bar-menus-card_radius;
         margin: 0em 2em;
-        margin-top: 0.75em;
-        padding: 0.5em;
+        margin-top: $menu-gap;
+        padding: $menu-gap;
     }
 
     .close-network-password-input-button {

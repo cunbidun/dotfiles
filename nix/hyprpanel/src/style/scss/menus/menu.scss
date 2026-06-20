@@ -96,7 +96,7 @@
 }
 
 .menu-section-container {
-    margin: 0.75em 0em;
+    margin: $menu-gap 0em;
 
     .menu-label {
         color: $dash-text;
@@ -109,7 +109,7 @@
         border-radius: $dash-r-lg;
         border-bottom-left-radius: 0em;
         border-bottom-right-radius: 0em;
-        margin: 0em $menu-panel-outer-margin;
+        margin: 0em $menu-gap;
         min-height: 2em;
     }
 
@@ -122,7 +122,7 @@
     }
 
     &:nth-child(2) {
-        margin-top: 0.75em;
+        margin-top: $menu-gap;
     }
 
     .menu-items-section {
@@ -130,21 +130,21 @@
         border-radius: $dash-r-lg;
         border-top-left-radius: 0em;
         border-top-right-radius: 0em;
-        padding: 0.9em;
-        margin: 0em $menu-panel-outer-margin;
+        padding: $menu-gap;
+        margin: 0em $menu-gap;
     }
 }
 
 .menu-active {
     font-size: $menu-caption-font-size;
     font-weight: $menu-font-weight-strong;
-    margin: 0rem $menu-panel-outer-margin;
-    margin-bottom: 0.9em;
+    margin: 0rem $menu-gap;
+    margin-bottom: $menu-gap;
 }
 
 .menu-active-container {
     &:first-child {
-        margin-bottom: 0.5em;
+        margin-bottom: $menu-gap;
     }
 }
 
@@ -246,7 +246,7 @@
 
 .mac-popover-page {
     min-width: $menu-panel-width;
-    padding: 0.55em $menu-panel-outer-margin;
+    padding: $menu-gap;
 }
 
 .mac-popover-header {
@@ -278,7 +278,7 @@
 }
 
 .mac-popover-row-group {
-    margin-top: 0.55em;
+    margin-top: $menu-gap;
 }
 
 .mac-popover-row {
@@ -345,7 +345,7 @@
 }
 
 .menu-label {
-    margin: 0.5em $menu-panel-outer-margin;
+    margin: $menu-gap;
     color: $dash-text;
 }
 

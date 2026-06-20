@@ -15,6 +15,7 @@
     ../shared/nix-config.nix
     ../shared/common.nix
     ../shared/user-secrets.nix
+    ../shared/sops-service.nix
     ../shared/monitoring.nix
     inputs.sops-nix.nixosModules.sops
   ];
@@ -96,13 +97,6 @@
       owner = "geoclue";
       group = "geoclue";
       mode = "0666";
-    };
-    secrets.hyprpanel_weather_api_key = {
-      sopsFile = ../../../secrets/hyprpanel.yaml;
-      path = "/etc/hyprpanel/weather_api_key";
-      owner = userdata.username;
-      group = "users";
-      mode = "0400";
     };
   };
 

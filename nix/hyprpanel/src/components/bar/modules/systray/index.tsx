@@ -1,4 +1,5 @@
 import AstalTray from 'gi://AstalTray?version=0.1';
+import GdkPixbuf from 'gi://GdkPixbuf';
 import { bind, exec, Gio, Variable } from 'astal';
 import { readFile } from 'astal/file';
 import { GLib } from 'astal/gobject';
@@ -85,10 +86,19 @@ const MenuFcitxInputMethodIcon = ({
 };
 
 const MenuDefaultIcon = ({ item }: MenuEntryProps): JSX.Element => {
+    const gicon = bind(item, 'gicon').as((g) => {
+        const pixbuf = item.iconPixbuf;
+        if (pixbuf === null) return g;
+        const dest = pixbuf.copy();
+        if (dest === null) return g;
+        pixbuf.saturate_and_pixelate(dest, 0.0, false);
+        return dest as unknown as Gio.Icon;
+    });
+
     return (
         <icon
             className={'systray-icon'}
-            gicon={bind(item, 'gicon')}
+            gicon={gicon}
             tooltipMarkup={bind(item, 'tooltipMarkup')}
         />
     );

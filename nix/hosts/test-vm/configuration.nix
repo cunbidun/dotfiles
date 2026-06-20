@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ../shared/nix-config.nix
+    ../shared/sops-service.nix
     ../shared/tailscale-base.nix
     inputs.sops-nix.nixosModules.sops
   ];

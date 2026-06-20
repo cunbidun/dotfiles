@@ -26,10 +26,10 @@
 
   min-height: 3.5em * $bar-menus-menu-power-scaling * 0.01;
   font-size: $menu-content-font-size;
-  margin: 1em;
+  margin: $menu-gap;
 
   .menu-items-section {
-    padding-bottom: 1.5em;
+    padding-bottom: $menu-gap;
   }
 
   .power-menu-button {
@@ -52,7 +52,7 @@
     }
 
     &:not(:last-child) {
-      margin-bottom: 1.5em;
+      margin-bottom: $menu-gap;
     }
 
     .power-button-label {

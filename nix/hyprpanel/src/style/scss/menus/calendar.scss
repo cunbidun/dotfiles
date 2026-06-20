@@ -1,7 +1,7 @@
 @import './tokens';
 
 $calendar-ui-scale: 1;
-$calendar-card-gap: 0.65em;
+$calendar-card-gap: $menu-gap;
 $calendar-time-size: 2.65em;
 $calendar-period-size: 1.05em;
 $calendar-weather-icon-size: 2.8em;
@@ -41,27 +41,27 @@ $calendar-hourly-icon-size: 1.08em;
 }
 
 .calendar-content-items {
-    margin: $menu-panel-outer-margin;
+    margin: $menu-gap;
 }
 
 .calendar-container-box {
-    margin: $menu-panel-outer-margin;
+    margin: $menu-gap;
     margin-bottom: 0em;
 }
 
 .calendar-menu-heading {
     color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-calendar-yearmonth);
-    margin-bottom: 0.55em;
+    margin-bottom: $menu-gap;
 }
 
 .calendar-menu-heading-group {
-    margin: 0em 0.45em;
+    margin: 0em $menu-gap;
     min-width: 6.4em;
 }
 
 .calendar-menu-heading-button {
     min-width: 1.25em;
-    padding: 0.25em 0em;
+    padding: $menu-gap 0em;
     color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-clock-calendar-paginator);
     font-weight: 900;
 
@@ -98,7 +98,7 @@ $calendar-hourly-icon-size: 1.08em;
         color: $text;
         font-weight: 900;
         min-width: 2em;
-        padding: 0em 0.35em;
+        padding: 0em $menu-gap;
     }
 
     &:hover {
@@ -114,7 +114,7 @@ $calendar-hourly-icon-size: 1.08em;
     }
 
     font-size: 1em;
-    padding: 0.3em;
+    padding: $menu-gap;
 }
 
 .clock-content-items {
@@ -134,16 +134,16 @@ $calendar-hourly-icon-size: 1.08em;
 }
 
 .weather-container-box {
-    margin: 0.65em;
+    margin: $menu-gap;
     min-width: 3em;
 
     .calendar-menu-weather.today {
-        padding: 0.15em 0.15em 0.45em 0.15em;
+        padding: $menu-gap;
     }
 
     .calendar-menu-weather.today.icon.container {
         min-width: 3.6em;
-        margin-right: 0.75em;
+        margin-right: $menu-gap;
     }
 
     .calendar-menu-weather.today.icon {
@@ -155,7 +155,7 @@ $calendar-hourly-icon-size: 1.08em;
 
     .calendar-menu-weather.today.temp.label {
         color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-text);
-        margin-left: 0.2em;
+        margin-left: $menu-gap;
         font-size: $calendar-weather-temp-size;
         font-weight: 700;
 
@@ -167,7 +167,7 @@ $calendar-hourly-icon-size: 1.08em;
     .calendar-menu-weather.today.condition.label {
         color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
         font-size: $calendar-weather-condition-size;
-        margin-bottom: 0.2em;
+        margin-bottom: $menu-gap;
         font-weight: 600;
     }
 
@@ -193,7 +193,7 @@ $calendar-hourly-icon-size: 1.08em;
 }
 
 .calendar-menu-weather.today.stats.container {
-    margin-bottom: 0.25em;
+    margin-bottom: $menu-gap;
     color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
     font-size: $calendar-weather-stats-size;
 
@@ -202,29 +202,29 @@ $calendar-hourly-icon-size: 1.08em;
     }
 
     .weather.label {
-        margin-left: 0.3em;
+        margin-left: $menu-gap;
         font-weight: 600;
     }
 }
 
 .menu-separator.weather {
-    margin: 0.35em 0em 0.5em 0em;
+    margin: $menu-gap 0em;
     min-height: 0.06em;
     background: transparentize(if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-border-color), 0.65);
 }
 
 .hourly-weather-container {
-    margin: 0em 0.05em 0.1em 0.05em;
+    margin: $menu-gap 0em 0em 0em;
 }
 
 .hourly-weather-item {
-    padding: 0.28em 0.22em;
+    padding: $menu-gap;
     border-radius: $bar-menus-buttons-radius;
 }
 
 .hourly-weather-time {
     color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
-    margin-bottom: 0.24em;
+    margin-bottom: $menu-gap;
     font-size: 0.84em;
     font-weight: 600;
 }

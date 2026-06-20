@@ -2,11 +2,53 @@ import options from 'src/configuration';
 import { globalEventBoxes } from 'src/lib/events/dropdown';
 import { GLib } from 'astal';
 import { EventBox } from 'astal/gtk3/widget';
+import { Gtk } from 'astal/gtk3';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 
 const hyprlandService = AstalHyprland.get_default();
-const { location } = options.theme.bar;
+const { location, outer_spacing } = options.theme.bar;
+const { size: fontSize } = options.theme.font;
 const { scalingPriority } = options;
+
+function parseCssLengthPx(value: string, emBasePx: number): number | null {
+    const match = value.trim().match(/^(-?\d+(?:\.\d+)?)(px|em|rem)?$/);
+
+    if (!match) {
+        return null;
+    }
+
+    const numericValue = parseFloat(match[1]);
+    const unit = match[2] ?? 'px';
+
+    if (unit === 'px') {
+        return numericValue;
+    }
+
+    if (unit === 'em' || unit === 'rem') {
+        return numericValue * emBasePx;
+    }
+
+    return null;
+}
+
+function getMenuEdgeSpacing(): number {
+    const fontBasePx = parseCssLengthPx(fontSize.get(), 13) ?? 13;
+    const barOuterSpacingPx = parseCssLengthPx(outer_spacing.get(), fontBasePx) ?? 12;
+
+    return Math.max(0, barOuterSpacingPx);
+}
+
+function getAllocatedOrPreferredSize(widget: Gtk.Widget | null | undefined): WidgetSize {
+    if (!widget) {
+        return { width: 0, height: 0 };
+    }
+
+    const allocation = widget.get_allocation();
+    const width = allocation.width > 1 ? allocation.width : widget.get_preferred_width()[1];
+    const height = allocation.height > 1 ? allocation.height : widget.get_preferred_height()[1];
+
+    return { width, height };
+}
 
 /**
  * Retrieves the dropdown EventBox widget from the global event boxes map using the provided window name.
@@ -106,7 +148,7 @@ function calculateHorizontalMargins(
     dropdownWidth: number,
     anchorX: number,
 ): HorizontalMargins {
-    const minimumSpacing = 12;
+    const minimumSpacing = getMenuEdgeSpacing();
 
     let rightMarginSpacing = monitorWidth - dropdownWidth / 2;
     rightMarginSpacing -= anchorX;
@@ -176,11 +218,18 @@ export const calculateMenuPosition = async (
             return;
         }
 
-        const dropdownWidth = dropdownEventBox.get_child()?.get_allocation().width ?? 0;
-        const dropdownHeight = dropdownEventBox.get_child()?.get_allocation().height ?? 0;
+        const dropdownSize = getAllocatedOrPreferredSize(dropdownEventBox.get_child());
+        const dropdownWidth = dropdownSize.width;
+        const dropdownHeight = dropdownSize.height;
 
         const monitorScaling = focusedHyprlandMonitor.scale || 1;
-        const { width: rawMonitorWidth, height: rawMonitorHeight, transform } = focusedHyprlandMonitor;
+        const monitorWithPosition = focusedHyprlandMonitor as AstalHyprland.Monitor & { x?: number };
+        const {
+            x: rawMonitorX,
+            width: rawMonitorWidth,
+            height: rawMonitorHeight,
+            transform,
+        } = monitorWithPosition;
 
         if (!rawMonitorWidth || !rawMonitorHeight) {
             return;
@@ -191,6 +240,7 @@ export const calculateMenuPosition = async (
             rawMonitorHeight,
             monitorScaling,
         );
+        const { adjustedWidth: adjustedMonitorX } = applyMonitorScaling(rawMonitorX ?? 0, 0, monitorScaling);
 
         const isVertical = transform !== undefined ? transform % 2 !== 0 : false;
         const { finalWidth, finalHeight } = adjustForVerticalTransform(
@@ -202,7 +252,7 @@ export const calculateMenuPosition = async (
         const { leftMargin, rightMargin } = calculateHorizontalMargins(
             finalWidth,
             dropdownWidth,
-            positionCoordinates[0],
+            Math.min(Math.max(positionCoordinates[0] - adjustedMonitorX, 0), finalWidth),
         );
 
         dropdownEventBox.set_margin_left(leftMargin);
@@ -227,4 +277,9 @@ type MonitorScaling = {
 type TransformedDimensions = {
     finalWidth: number;
     finalHeight: number;
+};
+
+type WidgetSize = {
+    width: number;
+    height: number;
 };

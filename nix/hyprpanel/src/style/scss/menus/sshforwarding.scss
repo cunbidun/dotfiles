@@ -13,10 +13,10 @@
     .ssh-forwarding-panel {
         background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-cards);
         border-radius: $bar-menus-card_radius;
-        padding: 0.75em;
+        padding: $menu-gap;
 
         &:not(:last-child) {
-            margin-bottom: 0.7em;
+            margin-bottom: $menu-gap;
         }
     }
 
@@ -25,7 +25,7 @@
     }
 
     .ssh-forwarding-panel-header {
-        margin-bottom: 0.55em;
+        margin-bottom: $menu-gap;
     }
 
     .ssh-forwarding-panel-icon {
@@ -35,7 +35,7 @@
         border-radius: $bar-menus-card_radius;
         background: $bar-menus-buttons-default;
         color: $bar-menus-buttons-text;
-        margin-right: 0.55em;
+        margin-right: $menu-gap;
     }
 
     .ssh-forwarding-panel-title {
@@ -51,10 +51,10 @@
     }
 
     .ssh-forwarding-row {
-        margin-bottom: 0.45em;
+        margin-bottom: $menu-gap;
         background: transparentize($mantle, 0.45);
         border-radius: $bar-menus-card_radius;
-        padding: 0.35em 0.5em;
+        padding: $menu-gap;
     }
 
     .menu-label {

@@ -35,8 +35,6 @@ export const handleRealization = async (name: DropdownMenuList): Promise<void> =
         }
 
         appWindow?.set_visible(false);
-
-        await calculateMenuPosition([0, 0], name);
     } catch (error) {
         if (error instanceof Error) {
             console.error(`Error realizing ${name}: ${error.message}`);

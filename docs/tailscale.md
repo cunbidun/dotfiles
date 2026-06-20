@@ -49,7 +49,7 @@ Creates or updates the four `svc:*` definitions on Tailscale's control plane via
 `PUT /api/v2/tailnet/-/services/{name}`. On update it preserves the existing `addrs`
 (VIPs assigned by Tailscale).
 
-## Secrets (`secrets/global.yaml`)
+## Secrets (`secrets/system.yaml`)
 
 | Key | Used by | Expires |
 |---|---|---|
@@ -101,7 +101,7 @@ when a tag is applied — hence the reusable auth key scoped to `tag:server`.
 - `home_server_key` expiry: the auth key maxes out at 90 days. On a running machine
   this has no effect. Only matters if the machine is rebuilt from scratch with an
   expired key. Renew by generating a new reusable key in the admin console scoped to
-  `tag:server`, updating `secrets/global.yaml` via sops, and switching.
+  `tag:server`, updating `secrets/system.yaml` via sops, and switching.
 
 - Tailscale **prefs on an already-registered node** (advertised tags, `--ssh`, …) are
   not reconciled by `nixos-rebuild`. NixOS's `tailscaled-autoconnect` only runs

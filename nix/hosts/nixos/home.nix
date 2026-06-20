@@ -13,6 +13,7 @@
 in {
   imports = [
     ../../home-manager/profiles/linux.nix
+    inputs.sops-nix.homeManagerModules.sops
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.self.homeManagerModules.theme-manager
@@ -22,6 +23,7 @@ in {
     ../../home-manager/configs/kitty.nix
     ../../home-manager/configs/hyprland/hyprland.nix
     ../../home-manager/configs/hyprpanel.nix
+    ../../home-manager/configs/quickshell.nix
     ../../home-manager/configs/hyprland/hypridle.nix
     ../../home-manager/configs/hyprland/pyprland.nix
     ../../home-manager/configs/hyprland/hyprpaper.nix
@@ -42,6 +44,7 @@ in {
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/hyprsunset.nix
     ../../home-manager/configs/llm_agent.nix
+    ../../home-manager/configs/user-secrets.nix
   ];
 
   home.sessionVariables.SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";

@@ -4,6 +4,7 @@
 
 .notification-card-container.menu {
     margin: 0em;
+    padding: 0em;
     min-width: 30.6em * $bar-menus-menu-notifications-scaling * 0.01;
     min-height: $bar-menus-menu-notifications-height * $bar-menus-menu-notifications-scaling * 0.01;
     background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-notifications-background), 0.35);
@@ -13,21 +14,20 @@
     opacity: $bar-menus-opacity * 0.01;
 
     .window-content.notificationsmenu-window {
-        margin-right: 0.5em;
+        margin-right: $menu-gap;
     }
 
     .menu-content-container.notifications {
-        margin: $menu-panel-outer-margin;
+        margin: $menu-gap;
         margin-bottom: 0em;
         min-height: 4em;
     }
 
     .notification-menu-controls {
         background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-notifications-card);
-        margin: $menu-panel-outer-margin $menu-panel-outer-margin;
-        margin-bottom: 0.5em;
+        margin: $menu-gap $menu-gap 0em $menu-gap;
         border-radius: $bar-menus-card_radius;
-        padding: 0.4em 0.75em;
+        padding: $menu-gap;
     }
 
     .notification-card.menu {
@@ -38,27 +38,28 @@
         border: 1px solid if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-notifications-border);
         border-radius: $bar-menus-buttons-radius;
         margin: 0em;
-        padding: 0.1em 0em;
+        padding: 0em;
     }
 
     .notification-card-content-container {
         .notification-card {
-            margin-bottom: 0.65em;
+            margin-bottom: $menu-gap;
 
             &:last-child {
-                margin-bottom: 1em;
+                margin-bottom: $menu-gap;
             }
         }
     }
 
     .notification-card-image-container {
-        margin: 0.55em 0.25em 0.55em 0.7em;
+        margin: $notification-content-gap;
+        margin-right: 0em;
     }
 
     .notification-card-image {
         min-width: 2.15em;
         min-height: 2.15em;
-        padding: 0.25em;
+        padding: $notification-content-gap;
         border-radius: $bar-menus-buttons-radius;
 
         &.icon {
@@ -70,7 +71,7 @@
 
     .notification-card-content {
         min-width: 0em;
-        padding: 0.52em 0.5em 0.48em 0.45em;
+        padding: $notification-content-gap 0.5em;
         margin-right: 0em;
         margin-bottom: 0em;
 
@@ -103,7 +104,7 @@
             $bar-menus-dropdownmenu-divider,
             $bar-menus-menu-notifications-switch_divider
         );
-        margin: 0em $menu-panel-outer-margin;
+        margin: 0em $menu-gap;
     }
 
     .menu-switch.notifications {
@@ -161,7 +162,7 @@
     }
 
     .clear-notifications-button {
-        margin-right: 0.3em;
+        margin-right: $menu-gap;
 
         &:hover label:not(.removing) {
             color: transparentize(
@@ -181,7 +182,7 @@
     }
 
     scrollbar {
-        margin-right: 0.2em;
+        margin-right: $menu-gap;
         min-width: $bar-menus-menu-notifications-scrollbar-width * $bar-menus-menu-notifications-scaling * 0.01;
         border-radius: $bar-menus-menu-notifications-scrollbar-radius;
         background: transparent;
@@ -246,7 +247,8 @@
         color: $bar-menus-dimtext;
         min-width: 1.45em * $bar-menus-menu-notifications-scaling * 0.01;
         border-radius: $bar-menus-buttons-radius;
-        margin: 0.45em 0.35em 0.45em 0em;
+        margin: $menu-gap;
+        margin-left: 0em;
 
         label {
             font-size: 0.95em * $bar-menus-menu-notifications-scaling * 0.01;
@@ -260,7 +262,7 @@
 }
 
 .notification-label-container {
-    margin-bottom: 2.5em;
+    margin-bottom: $menu-gap;
 
     label {
         color: $bar-menus-menu-notifications-no_notifications_label;
@@ -283,7 +285,8 @@
     color: $bar-menus-dimtext;
     min-width: 1.45em * $bar-menus-menu-notifications-scaling * 0.01;
     border-radius: $bar-menus-buttons-radius;
-    margin: 0.45em 0.35em 0.45em 0em;
+    margin: $menu-gap;
+    margin-left: 0em;
 
     label {
         font-size: 0.95em * $bar-menus-menu-notifications-scaling * 0.01;
@@ -297,14 +300,14 @@
 
 .notification-menu-pager {
     background: $bar-menus-menu-notifications-pager-background;
-    margin-bottom: 0.1em;
+    margin: 0em $menu-gap $menu-gap $menu-gap;
     border-radius: $bar-menus-border-radius;
     border-top-left-radius: 0em;
     border-top-right-radius: 0em;
 
     .pager-button {
         margin: 0em;
-        padding: 0.25em 1em;
+        padding: $menu-gap;
         color: $bar-menus-menu-notifications-pager-button;
 
         .pager-button-label {

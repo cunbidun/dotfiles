@@ -23,12 +23,12 @@
     }
 
     .bluetooth-quick-page {
-        padding: 0.7em $menu-panel-outer-margin 0.75em $menu-panel-outer-margin;
+        padding: $menu-gap;
     }
 
     .bluetooth-quick-header {
         min-height: 2.3em;
-        margin-bottom: 0.55em;
+        margin-bottom: $menu-gap;
     }
 
     .bluetooth-quick-title {
@@ -97,7 +97,7 @@
     .bluetooth-quick-empty {
         color: $dash-subtext;
         font-size: 0.9em;
-        padding: 1em 0.75em;
+        padding: $menu-gap;
     }
 
     .bluetooth-settings-link {
@@ -106,7 +106,7 @@
     }
 
     .menu-section-container {
-        margin: 1em 0em;
+        margin: $menu-gap 0em;
     }
 
     .menu-label-container {

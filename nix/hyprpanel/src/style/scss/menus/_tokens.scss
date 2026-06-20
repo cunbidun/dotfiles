@@ -1,4 +1,5 @@
-$menu-panel-outer-margin: 0.65em;
+$menu-gap: 0.65em;
+$menu-panel-outer-margin: $menu-gap;
 $menu-panel-width: 20em;
 $menu-list-min-height: 16em;
 $menu-radius-pill: 9999px;

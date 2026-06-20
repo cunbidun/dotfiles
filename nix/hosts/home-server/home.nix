@@ -13,6 +13,7 @@
 in {
   imports = [
     ../../home-manager/profiles/linux.nix
+    inputs.sops-nix.homeManagerModules.sops
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix
@@ -20,6 +21,7 @@ in {
     ../../home-manager/configs/nvim.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/llm_agent.nix
+    ../../home-manager/configs/user-secrets.nix
     ../../home-manager/configs/yazi.nix
   ];
 

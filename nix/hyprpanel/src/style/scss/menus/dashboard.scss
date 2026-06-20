@@ -21,7 +21,7 @@
     // than the inner chunk radius so the corners nest cleanly.
     border-radius: $menu-panel-radius;
     opacity: $bar-menus-opacity * 0.01;
-    padding: 0.5em 0em;
+    padding: $menu-gap 0em;
 
     button {
         border-radius: $dash-r-md;
@@ -29,17 +29,14 @@
 
     .dashboard-card {
         background: $dash-chunk;
-        // Vertical margin here (not on `> *`) so it isn't overridden by this
-        // rule's own specificity — this is what spaces the control panel from
-        // the stats panel. controls-container resets its own margin-top below.
-        margin: 0.7em $menu-panel-outer-margin;
+        margin: $menu-gap;
         border-radius: $dash-r-lg;
         border: none;
         padding: 1.2em;
     }
 
     .profile-picture-container {
-        margin-right: 0.65em;
+        margin-right: $menu-gap;
 
         .profile-picture {
             min-width: $bar-menus-menu-dashboard-profile-size;
@@ -53,7 +50,7 @@
         .profile-name {
             font-size: 1.5em;
             color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-dashboard-profile-name);
-            margin-top: 0.75em;
+            margin-top: $menu-gap;
         }
     }
 
@@ -65,7 +62,7 @@
             min-height: 2.5em;
 
             &:not(:last-child) {
-                margin-bottom: 0.75em;
+                margin-bottom: $menu-gap;
             }
 
             label {
@@ -169,7 +166,7 @@
         font-size: 1em;
 
         .dashboard-card {
-            padding: 1.5em;
+            padding: $menu-gap;
 
             button {
                 min-height: 2.5em;
@@ -178,18 +175,18 @@
         }
 
         .card-button-section-container.visible {
-            margin-right: 1.5em;
+            margin-right: $menu-gap;
         }
 
         .top-button.paired {
-            margin-bottom: 1.5em;
+            margin-bottom: $menu-gap;
         }
 
         .container {
             margin-top: 0em;
 
             &.most-used {
-                margin-right: 0.65em;
+                margin-right: $menu-gap;
             }
 
             &.utilities.paired {
@@ -236,7 +233,7 @@
     }
 
     .controls-container {
-        $control-gap: 0.55em;
+        $control-gap: $menu-gap;
         $control-tile-height: 3.55em;
         // Single-icon buttons; tune this one value if they look off.
         $control-chip-height: 3.55em;
@@ -273,7 +270,7 @@
 
         .dashboard-control-tile {
             min-height: $control-tile-height;
-            padding: 0.52em 0.65em;
+            padding: $menu-gap;
             border-radius: $dash-r-md;
 
             .dashboard-control-tile-content {
@@ -329,7 +326,7 @@
         .dashboard-control-audio-card {
             background: $dash-chunk;
             border-radius: $dash-r-md;
-            padding: 0.65em 0.8em;
+            padding: $menu-gap;
             min-height: ($control-tile-height * 2) + $control-gap;
 
             .dashboard-control-audio-header {
@@ -513,7 +510,7 @@
         .dashboard-control-slider {
             background: $dash-chunk;
             border-radius: $dash-r-lg;
-            padding: 0.62em 0.78em;
+            padding: $menu-gap;
 
             &:not(:last-child) {
                 margin-bottom: $control-gap;
@@ -650,12 +647,12 @@
     .directories-container {
         &.dashboard-card {
             margin-top: 0em;
-            padding-left: 1.5em;
+            padding-left: $menu-gap;
             padding-right: 0em;
         }
 
         .directory-link {
-            padding: 0.5em 0em;
+            padding: $menu-gap 0em;
             min-width: 9em;
 
             &:last-child {
@@ -726,7 +723,7 @@
         // card's bottom margin.
         margin-top: 0em;
         margin-bottom: 0em;
-        padding: 0.9em 1em;
+        padding: $menu-gap;
         color: $dash-text;
 
         .stat-row-btn {
@@ -803,5 +800,5 @@
 }
 
 .dashboard-content-items > * {
-    margin: 0.9em 0em;
+    margin: $menu-gap 0em;
 }
