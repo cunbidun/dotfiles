@@ -64,6 +64,14 @@ export class MediaPlayerService {
         return mediaPlayer.coverArt || mediaPlayer.cover_art || mediaPlayer.artUrl || mediaPlayer.art_url || '';
     }
 
+    private _normalizeLocalArtUrl(artUrl: string): string {
+        if (artUrl.startsWith('file://')) {
+            return decodeURIComponent(artUrl.replace('file://', ''));
+        }
+
+        return artUrl;
+    }
+
     private _hashString(value: string): string {
         let hash = 0;
 
@@ -75,6 +83,11 @@ export class MediaPlayerService {
     }
 
     private _setMediaArtUrl(player: AstalMpris.Player): void {
+        if (player.playbackStatus === AstalMpris.PlaybackStatus.STOPPED) {
+            this.mediaArtUrl.set('');
+            return;
+        }
+
         const artUrl = this._getPlayerArtUrl(player);
         const requestId = (this._artCacheRequestId += 1);
 
@@ -84,7 +97,7 @@ export class MediaPlayerService {
         }
 
         if (!artUrl.startsWith('http://') && !artUrl.startsWith('https://')) {
-            this.mediaArtUrl.set(artUrl);
+            this.mediaArtUrl.set(this._normalizeLocalArtUrl(artUrl));
             return;
         }
 
@@ -179,8 +192,16 @@ export class MediaPlayerService {
 
         const currentPlayer = this.activePlayer.get();
         const playingPlayer = players.find((player) => player.playbackStatus === AstalMpris.PlaybackStatus.PLAYING);
-        const currentStillAvailable = players.find((player) => player.busName === currentPlayer?.busName);
-        const nextPlayer = playingPlayer ?? currentStillAvailable ?? players[0];
+        const pausedPlayer = players.find((player) => player.playbackStatus === AstalMpris.PlaybackStatus.PAUSED);
+        const currentStillAvailable = players.find(
+            (player) => player.busName === currentPlayer?.busName && player.playbackStatus !== AstalMpris.PlaybackStatus.STOPPED,
+        );
+        const nextPlayer = playingPlayer ?? pausedPlayer ?? currentStillAvailable;
+
+        if (nextPlayer === undefined) {
+            this.activePlayer.set(undefined);
+            return;
+        }
 
         if (nextPlayer?.busName !== currentPlayer?.busName) {
             this.activePlayer.set(nextPlayer);
