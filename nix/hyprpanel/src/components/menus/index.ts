@@ -9,6 +9,7 @@ import EnergyMenu from './energy/index.js';
 import DashboardMenu from './dashboard/index.js';
 import PowerDropdown from './powerDropdown/index.js';
 import SshForwardingMenu from './sshForwarding/index.js';
+import SystemConfig from '../systemConfig/index.js';
 
 export const DropdownMenus = [
     AudioMenu,
@@ -23,4 +24,4 @@ export const DropdownMenus = [
     SshForwardingMenu,
 ];
 
-export const StandardWindows = [Verification];
+export const StandardWindows = [Verification, SystemConfig];

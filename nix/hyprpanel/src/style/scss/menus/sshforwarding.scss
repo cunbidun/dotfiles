@@ -1,4 +1,4 @@
-@import './menu.scss';
+@import './tokens';
 
 .menu-items.ssh-forwarding {
     background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-cards);
@@ -8,7 +8,7 @@
 
 .menu-items-container.ssh-forwarding {
     min-width: 19em;
-    font-size: 1.3em;
+    font-size: $menu-content-font-size;
 
     .ssh-forwarding-panel {
         background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-cards);

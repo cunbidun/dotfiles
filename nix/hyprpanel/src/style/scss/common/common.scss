@@ -5,7 +5,7 @@ menu {
     padding: 6px;
     background-color: $primary_bg;
     background-clip: border-box;
-    border-radius: 12px;
+    border-radius: $bar-menus-border-radius;
     border: 1px solid $secondary_bg;
 
     .dim {
@@ -18,9 +18,12 @@ menu {
         min-width: 40px;
         padding: 4px 8px;
         color: #ffffff;
-        font: initial;
+        font-family: $font-name;
+        font-size: $font-size;
+        font-style: $font-style;
+        font-weight: $font-weight;
         text-shadow: none;
-        border-radius: 6px;
+        border-radius: $bar-menus-buttons-radius;
 
         &:hover,
         &:active {
@@ -55,14 +58,14 @@ menu > arrow {
 
 menu > arrow.top {
     margin-top: 0;
-    border-radius: 6px;
+    border-radius: $bar-menus-buttons-radius;
     -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
 }
 
 menu > arrow.bottom {
     margin-top: 8px;
     margin-bottom: -12px;
-    border-radius: 6px;
+    border-radius: $bar-menus-buttons-radius;
     -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
 }
 

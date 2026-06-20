@@ -1,34 +1,25 @@
-// Dashboard "chunk" styling — local overrides so the dashboard reads as
-// filled, rounded blocks instead of square, hairline-bordered nested cards.
-// These intentionally ignore the global 0em radius theme so only the
-// dashboard dropdown is rounded.
-$dash-r-lg: 0.85em; // outer chunks: sliders, stats
-$dash-r-md: 0.6em; // inner tiles, buttons, chips
-// Neutral "chunk" surfaces — translucent white over the dark panel so every
-// control reads as a dark elevated block (matching the reference), instead of
-// the theme's white-on-black inverted buttons. Theme-agnostic: picks up the
-// wallpaper/panel tint.
-$dash-chunk: transparentize(#ffffff, 0.9);
-$dash-chunk-hover: transparentize(#ffffff, 0.84);
-$dash-chunk-active: transparentize(#ffffff, 0.78);
-$dash-chunk-disabled: transparentize(#ffffff, 0.95);
-$dash-text: transparentize(#ffffff, 0.05); // primary label / icon
-$dash-subtext: transparentize(#ffffff, 0.42); // secondary label
+@import './tokens';
+
+// Dashboard "chunk" styling. The $dash-* design tokens are shared with the
+// satellite menus so the whole menu system has a consistent look & feel.
 
 .dashboard-menu-content * {
     font-size: $font-size * $bar-menus-menu-dashboard-scaling * 0.01;
 }
 
 .dashboard-content-items {
-    // Floor only — the panel auto-grows to its widest row (the stats "Net"
-    // row). Kept narrow so the control grid cells stay roughly square:
-    // a wider panel makes the 4 homogeneous buttons stretch into rectangles.
-    min-width: 16.5em;
-    min-height: 25.2em;
+    // Match the satellite menus so the
+    // dashboard and every sub-menu are the same width and, via the shared
+    // center anchor, open in the exact same location.
+    min-width: $menu-panel-width;
+    // No min-height: it forced the panel taller than its content, and the
+    // extra space pooled at the bottom (asymmetric bottom margin).
     background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-dashboard-background-color), 0.35);
     border: 1px solid
         transparentize(if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-dashboard-border-color), 0.5);
-    border-radius: $bar-menus-border-radius;
+    // Round the outer panel too (global theme radius is 0em). Slightly larger
+    // than the inner chunk radius so the corners nest cleanly.
+    border-radius: $menu-panel-radius;
     opacity: $bar-menus-opacity * 0.01;
     padding: 0.5em 0em;
 
@@ -37,8 +28,11 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
     }
 
     .dashboard-card {
-        background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-dashboard-card-color);
-        margin: 0em $menu-panel-outer-margin;
+        background: $dash-chunk;
+        // Vertical margin here (not on `> *`) so it isn't overridden by this
+        // rule's own specificity — this is what spaces the control panel from
+        // the stats panel. controls-container resets its own margin-top below.
+        margin: 0.7em $menu-panel-outer-margin;
         border-radius: $dash-r-lg;
         border: none;
         padding: 1.2em;
@@ -244,8 +238,9 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
     .controls-container {
         $control-gap: 0.55em;
         $control-tile-height: 3.55em;
-        $control-chip-height: $control-tile-height;
-        $control-icon-width: 1.35em;
+        // Single-icon buttons; tune this one value if they look off.
+        $control-chip-height: 3.55em;
+        $control-icon-width: 1.1em;
 
         // The controls section is a bare panel — the individual tiles are the
         // chunks, so it carries no card background/border of its own.
@@ -278,7 +273,7 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
                 color: $dash-text;
                 font-size: 1.05em;
                 min-width: $control-icon-width;
-                margin-right: 0.58em;
+                margin-right: 0.42em;
             }
 
             .control-tile-copy {
@@ -287,7 +282,7 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
 
             .control-tile-title {
                 color: $dash-text;
-                font-size: 0.95em;
+                font-size: 0.9em;
                 font-weight: 700;
             }
 
@@ -338,14 +333,14 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
                     color: $dash-text;
                     font-size: 1.16em;
                     min-width: $control-icon-width;
-                    margin-right: 0.58em;
+                    margin-right: 0.42em;
                     margin-left: 0.02em;
                 }
 
                 .dashboard-control-audio-copy {
                     .dashboard-control-audio-title {
                         color: $dash-text;
-                        font-size: 0.95em;
+                        font-size: 0.9em;
                         font-weight: 700;
                     }
 
@@ -524,28 +519,28 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
                 margin: 0.4em 0.2em 0.1em 0.2em;
 
                 trough {
-                    background: transparentize(#ffffff, 0.8);
-                    border-radius: 9999px;
+                    background: $menu-control-track;
+                    border-radius: $menu-radius-pill;
                     min-height: 0.42em;
                 }
 
                 slider {
-                    background: #f6f7fb;
-                    box-shadow: inset 0 0 0 1px transparentize(#0b0d10, 0.75);
+                    background: $menu-control-thumb;
+                    box-shadow: $menu-control-thumb-shadow;
                 }
             }
 
             .dashboard-control-slider-track.brightness trough {
                 highlight,
                 progress {
-                    background: transparentize(#ffffff, 0.15);
+                    background: $menu-control-fill;
                 }
             }
 
             .dashboard-control-slider-track.volume trough {
                 highlight,
                 progress {
-                    background: transparentize(#ffffff, 0.15);
+                    background: $menu-control-fill;
                 }
             }
 
@@ -692,7 +687,11 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
     }
 
     .stats-container {
+        // Both vertical margins zero so the bottom edge matches the top edge
+        // (panel padding only). The gap above stats comes from the controls
+        // card's bottom margin.
         margin-top: 0em;
+        margin-bottom: 0em;
         padding: 0.9em 1em;
 
         .stat-row-btn {
@@ -729,9 +728,7 @@ $dash-subtext: transparentize(#ffffff, 0.42); // secondary label
             .stat-metric {
                 font-size: 0.92em;
                 margin-bottom: 0em;
-                // Non-proportional ("Propo" was proportional) so digits keep a
-                // fixed advance and the value column never shifts horizontally.
-                font-family: 'JetBrainsMono Nerd Font Mono', 'SFMono Nerd Font', monospace;
+                font-family: $font-name;
             }
         }
     }

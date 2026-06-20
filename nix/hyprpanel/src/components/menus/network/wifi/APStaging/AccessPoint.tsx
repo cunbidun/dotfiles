@@ -22,7 +22,7 @@ export const AccessPoint = ({ staging, connecting }: AccessPointProps): JSX.Elem
                 className="active-connection"
                 halign={Gtk.Align.START}
                 truncate
-                wrap
+                tooltipText={staging.get()?.ssid ?? ''}
                 label={staging.get()?.ssid ?? ''}
             />
         </box>

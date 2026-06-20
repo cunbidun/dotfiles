@@ -1,26 +1,32 @@
+@import './tokens';
+
 $calendar-ui-scale: 1;
 $calendar-card-gap: 0.65em;
-$calendar-time-size: 2.9em;
-$calendar-period-size: 1.2em;
-$calendar-weather-icon-size: 3.05em;
-$calendar-weather-temp-size: 1.65em;
-$calendar-weather-condition-size: 0.86em;
+$calendar-time-size: 2.65em;
+$calendar-period-size: 1.05em;
+$calendar-weather-icon-size: 2.8em;
+$calendar-weather-temp-size: 1.45em;
+$calendar-weather-condition-size: 0.82em;
 $calendar-weather-stats-size: 0.82em;
-$calendar-hourly-icon-size: 1.18em;
+$calendar-hourly-icon-size: 1.08em;
 
 .calendar-menu-content * {
     font-size: $font-size * $bar-menus-menu-clock-scaling * 0.01 * $calendar-ui-scale;
 }
 
+.menu-items.calendar {
+    min-width: 27em * $bar-menus-menu-clock-scaling * 0.01;
+}
+
+.menu-items-container.calendar {
+    min-width: 27em * $bar-menus-menu-clock-scaling * 0.01;
+    font-size: $menu-content-font-size;
+}
+
 .calendar-content-container {
     margin-top: 0em;
-    min-width: 27em;
+    min-width: 27em * $bar-menus-menu-clock-scaling * 0.01;
     min-height: 6em;
-    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-clock-background-color);
-    border: $bar-menus-border-size solid
-        if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-clock-border-color);
-    border-radius: $bar-menus-border-radius;
-    opacity: $bar-menus-opacity * 0.01;
 }
 
 .calendar-menu-item-container {
@@ -60,17 +66,18 @@ $calendar-hourly-icon-size: 1.18em;
     font-weight: 900;
 
     label {
-        font-size: 1.25em;
+        font-size: 1.1em;
     }
 }
 
 .calendar-menu-heading-label {
-    font-size: 1.25em;
+    font-size: 1.05em;
+    font-weight: $menu-font-weight-strong;
     min-width: 3.9em;
 }
 
 .calendar-menu-widget {
-    border-radius: 0.4em;
+    border-radius: $bar-menus-buttons-radius;
     color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-clock-calendar-days);
 
     &:selected {
@@ -79,7 +86,7 @@ $calendar-hourly-icon-size: 1.18em;
             inset -0.4em -0.3em 0 0 if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-clock-card-color),
             inset 0.4em 0 0 0.01em if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-clock-card-color);
         color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-clock-calendar-currentday);
-        border-radius: 0em;
+        border-radius: $bar-menus-buttons-radius;
     }
 
     &.header {
@@ -106,8 +113,8 @@ $calendar-hourly-icon-size: 1.18em;
         color: transparentize(if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-clock-calendar-days), 0.65);
     }
 
-    font-size: 1.1em;
-    padding: 0.35em;
+    font-size: 1em;
+    padding: 0.3em;
 }
 
 .clock-content-items {
@@ -161,7 +168,7 @@ $calendar-hourly-icon-size: 1.18em;
         color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-label);
         font-size: $calendar-weather-condition-size;
         margin-bottom: 0.2em;
-        letter-spacing: 0.015em;
+        font-weight: 600;
     }
 
     .calendar-menu-weather.today.temp.label.icon.weather-color.red {
@@ -212,7 +219,7 @@ $calendar-hourly-icon-size: 1.18em;
 
 .hourly-weather-item {
     padding: 0.28em 0.22em;
-    border-radius: 0.34em;
+    border-radius: $bar-menus-buttons-radius;
 }
 
 .hourly-weather-time {

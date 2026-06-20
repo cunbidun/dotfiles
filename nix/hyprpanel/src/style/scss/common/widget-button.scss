@@ -1,7 +1,7 @@
 $popover-padding: 7px * 1.6;
 $padding: 7px;
 $spacing: 12px;
-$radius: 11px;
+$radius: $shared-radius;
 
 .widget-button {
   background: $crust;
@@ -10,7 +10,7 @@ $radius: 11px;
   font-weight: bold;
   margin: 10px;
   padding: 15px 20px;
-  border-radius: 10px;
+  border-radius: $shared-radius;
   border: 3px solid;
   border-color: $crust;
   transition: border-color .3s ease-in-out;
@@ -29,7 +29,7 @@ $radius: 11px;
   }
 
   image {
-    border-radius: $radius + ($popover-padding * 1.4);
+    border-radius: $shared-radius;
     min-width: 1.2em;
     min-height: 1.2em;
     font-size: 4em;

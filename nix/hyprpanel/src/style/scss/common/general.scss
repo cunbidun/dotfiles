@@ -1,7 +1,7 @@
 @import '../colors.scss';
 
 .txt-icon {
-    font-family: 'JetBrainsMono Nerd Font Propo', monospace;
+    font-family: $font-name;
     font-size: 1.5em;
 
     &.bluetooth {
@@ -18,24 +18,30 @@
 }
 
 .bar.txt-icon {
-    font-family: 'JetBrainsMono Nerd Font Propo', monospace;
+    font-family: $font-name;
     font-size: 1.2em;
 }
 
 tooltip {
     * {
         all: unset;
+        font-family: $font-name;
+        font-style: $font-style;
+        font-weight: $font-weight;
     }
 
     opacity: $bar-menus-opacity * 0.01;
-
-    font-size: 1.1em * $tooltip-scaling * 0.01;
+    font-size: 0.9em * $tooltip-scaling * 0.01;
 
     > * > * {
-        padding: 0.6em;
+        padding: 0.42em 0.6em;
         border-radius: $bar-menus-tooltip-radius;
         color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-tooltip-text);
         background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-tooltip-background);
+    }
+
+    label {
+        font-size: 1em;
     }
 }
 

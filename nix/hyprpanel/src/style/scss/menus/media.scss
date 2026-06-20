@@ -1,5 +1,5 @@
 .menu-items.media {
-    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-media-background-color);
+    background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-media-background-color), 0.35);
     border-color: if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-media-border-color);
     opacity: $bar-menus-opacity * 0.01;
 }
@@ -11,6 +11,32 @@
 
     min-width: 23em * $bar-menus-menu-media-scaling * 0.01;
     min-height: 10em * $bar-menus-menu-media-scaling * 0.01;
+
+    &.mac-popover-container,
+    .mac-popover-stack,
+    .mac-popover-page {
+        min-width: 23em * $bar-menus-menu-media-scaling * 0.01;
+    }
+
+    .mac-popover-page.media-main {
+        padding: 0em;
+    }
+
+    .media-drilldown-row {
+        margin-top: 0.6em;
+    }
+
+    .media-playback-page {
+        min-height: 10em * $bar-menus-menu-media-scaling * 0.01;
+    }
+
+    .media-playback-title {
+        margin-bottom: 0.5em;
+    }
+
+    .media-playback-content {
+        padding: 0.35em 0.1em;
+    }
 
     .menu-section-container {
         margin: 1em 0em;

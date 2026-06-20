@@ -1,5 +1,6 @@
 import { opt } from 'src/lib/options';
 import { primaryColors } from '../../colors/primary';
+import { sharedRadius } from '../../shared';
 import components from './components';
 import media from './modules/media';
 import volume from './modules/volume';
@@ -17,7 +18,7 @@ export default {
     background: opt(primaryColors.crust),
     opacity: opt(100),
     cards: opt(primaryColors.base),
-    card_radius: opt('0.4em'),
+    card_radius: opt(sharedRadius),
     enableShadow: opt(false),
     shadow: opt('0px 0px 3px 1px #16161e'),
     shadowMargins: opt('5px 5px'),

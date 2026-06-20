@@ -64,7 +64,9 @@ export const Controls = ({ connecting, accessPoint }: ControlsProps): JSX.Elemen
 
     return (
         <box
+            className="network-row-controls"
             valign={Gtk.Align.START}
+            halign={Gtk.Align.END}
             setup={(self) => {
                 self.connect('unrealize', () => {
                     if (!isDestroying) {

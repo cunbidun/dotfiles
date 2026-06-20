@@ -1,58 +1,58 @@
-$menu-panel-outer-margin: 0.65em;
+@import './tokens';
 
 .menu-slider {
     trough {
-        border-radius: $bar-menus-slider-progress-radius;
-        background: $surface0;
+        border-radius: $menu-radius-pill;
+        background: $menu-control-track;
 
         highlight,
         progress {
-            background: $peach;
-            border-radius: $bar-menus-slider-progress-radius;
+            background: $menu-control-fill;
+            border-radius: $menu-radius-pill;
         }
     }
 
     slider {
-        box-shadow: none;
-        background-color: transparent;
+        box-shadow: $menu-control-thumb-shadow;
+        background-color: $menu-control-thumb;
         min-height: 0.6rem;
         min-width: 0.6rem;
         border: 0rem solid transparent;
-        border-radius: $bar-menus-slider-slider-radius;
+        border-radius: $menu-radius-pill;
     }
 
     &:hover {
         trough {
-            background: $surface0;
+            background: $menu-control-track-hover;
         }
 
         slider {
-            background: $overlay0;
-            box-shadow: none;
+            background: $menu-control-thumb-hover;
+            box-shadow: $menu-control-thumb-shadow;
         }
     }
 }
 
 .menu-switch {
-    font-size: 1.3em;
-    background-color: $surface0;
+    font-size: $menu-icon-font-size;
+    background-color: transparentize($menu-control-thumb-hover, 0.86);
     border-radius: $bar-menus-switch-radius;
 
     &:checked {
-        background: $sky;
+        background: $menu-control-fill-strong;
     }
 
     trough {
         highlight,
         progress {
-            background-color: $peach;
+            background-color: transparent;
             border-radius: $bar-menus-switch-radius;
         }
     }
 
     slider {
         box-shadow: none;
-        background-color: $overlay0;
+        background-color: $menu-control-thumb;
         min-height: 1em;
         min-width: 1em;
         border: 0em solid transparent;
@@ -62,50 +62,51 @@ $menu-panel-outer-margin: 0.65em;
 
     &:hover {
         trough {
-            background: $surface0;
+            background: $menu-control-track-soft-hover;
         }
 
         slider {
-            background: $overlay0;
+            background: $menu-control-thumb-hover;
             box-shadow: none;
         }
     }
 
     &:active {
-        background-color: $sky;
+        background-color: $menu-control-fill-strong;
     }
 }
 
 .menu-separator {
     min-height: 0.1rem;
     margin: 0.6rem 0rem;
-    background: $surface1;
+    background: $menu-divider-subtle;
 }
 
 .menu-items {
-    background: $crust;
-    border: $bar-menus-border-size solid $bar-menus-border-color;
-    border-radius: $bar-menus-border-radius;
-    color: $text;
+    background: transparentize($dash-base, 0.35);
+    border: 1px solid
+        transparentize(if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-dashboard-border-color), 0.5);
+    border-radius: $menu-panel-radius;
+    color: $dash-text;
 }
 
 .menu-items-container {
-    border-radius: 0.4em;
-    font-size: 1.3em;
+    border-radius: $menu-panel-radius;
+    font-size: $menu-content-font-size;
 }
 
 .menu-section-container {
     margin: 0.75em 0em;
 
     .menu-label {
-        color: $text;
-        font-size: 1.1em;
-        font-weight: bold;
+        color: $dash-text;
+        font-size: $menu-label-font-size;
+        font-weight: $menu-font-weight-strong;
     }
 
     .menu-label-container {
-        background: $base;
-        border-radius: $bar-menus-card_radius;
+        background: $dash-chunk;
+        border-radius: $dash-r-lg;
         border-bottom-left-radius: 0em;
         border-bottom-right-radius: 0em;
         margin: 0em $menu-panel-outer-margin;
@@ -125,8 +126,8 @@ $menu-panel-outer-margin: 0.65em;
     }
 
     .menu-items-section {
-        background: $base;
-        border-radius: $bar-menus-card_radius;
+        background: $dash-chunk;
+        border-radius: $dash-r-lg;
         border-top-left-radius: 0em;
         border-top-right-radius: 0em;
         padding: 0.9em;
@@ -135,8 +136,8 @@ $menu-panel-outer-margin: 0.65em;
 }
 
 .menu-active {
-    font-size: 0.9em;
-    font-weight: bold;
+    font-size: $menu-caption-font-size;
+    font-weight: $menu-font-weight-strong;
     margin: 0rem $menu-panel-outer-margin;
     margin-bottom: 0.9em;
 }
@@ -152,8 +153,8 @@ $menu-panel-outer-margin: 0.65em;
     margin-bottom: -0.2em;
 
     .menu-active-icon {
-        font-size: 1.4em;
-        font-weight: bold;
+        font-size: $menu-icon-font-size;
+        font-weight: $menu-font-weight-strong;
     }
 
     &.muted image {
@@ -166,9 +167,9 @@ $menu-panel-outer-margin: 0.65em;
 }
 
 .menu-active-percentage {
-    font-size: 0.9em;
+    font-size: $menu-caption-font-size;
     min-width: 2.5em;
-    font-weight: bold;
+    font-weight: $menu-font-weight-strong;
 }
 
 .menu-active-slider {
@@ -186,21 +187,21 @@ $menu-panel-outer-margin: 0.65em;
 }
 
 .menu-label-dim {
-    color: $overlay0;
+    color: $dash-subtext;
     margin-right: 1rem;
-    font-size: 1em;
-    font-weight: bold;
+    font-size: $menu-label-font-size;
+    font-weight: $menu-font-weight-strong;
 }
 
 .menu-icon-button {
     &:hover {
-        color: $surface2;
+        color: $dash-subtext;
     }
 }
 
 .menu-dropdown-label-container {
-    background: $base;
-    border-radius: 0.4em;
+    background: $dash-chunk;
+    border-radius: $dash-r-md;
 }
 
 .menu-button {
@@ -208,15 +209,15 @@ $menu-panel-outer-margin: 0.65em;
 }
 
 .menu-button-name {
-    font-size: 0.95em;
-    font-weight: bold;
+    font-size: $menu-caption-font-size;
+    font-weight: $menu-font-weight-strong;
     margin-left: 0.5em;
     margin-right: 1.2rem;
 }
 
 .menu-button-icon {
-    font-size: 1.3em;
-    font-weight: bold;
+    font-size: $menu-icon-font-size;
+    font-weight: $menu-font-weight-strong;
     margin-right: 0.5rem;
 }
 
@@ -234,9 +235,118 @@ $menu-panel-outer-margin: 0.65em;
     box-shadow: if($bar-menus-enableShadow, $bar-menus-shadow, 0 0 0 0);
 }
 
+.mac-popover-container {
+    min-width: $menu-panel-width;
+    border-radius: $menu-panel-radius;
+}
+
+.mac-popover-stack {
+    min-width: $menu-panel-width;
+}
+
+.mac-popover-page {
+    min-width: $menu-panel-width;
+    padding: 0.55em $menu-panel-outer-margin;
+}
+
+.mac-popover-header {
+    min-height: 2.1em;
+    margin-bottom: 0.35em;
+}
+
+.mac-popover-back-button {
+    min-width: 2em;
+    min-height: 2em;
+    margin-right: 0.25em;
+    border-radius: $bar-menus-buttons-radius;
+    color: $dash-subtext;
+
+    label {
+        font-size: 1.4em;
+    }
+
+    &:hover {
+        background: $dash-chunk-hover;
+        color: $dash-text;
+    }
+}
+
+.mac-popover-title {
+    color: $dash-text;
+    font-size: 1.05em;
+    font-weight: $menu-font-weight-strong;
+}
+
+.mac-popover-row-group {
+    margin-top: 0.55em;
+}
+
+.mac-popover-row {
+    min-height: 2.55em;
+    border-radius: $bar-menus-buttons-radius;
+    color: $dash-text;
+
+    &:not(:last-child) {
+        margin-bottom: 0.2em;
+    }
+
+    &:hover,
+    &:focus {
+        background: $dash-chunk-hover;
+    }
+
+    &:active {
+        background: $dash-chunk-active;
+    }
+}
+
+.mac-popover-row-content {
+    padding: 0.35em 0.5em;
+}
+
+.mac-popover-row-icon {
+    min-width: 1.6em;
+    margin-right: 0.45em;
+    color: $dash-text;
+    font-size: 1.05em;
+}
+
+.mac-popover-row-title {
+    color: $dash-text;
+    font-size: 0.92em;
+    font-weight: $menu-font-weight-strong;
+}
+
+.mac-popover-row-subtitle {
+    color: $dash-subtext;
+    font-size: 0.78em;
+    margin-top: 0.05em;
+}
+
+.mac-popover-row-chevron {
+    color: $dash-subtext;
+    font-size: 1.2em;
+    margin-left: 0.45em;
+}
+
+.mac-popover-child-content {
+    border-radius: $bar-menus-card_radius;
+}
+
+.mac-popover-body-back-zone {
+    min-height: 1em;
+    margin-top: 0.35em;
+    border-radius: $bar-menus-buttons-radius;
+    background: transparent;
+
+    &:hover {
+        background: transparentize($dash-text, 0.94);
+    }
+}
+
 .menu-label {
     margin: 0.5em $menu-panel-outer-margin;
-    color: $sky;
+    color: $dash-text;
 }
 
 .event-box-container {

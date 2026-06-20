@@ -2,6 +2,7 @@ import { opt } from 'src/lib/options';
 import { primaryColors } from '../../../colors/primary';
 import { secondaryColors } from '../../../colors/secondary';
 import { tertiaryColors } from '../../../colors/tertiary';
+import { sharedRadius } from '../../../shared';
 
 export default {
     scaling: opt(100),
@@ -18,7 +19,7 @@ export default {
     profile: {
         name: opt(primaryColors.pink),
         size: opt('8.5em'),
-        radius: opt('0.4em'),
+        radius: opt(sharedRadius),
     },
     powermenu: {
         shutdown: opt(primaryColors.red),

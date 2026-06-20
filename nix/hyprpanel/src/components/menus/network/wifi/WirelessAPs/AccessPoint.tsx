@@ -63,7 +63,7 @@ export const AccessPoint = ({ connecting, accessPoint }: AccessPointProps): JSX.
                     valign={Gtk.Align.CENTER}
                     halign={Gtk.Align.START}
                     truncate
-                    wrap
+                    tooltipText={accessPoint.ssid ?? ''}
                     label={accessPoint.ssid ?? ''}
                 />
                 <revealer revealChild={bind(showStatusVar)}>
@@ -94,8 +94,10 @@ export const AccessPoint = ({ connecting, accessPoint }: AccessPointProps): JSX.
                     }
                 });
             }}
+            halign={Gtk.Align.FILL}
+            hexpand
         >
-            <box hexpand>
+            <box halign={Gtk.Align.FILL} hexpand>
                 <ConnectionIcon />
                 <ConnectionAccessPoint />
                 <revealer halign={Gtk.Align.END} valign={Gtk.Align.CENTER} revealChild={bind(showSpinnerVar)}>

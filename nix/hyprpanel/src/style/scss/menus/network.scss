@@ -2,18 +2,126 @@
     font-size: $font-size * $bar-menus-menu-network-scaling * 0.01;
 }
 
-@import './menu.scss';
+@import './tokens';
 
 .menu-items.network {
-    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-network-background-color);
+    background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-network-background-color), 0.35);
     border-color: if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-network-border-color);
     opacity: $bar-menus-opacity * 0.01;
     font-size: $font-size * $bar-menus-menu-network-scaling * 0.01;
 }
 
 .menu-items-container.network {
-    min-width: 18em * $bar-menus-menu-network-scaling * 0.01;
-    font-size: 1.3em;
+    min-width: $menu-panel-width * $bar-menus-menu-network-scaling * 0.01;
+    font-size: $menu-content-font-size;
+
+    &.mac-popover-container,
+    .mac-popover-stack,
+    .mac-popover-page {
+        min-width: $menu-panel-width * $bar-menus-menu-network-scaling * 0.01;
+    }
+
+    .wifi-quick-page {
+        padding: 0.7em $menu-panel-outer-margin 0.75em $menu-panel-outer-margin;
+    }
+
+    .wifi-quick-header {
+        min-height: 2.3em;
+        margin-bottom: 0.55em;
+    }
+
+    .wifi-quick-title {
+        font-size: 1.12em;
+    }
+
+    .wifi-quick-section {
+        margin-bottom: 0.45em;
+    }
+
+    .wifi-quick-section-title {
+        color: $dash-subtext;
+        font-size: 0.82em;
+        font-weight: $menu-font-weight-strong;
+        margin: 0.15em 0.3em 0.3em 0.3em;
+    }
+
+    .wifi-quick-list {
+        background: $dash-chunk;
+        border-radius: $bar-menus-card_radius;
+        padding: 0.25em;
+    }
+
+    .wifi-quick-network-row {
+        min-height: 2.8em;
+        border-radius: $bar-menus-buttons-radius;
+        color: $dash-text;
+        margin-right: 0em;
+
+        &:not(:last-child) {
+            margin-bottom: 0.12em;
+        }
+
+        &:hover,
+        &:focus {
+            background: $dash-chunk-hover;
+        }
+
+        &:active,
+        &.connected {
+            background: $dash-chunk-active;
+        }
+    }
+
+    .wifi-quick-network-content {
+        padding: 0.3em 0.5em;
+    }
+
+    .wifi-quick-network-icon {
+        min-width: 1.5em;
+        margin-right: 0.55em;
+        color: if($bar-menus-monochrome, $bar-menus-icons-passive, $bar-menus-menu-network-icons-passive);
+        font-size: 1.05em;
+
+        &.active {
+            color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-network-icons-active);
+        }
+    }
+
+    .wifi-quick-network-name {
+        color: $dash-text;
+        font-size: 0.96em;
+        font-weight: $menu-font-weight-strong;
+    }
+
+    .wifi-quick-network-lock {
+        margin-left: 0.45em;
+        color: $dash-subtext;
+        font-size: 0.92em;
+    }
+
+    .wifi-quick-empty {
+        color: $dash-subtext;
+        font-size: 0.9em;
+        padding: 0.9em 0.75em;
+    }
+
+    .wifi-settings-link {
+        background: $dash-chunk;
+        margin-right: 0em;
+
+        &:not(:last-child) {
+            margin-bottom: 0.4em;
+        }
+
+        &:hover,
+        &:focus {
+            background: $dash-chunk-hover;
+        }
+
+        &:active {
+            background: $dash-chunk-active;
+        }
+    }
 
     .menu-items-section {
         padding-bottom: 1.5em;
@@ -24,8 +132,8 @@
     }
 
     .network-icon {
-        font-size: 1.3em;
-        min-width: 1em;
+        font-size: $menu-icon-font-size;
+        min-width: 1.05em;
         min-height: 1em;
         color: if($bar-menus-monochrome, $bar-menus-icons-passive, $bar-menus-menu-network-icons-passive);
 
@@ -37,8 +145,8 @@
     // Wi-Fi AP rows render as txt-icon labels; give them extra left bearing space
     // so glyphs like 󰤯/󰤨 are not clipped at the container edge.
     .network-icon.wifi {
-        min-width: 1.25em;
-        padding-left: 0.12em;
+        min-width: 1.15em;
+        padding-left: 0.08em;
     }
 
     .menu-icon-button.network {
@@ -46,7 +154,8 @@
     }
 
     .connection-container {
-        margin-left: 1em;
+        margin-left: 0.62em;
+        min-width: 0;
     }
 
     .connection-status.dim {
@@ -59,13 +168,16 @@
         margin-top: 0.65em;
 
         .menu-items-section {
-            min-height: 12em;
+            // Same list height as the bluetooth menu so the panels match.
+            min-height: $menu-list-min-height;
         }
     }
 
     .network-element-item {
+        min-width: 0;
+
         &:not(:last-child) {
-            margin-bottom: 0.5em;
+            margin-bottom: 0.42em;
         }
 
         &.staging {
@@ -89,6 +201,7 @@
 
         .active-connection {
             color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-network-text);
+            font-size: 0.96em;
         }
 
         .active-connection.dim {
@@ -104,7 +217,7 @@
     .network-password-input-container {
         background: darken(if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-network-card-color), 5%);
         color: if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-network-text);
-        border-radius: 0.4em;
+        border-radius: $bar-menus-card_radius;
         margin: 0em 2em;
         margin-top: 0.75em;
         padding: 0.5em;
@@ -131,13 +244,13 @@
         color: if($bar-menus-monochrome, $bar-menus-iconbuttons-passive, $bar-menus-menu-network-iconbuttons-passive);
         margin: 0em;
         margin-top: -0.2em;
-        margin-left: 1em;
-        min-width: 1.75em;
+        margin-left: 0.35em;
+        min-width: 1.45em;
         min-height: 1.75em;
         padding: 0em 0.16em;
 
         label {
-            font-size: 1.4em;
+            font-size: $menu-icon-font-size;
         }
 
         .delete-network {
@@ -156,11 +269,11 @@
     }
 
     .menu-label-container {
-        background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-network-card-color);
+        background: $dash-chunk;
     }
 
     .menu-items-section {
-        background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-network-card-color);
+        background: $dash-chunk;
     }
 
     .menu-switch.network {
@@ -198,7 +311,7 @@
     }
 
     .menu-scroller.wap {
-        min-height: 16em;
+        min-height: $menu-list-min-height;
 
         scrollbar contents trough slider {
             background: $bar-menus-menu-network-scroller-color;
@@ -206,6 +319,11 @@
     }
 
     .network-element-controls-container {
-        margin-right: 0.7em;
+        margin-right: 0.1em;
+    }
+
+    .network-row-controls {
+        min-width: 3.35em;
+        margin-left: 0.3em;
     }
 }

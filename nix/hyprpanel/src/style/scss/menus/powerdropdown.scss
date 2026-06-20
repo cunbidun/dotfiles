@@ -2,10 +2,10 @@
   font-size: $font-size * $bar-menus-menu-power-scaling * 0.01;
 }
 
-@import "./menu.scss";
+@import "./tokens";
 
 .menu-items.power-dropdown {
-  background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-power-background-color);
+  background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-power-background-color), 0.35);
   border-color: if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-power-border-color);
   opacity: $bar-menus-opacity * 0.01;
   font-size: $font-size * $bar-menus-menu-power-scaling * 0.01;
@@ -25,7 +25,7 @@
   }
 
   min-height: 3.5em * $bar-menus-menu-power-scaling * 0.01;
-  font-size: 1.3em;
+  font-size: $menu-content-font-size;
   margin: 1em;
 
   .menu-items-section {

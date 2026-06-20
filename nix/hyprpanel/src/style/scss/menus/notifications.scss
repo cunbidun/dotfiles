@@ -6,7 +6,7 @@
     margin: 0em;
     min-width: 30.6em * $bar-menus-menu-notifications-scaling * 0.01;
     min-height: $bar-menus-menu-notifications-height * $bar-menus-menu-notifications-scaling * 0.01;
-    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-notifications-background);
+    background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-notifications-background), 0.35);
     border: $bar-menus-border-size solid
         if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-notifications-border);
     border-radius: $bar-menus-border-radius;
@@ -31,13 +31,14 @@
     }
 
     .notification-card.menu {
-        background: $notification-background;
+        background: mix(#ffffff, if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-notifications-card), 6%);
         min-width: 0em;
         min-height: 0em;
         font-size: $font-size * $bar-menus-menu-notifications-scaling * 0.01;
-        border: 0.15em solid $notification-border;
-        border-radius: $notification-border_radius;
+        border: 1px solid transparentize(#ffffff, 0.88);
+        border-radius: $bar-menus-buttons-radius;
         margin: 0em;
+        padding: 0.1em 0em;
     }
 
     .notification-card-content-container {
@@ -50,8 +51,43 @@
         }
     }
 
+    .notification-card-image-container {
+        margin: 0.55em 0.25em 0.55em 0.7em;
+    }
+
+    .notification-card-image {
+        min-width: 2.15em;
+        min-height: 2.15em;
+        padding: 0.25em;
+        border-radius: $bar-menus-buttons-radius;
+
+        &.icon {
+            font-size: 1.55em;
+            min-width: 1.35em;
+            min-height: 1.35em;
+        }
+    }
+
     .notification-card-content {
-        margin-bottom: 0.25em;
+        min-width: 0em;
+        padding: 0.52em 0.5em 0.48em 0.45em;
+        margin-right: 0em;
+        margin-bottom: 0em;
+
+        &.noimg {
+            margin-left: 0.55em;
+            margin-top: 0em;
+        }
+    }
+
+    .notification-card-header {
+        min-width: 0em;
+    }
+
+    .notification-icon-slot {
+        min-width: 1.05em;
+        min-height: 1.05em;
+        margin-right: 0.32em;
     }
 
     .menu-label.notifications {
@@ -158,18 +194,68 @@
     }
 
     .notification-card-header-label {
-        font-size: 0.95em;
+        color: transparentize(#ffffff, 0.06);
+        font-size: 0.92em;
+        font-weight: 700;
+        margin-bottom: 0.08em;
     }
 
     .notification-card-body-label {
+        color: transparentize(#ffffff, 0.18);
         font-size: 0.84em;
+        margin-bottom: 0.24em;
     }
+
     .notification-icon {
-        font-size: 1.3em;
+        color: transparentize(#ffffff, 0.42);
+        font-size: 0.88em;
+        min-width: 0.9em;
     }
 
     .notification-time {
-        font-size: 0.85em;
+        color: transparentize(#ffffff, 0.36);
+        font-size: 0.74em;
+        margin-left: 0.55em;
+        min-width: 4.6em;
+    }
+
+    .notification-card-actions {
+        margin-top: 0.12em;
+        margin-bottom: 0.02em;
+    }
+
+    .notification-action-buttons {
+        background: transparentize(#ffffff, 0.9);
+        border-radius: $bar-menus-buttons-radius;
+        min-height: 1.7em;
+        padding: 0em 0.55em;
+
+        &:hover {
+            background: transparentize(#ffffff, 0.82);
+        }
+    }
+
+    .notification-action-buttons-label {
+        color: transparentize(#ffffff, 0.08);
+        font-size: 0.82em;
+        font-weight: 700;
+    }
+
+    .close-notification-button {
+        background: transparent;
+        color: transparentize(#ffffff, 0.34);
+        min-width: 1.45em * $bar-menus-menu-notifications-scaling * 0.01;
+        border-radius: $bar-menus-buttons-radius;
+        margin: 0.45em 0.35em 0.45em 0em;
+
+        label {
+            font-size: 0.95em * $bar-menus-menu-notifications-scaling * 0.01;
+        }
+
+        &:hover {
+            background: transparentize(#ffffff, 0.9);
+            color: transparentize(#ffffff, 0.08);
+        }
     }
 }
 
@@ -177,30 +263,35 @@
     margin-bottom: 2.5em;
 
     label {
-        color: if($bar-menus-monochrome, $bar-menus-feinttext, $bar-menus-menu-notifications-no_notifications_label);
+        color: transparentize(#ffffff, 0.22);
     }
 
     .bell {
-        font-size: 4.8em * $bar-menus-menu-notifications-scaling * 0.01;
+        color: transparentize(#ffffff, 0.34);
+        font-size: 4.4em * $bar-menus-menu-notifications-scaling * 0.01;
     }
 
     .message {
+        color: transparentize(#ffffff, 0.18);
         font-size: 1.05em * $bar-menus-menu-notifications-scaling * 0.01;
+        font-weight: 600;
     }
 }
 
 .close-notification-button.menu {
-    background: $notification-close_button-background;
-    color: $notification-close_button-label;
-    min-width: 2.1em * $bar-menus-menu-notifications-scaling * 0.01;
-    border-radius: 0rem $notification-border_radius $notification-border_radius 0em;
+    background: transparent;
+    color: transparentize(#ffffff, 0.34);
+    min-width: 1.45em * $bar-menus-menu-notifications-scaling * 0.01;
+    border-radius: $bar-menus-buttons-radius;
+    margin: 0.45em 0.35em 0.45em 0em;
 
     label {
-        font-size: 1.5em * $bar-menus-menu-notifications-scaling * 0.01;
+        font-size: 0.95em * $bar-menus-menu-notifications-scaling * 0.01;
     }
 
     &:hover {
-        background: transparentize($notification-close_button-background, 0.5);
+        background: transparentize(#ffffff, 0.9);
+        color: transparentize(#ffffff, 0.08);
     }
 }
 

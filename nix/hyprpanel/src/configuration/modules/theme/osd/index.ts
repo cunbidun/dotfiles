@@ -3,6 +3,7 @@ import { OSDOrientation, OSDAnchor } from 'src/lib/options/types';
 import { primaryColors } from '../colors/primary';
 import { secondaryColors } from '../colors/secondary';
 import { tertiaryColors } from '../colors/tertiary';
+import { sharedRadius } from '../shared';
 
 export default {
     scaling: opt(100),
@@ -23,7 +24,7 @@ export default {
     label: opt(tertiaryColors.lavender),
     monitor: opt(0),
     active_monitor: opt(true),
-    radius: opt('0.4em'),
+    radius: opt(sharedRadius),
     margins: opt('7px 7px 7px 7px'),
     enableShadow: opt(false),
     shadow: opt('0px 0px 3px 2px #16161e'),

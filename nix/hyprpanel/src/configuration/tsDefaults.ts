@@ -109,6 +109,9 @@ const tsDefaults: Record<string, unknown> = {
         },
     },
     theme: {
+        shared: {
+            radius: '0.4em',
+        },
         bar: {
             transparent: false,
             floating: false,
@@ -118,7 +121,6 @@ const tsDefaults: Record<string, unknown> = {
                 width: '0em',
             },
             buttons: {
-                radius: '0em',
                 padding_x: '0.6rem',
                 padding_y: '0em',
                 y_margins: '0.1em',
@@ -128,7 +130,6 @@ const tsDefaults: Record<string, unknown> = {
                 },
                 workspaces: {
                     enableBorder: false,
-                    numbered_active_highlight_border: '0em',
                     numbered_active_highlight_padding: '0.4em',
                     numbered_inactive_padding: '0.4em',
                     fontSize: '1em',
@@ -146,58 +147,23 @@ const tsDefaults: Record<string, unknown> = {
                 },
             },
             menus: {
-                card_radius: '0em',
                 border: {
-                    radius: '0em',
                     size: '0em',
-                },
-                popover: {
-                    radius: '0em',
-                },
-                tooltip: {
-                    radius: '0em',
-                },
-                scroller: {
-                    radius: '0em',
-                },
-                slider: {
-                    slider_radius: '0rem',
-                    progress_radius: '0rem',
-                },
-                progressbar: {
-                    radius: '0rem',
-                },
-                buttons: {
-                    radius: '0em',
-                },
-                switch: {
-                    radius: '0em',
-                    slider_radius: '0em',
-                },
-                menu: {
-                    dashboard: {
-                        profile: {
-                            radius: '0em',
-                        },
-                    },
                 },
             },
         },
         font: {
             name: 'SFMono Nerd Font',
-            label: 'SFMono Nerd Font Medium',
+            label: 'SFMono Nerd Font',
             size: '13px',
             weight: '400',
             style: 'normal',
         },
-        notification: {
-            border_radius: '0em',
-        },
+        notification: {},
         osd: {
             orientation: 'horizontal',
             location: 'top right',
             margins: '0.8em 12em 0 0',
-            radius: '0em',
         },
     },
 };

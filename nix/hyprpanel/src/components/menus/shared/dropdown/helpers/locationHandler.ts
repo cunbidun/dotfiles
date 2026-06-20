@@ -106,7 +106,7 @@ function calculateHorizontalMargins(
     dropdownWidth: number,
     anchorX: number,
 ): HorizontalMargins {
-    const minimumSpacing = 0;
+    const minimumSpacing = 12;
 
     let rightMarginSpacing = monitorWidth - dropdownWidth / 2;
     rightMarginSpacing -= anchorX;

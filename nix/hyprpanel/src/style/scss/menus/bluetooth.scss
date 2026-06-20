@@ -2,26 +2,115 @@
     font-size: $font-size * $bar-menus-menu-bluetooth-scaling * 0.01;
 }
 
-@import './menu.scss';
+@import './tokens';
 
 .menu-items.bluetooth {
-    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-bluetooth-background-color);
+    background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-bluetooth-background-color), 0.35);
     border-color: if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-bluetooth-border-color);
     opacity: $bar-menus-opacity * 0.01;
     font-size: $font-size * $bar-menus-menu-bluetooth-scaling * 0.01;
 }
 
 .menu-items-container.bluetooth {
-    min-width: 18em * $bar-menus-menu-bluetooth-scaling * 0.01;
+    min-width: $menu-panel-width * $bar-menus-menu-bluetooth-scaling * 0.01;
 
-    font-size: 1.3em;
+    font-size: $menu-content-font-size;
+
+    &.mac-popover-container,
+    .mac-popover-stack,
+    .mac-popover-page {
+        min-width: $menu-panel-width * $bar-menus-menu-bluetooth-scaling * 0.01;
+    }
+
+    .bluetooth-quick-page {
+        padding: 0.7em $menu-panel-outer-margin 0.75em $menu-panel-outer-margin;
+    }
+
+    .bluetooth-quick-header {
+        min-height: 2.3em;
+        margin-bottom: 0.55em;
+    }
+
+    .bluetooth-quick-title {
+        font-size: 1.12em;
+    }
+
+    .bluetooth-quick-list {
+        background: $dash-chunk;
+        border-radius: $bar-menus-card_radius;
+        padding: 0.25em;
+        margin-bottom: 0.45em;
+    }
+
+    .bluetooth-quick-device-row {
+        min-height: 3em;
+        border-radius: $bar-menus-buttons-radius;
+        color: $dash-text;
+        margin-right: 0em;
+
+        &:not(:last-child) {
+            margin-bottom: 0.12em;
+        }
+
+        &:hover,
+        &:focus {
+            background: $dash-chunk-hover;
+        }
+
+        &:active,
+        &.connected {
+            background: $dash-chunk-active;
+        }
+    }
+
+    .bluetooth-quick-device-content {
+        padding: 0.35em 0.5em;
+    }
+
+    .bluetooth-quick-device-icon {
+        min-width: 1.85em;
+        min-height: 1.85em;
+        border-radius: 999px;
+        margin-right: 0.62em;
+        background: transparentize($dash-text, 0.9);
+        color: $dash-subtext;
+        font-size: 1.05em;
+
+        &.active {
+            background: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-bluetooth-icons-active);
+            color: if($bar-menus-monochrome, $dash-base, #ffffff);
+        }
+    }
+
+    .bluetooth-quick-device-name {
+        color: $dash-text;
+        font-size: 0.96em;
+        font-weight: $menu-font-weight-strong;
+    }
+
+    .bluetooth-quick-device-status {
+        color: $dash-subtext;
+        font-size: 0.8em;
+        margin-top: 0.06em;
+    }
+
+    .bluetooth-quick-empty {
+        color: $dash-subtext;
+        font-size: 0.9em;
+        padding: 1em 0.75em;
+    }
+
+    .bluetooth-settings-link {
+        background: $dash-chunk;
+        margin-right: 0em;
+    }
 
     .menu-section-container {
         margin: 1em 0em;
     }
 
     .menu-label-container {
-        background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-bluetooth-card-color);
+        background: $dash-chunk;
 
         .menu-label {
             color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-bluetooth-label-color);
@@ -33,8 +122,10 @@
     }
 
     .menu-items-section {
-        background: if($bar-menus-monochrome, $bar-menus-cards, $bar-menus-menu-bluetooth-card-color);
-        min-height: 20em * $bar-menus-menu-bluetooth-scaling * 0.01;
+        background: $dash-chunk;
+        // Match the network menu's list height so Wi-Fi/Bluetooth panels are
+        // the same size.
+        min-height: $menu-list-min-height * $bar-menus-menu-bluetooth-scaling * 0.01;
         font-size: 1em;
     }
 
@@ -114,7 +205,7 @@
         }
 
         .menu-button-icon {
-            font-size: 1.5em;
+            font-size: $menu-icon-font-size;
             color: if($bar-menus-monochrome, $bar-menus-icons-passive, $bar-menus-menu-bluetooth-icons-passive);
 
             &.active {
@@ -200,7 +291,7 @@
     }
 
     .menu-scroller.bluetooth {
-        min-height: 18em;
+        min-height: $menu-list-min-height;
 
         scrollbar contents trough slider {
             background: $bar-menus-menu-bluetooth-scroller-color;

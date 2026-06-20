@@ -11,8 +11,8 @@ export const Body = ({ notification }: BodyProps): JSX.Element => {
                 className={'notification-card-body-label'}
                 halign={Gtk.Align.START}
                 label={escapeMarkup(body)}
-                maxWidthChars={!notifHasImg(notification) ? 35 : 28}
-                lines={2}
+                maxWidthChars={!notifHasImg(notification) ? 58 : 48}
+                lines={3}
                 truncate
                 wrap
                 justify={Gtk.Justification.LEFT}

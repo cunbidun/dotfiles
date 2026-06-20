@@ -56,7 +56,7 @@ export const WirelessAPs = (): JSX.Element => {
                     <box className={'available-waps-list'} vertical>
                         {bind(filteredWAPs).as((aps) =>
                             aps.map((ap: AstalNetwork.AccessPoint) => (
-                                <box className={'network-element-item'}>
+                                <box className={'network-element-item'} halign={Gtk.Align.FILL} hexpand>
                                     <AccessPoint
                                         connecting={networkService.wifi.connecting}
                                         accessPoint={ap}

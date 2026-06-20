@@ -14,6 +14,11 @@ import { GtkWidget } from '../../types';
  * @param event - The click event containing position information
  * @param window - The name of the menu window to open
  */
+// Anchor coordinates of the dashboard menu, captured when it is opened. Reused
+// so that sub-menus launched from inside the dashboard (e.g. Wi-Fi, Bluetooth)
+// appear in the exact same spot instead of under the clicked tile.
+let dashboardAnchorCoords: number[] | null = null;
+
 export const openDropdownMenu = async (
     clicked: GtkWidget,
     event: Gdk.Event,
@@ -28,6 +33,10 @@ export const openDropdownMenu = async (
         const adjustedXCoord = clickPos[1] + middleOffset;
         const coords = [adjustedXCoord, clickPos[2]];
 
+        if (window === 'dashboardmenu') {
+            dashboardAnchorCoords = coords;
+        }
+
         await calculateMenuPosition(coords, window);
 
         closeAllMenus();
@@ -40,6 +49,33 @@ export const openDropdownMenu = async (
         }
 
         // Fallback: still open the requested menu even if precise positioning fails.
+        closeAllMenus();
+        App.toggle_window(window);
+    }
+};
+
+/**
+ * Opens a sub-menu (e.g. networkmenu, bluetoothmenu) anchored at the same
+ * position the dashboard was opened at, so it visually replaces the dashboard
+ * in place. Falls back to a plain toggle if the dashboard anchor is unknown.
+ *
+ * @param window - The name of the menu window to open
+ */
+export const openDashboardSubMenu = async (window: string): Promise<void> => {
+    try {
+        if (dashboardAnchorCoords) {
+            await calculateMenuPosition(dashboardAnchorCoords, window);
+        }
+
+        closeAllMenus();
+        App.toggle_window(window);
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(`Error opening dashboard sub-menu: ${error.stack}`);
+        } else {
+            console.error(`Unknown error occurred: ${error}`);
+        }
+
         closeAllMenus();
         App.toggle_window(window);
     }

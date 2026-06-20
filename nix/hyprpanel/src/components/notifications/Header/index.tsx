@@ -22,7 +22,7 @@ const NotificationIcon = ({ notification }: HeaderProps): JSX.Element => {
 
     return (
         <box className={'notification-card-header'} halign={Gtk.Align.START}>
-            <box css={'min-width: 2rem; min-height: 2rem; '}>
+            <box className={'notification-icon-slot'}>
                 <icon
                     className={'notification-icon'}
                     icon={getNotificationIcon(appName, appIcon, desktopEntry)}
@@ -42,10 +42,10 @@ const SummaryLabel = ({ notification }: HeaderProps): JSX.Element => {
                 halign={Gtk.Align.START}
                 onRealize={(self) => self.set_markup(escapeMarkup(summary))}
                 label={escapeMarkup(summary)}
-                maxWidthChars={!notifHasImg(notification) ? 42 : 30}
+                maxWidthChars={!notifHasImg(notification) ? 54 : 42}
                 hexpand
                 vexpand
-                lines={2}
+                lines={1}
                 wrap
             />
         </box>

@@ -1,6 +1,7 @@
 import { opt } from 'src/lib/options';
 import { BarButtonStyles } from 'src/lib/options/types';
 import { primaryColors } from '../../colors/primary';
+import { sharedRadius } from '../../shared';
 import dashboard from './dashboard';
 import workspaces from './workspaces';
 import windowtitle from './windowtitle';
@@ -40,7 +41,7 @@ export default {
     padding_x: opt('0.7rem'),
     padding_y: opt('0.2rem'),
     y_margins: opt('0.4em'),
-    radius: opt('0.3em'),
+    radius: opt(sharedRadius),
     innerRadiusMultiplier: opt('0.4'),
     opacity: opt(100),
     background_opacity: opt(100),

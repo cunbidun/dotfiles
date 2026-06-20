@@ -4,7 +4,7 @@ import AstalBluetooth from 'gi://AstalBluetooth?version=0.1';
 import AstalMpris from 'gi://AstalMpris?version=0.1';
 import AstalNetwork from 'gi://AstalNetwork?version=0.1';
 import AstalWp from 'gi://AstalWp?version=0.1';
-import { openDropdownMenu } from 'src/components/bar/utils/menu';
+import { openDashboardSubMenu } from 'src/components/bar/utils/menu';
 import options from 'src/configuration';
 import icons from 'src/lib/icons/icons';
 import { isPrimaryClick } from 'src/lib/events/mouse';
@@ -67,9 +67,9 @@ export const WifiButton = (): JSX.Element => {
             className={bind(isWifiEnabled).as(
                 (isEnabled) => `dashboard-control-tile wifi ${!isEnabled ? 'disabled' : ''}`,
             )}
-            onButtonPressEvent={(clicked, event) => {
+            onButtonPressEvent={(_, event) => {
                 if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
-                void openDropdownMenu(clicked, event, 'networkmenu');
+                void openDashboardSubMenu('networkmenu');
             }}
             hexpand
         >
@@ -106,9 +106,9 @@ export const BluetoothButton = (): JSX.Element => {
             className={bind(bluetoothService, 'isPowered').as(
                 (isEnabled) => `dashboard-control-tile bluetooth ${!isEnabled ? 'disabled' : ''}`,
             )}
-            onButtonPressEvent={(clicked, event) => {
+            onButtonPressEvent={(_, event) => {
                 if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
-                void openDropdownMenu(clicked, event, 'bluetoothmenu');
+                void openDashboardSubMenu('bluetoothmenu');
             }}
             hexpand
         >
@@ -160,9 +160,9 @@ export const AudioControllerCard = (): JSX.Element => {
         <box className={'dashboard-control-audio-card'} hexpand vertical>
             <button
                 className={'dashboard-control-audio-header'}
-                onButtonPressEvent={(clicked, event) => {
+                onButtonPressEvent={(_, event) => {
                     if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
-                    void openDropdownMenu(clicked, event, 'mediamenu');
+                    void openDashboardSubMenu('mediamenu');
                 }}
             >
                 <box className={'dashboard-control-audio-header-content'} hexpand>

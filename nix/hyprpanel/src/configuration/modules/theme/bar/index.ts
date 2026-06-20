@@ -3,6 +3,7 @@ import { BarLocation, WindowLayer, BorderLocation } from 'src/lib/options/types'
 import buttons from './buttons';
 import menus from './menus';
 import { primaryColors } from '../colors/primary';
+import { sharedRadius } from '../shared';
 
 export default {
     scaling: opt(100),
@@ -16,7 +17,7 @@ export default {
     shadowMargins: opt('0px 0px 4px 0px'),
     margin_bottom: opt('0em'),
     margin_sides: opt('0.5em'),
-    border_radius: opt('0.4em'),
+    border_radius: opt(sharedRadius),
     outer_spacing: opt('1.6em'),
     label_spacing: opt('0.5em'),
     transparent: opt(false),

@@ -2,6 +2,7 @@ import { opt } from 'src/lib/options';
 import { primaryColors } from '../../../colors/primary';
 import { secondaryColors } from '../../../colors/secondary';
 import { tertiaryColors } from '../../../colors/tertiary';
+import { sharedRadius } from '../../../shared';
 
 export default {
     scaling: opt(100),
@@ -27,6 +28,6 @@ export default {
     scrollbar: {
         color: opt(primaryColors.lavender),
         width: opt('0.35em'),
-        radius: opt('0.2em'),
+        radius: opt(sharedRadius),
     },
 };

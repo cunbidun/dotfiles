@@ -5,6 +5,6 @@
     border: 0.2rem solid $surface0;
     background-color: $base;
     color: $primary_fg;
-    border-radius: 0.5rem;
+    border-radius: $shared-radius;
     padding: 1.5rem;
 }

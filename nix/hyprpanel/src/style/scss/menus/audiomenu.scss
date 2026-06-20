@@ -1,13 +1,46 @@
+@import './tokens';
+
 .menu-items.audio {
-    background: if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-volume-background-color);
+    background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-volume-background-color), 0.35);
     border-color: if($bar-menus-monochrome, $bar-menus-border-color, $bar-menus-menu-volume-border-color);
     opacity: $bar-menus-opacity * 0.01;
 }
 
 .menu-items-container.audio {
-    min-width: 18em * $bar-menus-menu-volume-scaling * 0.01;
+    min-width: $menu-panel-width * $bar-menus-menu-volume-scaling * 0.01;
 
-    @import './menu.scss';
+    &.mac-popover-container,
+    .mac-popover-stack,
+    .mac-popover-page {
+        min-width: $menu-panel-width * $bar-menus-menu-volume-scaling * 0.01;
+    }
+
+    .audio-title {
+        margin: 0.2em $menu-panel-outer-margin 0.35em $menu-panel-outer-margin;
+    }
+
+    .audio-main {
+        padding: 0.25em 0em 0.55em 0em;
+    }
+
+    .mac-popover-row-group {
+        margin-left: $menu-panel-outer-margin;
+        margin-right: $menu-panel-outer-margin;
+    }
+
+    .mac-popover-child-page {
+        min-height: 12em * $bar-menus-menu-volume-scaling * 0.01;
+    }
+
+    .mac-popover-child-content {
+        .menu-items-section {
+            margin: 0em;
+        }
+
+        .menu-container {
+            padding: 0.15em 0em;
+        }
+    }
 
     * {
         font-size: $font-size * $bar-menus-menu-volume-scaling * 0.01;

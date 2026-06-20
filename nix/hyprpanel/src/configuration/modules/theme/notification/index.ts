@@ -2,6 +2,7 @@ import { opt } from 'src/lib/options';
 import { primaryColors } from '../colors/primary';
 import { secondaryColors } from '../colors/secondary';
 import { tertiaryColors } from '../colors/tertiary';
+import { sharedRadius } from '../shared';
 
 export default {
     scaling: opt(100),
@@ -13,7 +14,7 @@ export default {
     },
     label: opt(primaryColors.lavender),
     border: opt(secondaryColors.surface0),
-    border_radius: opt('0.6em'),
+    border_radius: opt(sharedRadius),
     enableShadow: opt(false),
     shadow: opt('0px 1px 2px 1px #16161e'),
     shadowMargins: opt('4px 4px'),
