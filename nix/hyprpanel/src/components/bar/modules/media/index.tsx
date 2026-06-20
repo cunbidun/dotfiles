@@ -29,8 +29,6 @@ Variable.derive([bind(show_active_only), bind(mprisService, 'players')], (showAc
 });
 
 const Media = (): BarBoxChild => {
-    activePlayer.set(mprisService.get_players()[0]);
-
     const songIcon = Variable('');
 
     const mediaLabel = Variable.derive(

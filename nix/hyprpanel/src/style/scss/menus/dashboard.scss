@@ -335,7 +335,6 @@
             .dashboard-control-audio-header {
                 background: transparent;
                 padding: 0em;
-                min-height: 5.15em;
                 border-radius: $dash-r-md * 0.75;
             }
 
@@ -376,8 +375,6 @@
 
                     &.visible {
                         margin-right: 0.72em;
-                        min-height: 5.15em;
-                        min-width: 5.15em;
                     }
 
                     &.hidden {

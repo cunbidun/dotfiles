@@ -230,14 +230,28 @@ const dashboardMediaArtCss = bind(mediaArtUrl).as((artUrl) => {
     return `background-image: url("${escapedArtUrl}");`;
 });
 
+const syncDashboardMediaArtSize = (widget: Gtk.Widget): void => {
+    const parentHeight = widget.get_parent()?.get_allocated_height() ?? 0;
+    const hasArt = mediaArtUrl.get().trim().length > 0;
+    const size = hasArt ? parentHeight : 0;
+
+    widget.set_size_request(size, size);
+};
+
+const setupDashboardMediaArtSize = (widget: Gtk.Widget): void => {
+    widget.connect('size-allocate', () => syncDashboardMediaArtSize(widget));
+};
+
 export const AudioControllerCard = (): JSX.Element => {
     return (
         <box className={'dashboard-control-audio-card'} vertical>
-            <box className={'dashboard-control-audio-header'}>
-                <box className={'dashboard-control-audio-header-content'}>
+            <box className={'dashboard-control-audio-header'} vexpand>
+                <box className={'dashboard-control-audio-header-content'} valign={Gtk.Align.FILL} vexpand>
                     <box
                         className={bind(mediaArtUrl).as((artUrl) => `dashboard-control-audio-art ${artUrl.trim().length > 0 ? 'visible' : 'hidden'}`)}
                         css={dashboardMediaArtCss}
+                        setup={setupDashboardMediaArtSize}
+                        valign={Gtk.Align.FILL}
                     />
                     <box className={'dashboard-control-audio-copy'} hexpand vertical>
                         <label
@@ -258,7 +272,6 @@ export const AudioControllerCard = (): JSX.Element => {
                 </box>
             </box>
 
-            <box vexpand />
             <box className={'dashboard-control-audio-controls'} homogeneous>
                 <button
                     className={bind(canGoPrevious).as(

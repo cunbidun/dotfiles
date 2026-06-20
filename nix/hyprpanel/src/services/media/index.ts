@@ -35,6 +35,7 @@ export class MediaPlayerService {
     public mediaArtist: Variable<string> = Variable('-----');
     public mediaArtUrl: Variable<string> = Variable('');
     private _artCacheRequestId = 0;
+    private _playerSelectionSubscriptions = new Map<string, Variable<void>>();
 
     private _mprisService: AstalMpris.Mpris;
 
@@ -123,6 +124,8 @@ export class MediaPlayerService {
             this._handlePlayerAdded(player);
         }
 
+        this._selectBestPlayer();
+
         this._mprisService.connect('player-closed', (_, closedPlayer) =>
             this._handlePlayerClosed(closedPlayer),
         );
@@ -150,8 +153,37 @@ export class MediaPlayerService {
      * @param addedPlayer The player that was added
      */
     private _handlePlayerAdded(addedPlayer: AstalMpris.Player): void {
-        if (this.activePlayer.get() === undefined) {
-            this.activePlayer.set(addedPlayer);
+        this._trackPlayerSelection(addedPlayer);
+        this._selectBestPlayer();
+    }
+
+    private _trackPlayerSelection(player: AstalMpris.Player): void {
+        if (this._playerSelectionSubscriptions.has(player.busName)) {
+            return;
+        }
+
+        const subscription = Variable.derive([bind(player, 'playbackStatus')], () => {
+            this._selectBestPlayer();
+        });
+
+        this._playerSelectionSubscriptions.set(player.busName, subscription);
+    }
+
+    private _selectBestPlayer(): void {
+        const players = this._mprisService.get_players();
+
+        if (players.length === 0) {
+            this.activePlayer.set(undefined);
+            return;
+        }
+
+        const currentPlayer = this.activePlayer.get();
+        const playingPlayer = players.find((player) => player.playbackStatus === AstalMpris.PlaybackStatus.PLAYING);
+        const currentStillAvailable = players.find((player) => player.busName === currentPlayer?.busName);
+        const nextPlayer = playingPlayer ?? currentStillAvailable ?? players[0];
+
+        if (nextPlayer?.busName !== currentPlayer?.busName) {
+            this.activePlayer.set(nextPlayer);
         }
     }
 
@@ -164,6 +196,9 @@ export class MediaPlayerService {
      * @param closedPlayer The player that was closed
      */
     private _handlePlayerClosed(closedPlayer: AstalMpris.Player): void {
+        this._playerSelectionSubscriptions.get(closedPlayer.busName)?.drop();
+        this._playerSelectionSubscriptions.delete(closedPlayer.busName);
+
         if (
             this._mprisService.get_players().length === 1 &&
             closedPlayer.busName === this._mprisService.get_players()[0]?.busName
@@ -172,10 +207,7 @@ export class MediaPlayerService {
         }
 
         if (closedPlayer.busName === this.activePlayer.get()?.busName) {
-            const nextPlayer = this._mprisService
-                .get_players()
-                .find((player) => player.busName !== closedPlayer.busName);
-            this.activePlayer.set(nextPlayer);
+            this._selectBestPlayer();
         }
     }
 
@@ -552,6 +584,8 @@ export class MediaPlayerService {
      */
     public dispose(): void {
         Object.values(this._subscriptions).forEach((sub) => sub?.drop());
+        this._playerSelectionSubscriptions.forEach((subscription) => subscription.drop());
+        this._playerSelectionSubscriptions.clear();
 
         this.activePlayer.drop();
 
