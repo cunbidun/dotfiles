@@ -1,5 +1,5 @@
 import { generateMediaLabel } from './helpers/index.js';
-import { onPrimaryClick, onSecondaryClick, onMiddleClick, onScroll } from 'src/lib/shared/eventHandlers';
+import { onSecondaryClick, onMiddleClick, onScroll } from 'src/lib/shared/eventHandlers';
 import { bind, Variable } from 'astal';
 import { Astal } from 'astal/gtk3';
 import AstalMpris from 'gi://AstalMpris?version=0.1';
@@ -8,7 +8,6 @@ import { activePlayer, mediaTitle, mediaAlbum, mediaArtist } from 'src/services/
 import options from 'src/configuration';
 import { runAsyncCommand } from '../../utils/input/commandExecutor';
 import { throttledScrollHandler } from '../../utils/input/throttle';
-import { openDropdownMenu } from '../../utils/menu';
 
 const mprisService = AstalMpris.get_default();
 const {
@@ -101,12 +100,6 @@ const Media = (): BarBoxChild => {
                         disconnectFunctions = [];
 
                         const throttledHandler = throttledScrollHandler(options.bar.scrollSpeed.get());
-
-                        disconnectFunctions.push(
-                            onPrimaryClick(self, (clicked, event) => {
-                                openDropdownMenu(clicked, event, 'mediamenu');
-                            }),
-                        );
 
                         disconnectFunctions.push(
                             onSecondaryClick(self, (clicked, event) => {

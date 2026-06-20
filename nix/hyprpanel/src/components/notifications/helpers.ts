@@ -122,3 +122,58 @@ export const normalizeNotificationText = (text: string): string => {
     // Collapse excessive whitespace/newlines after tag removal.
     return withoutTags.replace(/\s+/g, ' ').trim();
 };
+
+const shapeNotificationMarkdown = (text: string): string => {
+    return normalizeNotificationText(text)
+        .replace(/\s+(\d+\.\s+)/g, '\n$1')
+        .replace(/\s+([-*]\s+)/g, '\n$1');
+};
+
+export const formatNotificationMarkdown = (text: string): string => {
+    const shapedText = shapeNotificationMarkdown(text);
+    const tokenPattern = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+    let cursor = 0;
+    let markup = '';
+
+    for (const match of shapedText.matchAll(tokenPattern)) {
+        const token = match[0];
+        const index = match.index ?? 0;
+
+        markup += escapeMarkup(shapedText.slice(cursor, index));
+
+        if (token.startsWith('`')) {
+            markup += `<tt>${escapeMarkup(token.slice(1, -1))}</tt>`;
+        } else if (token.startsWith('**')) {
+            markup += `<b>${escapeMarkup(token.slice(2, -2))}</b>`;
+        } else {
+            markup += `<i>${escapeMarkup(token.slice(1, -1))}</i>`;
+        }
+
+        cursor = index + token.length;
+    }
+
+    return markup + escapeMarkup(shapedText.slice(cursor));
+};
+
+export const shouldShowSummaryAsBody = (notification: AstalNotifd.Notification): boolean => {
+    const summary = normalizeNotificationText(notification.summary);
+    const body = normalizeNotificationText(notification.body);
+
+    return body.length === 0 && summary.length > 72;
+};
+
+export const getNotificationDisplaySummary = (notification: AstalNotifd.Notification): string => {
+    if (shouldShowSummaryAsBody(notification)) {
+        return notification.appName || 'Notification';
+    }
+
+    return normalizeNotificationText(notification.summary);
+};
+
+export const getNotificationDisplayBody = (notification: AstalNotifd.Notification): string => {
+    if (shouldShowSummaryAsBody(notification)) {
+        return normalizeNotificationText(notification.summary);
+    }
+
+    return normalizeNotificationText(notification.body);
+};

@@ -2,7 +2,7 @@ import AstalNotifd from 'gi://AstalNotifd?version=0.1';
 import options from 'src/configuration';
 import { GLib } from 'astal';
 import { Gtk } from 'astal/gtk3';
-import { notifHasImg, escapeMarkup, normalizeNotificationText } from '../helpers';
+import { notifHasImg, escapeMarkup, getNotificationDisplaySummary } from '../helpers';
 import { getNotificationIcon } from 'src/lib/shared/notifications';
 
 const { military } = options.menus.clock.time;
@@ -33,7 +33,7 @@ const NotificationIcon = ({ notification }: HeaderProps): JSX.Element => {
 };
 
 const SummaryLabel = ({ notification }: HeaderProps): JSX.Element => {
-    const summary = normalizeNotificationText(notification.summary);
+    const summary = getNotificationDisplaySummary(notification);
 
     return (
         <box className={'notification-card-header'} halign={Gtk.Align.START} valign={Gtk.Align.START} hexpand>

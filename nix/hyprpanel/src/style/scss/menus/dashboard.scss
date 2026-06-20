@@ -11,7 +11,7 @@
     // Match the satellite menus so the
     // dashboard and every sub-menu are the same width and, via the shared
     // center anchor, open in the exact same location.
-    min-width: $menu-panel-width;
+    min-width: 25.35em;
     // No min-height: it forced the panel taller than its content, and the
     // extra space pooled at the bottom (asymmetric bottom margin).
     background: transparentize(if($bar-menus-monochrome, $bar-menus-background, $bar-menus-menu-dashboard-background-color), 0.35);
@@ -240,6 +240,7 @@
         $control-tile-height: 3.55em;
         // Single-icon buttons; tune this one value if they look off.
         $control-chip-height: 3.55em;
+        $control-chip-width: $control-chip-height;
         $control-icon-width: 1.1em;
 
         // The controls section is a bare panel — the individual tiles are the
@@ -251,11 +252,21 @@
         }
 
         .dashboard-control-left-column {
+            min-width: ($control-chip-width * 2) + $control-gap;
+        }
+
+        .dashboard-control-main-row,
+        .dashboard-control-quick-row {
+            min-width: ($control-chip-width * 6) + ($control-gap * 5);
+        }
+
+        .dashboard-control-audio-frame {
+            min-width: ($control-chip-width * 4) + ($control-gap * 3);
         }
 
         .dashboard-control-quick-row {
             > button {
-                min-width: 0;
+                min-width: $control-chip-width;
                 min-height: $control-chip-height;
             }
         }
@@ -324,11 +335,13 @@
             .dashboard-control-audio-header {
                 background: transparent;
                 padding: 0em;
-                min-height: $control-tile-height;
+                min-height: 5.15em;
                 border-radius: $dash-r-md * 0.75;
             }
 
             .dashboard-control-audio-header-content {
+                min-width: 0em;
+
                 .dashboard-control-audio-icon {
                     color: $dash-text;
                     font-size: 1.16em;
@@ -338,10 +351,14 @@
                 }
 
                 .dashboard-control-audio-copy {
+                    min-width: 0em;
+                    padding-top: 0.05em;
+
                     .dashboard-control-audio-title {
                         color: $dash-text;
                         font-size: 0.9em;
                         font-weight: 700;
+                        min-width: 0em;
                     }
 
                     .dashboard-control-audio-subtitle {
@@ -350,10 +367,29 @@
                         margin-top: 0.06em;
                     }
                 }
+
+                .dashboard-control-audio-art {
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    border-radius: $dash-r-md * 0.65;
+
+                    &.visible {
+                        margin-right: 0.72em;
+                        min-height: 5.15em;
+                        min-width: 5.15em;
+                    }
+
+                    &.hidden {
+                        margin-right: 0em;
+                        min-height: 0em;
+                        min-width: 0em;
+                    }
+                }
             }
 
             .dashboard-control-audio-controls {
-                margin-top: 0.62em;
+                margin-top: 0.4em;
 
                 .dashboard-control-audio-control {
                     min-height: 2.2em;
@@ -383,8 +419,9 @@
         }
 
         .dashboard-control-chip {
+            min-width: $control-chip-width;
             min-height: $control-chip-height;
-            padding: 0.52em 0.65em;
+            padding: 0em;
             border-radius: $dash-r-md;
 
             .dashboard-control-chip-content {
@@ -394,6 +431,11 @@
                     min-width: 0;
                     margin-right: 0;
                     font-size: 1.1em;
+                }
+
+                icon {
+                    color: $dash-text;
+                    font-size: 1.05em;
                 }
 
                 label {
@@ -419,6 +461,14 @@
                 background: $dash-chunk;
             }
 
+            &.theme-toggle {
+                background: $dash-chunk;
+            }
+
+            &.placeholder {
+                background: $dash-chunk-disabled;
+            }
+
             &:hover {
                 &.recording {
                     background: $dash-chunk-hover;
@@ -433,6 +483,10 @@
                 }
 
                 &.colorpicker {
+                    background: $dash-chunk-hover;
+                }
+
+                &.theme-toggle {
                     background: $dash-chunk-hover;
                 }
 

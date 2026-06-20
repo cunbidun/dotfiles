@@ -1,5 +1,5 @@
 import AstalMpris from 'gi://AstalMpris?version=0.1';
-import { bind, Variable } from 'astal';
+import { bind, execAsync, GLib, Variable } from 'astal';
 import { getTimeStamp } from 'src/components/menus/media/components/timebar/helpers';
 import { CurrentPlayer, MediaSubscriptionNames, MediaSubscriptions } from './types';
 import options from 'src/configuration';
@@ -34,6 +34,7 @@ export class MediaPlayerService {
     public mediaAlbum: Variable<string> = Variable('-----');
     public mediaArtist: Variable<string> = Variable('-----');
     public mediaArtUrl: Variable<string> = Variable('');
+    private _artCacheRequestId = 0;
 
     private _mprisService: AstalMpris.Mpris;
 
@@ -50,6 +51,67 @@ export class MediaPlayerService {
         artist: undefined,
         artUrl: undefined,
     };
+
+    private _getPlayerArtUrl(player: AstalMpris.Player): string {
+        const mediaPlayer = player as AstalMpris.Player & {
+            coverArt?: string;
+            cover_art?: string;
+            artUrl?: string;
+            art_url?: string;
+        };
+
+        return mediaPlayer.coverArt || mediaPlayer.cover_art || mediaPlayer.artUrl || mediaPlayer.art_url || '';
+    }
+
+    private _hashString(value: string): string {
+        let hash = 0;
+
+        for (let i = 0; i < value.length; i += 1) {
+            hash = ((hash << 5) - hash + value.charCodeAt(i)) | 0;
+        }
+
+        return (hash >>> 0).toString(16);
+    }
+
+    private _setMediaArtUrl(player: AstalMpris.Player): void {
+        const artUrl = this._getPlayerArtUrl(player);
+        const requestId = (this._artCacheRequestId += 1);
+
+        if (artUrl.trim().length === 0) {
+            this.mediaArtUrl.set('');
+            return;
+        }
+
+        if (!artUrl.startsWith('http://') && !artUrl.startsWith('https://')) {
+            this.mediaArtUrl.set(artUrl);
+            return;
+        }
+
+        const cacheDir = `${GLib.get_user_cache_dir()}/hyprpanel/media-art`;
+        const cachePath = `${cacheDir}/${this._hashString(artUrl)}`;
+
+        void execAsync([
+            'bash',
+            '-lc',
+            'mkdir -p "$1" && if [ ! -s "$2" ]; then curl -L --fail --silent --show-error --max-time 10 --output "$2" "$3"; fi; printf "%s" "$2"',
+            'hyprpanel-media-art',
+            cacheDir,
+            cachePath,
+            artUrl,
+        ])
+            .then((cachedPath) => {
+                if (requestId === this._artCacheRequestId) {
+                    this.mediaArtUrl.set(cachedPath.trim());
+                }
+            })
+            .catch((error) => {
+                console.error('Failed to cache media artwork:', error);
+
+                if (requestId === this._artCacheRequestId) {
+                    this.mediaArtUrl.set('');
+                }
+            });
+    }
 
     private constructor() {
         this._mprisService = AstalMpris.get_default();
@@ -448,12 +510,12 @@ export class MediaPlayerService {
 
         this._subscriptions.artUrl = Variable.derive(
             [artUrlBinding, bind(player, 'playbackStatus')],
-            (newArtUrl) => {
-                this.mediaArtUrl.set(newArtUrl ?? '');
+            () => {
+                this._setMediaArtUrl(player);
             },
         );
 
-        this.mediaArtUrl.set(player.artUrl ?? '');
+        this._setMediaArtUrl(player);
     }
 
     /**

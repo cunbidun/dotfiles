@@ -92,11 +92,6 @@
           "darkFile": "icons/systray/dark/steam.svg",
           "size": "14px"
         },
-        "chrome_status_icon_.*": {
-          "lightFile": "icons/systray/light/onepassword.svg",
-          "darkFile": "icons/systray/dark/onepassword.svg",
-          "size": "14px"
-        },
         "Slack_status_icon_.*": {
           "lightFile": "icons/systray/light/slack.svg",
           "darkFile": "icons/systray/dark/slack.svg",

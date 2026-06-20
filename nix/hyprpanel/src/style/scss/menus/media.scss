@@ -10,7 +10,7 @@
     }
 
     min-width: 23em * $bar-menus-menu-media-scaling * 0.01;
-    min-height: 10em * $bar-menus-menu-media-scaling * 0.01;
+    min-height: 0em;
 
     &.mac-popover-container,
     .mac-popover-stack,
@@ -20,6 +20,14 @@
 
     .mac-popover-page.media-main {
         padding: 0em;
+    }
+
+    .media-empty-state {
+        min-height: 3.4em;
+    }
+
+    .media-empty-title {
+        color: if($bar-menus-monochrome, $bar-menus-label, $bar-menus-menu-media-song);
     }
 
     .media-drilldown-row {

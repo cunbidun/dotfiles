@@ -22,7 +22,6 @@ export const RevealerTransitionMap = {
 export const dropdownMenuList = [
     'dashboardmenu',
     'audiomenu',
-    'mediamenu',
     'networkmenu',
     'bluetoothmenu',
     'notificationsmenu',

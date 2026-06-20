@@ -16,7 +16,7 @@
         font-size: $font-size * $notification-scaling * 0.01;
     }
 
-    padding: 1px;
+    padding: 0.65em 0.85em 0.65em 0.65em;
 }
 
 .notification-card-image-container {
@@ -74,7 +74,8 @@
 
 .notification-action-buttons {
     color: $notification-actions-text;
-    background: $notification-actions-background;
+    background: mix($notification-actions-text, $notification-actions-background, 12%);
+    border: 1px solid transparentize($notification-actions-text, 0.82);
     min-width: 3.4em;
     min-height: 1.45em;
     border-radius: $notification-border_radius;
@@ -85,12 +86,13 @@
     }
 
     &:hover {
-        background: transparentize($notification-actions-background, 0.6);
+        background: mix($notification-actions-text, $notification-actions-background, 20%);
     }
 }
 
 .notification-action-buttons-label {
     color: $notification-actions-text;
+    font-weight: 700;
 }
 
 .notification-icon {

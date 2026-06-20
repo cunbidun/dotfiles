@@ -1,5 +1,7 @@
 import { bind, Variable } from 'astal';
+import { readFile } from 'astal/file';
 import { App, Gdk, Gtk } from 'astal/gtk3';
+import { GLib } from 'astal/gobject';
 import AstalBluetooth from 'gi://AstalBluetooth?version=0.1';
 import AstalMpris from 'gi://AstalMpris?version=0.1';
 import AstalNetwork from 'gi://AstalNetwork?version=0.1';
@@ -8,7 +10,7 @@ import { openDashboardSubMenu } from 'src/components/bar/utils/menu';
 import options from 'src/configuration';
 import icons from 'src/lib/icons/icons';
 import { isPrimaryClick } from 'src/lib/events/mouse';
-import { activePlayer, canGoNext, canGoPrevious, mediaArtist, mediaTitle, playbackStatus } from 'src/services/media';
+import { activePlayer, canGoNext, canGoPrevious, mediaArtist, mediaArtUrl, mediaTitle, playbackStatus } from 'src/services/media';
 import BrightnessService from 'src/services/system/brightness';
 import { BashPoller } from 'src/lib/poller/BashPoller';
 import { executeCommand, getRecordingPath, isRecording, isWifiEnabled } from './helpers';
@@ -28,6 +30,19 @@ export const CONTROL_GAP = 9;
 export const CONTROL_TILE = (CONTROL_CELL * 2) + CONTROL_GAP;
 const CONTROL_TITLE_MAX_CHARS = 12;
 const CONTROL_SUBTITLE_MAX_CHARS = 14;
+const DASHBOARD_MEDIA_TITLE_MAX_CHARS = 31;
+const DASHBOARD_MEDIA_TITLE_MAX_CHARS_WITH_ART = 20;
+const stylixThemeNamePath = `${GLib.get_home_dir()}/.local/state/stylix/current-theme-name.txt`;
+
+const getThemePolarity = (): 'light' | 'dark' => {
+    try {
+        return readFile(stylixThemeNamePath).trim().endsWith('-light') ? 'light' : 'dark';
+    } catch {
+        return 'dark';
+    }
+};
+
+const themePolarity = Variable(getThemePolarity());
 
 const wifiSubtitle = Variable.derive(
     [bind(isWifiEnabled), bind(networkService, 'state'), bind(networkService, 'connectivity')],
@@ -147,46 +162,103 @@ const audioPlaybackIcon = bind(playbackStatus).as((status) => {
     return icons.mpris.paused;
 });
 
-const audioSubtitle = Variable.derive([bind(mediaArtist), bind(audioService.defaultSpeaker, 'volume')], (artist, volume) => {
+const audioSubtitle = Variable.derive([bind(mediaArtist)], (artist) => {
     if (artist && artist.trim().length > 0 && artist !== '-----') {
         return artist;
     }
 
-    return `Volume ${Math.round(volume * 100)}%`;
+    return '';
+});
+
+const normalizeDashboardMediaTitle = (title: string): string => {
+    const normalizedTitle = title.trim();
+
+    if (
+        normalizedTitle.length === 0 ||
+        normalizedTitle === '-----' ||
+        normalizedTitle.toLowerCase().startsWith('no media currently')
+    ) {
+        return 'Not Playing';
+    }
+
+    return normalizedTitle;
+};
+
+const dashboardMediaTitleBase = Variable(normalizeDashboardMediaTitle(mediaTitle.get()));
+const dashboardMediaTitle = Variable(dashboardMediaTitleBase.get());
+const dashboardMediaTitleMaxChars = Variable.derive([bind(mediaArtUrl)], (artUrl) =>
+    artUrl.trim().length > 0 ? DASHBOARD_MEDIA_TITLE_MAX_CHARS_WITH_ART : DASHBOARD_MEDIA_TITLE_MAX_CHARS,
+);
+let dashboardMediaTitleOffset = 0;
+
+const updateDashboardMediaTitle = (): void => {
+    const title = dashboardMediaTitleBase.get();
+    const maxChars = dashboardMediaTitleMaxChars.get();
+
+    if (title.length <= maxChars) {
+        dashboardMediaTitle.set(title);
+        return;
+    }
+
+    const paddedTitle = `${title}   `;
+    const rotatedTitle = `${paddedTitle.slice(dashboardMediaTitleOffset)}${paddedTitle.slice(0, dashboardMediaTitleOffset)}`;
+
+    dashboardMediaTitle.set(rotatedTitle.slice(0, maxChars));
+    dashboardMediaTitleOffset = (dashboardMediaTitleOffset + 1) % paddedTitle.length;
+};
+
+Variable.derive([bind(mediaTitle)], (title) => {
+    dashboardMediaTitleBase.set(normalizeDashboardMediaTitle(title));
+    dashboardMediaTitleOffset = 0;
+    updateDashboardMediaTitle();
+});
+
+Variable.derive([bind(dashboardMediaTitleMaxChars)], () => {
+    dashboardMediaTitleOffset = 0;
+    updateDashboardMediaTitle();
+});
+
+setInterval(updateDashboardMediaTitle, 350);
+
+const dashboardMediaArtCss = bind(mediaArtUrl).as((artUrl) => {
+    if (artUrl.trim().length === 0) {
+        return '';
+    }
+
+    const escapedArtUrl = artUrl.replace(/"/g, '\\"');
+
+    return `background-image: url("${escapedArtUrl}");`;
 });
 
 export const AudioControllerCard = (): JSX.Element => {
     return (
-        <box className={'dashboard-control-audio-card'} hexpand vertical>
-            <button
-                className={'dashboard-control-audio-header'}
-                onButtonPressEvent={(_, event) => {
-                    if (event.get_button()[1] !== Gdk.BUTTON_PRIMARY) return;
-                    void openDashboardSubMenu('mediamenu');
-                }}
-            >
-                <box className={'dashboard-control-audio-header-content'} hexpand>
-                    <label
-                        className={'txt-icon dashboard-control-audio-icon'}
-                        label={bind(audioService.defaultSpeaker, 'mute').as((isMuted) => (isMuted ? '󰖁' : '󰕾'))}
+        <box className={'dashboard-control-audio-card'} vertical>
+            <box className={'dashboard-control-audio-header'}>
+                <box className={'dashboard-control-audio-header-content'}>
+                    <box
+                        className={bind(mediaArtUrl).as((artUrl) => `dashboard-control-audio-art ${artUrl.trim().length > 0 ? 'visible' : 'hidden'}`)}
+                        css={dashboardMediaArtCss}
                     />
                     <box className={'dashboard-control-audio-copy'} hexpand vertical>
                         <label
                             className={'dashboard-control-audio-title'}
                             halign={Gtk.Align.START}
-                            label={bind(mediaTitle).as((title) => (title && title.trim().length > 0 ? title : 'Audio'))}
+                            label={bind(dashboardMediaTitle)}
                             truncate
+                            maxWidthChars={bind(dashboardMediaTitleMaxChars)}
                         />
                         <label
                             className={'dashboard-control-audio-subtitle'}
                             halign={Gtk.Align.START}
                             label={bind(audioSubtitle)}
                             truncate
+                            maxWidthChars={bind(dashboardMediaTitleMaxChars)}
                         />
                     </box>
                 </box>
-            </button>
+            </box>
 
+            <box vexpand />
             <box className={'dashboard-control-audio-controls'} homogeneous>
                 <button
                     className={bind(canGoPrevious).as(
@@ -338,6 +410,38 @@ export const ColorPickerButton = (): JSX.Element => {
             <box className={'dashboard-control-chip-content'} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
                 <label className={'txt-icon'} label={bind(colorPickerShortcut.icon)} />
             </box>
+        </button>
+    );
+};
+
+export const ThemeToggleButton = (): JSX.Element => {
+    return (
+        <button
+            className={bind(themePolarity).as((polarity) => `dashboard-control-chip theme-toggle ${polarity}`)}
+            tooltipText={bind(themePolarity).as((polarity) => `Switch to ${polarity === 'dark' ? 'light' : 'dark'} mode`)}
+            onClick={(_, event) => {
+                if (!isPrimaryClick(event)) return;
+
+                const nextPolarity = themePolarity.get() === 'dark' ? 'light' : 'dark';
+                executeCommand(
+                    'current="$(darkman get 2>/dev/null || echo dark)"; ' +
+                        'if [ "$current" = dark ]; then themectl set-polarity light; else themectl set-polarity dark; fi',
+                );
+                themePolarity.set(nextPolarity);
+            }}
+            hexpand
+        >
+            <box className={'dashboard-control-chip-content'} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
+                <label className={'txt-icon'} label={bind(themePolarity).as((polarity) => (polarity === 'dark' ? '󰔎' : '󰖔'))} />
+            </box>
+        </button>
+    );
+};
+
+export const EmptyPlaceholderButton = (): JSX.Element => {
+    return (
+        <button className={'dashboard-control-chip placeholder'} sensitive={false} hexpand>
+            <box className={'dashboard-control-chip-content'} halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER} />
         </button>
     );
 };
