@@ -5,7 +5,7 @@
 Use this workflow whenever the user asks to refresh one or more flake inputs.
 Treat the steps below as instructions, not as the current state of the repo.
 
-1. Run `nix run .#flake-input-versions` from the repo root to generate the latest comparison table
+1. Run `nix run .#flake-input-versions -- show` from the repo root to generate the latest comparison table
    between pinned and upstream versions.
 2. Identify entries containing `->`; those inputs need an update unless the user specified otherwise.
 3. Update the requested inputs (`nix flake lock --update-input <name>` or `nix flake update`) and

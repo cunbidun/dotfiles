@@ -350,11 +350,11 @@ local function place_tree(ctx, targets, area, i, side)
   end
 
   if side == "v" then
-    targets[i]:place(ctx.split("top", area, nil, 0.5))
-    place_tree(ctx, targets, ctx.split("bottom", area, nil, 0.5), i + 1, "h")
+    targets[i]:place(ctx:split(area, "top", 0.5))
+    place_tree(ctx, targets, ctx:split(area, "bottom", 0.5), i + 1, "h")
   else
-    targets[i]:place(ctx.split("left", area, nil, 0.5))
-    place_tree(ctx, targets, ctx.split("right", area, nil, 0.5), i + 1, "v")
+    targets[i]:place(ctx:split(area, "left", 0.5))
+    place_tree(ctx, targets, ctx:split(area, "right", 0.5), i + 1, "v")
   end
 end
 
@@ -372,8 +372,8 @@ hl.layout.register("editor_side_tree", {
     end
 
     -- Main/editor is the first window, kept on the right 2/3.
-    local support_area = ctx.split("left", ctx.area, nil, 1.0 / 3.0)
-    local main_area    = ctx.split("right", ctx.area, nil, 2.0 / 3.0)
+    local support_area = ctx:split(ctx.area, "left", 1.0 / 3.0)
+    local main_area    = ctx:split(ctx.area, "right", 2.0 / 3.0)
 
     ctx.targets[1]:place(main_area)
 

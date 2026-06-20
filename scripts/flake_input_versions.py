@@ -12,7 +12,8 @@ Container images from nix/hosts/home-server/container-images.json are also
 included in the status table with digest and last-pushed date.
 
 Usage:
-    ./scripts/flake_input_versions.py [--flake PATH] [--no-color]
+    ./scripts/flake_input_versions.py show [--flake PATH] [--no-color]
+    ./scripts/flake_input_versions.py update [INPUT ...]
 """
 
 from __future__ import annotations
@@ -28,17 +29,6 @@ from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
 from urllib.error import URLError
 from urllib.request import Request, urlopen
-
-try:
-    from texttable import Texttable
-except ImportError as exc:  # pragma: no cover - dependency check
-    print(
-        "error: python module 'texttable' is required. "
-        "Install it or run via `nix run .#flake-input-versions`.",
-        file=sys.stderr,
-    )
-    raise SystemExit(1) from exc
-
 
 TAG_PATTERNS = (
     re.compile(r"^v?\d+(?:\.\d+)*(?:[-+._][0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$"),
@@ -406,6 +396,16 @@ def gather_versions(
 
 
 def format_table(rows: Tuple[InputVersion, ...]) -> str:
+    try:
+        from texttable import Texttable
+    except ImportError as exc:  # pragma: no cover - dependency check
+        print(
+            "error: python module 'texttable' is required. "
+            "Install it or run via `nix run .#flake-input-versions`.",
+            file=sys.stderr,
+        )
+        raise SystemExit(1) from exc
+
     table = Texttable(max_width=0)
     table.set_deco(Texttable.HEADER | Texttable.VLINES | Texttable.BORDER)
     table.set_cols_align(["l", "l", "l"])
@@ -805,7 +805,11 @@ def main() -> int:
     )
 
     args = parser.parse_args()
-    command = args.command or "show"
+    command = args.command
+
+    if command is None:
+        parser.print_help()
+        return 0
 
     if command == "show":
         flake_dir = resolve_flake_dir(args.flake)
