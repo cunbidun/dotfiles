@@ -15,12 +15,17 @@ const Padding = ({ name, opts }: PaddingProps): JSX.Element => (
     </eventbox>
 );
 
-const PopupRevealer = ({ name, child, transition }: PopupRevealerProps): JSX.Element => (
+const PopupRevealer = ({ name, child, reveal, transition }: PopupRevealerProps): JSX.Element => (
     <box css={'padding: 1px'}>
         <revealer
+            revealChild={reveal ?? false}
             transitionType={transition}
             transition_duration={200}
             setup={(self: Revealer) => {
+                if (reveal !== undefined) {
+                    return;
+                }
+
                 App.connect('window-toggled', (app) => {
                     self.revealChild = app.get_window(name)?.is_visible() ?? false;
                 });
@@ -31,13 +36,13 @@ const PopupRevealer = ({ name, child, transition }: PopupRevealerProps): JSX.Ele
     </box>
 );
 
-const Layout: LayoutFunction = (name, child, transition) => ({
+const Layout: LayoutFunction = (name, child, transition, reveal) => ({
     center: () => (
         <centerbox>
             <Padding name={name} />
             <centerbox vertical>
                 <Padding name={name} />
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
                 <Padding name={name} />
             </centerbox>
             <Padding name={name} />
@@ -47,7 +52,7 @@ const Layout: LayoutFunction = (name, child, transition) => ({
         <centerbox>
             <Padding name={name} />
             <box vertical>
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
                 <Padding name={name} />
             </box>
             <Padding name={name} />
@@ -57,7 +62,7 @@ const Layout: LayoutFunction = (name, child, transition) => ({
         <box>
             <Padding name={name} />
             <box hexpand={false} vertical>
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
                 <Padding name={name} />
             </box>
         </box>
@@ -67,7 +72,7 @@ const Layout: LayoutFunction = (name, child, transition) => ({
             <Padding name={name} />
             <box hexpand={false} vertical>
                 <Padding name={name} opts={{ vexpand: false, className: 'event-top-padding' }} />
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
                 <Padding name={name} />
             </box>
             <Padding name={name} />
@@ -76,7 +81,7 @@ const Layout: LayoutFunction = (name, child, transition) => ({
     'top-left': () => (
         <box>
             <box hexpand={false} vertical>
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
                 <Padding name={name} />
             </box>
             <Padding name={name} />
@@ -86,7 +91,7 @@ const Layout: LayoutFunction = (name, child, transition) => ({
         <box>
             <box hexpand={false} vertical>
                 <Padding name={name} />
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
             </box>
             <Padding name={name} />
         </box>
@@ -96,7 +101,7 @@ const Layout: LayoutFunction = (name, child, transition) => ({
             <Padding name={name} />
             <box hexpand={false} vertical>
                 <Padding name={name} />
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
             </box>
             <Padding name={name} />
         </box>
@@ -106,10 +111,11 @@ const Layout: LayoutFunction = (name, child, transition) => ({
             <Padding name={name} />
             <box hexpand={false} vertical>
                 <Padding name={name} />
-                <PopupRevealer name={name} child={child} transition={transition} />
+                <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />
             </box>
         </box>
     ),
+    none: () => <PopupRevealer name={name} child={child} reveal={reveal} transition={transition} />,
 });
 
 const isValidLayout = (layout: string): layout is Layouts => {
@@ -120,13 +126,14 @@ export default ({
     name,
     child = <box />,
     layout = 'center',
+    reveal,
     transition = Gtk.RevealerTransitionType.NONE,
     exclusivity = Astal.Exclusivity.IGNORE,
     ...props
 }: PopupWindowProps): JSX.Element => {
     const layoutFn = isValidLayout(layout) ? layout : 'center';
 
-    const layoutWidget = Layout(name, child, transition)[layoutFn]();
+    const layoutWidget = Layout(name, child, transition, reveal)[layoutFn]();
 
     return (
         <window

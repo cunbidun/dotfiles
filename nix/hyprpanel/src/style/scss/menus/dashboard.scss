@@ -363,15 +363,15 @@
                     color: $dash-text;
 
                     &.enabled {
-                        background: transparentize(#ffffff, 0.88);
+                        background: $dash-chunk-hover;
                     }
 
                     &.playpause {
-                        background: transparentize(#ffffff, 0.78);
+                        background: $dash-chunk-active;
                     }
 
                     &.disabled {
-                        background: transparentize(#ffffff, 0.95);
+                        background: $dash-chunk-disabled;
                         color: $dash-subtext;
                     }
                 }
@@ -469,27 +469,19 @@
             }
 
             .dashboard-control-slider-icon {
-                color: mix(
-                    #ffffff,
-                    $dash-text,
-                    78%
-                );
+                color: $dash-text;
                 font-size: 1.1em;
                 margin-right: 0.5em;
             }
 
             .dashboard-control-slider-title {
-                color: mix(
-                    #ffffff,
-                    $dash-text,
-                    82%
-                );
+                color: $dash-text;
                 font-size: 0.96em;
                 font-weight: 700;
             }
 
             .dashboard-control-slider-value {
-                color: mix(#ffffff, if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-dashboard-profile-name), 85%);
+                color: $dash-subtext;
                 font-size: 0.92em;
                 font-weight: 700;
             }
@@ -501,15 +493,12 @@
 
                 &:hover,
                 &.active {
-                    background: transparentize(#ffffff, 0.92);
+                    background: $dash-chunk-hover;
                 }
             }
 
             .dashboard-control-slider-disclosure {
-                color: transparentize(
-                    mix(#ffffff, if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-dashboard-profile-name), 85%),
-                    0.18
-                );
+                color: $dash-subtext;
                 font-size: 0.72em;
                 margin-left: 0.55em;
                 min-width: 1em;
@@ -547,7 +536,7 @@
             .dashboard-audio-output-selector {
                 margin-top: 0.7em;
                 padding-top: 0.55em;
-                border-top: 1px solid transparentize(#ffffff, 0.88);
+                border-top: 1px solid $menu-divider-subtle;
             }
 
             .dashboard-audio-output-header {
@@ -555,10 +544,7 @@
             }
 
             .dashboard-audio-output-title {
-                color: transparentize(
-                    mix(#ffffff, if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-dashboard-profile-name), 85%),
-                    0.22
-                );
+                color: $dash-subtext;
                 font-size: 0.78em;
                 font-weight: 700;
             }
@@ -570,11 +556,11 @@
                 background: transparent;
 
                 &:hover {
-                    background: transparentize(#ffffff, 0.9);
+                    background: $dash-chunk-hover;
                 }
 
                 &.active {
-                    background: transparentize(#ffffff, 0.86);
+                    background: $dash-chunk-active;
                 }
             }
 
@@ -590,7 +576,7 @@
             }
 
             .dashboard-audio-output-name {
-                color: mix(#ffffff, if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-dashboard-profile-name), 86%);
+                color: $dash-text;
                 font-size: 0.8em;
                 font-weight: 600;
             }
@@ -603,10 +589,7 @@
             }
 
             .dashboard-audio-output-empty {
-                color: transparentize(
-                    mix(#ffffff, if($bar-menus-monochrome, $bar-menus-text, $bar-menus-menu-dashboard-profile-name), 85%),
-                    0.35
-                );
+                color: $dash-subtext;
                 font-size: 0.8em;
                 padding: 0.35em 0.45em;
             }
@@ -693,11 +676,16 @@
         margin-top: 0em;
         margin-bottom: 0em;
         padding: 0.9em 1em;
+        color: $dash-text;
 
         .stat-row-btn {
             background: transparent;
             padding: 0;
             min-height: 1.7em;
+
+            &:hover {
+                background: $dash-chunk-hover;
+            }
 
             &.warn .stat-metric {
                 color: #f2cf64;
@@ -714,21 +702,50 @@
             margin-bottom: 0.18em;
 
             .stat-icon {
+                color: $dash-subtext;
                 min-width: 1.45em;
                 margin-right: 0.35em;
                 font-size: 1.08em;
             }
 
             .stat-title {
+                color: $dash-text;
                 font-size: 0.96em;
                 font-weight: 700;
                 margin-right: 0.2em;
             }
 
             .stat-metric {
+                color: $dash-subtext;
                 font-size: 0.92em;
                 margin-bottom: 0em;
                 font-family: $font-name;
+            }
+
+            &.cpu,
+            &.cputemp {
+                .stat-icon {
+                    color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-dashboard-monitors-cpu-icon);
+                }
+            }
+
+            &.ram {
+                .stat-icon {
+                    color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-dashboard-monitors-ram-icon);
+                }
+            }
+
+            &.gpu,
+            &.gputemp {
+                .stat-icon {
+                    color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-dashboard-monitors-gpu-icon);
+                }
+            }
+
+            &.storage {
+                .stat-icon {
+                    color: if($bar-menus-monochrome, $bar-menus-icons-active, $bar-menus-menu-dashboard-monitors-disk-icon);
+                }
             }
         }
     }

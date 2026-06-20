@@ -1,13 +1,13 @@
 import options from 'src/configuration';
 import { bind, Variable } from 'astal';
 import { trackActiveMonitor, trackAutoTimeout, trackPopupNotifications } from './helpers.js';
-import { Astal } from 'astal/gtk3';
+import { Astal, Gtk } from 'astal/gtk3';
 import AstalNotifd from 'gi://AstalNotifd?version=0.1';
 import AstalHyprland from 'gi://AstalHyprland?version=0.1';
 import { GdkMonitorService } from 'src/services/display/monitor/index.js';
 import { getPosition } from 'src/lib/window/positioning.js';
 import { NotificationCard } from './Notification';
-import { App } from 'astal/gtk3';
+import PopupWindow from 'src/components/menus/shared/popup/index.js';
 
 const hyprlandService = AstalHyprland.get_default();
 const { position, monitor, active_monitor, showActionsOnHover, displayedTotal } = options.notifications;
@@ -48,13 +48,15 @@ export default (): JSX.Element => {
             });
         },
     );
+    const notificationsVisible = bind(popupNotifications).as((notifications) => notifications.length > 0);
 
     return (
-        <window
+        <PopupWindow
             name={'notifications-window'}
-            namespace={'notifications-window'}
-            className={'notifications-window'}
-            application={App}
+            layout={'none'}
+            transition={Gtk.RevealerTransitionType.SLIDE_DOWN}
+            reveal={notificationsVisible}
+            visible={notificationsVisible}
             layer={windowLayer}
             anchor={windowAnchor}
             exclusivity={Astal.Exclusivity.NORMAL}
@@ -67,6 +69,6 @@ export default (): JSX.Element => {
             <box vertical hexpand className={'notification-card-container'}>
                 {notificationsBinding()}
             </box>
-        </window>
+        </PopupWindow>
     );
 };

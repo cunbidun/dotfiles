@@ -82,13 +82,41 @@
     },
     "systray": {
       "customIcons": {
+        "theme-manager": {
+          "lightFile": "icons/systray/light/theme-manager.svg",
+          "darkFile": "icons/systray/dark/theme-manager.svg",
+          "size": "14px"
+        },
+        "steam": {
+          "lightFile": "icons/systray/light/steam.svg",
+          "darkFile": "icons/systray/dark/steam.svg",
+          "size": "14px"
+        },
+        "chrome_status_icon_.*": {
+          "lightFile": "icons/systray/light/onepassword.svg",
+          "darkFile": "icons/systray/dark/onepassword.svg",
+          "size": "14px"
+        },
+        "Slack_status_icon_.*": {
+          "lightFile": "icons/systray/light/slack.svg",
+          "darkFile": "icons/systray/dark/slack.svg",
+          "size": "14px"
+        },
+        "Fcitx": {
+          "inputMethodLabels": {
+            "keyboard-us": "US",
+            "bamboo": "VN"
+          },
+          "defaultInputMethodLabel": "IM",
+          "size": "12px"
+        },
         "Claude_status_icon_.*": {
           "file": "icons/claude-tray.svg",
-          "size": "16px"
+          "size": "14px"
         },
         "Codex_status_icon_.*": {
           "file": "icons/codex-tray.svg",
-          "size": "16px"
+          "size": "14px"
         }
       }
     }

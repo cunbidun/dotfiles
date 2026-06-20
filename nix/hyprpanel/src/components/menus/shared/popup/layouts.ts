@@ -7,4 +7,5 @@ export const POPUP_LAYOUTS: string[] = [
     'bottom-left',
     'bottom-center',
     'bottom-right',
+    'none',
 ];

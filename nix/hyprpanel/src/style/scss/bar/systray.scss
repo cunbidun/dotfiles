@@ -3,10 +3,15 @@
 }
 
 .systray-icon {
-    font-size: 1.3em;
+    font-size: 1.1em;
 
     &.txt-icon {
         color: if($bar-buttons-monochrome, $bar-buttons-icon, $bar-buttons-systray-customIcon);
+    }
+
+    &.systray-input-method {
+        min-width: 2em;
+        font-weight: 700;
     }
 }
 

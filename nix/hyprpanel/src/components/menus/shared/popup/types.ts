@@ -10,12 +10,14 @@ export type Layouts =
     | 'top-left'
     | 'bottom-left'
     | 'bottom-center'
-    | 'bottom-right';
+    | 'bottom-right'
+    | 'none';
 
 export interface PopupWindowProps extends WindowProps {
     name: string;
     child?: JSX.Element;
     layout?: Layouts;
+    reveal?: boolean | Binding<boolean>;
     transition?: Gtk.RevealerTransitionType | Binding<Gtk.RevealerTransitionType>;
     exclusivity?: Astal.Exclusivity;
 }
@@ -24,6 +26,7 @@ export type LayoutFunction = (
     name: string,
     child: JSX.Element,
     transition: Gtk.RevealerTransitionType | Binding<Gtk.RevealerTransitionType>,
+    reveal?: boolean | Binding<boolean>,
 ) => {
     center: () => JSX.Element;
     top: () => JSX.Element;
@@ -33,6 +36,7 @@ export type LayoutFunction = (
     'bottom-left': () => JSX.Element;
     'bottom-center': () => JSX.Element;
     'bottom-right': () => JSX.Element;
+    none: () => JSX.Element;
 };
 
 type Opts = {
@@ -48,5 +52,6 @@ export type PaddingProps = {
 export type PopupRevealerProps = {
     name: string;
     child: JSX.Element;
+    reveal?: boolean | Binding<boolean>;
     transition: Gtk.RevealerTransitionType | Binding<Gtk.RevealerTransitionType>;
 };

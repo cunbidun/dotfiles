@@ -1,5 +1,7 @@
 import AstalTray from 'gi://AstalTray?version=0.1';
-import { bind, Gio, Variable } from 'astal';
+import { bind, exec, Gio, Variable } from 'astal';
+import { readFile } from 'astal/file';
+import { GLib } from 'astal/gobject';
 import { Gdk, Gtk } from 'astal/gtk3';
 import { BarBoxChild } from 'src/components/bar/types';
 import options from 'src/configuration';
@@ -8,6 +10,26 @@ import { SystemUtilities } from 'src/core/system/SystemUtilities';
 
 const systemtray = AstalTray.get_default();
 const { ignore, customIcons } = options.bar.systray;
+const stylixThemeNamePath = `${GLib.get_home_dir()}/.local/state/stylix/current-theme-name.txt`;
+
+const getThemePolarity = (): 'light' | 'dark' => {
+    try {
+        return readFile(stylixThemeNamePath).trim().endsWith('-light') ? 'light' : 'dark';
+    } catch {
+        return 'dark';
+    }
+};
+
+const getFcitxInputMethod = (): string => {
+    try {
+        const output = exec(
+            'bash -lc "gdbus call --session --dest org.fcitx.Fcitx5 --object-path /controller --method org.fcitx.Fcitx.Controller1.CurrentInputMethod 2>/dev/null || true"',
+        );
+        return output.match(/\('([^']+)'/)?.[1] ?? '';
+    } catch {
+        return '';
+    }
+};
 
 const createMenu = (menuModel: Gio.MenuModel, actionGroup: Gio.ActionGroup | null): Gtk.Menu => {
     const menu = Gtk.Menu.new_from_model(menuModel);
@@ -36,8 +58,28 @@ const MenuCustomFileIcon = ({ iconFile, iconSize, item }: MenuCustomFileIconProp
         <icon
             className={'systray-icon'}
             gicon={gicon}
-            css={iconSize ? `-gtk-icon-size: ${iconSize};` : ''}
+            css={iconSize ? `font-size: ${iconSize};` : ''}
             tooltipMarkup={bind(item, 'tooltipMarkup')}
+        />
+    );
+};
+
+const MenuFcitxInputMethodIcon = ({
+    defaultInputMethodLabel,
+    iconSize,
+    inputMethodLabels,
+    item,
+}: MenuFcitxInputMethodIconProps): JSX.Element => {
+    const inputMethodLabel = bind(item, 'gicon').as(
+        () => inputMethodLabels[getFcitxInputMethod()] ?? defaultInputMethodLabel,
+    );
+
+    return (
+        <label
+            className={'systray-icon systray-input-method txt-icon'}
+            label={inputMethodLabel}
+            css={`font-size: ${iconSize};`}
+            tooltipText={inputMethodLabel.as((label) => `Input method: ${label}`)}
         />
     );
 };
@@ -111,14 +153,26 @@ const SysTray = (): BarBoxChild => {
                 );
 
                 if (matchedCustomIcon !== undefined) {
-                    const iconLabel = custIcons[matchedCustomIcon].icon || '󰠫';
-                    const iconColor = custIcons[matchedCustomIcon].color;
-                    const iconSize = custIcons[matchedCustomIcon].size || '16px';
-                    const iconFile = custIcons[matchedCustomIcon].file;
+                    const customIcon = custIcons[matchedCustomIcon];
+                    const themeFile =
+                        getThemePolarity() === 'light' ? customIcon.lightFile : customIcon.darkFile;
+                    const iconLabel = customIcon.icon || '󰠫';
+                    const iconColor = customIcon.color;
+                    const iconSize = customIcon.size || '16px';
+                    const iconFile = themeFile || customIcon.file;
 
                     return (
                         <MenuEntry item={item}>
-                            {iconFile ? (
+                            {customIcon.inputMethodLabels ? (
+                                <MenuFcitxInputMethodIcon
+                                    defaultInputMethodLabel={
+                                        customIcon.defaultInputMethodLabel ?? iconLabel
+                                    }
+                                    iconSize={iconSize}
+                                    inputMethodLabels={customIcon.inputMethodLabels}
+                                    item={item}
+                                />
+                            ) : iconFile ? (
                                 <MenuCustomFileIcon iconFile={iconFile} iconSize={iconSize} item={item} />
                             ) : (
                                 <MenuCustomIcon
@@ -172,6 +226,13 @@ interface MenuCustomIconProps {
 interface MenuCustomFileIconProps {
     iconFile: string;
     iconSize: string;
+    item: AstalTray.TrayItem;
+}
+
+interface MenuFcitxInputMethodIconProps {
+    defaultInputMethodLabel: string;
+    iconSize: string;
+    inputMethodLabels: Record<string, string>;
     item: AstalTray.TrayItem;
 }
 

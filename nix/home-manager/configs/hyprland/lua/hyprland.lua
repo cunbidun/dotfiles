@@ -205,6 +205,17 @@ for _, rule in ipairs(windowRules) do
   hl.window_rule(rule)
 end
 
+local agsPopupLayerNamespaces = "^(dashboardmenu|audiomenu|mediamenu|networkmenu|bluetoothmenu|notificationsmenu|calendarmenu|energymenu|powerdropdownmenu|sshforwardingmenu|verification|notifications-window|osd.*)$"
+
+local layerRules = {
+  { match = { namespace = agsPopupLayerNamespaces }, blur = true },
+  { match = { namespace = agsPopupLayerNamespaces }, ignore_alpha = 0.2 },
+}
+
+for _, rule in ipairs(layerRules) do
+  hl.layer_rule(rule)
+end
+
 hl.bind("XF86AudioRaiseVolume", exec(nix.commands.increase_volume), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", exec(nix.commands.decrease_volume), { locked = true, repeating = true })
 hl.bind("XF86AudioMute", exec(nix.commands.toggle_volume), { locked = true, repeating = true })

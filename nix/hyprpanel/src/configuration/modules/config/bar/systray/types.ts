@@ -4,5 +4,9 @@ export type SystrayIconMap = {
         color?: string;
         size?: string;
         file?: string;
+        lightFile?: string;
+        darkFile?: string;
+        inputMethodLabels?: Record<string, string>;
+        defaultInputMethodLabel?: string;
     };
 };

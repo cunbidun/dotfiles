@@ -1,6 +1,6 @@
 .notification-card {
     color: $notification-text;
-    background: $notification-background;
+    background: transparentize($notification-background, 0.18);
     margin: 0.45em;
     border: 0.15em solid transparentize($notification-border, 0.5);
     min-width: 23em;
