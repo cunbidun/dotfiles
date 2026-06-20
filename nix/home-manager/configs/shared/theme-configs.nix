@@ -30,7 +30,7 @@
       wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
       vscodeTheme = "Light Modern";
       nvimTheme = "vscode_light";
-      hyprpanelTheme = "monochrome";
+      hyprpanelTheme = "default_light";
       vicinaeTheme = "vicinae-light";
       chromeExtension = null; # Default theme - no specific extension needed
     };
@@ -39,7 +39,7 @@
       wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
       vscodeTheme = "Dark Modern";
       nvimTheme = "vscode_dark";
-      hyprpanelTheme = "monochrome";
+      hyprpanelTheme = "default_dark";
       vicinaeTheme = "vicinae-dark";
       chromeExtension = null; # Default theme - no specific extension needed
     };
