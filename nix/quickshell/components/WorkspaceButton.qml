@@ -23,11 +23,13 @@ Rectangle {
         id: labelItem
 
         anchors.centerIn: parent
+        height: root.height
         text: root.label
         color: root.active ? root.theme.selectedForeground : root.theme.notSelectedForeground
         font.family: root.theme.fontFamily
         font.pixelSize: root.theme.fontSize
         font.weight: Font.Medium
+        verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
     }
 
@@ -35,7 +37,7 @@ Rectangle {
         id: hoverArea
 
         anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
+        cursorShape: Qt.ArrowCursor
         hoverEnabled: true
         onClicked: root.activate()
     }

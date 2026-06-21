@@ -93,51 +93,58 @@ Rectangle {
                 Row {
                     width: root.calendarGridWidth
                     height: root.calendarHeaderHeight
+                    spacing: 0
 
                     Text {
+                        id: monthLabel
+
+                        width: root.calendarGridWidth - prevChevron.width - nextChevron.width
+                        height: parent.height
+                        text: root.visibleMonth.toLocaleString(Qt.locale(), "MMMM yyyy")
+                        color: root.theme.popupText
+                        font.family: root.theme.fontFamily
+                        font.pixelSize: root.theme.fontSizeMedium
+                        font.bold: true
+                        horizontalAlignment: Text.AlignLeft
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    Text {
+                        id: prevChevron
+
                         text: "‹"
                         width: root.theme.calendarCellWidth
                         height: parent.height
                         color: root.theme.popupAccent
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize
+                        font.pixelSize: root.theme.fontSize * 1.7
+                        font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
                         MouseArea {
                             anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
+                            cursorShape: Qt.ArrowCursor
                             onClicked: root.shiftMonth(-1)
                         }
                     }
 
                     Text {
-                        id: monthLabel
+                        id: nextChevron
 
-                        width: root.calendarGridWidth - root.theme.calendarCellWidth * 2
-                        height: parent.height
-                        text: root.visibleMonth.toLocaleString(Qt.locale(), "MMM     yyyy")
-                        color: root.theme.popupAccent
-                        font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-
-                    Text {
                         text: "›"
                         width: root.theme.calendarCellWidth
                         height: parent.height
                         color: root.theme.popupAccent
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize
+                        font.pixelSize: root.theme.fontSize * 1.7
+                        font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
                         MouseArea {
                             anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
+                            cursorShape: Qt.ArrowCursor
                             onClicked: root.shiftMonth(1)
                         }
                     }
@@ -153,18 +160,18 @@ Rectangle {
                     columnSpacing: root.theme.gap
 
                     Repeater {
-                        model: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                        model: ["S", "M", "T", "W", "T", "F", "S"]
 
                         Text {
                             required property string modelData
-                            required property int index
 
                             width: root.theme.calendarCellWidth
                             height: root.weekdayHeight
                             text: modelData
-                            color: (index === 0 || index === 6) ? root.theme.calendarWeekendText : root.theme.popupMutedText
+                            color: root.theme.popupMutedText
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 0.9
+                            font.pixelSize: root.theme.fontSizeSmall
+                            font.bold: true
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -194,16 +201,17 @@ Rectangle {
                                 anchors.centerIn: parent
                                 width: Math.min(parent.width - root.theme.gap, parent.height - root.theme.gap)
                                 height: width
-                                radius: root.theme.popupSectionRadius
+                                radius: width / 2
                                 color: modelData.today ? root.theme.popupAccent : root.theme.transparentColor
 
                                 Text {
                                     anchors.centerIn: parent
                                     text: modelData.day
                                     color: root.calendarDayColor(modelData)
-                                    opacity: modelData.currentMonth || modelData.today ? 1 : 0.55
+                                    opacity: modelData.currentMonth || modelData.today ? 1 : 0.45
                                     font.family: root.theme.fontFamily
                                     font.pixelSize: root.theme.fontSize
+                                    font.bold: modelData.today
                                 }
                             }
                         }
@@ -240,17 +248,19 @@ Rectangle {
                         font.family: root.theme.fontFamily
                         font.pixelSize: root.theme.fontSize * 2
                         verticalAlignment: Text.AlignVCenter
+                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     Column {
                         width: parent.width - root.theme.calendarCellSize - statsColumn.width - parent.spacing * 2
                         spacing: root.theme.gap * 0.35
+                        anchors.verticalCenter: parent.verticalCenter
 
                         Text {
                             text: root.weatherData ? `${Math.round(root.currentTemp())}° ${root.theme.weatherMetric ? "C" : "F"}` : "Weather"
                             color: root.theme.popupText
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 1.4
+                            font.pixelSize: root.theme.fontSizeXLarge
                             font.bold: true
                         }
 
@@ -258,7 +268,7 @@ Rectangle {
                             text: root.weatherData ? root.weatherData.current.condition.text : root.weatherError
                             color: root.theme.popupMutedText
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 0.9
+                            font.pixelSize: root.theme.fontSizeSmall
                             elide: Text.ElideRight
                             width: parent.width
                         }
@@ -269,19 +279,20 @@ Rectangle {
 
                         spacing: root.theme.gap * 0.3
                         width: root.theme.weatherHourlyCellWidth * 1.2
+                        anchors.verticalCenter: parent.verticalCenter
 
                         Text {
                             text: root.weatherData ? `󰖝 ${Math.round(root.weatherData.current.wind_kph)} km/h` : ""
                             color: root.theme.popupText
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 0.85
+                            font.pixelSize: root.theme.fontSizeSmall
                         }
 
                         Text {
                             text: root.weatherData ? `󰖎 ${root.weatherData.current.humidity}%` : ""
                             color: root.theme.popupText
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 0.85
+                            font.pixelSize: root.theme.fontSizeSmall
                         }
                     }
                 }
@@ -310,7 +321,7 @@ Rectangle {
                                 text: modelData.time
                                 color: root.theme.popupText
                                 font.family: root.theme.fontFamily
-                                font.pixelSize: root.theme.fontSize * 0.82
+                                font.pixelSize: root.theme.fontSizeSmall
                                 font.bold: true
                                 horizontalAlignment: Text.AlignHCenter
                             }
@@ -329,7 +340,7 @@ Rectangle {
                                 text: `${Math.round(modelData.temp)}° ${root.theme.weatherMetric ? "C" : "F"}`
                                 color: root.theme.popupText
                                 font.family: root.theme.fontFamily
-                                font.pixelSize: root.theme.fontSize * 0.82
+                                font.pixelSize: root.theme.fontSizeSmall
                                 horizontalAlignment: Text.AlignHCenter
                             }
                         }
@@ -382,14 +393,14 @@ Rectangle {
 
     function calendarDayColor(cell) {
         if (cell.today) {
-            return root.theme.popupBackground;
+            return root.theme.selectedForeground;
         }
 
         if (!cell.currentMonth) {
             return root.theme.popupMutedText;
         }
 
-        return (cell.dayOfWeek === 0 || cell.dayOfWeek === 6) ? root.theme.calendarWeekendText : root.theme.popupText;
+        return root.theme.popupText;
     }
 
     function hourlyForecast() {

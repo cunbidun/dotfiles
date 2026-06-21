@@ -71,7 +71,7 @@ Item {
                             text: "󰒓"
                             color: root.theme.popupAccent
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 1.1
+                            font.pixelSize: root.theme.fontSizeMedium
                         }
 
                         Text {
@@ -81,40 +81,13 @@ Item {
                             color: root.theme.popupText
                             elide: Text.ElideRight
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 1.05
+                            font.pixelSize: root.theme.fontSizeMedium
                             font.bold: true
                         }
                     }
 
                     SettingsTabButton { theme: root.theme; width: parent.width; icon: "󰤨"; text: "Network"; active: root.currentTab === "network"; activate: () => root.currentTab = "network" }
                     SettingsTabButton { theme: root.theme; width: parent.width; icon: "󰂯"; text: "Bluetooth"; active: root.currentTab === "bluetooth"; activate: () => root.currentTab = "bluetooth" }
-                    Item { width: 1; height: 1 }
-
-                    Rectangle {
-                        width: parent.width
-                        height: root.theme.popupElementSize * 1.1
-                        radius: root.theme.popupSectionRadius
-                        color: closeHover.containsMouse ? root.theme.chipHoverBackground : root.theme.transparentColor
-
-                        Row {
-                            anchors.left: parent.left
-                            anchors.leftMargin: root.theme.gap
-                            anchors.verticalCenter: parent.verticalCenter
-                            spacing: root.theme.gap
-
-                            Text { text: "󰅖"; color: root.theme.popupText; font.family: root.theme.fontFamily; font.pixelSize: root.theme.fontSize }
-                            Text { text: "Close"; color: root.theme.popupText; font.family: root.theme.fontFamily; font.pixelSize: root.theme.fontSize * 0.9; font.bold: true }
-                        }
-
-                        MouseArea {
-                            id: closeHover
-
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            hoverEnabled: true
-                            onClicked: root.close()
-                        }
-                    }
                 }
             }
 
@@ -125,6 +98,7 @@ Item {
                 Flickable {
                     anchors.fill: parent
                     anchors.margins: root.theme.gap
+                    anchors.topMargin: root.theme.gap * 2 + root.theme.popupElementSize
                     clip: true
                     contentWidth: width
                     contentHeight: Math.max(height, contentLoader.item ? contentLoader.item.implicitHeight : height)
@@ -136,6 +110,36 @@ Item {
                     sourceComponent: root.currentTab === "bluetooth" ? bluetoothPage : networkPage
                     }
                 }
+            }
+        }
+
+        Rectangle {
+            id: closeButton
+
+            width: root.theme.popupElementSize
+            height: root.theme.popupElementSize
+            anchors.top: parent.top
+            anchors.topMargin: root.theme.gap
+            anchors.right: parent.right
+            anchors.rightMargin: root.theme.gap
+            radius: root.theme.popupSectionRadius
+            color: closeHover.containsMouse ? root.theme.chipHoverBackground : root.theme.popupSectionBackground
+
+            Text {
+                anchors.centerIn: parent
+                text: "󰅖"
+                color: root.theme.popupText
+                font.family: root.theme.fontFamily
+                font.pixelSize: root.theme.fontSize
+            }
+
+            MouseArea {
+                id: closeHover
+
+                anchors.fill: parent
+                cursorShape: Qt.ArrowCursor
+                hoverEnabled: true
+                onClicked: root.close()
             }
         }
     }
@@ -169,7 +173,7 @@ Item {
         property bool active: false
         property var activate: () => {}
 
-        height: theme.popupElementSize * 1.15
+        height: theme.compactRowHeight
         radius: theme.popupSectionRadius
         color: hover.containsMouse ? theme.chipHoverBackground : active ? theme.selectedBackground : theme.transparentColor
 
@@ -180,14 +184,14 @@ Item {
             spacing: theme.gap
 
             Text { text: tabButton.icon; color: tabButton.active ? theme.selectedForeground : theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
-            Text { text: tabButton.text; color: tabButton.active ? theme.selectedForeground : theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.9; font.bold: true }
+            Text { text: tabButton.text; color: tabButton.active ? theme.selectedForeground : theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true }
         }
 
         MouseArea {
             id: hover
 
             anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
+            cursorShape: Qt.ArrowCursor
             hoverEnabled: true
             onClicked: tabButton.activate()
         }

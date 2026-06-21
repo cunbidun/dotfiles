@@ -30,7 +30,7 @@ Rectangle {
 
         anchors.centerIn: parent
         spacing: root.icon.length > 0 && root.label.length > 0 ? root.theme.iconGap : 0
-        height: root.theme.barIconSize
+        height: root.height
 
         Text {
             id: iconText
@@ -65,16 +65,14 @@ Rectangle {
         id: hoverArea
 
         anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
+        cursorShape: Qt.ArrowCursor
         hoverEnabled: true
         onClicked: root.activate()
     }
 
     function popupX(popupWidth, popupWindowWidth) {
-        const pos = root.mapToItem(null, 0, 0);
-        const minX = root.theme.barOuterSpacing;
-        const maxX = Math.max(minX, popupWindowWidth - popupWidth - root.theme.barOuterSpacing);
-        const wanted = pos.x + root.theme.barOuterSpacing + root.width / 2 - popupWidth / 2;
-        return Math.max(minX, Math.min(maxX, wanted));
+        const minX = root.theme.popupScreenMargin;
+        const maxX = Math.max(minX, popupWindowWidth - popupWidth - root.theme.popupScreenMargin);
+        return maxX;
     }
 }

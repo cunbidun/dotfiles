@@ -16,6 +16,14 @@ in {
       repoPath = "${config.home.homeDirectory}/dotfiles/nix/quickshell";
       configPath = "${config.home.homeDirectory}/.config/quickshell/cunbidun";
       stylixStatePath = "${config.home.homeDirectory}/.local/state/stylix";
+      bluezAgentPython = pkgs.python3.withPackages (pythonPkgs: [
+        pythonPkgs.dbus-python
+        pythonPkgs.pygobject3
+      ]);
+      bluezAgentScript = pkgs.writeShellScriptBin "quickshell-bluez-agent-cunbidun" ''
+        export PYTHONUNBUFFERED=1
+        exec ${bluezAgentPython}/bin/python ${repoPath}/backend/bluez_agent.py
+      '';
       runtimeDeps = [
         pkgs.bash
         pkgs.coreutils
@@ -27,6 +35,7 @@ in {
         pkgs.quickshell
         pkgs.gnused
         pkgs.bluez
+        bluezAgentScript
         pkgs.brightnessctl
         pkgs.darkman
         pkgs.hyprpicker
@@ -93,8 +102,24 @@ in {
 
       home.packages = [
         pkgs.quickshell
+        bluezAgentScript
         quickshellReloadScript
       ];
+
+      systemd.user.services.quickshell-bluez-agent-cunbidun = {
+        Unit = {
+          Description = "QuickShell BlueZ pairing agent (cunbidun)";
+          After = ["graphical-session.target" "bluetooth.target"];
+          Wants = ["graphical-session.target"];
+          PartOf = ["graphical-session.target"];
+        };
+        Service = {
+          ExecStart = lib.getExe bluezAgentScript;
+          Restart = "on-failure";
+          RestartSec = 1;
+        };
+        Install.WantedBy = ["graphical-session.target"];
+      };
 
       systemd.user.services.quickshell-cunbidun = {
         Unit = {

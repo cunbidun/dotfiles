@@ -71,7 +71,7 @@ ModuleChip {
         visible: root.toastRecord !== null && !root.popupOpen
         screen: root.panelWindow.screen
         color: root.theme.transparentColor
-        implicitWidth: root.theme.notificationPopupWidth
+        implicitWidth: root.theme.notificationPopupWidth + root.theme.gap * 2
         implicitHeight: root.theme.popupElementSize * 5
 
         anchors {
@@ -81,7 +81,7 @@ ModuleChip {
 
         margins {
             top: root.theme.barOuterSpacing + root.theme.barHeight + root.theme.gap
-            right: root.theme.barOuterSpacing
+            right: root.theme.popupScreenMargin
         }
 
         WlrLayershell.layer: WlrLayer.Overlay
@@ -92,7 +92,7 @@ ModuleChip {
         Item {
             id: toastFrame
 
-            width: root.theme.notificationPopupWidth
+            width: toastWindow.implicitWidth
             height: toastWindow.implicitHeight
 
             Loader {
@@ -102,6 +102,7 @@ ModuleChip {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
+                anchors.margins: root.theme.gap
                 sourceComponent: toastCardComponent
             }
 
@@ -109,9 +110,10 @@ ModuleChip {
                 id: toastCardComponent
 
                 NotificationCard {
-                    width: toastFrame.width
+                    width: toastLoader.width
                     theme: root.theme
                     record: root.toastRecord
+                    elevated: true
                     closeNotification: record => root.closeNotification(record)
                 }
             }

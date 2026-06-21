@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell.Services.Notifications
 import Quickshell.Widgets
 
@@ -7,6 +8,7 @@ Rectangle {
 
     required property var theme
     required property var record
+    property bool elevated: false
     property var closeNotification: record => {}
     readonly property var safeRecord: record || ({})
     readonly property var visibleActions: (safeRecord.actions || []).filter(action => String(action.text || "").trim().length > 0).slice(0, 3)
@@ -14,9 +16,18 @@ Rectangle {
     width: parent.width
     height: cardContent.implicitHeight + theme.gap * 1.15
     radius: theme.popupSectionRadius
-    color: cardHoverArea.containsMouse ? theme.chipHoverBackground : theme.popupSectionBackground
-    border.width: safeRecord.urgency === NotificationUrgency.Critical ? theme.popupBorderWidth : 0
-    border.color: theme.popupDanger
+    color: cardHoverArea.containsMouse ? theme.chipHoverBackground : (root.elevated ? theme.popupElevatedBackground : theme.popupSectionBackground)
+    border.width: theme.popupBorderWidth
+    border.color: safeRecord.urgency === NotificationUrgency.Critical ? theme.popupDanger : (root.elevated ? theme.popupElevatedBorder : theme.popupBorder)
+
+    layer.enabled: root.elevated
+    layer.effect: MultiEffect {
+        shadowEnabled: true
+        shadowColor: "#73000000"
+        shadowBlur: 0.6
+        shadowVerticalOffset: 4
+        autoPaddingEnabled: true
+    }
 
     MouseArea {
         id: cardHoverArea
@@ -24,7 +35,7 @@ Rectangle {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton
         hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
+        cursorShape: Qt.ArrowCursor
         onClicked: root.activateNotification()
     }
 
@@ -44,6 +55,7 @@ Rectangle {
             Item {
                 width: root.theme.popupElementSize
                 height: width
+                anchors.verticalCenter: parent.verticalCenter
 
                 IconImage {
                     id: appIcon
@@ -63,7 +75,7 @@ Rectangle {
                     text: root.fallbackIconText(root.safeRecord.appName)
                     color: root.theme.iconColor
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.88
+                    font.pixelSize: root.theme.fontSizeSmall
                     font.bold: true
                 }
             }
@@ -82,7 +94,7 @@ Rectangle {
                         color: root.theme.popupText
                         elide: Text.ElideRight
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize * 0.82
+                        font.pixelSize: root.theme.fontSizeSmall
                         font.bold: true
                     }
 
@@ -92,7 +104,7 @@ Rectangle {
                         text: root.timeLabel(root.safeRecord.time)
                         color: root.theme.popupMutedText
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize * 0.74
+                        font.pixelSize: root.theme.fontSizeSmall
                     }
                 }
 
@@ -102,7 +114,7 @@ Rectangle {
                     color: root.theme.popupText
                     elide: Text.ElideRight
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.92
+                    font.pixelSize: root.theme.fontSizeMedium
                     font.bold: true
                 }
 
@@ -116,7 +128,7 @@ Rectangle {
                     maximumLineCount: 3
                     elide: Text.ElideRight
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.82
+                    font.pixelSize: root.theme.fontSize
                 }
             }
 
@@ -134,7 +146,7 @@ Rectangle {
                     text: "󰅖"
                     color: root.theme.popupMutedText
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.78
+                    font.pixelSize: root.theme.fontSizeSmall
                 }
 
                 MouseArea {
@@ -142,7 +154,7 @@ Rectangle {
 
                     anchors.fill: parent
                     hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
+                    cursorShape: Qt.ArrowCursor
                     onClicked: if (root.record) root.closeNotification(root.record)
                 }
             }
@@ -172,7 +184,7 @@ Rectangle {
                         horizontalAlignment: Text.AlignHCenter
                         elide: Text.ElideRight
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize * 0.8
+                        font.pixelSize: root.theme.fontSizeSmall
                         font.bold: true
                     }
 
@@ -181,7 +193,7 @@ Rectangle {
 
                         anchors.fill: parent
                         hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
+                        cursorShape: Qt.ArrowCursor
                         onClicked: {
                             modelData.invoke();
                             root.closeNotification(root.record);

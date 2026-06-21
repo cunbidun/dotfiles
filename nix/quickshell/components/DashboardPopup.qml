@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Bluetooth
 import Quickshell.Io
 import Quickshell.Services.Mpris
 
@@ -10,6 +9,7 @@ Rectangle {
     required property var theme
     property var openSettings: tab => {}
     property var pulseLauncher: (context, percent) => {}
+    property bool dashboardPopupOpen: false
 
     property var stats: ({})
     property string activeView: "dashboard"
@@ -17,8 +17,6 @@ Rectangle {
     property bool inhibited: false
     property bool nightLight: false
     property bool audioSelectorOpen: false
-    property bool wifiEnabled: false
-    property string wifiSsid: ""
     property int volumePercent: 43
     property int brightnessPercent: 58
     property bool adjustingVolume: false
@@ -29,9 +27,11 @@ Rectangle {
     readonly property int tileWidth: cell * 2 + gap
     readonly property int mediaWidth: cell * 4 + gap * 3
     readonly property var activePlayer: Mpris.players.values.find(player => player.isPlaying) || Mpris.players.values[0] || null
-    readonly property int connectedBluetoothDevices: Bluetooth.devices.values.filter(device => device.connected).length
+    readonly property int connectedBluetoothDevices: dashboardBluetoothSource.connectedDevices.length
+    readonly property bool wifiEnabled: dashboardWifiSource.wifiEnabled
+    readonly property string wifiSsid: dashboardWifiSource.activeNetwork?.ssid ?? ""
 
-    width: theme.dashboardPopupWidth
+    width: theme.popupWidth
     height: activeContent.implicitHeight + theme.gap * 2
     implicitWidth: width
     implicitHeight: height
@@ -39,6 +39,19 @@ Rectangle {
     color: theme.popupBackground
     border.width: theme.popupBorderWidth
     border.color: theme.popupBorder
+
+    onDashboardPopupOpenChanged: if (!dashboardPopupOpen) {
+        activeView = "dashboard";
+        audioSelectorOpen = false;
+    }
+
+    WifiNetworkSource {
+        id: dashboardWifiSource
+    }
+
+    BluetoothDeviceSource {
+        id: dashboardBluetoothSource
+    }
 
     Process {
         id: statsQuery
@@ -64,16 +77,6 @@ Rectangle {
         }
     }
 
-    Process {
-        id: networkSummaryQuery
-
-        command: ["bash", "-lc", "printf 'wifi_enabled=%s\\n' \"$(nmcli -t -f WIFI general 2>/dev/null | tail -1)\"; printf 'wifi_ssid=%s\\n' \"$(nmcli -t -f ACTIVE,SSID device wifi list --rescan no 2>/dev/null | awk -F: '$1==\"yes\" {print $2; exit}')\""]
-        stdout: StdioCollector {
-            waitForEnd: true
-            onStreamFinished: root.updateNetworkSummary(text)
-        }
-    }
-
     Timer {
         id: volumeCommitTimer
 
@@ -95,10 +98,7 @@ Rectangle {
         running: root.visible
         repeat: true
         triggeredOnStart: true
-        onTriggered: {
-            statsQuery.running = true;
-            networkSummaryQuery.running = true;
-        }
+        onTriggered: statsQuery.running = true
     }
 
     Loader {
@@ -167,7 +167,7 @@ Rectangle {
 
                     Item {
                         width: parent.width
-                        height: parent.height - mediaControls.height - root.gap - root.theme.fontSize * 1.4
+                        height: parent.height - mediaControls.height - root.gap - root.theme.fontSizeXLarge
 
                         Text {
                             anchors.centerIn: parent
@@ -216,14 +216,14 @@ Rectangle {
                         text: modelData.icon
                         color: modelData.active ? root.theme.iconOnAccentColor : root.theme.iconColor
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize * 1.1
+                        font.pixelSize: root.theme.fontSizeMedium
                     }
 
                     MouseArea {
                         id: quickHoverArea
 
                         anchors.fill: parent
-                        cursorShape: quickButton.modelData.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+                        cursorShape: Qt.ArrowCursor
                         hoverEnabled: quickButton.modelData.enabled
                         onClicked: if (quickButton.modelData.enabled) root.runQuickAction(quickButton.modelData.action)
                     }
@@ -254,7 +254,7 @@ Rectangle {
                     text: "Output"
                     color: root.theme.popupMutedText
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.78
+                    font.pixelSize: root.theme.fontSizeSmall
                     font.bold: true
                 }
 
@@ -267,7 +267,7 @@ Rectangle {
                         required property var modelData
 
                         width: parent.width
-                        height: root.theme.popupElementSize * 1.05
+                        height: root.theme.compactRowHeight
                         radius: root.theme.popupSectionRadius
                         color: outputHover.containsMouse || modelData.active ? root.theme.chipHoverBackground : root.theme.transparentColor
 
@@ -291,7 +291,7 @@ Rectangle {
                             color: outputRow.modelData.active ? root.theme.popupAccent : root.theme.popupText
                             elide: Text.ElideRight
                             font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 0.85
+                            font.pixelSize: root.theme.fontSizeSmall
                             font.bold: outputRow.modelData.active
                         }
 
@@ -311,7 +311,7 @@ Rectangle {
                             id: outputHover
 
                             anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
+                            cursorShape: Qt.ArrowCursor
                             hoverEnabled: true
                             onClicked: root.setAudioOutput(outputRow.modelData.id)
                         }
@@ -324,7 +324,7 @@ Rectangle {
                     text: "No output devices"
                     color: root.theme.popupMutedText
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.85
+                    font.pixelSize: root.theme.fontSizeSmall
                 }
             }
         }
@@ -367,6 +367,7 @@ Rectangle {
         DashboardNetworkSubmenu {
             theme: root.theme
             width: root.width - root.theme.gap * 2
+            wifiSource: dashboardWifiSource
             goBack: () => root.activeView = "dashboard"
             openSettings: () => root.openSettings("network")
         }
@@ -411,23 +412,6 @@ Rectangle {
         }
     }
 
-    function updateNetworkSummary(rawText) {
-        for (const line of rawText.trim().split("\n")) {
-            const index = line.indexOf("=");
-            if (index <= 0) {
-                continue;
-            }
-
-            const key = line.slice(0, index);
-            const value = line.slice(index + 1).trim();
-            if (key === "wifi_enabled") {
-                root.wifiEnabled = value === "enabled";
-            } else if (key === "wifi_ssid") {
-                root.wifiSsid = value;
-            }
-        }
-    }
-
     function wifiTileValue() {
         if (!root.wifiEnabled) {
             return "Off";
@@ -439,7 +423,7 @@ Rectangle {
         if (root.connectedBluetoothDevices > 0) {
             return `${root.connectedBluetoothDevices} connected`;
         }
-        return Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled ? "On" : "Off";
+        return dashboardBluetoothSource.enabled ? "On" : "Off";
     }
 
     function quickActions() {
@@ -514,13 +498,13 @@ Rectangle {
             anchors.margins: theme.gap
             spacing: theme.gap
 
-            Text { text: icon; color: controlTile.active ? theme.iconActiveColor : theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 1.05; anchors.verticalCenter: parent.verticalCenter }
+            Text { text: icon; color: controlTile.active ? theme.iconActiveColor : theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeMedium; anchors.verticalCenter: parent.verticalCenter }
             Column {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width - parent.spacing - theme.popupElementSize * 0.8
                 spacing: 1
-                Text { text: title; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.9; font.bold: true }
-                Text { text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.76; elide: Text.ElideRight; width: parent.width }
+                Text { text: title; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true }
+                Text { text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; elide: Text.ElideRight; width: parent.width }
             }
         }
 
@@ -528,7 +512,7 @@ Rectangle {
             id: controlHoverArea
 
             anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
+            cursorShape: Qt.ArrowCursor
             hoverEnabled: true
             onClicked: controlTile.activate()
         }
@@ -549,7 +533,7 @@ Rectangle {
         opacity: enabled ? 1 : 0.45
 
         Text { anchors.centerIn: parent; text: icon; color: theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
-        MouseArea { id: mediaButtonHoverArea; anchors.fill: parent; enabled: parent.enabled; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onClicked: parent.activate() }
+        MouseArea { id: mediaButtonHoverArea; anchors.fill: parent; enabled: parent.enabled; cursorShape: Qt.ArrowCursor; hoverEnabled: true; onClicked: parent.activate() }
     }
 
     component SliderTile: Rectangle {
@@ -582,8 +566,8 @@ Rectangle {
 
         Text { x: theme.gap; y: theme.gap; text: icon; color: theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
         Text { anchors.horizontalCenter: parent.horizontalCenter; y: theme.gap; text: title; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; font.bold: true }
-        Text { anchors.right: parent.right; anchors.rightMargin: theme.gap; y: theme.gap; text: `${percent}%`; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.85 }
-        Text { visible: sliderTile.expandable; anchors.right: parent.right; anchors.rightMargin: theme.gap; y: theme.gap + theme.fontSize; text: sliderTile.expanded ? "󰅀" : "󰅂"; color: theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.75 }
+        Text { anchors.right: parent.right; anchors.rightMargin: theme.gap; y: theme.gap; text: `${percent}%`; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall }
+        Text { visible: sliderTile.expandable; anchors.right: parent.right; anchors.rightMargin: theme.gap; y: theme.gap + theme.fontSize; text: sliderTile.expanded ? "󰅀" : "󰅂"; color: theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall }
         Rectangle { x: theme.gap; y: parent.trackY; width: parent.trackWidth; height: 5; radius: 3; color: theme.popupBorder }
         Rectangle { x: theme.gap; y: parent.trackY; width: parent.trackWidth * parent.clampedPercent / 100; height: 5; radius: 3; color: theme.popupAccent }
         Rectangle { x: theme.gap + parent.trackWidth * parent.clampedPercent / 100 - width / 2; y: parent.trackY + 2.5 - height / 2; width: theme.dashboardSliderThumbSize; height: width; radius: width / 2; color: theme.popupText }
@@ -592,7 +576,7 @@ Rectangle {
             id: sliderHoverArea
 
             anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
+            cursorShape: Qt.ArrowCursor
             hoverEnabled: true
             onClicked: mouse => {
                 if (sliderTile.expandable && mouse.y < sliderTile.trackY - theme.gap * 0.4) {
@@ -639,7 +623,7 @@ Rectangle {
 
         Text { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; text: icon; color: accent; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
         Text { anchors.left: parent.left; anchors.leftMargin: theme.popupElementSize; anchors.verticalCenter: parent.verticalCenter; text: label; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; font.bold: true }
-        Text { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.9 }
+        Text { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall }
 
         MouseArea {
             id: statHoverArea

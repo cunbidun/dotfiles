@@ -8,6 +8,11 @@ Item {
     readonly property string stylixColorsPath: `${Quickshell.env("HOME")}/.local/state/stylix/colors.json`
     readonly property string stylixThemeNamePath: `${Quickshell.env("HOME")}/.local/state/stylix/current-theme-name.txt`
     readonly property int fontSize: 12
+    // Type scale — every text should use one of these, not an ad-hoc multiplier.
+    readonly property int fontSizeSmall: 11
+    readonly property int fontSizeMedium: 13
+    readonly property int fontSizeLarge: 15
+    readonly property int fontSizeXLarge: 18
     readonly property string fontFamily: "SFMono Nerd Font"
 
     readonly property real em: fontSize
@@ -17,7 +22,8 @@ Item {
     readonly property int barPaddingY: Math.max(0, Math.round((barItemHeight - barIconSize) / 2))
     readonly property int barHeight: barItemHeight + barPaddingY * 2
     readonly property int barOuterSpacing: Math.round(em * 0.25)
-    readonly property int barRadius: Math.round(em * 0.55)
+    readonly property int generalRadius: Math.round(em * 0.45)
+    readonly property int barRadius: generalRadius
     readonly property int barBorderWidth: 0
 
     readonly property int moduleGap: Math.round(em * 0.35)
@@ -27,26 +33,32 @@ Item {
     readonly property int chipGap: Math.round(em * 0.35)
     readonly property int chipPaddingX: Math.round(em * 0.55)
     readonly property int chipPaddingY: barPaddingY
-    readonly property int chipRadius: Math.round(em * 0.35)
+    readonly property int chipRadius: generalRadius
     readonly property int iconGap: Math.round(em * 0.35)
     readonly property int trayGap: Math.round(em * 0.55)
     readonly property int windowTitleMaxWidth: Math.round(em * 22)
     readonly property int weatherMaxWidth: Math.round(em * 12)
     readonly property int clockMaxWidth: Math.round(em * 20)
     readonly property int gap: Math.round(em * 0.69)
-    readonly property int calendarPopupWidth: Math.round(em * 31)
-    readonly property int popupSectionRadius: Math.round(em * 0.45)
+    readonly property int popupScreenMargin: Math.round(gap * 1.25)
+    readonly property int popupSectionRadius: generalRadius
     readonly property int calendarCellWidth: Math.round(em * 2.95)
     readonly property int calendarCellHeight: Math.round(em * 1.9)
     readonly property int calendarCellSize: Math.round(em * 2.35)
     readonly property int popupElementSize: Math.round(em * 2.35)
+    // Semantic row heights — use these instead of multiplying popupElementSize ad-hoc.
+    readonly property int compactRowHeight: Math.round(popupElementSize * 1.12)
+    readonly property int listRowHeight: Math.round(popupElementSize * 1.28)
+    readonly property int sectionHeaderHeight: Math.round(popupElementSize * 1.45)
     readonly property int weatherHourlyCellWidth: Math.round(em * 5.4)
     readonly property int dashboardControlCell: Math.round(em * 4.3)
     readonly property int dashboardPopupWidth: dashboardControlCell * 6 + gap * 5 + gap * 2
+    readonly property int popupWidth: dashboardPopupWidth
+    readonly property int calendarPopupWidth: popupWidth
+    readonly property int notificationPopupWidth: popupWidth
     readonly property int dashboardTileHeight: Math.round(em * 3.55)
     readonly property int dashboardSliderHeight: Math.round(em * 3.05)
     readonly property int dashboardSliderThumbSize: Math.round(em * 0.92)
-    readonly property int notificationPopupWidth: Math.round(em * 30)
     readonly property int notificationPopupHeight: Math.round(em * 52)
     readonly property int trayIconSize: barIconSize
     readonly property int trayItemSize: barItemHeight
@@ -58,7 +70,7 @@ Item {
 
     readonly property int workspaceGap: Math.round(em * 0.375)
     readonly property int workspaceHeight: barItemHeight
-    readonly property int workspaceRadius: Math.round(em * 0.7)
+    readonly property int workspaceRadius: generalRadius
     readonly property int workspaceInactivePaddingX: Math.round(em * 0.4)
     readonly property int workspaceActivePaddingX: Math.round(em * 0.4)
     readonly property int workspaceMinWidth: Math.round(em * 1.7)
@@ -103,8 +115,10 @@ Item {
     readonly property color submapActiveText: selectedForeground
     readonly property color weatherIcon: iconActiveColor
     readonly property color clockIcon: iconColor
-    readonly property color popupBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.62 : 0.50)
-    readonly property color popupSectionBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.68 : 0.55)
+    readonly property color popupBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.55 : 0.40)
+    readonly property color popupSectionBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.45 : 0.30)
+    readonly property color popupElevatedBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.82 : 0.72)
+    readonly property color popupElevatedBorder: isLightTheme ? withAlpha("#000000", 0.12) : withAlpha("#FFFFFF", 0.16)
     readonly property color popupHoverBackground: appleFillHover
     readonly property color popupSelectedBackground: selectedBackground
     readonly property color popupBorder: appleSeparator

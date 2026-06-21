@@ -17,7 +17,8 @@ Rectangle {
     implicitHeight: height
     radius: theme.popupSectionRadius
     color: theme.popupBackground
-    border.width: 0
+    border.width: theme.popupBorderWidth
+    border.color: theme.popupBorder
 
     Column {
         id: shell
@@ -30,7 +31,7 @@ Rectangle {
             id: header
 
             width: parent.width
-            height: root.theme.popupElementSize * 1.45
+            height: root.theme.popupElementSize
 
             Text {
                 id: titleText
@@ -40,7 +41,7 @@ Rectangle {
                 text: root.notifications.length > 0 ? `Notifications (${root.notifications.length})` : "Notifications"
                 color: root.theme.popupText
                 font.family: root.theme.fontFamily
-                font.pixelSize: root.theme.fontSize * 1.08
+                font.pixelSize: root.theme.fontSizeMedium
                 font.bold: true
             }
 
@@ -60,7 +61,7 @@ Rectangle {
                     text: "󰅖"
                     color: clearArea.containsMouse ? root.theme.popupText : root.theme.popupMutedText
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.9
+                    font.pixelSize: root.theme.fontSizeSmall
                 }
 
                 MouseArea {
@@ -68,7 +69,7 @@ Rectangle {
 
                     anchors.fill: parent
                     hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
+                    cursorShape: Qt.ArrowCursor
                     onClicked: root.clearAll()
                 }
             }
@@ -89,7 +90,7 @@ Rectangle {
                     text: root.dnd ? "󰂛" : "󰂚"
                     color: root.dnd ? root.theme.popupBackground : root.theme.popupText
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.9
+                    font.pixelSize: root.theme.fontSizeSmall
                 }
 
                 MouseArea {
@@ -97,26 +98,27 @@ Rectangle {
 
                     anchors.fill: parent
                     hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
+                    cursorShape: Qt.ArrowCursor
                     onClicked: root.toggleDnd()
                 }
             }
 
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: 1
-                color: root.theme.popupBorder
-                opacity: 0.8
-            }
+        }
+
+        Rectangle {
+            id: headerDivider
+
+            width: parent.width
+            height: 1
+            color: root.theme.popupBorder
+            opacity: 0.8
         }
 
         Rectangle {
             id: dndNotice
 
             width: parent.width
-            height: root.dnd ? root.theme.popupElementSize * 1.15 : 0
+            height: root.dnd ? root.theme.popupElementSize : 0
             visible: root.dnd
             radius: root.theme.popupSectionRadius
             color: root.theme.popupSectionBackground
@@ -131,7 +133,7 @@ Rectangle {
                 color: root.theme.popupMutedText
                 elide: Text.ElideRight
                 font.family: root.theme.fontFamily
-                font.pixelSize: root.theme.fontSize * 0.86
+                font.pixelSize: root.theme.fontSizeSmall
             }
         }
 

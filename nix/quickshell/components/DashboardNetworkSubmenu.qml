@@ -1,53 +1,23 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 
 Column {
     id: root
 
     required property var theme
+    required property var wifiSource
     property var goBack: () => {}
     property var openSettings: () => {}
-    property bool wifiEnabled: false
-    property bool scanning: false
-    property string status: ""
-    property var networks: []
+    readonly property string status: wifiSource.status
+    readonly property string wifiDeviceName: wifiSource.wifiDeviceName
+    readonly property bool wifiEnabled: wifiSource.wifiEnabled
+    readonly property var networks: wifiSource.networks
 
     spacing: theme.gap
 
-    Component.onCompleted: refresh(false)
-
-    Process {
-        id: networkQuery
-
-        stdout: StdioCollector {
-            waitForEnd: true
-            onStreamFinished: root.parseNetworks(text)
-        }
-        stderr: StdioCollector {
-            waitForEnd: true
-            onStreamFinished: if (text.trim().length > 0) root.status = text.trim()
-        }
-        onExited: () => root.scanning = false
-    }
-
-    Process {
-        id: networkAction
-
-        stdout: StdioCollector {
-            waitForEnd: true
-            onStreamFinished: if (text.trim().length > 0) root.status = text.trim()
-        }
-        stderr: StdioCollector {
-            waitForEnd: true
-            onStreamFinished: if (text.trim().length > 0) root.status = text.trim()
-        }
-        onExited: () => root.refresh(false)
-    }
-
     Rectangle {
         width: parent.width
-        height: root.theme.popupElementSize * 1.45
+        height: root.theme.sectionHeaderHeight
         radius: root.theme.popupSectionRadius
         color: root.theme.popupSectionBackground
 
@@ -61,25 +31,15 @@ Column {
             activate: root.goBack
         }
 
-        ToggleButton {
-            theme: root.theme
-            anchors.right: scanButton.left
-            anchors.rightMargin: root.theme.gap
-            anchors.verticalCenter: parent.verticalCenter
-            checked: root.wifiEnabled
-            text: root.wifiEnabled ? "On" : "Off"
-            activate: () => root.setWifiEnabled(!root.wifiEnabled)
-        }
-
-        IconButton {
-            id: scanButton
+        SettingsSwitch {
+            id: powerSwitch
 
             theme: root.theme
             anchors.right: parent.right
             anchors.rightMargin: root.theme.gap
             anchors.verticalCenter: parent.verticalCenter
-            icon: root.scanning ? "󰑓" : "󰑐"
-            activate: () => root.refresh(true)
+            checked: root.wifiEnabled
+            activate: () => root.setWifiEnabled(!root.wifiEnabled)
         }
     }
 
@@ -88,7 +48,7 @@ Column {
         text: root.wifiEnabled ? `${root.networks.length} networks available` : "Wi-Fi disabled"
         color: root.theme.popupMutedText
         font.family: root.theme.fontFamily
-        font.pixelSize: root.theme.fontSize * 0.86
+        font.pixelSize: root.theme.fontSizeSmall
     }
 
     Column {
@@ -105,7 +65,7 @@ Column {
                 readonly property bool active: modelData.active
 
                 width: parent.width
-                height: root.theme.popupElementSize * 1.25
+                height: root.theme.listRowHeight
                 radius: root.theme.popupSectionRadius
                 color: active ? root.theme.popupSelectedBackground : networkHover.containsMouse ? root.theme.popupHoverBackground : root.theme.popupSectionBackground
 
@@ -141,7 +101,7 @@ Column {
                     text: "󰌾"
                     color: networkRow.active ? root.theme.selectedForeground : root.theme.iconMutedColor
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.82
+                    font.pixelSize: root.theme.fontSizeSmall
                 }
 
                 Text {
@@ -160,7 +120,7 @@ Column {
                     id: networkHover
 
                     anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
+                    cursorShape: Qt.ArrowCursor
                     hoverEnabled: true
                     onClicked: networkRow.active ? root.disconnectWifi() : root.connectWifi(networkRow.modelData.ssid)
                 }
@@ -189,7 +149,7 @@ Column {
         color: root.theme.popupMutedText
         elide: Text.ElideRight
         font.family: root.theme.fontFamily
-        font.pixelSize: root.theme.fontSize * 0.78
+        font.pixelSize: root.theme.fontSizeSmall
     }
 
     SettingsRow {
@@ -201,83 +161,19 @@ Column {
     }
 
     function refresh(rescan) {
-        root.scanning = true;
-        networkQuery.command = ["bash", "-lc", `printf 'enabled=%s\\n' "$(nmcli -t -f WIFI general 2>/dev/null | tail -1)"; nmcli -t -f IN-USE,SSID,SIGNAL,SECURITY device wifi list --rescan ${rescan ? "yes" : "no"} 2>/dev/null | head -20`];
-        networkQuery.running = true;
-    }
-
-    function parseNetworks(rawText) {
-        const next = [];
-        const lines = rawText.trim().split("\n").filter(line => line.length > 0);
-        root.wifiEnabled = false;
-        for (const line of lines) {
-            if (line.startsWith("enabled=")) {
-                root.wifiEnabled = line.slice(8).trim() === "enabled";
-                continue;
-            }
-
-            const parts = root.splitNmcli(line);
-            const ssid = parts[1] || "Hidden network";
-            if (ssid.length === 0) {
-                continue;
-            }
-
-            const existing = next.find(network => network.ssid === ssid);
-            const network = {
-                active: (parts[0] || "").trim() === "*",
-                ssid,
-                signal: Number(parts[2] || 0),
-                secure: (parts[3] || "").trim().length > 0
-            };
-            if (!existing || network.signal > existing.signal || network.active) {
-                if (existing) {
-                    next.splice(next.indexOf(existing), 1);
-                }
-                next.push(network);
-            }
-        }
-        root.networks = next.sort((a, b) => Number(b.active) - Number(a.active) || b.signal - a.signal);
-    }
-
-    function splitNmcli(line) {
-        const parts = [];
-        let current = "";
-        let escaped = false;
-        for (const char of line) {
-            if (escaped) {
-                current += char;
-                escaped = false;
-            } else if (char === "\\") {
-                escaped = true;
-            } else if (char === ":") {
-                parts.push(current);
-                current = "";
-            } else {
-                current += char;
-            }
-        }
-        parts.push(current);
-        return parts;
+        wifiSource.refresh();
     }
 
     function setWifiEnabled(enabled) {
-        networkAction.command = ["bash", "-lc", `nmcli radio wifi ${enabled ? "on" : "off"}`];
-        networkAction.running = true;
+        wifiSource.setWifiEnabled(enabled);
     }
 
     function connectWifi(ssid) {
-        root.status = `Connecting to ${ssid}`;
-        networkAction.command = ["bash", "-lc", `nmcli device wifi connect ${root.shellQuote(ssid)}`];
-        networkAction.running = true;
+        wifiSource.connectSsid(ssid);
     }
 
     function disconnectWifi() {
-        networkAction.command = ["bash", "-lc", "device=$(nmcli -t -f DEVICE,TYPE,STATE device | awk -F: '$2==\"wifi\" && $3==\"connected\"{print $1; exit}'); [ -n \"$device\" ] && nmcli device disconnect \"$device\""];
-        networkAction.running = true;
-    }
-
-    function shellQuote(value) {
-        return `'${String(value).replace(/'/g, `'\\''`)}'`;
+        wifiSource.disconnectWifi();
     }
 
     function networkIcon(signal) {
@@ -287,28 +183,13 @@ Column {
         return "󰤟";
     }
 
-    component ToggleButton: Rectangle {
-        required property var theme
-        property bool checked: false
-        property string text: ""
-        property var activate: () => {}
-
-        width: Math.max(theme.popupElementSize * 1.65, label.implicitWidth + theme.gap * 2)
-        height: theme.popupElementSize
-        radius: theme.popupSectionRadius
-        color: hover.containsMouse ? theme.chipHoverBackground : checked ? theme.selectedBackground : theme.chipBackground
-
-        Text { id: label; anchors.centerIn: parent; text: parent.text; color: parent.checked ? theme.selectedForeground : theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.82; font.bold: true }
-        MouseArea { id: hover; anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onClicked: parent.activate() }
-    }
-
     component SettingsRow: Rectangle {
         required property var theme
         property string icon: ""
         property string text: ""
         property var activate: () => {}
 
-        height: theme.popupElementSize * 1.15
+        height: theme.compactRowHeight
         radius: theme.popupSectionRadius
         color: hover.containsMouse ? theme.chipHoverBackground : theme.popupSectionBackground
         border.width: theme.popupBorderWidth
@@ -323,9 +204,9 @@ Column {
             spacing: theme.gap
 
             Text { text: icon; color: theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
-            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.88; font.bold: true; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
+            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
         }
 
-        MouseArea { id: hover; anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onClicked: parent.activate() }
+        MouseArea { id: hover; anchors.fill: parent; cursorShape: Qt.ArrowCursor; hoverEnabled: true; onClicked: parent.activate() }
     }
 }

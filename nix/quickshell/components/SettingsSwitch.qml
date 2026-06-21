@@ -30,7 +30,7 @@ Rectangle {
         id: switchHover
 
         anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
+        cursorShape: Qt.ArrowCursor
         hoverEnabled: true
         onClicked: root.activate()
     }

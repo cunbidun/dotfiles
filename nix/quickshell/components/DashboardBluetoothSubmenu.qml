@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Bluetooth
 
 Column {
     id: root
@@ -8,16 +7,20 @@ Column {
     required property var theme
     property var goBack: () => {}
     property var openSettings: () => {}
-    readonly property var adapter: Bluetooth.defaultAdapter
-    readonly property bool enabled: adapter ? adapter.enabled : false
-    readonly property bool discovering: adapter ? adapter.discovering : false
-    readonly property var sortedDevices: [...Bluetooth.devices.values].sort((a, b) => Number(b.connected) - Number(a.connected) || Number(b.bonded || b.paired) - Number(a.bonded || a.paired) || String(a.name || "").localeCompare(String(b.name || ""))).slice(0, 8)
+    readonly property var adapter: bluetoothSource.adapter
+    readonly property bool enabled: bluetoothSource.enabled
+    readonly property bool discovering: bluetoothSource.discovering
+    readonly property var sortedDevices: bluetoothSource.devices.slice(0, 8)
 
     spacing: theme.gap
 
+    BluetoothDeviceSource {
+        id: bluetoothSource
+    }
+
     Rectangle {
         width: parent.width
-        height: root.theme.popupElementSize * 1.45
+        height: root.theme.sectionHeaderHeight
         radius: root.theme.popupSectionRadius
         color: root.theme.popupSectionBackground
 
@@ -31,49 +34,27 @@ Column {
             activate: root.goBack
         }
 
-        ToggleButton {
-            id: powerButton
-
-            theme: root.theme
-            anchors.right: discoverButton.left
-            anchors.rightMargin: root.theme.gap
-            anchors.verticalCenter: parent.verticalCenter
-            checked: root.enabled
-            text: root.enabled ? "On" : "Off"
-            activate: () => {
-                if (root.adapter) {
-                    root.adapter.enabled = !root.adapter.enabled;
-                }
-            }
-        }
-
-        ToggleButton {
-            id: discoverButton
+        SettingsSwitch {
+            id: powerSwitch
 
             theme: root.theme
             anchors.right: parent.right
             anchors.rightMargin: root.theme.gap
             anchors.verticalCenter: parent.verticalCenter
-            enabled: root.enabled
-            checked: root.discovering
-            text: root.discovering ? "Scan" : "Idle"
-            activate: () => {
-                if (root.adapter) {
-                    root.adapter.discovering = !root.adapter.discovering;
-                }
-            }
+            checked: root.enabled
+            activate: () => bluetoothSource.setEnabled(!root.enabled)
         }
     }
 
     Text {
         width: parent.width
         text: {
-            const connected = Bluetooth.devices.values.filter(device => device.connected).length;
-            return `${Bluetooth.devices.values.length} devices available${connected > 0 ? ` (${connected} connected)` : ""}`;
+            const connected = bluetoothSource.connectedDevices.length;
+            return `${bluetoothSource.devices.length} devices available${connected > 0 ? ` (${connected} connected)` : ""}`;
         }
         color: root.theme.popupMutedText
         font.family: root.theme.fontFamily
-        font.pixelSize: root.theme.fontSize * 0.86
+        font.pixelSize: root.theme.fontSizeSmall
     }
 
     Column {
@@ -91,7 +72,7 @@ Column {
                 readonly property bool loading: String(modelData.state).toLowerCase().includes("connecting") || String(modelData.state).toLowerCase().includes("disconnecting")
 
                 width: parent.width
-                height: root.theme.popupElementSize * 1.25
+                height: root.theme.listRowHeight
                 radius: root.theme.popupSectionRadius
                 color: deviceHover.containsMouse || connected ? root.theme.chipHoverBackground : root.theme.popupSectionBackground
 
@@ -115,7 +96,7 @@ Column {
 
                     Text {
                         width: parent.width
-                        text: deviceRow.modelData.name || deviceRow.modelData.address || "Bluetooth device"
+                        text: bluetoothSource.displayName(deviceRow.modelData)
                         color: deviceRow.connected ? root.theme.popupAccent : root.theme.popupText
                         elide: Text.ElideRight
                         font.family: root.theme.fontFamily
@@ -125,11 +106,11 @@ Column {
 
                     Text {
                         width: parent.width
-                        text: deviceRow.connected ? "Connected" : deviceRow.modelData.bonded || deviceRow.modelData.paired ? "Paired" : "Available"
+                        text: deviceRow.connected ? "Connected" : bluetoothSource.isPaired(deviceRow.modelData) ? "Paired" : "Available"
                         color: root.theme.popupMutedText
                         elide: Text.ElideRight
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize * 0.76
+                        font.pixelSize: root.theme.fontSizeSmall
                     }
                 }
 
@@ -143,7 +124,7 @@ Column {
                     text: `${Math.round(deviceRow.modelData.battery * 100)}%`
                     color: root.theme.popupMutedText
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.78
+                    font.pixelSize: root.theme.fontSizeSmall
                 }
 
                 Text {
@@ -161,21 +142,21 @@ Column {
                 Text {
                     id: forgetIcon
 
-                    visible: deviceRow.modelData.bonded || deviceRow.modelData.paired
+                    visible: bluetoothSource.isPaired(deviceRow.modelData)
                     anchors.right: parent.right
                     anchors.rightMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
                     text: "󰆴"
                     color: root.theme.iconMutedColor
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.9
+                    font.pixelSize: root.theme.fontSizeSmall
 
                     MouseArea {
                         anchors.fill: parent
                         anchors.margins: -root.theme.gap * 0.6
-                        cursorShape: Qt.PointingHandCursor
+                        cursorShape: Qt.ArrowCursor
                         hoverEnabled: true
-                        onClicked: deviceRow.modelData.forget()
+                        onClicked: bluetoothSource.forgetDevice(deviceRow.modelData)
                     }
                 }
 
@@ -184,9 +165,9 @@ Column {
 
                     anchors.fill: parent
                     anchors.rightMargin: forgetIcon.visible ? root.theme.popupElementSize : 0
-                    cursorShape: Qt.PointingHandCursor
+                    cursorShape: Qt.ArrowCursor
                     hoverEnabled: true
-                    onClicked: deviceRow.modelData.connected = !deviceRow.modelData.connected
+                    onClicked: bluetoothSource.toggleDevice(deviceRow.modelData)
                 }
             }
         }
@@ -214,29 +195,13 @@ Column {
         activate: root.openSettings
     }
 
-    component ToggleButton: Rectangle {
-        required property var theme
-        property bool checked: false
-        property string text: ""
-        property var activate: () => {}
-
-        width: Math.max(theme.popupElementSize * 1.65, label.implicitWidth + theme.gap * 2)
-        height: theme.popupElementSize
-        radius: theme.popupSectionRadius
-        color: hover.containsMouse ? theme.chipHoverBackground : checked ? theme.selectedBackground : theme.chipBackground
-        opacity: enabled ? 1 : 0.55
-
-        Text { id: label; anchors.centerIn: parent; text: parent.text; color: parent.checked ? theme.selectedForeground : theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.82; font.bold: true }
-        MouseArea { id: hover; anchors.fill: parent; enabled: parent.enabled; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onClicked: parent.activate() }
-    }
-
     component SettingsRow: Rectangle {
         required property var theme
         property string icon: ""
         property string text: ""
         property var activate: () => {}
 
-        height: theme.popupElementSize * 1.15
+        height: theme.compactRowHeight
         radius: theme.popupSectionRadius
         color: hover.containsMouse ? theme.chipHoverBackground : theme.popupSectionBackground
         border.width: theme.popupBorderWidth
@@ -251,10 +216,10 @@ Column {
             spacing: theme.gap
 
             Text { text: icon; color: theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
-            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.88; font.bold: true; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
+            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
         }
 
-        MouseArea { id: hover; anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onClicked: parent.activate() }
+        MouseArea { id: hover; anchors.fill: parent; cursorShape: Qt.ArrowCursor; hoverEnabled: true; onClicked: parent.activate() }
     }
 
     function bluetoothIcon(iconName) {

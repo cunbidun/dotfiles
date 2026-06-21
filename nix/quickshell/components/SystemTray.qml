@@ -93,7 +93,7 @@ Rectangle {
 
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-                    cursorShape: Qt.PointingHandCursor
+                    cursorShape: Qt.ArrowCursor
                     hoverEnabled: true
                     onClicked: mouse => {
                         if (trayItem.inputMethodItem && mouse.button === Qt.LeftButton) {
@@ -191,7 +191,7 @@ Rectangle {
                         id: backHover
                         anchors.fill: parent
                         hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
+                        cursorShape: Qt.ArrowCursor
                         onClicked: root.popTraySubmenu()
                     }
                 }
@@ -253,7 +253,7 @@ Rectangle {
                                         text: "✓"
                                         color: root.theme.popupAccent
                                         font.family: root.theme.fontFamily
-                                        font.pixelSize: root.theme.fontSize * 0.72
+                                        font.pixelSize: root.theme.fontSizeSmall
                                     }
                                 }
                             }
@@ -285,7 +285,7 @@ Rectangle {
                             anchors.fill: parent
                             enabled: menuEntryRow.modelData && !menuEntryRow.modelData.isSeparator && menuEntryRow.modelData.enabled !== false
                             hoverEnabled: enabled
-                            cursorShape: enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            cursorShape: Qt.ArrowCursor
                             onClicked: root.activateMenuEntry(menuEntryRow.modelData)
                         }
                     }

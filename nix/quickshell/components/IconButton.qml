@@ -26,7 +26,7 @@ Rectangle {
 
         anchors.fill: parent
         enabled: root.enabled
-        cursorShape: root.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+        cursorShape: Qt.ArrowCursor
         hoverEnabled: root.enabled
         onClicked: root.activate()
     }

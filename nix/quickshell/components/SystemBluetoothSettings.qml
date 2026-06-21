@@ -1,93 +1,41 @@
 import QtQuick
-import Quickshell.Bluetooth
 
 Column {
     id: root
 
     required property var theme
     property var goBack: () => {}
-    readonly property var adapter: Bluetooth.defaultAdapter
-    readonly property bool enabled: adapter ? adapter.enabled : false
-    readonly property bool discovering: adapter ? adapter.discovering : false
-    readonly property var connectedDevices: root.sortedDevices().filter(device => device.connected).slice(0, 4)
-    readonly property var pairedDevices: root.sortedDevices().filter(device => !device.connected && (device.bonded || device.paired)).slice(0, 5)
-    readonly property var availableDevices: root.sortedDevices().filter(device => !device.connected && !(device.bonded || device.paired)).slice(0, 5)
+    readonly property var adapter: bluetoothSource.adapter
+    readonly property bool enabled: bluetoothSource.enabled
+    readonly property bool discovering: bluetoothSource.discovering
+    readonly property var connectedDevices: bluetoothSource.connectedDevices.slice(0, 4)
+    readonly property var pairedDevices: bluetoothSource.pairedDevices.slice(0, 5)
+    readonly property var availableDevices: bluetoothSource.availableDevices.slice(0, 5)
+    readonly property string status: bluetoothSource.status
+    property var pairingDevice: null
+    property var pairingPrompt: null
+    property string pairingSecret: ""
 
     spacing: theme.gap
 
-    Rectangle {
-        width: parent.width
-        height: headerContent.implicitHeight + root.theme.gap * 2
-        radius: root.theme.popupSectionRadius
-        color: root.theme.popupSectionBackground
+    BluetoothDeviceSource {
+        id: bluetoothSource
 
-        Row {
-            id: headerContent
-
-            anchors.left: parent.left
-            anchors.leftMargin: root.theme.gap
-            anchors.right: parent.right
-            anchors.rightMargin: root.theme.gap
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: root.theme.gap
-
-            TextButton {
-                theme: root.theme
-                anchors.verticalCenter: parent.verticalCenter
-                icon: "󰁍"
-                text: "Bluetooth"
-                activate: root.goBack
-            }
-
-            Column {
-                width: parent.width - root.theme.popupElementSize * 9
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 2
-
-                Text {
-                    width: parent.width
-                    text: "Connect keyboards, headphones, controllers, and other devices."
-                    color: root.theme.popupText
-                    elide: Text.ElideRight
-                    font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.86
-                }
-
-                Text {
-                    width: parent.width
-                    text: root.enabled ? (root.discovering ? "Scanning for nearby devices." : "Start scan to find nearby devices.") : "Turn on Bluetooth to connect devices."
-                    color: root.theme.popupMutedText
-                    elide: Text.ElideRight
-                    font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 0.76
-                }
-            }
-
-            IconButton {
-                id: scanButton
-
-                theme: root.theme
-                anchors.verticalCenter: parent.verticalCenter
-                enabled: root.enabled
-                icon: root.discovering ? "󰑓" : "󰐊"
-                activate: () => {
-                    if (root.adapter) {
-                        root.adapter.discovering = !root.adapter.discovering;
-                    }
-                }
-            }
-
-            SettingsSwitch {
-                theme: root.theme
-                anchors.verticalCenter: parent.verticalCenter
-                checked: root.enabled
-                activate: () => {
-                    if (root.adapter) {
-                        root.adapter.enabled = !root.adapter.enabled;
-                    }
-                }
-            }
+        onPairingPrompt: prompt => {
+            root.pairingPrompt = prompt;
+            root.pairingSecret = "";
         }
+
+        onPairingCancelled: root.cancelPairing()
+    }
+
+    SettingsHeader {
+        theme: root.theme
+        width: parent.width
+        title: "Bluetooth"
+        subtitle: root.enabled ? "Nearby devices update automatically." : "Turn on Bluetooth to connect devices."
+        checked: root.enabled
+        toggle: () => bluetoothSource.setEnabled(!root.enabled)
     }
 
     Rectangle {
@@ -109,7 +57,7 @@ Column {
 
             Row {
                 width: parent.width
-                height: root.theme.popupElementSize * 1.1
+                height: root.theme.compactRowHeight
                 spacing: root.theme.gap
 
                 Text {
@@ -117,7 +65,7 @@ Column {
                     text: root.enabled ? "󰂯" : "󰂲"
                     color: root.enabled ? root.theme.iconActiveColor : root.theme.iconMutedColor
                     font.family: root.theme.fontFamily
-                    font.pixelSize: root.theme.fontSize * 1.25
+                    font.pixelSize: root.theme.fontSizeLarge
                 }
 
                 Column {
@@ -127,7 +75,7 @@ Column {
 
                     Text {
                         width: parent.width
-                        text: root.adapter ? (root.adapter.name || "Bluetooth") : "No Adapter"
+                        text: root.adapter ? bluetoothSource.adapterDisplayName : "No Adapter"
                         color: root.theme.popupText
                         elide: Text.ElideRight
                         font.family: root.theme.fontFamily
@@ -141,14 +89,103 @@ Column {
                         color: root.theme.popupMutedText
                         elide: Text.ElideRight
                         font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize * 0.78
+                        font.pixelSize: root.theme.fontSizeSmall
                     }
                 }
             }
 
-            InfoRow { theme: root.theme; label: "Connected"; value: String(root.connectedDevices.length) }
-            InfoRow { theme: root.theme; label: "Paired"; value: String(root.pairedDevices.length) }
-            InfoRow { theme: root.theme; label: "Available"; value: String(root.availableDevices.length) }
+            SettingsInfoRow { theme: root.theme; width: parent.width; label: "Connected"; value: String(root.connectedDevices.length) }
+            SettingsInfoRow { theme: root.theme; width: parent.width; label: "Paired"; value: String(root.pairedDevices.length) }
+            SettingsInfoRow { theme: root.theme; width: parent.width; label: "Available"; value: String(root.availableDevices.length) }
+        }
+    }
+
+    Text {
+        width: parent.width
+        visible: root.status.length > 0
+        text: root.status
+        color: root.theme.popupMutedText
+        elide: Text.ElideRight
+        font.family: root.theme.fontFamily
+        font.pixelSize: root.theme.fontSizeSmall
+    }
+
+    Rectangle {
+        id: pairingCard
+
+        width: parent.width
+        height: visible ? pairingColumn.implicitHeight + root.theme.gap * 2 : 0
+        visible: root.pairingDevice !== null || root.pairingPrompt !== null
+        radius: root.theme.popupSectionRadius
+        color: root.theme.popupSectionBackground
+        border.width: root.theme.popupBorderWidth
+        border.color: root.theme.popupBorder
+
+        Column {
+            id: pairingColumn
+
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.margins: root.theme.gap
+            spacing: root.theme.gap
+
+            Text {
+                width: parent.width
+                text: root.pairingPrompt ? root.promptTitle() : `Pair ${bluetoothSource.displayName(root.pairingDevice)}`
+                color: root.theme.popupText
+                elide: Text.ElideRight
+                font.family: root.theme.fontFamily
+                font.pixelSize: root.theme.fontSize
+                font.bold: true
+            }
+
+            Text {
+                width: parent.width
+                text: root.promptBody()
+                color: root.theme.popupMutedText
+                wrapMode: Text.WordWrap
+                font.family: root.theme.fontFamily
+                font.pixelSize: root.theme.fontSizeSmall
+            }
+
+            Rectangle {
+                width: parent.width
+                height: root.promptNeedsInput() ? root.theme.compactRowHeight : 0
+                visible: root.promptNeedsInput()
+                radius: root.theme.popupSectionRadius
+                color: root.theme.popupElevatedBackground
+                border.width: root.theme.popupBorderWidth
+                border.color: promptInput.activeFocus ? root.theme.selectedBackground : root.theme.popupBorder
+
+                TextInput {
+                    id: promptInput
+
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: root.theme.gap
+                    anchors.rightMargin: root.theme.gap
+                    text: root.pairingSecret
+                    echoMode: TextInput.Password
+                    color: root.theme.popupText
+                    selectionColor: root.theme.selectedBackground
+                    selectedTextColor: root.theme.selectedForeground
+                    font.family: root.theme.fontFamily
+                    font.pixelSize: root.theme.fontSizeSmall
+                    onTextChanged: root.pairingSecret = text
+                    Keys.onReturnPressed: root.acceptPairingPrompt()
+                }
+            }
+
+            Row {
+                width: parent.width
+                height: root.theme.compactRowHeight
+                spacing: root.theme.gap
+
+                SettingsActionButton { theme: root.theme; width: (parent.width - root.theme.gap) / 2; text: "Cancel"; activate: root.cancelPairing }
+                SettingsActionButton { theme: root.theme; width: (parent.width - root.theme.gap) / 2; text: root.pairingPrompt ? "Allow" : "Pair"; active: true; activate: root.pairingPrompt ? root.acceptPairingPrompt : root.submitPairing }
+            }
         }
     }
 
@@ -158,6 +195,7 @@ Column {
         title: "Connected"
         emptyText: "No connected devices"
         devices: root.connectedDevices
+        requestPair: root.requestPairing
     }
 
     DeviceSection {
@@ -166,18 +204,80 @@ Column {
         title: "Paired"
         emptyText: "No paired devices"
         devices: root.pairedDevices
+        requestPair: root.requestPairing
     }
 
     DeviceSection {
         theme: root.theme
         width: parent.width
-        title: root.discovering ? "Available" : "Available (scan off)"
-        emptyText: root.enabled ? (root.discovering ? "Searching for devices" : "Start scan to find devices") : "Bluetooth disabled"
-        devices: root.enabled && root.discovering ? root.availableDevices : []
+        title: "Available"
+        emptyText: root.enabled ? "Searching for devices" : "Bluetooth disabled"
+        devices: root.enabled ? root.availableDevices : []
+        requestPair: root.requestPairing
     }
 
-    function sortedDevices() {
-        return [...Bluetooth.devices.values].sort((a, b) => Number(b.connected) - Number(a.connected) || Number(b.bonded || b.paired) - Number(a.bonded || a.paired) || String(a.name || a.address || "").localeCompare(String(b.name || b.address || "")));
+    function requestPairing(device) {
+        root.pairingDevice = device;
+    }
+
+    function submitPairing() {
+        if (!root.pairingDevice) {
+            return;
+        }
+        bluetoothSource.pairDevice(root.pairingDevice);
+        root.cancelPairing();
+    }
+
+    function cancelPairing() {
+        if (root.pairingPrompt) {
+            bluetoothSource.cancelPairingPrompt(root.pairingPrompt);
+        }
+        root.pairingDevice = null;
+        root.pairingPrompt = null;
+        root.pairingSecret = "";
+    }
+
+    function acceptPairingPrompt() {
+        if (!root.pairingPrompt) {
+            return;
+        }
+        const fields = root.pairingPrompt.fields || [];
+        const secrets = {};
+        if (fields.indexOf("pin") !== -1) secrets.pin = root.pairingSecret;
+        if (fields.indexOf("passkey") !== -1) secrets.passkey = root.pairingSecret;
+        if (fields.indexOf("decision") !== -1) secrets.decision = "yes";
+        bluetoothSource.submitPairingPrompt(root.pairingPrompt.token, true, secrets);
+        root.pairingPrompt = null;
+        root.pairingSecret = "";
+    }
+
+    function promptNeedsInput() {
+        const fields = root.pairingPrompt?.fields || [];
+        return fields.indexOf("pin") !== -1 || fields.indexOf("passkey") !== -1;
+    }
+
+    function promptTitle() {
+        const name = root.pairingPrompt?.deviceName || "Bluetooth device";
+        const type = root.pairingPrompt?.type || "confirm";
+        if (type === "pin" || type === "passkey") return `Enter code for ${name}`;
+        if (type === "display-pin" || type === "display-passkey") return `Code for ${name}`;
+        return `Pair ${name}`;
+    }
+
+    function promptBody() {
+        if (!root.pairingPrompt) {
+            return "Confirm pairing on the device if a prompt appears.";
+        }
+        const display = root.pairingPrompt.display || "";
+        const type = root.pairingPrompt.type || "confirm";
+        if (type === "display-pin" || type === "display-passkey") return display.length > 0 ? `Enter ${display} on the device.` : "Enter the displayed code on the device.";
+        if (type === "confirm") return display.length > 0 ? `Confirm code ${display} on both devices.` : "Confirm pairing on both devices.";
+        if (type === "authorize" || type === "authorize-service") return "Allow this Bluetooth connection.";
+        return "Enter the Bluetooth pairing code.";
+    }
+
+    function deviceName(device) {
+        return bluetoothSource.displayName(device);
     }
 
     component DeviceSection: Column {
@@ -187,16 +287,14 @@ Column {
         property string title: ""
         property string emptyText: ""
         property var devices: []
+        property var requestPair: device => {}
 
         spacing: theme.gap
 
-        Text {
+        SettingsSectionLabel {
+            theme: deviceSection.theme
             width: parent.width
             text: parent.title
-            color: theme.popupMutedText
-            font.family: theme.fontFamily
-            font.pixelSize: theme.fontSize * 0.86
-            font.bold: true
         }
 
         Repeater {
@@ -206,21 +304,16 @@ Column {
                 theme: deviceSection.theme
                 width: deviceSection.width
                 device: modelData
+                deviceSource: bluetoothSource
+                requestPair: deviceSection.requestPair
             }
         }
 
-        Item {
+        SettingsEmptyState {
+            theme: deviceSection.theme
             width: deviceSection.width
-            height: deviceSection.devices.length === 0 ? theme.popupElementSize * 1.4 : 0
             visible: deviceSection.devices.length === 0
-
-            Text {
-                anchors.centerIn: parent
-                text: deviceSection.emptyText
-                color: theme.popupMutedText
-                font.family: theme.fontFamily
-                font.pixelSize: theme.fontSize * 0.86
-            }
+            text: deviceSection.emptyText
         }
     }
 
@@ -229,11 +322,13 @@ Column {
 
         required property var theme
         required property var device
+        required property var deviceSource
+        property var requestPair: device => {}
         readonly property bool connected: !!device.connected
-        readonly property bool paired: !!(device.bonded || device.paired)
+        readonly property bool paired: deviceSource.isPaired(device)
         readonly property bool loading: String(device.state).toLowerCase().includes("connecting") || String(device.state).toLowerCase().includes("disconnecting") || String(device.state).toLowerCase().includes("pairing")
 
-        height: theme.popupElementSize * 1.25
+        height: theme.listRowHeight
         radius: theme.popupSectionRadius
         color: deviceHover.containsMouse || connected ? theme.chipHoverBackground : theme.popupSectionBackground
         opacity: loading ? 0.7 : 1
@@ -258,7 +353,7 @@ Column {
 
             Text {
                 width: parent.width
-                text: deviceRow.device.name || deviceRow.device.address || "Bluetooth device"
+                text: deviceRow.deviceSource.displayName(deviceRow.device)
                 color: deviceRow.connected ? theme.popupAccent : theme.popupText
                 elide: Text.ElideRight
                 font.family: theme.fontFamily
@@ -272,7 +367,7 @@ Column {
                 color: theme.popupMutedText
                 elide: Text.ElideRight
                 font.family: theme.fontFamily
-                font.pixelSize: theme.fontSize * 0.76
+                font.pixelSize: theme.fontSizeSmall
             }
         }
 
@@ -285,7 +380,7 @@ Column {
             text: deviceRow.loading ? "󰑓" : deviceRow.connected ? "Disconnect" : "Connect"
             color: deviceRow.connected ? theme.popupAccent : theme.popupText
             font.family: theme.fontFamily
-            font.pixelSize: deviceRow.connected || !deviceRow.loading ? theme.fontSize * 0.78 : theme.fontSize
+            font.pixelSize: deviceRow.connected || !deviceRow.loading ? theme.fontSizeSmall : theme.fontSize
             font.bold: !deviceRow.loading
         }
 
@@ -299,14 +394,14 @@ Column {
             text: "󰆴"
             color: theme.popupMutedText
             font.family: theme.fontFamily
-            font.pixelSize: theme.fontSize * 0.9
+            font.pixelSize: theme.fontSizeSmall
 
             MouseArea {
                 anchors.fill: parent
                 anchors.margins: -theme.gap * 0.7
-                cursorShape: Qt.PointingHandCursor
+                cursorShape: Qt.ArrowCursor
                 hoverEnabled: true
-                onClicked: deviceRow.device.forget()
+                onClicked: deviceRow.deviceSource.forgetDevice(deviceRow.device)
             }
         }
 
@@ -315,10 +410,10 @@ Column {
 
             anchors.fill: parent
             anchors.rightMargin: deviceRow.paired ? theme.popupElementSize : 0
-            cursorShape: deviceRow.loading ? Qt.ArrowCursor : Qt.PointingHandCursor
+            cursorShape: Qt.ArrowCursor
             hoverEnabled: !deviceRow.loading
             enabled: !deviceRow.loading
-            onClicked: deviceRow.device.connected = !deviceRow.device.connected
+            onClicked: deviceRow.paired ? deviceRow.deviceSource.toggleDevice(deviceRow.device) : deviceRow.requestPair(deviceRow.device)
         }
 
         function statusText() {
@@ -338,18 +433,6 @@ Column {
             if (name.includes("phone")) return "󰏲";
             return "󰂯";
         }
-    }
-
-    component InfoRow: Item {
-        required property var theme
-        property string label: ""
-        property string value: ""
-
-        width: parent.width
-        height: theme.statRowHeight
-
-        Text { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; text: label; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.86; font.bold: true }
-        Text { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize * 0.86 }
     }
 
 }

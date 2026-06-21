@@ -126,6 +126,7 @@ ModuleChip {
                 id: popupContent
 
                 theme: root.theme
+                dashboardPopupOpen: root.popupOpen
                 pulseLauncher: (context, percent) => root.pulseLauncher(context, percent)
                 openSettings: tab => {
                     root.popupOpen = false;
