@@ -3,5 +3,5 @@
     ../../hyprpanel/module.nix
   ];
 
-  hyprpanel.enable = true;
+  hyprpanel.enable = false;
 }

@@ -6,24 +6,58 @@ Item {
     id: theme
 
     readonly property string stylixColorsPath: `${Quickshell.env("HOME")}/.local/state/stylix/colors.json`
+    readonly property string stylixThemeNamePath: `${Quickshell.env("HOME")}/.local/state/stylix/current-theme-name.txt`
     readonly property int fontSize: 13
     readonly property string fontFamily: "SFMono Nerd Font"
 
     readonly property real em: fontSize
-    readonly property real rem: fontSize
 
-    readonly property int barHeight: Math.round(em * 2.25)
-    readonly property int barOuterSpacing: Math.round(em * 0.5)
-    readonly property int barRadius: 0
+    readonly property int barIconSize: Math.round(em * 1.23)
+    readonly property int barItemHeight: Math.round(em * 1.85)
+    readonly property int barPaddingY: Math.max(0, Math.round((barItemHeight - barIconSize) / 2))
+    readonly property int barHeight: barItemHeight + barPaddingY * 2
+    readonly property int barOuterSpacing: Math.round(em * 0.25)
+    readonly property int barRadius: Math.round(em * 0.55)
     readonly property int barBorderWidth: 0
 
     readonly property int moduleGap: Math.round(em * 0.35)
-    readonly property int modulePaddingX: Math.round(rem * 0.6)
+    readonly property int modulePaddingX: Math.round(em * 0.6)
     readonly property int modulePaddingY: 0
     readonly property int moduleMarginY: Math.round(em * 0.1)
+    readonly property int chipGap: Math.round(em * 0.35)
+    readonly property int chipPaddingX: Math.round(em * 0.55)
+    readonly property int chipPaddingY: barPaddingY
+    readonly property int chipRadius: Math.round(em * 0.35)
+    readonly property int iconGap: Math.round(em * 0.35)
+    readonly property int trayGap: Math.round(em * 0.55)
+    readonly property int windowTitleMaxWidth: Math.round(em * 22)
+    readonly property int weatherMaxWidth: Math.round(em * 12)
+    readonly property int clockMaxWidth: Math.round(em * 20)
+    readonly property int gap: Math.round(em * 0.69)
+    readonly property int calendarPopupWidth: Math.round(em * 31)
+    readonly property int popupSectionRadius: Math.round(em * 0.45)
+    readonly property int calendarCellWidth: Math.round(em * 2.95)
+    readonly property int calendarCellHeight: Math.round(em * 1.9)
+    readonly property int calendarCellSize: Math.round(em * 2.35)
+    readonly property int popupElementSize: Math.round(em * 2.35)
+    readonly property int weatherHourlyCellWidth: Math.round(em * 5.4)
+    readonly property int dashboardControlCell: Math.round(em * 4.3)
+    readonly property int dashboardPopupWidth: dashboardControlCell * 6 + gap * 5 + gap * 2
+    readonly property int dashboardTileHeight: Math.round(em * 3.55)
+    readonly property int dashboardSliderHeight: Math.round(em * 3.05)
+    readonly property int dashboardSliderThumbSize: Math.round(em * 0.92)
+    readonly property int notificationPopupWidth: Math.round(em * 30)
+    readonly property int notificationPopupHeight: Math.round(em * 52)
+    readonly property int trayIconSize: barIconSize
+    readonly property int trayItemSize: barItemHeight
+    readonly property int statRowHeight: Math.round(em * 1.75)
 
-    readonly property int workspaceGap: Math.round(rem * 0.375)
-    readonly property int workspaceHeight: Math.round(em * 1.7)
+    readonly property string weatherLocation: "10001"
+    readonly property string weatherApiKeyPath: `${Quickshell.env("HOME")}/.config/hyprpanel/weather_api_key`
+    readonly property bool weatherMetric: true
+
+    readonly property int workspaceGap: Math.round(em * 0.375)
+    readonly property int workspaceHeight: barItemHeight
     readonly property int workspaceRadius: Math.round(em * 0.7)
     readonly property int workspaceInactivePaddingX: Math.round(em * 0.4)
     readonly property int workspaceActivePaddingX: Math.round(em * 0.4)
@@ -31,18 +65,61 @@ Item {
     readonly property int workspaceActiveMinWidth: Math.round(em * 2.1)
 
     readonly property color transparentColor: "transparent"
-    readonly property color barBackground: color("color0")
-    readonly property color barBorder: color("color2")
-    readonly property color moduleBackground: color("color1")
-    readonly property color moduleHoverBackground: color("color2")
-    readonly property color workspaceAvailableBackground: color("color2")
-    readonly property color workspaceOccupiedBackground: color("color4")
-    readonly property color workspaceActiveBackground: color("color12")
-    readonly property color workspaceVirtualBackground: color("color13")
-    readonly property color workspaceText: color("color6")
-    readonly property color workspaceActiveText: color("color0")
+    readonly property color appleSystemBlue: isLightTheme ? "#007AFF" : "#0A84FF"
+    readonly property color appleLabel: isLightTheme ? "#000000" : "#FFFFFF"
+    readonly property color appleSecondaryLabel: isLightTheme ? "#3C3C43" : "#EBEBF5"
+    readonly property color appleTertiaryLabel: isLightTheme ? "#8E8E93" : "#8E8E93"
+    readonly property color appleSystemBackground: isLightTheme ? "#FFFFFF" : "#1C1C1E"
+    readonly property color appleSecondarySystemBackground: isLightTheme ? "#F2F2F7" : "#2C2C2E"
+    readonly property color appleTertiarySystemBackground: isLightTheme ? "#FFFFFF" : "#3A3A3C"
+    readonly property color appleSeparator: isLightTheme ? withAlpha("#3C3C43", 0.22) : withAlpha("#545458", 0.65)
+    readonly property color appleFill: isLightTheme ? withAlpha("#787880", 0.20) : withAlpha("#787880", 0.36)
+    readonly property color appleFillHover: isLightTheme ? withAlpha("#787880", 0.28) : withAlpha("#787880", 0.44)
+    readonly property color selectedForeground: "#FFFFFF"
+    readonly property color selectedBackground: appleSystemBlue
+    readonly property color notSelectedForeground: appleLabel
+    readonly property color notSelectedBackground: appleFill
+    readonly property color unselectedForeground: notSelectedForeground
+    readonly property color unselectedBackground: notSelectedBackground
+    readonly property color barBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.82 : 0.72)
+    readonly property color barBorder: appleSeparator
+    readonly property color moduleBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.78 : 0.62)
+    readonly property color moduleHoverBackground: appleFillHover
+    readonly property color workspaceAvailableBackground: notSelectedBackground
+    readonly property color workspaceOccupiedBackground: notSelectedBackground
+    readonly property color workspaceActiveBackground: selectedBackground
+    readonly property color workspaceVirtualBackground: notSelectedBackground
+    readonly property color workspaceText: notSelectedForeground
+    readonly property color workspaceActiveText: selectedForeground
+    readonly property color chipBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.78 : 0.62)
+    readonly property color chipHoverBackground: appleFillHover
+    readonly property color chipText: notSelectedForeground
+    readonly property color iconColor: notSelectedForeground
+    readonly property color iconActiveColor: selectedBackground
+    readonly property color iconMutedColor: appleTertiaryLabel
+    readonly property color iconOnAccentColor: selectedForeground
+    readonly property color chipIcon: iconColor
+    readonly property color submapActiveBackground: selectedBackground
+    readonly property color submapActiveText: selectedForeground
+    readonly property color weatherIcon: iconActiveColor
+    readonly property color clockIcon: iconColor
+    readonly property color popupBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.72 : 0.62)
+    readonly property color popupSectionBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.72 : 0.58)
+    readonly property color popupHoverBackground: appleFillHover
+    readonly property color popupSelectedBackground: selectedBackground
+    readonly property color popupBorder: appleSeparator
+    readonly property int popupBorderWidth: 1
+    readonly property color popupText: appleLabel
+    readonly property color popupMutedText: appleTertiaryLabel
+    readonly property color popupAccent: iconActiveColor
+    readonly property color calendarWeekendText: color("color9")
+    readonly property color popupSuccess: color("color10")
+    readonly property color popupWarning: color("color11")
+    readonly property color popupDanger: color("color9")
 
     property var stylix: parseJson(stylixColors.text())
+    property string stylixThemeName: stylixThemeNameFile.text().trim()
+    readonly property bool isLightTheme: stylixThemeName.endsWith("-light")
 
     FileView {
         id: stylixColors
@@ -53,6 +130,17 @@ Item {
         watchChanges: true
         onFileChanged: reload()
         onTextChanged: theme.stylix = theme.parseJson(text())
+    }
+
+    FileView {
+        id: stylixThemeNameFile
+
+        path: theme.stylixThemeNamePath
+        blockLoading: true
+        printErrors: false
+        watchChanges: true
+        onFileChanged: reload()
+        onTextChanged: theme.stylixThemeName = stylixThemeNameFile.text().trim()
     }
 
     function parseJson(rawText) {
@@ -71,5 +159,20 @@ Item {
     function color(name) {
         const palette = stylix && stylix.colors ? stylix.colors : {};
         return palette[name] || palette.color0 || transparentColor;
+    }
+
+    function withAlpha(value, alpha) {
+        const text = String(value || "");
+        if (text === "transparent") {
+            return Qt.rgba(0, 0, 0, 0);
+        }
+        const hex = text.startsWith("#") ? text.slice(1) : text;
+        if (hex.length === 6) {
+            return Qt.rgba(parseInt(hex.slice(0, 2), 16) / 255, parseInt(hex.slice(2, 4), 16) / 255, parseInt(hex.slice(4, 6), 16) / 255, alpha);
+        }
+        if (hex.length === 8) {
+            return Qt.rgba(parseInt(hex.slice(2, 4), 16) / 255, parseInt(hex.slice(4, 6), 16) / 255, parseInt(hex.slice(6, 8), 16) / 255, alpha);
+        }
+        return Qt.rgba(0, 0, 0, 0);
     }
 }

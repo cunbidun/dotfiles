@@ -19,9 +19,25 @@ in {
       runtimeDeps = [
         pkgs.bash
         pkgs.coreutils
+        pkgs.curl
+        pkgs.gawk
         pkgs.inotify-tools
+        pkgs.networkmanager
+        pkgs.procps
         pkgs.quickshell
+        pkgs.gnused
+        pkgs.bluez
+        pkgs.brightnessctl
+        pkgs.darkman
+        pkgs.hyprpicker
+        pkgs.jq
+        pkgs.libnotify
+        pkgs.pamixer
+        pkgs.pulseaudio
+        pkgs.slurp
         pkgs.systemd
+        pkgs.wf-recorder
+        pkgs.wireplumber
         scripts.wsctl
         inputs.hyprland.packages.${system}.hyprland
       ];

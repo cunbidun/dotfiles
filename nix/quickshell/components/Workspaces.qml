@@ -24,15 +24,17 @@ Item {
     readonly property string focusedWorkspaceName: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.name : ""
     readonly property var hyprlandWorkspaces: Hyprland.workspaces.values
     readonly property var rememberedWorkspaces: parseJson(rememberedFile.text())
-    property int eventTick: 0
+    property int workspaceTick: 0
 
     implicitWidth: moduleFrame.implicitWidth
     implicitHeight: moduleFrame.implicitHeight
+    width: implicitWidth
+    height: implicitHeight
 
     Connections {
-        target: Hyprland
-        function onRawEvent() {
-            root.eventTick += 1;
+        target: Hyprland.workspaces
+        function onValuesChanged() {
+            root.workspaceTick += 1;
         }
     }
 
@@ -49,8 +51,10 @@ Item {
     Rectangle {
         id: moduleFrame
 
-        width: workspaceRow.implicitWidth + root.theme.modulePaddingX * 2
-        height: workspaceRow.implicitHeight + root.theme.modulePaddingY * 2
+        implicitWidth: workspaceRow.implicitWidth + root.theme.modulePaddingX * 2
+        implicitHeight: workspaceRow.implicitHeight + root.theme.modulePaddingY * 2
+        width: implicitWidth
+        height: implicitHeight
         radius: root.theme.workspaceRadius
         color: root.theme.moduleBackground
 
@@ -61,7 +65,7 @@ Item {
             spacing: root.theme.workspaceGap
 
             Repeater {
-                model: root.workspaceButtons(root.hyprlandWorkspaces, root.focusedWorkspaceName, root.rememberedWorkspaces, root.eventTick)
+                model: root.workspaceButtons(root.hyprlandWorkspaces, root.focusedWorkspaceName, root.rememberedWorkspaces, root.workspaceTick)
 
                 WorkspaceButton {
                     required property var modelData
@@ -150,11 +154,16 @@ Item {
             const subWorkspaces = isFocusedProject ? sortedSubWorkspaces(workspaceValues, project, focusedName) : [];
             const rememberedWorkspace = parseWorkspaceName(remembered[String(project)]);
             const rememberedSuffix = rememberedWorkspace && rememberedWorkspace.sub.length > 0 ? `[${rememberedWorkspace.sub}]` : "";
+            const occupied = hasProjectWorkspace(workspaceValues, project);
+
+            if (!isFocusedProject && !occupied && rememberedSuffix.length === 0) {
+                continue;
+            }
 
             buttons.push({
                 label: isFocusedProject && focused.sub.length > 0 ? `${baseLabel}[${focused.sub}]` : `${baseLabel}${rememberedSuffix}`,
                 active: !!isFocusedProject,
-                occupied: hasProjectWorkspace(workspaceValues, project),
+                occupied,
                 virtualWorkspace: rememberedSuffix.length > 0,
                 activate: () => focusProject(project)
             });

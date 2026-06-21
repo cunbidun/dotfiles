@@ -206,10 +206,13 @@ for _, rule in ipairs(windowRules) do
 end
 
 local agsPopupLayerNamespaces = "^(dashboardmenu|audiomenu|mediamenu|networkmenu|bluetoothmenu|notificationsmenu|calendarmenu|energymenu|powerdropdownmenu|sshforwardingmenu|verification|notifications-window|osd.*)$"
+local quickshellPopupLayerNamespaces = "^(quickshell-.*-popup)$"
 
 local layerRules = {
   { match = { namespace = agsPopupLayerNamespaces }, blur = true },
   { match = { namespace = agsPopupLayerNamespaces }, ignore_alpha = 0.2 },
+  { match = { namespace = quickshellPopupLayerNamespaces }, blur = true },
+  { match = { namespace = quickshellPopupLayerNamespaces }, ignore_alpha = 0.2 },
 }
 
 for _, rule in ipairs(layerRules) do

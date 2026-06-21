@@ -14,33 +14,17 @@ Rectangle {
 
     implicitWidth: Math.max(labelItem.implicitWidth + horizontalPadding * 2, active ? theme.workspaceActiveMinWidth : theme.workspaceMinWidth)
     implicitHeight: theme.workspaceHeight
+    width: implicitWidth
+    height: implicitHeight
     radius: theme.workspaceRadius
-    color: {
-        if (hoverArea.containsMouse) {
-            return theme.moduleHoverBackground;
-        }
-
-        if (active) {
-            return theme.workspaceActiveBackground;
-        }
-
-        if (virtualWorkspace) {
-            return theme.workspaceVirtualBackground;
-        }
-
-        if (occupied) {
-            return theme.workspaceOccupiedBackground;
-        }
-
-        return theme.workspaceAvailableBackground;
-    }
+    color: active ? theme.selectedBackground : theme.notSelectedBackground
 
     Text {
         id: labelItem
 
         anchors.centerIn: parent
         text: root.label
-        color: root.active ? root.theme.workspaceActiveText : root.theme.workspaceText
+        color: root.active ? root.theme.selectedForeground : root.theme.notSelectedForeground
         font.family: root.theme.fontFamily
         font.pixelSize: root.theme.fontSize
         font.weight: Font.Medium
