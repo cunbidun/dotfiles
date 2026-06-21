@@ -22,7 +22,6 @@ in {
     ../../home-manager/configs/starship.nix
     ../../home-manager/configs/kitty.nix
     ../../home-manager/configs/hyprland/hyprland.nix
-    ../../home-manager/configs/hyprpanel.nix
     ../../home-manager/configs/quickshell.nix
     ../../home-manager/configs/hyprland/hypridle.nix
     ../../home-manager/configs/hyprland/pyprland.nix

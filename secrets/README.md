@@ -106,7 +106,7 @@ Remote hosts such as `home-server` need the same Age private key at both service
    ssh root@home-server 'su - cunbidun -c "opencode debug config | jq -r \".lsp | keys | join(\\\",\\\")\""'
    ```
 
-The OpenCode GitHub token, ninerouter key, and HyprPanel weather key are stored encrypted in
+The OpenCode GitHub token, ninerouter key, and QuickShell weather key are stored encrypted in
 `secrets/user.yaml` and written by user `sops-nix` under `$HOME/.config`. The geolocation secret and
 system-service credentials are stored encrypted in `secrets/system.yaml`. 1Password only needs to keep the
 `SOPS Age Key` bootstrap item; service tokens do not need to be duplicated there.

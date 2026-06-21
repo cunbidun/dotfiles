@@ -53,7 +53,7 @@ Item {
     readonly property int statRowHeight: Math.round(em * 1.75)
 
     readonly property string weatherLocation: "10001"
-    readonly property string weatherApiKeyPath: `${Quickshell.env("HOME")}/.config/hyprpanel/weather_api_key`
+    readonly property string weatherApiKeyPath: `${Quickshell.env("HOME")}/.config/quickshell/weather_api_key`
     readonly property bool weatherMetric: true
 
     readonly property int workspaceGap: Math.round(em * 0.375)

@@ -17,8 +17,8 @@ in
       mode = "0400";
     };
 
-    secrets.hyprpanel_weather_api_key = {
-      path = "${configHome}/hyprpanel/weather_api_key";
+    secrets.quickshell_weather_api_key = {
+      path = "${configHome}/quickshell/weather_api_key";
       mode = "0400";
     };
   };

@@ -20,7 +20,7 @@ Rectangle {
     readonly property var activeMenuHandle: menuStack.length > 0 ? menuStack[menuStack.length - 1] : (activeTrayItem ? activeTrayItem.menu : null)
     readonly property bool hasFcitxTrayItem: SystemTray.items.values.some(item => root.isFcitx(item.id))
 
-    readonly property string iconRoot: `${Quickshell.env("HOME")}/dotfiles/nix/hyprpanel/config/icons`
+    readonly property string iconRoot: `${Quickshell.env("HOME")}/dotfiles/nix/quickshell/assets/icons`
 
     visible: trayItems.count > 0
     implicitWidth: trayContent.implicitWidth + theme.chipPaddingX * 2

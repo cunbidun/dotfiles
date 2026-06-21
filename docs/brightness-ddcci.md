@@ -7,8 +7,8 @@ Current setup exposes the Dell external monitor as a Linux backlight device:
 brightnessctl -d ddcci13 -m
 ```
 
-HyprPanel and the brightness keys use the real `brightnessctl`; there is no
-`ddcutil` wrapper. HyprPanel also watches the active backlight brightness file,
+QuickShell and the brightness keys use the real `brightnessctl`; there is no
+`ddcutil` wrapper. QuickShell also reads the active backlight brightness value,
 so the widget updates quickly after external brightness changes.
 
 ## NixOS Pieces
@@ -45,5 +45,5 @@ for f in /sys/bus/i2c/devices/i2c-*/name; do echo "$f: $(cat "$f")"; done
 
 If names differ, update the `grep` adapter match in `configuration.nix`.
 
-If the backlight device name changes, HyprPanel should auto-detect it from
+If the backlight device name changes, QuickShell should auto-detect it from
 `brightnessctl -m`; only scripts that hardcode `ddcci13` need updating.
