@@ -20,6 +20,7 @@ Item {
     readonly property var availableDevices: root.devices.filter(device => !device.connected && !root.isPaired(device) && !device.pairing && !device.blocked)
     property string status: ""
     property bool backendAvailable: false
+    property bool backendWanted: false
     property int requestId: 0
     readonly property string adapterDisplayName: root.goodName(adapter?.name) ? adapter.name : "Bluetooth"
     readonly property string backendSocketPath: `${Quickshell.env("XDG_RUNTIME_DIR") || "/tmp"}/quickshell-cunbidun/bluez-agent.sock`
@@ -29,8 +30,7 @@ Item {
 
     Component.onCompleted: {
         syncDiscovery();
-        requestSocket.connected = true;
-        subscribeSocket.connected = true;
+        root.connectBackend();
     }
     onEnabledChanged: syncDiscovery()
     onAdapterChanged: syncDiscovery()
@@ -206,7 +206,7 @@ Item {
         if (!requestSocket.connected) {
             root.backendAvailable = false;
             root.status = "Bluetooth pairing service unavailable";
-            requestSocket.connected = true;
+            root.scheduleBackendReconnect();
             return;
         }
         const request = {
@@ -237,6 +237,32 @@ Item {
         }
     }
 
+    function connectBackend() {
+        root.backendWanted = true;
+        backendReconnectTimer.stop();
+        requestSocket.connected = true;
+        subscribeSocket.connected = true;
+    }
+
+    function scheduleBackendReconnect() {
+        if (!root.backendWanted || backendReconnectTimer.running) {
+            return;
+        }
+        backendReconnectTimer.restart();
+    }
+
+    Timer {
+        id: backendReconnectTimer
+
+        interval: 1000
+        repeat: false
+        onTriggered: {
+            requestSocket.connected = false;
+            subscribeSocket.connected = false;
+            Qt.callLater(root.connectBackend);
+        }
+    }
+
     Socket {
         id: requestSocket
 
@@ -248,8 +274,12 @@ Item {
             root.backendAvailable = connected;
             if (connected) {
                 root.sendRequest("ping", {});
+            } else {
+                root.scheduleBackendReconnect();
             }
         }
+
+        onError: root.scheduleBackendReconnect()
 
         parser: SplitParser {
             onRead: line => {
@@ -273,8 +303,12 @@ Item {
             if (connected) {
                 subscribeSocket.write(JSON.stringify({ method: "subscribe" }) + "\n");
                 subscribeSocket.flush();
+            } else {
+                root.scheduleBackendReconnect();
             }
         }
+
+        onError: root.scheduleBackendReconnect()
 
         parser: SplitParser {
             onRead: line => {

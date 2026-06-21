@@ -124,8 +124,8 @@ in {
       systemd.user.services.quickshell-cunbidun = {
         Unit = {
           Description = "QuickShell (cunbidun config from source)";
-          After = ["graphical-session.target"];
-          Wants = ["graphical-session.target"];
+          After = ["graphical-session.target" "quickshell-bluez-agent-cunbidun.service"];
+          Wants = ["graphical-session.target" "quickshell-bluez-agent-cunbidun.service"];
           PartOf = ["graphical-session.target"];
         };
         Service = {
