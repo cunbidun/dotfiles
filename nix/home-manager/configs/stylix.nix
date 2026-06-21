@@ -170,7 +170,7 @@ in
     };
 
     opacity = {
-      terminal = 0.85;
+      terminal = 0.75;
     };
 
     fonts = lib.mkIf isLinux {

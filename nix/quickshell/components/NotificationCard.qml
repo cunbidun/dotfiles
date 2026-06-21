@@ -212,9 +212,23 @@ Rectangle {
         }
 
         const actions = root.safeRecord.actions || [];
-        if (actions.length > 0 && typeof actions[0].invoke === "function") {
+        const notification = root.safeRecord.notification;
+        const defaultAction = actions.find(action => String(action.identifier || "") === "default") || null;
+        let activated = false;
+
+        if (notification && typeof notification.activate === "function") {
+            notification.activate();
+            activated = true;
+        } else if (defaultAction && typeof defaultAction.invoke === "function") {
+            defaultAction.invoke();
+            activated = true;
+        } else if (actions.length === 1 && typeof actions[0].invoke === "function") {
             actions[0].invoke();
+            activated = true;
         }
-        root.closeNotification(root.record);
+
+        if (activated) {
+            root.closeNotification(root.record);
+        }
     }
 }

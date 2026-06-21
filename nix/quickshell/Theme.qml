@@ -7,13 +7,13 @@ Item {
 
     readonly property string stylixColorsPath: `${Quickshell.env("HOME")}/.local/state/stylix/colors.json`
     readonly property string stylixThemeNamePath: `${Quickshell.env("HOME")}/.local/state/stylix/current-theme-name.txt`
-    readonly property int fontSize: 13
+    readonly property int fontSize: 12
     readonly property string fontFamily: "SFMono Nerd Font"
 
     readonly property real em: fontSize
 
     readonly property int barIconSize: Math.round(em * 1.23)
-    readonly property int barItemHeight: Math.round(em * 1.85)
+    readonly property int barItemHeight: Math.round(em * 1.85) - 2
     readonly property int barPaddingY: Math.max(0, Math.round((barItemHeight - barIconSize) / 2))
     readonly property int barHeight: barItemHeight + barPaddingY * 2
     readonly property int barOuterSpacing: Math.round(em * 0.25)
@@ -81,7 +81,7 @@ Item {
     readonly property color notSelectedBackground: appleFill
     readonly property color unselectedForeground: notSelectedForeground
     readonly property color unselectedBackground: notSelectedBackground
-    readonly property color barBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.82 : 0.72)
+    readonly property color barBackground: transparentColor
     readonly property color barBorder: appleSeparator
     readonly property color moduleBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.78 : 0.62)
     readonly property color moduleHoverBackground: appleFillHover
@@ -103,8 +103,8 @@ Item {
     readonly property color submapActiveText: selectedForeground
     readonly property color weatherIcon: iconActiveColor
     readonly property color clockIcon: iconColor
-    readonly property color popupBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.72 : 0.62)
-    readonly property color popupSectionBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.72 : 0.58)
+    readonly property color popupBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.62 : 0.50)
+    readonly property color popupSectionBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.68 : 0.55)
     readonly property color popupHoverBackground: appleFillHover
     readonly property color popupSelectedBackground: selectedBackground
     readonly property color popupBorder: appleSeparator

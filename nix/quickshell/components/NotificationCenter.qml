@@ -47,6 +47,7 @@ ModuleChip {
                 time: new Date(),
                 urgency: notification.urgency,
                 actions: notification.actions.map(action => ({
+                    identifier: action.identifier || "",
                     text: action.text,
                     invoke: () => action.invoke()
                 }))

@@ -105,8 +105,15 @@ hl.config({
     },
     blur = {
       enabled = true,
-      size = 10,
+      size = 6,
       passes = 3,
+      vibrancy = 0.18,
+      vibrancy_darkness = 0.5,
+      brightness = 1.1,
+      noise = 0.015,
+      contrast = 1.0,
+      new_optimizations = true,
+      xray = false,
     },
   },
 
@@ -205,7 +212,7 @@ for _, rule in ipairs(windowRules) do
   hl.window_rule(rule)
 end
 
-local quickshellPopupLayerNamespaces = "^(quickshell-.*-popup)$"
+local quickshellPopupLayerNamespaces = "^(quickshell-.*)$"
 
 local layerRules = {
   { match = { namespace = quickshellPopupLayerNamespaces }, blur = true },
