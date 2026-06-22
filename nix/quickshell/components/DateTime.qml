@@ -13,6 +13,8 @@ ModuleChip {
     iconColor: theme.clockIcon
     label: clock.date.toLocaleString(Qt.locale(), "ddd MMM d  hh:mm:ss AP")
     maxLabelWidth: theme.clockMaxWidth
+    labelFixedWidth: true
+    labelTabularFigures: true
     activate: () => root.popupOpen = true
 
     PanelWindow {

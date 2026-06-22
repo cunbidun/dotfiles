@@ -4,6 +4,7 @@ Column {
     id: root
 
     required property var theme
+    required property var wifiSource
     property var goBack: () => {}
     readonly property string status: wifiSource.status
     property var passwordNetwork: null
@@ -13,10 +14,7 @@ Column {
     readonly property var activeNetwork: wifiSource.activeNetwork
     readonly property var connectionInfo: ({
         device: root.wifiDeviceName,
-        connection: root.activeNetwork.ssid || "",
-        address: wifiSource.address,
-        gateway: wifiSource.gateway,
-        dns: wifiSource.dns
+        connection: root.activeNetwork.ssid || ""
     })
     readonly property var nearbyNetworks: wifiSource.networks
     readonly property var savedNetworks: wifiSource.knownNetworks
@@ -24,10 +22,6 @@ Column {
     readonly property var otherNetworks: wifiSource.otherNetworks
 
     spacing: theme.gap
-
-    WifiNetworkSource {
-        id: wifiSource
-    }
 
     SettingsHeader {
         theme: root.theme
@@ -78,9 +72,8 @@ Column {
                         text: root.activeNetwork.ssid || root.connectionInfo.connection || (root.wifiEnabled ? "Not Connected" : "Wi-Fi Off")
                         color: root.theme.popupText
                         elide: Text.ElideRight
-                        font.family: root.theme.fontFamily
+                        font.family: root.theme.fontFamilyEmphasis
                         font.pixelSize: root.theme.fontSize
-                        font.bold: true
                     }
 
                     Text {
@@ -95,9 +88,6 @@ Column {
             }
 
             SettingsInfoRow { theme: root.theme; width: parent.width; label: "Connection"; value: root.connectionInfo.connection || "--" }
-            SettingsInfoRow { theme: root.theme; width: parent.width; label: "Address"; value: root.connectionInfo.address || "--" }
-            SettingsInfoRow { theme: root.theme; width: parent.width; label: "Gateway"; value: root.connectionInfo.gateway || "--" }
-            SettingsInfoRow { theme: root.theme; width: parent.width; label: "DNS"; value: root.connectionInfo.dns || "--" }
             SettingsInfoRow { theme: root.theme; width: parent.width; label: "Security"; value: root.activeNetwork.security || "--" }
         }
     }
@@ -127,9 +117,8 @@ Column {
                 text: `Join ${root.passwordNetwork?.ssid || "network"}`
                 color: root.theme.popupText
                 elide: Text.ElideRight
-                font.family: root.theme.fontFamily
+                font.family: root.theme.fontFamilyEmphasis
                 font.pixelSize: root.theme.fontSize
-                font.bold: true
             }
 
             Rectangle {
@@ -182,14 +171,17 @@ Column {
         spacing: root.theme.gap * 0.2
 
         Repeater {
-            model: root.knownNearbyNetworks.slice(0, 8)
+            model: root.knownNearbyNetworks.length
 
             NetworkRow {
+                required property int index
+
                 theme: root.theme
                 width: parent.width
-                wifiNetwork: modelData
-                activate: () => modelData.active ? root.disconnectWifi() : root.requestConnect(modelData)
-                forget: () => root.forgetNetwork(modelData)
+                wifiNetwork: root.knownNearbyNetworks[index]
+                activate: () => root.requestConnect(wifiNetwork)
+                disconnect: () => root.disconnectWifi()
+                forget: () => root.forgetNetwork(wifiNetwork)
                 showForget: true
             }
         }
@@ -213,13 +205,16 @@ Column {
         spacing: root.theme.gap * 0.2
 
         Repeater {
-            model: root.otherNetworks.slice(0, 12)
+            model: root.otherNetworks.length
 
             NetworkRow {
+                required property int index
+
                 theme: root.theme
                 width: parent.width
-                wifiNetwork: modelData
-                activate: () => root.requestConnect(modelData)
+                wifiNetwork: root.otherNetworks[index]
+                activate: () => root.requestConnect(wifiNetwork)
+                disconnect: () => {}
                 forget: () => {}
                 showForget: false
             }
@@ -244,7 +239,7 @@ Column {
     }
 
     function refresh(rescan) {
-        wifiSource.refresh();
+        wifiSource.refresh(rescan);
     }
 
     function setWifiEnabled(enabled) {
@@ -252,6 +247,13 @@ Column {
     }
 
     function requestConnect(network) {
+        if (network.active) {
+            return;
+        }
+        if (network.enterprise) {
+            wifiSource.status = "Enterprise Wi-Fi is not supported here yet";
+            return;
+        }
         if (network.secure && !network.saved && !network.active) {
             root.passwordNetwork = network;
             root.wifiPassword = "";
@@ -295,12 +297,16 @@ Column {
         property var wifiNetwork: ({})
         property bool showForget: false
         property var activate: () => {}
+        property var disconnect: () => {}
         property var forget: () => {}
+        property bool menuOpen: false
+        readonly property bool showMenu: true
 
         visible: String(wifiNetwork.ssid || "").trim().length > 0
+        z: networkRow.menuOpen ? 30 : 0
         height: visible ? theme.listRowHeight : 0
         radius: theme.popupSectionRadius
-        color: !!wifiNetwork.active ? theme.popupSelectedBackground : rowHover.containsMouse ? theme.popupHoverBackground : theme.popupSectionBackground
+        color: rowHover.containsMouse || menuButtonHover.containsMouse || networkRow.menuOpen ? theme.popupHoverBackground : theme.popupSectionBackground
         border.width: !!wifiNetwork.active ? theme.popupBorderWidth : 0
         border.color: theme.popupBorder
 
@@ -309,7 +315,7 @@ Column {
             anchors.leftMargin: theme.gap
             anchors.verticalCenter: parent.verticalCenter
             text: wifiNetwork.active ? "✓" : wifiNetwork.saved ? "󰤢" : ""
-            color: !!wifiNetwork.active ? theme.selectedForeground : theme.iconMutedColor
+            color: !!wifiNetwork.active ? theme.popupAccent : theme.iconMutedColor
             font.family: theme.fontFamily
             font.pixelSize: theme.fontSize
         }
@@ -317,7 +323,7 @@ Column {
         Column {
             anchors.left: parent.left
             anchors.leftMargin: theme.popupElementSize
-            anchors.right: detailIcon.left
+            anchors.right: trailingIcons.left
             anchors.rightMargin: theme.gap
             anchors.verticalCenter: parent.verticalCenter
             spacing: 1
@@ -325,18 +331,17 @@ Column {
             Text {
                 width: parent.width
                 text: wifiNetwork.ssid || ""
-                color: !!wifiNetwork.active ? theme.selectedForeground : theme.popupText
+                color: theme.popupText
                 elide: Text.ElideRight
-                font.family: theme.fontFamily
+                font.family: !!wifiNetwork.active ? theme.fontFamilyEmphasis : theme.fontFamily
                 font.pixelSize: theme.fontSize
-                font.bold: !!wifiNetwork.active
             }
 
             Text {
                 width: parent.width
-                visible: !!(wifiNetwork.active || wifiNetwork.saved || wifiNetwork.security)
-                text: wifiNetwork.active ? "Connected" : wifiNetwork.saved ? "Known Network" : wifiNetwork.security || ""
-                color: !!wifiNetwork.active ? theme.selectedForeground : theme.popupMutedText
+                visible: !!(wifiNetwork.saved || wifiNetwork.security)
+                text: wifiNetwork.saved ? "Known Network" : wifiNetwork.security || ""
+                color: theme.popupMutedText
                 elide: Text.ElideRight
                 font.family: theme.fontFamily
                 font.pixelSize: theme.fontSizeSmall
@@ -344,30 +349,120 @@ Column {
         }
 
         Row {
-            id: detailIcon
+            id: trailingIcons
 
             anchors.right: parent.right
             anchors.rightMargin: theme.gap
             anchors.verticalCenter: parent.verticalCenter
             spacing: theme.gap * 0.7
 
-            Text { visible: !!wifiNetwork.secure; text: "󰌾"; color: !!wifiNetwork.active ? theme.selectedForeground : theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; anchors.verticalCenter: parent.verticalCenter }
-            Text { text: networkIcon(wifiNetwork.signal || 0); color: !!wifiNetwork.active ? theme.selectedForeground : theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
-            Text { visible: !!networkRow.showForget; text: "󰍉"; color: theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
+            Spinner { visible: !!networkRow.wifiNetwork.connecting; theme: networkRow.theme; size: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
+            Text { visible: !!wifiNetwork.secure && !networkRow.wifiNetwork.connecting; text: "󰌾"; color: theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; anchors.verticalCenter: parent.verticalCenter }
+            Text { visible: !networkRow.wifiNetwork.connecting; text: networkIcon(wifiNetwork.signal || 0); color: theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
+
+            Rectangle {
+                id: menuButton
+
+                visible: networkRow.showMenu
+                width: Math.round(theme.em * 1.25)
+                height: width
+                radius: width / 2
+                color: menuButtonHover.containsMouse || networkRow.menuOpen ? theme.chipHoverBackground : theme.transparentColor
+                anchors.verticalCenter: parent.verticalCenter
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "ⓘ"
+                    color: menuButtonHover.containsMouse || networkRow.menuOpen ? theme.popupText : theme.iconMutedColor
+                    font.family: theme.fontFamily
+                    font.pixelSize: theme.fontSizeMedium
+                }
+
+                MouseArea {
+                    id: menuButtonHover
+
+                    anchors.fill: parent
+                    anchors.margins: -theme.gap * 0.45
+                    cursorShape: Qt.ArrowCursor
+                    hoverEnabled: true
+                    onClicked: mouse => {
+                        mouse.accepted = true;
+                        networkRow.menuOpen = !networkRow.menuOpen;
+                    }
+                }
+            }
         }
 
         MouseArea {
             id: rowHover
 
             anchors.fill: parent
+            anchors.rightMargin: networkRow.showMenu ? theme.popupElementSize : 0
             cursorShape: Qt.ArrowCursor
             hoverEnabled: true
-            acceptedButtons: Qt.LeftButton | Qt.RightButton
-            onClicked: mouse => {
-                if (mouse.button === Qt.RightButton && networkRow.showForget) {
-                    networkRow.forget();
-                } else {
-                    networkRow.activate();
+            acceptedButtons: Qt.LeftButton
+            onClicked: {
+                networkRow.menuOpen = false;
+                networkRow.activate();
+            }
+        }
+
+        Rectangle {
+            id: actionMenu
+
+            visible: networkRow.menuOpen
+            z: 20
+            width: theme.popupElementSize * 3.4
+            height: actionColumn.implicitHeight + theme.gap * 0.8
+            radius: theme.popupSectionRadius
+            color: theme.popupElevatedBackground
+            border.width: theme.popupBorderWidth
+            border.color: theme.popupBorder
+            anchors.right: parent.right
+            anchors.top: parent.bottom
+            anchors.topMargin: theme.gap * 0.35
+
+            Column {
+                id: actionColumn
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: theme.gap * 0.4
+                spacing: 0
+
+                ActionMenuRow {
+                    theme: networkRow.theme
+                    width: parent.width
+                    visible: !networkRow.wifiNetwork.active
+                    text: "Join"
+                    activate: () => {
+                        networkRow.menuOpen = false;
+                        networkRow.activate();
+                    }
+                }
+
+                ActionMenuRow {
+                    theme: networkRow.theme
+                    width: parent.width
+                    visible: !!networkRow.wifiNetwork.active
+                    text: "Disconnect"
+                    activate: () => {
+                        networkRow.menuOpen = false;
+                        networkRow.disconnect();
+                    }
+                }
+
+                ActionMenuRow {
+                    theme: networkRow.theme
+                    width: parent.width
+                    visible: networkRow.showForget
+                    text: "Forget"
+                    destructive: true
+                    activate: () => {
+                        networkRow.menuOpen = false;
+                        networkRow.forget();
+                    }
                 }
             }
         }
@@ -377,6 +472,38 @@ Column {
             if (signal >= 50) return "󰤥";
             if (signal >= 25) return "󰤢";
             return "󰤟";
+        }
+    }
+
+    component ActionMenuRow: Rectangle {
+        id: actionRow
+
+        required property var theme
+        property string text: ""
+        property bool destructive: false
+        property var activate: () => {}
+
+        height: visible ? theme.compactRowHeight * 0.82 : 0
+        radius: theme.popupSectionRadius * 0.7
+        color: actionHover.containsMouse ? theme.popupHoverBackground : theme.transparentColor
+
+        Text {
+            anchors.left: parent.left
+            anchors.leftMargin: theme.gap * 0.7
+            anchors.verticalCenter: parent.verticalCenter
+            text: actionRow.text
+            color: actionRow.destructive ? theme.popupDanger : theme.popupText
+            font.family: theme.fontFamily
+            font.pixelSize: theme.fontSizeSmall
+        }
+
+        MouseArea {
+            id: actionHover
+
+            anchors.fill: parent
+            cursorShape: Qt.ArrowCursor
+            hoverEnabled: true
+            onClicked: actionRow.activate()
         }
     }
 }

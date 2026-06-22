@@ -27,9 +27,8 @@ Rectangle {
             text: root.title
             color: root.theme.popupText
             elide: Text.ElideRight
-            font.family: root.theme.fontFamily
+            font.family: root.theme.fontFamilyEmphasis
             font.pixelSize: root.theme.fontSizeSmall
-            font.bold: true
         }
 
         Text {

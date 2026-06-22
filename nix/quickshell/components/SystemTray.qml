@@ -83,9 +83,8 @@ Rectangle {
                     visible: trayItem.inputMethodItem || !iconImage.visible
                     text: trayItem.inputMethodItem ? root.fcitxLabel(trayItem.modelData.icon) : root.trayTextLabel(trayItem.modelData.id)
                     color: root.theme.popupText
-                    font.family: root.theme.fontFamily
+                    font.family: root.theme.fontFamilyEmphasis
                     font.pixelSize: root.theme.barIconSize
-                    font.bold: true
                 }
 
                 MouseArea {
@@ -184,7 +183,7 @@ Rectangle {
                         spacing: root.theme.gap * 0.5
 
                         Text { text: "󰁍"; color: root.theme.popupText; font.family: root.theme.fontFamily; font.pixelSize: root.theme.fontSize }
-                        Text { text: "Back"; color: root.theme.popupText; font.family: root.theme.fontFamily; font.pixelSize: root.theme.fontSize; font.bold: true }
+                        Text { text: "Back"; color: root.theme.popupText; font.family: root.theme.fontFamilyEmphasis; font.pixelSize: root.theme.fontSize }
                     }
 
                     MouseArea {
@@ -415,7 +414,7 @@ Rectangle {
             return `file://${root.iconRoot}/systray/${polarity}/slack.svg`;
         }
         if (itemId.match(/Claude_status_icon_.*/)) {
-            return `file://${root.iconRoot}/claude-tray.svg`;
+            return `file://${root.iconRoot}/systray/${polarity}/claude.svg`;
         }
         if (itemId.match(/Codex_status_icon_.*/)) {
             return `file://${root.iconRoot}/codex-tray.svg`;

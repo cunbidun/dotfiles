@@ -1,22 +1,20 @@
 import QtQuick
 import Quickshell
+import Quickshell.Bluetooth
 
 Column {
     id: root
 
     required property var theme
+    required property var bluetoothSource
     property var goBack: () => {}
     property var openSettings: () => {}
-    readonly property var adapter: bluetoothSource.adapter
-    readonly property bool enabled: bluetoothSource.enabled
-    readonly property bool discovering: bluetoothSource.discovering
-    readonly property var sortedDevices: bluetoothSource.devices.slice(0, 8)
+    readonly property var adapter: root.bluetoothSource.adapter
+    readonly property bool enabled: root.bluetoothSource.enabled
+    readonly property bool discovering: root.bluetoothSource.discovering
+    readonly property var sortedDevices: root.bluetoothSource.devices.filter(device => root.bluetoothSource.isPaired(device) || device.connected || root.bluetoothSource.hasGoodName(device)).slice(0, 8)
 
     spacing: theme.gap
-
-    BluetoothDeviceSource {
-        id: bluetoothSource
-    }
 
     Rectangle {
         width: parent.width
@@ -42,15 +40,15 @@ Column {
             anchors.rightMargin: root.theme.gap
             anchors.verticalCenter: parent.verticalCenter
             checked: root.enabled
-            activate: () => bluetoothSource.setEnabled(!root.enabled)
+            activate: () => root.bluetoothSource.setEnabled(!root.enabled)
         }
     }
 
     Text {
         width: parent.width
         text: {
-            const connected = bluetoothSource.connectedDevices.length;
-            return `${bluetoothSource.devices.length} devices available${connected > 0 ? ` (${connected} connected)` : ""}`;
+            const connected = root.bluetoothSource.connectedDevices.length;
+            return `${root.bluetoothSource.devices.length} devices available${connected > 0 ? ` (${connected} connected)` : ""}`;
         }
         color: root.theme.popupMutedText
         font.family: root.theme.fontFamily
@@ -62,14 +60,16 @@ Column {
         spacing: root.theme.gap
 
         Repeater {
-            model: root.sortedDevices
+            model: root.sortedDevices.length
 
             Rectangle {
                 id: deviceRow
 
-                required property var modelData
-                readonly property bool connected: modelData.connected
-                readonly property bool loading: String(modelData.state).toLowerCase().includes("connecting") || String(modelData.state).toLowerCase().includes("disconnecting")
+                required property int index
+
+                readonly property var device: root.sortedDevices[index]
+                readonly property bool connected: device.connected
+                readonly property bool loading: !!device.pairing || device.state === BluetoothDeviceState.Connecting || device.state === BluetoothDeviceState.Disconnecting
 
                 width: parent.width
                 height: root.theme.listRowHeight
@@ -80,7 +80,7 @@ Column {
                     anchors.left: parent.left
                     anchors.leftMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
-                    text: root.bluetoothIcon(deviceRow.modelData.icon)
+                    text: root.bluetoothIcon(deviceRow.device.icon)
                     color: deviceRow.connected ? root.theme.iconActiveColor : root.theme.iconColor
                     font.family: root.theme.fontFamily
                     font.pixelSize: root.theme.fontSize
@@ -96,17 +96,16 @@ Column {
 
                     Text {
                         width: parent.width
-                        text: bluetoothSource.displayName(deviceRow.modelData)
+                        text: root.bluetoothSource.displayName(deviceRow.device)
                         color: deviceRow.connected ? root.theme.popupAccent : root.theme.popupText
                         elide: Text.ElideRight
-                        font.family: root.theme.fontFamily
+                        font.family: deviceRow.connected ? root.theme.fontFamilyEmphasis : root.theme.fontFamily
                         font.pixelSize: root.theme.fontSize
-                        font.bold: deviceRow.connected
                     }
 
                     Text {
                         width: parent.width
-                        text: deviceRow.connected ? "Connected" : bluetoothSource.isPaired(deviceRow.modelData) ? "Paired" : "Available"
+                        text: deviceRow.connected ? "Connected" : root.bluetoothSource.isPaired(deviceRow.device) ? "Paired" : "Available"
                         color: root.theme.popupMutedText
                         elide: Text.ElideRight
                         font.family: root.theme.fontFamily
@@ -117,23 +116,33 @@ Column {
                 Text {
                     id: batteryIcon
 
-                    visible: deviceRow.connected && deviceRow.modelData.batteryAvailable
+                    visible: deviceRow.connected && deviceRow.device.batteryAvailable
                     anchors.right: connectIcon.left
                     anchors.rightMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
-                    text: `${Math.round(deviceRow.modelData.battery * 100)}%`
+                    text: `${Math.round(deviceRow.device.battery * 100)}%`
                     color: root.theme.popupMutedText
                     font.family: root.theme.fontFamily
                     font.pixelSize: root.theme.fontSizeSmall
                 }
 
-                Text {
-                    id: connectIcon
-
+                Spinner {
+                    visible: deviceRow.loading
+                    theme: root.theme
+                    size: root.theme.fontSize
                     anchors.right: forgetIcon.left
                     anchors.rightMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
-                    text: deviceRow.loading ? "󰑓" : deviceRow.connected ? "󰌙" : "󰌘"
+                }
+
+                Text {
+                    id: connectIcon
+
+                    visible: !deviceRow.loading
+                    anchors.right: forgetIcon.left
+                    anchors.rightMargin: root.theme.gap
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: deviceRow.connected ? "󰌙" : "󰌘"
                     color: deviceRow.connected ? root.theme.iconActiveColor : root.theme.iconColor
                     font.family: root.theme.fontFamily
                     font.pixelSize: root.theme.fontSize
@@ -142,7 +151,7 @@ Column {
                 Text {
                     id: forgetIcon
 
-                    visible: bluetoothSource.isPaired(deviceRow.modelData)
+                    visible: root.bluetoothSource.isPaired(deviceRow.device)
                     anchors.right: parent.right
                     anchors.rightMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
@@ -156,7 +165,7 @@ Column {
                         anchors.margins: -root.theme.gap * 0.6
                         cursorShape: Qt.ArrowCursor
                         hoverEnabled: true
-                        onClicked: bluetoothSource.forgetDevice(deviceRow.modelData)
+                        onClicked: root.bluetoothSource.forgetDevice(deviceRow.device)
                     }
                 }
 
@@ -167,7 +176,7 @@ Column {
                     anchors.rightMargin: forgetIcon.visible ? root.theme.popupElementSize : 0
                     cursorShape: Qt.ArrowCursor
                     hoverEnabled: true
-                    onClicked: bluetoothSource.toggleDevice(deviceRow.modelData)
+                    onClicked: root.bluetoothSource.toggleDevice(deviceRow.device)
                 }
             }
         }
@@ -216,7 +225,7 @@ Column {
             spacing: theme.gap
 
             Text { text: icon; color: theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
-            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
+            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamilyEmphasis; font.pixelSize: theme.fontSizeSmall; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
         }
 
         MouseArea { id: hover; anchors.fill: parent; cursorShape: Qt.ArrowCursor; hoverEnabled: true; onClicked: parent.activate() }

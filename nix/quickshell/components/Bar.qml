@@ -6,6 +6,8 @@ Item {
     required property var theme
     required property var screen
     required property var panelWindow
+    required property var wifiSource
+    required property var bluetoothSource
     property var openSettings: tab => {}
 
     implicitHeight: theme.barHeight
@@ -61,6 +63,8 @@ Item {
         Dashboard {
             theme: root.theme
             panelWindow: root.panelWindow
+            wifiSource: root.wifiSource
+            bluetoothSource: root.bluetoothSource
             openSettings: root.openSettings
         }
 

@@ -42,6 +42,7 @@ in {
     ../../home-manager/configs/taskwarrior.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/hyprsunset.nix
+    ../../home-manager/configs/mpris-proxy.nix
     ../../home-manager/configs/llm_agent.nix
     ../../home-manager/configs/user-secrets.nix
   ];

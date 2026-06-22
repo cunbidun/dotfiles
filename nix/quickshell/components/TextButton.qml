@@ -30,9 +30,8 @@ Rectangle {
         Text {
             text: root.text
             color: root.theme.popupText
-            font.family: root.theme.fontFamily
+            font.family: root.theme.fontFamilyEmphasis
             font.pixelSize: root.theme.fontSize
-            font.bold: true
         }
     }
 

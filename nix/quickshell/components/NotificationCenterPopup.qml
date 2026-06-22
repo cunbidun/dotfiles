@@ -40,9 +40,8 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 text: root.notifications.length > 0 ? `Notifications (${root.notifications.length})` : "Notifications"
                 color: root.theme.popupText
-                font.family: root.theme.fontFamily
+                font.family: root.theme.fontFamilyEmphasis
                 font.pixelSize: root.theme.fontSizeMedium
-                font.bold: true
             }
 
             Rectangle {
@@ -174,9 +173,8 @@ Rectangle {
                             anchors.horizontalCenter: parent.horizontalCenter
                             text: "Nothing to see here"
                             color: root.theme.popupMutedText
-                            font.family: root.theme.fontFamily
+                            font.family: root.theme.fontFamilyEmphasis
                             font.pixelSize: root.theme.fontSize
-                            font.bold: true
                         }
                     }
                 }

@@ -8,6 +8,8 @@ Rectangle {
     property string label: ""
     property bool active: false
     property int maxLabelWidth: 0
+    property bool labelFixedWidth: false
+    property bool labelTabularFigures: false
     property color iconColor: active ? theme.selectedForeground : theme.chipIcon
     property var activate: () => {}
 
@@ -49,13 +51,17 @@ Rectangle {
             id: labelText
 
             visible: root.label.length > 0
-            width: root.maxLabelWidth > 0 ? Math.min(implicitWidth, root.maxLabelWidth) : implicitWidth
+            width: root.labelFixedWidth && root.maxLabelWidth > 0
+                ? root.maxLabelWidth
+                : (root.maxLabelWidth > 0 ? Math.min(implicitWidth, root.maxLabelWidth) : implicitWidth)
             height: parent.height
             text: root.label
             color: root.active ? root.theme.selectedForeground : root.theme.chipText
             elide: Text.ElideRight
+            horizontalAlignment: root.labelFixedWidth ? Text.AlignHCenter : Text.AlignLeft
             font.family: root.theme.fontFamily
             font.pixelSize: root.theme.fontSize
+            font.features: root.labelTabularFigures ? ({ "tnum": 1 }) : ({})
             verticalAlignment: Text.AlignVCenter
             renderType: Text.NativeRendering
         }

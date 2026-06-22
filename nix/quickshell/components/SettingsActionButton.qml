@@ -18,9 +18,8 @@ Rectangle {
         anchors.centerIn: parent
         text: root.text
         color: root.active ? theme.selectedForeground : theme.popupText
-        font.family: theme.fontFamily
+        font.family: theme.fontFamilyEmphasis
         font.pixelSize: theme.fontSizeSmall
-        font.bold: true
     }
 
     MouseArea {

@@ -4,6 +4,8 @@ Item {
     id: root
 
     required property var theme
+    required property var wifiSource
+    required property var bluetoothSource
     property string currentTab: "network"
     property var close: () => {}
 
@@ -80,9 +82,8 @@ Item {
                             text: "Settings"
                             color: root.theme.popupText
                             elide: Text.ElideRight
-                            font.family: root.theme.fontFamily
+                            font.family: root.theme.fontFamilyEmphasis
                             font.pixelSize: root.theme.fontSizeMedium
-                            font.bold: true
                         }
                     }
 
@@ -150,6 +151,7 @@ Item {
         SystemNetworkSettings {
             theme: root.theme
             width: contentLoader.width - root.theme.gap * 2
+            wifiSource: root.wifiSource
             goBack: root.close
         }
     }
@@ -160,6 +162,7 @@ Item {
         SystemBluetoothSettings {
             theme: root.theme
             width: contentLoader.width - root.theme.gap * 2
+            bluetoothSource: root.bluetoothSource
             goBack: root.close
         }
     }
@@ -184,7 +187,7 @@ Item {
             spacing: theme.gap
 
             Text { text: tabButton.icon; color: tabButton.active ? theme.selectedForeground : theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
-            Text { text: tabButton.text; color: tabButton.active ? theme.selectedForeground : theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true }
+            Text { text: tabButton.text; color: tabButton.active ? theme.selectedForeground : theme.popupText; font.family: theme.fontFamilyEmphasis; font.pixelSize: theme.fontSizeSmall }
         }
 
         MouseArea {

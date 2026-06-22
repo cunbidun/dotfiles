@@ -16,6 +16,14 @@ ShellRoot {
         id: shellTheme
     }
 
+    WifiNetworkSource {
+        id: shellWifiSource
+    }
+
+    BluetoothDeviceSource {
+        id: shellBluetoothSource
+    }
+
     function openSettings(tab, targetScreen) {
         settingsTab = tab || "network";
         settingsScreenName = targetScreen ? targetScreen.name : "";
@@ -46,8 +54,8 @@ ShellRoot {
             }
             margins {
                 top: shellTheme.barOuterSpacing
-                left: shellTheme.barOuterSpacing
-                right: shellTheme.barOuterSpacing
+                left: shellTheme.barHorizontalSpacing
+                right: shellTheme.barHorizontalSpacing
             }
             exclusiveZone: shellTheme.barHeight + shellTheme.barOuterSpacing
 
@@ -56,6 +64,8 @@ ShellRoot {
                 theme: shellTheme
                 screen: barWindow.screen
                 panelWindow: barWindow
+                wifiSource: shellWifiSource
+                bluetoothSource: shellBluetoothSource
                 openSettings: tab => shell.openSettings(tab, barWindow.screen)
             }
         }
@@ -89,6 +99,8 @@ ShellRoot {
                 anchors.fill: parent
                 theme: shellTheme
                 currentTab: shell.settingsTab
+                wifiSource: shellWifiSource
+                bluetoothSource: shellBluetoothSource
                 close: shell.closeSettings
                 onCurrentTabChanged: shell.settingsTab = currentTab
             }

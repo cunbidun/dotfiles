@@ -13,7 +13,11 @@ Item {
     readonly property int fontSizeMedium: 13
     readonly property int fontSizeLarge: 15
     readonly property int fontSizeXLarge: 18
-    readonly property string fontFamily: "SFMono Nerd Font"
+    // macOS UI font (SF Pro Text). Nerd Fonts ship weights as separate family
+    // names, so emphasis is selected by family, not font.weight/font.bold.
+    readonly property string fontFamily: "SFProText Nerd Font"
+    readonly property string fontFamilyMedium: "SFProText Nerd Font Medium"
+    readonly property string fontFamilyEmphasis: "SFProText Nerd Font SemiBold"
 
     readonly property real em: fontSize
 
@@ -21,7 +25,10 @@ Item {
     readonly property int barItemHeight: Math.round(em * 1.85) - 2
     readonly property int barPaddingY: Math.max(0, Math.round((barItemHeight - barIconSize) / 2))
     readonly property int barHeight: barItemHeight + barPaddingY * 2
-    readonly property int barOuterSpacing: Math.round(em * 0.25)
+    // Must match Hyprland general.gaps_out (hyprland.lua) so the bar lines up
+    // with the window grid: equal gap above the bar, below it, and on the sides.
+    readonly property int barOuterSpacing: 2
+    readonly property int barHorizontalSpacing: Math.round(em * 0.55)
     readonly property int generalRadius: Math.round(em * 0.45)
     readonly property int barRadius: generalRadius
     readonly property int barBorderWidth: 0
@@ -38,7 +45,7 @@ Item {
     readonly property int trayGap: Math.round(em * 0.55)
     readonly property int windowTitleMaxWidth: Math.round(em * 22)
     readonly property int weatherMaxWidth: Math.round(em * 12)
-    readonly property int clockMaxWidth: Math.round(em * 20)
+    readonly property int clockMaxWidth: Math.round(em * 14)
     readonly property int gap: Math.round(em * 0.69)
     readonly property int popupScreenMargin: Math.round(gap * 1.25)
     readonly property int popupSectionRadius: generalRadius

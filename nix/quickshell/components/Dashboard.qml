@@ -8,6 +8,8 @@ ModuleChip {
     id: root
 
     required property var panelWindow
+    required property var wifiSource
+    required property var bluetoothSource
     property var openSettings: tab => {}
     property bool popupOpen: false
     property bool launcherPulseActive: false
@@ -127,6 +129,8 @@ ModuleChip {
 
                 theme: root.theme
                 dashboardPopupOpen: root.popupOpen
+                wifiSource: root.wifiSource
+                bluetoothSource: root.bluetoothSource
                 pulseLauncher: (context, percent) => root.pulseLauncher(context, percent)
                 openSettings: tab => {
                     root.popupOpen = false;

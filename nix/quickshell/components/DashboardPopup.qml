@@ -2,11 +2,14 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Mpris
+import Quickshell.Widgets
 
 Rectangle {
     id: root
 
     required property var theme
+    required property var wifiSource
+    required property var bluetoothSource
     property var openSettings: tab => {}
     property var pulseLauncher: (context, percent) => {}
     property bool dashboardPopupOpen: false
@@ -27,9 +30,9 @@ Rectangle {
     readonly property int tileWidth: cell * 2 + gap
     readonly property int mediaWidth: cell * 4 + gap * 3
     readonly property var activePlayer: Mpris.players.values.find(player => player.isPlaying) || Mpris.players.values[0] || null
-    readonly property int connectedBluetoothDevices: dashboardBluetoothSource.connectedDevices.length
-    readonly property bool wifiEnabled: dashboardWifiSource.wifiEnabled
-    readonly property string wifiSsid: dashboardWifiSource.activeNetwork?.ssid ?? ""
+    readonly property int connectedBluetoothDevices: root.bluetoothSource.connectedDevices.length
+    readonly property bool wifiEnabled: root.wifiSource.wifiEnabled
+    readonly property string wifiSsid: root.wifiSource.activeNetwork?.ssid ?? ""
 
     width: theme.popupWidth
     height: activeContent.implicitHeight + theme.gap * 2
@@ -43,14 +46,6 @@ Rectangle {
     onDashboardPopupOpenChanged: if (!dashboardPopupOpen) {
         activeView = "dashboard";
         audioSelectorOpen = false;
-    }
-
-    WifiNetworkSource {
-        id: dashboardWifiSource
-    }
-
-    BluetoothDeviceSource {
-        id: dashboardBluetoothSource
     }
 
     Process {
@@ -155,26 +150,67 @@ Rectangle {
                     anchors.margins: root.gap
                     spacing: root.gap * 0.7
 
-                    Text {
-                        width: parent.width
-                        text: root.activePlayer ? root.activePlayer.trackTitle || root.activePlayer.identity : "Not Playing"
-                        color: root.theme.popupText
-                        elide: Text.ElideRight
-                        font.family: root.theme.fontFamily
-                        font.pixelSize: root.theme.fontSize
-                        font.bold: true
-                    }
+                    Row {
+                        id: mediaInfo
 
-                    Item {
                         width: parent.width
-                        height: parent.height - mediaControls.height - root.gap - root.theme.fontSizeXLarge
+                        height: parent.height - mediaControls.height - parent.spacing
+                        spacing: root.gap
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: root.activePlayer ? "" : "󰝚"
-                            color: root.theme.popupMutedText
-                            font.family: root.theme.fontFamily
-                            font.pixelSize: root.theme.fontSize * 1.7
+                        ClippingRectangle {
+                            id: artwork
+
+                            height: parent.height
+                            width: height
+                            radius: root.theme.popupSectionRadius * 0.8
+                            color: root.theme.popupBackground
+
+                            Image {
+                                id: artImage
+
+                                anchors.fill: parent
+                                source: root.activePlayer ? (root.activePlayer.trackArtUrl || "") : ""
+                                fillMode: Image.PreserveAspectCrop
+                                asynchronous: true
+                                cache: true
+                                sourceSize.width: width * 2
+                                sourceSize.height: height * 2
+                                visible: status === Image.Ready
+                            }
+
+                            Text {
+                                anchors.centerIn: parent
+                                visible: artImage.status !== Image.Ready
+                                text: "󰝚"
+                                color: root.theme.popupMutedText
+                                font.family: root.theme.fontFamily
+                                font.pixelSize: root.theme.fontSize * 1.4
+                            }
+                        }
+
+                        Column {
+                            width: parent.width - artwork.width - parent.spacing
+                            anchors.verticalCenter: parent.verticalCenter
+                            spacing: 2
+
+                            Text {
+                                width: parent.width
+                                text: root.activePlayer ? (root.activePlayer.trackTitle || root.activePlayer.identity) : "Not Playing"
+                                color: root.theme.popupText
+                                elide: Text.ElideRight
+                                font.family: root.theme.fontFamilyEmphasis
+                                font.pixelSize: root.theme.fontSize
+                            }
+
+                            Text {
+                                width: parent.width
+                                visible: text.length > 0
+                                text: root.activePlayer ? (root.activePlayer.trackArtist || "") : ""
+                                color: root.theme.popupMutedText
+                                elide: Text.ElideRight
+                                font.family: root.theme.fontFamily
+                                font.pixelSize: root.theme.fontSizeSmall
+                            }
                         }
                     }
 
@@ -253,9 +289,8 @@ Rectangle {
                     width: parent.width
                     text: "Output"
                     color: root.theme.popupMutedText
-                    font.family: root.theme.fontFamily
+                    font.family: root.theme.fontFamilyEmphasis
                     font.pixelSize: root.theme.fontSizeSmall
-                    font.bold: true
                 }
 
                 Repeater {
@@ -290,9 +325,8 @@ Rectangle {
                             text: outputRow.modelData.name
                             color: outputRow.modelData.active ? root.theme.popupAccent : root.theme.popupText
                             elide: Text.ElideRight
-                            font.family: root.theme.fontFamily
+                            font.family: outputRow.modelData.active ? root.theme.fontFamilyEmphasis : root.theme.fontFamily
                             font.pixelSize: root.theme.fontSizeSmall
-                            font.bold: outputRow.modelData.active
                         }
 
                         Text {
@@ -367,7 +401,7 @@ Rectangle {
         DashboardNetworkSubmenu {
             theme: root.theme
             width: root.width - root.theme.gap * 2
-            wifiSource: dashboardWifiSource
+            wifiSource: root.wifiSource
             goBack: () => root.activeView = "dashboard"
             openSettings: () => root.openSettings("network")
         }
@@ -379,6 +413,7 @@ Rectangle {
         DashboardBluetoothSubmenu {
             theme: root.theme
             width: root.width - root.theme.gap * 2
+            bluetoothSource: root.bluetoothSource
             goBack: () => root.activeView = "dashboard"
             openSettings: () => root.openSettings("bluetooth")
         }
@@ -423,7 +458,7 @@ Rectangle {
         if (root.connectedBluetoothDevices > 0) {
             return `${root.connectedBluetoothDevices} connected`;
         }
-        return dashboardBluetoothSource.enabled ? "On" : "Off";
+        return root.bluetoothSource.enabled ? "On" : "Off";
     }
 
     function quickActions() {
@@ -432,7 +467,7 @@ Rectangle {
             { icon: "", action: "color", enabled: true, active: false },
             { icon: root.inhibited ? "󰅶" : "󰾪", action: "inhibit", enabled: true, active: root.inhibited },
             { icon: root.nightLight ? "󰖔" : "󰖨", action: "nightlight", enabled: true, active: root.nightLight },
-            { icon: "󰔎", action: "theme", enabled: true, active: false },
+            { icon: root.theme.isLightTheme ? "󰖨" : "󰖔", action: "theme", enabled: true, active: root.theme.isLightTheme },
             { icon: "", action: "", enabled: false, active: false }
         ];
     }
@@ -458,7 +493,7 @@ Rectangle {
         } else if (action === "nightlight") {
             runCommand(`systemctl --user ${root.nightLight ? "stop" : "start"} hyprsunset.service`);
         } else if (action === "theme") {
-            runCommand('current="$(darkman get 2>/dev/null || echo dark)"; if [ "$current" = dark ]; then themectl set-polarity light; else themectl set-polarity dark; fi');
+            runCommand("themectl toggle");
         }
     }
 
@@ -503,7 +538,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width - parent.spacing - theme.popupElementSize * 0.8
                 spacing: 1
-                Text { text: title; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true }
+                Text { text: title; color: theme.popupText; font.family: theme.fontFamilyEmphasis; font.pixelSize: theme.fontSizeSmall }
                 Text { text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; elide: Text.ElideRight; width: parent.width }
             }
         }
@@ -565,9 +600,8 @@ Rectangle {
         }
 
         Text { x: theme.gap; y: theme.gap; text: icon; color: theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
-        Text { anchors.horizontalCenter: parent.horizontalCenter; y: theme.gap; text: title; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; font.bold: true }
+        Text { anchors.horizontalCenter: parent.horizontalCenter; y: theme.gap; text: title; color: theme.popupText; font.family: theme.fontFamilyEmphasis; font.pixelSize: theme.fontSize }
         Text { anchors.right: parent.right; anchors.rightMargin: theme.gap; y: theme.gap; text: `${percent}%`; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall }
-        Text { visible: sliderTile.expandable; anchors.right: parent.right; anchors.rightMargin: theme.gap; y: theme.gap + theme.fontSize; text: sliderTile.expanded ? "󰅀" : "󰅂"; color: theme.iconMutedColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall }
         Rectangle { x: theme.gap; y: parent.trackY; width: parent.trackWidth; height: 5; radius: 3; color: theme.popupBorder }
         Rectangle { x: theme.gap; y: parent.trackY; width: parent.trackWidth * parent.clampedPercent / 100; height: 5; radius: 3; color: theme.popupAccent }
         Rectangle { x: theme.gap + parent.trackWidth * parent.clampedPercent / 100 - width / 2; y: parent.trackY + 2.5 - height / 2; width: theme.dashboardSliderThumbSize; height: width; radius: width / 2; color: theme.popupText }
@@ -622,7 +656,7 @@ Rectangle {
         }
 
         Text { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; text: icon; color: accent; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
-        Text { anchors.left: parent.left; anchors.leftMargin: theme.popupElementSize; anchors.verticalCenter: parent.verticalCenter; text: label; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; font.bold: true }
+        Text { anchors.left: parent.left; anchors.leftMargin: theme.popupElementSize; anchors.verticalCenter: parent.verticalCenter; text: label; color: theme.popupText; font.family: theme.fontFamilyEmphasis; font.pixelSize: theme.fontSize }
         Text { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall }
 
         MouseArea {

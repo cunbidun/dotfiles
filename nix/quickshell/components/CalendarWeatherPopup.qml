@@ -102,9 +102,8 @@ Rectangle {
                         height: parent.height
                         text: root.visibleMonth.toLocaleString(Qt.locale(), "MMMM yyyy")
                         color: root.theme.popupText
-                        font.family: root.theme.fontFamily
+                        font.family: root.theme.fontFamilyEmphasis
                         font.pixelSize: root.theme.fontSizeMedium
-                        font.bold: true
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -116,9 +115,8 @@ Rectangle {
                         width: root.theme.calendarCellWidth
                         height: parent.height
                         color: root.theme.popupAccent
-                        font.family: root.theme.fontFamily
+                        font.family: root.theme.fontFamilyEmphasis
                         font.pixelSize: root.theme.fontSize * 1.7
-                        font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
@@ -136,9 +134,8 @@ Rectangle {
                         width: root.theme.calendarCellWidth
                         height: parent.height
                         color: root.theme.popupAccent
-                        font.family: root.theme.fontFamily
+                        font.family: root.theme.fontFamilyEmphasis
                         font.pixelSize: root.theme.fontSize * 1.7
-                        font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
@@ -169,9 +166,8 @@ Rectangle {
                             height: root.weekdayHeight
                             text: modelData
                             color: root.theme.popupMutedText
-                            font.family: root.theme.fontFamily
+                            font.family: root.theme.fontFamilyEmphasis
                             font.pixelSize: root.theme.fontSizeSmall
-                            font.bold: true
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -209,9 +205,8 @@ Rectangle {
                                     text: modelData.day
                                     color: root.calendarDayColor(modelData)
                                     opacity: modelData.currentMonth || modelData.today ? 1 : 0.45
-                                    font.family: root.theme.fontFamily
+                                    font.family: modelData.today ? root.theme.fontFamilyEmphasis : root.theme.fontFamily
                                     font.pixelSize: root.theme.fontSize
-                                    font.bold: modelData.today
                                 }
                             }
                         }
@@ -259,9 +254,8 @@ Rectangle {
                         Text {
                             text: root.weatherData ? `${Math.round(root.currentTemp())}° ${root.theme.weatherMetric ? "C" : "F"}` : "Weather"
                             color: root.theme.popupText
-                            font.family: root.theme.fontFamily
+                            font.family: root.theme.fontFamilyEmphasis
                             font.pixelSize: root.theme.fontSizeXLarge
-                            font.bold: true
                         }
 
                         Text {
@@ -320,9 +314,8 @@ Rectangle {
                                 width: parent.width
                                 text: modelData.time
                                 color: root.theme.popupText
-                                font.family: root.theme.fontFamily
+                                font.family: root.theme.fontFamilyEmphasis
                                 font.pixelSize: root.theme.fontSizeSmall
-                                font.bold: true
                                 horizontalAlignment: Text.AlignHCenter
                             }
 

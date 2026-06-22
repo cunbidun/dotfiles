@@ -1,32 +1,36 @@
 import QtQuick
+import Quickshell.Bluetooth
 
 Column {
     id: root
 
     required property var theme
+    required property var bluetoothSource
     property var goBack: () => {}
-    readonly property var adapter: bluetoothSource.adapter
-    readonly property bool enabled: bluetoothSource.enabled
-    readonly property bool discovering: bluetoothSource.discovering
-    readonly property var connectedDevices: bluetoothSource.connectedDevices.slice(0, 4)
-    readonly property var pairedDevices: bluetoothSource.pairedDevices.slice(0, 5)
-    readonly property var availableDevices: bluetoothSource.availableDevices.slice(0, 5)
-    readonly property string status: bluetoothSource.status
+    readonly property var adapter: root.bluetoothSource.adapter
+    readonly property bool enabled: root.bluetoothSource.enabled
+    readonly property bool discovering: root.bluetoothSource.discovering
+    readonly property var connectedDevices: root.bluetoothSource.connectedDevices
+    readonly property var pairedDevices: root.bluetoothSource.pairedDevices
+    readonly property var availableDevices: root.bluetoothSource.availableDevices
+    readonly property string status: root.bluetoothSource.status
     property var pairingDevice: null
     property var pairingPrompt: null
     property string pairingSecret: ""
 
     spacing: theme.gap
 
-    BluetoothDeviceSource {
-        id: bluetoothSource
+    Connections {
+        target: root.bluetoothSource
 
-        onPairingPrompt: prompt => {
+        function onPairingPrompt(prompt) {
             root.pairingPrompt = prompt;
             root.pairingSecret = "";
         }
 
-        onPairingCancelled: root.cancelPairing()
+        function onPairingCancelled() {
+            root.cancelPairing();
+        }
     }
 
     SettingsHeader {
@@ -35,7 +39,7 @@ Column {
         title: "Bluetooth"
         subtitle: root.enabled ? "Nearby devices update automatically." : "Turn on Bluetooth to connect devices."
         checked: root.enabled
-        toggle: () => bluetoothSource.setEnabled(!root.enabled)
+        toggle: () => root.bluetoothSource.setEnabled(!root.enabled)
     }
 
     Rectangle {
@@ -75,12 +79,11 @@ Column {
 
                     Text {
                         width: parent.width
-                        text: root.adapter ? bluetoothSource.adapterDisplayName : "No Adapter"
+                        text: root.adapter ? root.bluetoothSource.adapterDisplayName : "No Adapter"
                         color: root.theme.popupText
                         elide: Text.ElideRight
-                        font.family: root.theme.fontFamily
+                        font.family: root.theme.fontFamilyEmphasis
                         font.pixelSize: root.theme.fontSize
-                        font.bold: true
                     }
 
                     Text {
@@ -132,12 +135,11 @@ Column {
 
             Text {
                 width: parent.width
-                text: root.pairingPrompt ? root.promptTitle() : `Pair ${bluetoothSource.displayName(root.pairingDevice)}`
+                text: root.pairingPrompt ? root.promptTitle() : `Pair ${root.bluetoothSource.displayName(root.pairingDevice)}`
                 color: root.theme.popupText
                 elide: Text.ElideRight
-                font.family: root.theme.fontFamily
+                font.family: root.theme.fontFamilyEmphasis
                 font.pixelSize: root.theme.fontSize
-                font.bold: true
             }
 
             Text {
@@ -224,13 +226,13 @@ Column {
         if (!root.pairingDevice) {
             return;
         }
-        bluetoothSource.pairDevice(root.pairingDevice);
+        root.bluetoothSource.pairDevice(root.pairingDevice);
         root.cancelPairing();
     }
 
     function cancelPairing() {
         if (root.pairingPrompt) {
-            bluetoothSource.cancelPairingPrompt(root.pairingPrompt);
+            root.bluetoothSource.cancelPairingPrompt(root.pairingPrompt);
         }
         root.pairingDevice = null;
         root.pairingPrompt = null;
@@ -246,7 +248,7 @@ Column {
         if (fields.indexOf("pin") !== -1) secrets.pin = root.pairingSecret;
         if (fields.indexOf("passkey") !== -1) secrets.passkey = root.pairingSecret;
         if (fields.indexOf("decision") !== -1) secrets.decision = "yes";
-        bluetoothSource.submitPairingPrompt(root.pairingPrompt.token, true, secrets);
+        root.bluetoothSource.submitPairingPrompt(root.pairingPrompt.token, true, secrets);
         root.pairingPrompt = null;
         root.pairingSecret = "";
     }
@@ -277,7 +279,7 @@ Column {
     }
 
     function deviceName(device) {
-        return bluetoothSource.displayName(device);
+        return root.bluetoothSource.displayName(device);
     }
 
     component DeviceSection: Column {
@@ -298,13 +300,15 @@ Column {
         }
 
         Repeater {
-            model: deviceSection.devices
+            model: deviceSection.devices.length
 
             DeviceRow {
+                required property int index
+
                 theme: deviceSection.theme
                 width: deviceSection.width
-                device: modelData
-                deviceSource: bluetoothSource
+                device: deviceSection.devices[index]
+                deviceSource: root.bluetoothSource
                 requestPair: deviceSection.requestPair
             }
         }
@@ -326,11 +330,14 @@ Column {
         property var requestPair: device => {}
         readonly property bool connected: !!device.connected
         readonly property bool paired: deviceSource.isPaired(device)
-        readonly property bool loading: String(device.state).toLowerCase().includes("connecting") || String(device.state).toLowerCase().includes("disconnecting") || String(device.state).toLowerCase().includes("pairing")
+        readonly property bool loading: !!device.pairing || device.state === BluetoothDeviceState.Connecting || device.state === BluetoothDeviceState.Disconnecting
+        property bool menuOpen: false
+        readonly property bool showMenu: deviceRow.connected || deviceRow.paired
 
+        z: deviceRow.menuOpen ? 30 : 0
         height: theme.listRowHeight
         radius: theme.popupSectionRadius
-        color: deviceHover.containsMouse || connected ? theme.chipHoverBackground : theme.popupSectionBackground
+        color: deviceHover.containsMouse || menuButtonHover.containsMouse || deviceRow.menuOpen ? theme.popupHoverBackground : theme.popupSectionBackground
         opacity: loading ? 0.7 : 1
 
         Text {
@@ -346,19 +353,18 @@ Column {
         Column {
             anchors.left: parent.left
             anchors.leftMargin: theme.popupElementSize
-            anchors.right: forgetIcon.left
+            anchors.right: trailingIcons.left
             anchors.rightMargin: theme.gap
             anchors.verticalCenter: parent.verticalCenter
             spacing: 1
 
             Text {
                 width: parent.width
-                text: deviceRow.deviceSource.displayName(deviceRow.device)
+                text: deviceRow.deviceTitle()
                 color: deviceRow.connected ? theme.popupAccent : theme.popupText
                 elide: Text.ElideRight
-                font.family: theme.fontFamily
+                font.family: deviceRow.connected ? theme.fontFamilyEmphasis : theme.fontFamily
                 font.pixelSize: theme.fontSize
-                font.bold: deviceRow.connected
             }
 
             Text {
@@ -371,37 +377,52 @@ Column {
             }
         }
 
-        Text {
-            id: connectText
+        Row {
+            id: trailingIcons
 
-            anchors.right: forgetIcon.visible ? forgetIcon.left : parent.right
-            anchors.rightMargin: theme.gap
-            anchors.verticalCenter: parent.verticalCenter
-            text: deviceRow.loading ? "󰑓" : deviceRow.connected ? "Disconnect" : "Connect"
-            color: deviceRow.connected ? theme.popupAccent : theme.popupText
-            font.family: theme.fontFamily
-            font.pixelSize: deviceRow.connected || !deviceRow.loading ? theme.fontSizeSmall : theme.fontSize
-            font.bold: !deviceRow.loading
-        }
-
-        Text {
-            id: forgetIcon
-
-            visible: deviceRow.paired
             anchors.right: parent.right
             anchors.rightMargin: theme.gap
             anchors.verticalCenter: parent.verticalCenter
-            text: "󰆴"
-            color: theme.popupMutedText
-            font.family: theme.fontFamily
-            font.pixelSize: theme.fontSizeSmall
+            spacing: theme.gap * 0.7
 
-            MouseArea {
-                anchors.fill: parent
-                anchors.margins: -theme.gap * 0.7
-                cursorShape: Qt.ArrowCursor
-                hoverEnabled: true
-                onClicked: deviceRow.deviceSource.forgetDevice(deviceRow.device)
+            Spinner {
+                visible: deviceRow.loading
+                theme: deviceRow.theme
+                size: theme.fontSize
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Rectangle {
+                id: menuButton
+
+                visible: deviceRow.showMenu
+                width: Math.round(theme.em * 1.25)
+                height: width
+                radius: width / 2
+                color: menuButtonHover.containsMouse || deviceRow.menuOpen ? theme.chipHoverBackground : theme.transparentColor
+                anchors.verticalCenter: parent.verticalCenter
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "ⓘ"
+                    color: menuButtonHover.containsMouse || deviceRow.menuOpen ? theme.popupText : theme.iconMutedColor
+                    font.family: theme.fontFamily
+                    font.pixelSize: theme.fontSizeMedium
+                }
+
+                MouseArea {
+                    id: menuButtonHover
+
+                    anchors.fill: parent
+                    anchors.margins: -theme.gap * 0.45
+                    cursorShape: Qt.ArrowCursor
+                    hoverEnabled: true
+                    enabled: !deviceRow.loading
+                    onClicked: mouse => {
+                        mouse.accepted = true;
+                        deviceRow.menuOpen = !deviceRow.menuOpen;
+                    }
+                }
             }
         }
 
@@ -409,11 +430,70 @@ Column {
             id: deviceHover
 
             anchors.fill: parent
-            anchors.rightMargin: deviceRow.paired ? theme.popupElementSize : 0
+            anchors.rightMargin: deviceRow.showMenu ? theme.popupElementSize : 0
             cursorShape: Qt.ArrowCursor
             hoverEnabled: !deviceRow.loading
             enabled: !deviceRow.loading
-            onClicked: deviceRow.paired ? deviceRow.deviceSource.toggleDevice(deviceRow.device) : deviceRow.requestPair(deviceRow.device)
+            onClicked: {
+                deviceRow.menuOpen = false;
+                if (deviceRow.connected) {
+                    return;
+                }
+                if (deviceRow.paired) {
+                    deviceRow.deviceSource.connectDevice(deviceRow.device);
+                } else {
+                    deviceRow.requestPair(deviceRow.device);
+                }
+            }
+        }
+
+        Rectangle {
+            id: actionMenu
+
+            visible: deviceRow.menuOpen
+            z: 20
+            width: theme.popupElementSize * 3.4
+            height: actionColumn.implicitHeight + theme.gap * 0.8
+            radius: theme.popupSectionRadius
+            color: theme.popupElevatedBackground
+            border.width: theme.popupBorderWidth
+            border.color: theme.popupBorder
+            anchors.right: parent.right
+            anchors.top: parent.bottom
+            anchors.topMargin: theme.gap * 0.35
+
+            Column {
+                id: actionColumn
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: theme.gap * 0.4
+                spacing: 0
+
+                ActionMenuRow {
+                    theme: deviceRow.theme
+                    width: parent.width
+                    visible: deviceRow.connected
+                    text: "Disconnect"
+                    activate: () => {
+                        deviceRow.menuOpen = false;
+                        deviceRow.deviceSource.disconnectDevice(deviceRow.device);
+                    }
+                }
+
+                ActionMenuRow {
+                    theme: deviceRow.theme
+                    width: parent.width
+                    visible: deviceRow.paired
+                    text: "Forget"
+                    destructive: true
+                    activate: () => {
+                        deviceRow.menuOpen = false;
+                        deviceRow.deviceSource.forgetDevice(deviceRow.device);
+                    }
+                }
+            }
         }
 
         function statusText() {
@@ -425,6 +505,11 @@ Column {
             return "Available";
         }
 
+        function deviceTitle() {
+            const direct = String(deviceRow.device?.displayName || deviceRow.device?.name || deviceRow.device?.deviceName || "").trim();
+            return direct.length > 0 ? direct : deviceRow.deviceSource.displayName(deviceRow.device);
+        }
+
         function bluetoothIcon(iconName) {
             const name = String(iconName || "").toLowerCase();
             if (name.includes("audio") || name.includes("headset") || name.includes("headphone")) return "󰋋";
@@ -432,6 +517,38 @@ Column {
             if (name.includes("mouse")) return "󰍽";
             if (name.includes("phone")) return "󰏲";
             return "󰂯";
+        }
+    }
+
+    component ActionMenuRow: Rectangle {
+        id: actionRow
+
+        required property var theme
+        property string text: ""
+        property bool destructive: false
+        property var activate: () => {}
+
+        height: visible ? theme.compactRowHeight * 0.82 : 0
+        radius: theme.popupSectionRadius * 0.7
+        color: actionHover.containsMouse ? theme.popupHoverBackground : theme.transparentColor
+
+        Text {
+            anchors.left: parent.left
+            anchors.leftMargin: theme.gap * 0.7
+            anchors.verticalCenter: parent.verticalCenter
+            text: actionRow.text
+            color: actionRow.destructive ? theme.popupDanger : theme.popupText
+            font.family: theme.fontFamily
+            font.pixelSize: theme.fontSizeSmall
+        }
+
+        MouseArea {
+            id: actionHover
+
+            anchors.fill: parent
+            cursorShape: Qt.ArrowCursor
+            hoverEnabled: true
+            onClicked: actionRow.activate()
         }
     }
 

@@ -74,9 +74,8 @@ Rectangle {
                     visible: !appIcon.visible
                     text: root.fallbackIconText(root.safeRecord.appName)
                     color: root.theme.iconColor
-                    font.family: root.theme.fontFamily
+                    font.family: root.theme.fontFamilyEmphasis
                     font.pixelSize: root.theme.fontSizeSmall
-                    font.bold: true
                 }
             }
 
@@ -93,9 +92,8 @@ Rectangle {
                         text: root.safeRecord.appName || "App"
                         color: root.theme.popupText
                         elide: Text.ElideRight
-                        font.family: root.theme.fontFamily
+                        font.family: root.theme.fontFamilyEmphasis
                         font.pixelSize: root.theme.fontSizeSmall
-                        font.bold: true
                     }
 
                     Text {
@@ -113,9 +111,8 @@ Rectangle {
                     text: root.safeRecord.summary || "Notification"
                     color: root.theme.popupText
                     elide: Text.ElideRight
-                    font.family: root.theme.fontFamily
+                    font.family: root.theme.fontFamilyEmphasis
                     font.pixelSize: root.theme.fontSizeMedium
-                    font.bold: true
                 }
 
                 Text {
@@ -183,9 +180,8 @@ Rectangle {
                         color: root.theme.popupAccent
                         horizontalAlignment: Text.AlignHCenter
                         elide: Text.ElideRight
-                        font.family: root.theme.fontFamily
+                        font.family: root.theme.fontFamilyEmphasis
                         font.pixelSize: root.theme.fontSizeSmall
-                        font.bold: true
                     }
 
                     MouseArea {

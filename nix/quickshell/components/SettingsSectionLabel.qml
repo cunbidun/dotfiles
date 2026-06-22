@@ -4,7 +4,6 @@ Text {
     required property var theme
 
     color: theme.popupText
-    font.family: theme.fontFamily
+    font.family: theme.fontFamilyEmphasis
     font.pixelSize: theme.fontSizeSmall
-    font.bold: true
 }

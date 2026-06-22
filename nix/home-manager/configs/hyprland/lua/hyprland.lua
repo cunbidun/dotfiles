@@ -226,6 +226,10 @@ end
 hl.bind("XF86AudioRaiseVolume", exec(nix.commands.increase_volume), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", exec(nix.commands.decrease_volume), { locked = true, repeating = true })
 hl.bind("XF86AudioMute", exec(nix.commands.toggle_volume), { locked = true, repeating = true })
+hl.bind("XF86AudioPlay", exec(nix.commands.playerctl .. " play-pause"), { locked = true })
+hl.bind("XF86AudioPause", exec(nix.commands.playerctl .. " play-pause"), { locked = true })
+hl.bind("XF86AudioNext", exec(nix.commands.playerctl .. " next"), { locked = true })
+hl.bind("XF86AudioPrev", exec(nix.commands.playerctl .. " previous"), { locked = true })
 hl.bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp", exec("brightnessctl set +5%"), { locked = true, repeating = true })
 

@@ -26,9 +26,8 @@ Rectangle {
         height: root.height
         text: root.label
         color: root.active ? root.theme.selectedForeground : root.theme.notSelectedForeground
-        font.family: root.theme.fontFamily
+        font.family: root.active ? root.theme.fontFamilyEmphasis : root.theme.fontFamily
         font.pixelSize: root.theme.fontSize
-        font.weight: Font.Medium
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
     }

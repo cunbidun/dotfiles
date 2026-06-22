@@ -20,7 +20,7 @@ in {
         pythonPkgs.dbus-python
         pythonPkgs.pygobject3
       ]);
-      bluezAgentScript = pkgs.writeShellScriptBin "quickshell-bluez-agent-cunbidun" ''
+      backendScript = pkgs.writeShellScriptBin "quickshell-backend" ''
         export PYTHONUNBUFFERED=1
         exec ${bluezAgentPython}/bin/python ${repoPath}/backend/bluez_agent.py
       '';
@@ -30,12 +30,10 @@ in {
         pkgs.curl
         pkgs.gawk
         pkgs.inotify-tools
-        pkgs.networkmanager
         pkgs.procps
         pkgs.quickshell
         pkgs.gnused
-        pkgs.bluez
-        bluezAgentScript
+        backendScript
         pkgs.brightnessctl
         pkgs.darkman
         pkgs.hyprpicker
@@ -45,6 +43,7 @@ in {
         pkgs.pulseaudio
         pkgs.slurp
         pkgs.systemd
+        pkgs.theme-manager
         pkgs.wf-recorder
         pkgs.wireplumber
         scripts.wsctl
@@ -52,14 +51,14 @@ in {
       ];
       binPath = lib.makeBinPath runtimeDeps;
 
-      quickshellRunScript = pkgs.writeShellScriptBin "quickshell-run-cunbidun" ''
+      quickshellRunScript = pkgs.writeShellScriptBin "quickshell-run" ''
         set -eo pipefail
 
         export PATH='${binPath}:/run/current-system/sw/bin:$PATH'
         exec ${pkgs.quickshell}/bin/qs --config cunbidun --no-duplicate
       '';
 
-      quickshellWatchScript = pkgs.writeShellScript "quickshell-watch-cunbidun" ''
+      quickshellWatchScript = pkgs.writeShellScript "quickshell-watch" ''
         set -euo pipefail
 
         watch_dir='${configPath}'
@@ -87,12 +86,12 @@ in {
             continue
           fi
           last_restart="$now_ms"
-          ${pkgs.systemd}/bin/systemctl --user restart quickshell-cunbidun.service || true
+          ${pkgs.systemd}/bin/systemctl --user restart quickshell-backend.service quickshell.service || true
         done
       '';
 
-      quickshellReloadScript = pkgs.writeShellScriptBin "quickshell-reload-cunbidun" ''
-        exec ${pkgs.systemd}/bin/systemctl --user restart quickshell-cunbidun.service
+      quickshellReloadScript = pkgs.writeShellScriptBin "quickshell-reload" ''
+        exec ${pkgs.systemd}/bin/systemctl --user restart quickshell-backend.service quickshell.service
       '';
     in {
       xdg.configFile."quickshell/cunbidun" = {
@@ -102,30 +101,30 @@ in {
 
       home.packages = [
         pkgs.quickshell
-        bluezAgentScript
+        backendScript
         quickshellReloadScript
       ];
 
-      systemd.user.services.quickshell-bluez-agent-cunbidun = {
+      systemd.user.services.quickshell-backend = {
         Unit = {
-          Description = "QuickShell BlueZ pairing agent (cunbidun)";
+          Description = "QuickShell DBus backend";
           After = ["graphical-session.target" "bluetooth.target"];
           Wants = ["graphical-session.target"];
           PartOf = ["graphical-session.target"];
         };
         Service = {
-          ExecStart = lib.getExe bluezAgentScript;
+          ExecStart = lib.getExe backendScript;
           Restart = "on-failure";
           RestartSec = 1;
         };
         Install.WantedBy = ["graphical-session.target"];
       };
 
-      systemd.user.services.quickshell-cunbidun = {
+      systemd.user.services.quickshell = {
         Unit = {
-          Description = "QuickShell (cunbidun config from source)";
-          After = ["graphical-session.target" "quickshell-bluez-agent-cunbidun.service"];
-          Wants = ["graphical-session.target" "quickshell-bluez-agent-cunbidun.service"];
+          Description = "QuickShell";
+          After = ["graphical-session.target" "quickshell-backend.service"];
+          Wants = ["graphical-session.target" "quickshell-backend.service"];
           PartOf = ["graphical-session.target"];
         };
         Service = {
@@ -141,7 +140,7 @@ in {
         Install.WantedBy = ["graphical-session.target"];
       };
 
-      systemd.user.services.quickshell-cunbidun-watch = {
+      systemd.user.services.quickshell-watch = {
         Unit = {
           Description = "Watch QuickShell source and restart on change";
           After = ["graphical-session.target"];

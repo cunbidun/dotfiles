@@ -59,6 +59,12 @@ def set_polarity(polarity):
         print(out)
     return code
 
+def toggle_polarity():
+    out, code = client_request("TOGGLE-POLARITY\n")
+    if out is not None:
+        print(out)
+    return code
+
 
 def get_nvim_theme():
     out, code = client_request("GET-NVIM-THEME\n")
@@ -85,6 +91,9 @@ def build_parser():
     ppol = sub.add_parser("set-polarity", help="Set polarity (light or dark)")
     ppol.add_argument("polarity", choices=["light", "dark"], help="Target polarity")
 
+    sub.add_parser("toggle", help="Toggle polarity between light and dark")
+    sub.add_parser("toggle-polarity", help="Toggle polarity between light and dark")
+
     return parser
 
 
@@ -98,6 +107,8 @@ def main():
         "get-nvim-theme": get_nvim_theme,
         "set-theme": lambda: set_theme(args.theme),
         "set-polarity": lambda: set_polarity(args.polarity),
+        "toggle": toggle_polarity,
+        "toggle-polarity": toggle_polarity,
     }[args.cmd]()
 
     sys.exit(exit_code)

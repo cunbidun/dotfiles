@@ -11,7 +11,8 @@ Column {
     readonly property string status: wifiSource.status
     readonly property string wifiDeviceName: wifiSource.wifiDeviceName
     readonly property bool wifiEnabled: wifiSource.wifiEnabled
-    readonly property var networks: wifiSource.networks
+    readonly property var networks: wifiSource.networks.filter(network => !network.outOfRange)
+    readonly property var visibleNetworks: root.networks.slice(0, 8)
 
     spacing: theme.gap
 
@@ -56,13 +57,15 @@ Column {
         spacing: root.theme.gap
 
         Repeater {
-            model: root.networks.slice(0, 8)
+            model: root.visibleNetworks.length
 
             Rectangle {
                 id: networkRow
 
-                required property var modelData
-                readonly property bool active: modelData.active
+                required property int index
+
+                readonly property var network: root.visibleNetworks[index]
+                readonly property bool active: network.active
 
                 width: parent.width
                 height: root.theme.listRowHeight
@@ -73,7 +76,7 @@ Column {
                     anchors.left: parent.left
                     anchors.leftMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
-                    text: root.networkIcon(networkRow.modelData.signal)
+                    text: root.networkIcon(networkRow.network.signal)
                     color: networkRow.active ? root.theme.selectedForeground : root.theme.iconColor
                     font.family: root.theme.fontFamily
                     font.pixelSize: root.theme.fontSize
@@ -85,16 +88,15 @@ Column {
                     anchors.right: actionIcon.left
                     anchors.rightMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
-                    text: networkRow.modelData.ssid
+                    text: networkRow.network.ssid
                     color: networkRow.active ? root.theme.selectedForeground : root.theme.popupText
                     elide: Text.ElideRight
-                    font.family: root.theme.fontFamily
+                    font.family: networkRow.active ? root.theme.fontFamilyEmphasis : root.theme.fontFamily
                     font.pixelSize: root.theme.fontSize
-                    font.bold: networkRow.active
                 }
 
                 Text {
-                    visible: networkRow.modelData.secure
+                    visible: networkRow.network.secure
                     anchors.right: actionIcon.left
                     anchors.rightMargin: root.theme.popupElementSize * 0.8
                     anchors.verticalCenter: parent.verticalCenter
@@ -104,9 +106,19 @@ Column {
                     font.pixelSize: root.theme.fontSizeSmall
                 }
 
+                Spinner {
+                    visible: !!networkRow.network.connecting
+                    theme: root.theme
+                    size: root.theme.fontSize
+                    anchors.right: parent.right
+                    anchors.rightMargin: root.theme.gap
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
                 Text {
                     id: actionIcon
 
+                    visible: !networkRow.network.connecting
                     anchors.right: parent.right
                     anchors.rightMargin: root.theme.gap
                     anchors.verticalCenter: parent.verticalCenter
@@ -122,7 +134,7 @@ Column {
                     anchors.fill: parent
                     cursorShape: Qt.ArrowCursor
                     hoverEnabled: true
-                    onClicked: networkRow.active ? root.disconnectWifi() : root.connectWifi(networkRow.modelData.ssid)
+                    onClicked: networkRow.active ? root.disconnectWifi() : root.connectWifi(networkRow.network.ssid)
                 }
             }
         }
@@ -161,7 +173,7 @@ Column {
     }
 
     function refresh(rescan) {
-        wifiSource.refresh();
+        wifiSource.refresh(rescan);
     }
 
     function setWifiEnabled(enabled) {
@@ -204,7 +216,7 @@ Column {
             spacing: theme.gap
 
             Text { text: icon; color: theme.iconColor; font.family: theme.fontFamily; font.pixelSize: theme.fontSize; anchors.verticalCenter: parent.verticalCenter }
-            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall; font.bold: true; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
+            Text { width: parent.width - theme.popupElementSize; text: parent.parent.text; color: theme.popupText; font.family: theme.fontFamilyEmphasis; font.pixelSize: theme.fontSizeSmall; elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
         }
 
         MouseArea { id: hover; anchors.fill: parent; cursorShape: Qt.ArrowCursor; hoverEnabled: true; onClicked: parent.activate() }
