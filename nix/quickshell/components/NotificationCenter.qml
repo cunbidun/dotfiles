@@ -28,6 +28,7 @@ ModuleChip {
         bodyMarkupSupported: true
         imageSupported: true
         persistenceSupported: true
+        extraHints: ["desktop-entry", "sender-pid", "pid"]
 
         onNotification: notification => {
             if (root.dnd) {
@@ -43,6 +44,8 @@ ModuleChip {
                 body: notification.body || "",
                 appName: notification.appName || "App",
                 appIcon: notification.appIcon || "",
+                desktopEntry: notification.desktopEntry || "",
+                hints: notification.hints || ({}),
                 image: notification.image || "",
                 time: new Date(),
                 urgency: notification.urgency,
@@ -53,6 +56,7 @@ ModuleChip {
                     invoke: () => action.invoke()
                 }))
             };
+            console.log(`[notification] app=${record.appName} desktop=${record.desktopEntry} icon=${record.appIcon} summary=${record.summary} hints=${JSON.stringify(record.hints)} actions=${JSON.stringify(record.actions.map(action => ({ identifier: action.identifier, text: action.text })))}`);
             root.notifications = [record, ...root.notifications].slice(0, 30);
             root.showToast(record);
         }
