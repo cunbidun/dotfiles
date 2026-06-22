@@ -22,6 +22,7 @@ import uuid
 
 import dbus
 import dbus.service
+from dashboard_state import DashboardStatePoller
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import GLib
 
@@ -276,6 +277,7 @@ def main():
     except Exception:
         pass
 
+    DashboardStatePoller().start()
     SocketServer(broker, socket_path).start()
     print(f"quickshell-bluez-agent listening on {socket_path}", flush=True)
 

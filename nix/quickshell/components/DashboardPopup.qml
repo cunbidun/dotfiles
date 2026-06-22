@@ -54,7 +54,7 @@ Rectangle {
         command: [
             "bash",
             "-lc",
-            "read cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat; total1=$((user+nice+system+idle+iowait+irq+softirq+steal)); idle1=$((idle+iowait)); sleep 0.12; read cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat; total2=$((user+nice+system+idle+iowait+irq+softirq+steal)); idle2=$((idle+iowait)); awk -v t1=$total1 -v t2=$total2 -v i1=$idle1 -v i2=$idle2 'BEGIN { printf \"cpu=%d\\n\", (t2>t1 ? (100 * ((t2-t1)-(i2-i1)) / (t2-t1)) : 0) }'; awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} END { printf \"ram=%d/%d GiB\\n\", (t-a)/1048576, t/1048576 }' /proc/meminfo; df -h --output=used,size / | tail -1 | awk '{ printf \"disk=%s/%s\\n\", $1, $2 }'; awk '{ printf \"load=%s %s %s\\n\", $1, $2, $3 }' /proc/loadavg; awk '{s=int($1); printf \"uptime=%dh %02dm\\n\", s/3600, (s%3600)/60}' /proc/uptime; awk -F'[: ]+' '/:/ && $2 !~ /^lo$/ {rx+=$3; tx+=$11} END {printf \"net=↓ %.0f K/s    ↑ %.0f K/s\\n\", rx/1024%1000, tx/1024%1000}' /proc/net/dev; temp=$(for f in /sys/class/thermal/thermal_zone*/temp; do [ -r \"$f\" ] && awk '{ if ($1 > 1000 && $1 < 110000) { printf \"%d\\n\", $1/1000; exit } }' \"$f\"; done | head -1); printf \"cpu_temp=%sC\\n\" \"${temp:---}\"; if command -v nvidia-smi >/dev/null 2>&1; then nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,noheader,nounits | head -1 | awk -F, '{gsub(/ /,\"\",$1); gsub(/ /,\"\",$2); printf \"gpu=%s%%\\ngpu_temp=%sC\\n\", $1, $2}'; else printf \"gpu=0%%\\ngpu_temp=--\\n\"; fi; if command -v wpctl >/dev/null 2>&1; then wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ printf \"volume=%d\\n\", $2*100 }'; wpctl status | awk '/Sinks:/{in_sinks=1; next} /Sources:/{if(in_sinks) exit} in_sinks && /^[[:space:]│├└─*]*[0-9]+\\./ {line=$0; active=(line ~ /\\*/ ? 1 : 0); gsub(/^[^0-9]*/, \"\", line); id=line; sub(/\\..*/, \"\", id); name=line; sub(/^[0-9]+\\. /, \"\", name); sub(/[[:space:]]*\\[vol:.*/, \"\", name); printf \"audio_output=%s|%s|%s\\n\", id, active, name }'; else printf \"volume=43\\n\"; fi; if command -v brightnessctl >/dev/null 2>&1; then brightnessctl -m | awk -F, '{ gsub(/%/,\"\",$4); printf \"brightness=%s\\n\", $4 }'; else printf \"brightness=58\\n\"; fi; printf \"recording=%s\\n\" \"$($HOME/dotfiles/nix/quickshell/scripts/screen_record.sh status 2>/dev/null || echo 'not recording')\"; printf \"nightlight=%s\\n\" \"$(systemctl --user is-active hyprsunset.service 2>/dev/null || true)\""
+            "cat \"${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/quickshell-cunbidun/dashboard-state.json\" 2>/dev/null || printf '{}'"
         ]
         stdout: StdioCollector {
             waitForEnd: true
@@ -381,10 +381,10 @@ Rectangle {
                 spacing: 0
 
                 StatRow { theme: root.theme; icon: "󰻠"; label: "CPU"; value: `${root.stats.cpu || "0"}%`; accent: root.theme.iconActiveColor }
-                StatRow { theme: root.theme; icon: "󰍛"; label: "CPU Temp"; value: root.stats.cpu_temp || "--"; accent: root.theme.iconActiveColor }
+                StatRow { theme: root.theme; icon: ""; label: "CPU Temp"; value: root.stats.cpu_temp || "--"; accent: root.theme.iconActiveColor }
                 StatRow { theme: root.theme; icon: "󰍹"; label: "RAM"; value: root.stats.ram || "--"; accent: root.theme.iconActiveColor }
                 StatRow { theme: root.theme; icon: "󰢮"; label: "GPU"; value: root.stats.gpu || "0%"; accent: root.theme.iconActiveColor }
-                StatRow { theme: root.theme; icon: "󰍛"; label: "GPU Temp"; value: root.stats.gpu_temp || "--"; accent: root.theme.iconActiveColor }
+                StatRow { theme: root.theme; icon: ""; label: "GPU Temp"; value: root.stats.gpu_temp || "--"; accent: root.theme.iconActiveColor }
                 StatRow { theme: root.theme; icon: "󰋊"; label: "Disk"; value: root.stats.disk || "--"; accent: root.theme.iconActiveColor }
                 StatRow { theme: root.theme; icon: "󰈀"; label: "Net"; value: root.stats.net || "--"; accent: root.theme.iconMutedColor }
                 StatRow { theme: root.theme; icon: "󰅐"; label: "Uptime"; value: root.stats.uptime || "--"; accent: root.theme.iconMutedColor }
@@ -420,23 +420,15 @@ Rectangle {
     }
 
     function updateStats(rawText) {
-        const next = {};
-        const outputs = [];
-        for (const line of rawText.trim().split("\n")) {
-            const index = line.indexOf("=");
-            if (index > 0) {
-                const key = line.slice(0, index);
-                const value = line.slice(index + 1);
-                if (key === "audio_output") {
-                    const parts = value.split("|");
-                    outputs.push({ id: parts[0], active: parts[1] === "1", name: parts.slice(2).join("|") });
-                } else {
-                    next[key] = value;
-                }
-            }
+        let next = {};
+        try {
+            next = JSON.parse(rawText.trim() || "{}");
+        } catch (error) {
+            console.warn(`Invalid dashboard stats: ${error}`);
+            return;
         }
         root.stats = next;
-        root.audioOutputs = outputs;
+        root.audioOutputs = next.audio_outputs || [];
         root.recording = next.recording === "recording";
         root.nightLight = next.nightlight === "active";
         if (!root.adjustingVolume) {
@@ -656,8 +648,8 @@ Rectangle {
         }
 
         Text { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; text: icon; color: accent; font.family: theme.fontFamily; font.pixelSize: theme.fontSize }
-        Text { anchors.left: parent.left; anchors.leftMargin: theme.popupElementSize; anchors.verticalCenter: parent.verticalCenter; text: label; color: theme.popupText; font.family: theme.fontFamilyEmphasis; font.pixelSize: theme.fontSize }
-        Text { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; text: value; color: theme.popupMutedText; font.family: theme.fontFamily; font.pixelSize: theme.fontSizeSmall }
+        Text { anchors.left: parent.left; anchors.leftMargin: theme.popupElementSize; anchors.verticalCenter: parent.verticalCenter; text: label; color: theme.popupText; font.family: theme.fontFamilyMono; font.pixelSize: theme.fontSize; font.weight: Font.DemiBold }
+        Text { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; text: value; color: theme.popupMutedText; font.family: theme.fontFamilyMono; font.pixelSize: theme.fontSizeSmall }
 
         MouseArea {
             id: statHoverArea

@@ -18,6 +18,7 @@ Item {
     readonly property string fontFamily: "SFProText Nerd Font"
     readonly property string fontFamilyMedium: "SFProText Nerd Font Medium"
     readonly property string fontFamilyEmphasis: "SFProText Nerd Font SemiBold"
+    readonly property string fontFamilyMono: "SFMono Nerd Font"
 
     readonly property real em: fontSize
 

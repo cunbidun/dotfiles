@@ -10,8 +10,8 @@ Rectangle {
     required property var record
     property bool elevated: false
     property var closeNotification: record => {}
+    property var removeNotification: record => {}
     readonly property var safeRecord: record || ({})
-    readonly property var visibleActions: (safeRecord.actions || []).filter(action => String(action.text || "").trim().length > 0).slice(0, 3)
 
     width: parent.width
     height: cardContent.implicitHeight + theme.gap * 1.15
@@ -157,47 +157,6 @@ Rectangle {
             }
         }
 
-        Row {
-            width: parent.width
-            visible: root.visibleActions.length > 0
-            spacing: root.theme.gap * 0.55
-
-            Repeater {
-                model: root.visibleActions
-
-                Rectangle {
-                    required property var modelData
-
-                    width: (cardContent.width - root.theme.gap * 0.55 * (root.visibleActions.length - 1)) / root.visibleActions.length
-                    height: root.theme.popupElementSize * 0.78
-                    radius: root.theme.popupSectionRadius
-                    color: actionArea.containsMouse ? root.theme.chipHoverBackground : root.theme.popupHoverBackground
-
-                    Text {
-                        anchors.centerIn: parent
-                        width: parent.width - root.theme.gap
-                        text: modelData.text || "Open"
-                        color: root.theme.popupAccent
-                        horizontalAlignment: Text.AlignHCenter
-                        elide: Text.ElideRight
-                        font.family: root.theme.fontFamilyEmphasis
-                        font.pixelSize: root.theme.fontSizeSmall
-                    }
-
-                    MouseArea {
-                        id: actionArea
-
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.ArrowCursor
-                        onClicked: {
-                            modelData.invoke();
-                            root.closeNotification(root.record);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     function timeLabel(date) {
@@ -214,29 +173,29 @@ Rectangle {
         return text.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
     }
 
+    function invokeNotificationAction() {
+        const actions = root.safeRecord.actions || [];
+        const defaultAction = actions.find(action => String(action.identifier || "") === "default") || null;
+        if (defaultAction && typeof defaultAction.invoke === "function") {
+            defaultAction.invoke();
+            return true;
+        }
+
+        if (actions.length === 1 && typeof actions[0].invoke === "function") {
+            actions[0].invoke();
+            return true;
+        }
+
+        return false;
+    }
+
     function activateNotification() {
         if (!root.record) {
             return;
         }
 
-        const actions = root.safeRecord.actions || [];
-        const notification = root.safeRecord.notification;
-        const defaultAction = actions.find(action => String(action.identifier || "") === "default") || null;
-        let activated = false;
-
-        if (notification && typeof notification.activate === "function") {
-            notification.activate();
-            activated = true;
-        } else if (defaultAction && typeof defaultAction.invoke === "function") {
-            defaultAction.invoke();
-            activated = true;
-        } else if (actions.length === 1 && typeof actions[0].invoke === "function") {
-            actions[0].invoke();
-            activated = true;
-        }
-
-        if (activated) {
-            root.closeNotification(root.record);
+        if (root.invokeNotificationAction() && !root.safeRecord.resident) {
+            root.removeNotification(root.record);
         }
     }
 }

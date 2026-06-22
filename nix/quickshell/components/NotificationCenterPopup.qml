@@ -10,6 +10,7 @@ Rectangle {
     property var toggleDnd: () => {}
     property var clearAll: () => {}
     property var closeNotification: record => {}
+    property var removeNotification: record => {}
 
     width: theme.notificationPopupWidth
     height: theme.notificationPopupHeight
@@ -188,6 +189,7 @@ Rectangle {
                         theme: root.theme
                         record: modelData
                         closeNotification: root.closeNotification
+                        removeNotification: root.removeNotification
                     }
                 }
             }

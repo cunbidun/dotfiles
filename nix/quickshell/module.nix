@@ -20,8 +20,17 @@ in {
         pythonPkgs.dbus-python
         pythonPkgs.pygobject3
       ]);
+      backendRuntimeDeps = [
+        pkgs.bash
+        pkgs.brightnessctl
+        pkgs.coreutils
+        pkgs.systemd
+        pkgs.wireplumber
+      ];
+      backendPath = lib.makeBinPath backendRuntimeDeps;
       backendScript = pkgs.writeShellScriptBin "quickshell-backend" ''
         export PYTHONUNBUFFERED=1
+        export PATH='${backendPath}:/run/current-system/sw/bin:$PATH'
         exec ${bluezAgentPython}/bin/python ${repoPath}/backend/bluez_agent.py
       '';
       runtimeDeps = [

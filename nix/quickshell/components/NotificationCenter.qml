@@ -46,6 +46,7 @@ ModuleChip {
                 image: notification.image || "",
                 time: new Date(),
                 urgency: notification.urgency,
+                resident: notification.resident,
                 actions: notification.actions.map(action => ({
                     identifier: action.identifier || "",
                     text: action.text,
@@ -115,6 +116,7 @@ ModuleChip {
                     record: root.toastRecord
                     elevated: true
                     closeNotification: record => root.closeNotification(record)
+                    removeNotification: record => root.removeNotification(record)
                 }
             }
         }
@@ -170,15 +172,20 @@ ModuleChip {
                 toggleDnd: () => root.dnd = !root.dnd
                 clearAll: () => root.clearAll()
                 closeNotification: record => root.closeNotification(record)
+                removeNotification: record => root.removeNotification(record)
             }
         }
     }
 
-    function closeNotification(record) {
+    function removeNotification(record) {
         root.notifications = root.notifications.filter(notification => notification.key !== record.key);
         if (root.toastRecord && root.toastRecord.key === record.key) {
             root.toastRecord = null;
         }
+    }
+
+    function closeNotification(record) {
+        root.removeNotification(record);
         record.notification?.dismiss();
     }
 
