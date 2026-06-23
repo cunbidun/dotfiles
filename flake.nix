@@ -158,7 +158,7 @@
       mkHomeManagerModule = configPath: {
         home-manager = {
           useGlobalPkgs = true;
-          useUserPackages = true;
+          useUserPackages = false;
           backupFileExtension = "bak";
           users.${userdata.username} = import configPath;
           extraSpecialArgs = {
