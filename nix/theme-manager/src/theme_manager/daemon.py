@@ -64,10 +64,24 @@ class ThemeManagerDaemon:
 
     def _get_polarity(self):
         try:
+            stylix_theme = self._get_stylix_theme_name()
+            if stylix_theme.endswith("-light"):
+                return "light"
+            if stylix_theme.endswith("-dark"):
+                return "dark"
+        except Exception:
+            pass
+
+        try:
             result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
             return result.stdout.strip() if result.returncode == 0 else "dark"
         except Exception:
             return "dark"
+
+    def _get_stylix_theme_name(self):
+        stylix_theme_path = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
+        with open(stylix_theme_path, 'r') as f:
+            return f.read().strip()
 
     def _set_polarity(self, polarity: str) -> bool:
         if polarity not in ("light", "dark"):
@@ -144,35 +158,32 @@ class ThemeManagerDaemon:
 
     def _monitor_stylix_theme(self):
         """Monitor ~/.local/state/stylix/current-theme-name.txt and sync theme when different."""
-        stylix_theme_path = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
 
         while not self._stop_monitoring.wait(1):  # Check every 2 seconds
             try:
                 # Read the current theme from stylix file
-                if os.path.exists(stylix_theme_path):
-                    with open(stylix_theme_path, 'r') as f:
-                        stylix_theme = f.read().strip()
+                stylix_theme = self._get_stylix_theme_name()
 
-                    # Get current daemon theme with polarity
-                    pol = self._get_polarity()
-                    daemon_theme = f"{self.current_theme}-{pol}"
+                # Get current daemon theme with polarity
+                pol = self._get_polarity()
+                daemon_theme = f"{self.current_theme}-{pol}"
 
-                    # If themes don't match, sync to daemon's theme
-                    if stylix_theme != daemon_theme:
-                        print(f"Theme mismatch detected: stylix='{stylix_theme}', daemon='{daemon_theme}'. Syncing...")
+                # If themes don't match, sync to daemon's theme
+                if stylix_theme != daemon_theme:
+                    print(f"Theme mismatch detected: stylix='{stylix_theme}', daemon='{daemon_theme}'. Syncing...")
 
-                        # Acquire lock to prevent conflicts with other operations
-                        with self.lock:
-                            if not self.script_running:
-                                self.script_running = True
-                                try:
-                                    # Run the script to switch to the correct theme
-                                    subprocess.run([self.config["script"], self.current_theme], check=False)
-                                    print(f"Synced theme to {daemon_theme}")
-                                except Exception as e:
-                                    print(f"Failed to sync theme: {e}")
-                                finally:
-                                    self.script_running = False
+                    # Acquire lock to prevent conflicts with other operations
+                    with self.lock:
+                        if not self.script_running:
+                            self.script_running = True
+                            try:
+                                # Run the script to switch to the correct theme
+                                subprocess.run([self.config["script"], self.current_theme], check=False)
+                                print(f"Synced theme to {daemon_theme}")
+                            except Exception as e:
+                                print(f"Failed to sync theme: {e}")
+                            finally:
+                                self.script_running = False
             except Exception as e:
                 # Don't spam errors, just print once and continue monitoring
                 print(f"Theme monitoring error: {e}")
