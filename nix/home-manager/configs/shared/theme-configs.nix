@@ -9,8 +9,7 @@
       wallpaper = ../../../../wallpapers/thuonglam.jpeg;
       vscodeTheme = "Catppuccin Latte";
       vicinaeTheme = "catppuccin-latte";
-      spicetifyTheme = "catppuccin";
-      spicetifyColorScheme = "latte";
+      spicetify = { theme = "catppuccin"; colorScheme = "latte"; };
       chromeExtension = "jhjnalhegpceacdhbplhnakmkdliaddd"; # Catppuccin extension
     };
     dark = {
@@ -18,8 +17,7 @@
       wallpaper = ../../../../wallpapers/Astronaut.png;
       vscodeTheme = "Catppuccin Mocha";
       vicinaeTheme = "catppuccin-mocha";
-      spicetifyTheme = "catppuccin";
-      spicetifyColorScheme = "mocha";
+      spicetify = { theme = "catppuccin"; colorScheme = "mocha"; };
       chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
     };
   };
@@ -29,8 +27,7 @@
       wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
       vscodeTheme = "Light Modern";
       vicinaeTheme = "vicinae-light";
-      spicetifyTheme = "default";
-      spicetifyColorScheme = "Ocean";
+      spicetify = { theme = "default"; colorScheme = "Ocean"; };
       chromeExtension = null; # Default theme - no specific extension needed
     };
     dark = {
@@ -38,8 +35,7 @@
       wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
       vscodeTheme = "Dark Modern";
       vicinaeTheme = "vicinae-dark";
-      spicetifyTheme = "default";
-      spicetifyColorScheme = "Ocean";
+      spicetify = { theme = "default"; colorScheme = "Ocean"; };
       chromeExtension = null; # Default theme - no specific extension needed
     };
   };

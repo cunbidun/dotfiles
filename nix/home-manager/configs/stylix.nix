@@ -13,6 +13,7 @@ let
   # Import from shared theme configuration
   # NOTE:
   themeConfigs = import ./shared/theme-configs.nix;
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
   # Import shared Chrome configuration
   chromeConfig = import ./shared/chrome-config.nix;
@@ -39,6 +40,10 @@ let
     {
       dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkOverride 1 colorScheme;
       services.vicinae.settings.theme.name = themeConfig.vicinaeTheme;
+      programs.spicetify = {
+        theme = lib.mkForce spicePkgs.themes.${themeConfig.spicetify.theme};
+        colorScheme = lib.mkForce themeConfig.spicetify.colorScheme;
+      };
       stylix = {
         base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${themeConfig.scheme}.yaml";
         image = lib.mkForce themeConfig.wallpaper;
