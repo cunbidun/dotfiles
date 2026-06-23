@@ -22,6 +22,12 @@ function M.apply(force)
 
 	local theme = themes[name] or themes[vim.endswith(name, "-light") and "default-light" or "default-dark"]
 	vim.o.background = theme.background
+	pcall(function()
+		require("tokyonight").setup({ transparent = true })
+	end)
+	pcall(function()
+		require("vscode").setup({ transparent = true })
+	end)
 	if theme.flavour then
 		pcall(function()
 			require("catppuccin").setup({ flavour = theme.flavour })

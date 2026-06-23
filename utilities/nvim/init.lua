@@ -22,7 +22,20 @@ local plugins = {
 		import = "lazyvim.plugins",
 		opts = { colorscheme = "vscode" },
 	},
-	{ "Mofiqul/vscode.nvim", dir = root .. "/vscode.nvim", lazy = false, priority = 1000 },
+	{
+		"folke/tokyonight.nvim",
+		dir = root .. "/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = { transparent = true },
+	},
+	{
+		"Mofiqul/vscode.nvim",
+		dir = root .. "/vscode.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = { transparent = true },
+	},
 	{ "catppuccin/nvim", dir = root .. "/catppuccin", name = "catppuccin", lazy = false, priority = 1000 },
 	{
 		"folke/snacks.nvim",

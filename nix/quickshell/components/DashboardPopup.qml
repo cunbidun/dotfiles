@@ -29,7 +29,7 @@ Rectangle {
     readonly property int gap: theme.gap
     readonly property int tileWidth: cell * 2 + gap
     readonly property int mediaWidth: cell * 4 + gap * 3
-    readonly property var activePlayer: Mpris.players.values.find(player => player.isPlaying) || Mpris.players.values[0] || null
+    readonly property var activePlayer: Mpris.players.values.find(player => player.isPlaying) || null
     readonly property int connectedBluetoothDevices: root.bluetoothSource.connectedDevices.length
     readonly property bool wifiEnabled: root.wifiSource.wifiEnabled
     readonly property string wifiSsid: root.wifiSource.activeNetwork?.ssid ?? ""
@@ -459,7 +459,7 @@ Rectangle {
             { icon: "", action: "color", enabled: true, active: false },
             { icon: root.inhibited ? "󰅶" : "󰾪", action: "inhibit", enabled: true, active: root.inhibited },
             { icon: root.nightLight ? "󰖔" : "󰖨", action: "nightlight", enabled: true, active: root.nightLight },
-            { icon: root.theme.isLightTheme ? "󰖨" : "󰖔", action: "theme", enabled: true, active: root.theme.isLightTheme },
+            { icon: "󰔎", action: "theme", enabled: true, active: root.theme.isLightTheme },
             { icon: "", action: "", enabled: false, active: false }
         ];
     }
