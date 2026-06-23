@@ -39,7 +39,6 @@ in {
     ../../home-manager/configs/chromium.nix
     ../../home-manager/configs/minecraft.nix
     ../../home-manager/configs/xremap.nix
-    ../../home-manager/configs/taskwarrior.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/hyprsunset.nix
     ../../home-manager/configs/mpris-proxy.nix
