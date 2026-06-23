@@ -23,6 +23,7 @@ local plugins = {
 		opts = { colorscheme = "vscode" },
 	},
 	{ "Mofiqul/vscode.nvim", dir = root .. "/vscode.nvim", lazy = false, priority = 1000 },
+	{ "catppuccin/nvim", dir = root .. "/catppuccin", name = "catppuccin", lazy = false, priority = 1000 },
 	{
 		"folke/snacks.nvim",
 		opts = {
@@ -88,6 +89,8 @@ require("lazy").setup(plugins, {
 	rocks = { enabled = false },
 	pkg = { enabled = false },
 })
+
+require("user.theme").setup()
 
 for _, path in ipairs(vim.fn.glob(root .. "/nvim-treesitter-grammar-*", false, true)) do
 	vim.opt.rtp:append(path)

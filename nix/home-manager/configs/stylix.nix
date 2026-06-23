@@ -120,7 +120,7 @@ in
     themes = builtins.attrNames themeConfigs;
     hookScriptContent = ''
       #!/usr/bin/env bash
-      /etc/profiles/per-user/${userdata.username}/bin/theme-switch
+      /etc/profiles/per-user/${userdata.username}/bin/theme-switch "$@"
     '';
   };
 

@@ -5,8 +5,9 @@ import Quickshell.Io
 Item {
     id: theme
 
-    readonly property string stylixColorsPath: `${Quickshell.env("HOME")}/.local/state/stylix/colors.json`
-    readonly property string stylixThemeNamePath: `${Quickshell.env("HOME")}/.local/state/stylix/current-theme-name.txt`
+    readonly property string currentThemeNamePath: `${Quickshell.env("HOME")}/.local/state/stylix/current-theme-name.txt`
+    readonly property string themeName: resolveThemeName(currentThemeName)
+    readonly property string themeFilePath: `${Quickshell.env("HOME")}/.config/quickshell/cunbidun/themes/${themeName}.json`
     readonly property int fontSize: 12
     // Type scale — every text should use one of these, not an ad-hoc multiplier.
     readonly property int fontSizeSmall: 11
@@ -85,84 +86,77 @@ Item {
     readonly property int workspaceActiveMinWidth: Math.round(em * 2.1)
 
     readonly property color transparentColor: "transparent"
-    readonly property color appleSystemBlue: isLightTheme ? "#007AFF" : "#0A84FF"
-    readonly property color appleLabel: isLightTheme ? "#000000" : "#FFFFFF"
-    readonly property color appleSecondaryLabel: isLightTheme ? "#3C3C43" : "#EBEBF5"
-    readonly property color appleTertiaryLabel: isLightTheme ? "#8E8E93" : "#8E8E93"
-    readonly property color appleSystemBackground: isLightTheme ? "#FFFFFF" : "#1C1C1E"
-    readonly property color appleSecondarySystemBackground: isLightTheme ? "#F2F2F7" : "#2C2C2E"
-    readonly property color appleTertiarySystemBackground: isLightTheme ? "#FFFFFF" : "#3A3A3C"
-    readonly property color appleSeparator: isLightTheme ? withAlpha("#3C3C43", 0.22) : withAlpha("#545458", 0.65)
-    readonly property color appleFill: isLightTheme ? withAlpha("#787880", 0.20) : withAlpha("#787880", 0.36)
-    readonly property color appleFillHover: isLightTheme ? withAlpha("#787880", 0.28) : withAlpha("#787880", 0.44)
-    readonly property color selectedForeground: "#FFFFFF"
-    readonly property color selectedBackground: appleSystemBlue
-    readonly property color notSelectedForeground: appleLabel
-    readonly property color notSelectedBackground: appleFill
+    readonly property color selectedForeground: roleColor("selectedForeground")
+    readonly property color selectedBackground: roleColor("selectedBackground")
+    readonly property color notSelectedForeground: roleColor("notSelectedForeground")
+    readonly property color notSelectedBackground: roleColor("notSelectedBackground")
     readonly property color unselectedForeground: notSelectedForeground
     readonly property color unselectedBackground: notSelectedBackground
-    readonly property color barBackground: transparentColor
-    readonly property color barBorder: appleSeparator
-    readonly property color moduleBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.78 : 0.62)
-    readonly property color moduleHoverBackground: appleFillHover
+    readonly property color barBackground: roleColor("barBackground")
+    readonly property color barBorder: roleColor("barBorder")
+    readonly property color moduleBackground: roleColor("moduleBackground")
+    readonly property color moduleHoverBackground: roleColor("moduleHoverBackground")
     readonly property color workspaceAvailableBackground: notSelectedBackground
     readonly property color workspaceOccupiedBackground: notSelectedBackground
     readonly property color workspaceActiveBackground: selectedBackground
     readonly property color workspaceVirtualBackground: notSelectedBackground
     readonly property color workspaceText: notSelectedForeground
     readonly property color workspaceActiveText: selectedForeground
-    readonly property color chipBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.78 : 0.62)
-    readonly property color chipHoverBackground: appleFillHover
+    readonly property color chipBackground: roleColor("chipBackground")
+    readonly property color chipHoverBackground: roleColor("chipHoverBackground")
     readonly property color chipText: notSelectedForeground
     readonly property color iconColor: notSelectedForeground
     readonly property color iconActiveColor: selectedBackground
-    readonly property color iconMutedColor: appleTertiaryLabel
+    readonly property color iconMutedColor: roleColor("iconMutedColor")
     readonly property color iconOnAccentColor: selectedForeground
     readonly property color chipIcon: iconColor
     readonly property color submapActiveBackground: selectedBackground
     readonly property color submapActiveText: selectedForeground
     readonly property color weatherIcon: iconActiveColor
     readonly property color clockIcon: iconColor
-    readonly property color popupBackground: withAlpha(appleSystemBackground, isLightTheme ? 0.55 : 0.40)
-    readonly property color popupSectionBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.45 : 0.30)
-    readonly property color popupElevatedBackground: withAlpha(appleSecondarySystemBackground, isLightTheme ? 0.82 : 0.72)
-    readonly property color popupElevatedBorder: isLightTheme ? withAlpha("#000000", 0.12) : withAlpha("#FFFFFF", 0.16)
-    readonly property color popupHoverBackground: appleFillHover
+    readonly property color popupBackground: roleColor("popupBackground")
+    readonly property color popupSectionBackground: roleColor("popupSectionBackground")
+    readonly property color popupElevatedBackground: roleColor("popupElevatedBackground")
+    readonly property color popupElevatedBorder: roleColor("popupElevatedBorder")
+    readonly property color popupHoverBackground: roleColor("popupHoverBackground")
     readonly property color popupSelectedBackground: selectedBackground
-    readonly property color popupBorder: appleSeparator
+    readonly property color popupBorder: roleColor("popupBorder")
     readonly property int popupBorderWidth: 1
-    readonly property color popupText: appleLabel
-    readonly property color popupMutedText: appleTertiaryLabel
+    readonly property color popupText: roleColor("popupText")
+    readonly property color popupMutedText: roleColor("popupMutedText")
     readonly property color popupAccent: iconActiveColor
-    readonly property color calendarWeekendText: color("color9")
-    readonly property color popupSuccess: color("color10")
-    readonly property color popupWarning: color("color11")
-    readonly property color popupDanger: color("color9")
+    readonly property color calendarWeekendText: roleColor("calendarWeekendText")
+    readonly property color popupSuccess: roleColor("popupSuccess")
+    readonly property color popupWarning: roleColor("popupWarning")
+    readonly property color popupDanger: roleColor("popupDanger")
 
-    property var stylix: parseJson(stylixColors.text())
-    property string stylixThemeName: stylixThemeNameFile.text().trim()
-    readonly property bool isLightTheme: stylixThemeName.endsWith("-light")
-
-    FileView {
-        id: stylixColors
-
-        path: theme.stylixColorsPath
-        blockLoading: true
-        printErrors: true
-        watchChanges: true
-        onFileChanged: reload()
-        onTextChanged: theme.stylix = theme.parseJson(text())
-    }
+    property string currentThemeName: currentThemeNameFile.text().trim()
+    property var activeTheme: parseJson(themeFile.text())
+    readonly property bool isLightTheme: activeTheme.variant === "light"
 
     FileView {
-        id: stylixThemeNameFile
+        id: currentThemeNameFile
 
-        path: theme.stylixThemeNamePath
+        path: theme.currentThemeNamePath
         blockLoading: true
         printErrors: false
         watchChanges: true
         onFileChanged: reload()
-        onTextChanged: theme.stylixThemeName = stylixThemeNameFile.text().trim()
+        onTextChanged: theme.currentThemeName = currentThemeNameFile.text().trim()
+    }
+
+    FileView {
+        id: themeFile
+
+        path: theme.themeFilePath
+        blockLoading: true
+        printErrors: false
+        watchChanges: true
+        onFileChanged: reload()
+        onTextChanged: {
+            theme.activeTheme = theme.parseJson(text());
+            console.info(`QuickShell theme loaded: current='${theme.currentThemeName}' resolved='${theme.themeName}' name='${theme.activeTheme.name || "unknown"}' variant='${theme.activeTheme.variant || "unknown"}' file='${theme.themeFilePath}'`);
+        }
     }
 
     function parseJson(rawText) {
@@ -173,14 +167,32 @@ Item {
         try {
             return JSON.parse(rawText);
         } catch (error) {
-            console.warn(`Failed to parse Stylix colors: ${error}`);
+            console.warn(`Failed to parse QuickShell theme JSON: ${error}`);
             return {};
         }
     }
 
-    function color(name) {
-        const palette = stylix && stylix.colors ? stylix.colors : {};
-        return palette[name] || palette.color0 || transparentColor;
+    function resolveThemeName(name) {
+        const normalized = String(name || "").trim();
+        if (["default-dark", "default-light", "catppuccin-dark", "catppuccin-light"].includes(normalized)) {
+            return normalized;
+        }
+        return normalized.endsWith("-light") ? "default-light" : "default-dark";
+    }
+
+    function roleColor(name) {
+        const roles = activeTheme && activeTheme.colors ? activeTheme.colors : {};
+        return parseColor(roles[name]);
+    }
+
+    function parseColor(value) {
+        if (typeof value === "string") {
+            return value === "transparent" ? transparentColor : value;
+        }
+        if (value && typeof value === "object" && value.color !== undefined) {
+            return withAlpha(value.color, value.alpha === undefined ? 1 : value.alpha);
+        }
+        return transparentColor;
     }
 
     function withAlpha(value, alpha) {

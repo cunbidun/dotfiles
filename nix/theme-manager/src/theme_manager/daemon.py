@@ -43,8 +43,6 @@ class ThemeManagerDaemon:
             sys.exit(1)
 
         cfg["script"] = script
-        if "nvimThemeMap" not in cfg:
-            cfg["nvimThemeMap"] = {}
         return cfg
 
     def _load_state(self, default):
@@ -139,7 +137,7 @@ class ThemeManagerDaemon:
         self._notify("Theme Changed", f"Theme set to {self.current_theme}")
         conn.sendall(f"OK {self.current_theme}\n".encode())
         self._update_tray()
-    
+
     def _update_tray(self):
         if self.tray:
             self.tray.refresh_menu()
@@ -147,22 +145,22 @@ class ThemeManagerDaemon:
     def _monitor_stylix_theme(self):
         """Monitor ~/.local/state/stylix/current-theme-name.txt and sync theme when different."""
         stylix_theme_path = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
-        
+
         while not self._stop_monitoring.wait(1):  # Check every 2 seconds
             try:
                 # Read the current theme from stylix file
                 if os.path.exists(stylix_theme_path):
                     with open(stylix_theme_path, 'r') as f:
                         stylix_theme = f.read().strip()
-                    
+
                     # Get current daemon theme with polarity
                     pol = self._get_polarity()
                     daemon_theme = f"{self.current_theme}-{pol}"
-                    
+
                     # If themes don't match, sync to daemon's theme
                     if stylix_theme != daemon_theme:
                         print(f"Theme mismatch detected: stylix='{stylix_theme}', daemon='{daemon_theme}'. Syncing...")
-                        
+
                         # Acquire lock to prevent conflicts with other operations
                         with self.lock:
                             if not self.script_running:
@@ -196,16 +194,6 @@ class ThemeManagerDaemon:
                 self._handle_set_polarity(conn, data[1])
             elif cmd == "TOGGLE-POLARITY":
                 self._handle_toggle_polarity(conn)
-            elif cmd == "GET-NVIM-THEME":
-                try:
-                    pol = self._get_polarity()
-                except Exception:
-                    pol = "dark"
-                key = f"{self.current_theme}-{pol}"
-                if key in self.config["nvimThemeMap"]:
-                    conn.sendall(f"OK {self.config['nvimThemeMap'][key]}\n".encode())
-                else:
-                    conn.sendall(f"ERROR no nvim theme mapping for '{key}'\n".encode())
             elif cmd == "SET-THEME" and len(data) == 2:
                 theme = data[1]
                 if theme not in self.allowed:
@@ -226,7 +214,7 @@ class ThemeManagerDaemon:
         self.server_socket.bind(SOCKET_PATH)
         os.chmod(SOCKET_PATH, 0o600)
         self.server_socket.listen(5)
-        
+
         # Start theme monitoring thread
         self._monitor_thread = threading.Thread(target=self._monitor_stylix_theme, daemon=True)
         self._monitor_thread.start()

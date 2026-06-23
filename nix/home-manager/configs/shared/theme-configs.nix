@@ -8,7 +8,6 @@
       scheme = "catppuccin-latte";
       wallpaper = ../../../../wallpapers/thuonglam.jpeg;
       vscodeTheme = "Catppuccin Latte";
-      nvimTheme = "catppuccin";
       vicinaeTheme = "catppuccin-latte";
       chromeExtension = "jhjnalhegpceacdhbplhnakmkdliaddd"; # Catppuccin extension
     };
@@ -16,7 +15,6 @@
       scheme = "catppuccin-mocha";
       wallpaper = ../../../../wallpapers/Astronaut.png;
       vscodeTheme = "Catppuccin Mocha";
-      nvimTheme = "catppuccin";
       vicinaeTheme = "catppuccin-mocha";
       chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
     };
@@ -26,7 +24,6 @@
       scheme = "standardized-light";
       wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
       vscodeTheme = "Light Modern";
-      nvimTheme = "vscode_light";
       vicinaeTheme = "vicinae-light";
       chromeExtension = null; # Default theme - no specific extension needed
     };
@@ -34,7 +31,6 @@
       scheme = "standardized-dark";
       wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
       vscodeTheme = "Dark Modern";
-      nvimTheme = "vscode_dark";
       vicinaeTheme = "vicinae-dark";
       chromeExtension = null; # Default theme - no specific extension needed
     };

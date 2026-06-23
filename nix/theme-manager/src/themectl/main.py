@@ -66,24 +66,12 @@ def toggle_polarity():
     return code
 
 
-def get_nvim_theme():
-    out, code = client_request("GET-NVIM-THEME\n")
-    if code == 0 and out is not None:
-        print(out)
-    elif code == 1 and out is not None:
-        # Extract error message and print to stderr for better error handling
-        error_msg = out.replace("ERROR ", "") if out.startswith("ERROR ") else out
-        print(f"ERROR: {error_msg}", file=sys.stderr)
-    return code
-
-
 def build_parser():
     parser = argparse.ArgumentParser(prog="themectl", description="Control theme-manager daemon")
     sub = parser.add_subparsers(dest="cmd", required=True, help="sub-command")
 
     sub.add_parser("get-theme", help="Show current theme")
     sub.add_parser("list-themes", help="List all available themes")
-    sub.add_parser("get-nvim-theme", help="Show current theme's Neovim colorscheme")
 
     pset = sub.add_parser("set-theme", help="Set a new theme")
     pset.add_argument("theme", help="Theme name (as returned by list-themes)")
@@ -91,7 +79,6 @@ def build_parser():
     ppol = sub.add_parser("set-polarity", help="Set polarity (light or dark)")
     ppol.add_argument("polarity", choices=["light", "dark"], help="Target polarity")
 
-    sub.add_parser("toggle", help="Toggle polarity between light and dark")
     sub.add_parser("toggle-polarity", help="Toggle polarity between light and dark")
 
     return parser
@@ -104,10 +91,8 @@ def main():
     exit_code = {
         "get-theme": get_theme,
         "list-themes": get_themes,
-        "get-nvim-theme": get_nvim_theme,
         "set-theme": lambda: set_theme(args.theme),
         "set-polarity": lambda: set_polarity(args.polarity),
-        "toggle": toggle_polarity,
         "toggle-polarity": toggle_polarity,
     }[args.cmd]()
 

@@ -485,7 +485,7 @@ Rectangle {
         } else if (action === "nightlight") {
             runCommand(`systemctl --user ${root.nightLight ? "stop" : "start"} hyprsunset.service`);
         } else if (action === "theme") {
-            runCommand("themectl toggle");
+            runCommand("themectl toggle-polarity");
         }
     }
 
