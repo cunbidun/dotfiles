@@ -135,7 +135,6 @@ in rec {
     pkgs.obsidian
     pkgs.signal-desktop
     pkgs.slack
-    pkgs.spotify
     pkgs.vlc
 
     # Development and tooling

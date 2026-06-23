@@ -16,6 +16,7 @@ in {
     inputs.sops-nix.homeManagerModules.sops
     inputs.xremap-flake.homeManagerModules.default
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
+    inputs.spicetify-nix.homeManagerModules.default
     inputs.self.homeManagerModules.theme-manager
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
@@ -36,6 +37,7 @@ in {
     ../../home-manager/systemd.nix
     ../../home-manager/configs/stylix.nix
     ../../home-manager/configs/activitywatch.nix
+    ../../home-manager/configs/spicetify.nix
     ../../home-manager/configs/chromium.nix
     ../../home-manager/configs/minecraft.nix
     ../../home-manager/configs/xremap.nix
