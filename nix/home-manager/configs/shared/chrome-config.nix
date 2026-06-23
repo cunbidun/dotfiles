@@ -50,6 +50,12 @@
         "cjnmckjndlpiamhfimnnjmnckgghkjbl" = {
           toolbar_pin = "force_pinned";
         };
+        # Get cookies.txt LOCALLY
+        "cclelndahbckbenkjhflpdbgdldlbecc" = {
+          installation_mode = "force_installed";
+          update_url = "https://clients2.google.com/service/update2/crx";
+          toolbar_pin = "force_pinned";
+        };
       };
     };
 }
