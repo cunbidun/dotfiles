@@ -23,20 +23,19 @@ local plugins = {
 		opts = { colorscheme = "vscode" },
 	},
 	{
-		"folke/tokyonight.nvim",
-		dir = root .. "/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = { transparent = true },
-	},
-	{
 		"Mofiqul/vscode.nvim",
 		dir = root .. "/vscode.nvim",
 		lazy = false,
 		priority = 1000,
 		opts = { transparent = true },
 	},
-	{ "catppuccin/nvim", dir = root .. "/catppuccin", name = "catppuccin", lazy = false, priority = 1000 },
+	{
+		"catppuccin/nvim",
+		dir = root .. "/catppuccin",
+		name = "catppuccin",
+		lazy = false,
+		priority = 1000,
+	},
 	{
 		"folke/snacks.nvim",
 		opts = {
@@ -70,6 +69,14 @@ local plugins = {
 }
 
 vim.list_extend(plugins, {
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		opts = function(_, opts)
+			opts.transparent_background = true
+			return opts
+		end,
+	},
 	{ import = "lazyvim.plugins.extras.ai.sidekick" },
 	-- Configure codex CLI with dangerously-bypass-approvals flag
 	{

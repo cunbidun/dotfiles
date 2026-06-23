@@ -12,6 +12,12 @@ local themes = {
 
 local last
 
+local function load_plugin(name)
+	pcall(function()
+		require("lazy").load({ plugins = { name } })
+	end)
+end
+
 function M.apply(force)
 	local ok, lines = pcall(vim.fn.readfile, theme_file)
 	local name = ok and lines[1] and vim.trim(lines[1])
@@ -22,15 +28,13 @@ function M.apply(force)
 
 	local theme = themes[name] or themes[vim.endswith(name, "-light") and "default-light" or "default-dark"]
 	vim.o.background = theme.background
-	pcall(function()
-		require("tokyonight").setup({ transparent = true })
-	end)
+	load_plugin(theme.colorscheme)
 	pcall(function()
 		require("vscode").setup({ transparent = true })
 	end)
 	if theme.flavour then
 		pcall(function()
-			require("catppuccin").setup({ flavour = theme.flavour })
+			require("catppuccin").setup({ flavour = theme.flavour, transparent_background = true })
 		end)
 	end
 	pcall(vim.cmd.colorscheme, theme.colorscheme)
