@@ -26,6 +26,10 @@ done
 if [[ -z "$polarity" ]]; then
   polarity="$(darkman get 2>/dev/null || echo dark)"
 fi
+if [[ "$polarity" != "dark" && "$polarity" != "light" ]]; then
+  echo "Invalid polarity: $polarity" >&2
+  usage
+fi
 if [[ -z "$theme" ]]; then
   theme="$(themectl get-theme 2>/dev/null || echo default)"
 fi

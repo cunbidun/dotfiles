@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import os, socket, yaml, subprocess, sys, threading, fcntl
 import json  # for JSON encoding
-
 import time
+
 from .tray import ThemeManagerTray
 
 CONFIG_PATH = os.path.expanduser("~/.config/theme-manager/config.yaml")
@@ -25,9 +25,7 @@ class ThemeManagerDaemon:
         self.script_running = False  # guarded by self.lock
         self.server_socket = None
         self._accept_thread = None
-        self._monitor_thread = None
         self.tray: ThemeManagerTray | None = None  # tray instance (optional)
-        self._stop_monitoring = threading.Event()
 
     # ---------- config & state helpers ---------- #
     def _load_config(self):
@@ -64,17 +62,19 @@ class ThemeManagerDaemon:
 
     def _get_polarity(self):
         try:
+            result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
+            polarity = result.stdout.strip()
+            if result.returncode == 0 and polarity in ("light", "dark"):
+                return polarity
+        except Exception:
+            pass
+
+        try:
             stylix_theme = self._get_stylix_theme_name()
             if stylix_theme.endswith("-light"):
                 return "light"
             if stylix_theme.endswith("-dark"):
                 return "dark"
-        except Exception:
-            pass
-
-        try:
-            result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
-            return result.stdout.strip() if result.returncode == 0 else "dark"
         except Exception:
             return "dark"
 
@@ -87,9 +87,10 @@ class ThemeManagerDaemon:
         if polarity not in ("light", "dark"):
             return False
         try:
-            proc = subprocess.run([self.config["script"], "-p", polarity])
-            return True
-        except subprocess.CalledProcessError:
+            if self._get_polarity() == polarity:
+                return True
+            return subprocess.run(["darkman", "set", polarity], check=False).returncode == 0
+        except Exception:
             return False
 
     def _toggle_polarity(self) -> str:
@@ -137,7 +138,7 @@ class ThemeManagerDaemon:
         try:
             self.current_theme = theme
             self._save_state(self.current_theme)
-            proc = subprocess.Popen([self.config["script"], theme])
+            proc = subprocess.Popen([self.config["script"], "-t", theme, "-p", self._get_polarity()])
         except Exception as e:
             self._release_write()
             conn.sendall(f"ERROR failed to launch script: {e}\n".encode())
@@ -155,39 +156,6 @@ class ThemeManagerDaemon:
     def _update_tray(self):
         if self.tray:
             self.tray.refresh_menu()
-
-    def _monitor_stylix_theme(self):
-        """Monitor ~/.local/state/stylix/current-theme-name.txt and sync theme when different."""
-
-        while not self._stop_monitoring.wait(1):  # Check every 2 seconds
-            try:
-                # Read the current theme from stylix file
-                stylix_theme = self._get_stylix_theme_name()
-
-                # Get current daemon theme with polarity
-                pol = self._get_polarity()
-                daemon_theme = f"{self.current_theme}-{pol}"
-
-                # If themes don't match, sync to daemon's theme
-                if stylix_theme != daemon_theme:
-                    print(f"Theme mismatch detected: stylix='{stylix_theme}', daemon='{daemon_theme}'. Syncing...")
-
-                    # Acquire lock to prevent conflicts with other operations
-                    with self.lock:
-                        if not self.script_running:
-                            self.script_running = True
-                            try:
-                                # Run the script to switch to the correct theme
-                                subprocess.run([self.config["script"], self.current_theme], check=False)
-                                print(f"Synced theme to {daemon_theme}")
-                            except Exception as e:
-                                print(f"Failed to sync theme: {e}")
-                            finally:
-                                self.script_running = False
-            except Exception as e:
-                # Don't spam errors, just print once and continue monitoring
-                print(f"Theme monitoring error: {e}")
-                time.sleep(5)  # Wait longer on error
 
     # ---------- client handling ---------- #
     def _handle_client(self, conn: socket.socket):
@@ -226,10 +194,7 @@ class ThemeManagerDaemon:
         os.chmod(SOCKET_PATH, 0o600)
         self.server_socket.listen(5)
 
-        # Start theme monitoring thread
-        self._monitor_thread = threading.Thread(target=self._monitor_stylix_theme, daemon=True)
-        self._monitor_thread.start()
-        print("Theme manager daemon started with stylix monitoring")
+        print("Theme manager daemon started")
 
         def _loop():
             while True:
@@ -244,7 +209,6 @@ class ThemeManagerDaemon:
 
     def stop(self):
         """Stop the daemon and cleanup resources."""
-        self._stop_monitoring.set()
         if self.server_socket:
             self.server_socket.close()
         try:

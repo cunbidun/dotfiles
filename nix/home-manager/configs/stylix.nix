@@ -100,12 +100,12 @@ in
 
     darkModeScripts = {
       dark-theme-switch = ''
-        /etc/profiles/per-user/${userdata.username}/bin/themectl set-polarity dark
+        /etc/profiles/per-user/${userdata.username}/bin/theme-switch -p dark
       '';
     };
     lightModeScripts = {
       light-theme-switch = ''
-        /etc/profiles/per-user/${userdata.username}/bin/themectl set-polarity light
+        /etc/profiles/per-user/${userdata.username}/bin/theme-switch -p light
       '';
     };
 
