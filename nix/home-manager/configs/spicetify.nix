@@ -38,7 +38,6 @@ in {
 
     theme = spicePkgs.themes.${currentThemeConfig.spicetifyTheme};
     colorScheme = currentThemeConfig.spicetifyColorScheme;
-    customColorScheme = currentThemeConfig.spicetifyCustomColorScheme or {};
 
     enabledExtensions = with spicePkgs.extensions; [
       adblockify
