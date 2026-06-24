@@ -168,6 +168,20 @@
         };
       };
 
+      mkHomeConfiguration =
+        {
+          system,
+          homePath,
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs system;
+          modules = [homePath];
+          extraSpecialArgs = {
+            inherit inputs;
+            userdata = userdata;
+          };
+        };
+
       mkDarwinSystem =
         {
           system,
@@ -204,8 +218,6 @@
             inputs.stylix.nixosModules.stylix
             diskoPath
             hostPath
-            home-manager.nixosModules.home-manager
-            (mkHomeManagerModule homePath)
           ];
         };
 
@@ -263,13 +275,31 @@
             inputs.disko.nixosModules.disko
             ./nix/hosts/test-vm/disko.nix
             ./nix/hosts/test-vm/configuration.nix
-            home-manager.nixosModules.home-manager
-            (mkHomeManagerModule ./nix/hosts/test-vm/home.nix)
           ];
         };
 
         minimal = minimalSystem;
 
+      };
+
+      # -----------------------#
+      # home-manager configs   #
+      # -----------------------#
+      homeConfigurations = {
+        "${userdata.username}@nixos" = mkHomeConfiguration {
+          system = "x86_64-linux";
+          homePath = ./nix/hosts/nixos/home.nix;
+        };
+
+        "${userdata.username}@home-server" = mkHomeConfiguration {
+          system = "x86_64-linux";
+          homePath = ./nix/hosts/home-server/home.nix;
+        };
+
+        "${userdata.username}@test-vm" = mkHomeConfiguration {
+          system = "x86_64-linux";
+          homePath = ./nix/hosts/test-vm/home.nix;
+        };
       };
 
       # -----------------------#
@@ -334,6 +364,7 @@
               let
                 pythonWithDeps = pkgs.python3.withPackages (ps: with ps; [ ]);
                 script = pkgs.writeShellScriptBin "nix-switch" ''
+                  export PATH=${home-manager.packages.${system}.home-manager}/bin:$PATH
                   exec ${pythonWithDeps}/bin/python3 ${./scripts/switch.py} "$@"
                 '';
               in

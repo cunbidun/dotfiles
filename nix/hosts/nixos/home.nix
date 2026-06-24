@@ -18,6 +18,7 @@ in {
     inputs.hyprcursor-phinger.homeManagerModules.hyprcursor-phinger
     inputs.spicetify-nix.homeManagerModules.default
     inputs.self.homeManagerModules.theme-manager
+    inputs.stylix.homeModules.stylix
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix

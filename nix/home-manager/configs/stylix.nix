@@ -107,12 +107,12 @@ in {
 
     darkModeScripts = {
       dark-theme-switch = ''
-        /etc/profiles/per-user/${userdata.username}/bin/theme-switch -p dark
+        ${config.home.profileDirectory}/bin/theme-switch -p dark
       '';
     };
     lightModeScripts = {
       light-theme-switch = ''
-        /etc/profiles/per-user/${userdata.username}/bin/theme-switch -p light
+        ${config.home.profileDirectory}/bin/theme-switch -p light
       '';
     };
 
@@ -127,28 +127,12 @@ in {
     themes = builtins.attrNames themeConfigs;
     hookScriptContent = ''
       #!/usr/bin/env bash
-      /etc/profiles/per-user/${userdata.username}/bin/theme-switch "$@"
+      ${config.home.profileDirectory}/bin/theme-switch "$@"
     '';
   };
 
   # Apply the generated specializations
   specialisation = generateSpecializations;
-
-  home.activation = {
-    reconciliation_theme = lib.mkIf isLinux ''
-      #!/usr/bin/env bash
-      set -euo pipefail
-
-      echo "Running theme reconciliation..."
-      POLARITY="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"   # 'dark' by default
-      THEME="$(${pkgs.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"  # 'default' by default
-      echo "Detected theme: $THEME, polarity: $POLARITY"
-
-      if [[ $POLARITY != dark || $THEME != default ]]; then
-        /etc/profiles/per-user/${userdata.username}/bin/theme-switch
-      fi
-    '';
-  };
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {

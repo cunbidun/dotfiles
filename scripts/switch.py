@@ -6,6 +6,10 @@ from datetime import datetime
 from pathlib import Path
 
 
+HOME_PROFILES = {"nixos"}
+
+
+
 def run_cmd(
     cmd: list[str], check: bool = True, capture: bool = False
 ) -> subprocess.CompletedProcess:
@@ -39,6 +43,100 @@ def get_nixos_version(profile: str) -> str:
         ]
         result = run_cmd(cmd, capture=True)
     return result.stdout.strip()
+
+
+def selected_targets(args: argparse.Namespace, is_darwin: bool) -> tuple[bool, bool]:
+    """Return (run_system, run_home)."""
+    if is_darwin:
+        return True, False
+    if args.home:
+        return False, True
+    if args.system:
+        return True, False
+    return True, True
+
+
+def run_with_nom(cmd: list[str], env: dict[str, str] | None = None):
+    p1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env)
+    p2 = subprocess.Popen(["nom", "--json"], stdin=p1.stdout)
+    p1.stdout.close()
+    p2.communicate()
+    p1.wait()
+    if p1.returncode != 0 or p2.returncode != 0:
+        raise subprocess.CalledProcessError(p1.returncode or p2.returncode, cmd)
+
+
+def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
+    operation = "build" if args.build_only else "switch"
+    flake_ref = f"{git_root}#{args.profile}"
+    max_jobs_opts = (
+        ["--option", "max-jobs", str(args.max_jobs)]
+        if args.max_jobs is not None
+        else []
+    )
+
+    if is_darwin:
+        cmd = [
+            "sudo",
+            "darwin-rebuild",
+            operation,
+            "--flake",
+            flake_ref,
+            "--cores",
+            "0",
+        ]
+        run_cmd(cmd)
+        return
+
+    if args.profile in ("home-server", "test-vm"):
+        if args.profile == "home-server":
+            target = "root@home-server"
+            ssh_opts = ""
+        else:
+            target = "root@localhost"
+            ssh_opts = "-p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        print(f"Using remote target-host for {args.profile}...")
+        cmd = [
+            "nixos-rebuild",
+            "--log-format",
+            "internal-json",
+            operation,
+            "--flake",
+            flake_ref,
+            "--target-host",
+            target,
+            "--cores",
+            "0",
+        ] + max_jobs_opts
+        env = os.environ.copy()
+        if ssh_opts:
+            env["NIX_SSHOPTS"] = ssh_opts
+        run_with_nom(cmd, env=env)
+        return
+
+    cmd = [
+        "sudo",
+        "nixos-rebuild",
+        "--log-format",
+        "internal-json",
+        operation,
+        "--flake",
+        flake_ref,
+        "--cores",
+        "0",
+    ] + max_jobs_opts
+    run_with_nom(cmd)
+
+
+def switch_home(args: argparse.Namespace, git_root: Path):
+    operation = "build" if args.build_only else "switch"
+    username = os.environ.get("USER", "cunbidun")
+    flake_ref = f"{git_root}#{username}@{args.profile}"
+    cmd = ["home-manager", operation]
+    if operation == "switch":
+        cmd += ["-b", "bak"]
+    cmd += ["--flake", flake_ref]
+    run_cmd(cmd)
 
 
 def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
@@ -104,6 +202,16 @@ def main():
     parser.add_argument(
         "--build-only", action="store_true", help="Build without switching"
     )
+    target_group = parser.add_mutually_exclusive_group()
+    target_group.add_argument(
+        "--system", action="store_true", help="Build/switch only system config"
+    )
+    target_group.add_argument(
+        "--home", action="store_true", help="Build/switch only Home Manager config"
+    )
+    target_group.add_argument(
+        "--all", action="store_true", help="Build/switch system and Home Manager configs"
+    )
     parser.add_argument(
         "--copy-back",
         action="store_true",
@@ -134,6 +242,14 @@ def main():
         return 1
 
     os.chdir(git_root)
+    run_system, run_home = selected_targets(args, is_darwin)
+
+    if run_home and args.profile not in HOME_PROFILES and not args.build_only:
+        print(
+            f"Error: --home/--all switch is only enabled for local profiles: {', '.join(sorted(HOME_PROFILES))}."
+        )
+        print("Use --system for remote machines, or --build-only to test their home configs.")
+        return 1
 
     # Handle copy-back-only mode
     if args.copy_back_only:
@@ -164,82 +280,16 @@ def main():
     run_cmd(["git", "add", "-A"])
 
     # Ensure sudo access
-    if not is_darwin or args.profile != "home-server":
+    if run_system and (not is_darwin or args.profile != "home-server"):
         run_cmd(["sudo", "-v"])
 
-    # Build/switch configuration
-    operation = "build" if args.build_only else "switch"
-    flake_ref = f"{git_root}#{args.profile}"
-    max_jobs_opts = ["--option", "max-jobs", str(args.max_jobs)] if args.max_jobs is not None else []
-
     try:
-        if is_darwin:
-            cmd = [
-                "sudo",
-                "darwin-rebuild",
-                operation,
-                "--flake",
-                flake_ref,
-                "--cores",
-                "0",
-            ]
-            run_cmd(cmd)
-        else:
-            if args.profile in ("home-server", "test-vm"):
-                if args.profile == "home-server":
-                    target = "root@home-server"
-                    ssh_opts = ""
-                else:
-                    target = "root@localhost"
-                    ssh_opts = "-p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-                print(f"Using remote target-host for {args.profile}...")
-                cmd = [
-                    "nixos-rebuild",
-                    "--log-format",
-                    "internal-json",
-                    operation,
-                    "--flake",
-                    flake_ref,
-                    "--target-host",
-                    target,
-                    "--cores",
-                    "0",
-                ] + max_jobs_opts
-                env = os.environ.copy()
-                if ssh_opts:
-                    env["NIX_SSHOPTS"] = ssh_opts
-                # Pipe through nom
-                p1 = subprocess.Popen(
-                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env
-                )
-                p2 = subprocess.Popen(["nom", "--json"], stdin=p1.stdout)
-                p1.stdout.close()
-                p2.communicate()
-                p1.wait()
-                if p1.returncode != 0 or p2.returncode != 0:
-                    raise subprocess.CalledProcessError(p1.returncode or p2.returncode, cmd)
-            else:
-                cmd = [
-                    "sudo",
-                    "nixos-rebuild",
-                    "--log-format",
-                    "internal-json",
-                    operation,
-                    "--flake",
-                    flake_ref,
-                    "--cores",
-                    "0",
-                ] + max_jobs_opts
-                # Pipe through nom
-                p1 = subprocess.Popen(
-                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
-                )
-                p2 = subprocess.Popen(["nom", "--json"], stdin=p1.stdout)
-                p1.stdout.close()
-                p2.communicate()
-                if p2.returncode != 0:
-                    raise subprocess.CalledProcessError(p2.returncode, cmd)
+        if run_system:
+            switch_system(args, git_root, is_darwin)
+        if run_home:
+            switch_home(args, git_root)
     except subprocess.CalledProcessError:
+        operation = "build" if args.build_only else "switch"
         print(f"Error: {operation.capitalize()} failed.")
         return 1
 

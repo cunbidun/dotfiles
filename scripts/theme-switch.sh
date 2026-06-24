@@ -34,10 +34,11 @@ if [[ -z "$theme" ]]; then
   theme="$(themectl get-theme 2>/dev/null || echo default)"
 fi
 
-# Find home-manager activation dir
-home_manager_dir="$(systemctl cat home-manager-"$USER".service | grep 'ExecStart' | awk '{print $2}')"
-if [[ -z "$home_manager_dir" ]]; then
-  echo "Could not find home-manager directory" >&2
+# Find home-manager activation dir for standalone Home Manager.
+home_manager_profile="$HOME/.local/state/nix/profiles/home-manager"
+home_manager_dir="$(readlink -f "$home_manager_profile")"
+if [[ -z "$home_manager_dir" || ! -x "$home_manager_dir/activate" ]]; then
+  echo "Could not find home-manager activation directory" >&2
   exit 1
 fi
 
