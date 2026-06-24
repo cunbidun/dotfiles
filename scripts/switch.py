@@ -60,6 +60,22 @@ def run_with_nom(cmd: list[str], env: dict[str, str] | None = None):
     if p1.returncode != 0 or p2.returncode != 0:
         raise subprocess.CalledProcessError(p1.returncode or p2.returncode, cmd)
 
+def run_build_with_nom(cmd: list[str], env: dict[str, str] | None = None) -> str:
+    p1 = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        env=env,
+    )
+    p2 = subprocess.Popen(["nom", "--json"], stdin=p1.stderr)
+    p1.stderr.close()
+    stdout, _ = p1.communicate()
+    p2.wait()
+    if p1.returncode != 0 or p2.returncode != 0:
+        raise subprocess.CalledProcessError(p1.returncode or p2.returncode, cmd)
+    return stdout
+
 
 def remote_profile(profile: str) -> tuple[str, str]:
     if profile == "home-server":
@@ -82,11 +98,18 @@ def current_theme_specialisation() -> str:
     return specialisation
 
 def build_home_activation(attr: str, max_jobs: int | None = None) -> str:
-    build_cmd = ["nix", "build", "--no-link", "--print-out-paths", attr]
+    build_cmd = [
+        "nix",
+        "build",
+        "--log-format",
+        "internal-json",
+        "--no-link",
+        "--print-out-paths",
+        attr,
+    ]
     if max_jobs is not None:
         build_cmd += ["--option", "max-jobs", str(max_jobs)]
-    result = run_cmd(build_cmd, capture=True)
-    return result.stdout.strip().splitlines()[-1]
+    return run_build_with_nom(build_cmd).strip().splitlines()[-1]
 
 def activate_home_generation(generation: str, specialisation: str | None = None):
     run_cmd(["nix-env", "--profile", str(Path.home() / ".local/state/nix/profiles/home-manager"), "--set", generation])

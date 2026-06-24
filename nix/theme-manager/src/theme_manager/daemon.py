@@ -104,7 +104,7 @@ class ThemeManagerDaemon:
         now = datetime.now(timezone.utc)
         next_polarity = "dark" if polarity == "light" else "light"
         print(
-            f"Auto polarity: {polarity}; next switch to {next_polarity} at "
+            f"Auto polarity status: current={polarity}, next={next_polarity}, at="
             f"{next_switch.astimezone().strftime('%Y-%m-%d %H:%M:%S %Z')} "
             f"(in {self._format_duration(next_switch - now)})",
             flush=True,
@@ -134,8 +134,13 @@ class ThemeManagerDaemon:
                             self._release_write()
                             self._update_tray()
 
-                sleep_for = max(1, int((next_switch - datetime.now(timezone.utc)).total_seconds()) + 1)
-                time.sleep(sleep_for)
+                while True:
+                    remaining = int((next_switch - datetime.now(timezone.utc)).total_seconds())
+                    if remaining <= 0:
+                        break
+                    time.sleep(min(60, remaining))
+                    if remaining > 60:
+                        self._log_next_switch(polarity, next_switch)
             except Exception as e:
                 print(f"ERROR auto polarity failed: {e}", file=sys.stderr, flush=True)
                 time.sleep(300)
