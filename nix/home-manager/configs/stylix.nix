@@ -111,10 +111,10 @@ in {
   specialisation = generateSpecializations;
 
   home.activation.reconciliation_theme = lib.hm.dag.entryBetween ["linkGeneration"] ["writeBoundary"] ''
-    expected_theme="$(${config.home.profileDirectory}/bin/themectl get-theme)-$(${config.home.profileDirectory}/bin/themectl get-polarity)"
+    expected_theme="$($newGenPath/home-path/bin/themectl get-theme)-$($newGenPath/home-path/bin/themectl get-polarity)"
     new_theme="$(cat "$newGenPath/home-files/.local/state/stylix/current-theme-name.txt")"
     if [ "$new_theme" != "$expected_theme" ]; then
-      ${config.home.profileDirectory}/bin/theme-switch --reconcile
+      "$newGenPath/home-path/bin/theme-switch" --reconcile
       exit $?
     fi
   '';
