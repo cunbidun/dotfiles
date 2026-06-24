@@ -1,5 +1,6 @@
 import argparse
 import os
+import shlex
 import subprocess
 import sys
 from datetime import datetime
@@ -185,7 +186,12 @@ def switch_home(args: argparse.Namespace, git_root: Path):
         if ssh_opts:
             env["NIX_SSHOPTS"] = ssh_opts
         run_cmd(["nix", "copy", "--to", f"ssh://{target}", activation], env=env)
-        ssh_cmd = ["ssh"] + ssh_opts.split() + [target, "sudo", "-u", username, "--set-home", f"{activation}/activate"]
+        remote_cmd = (
+            f"sudo -u {shlex.quote(username)} --set-home sh -lc "
+            + shlex.quote('export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"; exec "$1"')
+            + f" sh {shlex.quote(f'{activation}/activate')}"
+        )
+        ssh_cmd = ["ssh"] + ssh_opts.split() + [target, remote_cmd]
         run_cmd(ssh_cmd)
         return
 

@@ -25,6 +25,7 @@ local plugins = {
 	{
 		"Mofiqul/vscode.nvim",
 		dir = root .. "/vscode.nvim",
+		name = "vscode",
 		lazy = false,
 		priority = 1000,
 		opts = { transparent = true },
