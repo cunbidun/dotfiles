@@ -110,7 +110,7 @@ class ThemeManagerTray:
         def _set():
             result, ok = self.client_request(f"SET-THEME {theme}\n")
             if ok:
-                self.current_theme = theme
+                self.current_theme = result
                 self.refresh_menu()
             else:
                 logger.error(f"Failed to set theme: {result}")

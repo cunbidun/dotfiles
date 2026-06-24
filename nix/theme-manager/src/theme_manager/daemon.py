@@ -6,7 +6,7 @@ import time
 from .tray import ThemeManagerTray
 
 CONFIG_PATH = os.path.expanduser("~/.config/theme-manager/config.yaml")
-STATE_PATH = os.path.expanduser("~/.local/share/theme-manager/state")
+STYLIX_THEME_PATH = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
 SOCKET_PATH = os.path.expanduser("~/.local/share/theme-manager/socket")
 LOCK_PATH = os.path.expanduser("~/.local/share/theme-manager/lock")
 
@@ -16,10 +16,6 @@ class ThemeManagerDaemon:
     def __init__(self):
         self.config = self._load_config()
         self.allowed = self.config["themes"]
-        self.current_theme = self._load_state(self.allowed[0])
-        if self.current_theme not in self.allowed:
-            self.current_theme = self.allowed[0]
-            self._save_state(self.current_theme)
 
         self.lock = threading.Lock()
         self.script_running = False  # guarded by self.lock
@@ -43,15 +39,20 @@ class ThemeManagerDaemon:
         cfg["script"] = script
         return cfg
 
-    def _load_state(self, default):
-        try:
-            return open(STATE_PATH).read().strip()
-        except FileNotFoundError:
-            return default
+    def _split_stylix_theme(self, stylix_theme: str) -> tuple[str, str] | None:
+        if "-" not in stylix_theme:
+            return None
+        theme, polarity = stylix_theme.rsplit("-", 1)
+        if theme not in self.allowed or polarity not in ("light", "dark"):
+            return None
+        return theme, polarity
 
-    def _save_state(self, theme):
-        os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
-        open(STATE_PATH, "w").write(theme)
+    def _get_current_theme(self) -> str:
+        parsed = self._split_stylix_theme(self._get_stylix_theme_name())
+        if parsed is None:
+            return self.allowed[0]
+        theme, _ = parsed
+        return theme
 
     # ---------- system helpers ---------- #
     def _notify(self, summary: str, body: str = ""):
@@ -79,8 +80,7 @@ class ThemeManagerDaemon:
             return "dark"
 
     def _get_stylix_theme_name(self):
-        stylix_theme_path = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
-        with open(stylix_theme_path, 'r') as f:
+        with open(STYLIX_THEME_PATH, 'r') as f:
             return f.read().strip()
 
     def _set_polarity(self, polarity: str) -> bool:
@@ -136,22 +136,29 @@ class ThemeManagerDaemon:
         if not self._acquire_write(conn):
             return
         try:
-            self.current_theme = theme
-            self._save_state(self.current_theme)
-            proc = subprocess.Popen([self.config["script"], "-t", theme, "-p", self._get_polarity()])
+            polarity = self._get_polarity()
+            proc = subprocess.run([self.config["script"], "-t", theme, "-p", polarity], check=False)
         except Exception as e:
             self._release_write()
-            conn.sendall(f"ERROR failed to launch script: {e}\n".encode())
+            conn.sendall(f"ERROR failed to run script: {e}\n".encode())
             return
 
-        def _wait(p):
-            p.wait()
-            self._release_write()
-        threading.Thread(target=_wait, args=(proc,), daemon=True).start()
+        try:
+            if proc.returncode != 0:
+                conn.sendall(f"ERROR script failed with exit code {proc.returncode}\n".encode())
+                return
 
-        self._notify("Theme Changed", f"Theme set to {self.current_theme}")
-        conn.sendall(f"OK {self.current_theme}\n".encode())
-        self._update_tray()
+            active = self._get_stylix_theme_name()
+            expected = f"{theme}-{polarity}"
+            if active != expected:
+                conn.sendall(f"ERROR active theme is {active}, expected {expected}\n".encode())
+                return
+
+            self._notify("Theme Changed", f"Theme set to {theme}")
+            conn.sendall(f"OK {theme}\n".encode())
+        finally:
+            self._release_write()
+            self._update_tray()
 
     def _update_tray(self):
         if self.tray:
@@ -166,7 +173,7 @@ class ThemeManagerDaemon:
             cmd = data[0]
 
             if cmd == "GET-THEME":
-                conn.sendall(f"OK {self.current_theme}\n".encode())
+                conn.sendall(f"OK {self._get_current_theme()}\n".encode())
             elif cmd == "LIST-THEMES":
                 conn.sendall(f"OK {json.dumps(self.allowed)}\n".encode())
             elif cmd == "SET-POLARITY" and len(data) == 2:

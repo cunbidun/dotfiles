@@ -215,7 +215,6 @@
           };
           modules = [
             inputs.disko.nixosModules.disko
-            inputs.stylix.nixosModules.stylix
             diskoPath
             hostPath
           ];

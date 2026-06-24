@@ -314,16 +314,6 @@
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   };
 
-  # Enable Stylix for system-wide theming
-  # The actual theme configuration is in home-manager/configs/stylix.nix
-  stylix = {
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/standardized-dark.yaml";
-    targets = {
-      chromium.enable = false;
-      kmscon.enable = false;
-    };
-  };
   programs.localsend = {
     enable = true;
     openFirewall = true; # opens port 53317 for receiving
