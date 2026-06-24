@@ -42,6 +42,7 @@ logger.propagate = False
 
 class ThemeManagerTray:
     def __init__(self) -> None:
+        self._install_menu_css()
         self.current_theme: str | None = None
         self.current_polarity: str | None = None
         self.schedule_status: dict | None = None
@@ -50,6 +51,23 @@ class ThemeManagerTray:
         self._font: ImageFont.FreeTypeFont | ImageFont.ImageFont | None = None
         self._menu_active = False  # suppress auto refresh when user interacting
         self.update_status()
+
+    def _install_menu_css(self):
+        try:
+            from gi.repository import Gdk, Gtk
+
+            provider = Gtk.CssProvider()
+            provider.load_from_data(b"""
+                menuitem label { font-size: 11px; }
+                menuitem { padding-left: 6px; padding-right: 6px; }
+            """)
+            Gtk.StyleContext.add_provider_for_screen(
+                Gdk.Screen.get_default(),
+                provider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+            )
+        except Exception:
+            pass
 
     # ------------- font resolution ------------- #
     def _load_font(self, size: int = 48):
