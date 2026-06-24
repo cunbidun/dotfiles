@@ -186,6 +186,7 @@ class ThemeManagerTray:
         if self.icon:
             self.icon.icon = self.create_image()
             self.icon.menu = pystray.Menu(*self.build_menu())
+            self.icon.update_menu()
 
     def quit_app(self, *_):
         if self.icon:

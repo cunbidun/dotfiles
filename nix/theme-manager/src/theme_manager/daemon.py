@@ -84,7 +84,8 @@ class ThemeManagerDaemon:
     def _sun_window(self, now: datetime) -> tuple[datetime, datetime]:
         lat, lon = self._read_location()
         location = LocationInfo(latitude=lat, longitude=lon)
-        times = sun(location.observer, date=now.date())
+        local_now = now.astimezone()
+        times = sun(location.observer, date=local_now.date(), tzinfo=local_now.tzinfo)
         return times["sunrise"], times["sunset"]
 
     def _scheduled_polarity(self, now: datetime | None = None) -> tuple[str, datetime]:
@@ -174,6 +175,7 @@ class ThemeManagerDaemon:
             try:
                 polarity, next_switch = self._scheduled_polarity()
                 self._log_next_switch(polarity, next_switch)
+                self._update_tray()
 
                 override = self._load_override()
                 if override is not None:
@@ -198,6 +200,7 @@ class ThemeManagerDaemon:
                     time.sleep(min(60, remaining))
                     if remaining > 60:
                         self._log_next_switch(polarity, next_switch)
+                        self._update_tray()
 
                 target, _ = self._scheduled_polarity(datetime.now(timezone.utc) + timedelta(seconds=5))
                 if self._get_polarity() != target:
