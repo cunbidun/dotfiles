@@ -34,26 +34,9 @@ if [[ -z "$theme" ]]; then
   theme="$(themectl get-theme 2>/dev/null || echo default)"
 fi
 
-# Find home-manager activation dir for standalone Home Manager.
-home_manager_profile="$HOME/.local/state/nix/profiles/home-manager"
-home_manager_dir="$(readlink -f "$home_manager_profile")"
-if [[ -z "$home_manager_dir" || ! -x "$home_manager_dir/activate" ]]; then
-  echo "Could not find home-manager activation directory" >&2
-  exit 1
-fi
-
-# Compose activation command path
-if [[ "$theme" == "default" && "$polarity" == "dark" ]]; then
-  activate_cmd="$home_manager_dir/activate"
-else
-  activate_cmd="$home_manager_dir/specialisation/${theme}-${polarity}/activate"
-fi
+specialisation_name="${theme}-${polarity}"
+flake_ref="$HOME/dotfiles#${USER}@${HOSTNAME}"
 
 # Perform switch
-if [[ -x "$activate_cmd" ]]; then
-  echo "Switching to theme '$theme' with polarity '$polarity'..."
-  "$activate_cmd"
-else
-  echo "Activation script not found or not executable: $activate_cmd. Falling back to '$home_manager_dir/activate'" >&2
-  "$home_manager_dir"/activate
-fi
+echo "Switching to theme '$theme' with polarity '$polarity'..."
+home-manager switch --flake "$flake_ref" --specialisation "$specialisation_name"

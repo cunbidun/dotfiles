@@ -155,19 +155,6 @@
           config.allowUnfree = true;
         };
 
-      mkHomeManagerModule = configPath: {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = false;
-          backupFileExtension = "bak";
-          users.${userdata.username} = import configPath;
-          extraSpecialArgs = {
-            inherit inputs;
-            userdata = userdata;
-          };
-        };
-      };
-
       mkHomeConfiguration =
         {
           system,
@@ -196,8 +183,6 @@
           modules = [
             inputs.mac-app-util.darwinModules.default
             ./nix/hosts/macbook/configuration.nix
-            home-manager.darwinModules.home-manager
-            (mkHomeManagerModule ./nix/hosts/macbook/home.nix)
           ];
         };
 
@@ -285,6 +270,11 @@
       # home-manager configs   #
       # -----------------------#
       homeConfigurations = {
+        "${userdata.username}@macbook-m1" = mkHomeConfiguration {
+          system = "aarch64-darwin";
+          homePath = ./nix/hosts/macbook/home.nix;
+        };
+
         "${userdata.username}@nixos" = mkHomeConfiguration {
           system = "x86_64-linux";
           homePath = ./nix/hosts/nixos/home.nix;

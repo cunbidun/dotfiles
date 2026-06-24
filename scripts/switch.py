@@ -5,18 +5,15 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-
-HOME_PROFILES = {"nixos"}
-
-
-
 def run_cmd(
-    cmd: list[str], check: bool = True, capture: bool = False
+    cmd: list[str], check: bool = True, capture: bool = False, env: dict[str, str] | None = None
 ) -> subprocess.CompletedProcess:
     """Run a command with optional output capture."""
     kwargs = {"check": check, "text": True}
     if capture:
         kwargs["capture_output"] = True
+    if env is not None:
+        kwargs["env"] = env
     return subprocess.run(cmd, **kwargs)
 
 
@@ -45,10 +42,8 @@ def get_nixos_version(profile: str) -> str:
     return result.stdout.strip()
 
 
-def selected_targets(args: argparse.Namespace, is_darwin: bool) -> tuple[bool, bool]:
+def selected_targets(args: argparse.Namespace) -> tuple[bool, bool]:
     """Return (run_system, run_home)."""
-    if is_darwin:
-        return True, False
     if args.home:
         return False, True
     if args.system:
@@ -66,8 +61,15 @@ def run_with_nom(cmd: list[str], env: dict[str, str] | None = None):
         raise subprocess.CalledProcessError(p1.returncode or p2.returncode, cmd)
 
 
+def remote_profile(profile: str) -> tuple[str, str]:
+    if profile == "home-server":
+        return "root@home-server", ""
+    if profile == "test-vm":
+        return "root@localhost", "-p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+    raise ValueError(f"profile {profile} is not remote")
+
+
 def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
-    operation = "build" if args.build_only else "switch"
     flake_ref = f"{git_root}#{args.profile}"
     max_jobs_opts = (
         ["--option", "max-jobs", str(args.max_jobs)]
@@ -79,7 +81,7 @@ def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
         cmd = [
             "sudo",
             "darwin-rebuild",
-            operation,
+            "switch",
             "--flake",
             flake_ref,
             "--cores",
@@ -100,7 +102,7 @@ def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
             "nixos-rebuild",
             "--log-format",
             "internal-json",
-            operation,
+            "switch",
             "--flake",
             flake_ref,
             "--target-host",
@@ -119,7 +121,7 @@ def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
         "nixos-rebuild",
         "--log-format",
         "internal-json",
-        operation,
+        "switch",
         "--flake",
         flake_ref,
         "--cores",
@@ -129,61 +131,26 @@ def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
 
 
 def switch_home(args: argparse.Namespace, git_root: Path):
-    operation = "build" if args.build_only else "switch"
     username = os.environ.get("USER", "cunbidun")
     flake_ref = f"{git_root}#{username}@{args.profile}"
-    cmd = ["home-manager", operation]
-    if operation == "switch":
-        cmd += ["-b", "bak"]
-    cmd += ["--flake", flake_ref]
+    if args.profile in ("home-server", "test-vm"):
+        target, ssh_opts = remote_profile(args.profile)
+        attr = f"{git_root}#homeConfigurations.\"{username}@{args.profile}\".activationPackage"
+        build_cmd = ["nix", "build", "--no-link", "--print-out-paths", attr]
+        if args.max_jobs is not None:
+            build_cmd += ["--option", "max-jobs", str(args.max_jobs)]
+        result = run_cmd(build_cmd, capture=True)
+        activation = result.stdout.strip().splitlines()[-1]
+        env = os.environ.copy()
+        if ssh_opts:
+            env["NIX_SSHOPTS"] = ssh_opts
+        run_cmd(["nix", "copy", "--to", f"ssh://{target}", activation], env=env)
+        ssh_cmd = ["ssh"] + ssh_opts.split() + [target, "sudo", "-u", username, "--set-home", f"{activation}/activate"]
+        run_cmd(ssh_cmd)
+        return
+
+    cmd = ["home-manager", "switch", "-b", "bak", "--flake", flake_ref]
     run_cmd(cmd)
-
-
-def copy_files_back(git_root: Path, profile: str, is_darwin: bool):
-    """Copy generated configuration files back to repository."""
-    dest_dir = git_root / "generated" / profile
-    dest_dir.mkdir(parents=True, exist_ok=True)
-
-    # Files to copy (OS-specific paths, we skip what doesn't exist)
-    files = [
-        # macOS VS Code
-        "~/Library/Application Support/Code/User/keybindings.json",
-        "~/Library/Application Support/Code/User/settings.json",
-        # Linux VS Code
-        "~/.config/Code/User/keybindings.json",
-        "~/.config/Code/User/settings.json",
-        # Common configs
-        "~/.config/starship.toml",
-        "~/.config/tmux/tmux.conf",
-        "~/.config/nvim",
-        "~/.zshrc",
-    ]
-
-    # Copy files (follow symlinks, recursive)
-    for file in files:
-        src = Path(file).expanduser()
-        if src.exists():
-            rel_path = src.relative_to(Path.home())
-            dest = dest_dir / "$HOME" / rel_path
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            run_cmd(["cp", "-rL", str(src), str(dest)])
-            print(f"Copied: {file}")
-
-    # Dump VS Code extensions list
-    code_cmd = None
-    for cmd in ["code"]:
-        result = run_cmd(["which", cmd], capture=True, check=False)
-        if result.returncode == 0:
-            code_cmd = cmd
-            break
-
-    if code_cmd:
-        result = run_cmd([code_cmd, "--list-extensions"], capture=True, check=False)
-        if result.returncode == 0:
-            ext_list = dest_dir / "vscode" / "extensions.txt"
-            ext_list.parent.mkdir(parents=True, exist_ok=True)
-            ext_list.write_text(result.stdout)
-            print("Copied: VS Code extensions list")
 
 
 def main():
@@ -199,9 +166,6 @@ def main():
         default=f"Auto commit: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         help="Custom commit message",
     )
-    parser.add_argument(
-        "--build-only", action="store_true", help="Build without switching"
-    )
     target_group = parser.add_mutually_exclusive_group()
     target_group.add_argument(
         "--system", action="store_true", help="Build/switch only system config"
@@ -213,16 +177,6 @@ def main():
         "--all", action="store_true", help="Build/switch system and Home Manager configs"
     )
     parser.add_argument(
-        "--copy-back",
-        action="store_true",
-        help="Copy generated files back to repository",
-    )
-    parser.add_argument(
-        "--copy-back-only",
-        action="store_true",
-        help="Only copy files back, skip build/switch",
-    )
-    parser.add_argument(
         "--max-jobs",
         type=int,
         default=None,
@@ -232,8 +186,8 @@ def main():
 
     args = parser.parse_args()
 
-    # Detect OS and validate git root
-    is_darwin = sys.platform == "darwin"
+    # Detect target platform and validate git root
+    is_darwin = args.profile == "macbook-m1"
     git_root = get_git_root()
     expected_root = Path.home() / "dotfiles"
 
@@ -242,39 +196,7 @@ def main():
         return 1
 
     os.chdir(git_root)
-    run_system, run_home = selected_targets(args, is_darwin)
-
-    if run_home and args.profile not in HOME_PROFILES and not args.build_only:
-        print(
-            f"Error: --home/--all switch is only enabled for local profiles: {', '.join(sorted(HOME_PROFILES))}."
-        )
-        print("Use --system for remote machines, or --build-only to test their home configs.")
-        return 1
-
-    # Handle copy-back-only mode
-    if args.copy_back_only:
-        import shutil
-
-        shutil.rmtree(git_root / "generated" / args.profile, ignore_errors=True)
-        print(f"Removed old generated files for {args.profile}.")
-        copy_files_back(git_root, args.profile, is_darwin)
-        print("Copy-back completed.")
-
-        # Commit if requested
-        run_cmd(["git", "add", "-A"])
-        if not args.no_commit:
-            result = run_cmd(
-                ["git", "diff-index", "--quiet", "HEAD", "--"], check=False
-            )
-            if result.returncode != 0:
-                commit_msg = (
-                    f"{args.commit_message} (profile: {args.profile}, copy-back only)"
-                )
-                run_cmd(["git", "commit", "-m", commit_msg])
-                print(f"Committed: {commit_msg}")
-            else:
-                print("No changes to commit.")
-        return 0
+    run_system, run_home = selected_targets(args)
 
     # Stage all changes
     run_cmd(["git", "add", "-A"])
@@ -289,23 +211,8 @@ def main():
         if run_home:
             switch_home(args, git_root)
     except subprocess.CalledProcessError:
-        operation = "build" if args.build_only else "switch"
-        print(f"Error: {operation.capitalize()} failed.")
+        print("Error: Switch failed.")
         return 1
-
-    if args.build_only:
-        print("Build completed successfully. Run again without --build-only to switch.")
-        return 0
-
-    # Copy files back if requested
-    if args.copy_back:
-        import shutil
-
-        shutil.rmtree(git_root / "generated" / args.profile, ignore_errors=True)
-        print(f"Removed old generated files for {args.profile}.")
-        copy_files_back(git_root, args.profile, is_darwin)
-    else:
-        print("Skipping file copy-back (use --copy-back to enable).")
 
     print("Switch successful.")
 
