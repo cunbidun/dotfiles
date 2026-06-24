@@ -208,7 +208,7 @@ let
     # User-kept extra plugin not provided by LazyVim defaults.
     {
       pkg = vscode-nvim;
-      dir = "vscode.nvim";
+      dir = "vscode";
     }
   ];
 
