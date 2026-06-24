@@ -4,14 +4,15 @@ set -euo pipefail
 
 usage() {
   echo "Usage: $0 [-p polarity] [-t theme]" >&2
-  echo "  -p polarity   Polarity: dark or light (default: detected by darkman or 'dark')" >&2
-  echo "  -t theme      Theme name (default: output of 'themectl get-theme' or 'default')" >&2
+  echo "  -p polarity   Polarity: dark or light (default: persisted state)" >&2
+  echo "  -t theme      Theme name (default: persisted state)" >&2
   exit 1
 }
 
 # Default values
 polarity=""
 theme=""
+theme_state_file="$HOME/.local/state/stylix/current-theme-name.txt"
 
 # Parse options
 while getopts ":p:t:" opt; do
@@ -22,16 +23,30 @@ while getopts ":p:t:" opt; do
   esac
 done
 
-# Get defaults if not set
-if [[ -z "$polarity" ]]; then
-  polarity="$(darkman get 2>/dev/null || echo dark)"
+# Get defaults from persisted state if not set
+if [[ -z "$polarity" || -z "$theme" ]]; then
+  current_theme_name="$(<"$theme_state_file")"
+  case "$current_theme_name" in
+  *-dark)
+    state_theme="${current_theme_name%-dark}"
+    state_polarity="dark"
+    ;;
+  *-light)
+    state_theme="${current_theme_name%-light}"
+    state_polarity="light"
+    ;;
+  *)
+    echo "Invalid theme state: $current_theme_name" >&2
+    exit 1
+    ;;
+  esac
+
+  [[ -n "$theme" ]] || theme="$state_theme"
+  [[ -n "$polarity" ]] || polarity="$state_polarity"
 fi
 if [[ "$polarity" != "dark" && "$polarity" != "light" ]]; then
   echo "Invalid polarity: $polarity" >&2
   usage
-fi
-if [[ -z "$theme" ]]; then
-  theme="$(themectl get-theme 2>/dev/null || echo default)"
 fi
 
 specialisation_name="${theme}-${polarity}"

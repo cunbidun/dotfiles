@@ -22,6 +22,18 @@ in {
       description = "List of themes to cycle through.";
     };
 
+    autoSwitch = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Automatically switch light/dark polarity at sunrise/sunset.";
+    };
+
+    locationFile = lib.mkOption {
+      type = lib.types.str;
+      default = "/etc/geolocation";
+      description = "File containing latitude and longitude, one per line.";
+    };
+
     hookScriptContent = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "Full Bash script contents to run when theme changes.";
@@ -37,6 +49,8 @@ in {
       ${lib.concatStringsSep "\n" (map (t: "  - " + t) cfg.themes)}
 
       script: "${lib.getExe hook}"
+      autoSwitch: ${if cfg.autoSwitch then "true" else "false"}
+      locationFile: "${cfg.locationFile}"
     '';
 
     systemd.user.services."theme-manager" = {

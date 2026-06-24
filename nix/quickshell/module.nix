@@ -44,7 +44,6 @@ in {
         pkgs.gnused
         backendScript
         pkgs.brightnessctl
-        pkgs.darkman
         pkgs.hyprpicker
         pkgs.jq
         pkgs.libnotify

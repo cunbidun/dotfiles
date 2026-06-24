@@ -47,11 +47,6 @@
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/${themeConfig.scheme}.yaml";
       image = lib.mkForce themeConfig.wallpaper;
     };
-    home.activation.reconciliation_theme = lib.mkForce ''
-      #!/usr/bin/env bash
-      # no-op script to avoid double activation
-    '';
-
     # Write the current theme name directly in the specialization
     home.file.".local/state/stylix/current-theme-name.txt".text = lib.mkForce "${theme}-${polarity}";
 
@@ -102,25 +97,6 @@
     null
     allThemeConfigs;
 in {
-  services.darkman = {
-    enable = isLinux;
-
-    darkModeScripts = {
-      dark-theme-switch = ''
-        ${config.home.profileDirectory}/bin/theme-switch -p dark
-      '';
-    };
-    lightModeScripts = {
-      light-theme-switch = ''
-        ${config.home.profileDirectory}/bin/theme-switch -p light
-      '';
-    };
-
-    settings = {
-      usegeoclue = true;
-    };
-  };
-
   services.theme-manager = {
     enable = isLinux;
     enableTray = isLinux; # Enable tray icon on Linux systems
@@ -133,21 +109,6 @@ in {
 
   # Apply the generated specializations
   specialisation = generateSpecializations;
-
-  home.activation = {
-    reconciliation_theme = lib.mkIf isLinux ''
-      #!/usr/bin/env bash
-      set -euo pipefail
-
-      echo "Running theme reconciliation..."
-      POLARITY="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"
-      THEME="$(${pkgs.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"
-
-      if [[ $POLARITY != dark || $THEME != default ]]; then
-        ${config.home.profileDirectory}/bin/theme-switch
-      fi
-    '';
-  };
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {

@@ -21,6 +21,7 @@ in
     propagatedBuildInputs = with python3.pkgs;
       [
         pyyaml
+        astral
         pystray
         pillow
         pygobject3
@@ -32,7 +33,6 @@ in
       "--set GI_TYPELIB_PATH ${gtk3.out}/lib/girepository-1.0:${gobject-introspection.out}/lib/girepository-1.0:${glib.out}/lib/girepository-1.0:${libappindicator-gtk3.out}/lib/girepository-1.0:${pango.out}/lib/girepository-1.0:${harfbuzz.out}/lib/girepository-1.0:${gdk-pixbuf.out}/lib/girepository-1.0:${atk.out}/lib/girepository-1.0"
       "--set XDG_DATA_DIRS ${gtk3.out}/share:${libappindicator-gtk3.out}/share:$XDG_DATA_DIRS"
       "--set PYSTRAY_BACKEND appindicator"
-      "--prefix PATH : ${lib.makeBinPath [pkgs.darkman]}"
     ];
 
     meta = with lib; {

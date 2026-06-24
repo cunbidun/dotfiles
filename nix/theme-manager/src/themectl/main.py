@@ -42,6 +42,12 @@ def get_themes():
             return 4
     return code
 
+def get_polarity():
+    out, code = client_request("GET-POLARITY\n")
+    if out is not None:
+        print(out)
+    return code
+
 
 def set_theme(theme):
     out, code = client_request(f"SET-THEME {theme}\n")
@@ -71,6 +77,7 @@ def build_parser():
     sub = parser.add_subparsers(dest="cmd", required=True, help="sub-command")
 
     sub.add_parser("get-theme", help="Show current theme")
+    sub.add_parser("get-polarity", help="Show current polarity")
     sub.add_parser("list-themes", help="List all available themes")
 
     pset = sub.add_parser("set-theme", help="Set a new theme")
@@ -90,6 +97,7 @@ def main():
 
     exit_code = {
         "get-theme": get_theme,
+        "get-polarity": get_polarity,
         "list-themes": get_themes,
         "set-theme": lambda: set_theme(args.theme),
         "set-polarity": lambda: set_polarity(args.polarity),

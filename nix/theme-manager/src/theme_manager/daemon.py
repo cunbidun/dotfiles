@@ -2,6 +2,10 @@
 import os, socket, yaml, subprocess, sys, threading, fcntl
 import json  # for JSON encoding
 import time
+from datetime import datetime, timezone, timedelta
+
+from astral import LocationInfo
+from astral.sun import sun
 
 from .tray import ThemeManagerTray
 
@@ -16,12 +20,13 @@ class ThemeManagerDaemon:
     def __init__(self):
         self.config = self._load_config()
         self.allowed = self.config["themes"]
-        self.current_theme = self._load_current_theme()
+        self.current_theme, self.current_polarity = self._load_current_state()
 
         self.lock = threading.Lock()
         self.script_running = False  # guarded by self.lock
         self.server_socket = None
         self._accept_thread = None
+        self._scheduler_thread = None
         self.tray: ThemeManagerTray | None = None  # tray instance (optional)
 
     # ---------- config & state helpers ---------- #
@@ -48,15 +53,92 @@ class ThemeManagerDaemon:
             return None
         return theme, polarity
 
-    def _load_current_theme(self) -> str:
+    def _load_current_state(self) -> tuple[str, str]:
         try:
             parsed = self._split_stylix_theme(self._get_stylix_theme_name())
         except FileNotFoundError:
             parsed = None
         if parsed is None:
-            return self.allowed[0]
-        theme, _ = parsed
-        return theme
+            return self.allowed[0], "dark"
+        return parsed
+
+    def _format_duration(self, delta: timedelta) -> str:
+        seconds = max(0, int(delta.total_seconds()))
+        hours, seconds = divmod(seconds, 3600)
+        minutes, seconds = divmod(seconds, 60)
+        if hours:
+            return f"{hours}h {minutes}m"
+        if minutes:
+            return f"{minutes}m {seconds}s"
+        return f"{seconds}s"
+
+    def _read_location(self) -> tuple[float, float]:
+        location_file = self.config.get("locationFile", "/etc/geolocation")
+        with open(os.path.expanduser(location_file), "r") as f:
+            values = [line.strip() for line in f if line.strip() and not line.lstrip().startswith("#")]
+        if len(values) < 2:
+            raise RuntimeError(f"location file missing latitude/longitude: {location_file}")
+        return float(values[0]), float(values[1])
+
+    def _sun_window(self, now: datetime) -> tuple[datetime, datetime]:
+        lat, lon = self._read_location()
+        location = LocationInfo(latitude=lat, longitude=lon)
+        times = sun(location.observer, date=now.date())
+        return times["sunrise"], times["sunset"]
+
+    def _scheduled_polarity(self, now: datetime | None = None) -> tuple[str, datetime]:
+        now = now or datetime.now(timezone.utc)
+        sunrise, sunset = self._sun_window(now)
+
+        if sunrise <= now < sunset:
+            return "light", sunset
+
+        if now < sunrise:
+            return "dark", sunrise
+
+        tomorrow = now + timedelta(days=1)
+        next_sunrise, _ = self._sun_window(tomorrow)
+        return "dark", next_sunrise
+
+    def _log_next_switch(self, polarity: str, next_switch: datetime):
+        now = datetime.now(timezone.utc)
+        next_polarity = "dark" if polarity == "light" else "light"
+        print(
+            f"Auto polarity: {polarity}; next switch to {next_polarity} at "
+            f"{next_switch.astimezone().strftime('%Y-%m-%d %H:%M:%S %Z')} "
+            f"(in {self._format_duration(next_switch - now)})",
+            flush=True,
+        )
+
+    def _auto_switch_loop(self):
+        if not self.config.get("autoSwitch", True):
+            print("Auto polarity disabled", flush=True)
+            return
+
+        while True:
+            try:
+                polarity, next_switch = self._scheduled_polarity()
+                self._log_next_switch(polarity, next_switch)
+                if self._get_polarity() != polarity:
+                    acquired = False
+                    with self.lock:
+                        if self.script_running:
+                            print("Auto polarity skipped: theme switch already running", flush=True)
+                        else:
+                            self.script_running = True
+                            acquired = True
+                    if acquired:
+                        try:
+                            self._apply_polarity(polarity)
+                        finally:
+                            self._release_write()
+                            self._update_tray()
+
+                sleep_for = max(1, int((next_switch - datetime.now(timezone.utc)).total_seconds()) + 1)
+                time.sleep(sleep_for)
+            except Exception as e:
+                print(f"ERROR auto polarity failed: {e}", file=sys.stderr, flush=True)
+                time.sleep(300)
 
     # ---------- system helpers ---------- #
     def _notify(self, summary: str, body: str = ""):
@@ -66,14 +148,6 @@ class ThemeManagerDaemon:
             pass
 
     def _get_polarity(self):
-        try:
-            result = subprocess.run(["darkman", "get"], capture_output=True, text=True, timeout=5)
-            polarity = result.stdout.strip()
-            if result.returncode == 0 and polarity in ("light", "dark"):
-                return polarity
-        except Exception:
-            pass
-
         try:
             stylix_theme = self._get_stylix_theme_name()
             if stylix_theme.endswith("-light"):
@@ -87,20 +161,23 @@ class ThemeManagerDaemon:
         with open(STYLIX_THEME_PATH, 'r') as f:
             return f.read().strip()
 
-    def _set_polarity(self, polarity: str) -> bool:
+    def _apply_polarity(self, polarity: str) -> bool:
         if polarity not in ("light", "dark"):
             return False
-        try:
-            if self._get_polarity() == polarity:
-                return True
-            return subprocess.run(["darkman", "set", polarity], check=False).returncode == 0
-        except Exception:
+        proc = subprocess.run([self.config["script"], "-t", self.current_theme, "-p", polarity], check=False)
+        if proc.returncode != 0:
             return False
+        active = self._get_stylix_theme_name()
+        expected = f"{self.current_theme}-{polarity}"
+        if active != expected:
+            raise RuntimeError(f"active theme is {active}, expected {expected}")
+        self.current_polarity = polarity
+        return True
 
     def _toggle_polarity(self) -> str:
         current = self._get_polarity()
         new = "light" if current == "dark" else "dark"
-        return new if self._set_polarity(new) else current
+        return new if self._apply_polarity(new) else current
 
     # ---------- concurrency helpers ---------- #
     def _acquire_write(self, conn) -> bool:
@@ -119,7 +196,7 @@ class ThemeManagerDaemon:
     def _handle_set_polarity(self, conn, pol: str):
         if not self._acquire_write(conn):
             return
-        if self._set_polarity(pol):
+        if self._apply_polarity(pol):
             self._notify("Polarity Changed", f"Polarity set to {pol}")
             conn.sendall(f"OK {pol}\n".encode())
         else:
@@ -163,6 +240,7 @@ class ThemeManagerDaemon:
                 return
 
             self.current_theme = theme
+            self.current_polarity = polarity
             self._notify("Theme Changed", f"Theme set to {theme}")
             conn.sendall(f"OK {theme}\n".encode())
         finally:
@@ -183,6 +261,8 @@ class ThemeManagerDaemon:
 
             if cmd == "GET-THEME":
                 conn.sendall(f"OK {self.current_theme}\n".encode())
+            elif cmd == "GET-POLARITY":
+                conn.sendall(f"OK {self._get_polarity()}\n".encode())
             elif cmd == "LIST-THEMES":
                 conn.sendall(f"OK {json.dumps(self.allowed)}\n".encode())
             elif cmd == "SET-POLARITY" and len(data) == 2:
@@ -211,6 +291,8 @@ class ThemeManagerDaemon:
         self.server_socket.listen(5)
 
         print("Theme manager daemon started")
+        self._scheduler_thread = threading.Thread(target=self._auto_switch_loop, daemon=True)
+        self._scheduler_thread.start()
 
         def _loop():
             while True:

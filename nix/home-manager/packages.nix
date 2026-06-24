@@ -94,7 +94,6 @@ in rec {
       name = "theme-switch";
       text = builtins.readFile ../../scripts/theme-switch.sh;
       runtimeInputs = [
-        pkgs.darkman
         pkgs.gawk
         pkgs.gnugrep
         pkgs.systemdMinimal
