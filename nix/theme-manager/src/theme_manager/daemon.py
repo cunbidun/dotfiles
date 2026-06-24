@@ -13,6 +13,7 @@ CONFIG_PATH = os.path.expanduser("~/.config/theme-manager/config.yaml")
 STYLIX_THEME_PATH = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
 SOCKET_PATH = os.path.expanduser("~/.local/share/theme-manager/socket")
 LOCK_PATH = os.path.expanduser("~/.local/share/theme-manager/lock")
+OVERRIDE_PATH = os.path.expanduser("~/.local/state/theme-manager/polarity-override.json")
 
 class ThemeManagerDaemon:
     """Encapsulated daemon replacing previous global-state implementation."""
@@ -115,15 +116,54 @@ class ThemeManagerDaemon:
         current = self._get_polarity()
         next_polarity = "dark" if scheduled == "light" else "light"
         now = datetime.now(timezone.utc)
+        override = self._load_override(now)
         return {
             "enabled": bool(self.config.get("autoSwitch", True)),
             "current": current,
             "scheduled": scheduled,
             "next": next_polarity,
-            "override": current != scheduled,
+            "override": override is not None,
+            "overrideUntil": override["until"].astimezone().strftime("%H:%M") if override else "",
+            "overrideRemaining": self._format_duration(override["until"] - now) if override else "",
             "at": next_switch.astimezone().strftime("%H:%M"),
             "remaining": self._format_duration(next_switch - now),
         }
+
+    def _load_override(self, now: datetime | None = None):
+        now = now or datetime.now(timezone.utc)
+        try:
+            with open(OVERRIDE_PATH, "r") as f:
+                data = json.load(f)
+            until = datetime.fromisoformat(data["until"])
+            if until.tzinfo is None:
+                until = until.replace(tzinfo=timezone.utc)
+            if until <= now or data.get("polarity") not in ("light", "dark"):
+                self._clear_override()
+                return None
+            return {"polarity": data["polarity"], "until": until}
+        except FileNotFoundError:
+            return None
+        except Exception:
+            self._clear_override()
+            return None
+
+    def _write_override(self, polarity: str, until: datetime):
+        os.makedirs(os.path.dirname(OVERRIDE_PATH), exist_ok=True)
+        with open(OVERRIDE_PATH, "w") as f:
+            json.dump({"polarity": polarity, "until": until.isoformat()}, f)
+
+    def _clear_override(self):
+        try:
+            os.unlink(OVERRIDE_PATH)
+        except FileNotFoundError:
+            pass
+
+    def _record_manual_polarity(self, polarity: str):
+        scheduled, next_switch = self._scheduled_polarity()
+        if polarity == scheduled:
+            self._clear_override()
+        else:
+            self._write_override(polarity, next_switch)
 
     def _auto_switch_loop(self):
         if not self.config.get("autoSwitch", True):
@@ -134,31 +174,53 @@ class ThemeManagerDaemon:
             try:
                 polarity, next_switch = self._scheduled_polarity()
                 self._log_next_switch(polarity, next_switch)
-                if self._get_polarity() != polarity:
-                    acquired = False
-                    with self.lock:
-                        if self.script_running:
-                            print("Auto polarity skipped: theme switch already running", flush=True)
-                        else:
-                            self.script_running = True
-                            acquired = True
-                    if acquired:
-                        try:
-                            self._apply_polarity(polarity)
-                        finally:
-                            self._release_write()
-                            self._update_tray()
+
+                override = self._load_override()
+                if override is not None:
+                    if self._get_polarity() != override["polarity"]:
+                        self._apply_auto_polarity(override["polarity"])
+                    wait_until = min(next_switch, override["until"])
+                    print(
+                        f"Auto polarity override active until "
+                        f"{override['until'].astimezone().strftime('%Y-%m-%d %H:%M:%S %Z')} "
+                        f"(in {self._format_duration(override['until'] - datetime.now(timezone.utc))})",
+                        flush=True,
+                    )
+                else:
+                    wait_until = next_switch
+                    if self._get_polarity() != polarity:
+                        self._apply_auto_polarity(polarity)
 
                 while True:
-                    remaining = int((next_switch - datetime.now(timezone.utc)).total_seconds())
+                    remaining = int((wait_until - datetime.now(timezone.utc)).total_seconds())
                     if remaining <= 0:
                         break
                     time.sleep(min(60, remaining))
                     if remaining > 60:
                         self._log_next_switch(polarity, next_switch)
+
+                target, _ = self._scheduled_polarity(datetime.now(timezone.utc) + timedelta(seconds=5))
+                if self._get_polarity() != target:
+                    self._clear_override()
+                    self._apply_auto_polarity(target)
             except Exception as e:
                 print(f"ERROR auto polarity failed: {e}", file=sys.stderr, flush=True)
                 time.sleep(300)
+
+    def _apply_auto_polarity(self, polarity: str):
+        acquired = False
+        with self.lock:
+            if self.script_running:
+                print("Auto polarity skipped: theme switch already running", flush=True)
+            else:
+                self.script_running = True
+                acquired = True
+        if acquired:
+            try:
+                self._apply_polarity(polarity)
+            finally:
+                self._release_write()
+                self._update_tray()
 
     # ---------- system helpers ---------- #
     def _notify(self, summary: str, body: str = ""):
@@ -217,6 +279,7 @@ class ThemeManagerDaemon:
         if not self._acquire_write(conn):
             return
         if self._apply_polarity(pol):
+            self._record_manual_polarity(pol)
             self._notify("Polarity Changed", f"Polarity set to {pol}")
             conn.sendall(f"OK {pol}\n".encode())
         else:
@@ -228,6 +291,7 @@ class ThemeManagerDaemon:
         if not self._acquire_write(conn):
             return
         new_pol = self._toggle_polarity()
+        self._record_manual_polarity(new_pol)
         self._notify("Polarity Toggled", f"Now {new_pol}")
         conn.sendall(f"OK {new_pol}\n".encode())
         self._release_write()

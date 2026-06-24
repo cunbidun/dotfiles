@@ -167,8 +167,9 @@ class ThemeManagerTray:
             label = f"Next: {next_pol} at {at} ({remaining})"
             items.append(Item(label, lambda: None, enabled=False))
             if self.schedule_status.get("override"):
-                scheduled = str(self.schedule_status.get("scheduled", "?")).title()
-                items.append(Item(f"Override: until {scheduled} switch", lambda: None, enabled=False))
+                until = self.schedule_status.get("overrideUntil", "?")
+                remaining = self.schedule_status.get("overrideRemaining", "?")
+                items.append(Item(f"Override until {until} ({remaining})", lambda: None, enabled=False))
         items.append(pystray.Menu.SEPARATOR)
         items.append(Item("Themes:", lambda: None, enabled=False))
         for t in self.themes:
