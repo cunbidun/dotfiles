@@ -14,8 +14,6 @@ in {
     let
       system = pkgs.stdenv.hostPlatform.system;
       repoPath = "${config.home.homeDirectory}/dotfiles/nix/quickshell";
-      configPath = "${config.home.homeDirectory}/.config/quickshell/cunbidun";
-      stylixStatePath = "${config.home.homeDirectory}/.local/state/stylix";
       bluezAgentPython = pkgs.python3.withPackages (pythonPkgs: [
         pythonPkgs.dbus-python
         pythonPkgs.pygobject3
@@ -38,7 +36,6 @@ in {
         pkgs.coreutils
         pkgs.curl
         pkgs.gawk
-        pkgs.inotify-tools
         pkgs.procps
         pkgs.quickshell
         pkgs.gnused
@@ -66,38 +63,6 @@ in {
         exec ${pkgs.quickshell}/bin/qs --config cunbidun --no-duplicate
       '';
 
-      quickshellWatchScript = pkgs.writeShellScript "quickshell-watch" ''
-        set -euo pipefail
-
-        watch_dir='${configPath}'
-        stylix_state_dir='${stylixStatePath}'
-        last_restart=0
-        debounce_ms=800
-
-        watch_targets=("$watch_dir")
-        if [ -L "$watch_dir" ]; then
-          watch_dir="$(${pkgs.coreutils}/bin/readlink -f "$watch_dir")"
-          watch_targets=("$watch_dir")
-        fi
-        if [ -d "$stylix_state_dir" ]; then
-          watch_targets+=("$stylix_state_dir")
-        fi
-
-        while ${pkgs.inotify-tools}/bin/inotifywait \
-          --quiet \
-          --recursive \
-          --event close_write,delete,move \
-          --exclude '(^|/)(\.git|node_modules|result)(/|$)|(^|/)\.goutputstream-.*|(~$|\.sw.$)' \
-          "''${watch_targets[@]}"; do
-          now_ms="$(${pkgs.coreutils}/bin/date +%s%3N)"
-          if [ "$last_restart" -ne 0 ] && [ "$((now_ms - last_restart))" -lt "$debounce_ms" ]; then
-            continue
-          fi
-          last_restart="$now_ms"
-          ${pkgs.systemd}/bin/systemctl --user restart quickshell-backend.service quickshell.service || true
-        done
-      '';
-
       quickshellReloadScript = pkgs.writeShellScriptBin "quickshell-reload" ''
         exec ${pkgs.systemd}/bin/systemctl --user restart quickshell-backend.service quickshell.service
       '';
@@ -119,6 +84,7 @@ in {
           After = ["graphical-session.target" "bluetooth.target"];
           Wants = ["graphical-session.target"];
           PartOf = ["graphical-session.target"];
+          X-SwitchMethod = "keep-old";
         };
         Service = {
           ExecStart = lib.getExe backendScript;
@@ -134,6 +100,7 @@ in {
           After = ["graphical-session.target" "quickshell-backend.service"];
           Wants = ["graphical-session.target" "quickshell-backend.service"];
           PartOf = ["graphical-session.target"];
+          X-SwitchMethod = "keep-old";
         };
         Service = {
           ExecStart = lib.getExe quickshellRunScript;
@@ -143,21 +110,6 @@ in {
           KillMode = "mixed";
           TimeoutStopSec = 2;
           Restart = "on-failure";
-          RestartSec = 1;
-        };
-        Install.WantedBy = ["graphical-session.target"];
-      };
-
-      systemd.user.services.quickshell-watch = {
-        Unit = {
-          Description = "Watch QuickShell source and restart on change";
-          After = ["graphical-session.target"];
-          Wants = ["graphical-session.target"];
-          PartOf = ["graphical-session.target"];
-        };
-        Service = {
-          ExecStart = "${pkgs.bash}/bin/bash ${quickshellWatchScript}";
-          Restart = "always";
           RestartSec = 1;
         };
         Install.WantedBy = ["graphical-session.target"];
