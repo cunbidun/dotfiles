@@ -97,7 +97,6 @@ in rec {
         pkgs.darkman
         pkgs.gawk
         pkgs.gnugrep
-        pkgs.home-manager
         pkgs.systemdMinimal
         pkgs.theme-manager
       ];

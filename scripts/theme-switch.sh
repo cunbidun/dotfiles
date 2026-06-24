@@ -35,8 +35,13 @@ if [[ -z "$theme" ]]; then
 fi
 
 specialisation_name="${theme}-${polarity}"
-flake_ref="$HOME/dotfiles#${USER}@${HOSTNAME}"
+activate_cmd="$HOME/.local/state/nix/profiles/home-manager/specialisation/$specialisation_name/activate"
 
 # Perform switch
+if [[ ! -x "$activate_cmd" ]]; then
+  echo "Activation script not found or not executable: $activate_cmd" >&2
+  exit 1
+fi
+
 echo "Switching to theme '$theme' with polarity '$polarity'..."
-home-manager switch --flake "$flake_ref" --specialisation "$specialisation_name"
+"$activate_cmd" --driver-version 1
