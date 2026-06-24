@@ -44,6 +44,7 @@ class ThemeManagerTray:
     def __init__(self) -> None:
         self.current_theme: str | None = None
         self.current_polarity: str | None = None
+        self.schedule_status: dict | None = None
         self.themes: list[str] = []
         self.icon: pystray.Icon | None = None
         self._font: ImageFont.FreeTypeFont | ImageFont.ImageFont | None = None
@@ -134,6 +135,12 @@ class ThemeManagerTray:
             except json.JSONDecodeError:
                 self.themes = []
         self.current_polarity = self.get_current_polarity()
+        schedule_json, ok = self.client_request("GET-SCHEDULE\n")
+        if ok:
+            try:
+                self.schedule_status = json.loads(schedule_json)
+            except json.JSONDecodeError:
+                self.schedule_status = None
 
     # ------------- tray presentation ------------- #
     def create_image(self) -> Image.Image:
@@ -153,6 +160,15 @@ class ThemeManagerTray:
         items = []
         pol = self.current_polarity or "dark"
         items.append(Item(f"Polarity: {pol.title()}", self.toggle_polarity, default=True))
+        if self.schedule_status and self.schedule_status.get("enabled"):
+            next_pol = str(self.schedule_status.get("next", "?")).title()
+            at = self.schedule_status.get("at", "?")
+            remaining = self.schedule_status.get("remaining", "?")
+            label = f"Next: {next_pol} at {at} ({remaining})"
+            items.append(Item(label, lambda: None, enabled=False))
+            if self.schedule_status.get("override"):
+                scheduled = str(self.schedule_status.get("scheduled", "?")).title()
+                items.append(Item(f"Override: until {scheduled} switch", lambda: None, enabled=False))
         items.append(pystray.Menu.SEPARATOR)
         items.append(Item("Themes:", lambda: None, enabled=False))
         for t in self.themes:

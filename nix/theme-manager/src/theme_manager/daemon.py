@@ -104,11 +104,26 @@ class ThemeManagerDaemon:
         now = datetime.now(timezone.utc)
         next_polarity = "dark" if polarity == "light" else "light"
         print(
-            f"Auto polarity status: current={polarity}, next={next_polarity}, at="
+            f"Auto polarity status: scheduled={polarity}, next={next_polarity}, at="
             f"{next_switch.astimezone().strftime('%Y-%m-%d %H:%M:%S %Z')} "
             f"(in {self._format_duration(next_switch - now)})",
             flush=True,
         )
+
+    def _schedule_status(self) -> dict[str, str | bool]:
+        scheduled, next_switch = self._scheduled_polarity()
+        current = self._get_polarity()
+        next_polarity = "dark" if scheduled == "light" else "light"
+        now = datetime.now(timezone.utc)
+        return {
+            "enabled": bool(self.config.get("autoSwitch", True)),
+            "current": current,
+            "scheduled": scheduled,
+            "next": next_polarity,
+            "override": current != scheduled,
+            "at": next_switch.astimezone().strftime("%H:%M"),
+            "remaining": self._format_duration(next_switch - now),
+        }
 
     def _auto_switch_loop(self):
         if not self.config.get("autoSwitch", True):
@@ -268,6 +283,8 @@ class ThemeManagerDaemon:
                 conn.sendall(f"OK {self.current_theme}\n".encode())
             elif cmd == "GET-POLARITY":
                 conn.sendall(f"OK {self._get_polarity()}\n".encode())
+            elif cmd == "GET-SCHEDULE":
+                conn.sendall(f"OK {json.dumps(self._schedule_status())}\n".encode())
             elif cmd == "LIST-THEMES":
                 conn.sendall(f"OK {json.dumps(self.allowed)}\n".encode())
             elif cmd == "SET-POLARITY" and len(data) == 2:

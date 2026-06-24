@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # theme-switch: toggle Home‑Manager light/dark specialisations with theme support
 set -euo pipefail
+start_time=$SECONDS
 
 usage() {
   echo "Usage: $0 [-p polarity] [-t theme]" >&2
@@ -60,3 +61,4 @@ fi
 
 echo "Switching to theme '$theme' with polarity '$polarity'..."
 "$activate_cmd" --driver-version 1
+echo "Theme switch completed in $((SECONDS - start_time))s"

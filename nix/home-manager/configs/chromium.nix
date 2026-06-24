@@ -64,6 +64,8 @@ in {
     text = chromeConfig.mkChromePolicy chromeConfig.baseExtensions;
   };
   home.activation.refresh_chrome_policy = lib.mkIf isLinux ''
-    ${chromeBinary} --refresh-platform-policy --no-startup-window || true
+    if ${pkgs.procps}/bin/pgrep -u "$USER" -x chrome >/dev/null; then
+      (${chromeBinary} --refresh-platform-policy --no-startup-window >/dev/null 2>&1 &)
+    fi
   '';
 }
