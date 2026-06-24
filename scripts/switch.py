@@ -98,15 +98,7 @@ def current_theme_specialisation() -> str:
     return specialisation
 
 def build_home_activation(attr: str, max_jobs: int | None = None) -> str:
-    build_cmd = [
-        "nix",
-        "build",
-        "--log-format",
-        "internal-json",
-        "--no-link",
-        "--print-out-paths",
-        attr,
-    ]
+    build_cmd = ["nix", "build", "--log-format", "internal-json", "--print-out-paths", attr]
     if max_jobs is not None:
         build_cmd += ["--option", "max-jobs", str(max_jobs)]
     return run_build_with_nom(build_cmd).strip().splitlines()[-1]

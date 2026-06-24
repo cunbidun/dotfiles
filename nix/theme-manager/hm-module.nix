@@ -54,17 +54,15 @@ in {
     '';
 
     systemd.user.services."theme-manager" = {
-      Install = {
-        WantedBy = [config.wayland.systemd.target];
-      };
-
       Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
         After = [config.wayland.systemd.target];
         PartOf = [config.wayland.systemd.target];
-        X-Restart-Triggers = [
-          "${config.xdg.configFile."theme-manager/config.yaml".source}"
-        ];
+        X-SwitchMethod = "keep-old";
+      };
+
+      Install = {
+        WantedBy = [config.wayland.systemd.target];
       };
 
       Service = {
