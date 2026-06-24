@@ -85,30 +85,15 @@ def remote_profile(profile: str) -> tuple[str, str]:
         return "root@localhost", "-p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
     raise ValueError(f"profile {profile} is not remote")
 
-def current_theme_specialisation() -> str:
-    theme_file = Path.home() / ".local/state/stylix/current-theme-name.txt"
-    specialisation = theme_file.read_text().strip()
-    if not specialisation:
-        raise RuntimeError(f"empty theme specialisation in {theme_file}")
-    try:
-        _, polarity = specialisation.rsplit("-", 1)
-    except ValueError as exc:
-        raise RuntimeError(f"invalid theme specialisation in {theme_file}: {specialisation}") from exc
-    if polarity not in ("dark", "light"):
-        raise RuntimeError(f"invalid theme polarity in {theme_file}: {specialisation}")
-    return specialisation
-
 def build_home_activation(attr: str, max_jobs: int | None = None) -> str:
     build_cmd = ["nix", "build", "--log-format", "internal-json", "--print-out-paths", attr]
     if max_jobs is not None:
         build_cmd += ["--option", "max-jobs", str(max_jobs)]
     return run_build_with_nom(build_cmd).strip().splitlines()[-1]
 
-def activate_home_generation(generation: str, specialisation: str | None = None):
+def activate_home_generation(generation: str):
     run_cmd(["nix-env", "--profile", str(Path.home() / ".local/state/nix/profiles/home-manager"), "--set", generation])
     activate = Path(generation) / "activate"
-    if specialisation is not None:
-        activate = Path(generation) / "specialisation" / specialisation / "activate"
     if not activate.is_file() or not os.access(activate, os.X_OK):
         raise RuntimeError(f"activation script not found or not executable: {activate}")
     run_cmd([str(activate), "--driver-version", "1"])
@@ -198,7 +183,7 @@ def switch_home(args: argparse.Namespace, git_root: Path):
     if args.profile == "nixos":
         attr = f"{git_root}#homeConfigurations.\"{username}@{args.profile}\".activationPackage"
         activation = build_home_activation(attr, args.max_jobs)
-        activate_home_generation(activation, current_theme_specialisation())
+        activate_home_generation(activation)
         return
 
     run_cmd(["home-manager", "switch", "--flake", flake_ref])

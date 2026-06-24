@@ -1,7 +1,5 @@
 local root = vim.fn.expand("~/.local/share/vim-plugins")
 vim.opt.rtp:prepend(root .. "/lazy.nvim")
-vim.opt.rtp:prepend(root .. "/vscode")
-vim.opt.rtp:prepend(root .. "/catppuccin")
 
 local util = require("lazy.core.util")
 local ls = util.ls

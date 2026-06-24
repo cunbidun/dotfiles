@@ -110,6 +110,15 @@ in {
   # Apply the generated specializations
   specialisation = generateSpecializations;
 
+  home.activation.reconciliation_theme = lib.hm.dag.entryBetween ["installPackages"] ["linkGeneration"] ''
+    expected_theme="$(${config.home.profileDirectory}/bin/themectl get-theme)-$(${config.home.profileDirectory}/bin/themectl get-polarity)"
+    current_theme="$(cat "$HOME/.local/state/stylix/current-theme-name.txt")"
+    if [ "$current_theme" != "$expected_theme" ]; then
+      ${config.home.profileDirectory}/bin/theme-switch --reconcile
+      exit $?
+    fi
+  '';
+
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {
     enable = true;

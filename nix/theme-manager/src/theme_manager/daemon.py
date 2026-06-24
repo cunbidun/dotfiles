@@ -230,14 +230,7 @@ class ThemeManagerDaemon:
             pass
 
     def _get_polarity(self):
-        try:
-            stylix_theme = self._get_stylix_theme_name()
-            if stylix_theme.endswith("-light"):
-                return "light"
-            if stylix_theme.endswith("-dark"):
-                return "dark"
-        except Exception:
-            return "dark"
+        return self.current_polarity
 
     def _get_stylix_theme_name(self):
         with open(STYLIX_THEME_PATH, 'r') as f:
@@ -246,14 +239,17 @@ class ThemeManagerDaemon:
     def _apply_polarity(self, polarity: str) -> bool:
         if polarity not in ("light", "dark"):
             return False
+        old_polarity = self.current_polarity
+        self.current_polarity = polarity
         proc = subprocess.run([self.config["script"], "-t", self.current_theme, "-p", polarity], check=False)
         if proc.returncode != 0:
+            self.current_polarity = old_polarity
             return False
         active = self._get_stylix_theme_name()
         expected = f"{self.current_theme}-{polarity}"
         if active != expected:
+            self.current_polarity = old_polarity
             raise RuntimeError(f"active theme is {active}, expected {expected}")
-        self.current_polarity = polarity
         return True
 
     def _toggle_polarity(self) -> str:
@@ -278,53 +274,66 @@ class ThemeManagerDaemon:
     def _handle_set_polarity(self, conn, pol: str):
         if not self._acquire_write(conn):
             return
-        if self._apply_polarity(pol):
-            self._record_manual_polarity(pol)
-            self._notify("Polarity Changed", f"Polarity set to {pol}")
-            conn.sendall(f"OK {pol}\n".encode())
-        else:
-            conn.sendall(b"ERROR invalid polarity\n")
-        self._release_write()
-        self._update_tray()
+        try:
+            if self._apply_polarity(pol):
+                self._record_manual_polarity(pol)
+                self._notify("Polarity Changed", f"Polarity set to {pol}")
+                conn.sendall(f"OK {pol}\n".encode())
+            else:
+                conn.sendall(b"ERROR invalid polarity\n")
+        finally:
+            self._release_write()
+            self._update_tray()
 
     def _handle_toggle_polarity(self, conn):
         if not self._acquire_write(conn):
             return
-        new_pol = self._toggle_polarity()
-        self._record_manual_polarity(new_pol)
-        self._notify("Polarity Toggled", f"Now {new_pol}")
-        conn.sendall(f"OK {new_pol}\n".encode())
-        self._release_write()
-        self._update_tray()
+        try:
+            new_pol = self._toggle_polarity()
+            self._record_manual_polarity(new_pol)
+            self._notify("Polarity Toggled", f"Now {new_pol}")
+            conn.sendall(f"OK {new_pol}\n".encode())
+        finally:
+            self._release_write()
+            self._update_tray()
 
     def _handle_set_theme(self, conn, theme: str):
         if not self._acquire_write(conn):
             return
+        old_theme = self.current_theme
+        old_polarity = self.current_polarity
         try:
             polarity = self._get_polarity()
+            self.current_theme = theme
+            self.current_polarity = polarity
             proc = subprocess.run([self.config["script"], "-t", theme, "-p", polarity], check=False)
         except Exception as e:
+            self.current_theme = old_theme
+            self.current_polarity = old_polarity
             self._release_write()
             conn.sendall(f"ERROR failed to run script: {e}\n".encode())
             return
 
         try:
             if proc.returncode != 0:
+                self.current_theme = old_theme
+                self.current_polarity = old_polarity
                 conn.sendall(f"ERROR script failed with exit code {proc.returncode}\n".encode())
                 return
 
             try:
                 active = self._get_stylix_theme_name()
             except FileNotFoundError:
+                self.current_theme = old_theme
+                self.current_polarity = old_polarity
                 conn.sendall(b"ERROR active theme file is missing\n")
                 return
             expected = f"{theme}-{polarity}"
             if active != expected:
+                self.current_theme = old_theme
+                self.current_polarity = old_polarity
                 conn.sendall(f"ERROR active theme is {active}, expected {expected}\n".encode())
                 return
-
-            self.current_theme = theme
-            self.current_polarity = polarity
             self._notify("Theme Changed", f"Theme set to {theme}")
             conn.sendall(f"OK {theme}\n".encode())
         finally:

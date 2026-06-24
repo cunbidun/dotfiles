@@ -4,7 +4,8 @@ set -euo pipefail
 start_time=$SECONDS
 
 usage() {
-  echo "Usage: $0 [-p polarity] [-t theme]" >&2
+  echo "Usage: $0 [--reconcile] [-p polarity] [-t theme]" >&2
+  echo "  --reconcile  Query theme-manager and activate the matching specialization if needed" >&2
   echo "  -p polarity   Polarity: dark or light (default: persisted state)" >&2
   echo "  -t theme      Theme name (default: persisted state)" >&2
   exit 1
@@ -13,16 +14,37 @@ usage() {
 # Default values
 polarity=""
 theme=""
+reconcile="false"
 theme_state_file="$HOME/.local/state/stylix/current-theme-name.txt"
 
 # Parse options
-while getopts ":p:t:" opt; do
-  case $opt in
-  p) polarity="$OPTARG" ;;
-  t) theme="$OPTARG" ;;
-  *) usage ;;
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --reconcile)
+    reconcile="true"
+    shift
+    ;;
+  -p)
+    [[ $# -ge 2 ]] || usage
+    polarity="$2"
+    shift 2
+    ;;
+  -t)
+    [[ $# -ge 2 ]] || usage
+    theme="$2"
+    shift 2
+    ;;
+  *)
+    usage
+    ;;
   esac
 done
+
+if [[ "$reconcile" == "true" ]]; then
+  [[ -z "$theme" && -z "$polarity" ]] || usage
+  theme="$(themectl get-theme)"
+  polarity="$(themectl get-polarity)"
+fi
 
 # Get defaults from persisted state if not set
 if [[ -z "$polarity" || -z "$theme" ]]; then
@@ -52,6 +74,14 @@ fi
 
 specialisation_name="${theme}-${polarity}"
 activate_cmd="$HOME/.local/state/nix/profiles/home-manager/specialisation/$specialisation_name/activate"
+
+if [[ "$reconcile" == "true" ]]; then
+  current_theme_name="$(<"$theme_state_file")"
+  if [[ "$current_theme_name" == "$specialisation_name" ]]; then
+    echo "Theme already active: $specialisation_name"
+    exit 0
+  fi
+fi
 
 # Perform switch
 if [[ ! -x "$activate_cmd" ]]; then
