@@ -75,14 +75,6 @@ fi
 specialisation_name="${theme}-${polarity}"
 activate_cmd="$HOME/.local/state/nix/profiles/home-manager/specialisation/$specialisation_name/activate"
 
-if [[ "$reconcile" == "true" ]]; then
-  current_theme_name="$(<"$theme_state_file")"
-  if [[ "$current_theme_name" == "$specialisation_name" ]]; then
-    echo "Theme already active: $specialisation_name"
-    exit 0
-  fi
-fi
-
 # Perform switch
 if [[ ! -x "$activate_cmd" ]]; then
   echo "Activation script not found or not executable: $activate_cmd" >&2
