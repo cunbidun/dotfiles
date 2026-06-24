@@ -134,6 +134,21 @@ in {
   # Apply the generated specializations
   specialisation = generateSpecializations;
 
+  home.activation = {
+    reconciliation_theme = lib.mkIf isLinux ''
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      echo "Running theme reconciliation..."
+      POLARITY="$(${pkgs.darkman}/bin/darkman get 2>/dev/null || echo dark)"
+      THEME="$(${pkgs.theme-manager}/bin/themectl get-theme 2>/dev/null || echo default)"
+
+      if [[ $POLARITY != dark || $THEME != default ]]; then
+        ${config.home.profileDirectory}/bin/theme-switch
+      fi
+    '';
+  };
+
   dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
   stylix = {
     enable = true;

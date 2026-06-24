@@ -16,6 +16,7 @@ class ThemeManagerDaemon:
     def __init__(self):
         self.config = self._load_config()
         self.allowed = self.config["themes"]
+        self.current_theme = self._load_current_theme()
 
         self.lock = threading.Lock()
         self.script_running = False  # guarded by self.lock
@@ -47,8 +48,11 @@ class ThemeManagerDaemon:
             return None
         return theme, polarity
 
-    def _get_current_theme(self) -> str:
-        parsed = self._split_stylix_theme(self._get_stylix_theme_name())
+    def _load_current_theme(self) -> str:
+        try:
+            parsed = self._split_stylix_theme(self._get_stylix_theme_name())
+        except FileNotFoundError:
+            parsed = None
         if parsed is None:
             return self.allowed[0]
         theme, _ = parsed
@@ -148,12 +152,17 @@ class ThemeManagerDaemon:
                 conn.sendall(f"ERROR script failed with exit code {proc.returncode}\n".encode())
                 return
 
-            active = self._get_stylix_theme_name()
+            try:
+                active = self._get_stylix_theme_name()
+            except FileNotFoundError:
+                conn.sendall(b"ERROR active theme file is missing\n")
+                return
             expected = f"{theme}-{polarity}"
             if active != expected:
                 conn.sendall(f"ERROR active theme is {active}, expected {expected}\n".encode())
                 return
 
+            self.current_theme = theme
             self._notify("Theme Changed", f"Theme set to {theme}")
             conn.sendall(f"OK {theme}\n".encode())
         finally:
@@ -173,7 +182,7 @@ class ThemeManagerDaemon:
             cmd = data[0]
 
             if cmd == "GET-THEME":
-                conn.sendall(f"OK {self._get_current_theme()}\n".encode())
+                conn.sendall(f"OK {self.current_theme}\n".encode())
             elif cmd == "LIST-THEMES":
                 conn.sendall(f"OK {json.dumps(self.allowed)}\n".encode())
             elif cmd == "SET-POLARITY" and len(data) == 2:

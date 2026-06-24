@@ -366,13 +366,4 @@ in
   };
 
   home.packages = [ neovim-with-packages ];
-
-  home.activation.updateNvimTheme = lib.mkIf isLinux ''
-    shopt -s nullglob
-    if [ -n "''${XDG_RUNTIME_DIR:-}" ]; then
-      for addr in "''${XDG_RUNTIME_DIR}"/nvim.*; do
-        /etc/profiles/per-user/${userdata.username}/bin/nvim --server "$addr" --remote-expr "luaeval('pcall(function() require(\"user.theme\").apply() end) or \"\"')" || true
-      done
-    fi
-  '';
 }
