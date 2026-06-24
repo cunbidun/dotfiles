@@ -68,6 +68,35 @@ def remote_profile(profile: str) -> tuple[str, str]:
         return "root@localhost", "-p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
     raise ValueError(f"profile {profile} is not remote")
 
+def current_theme_specialisation() -> str:
+    theme_file = Path.home() / ".local/state/stylix/current-theme-name.txt"
+    specialisation = theme_file.read_text().strip()
+    if not specialisation:
+        raise RuntimeError(f"empty theme specialisation in {theme_file}")
+    try:
+        _, polarity = specialisation.rsplit("-", 1)
+    except ValueError as exc:
+        raise RuntimeError(f"invalid theme specialisation in {theme_file}: {specialisation}") from exc
+    if polarity not in ("dark", "light"):
+        raise RuntimeError(f"invalid theme polarity in {theme_file}: {specialisation}")
+    return specialisation
+
+def build_home_activation(attr: str, max_jobs: int | None = None) -> str:
+    build_cmd = ["nix", "build", "--no-link", "--print-out-paths", attr]
+    if max_jobs is not None:
+        build_cmd += ["--option", "max-jobs", str(max_jobs)]
+    result = run_cmd(build_cmd, capture=True)
+    return result.stdout.strip().splitlines()[-1]
+
+def activate_home_generation(generation: str, specialisation: str | None = None):
+    run_cmd(["nix-env", "--profile", str(Path.home() / ".local/state/nix/profiles/home-manager"), "--set", generation])
+    activate = Path(generation) / "activate"
+    if specialisation is not None:
+        activate = Path(generation) / "specialisation" / specialisation / "activate"
+    if not activate.is_file() or not os.access(activate, os.X_OK):
+        raise RuntimeError(f"activation script not found or not executable: {activate}")
+    run_cmd([str(activate), "--driver-version", "1"])
+
 
 def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
     flake_ref = f"{git_root}#{args.profile}"
@@ -136,11 +165,7 @@ def switch_home(args: argparse.Namespace, git_root: Path):
     if args.profile in ("home-server", "test-vm"):
         target, ssh_opts = remote_profile(args.profile)
         attr = f"{git_root}#homeConfigurations.\"{username}@{args.profile}\".activationPackage"
-        build_cmd = ["nix", "build", "--no-link", "--print-out-paths", attr]
-        if args.max_jobs is not None:
-            build_cmd += ["--option", "max-jobs", str(args.max_jobs)]
-        result = run_cmd(build_cmd, capture=True)
-        activation = result.stdout.strip().splitlines()[-1]
+        activation = build_home_activation(attr, args.max_jobs)
         env = os.environ.copy()
         if ssh_opts:
             env["NIX_SSHOPTS"] = ssh_opts
@@ -149,8 +174,13 @@ def switch_home(args: argparse.Namespace, git_root: Path):
         run_cmd(ssh_cmd)
         return
 
-    cmd = ["home-manager", "switch", "-b", "bak", "--flake", flake_ref]
-    run_cmd(cmd)
+    if args.profile == "nixos":
+        attr = f"{git_root}#homeConfigurations.\"{username}@{args.profile}\".activationPackage"
+        activation = build_home_activation(attr, args.max_jobs)
+        activate_home_generation(activation, current_theme_specialisation())
+        return
+
+    run_cmd(["home-manager", "switch", "--flake", flake_ref])
 
 
 def main():
@@ -212,6 +242,9 @@ def main():
             switch_home(args, git_root)
     except subprocess.CalledProcessError:
         print("Error: Switch failed.")
+        return 1
+    except RuntimeError as exc:
+        print(f"Error: {exc}")
         return 1
 
     print("Switch successful.")
