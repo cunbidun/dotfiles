@@ -1,9 +1,9 @@
 {
+  inputs,
   pkgs,
-  userdata,
   ...
 }: let
-  hyprctl = "/etc/profiles/per-user/${userdata.username}/bin/hyprctl";
+  hyprctl = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/hyprctl";
   nightTemp = 4500;
 
   hyprsunsetGeoclue = pkgs.writeTextFile {
