@@ -159,6 +159,23 @@ Item {
         }
     }
 
+    IpcHandler {
+        target: "theme"
+
+        function reload(): string {
+            return theme.reloadTheme();
+        }
+    }
+
+    function reloadTheme() {
+        currentThemeNameFile.reload();
+        theme.currentThemeName = currentThemeNameFile.text().trim();
+        themeFile.reload();
+        theme.activeTheme = theme.parseJson(themeFile.text());
+        console.info(`QuickShell theme loaded: current='${theme.currentThemeName}' resolved='${theme.themeName}' name='${theme.activeTheme.name || "unknown"}' variant='${theme.activeTheme.variant || "unknown"}' file='${theme.themeFilePath}'`);
+        return theme.themeName;
+    }
+
     function parseJson(rawText) {
         if (!rawText || rawText.length === 0) {
             return {};

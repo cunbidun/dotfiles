@@ -114,6 +114,12 @@ in {
         };
         Install.WantedBy = ["graphical-session.target"];
       };
+
+      home.activation.reloadQuickshellTheme = lib.hm.dag.entryAfter ["linkGeneration"] ''
+        if [ -n "''${WAYLAND_DISPLAY:-}" ] && ${pkgs.systemd}/bin/systemctl --user is-active --quiet quickshell.service; then
+          "$newGenPath/home-path/bin/qs" --config cunbidun ipc --any-display call theme reload >/dev/null || true
+        fi
+      '';
     }
   );
 }
