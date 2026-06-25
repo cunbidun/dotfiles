@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   services.hyprpaper = {
     enable = true;
     settings = {
@@ -6,30 +10,20 @@
     };
   };
 
-  # One-shot service to restart hyprpaper
-  systemd.user.services.hyprpaper-restart = {
-    Unit = {
-      Description = "Restart hyprpaper service";
-    };
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.systemd}/bin/systemctl --user restart hyprpaper.service";
-    };
-  };
+  systemd.user.services.hyprpaper.Unit.X-SwitchMethod = "keep-old";
 
-  # Path watcher to restart hyprpaper when config changes
-  systemd.user.paths.hyprpaper-config-watcher = {
-    Unit = {
-      Description = "Watch hyprpaper config file for changes";
-    };
-    Path = {
-      # Watch both the file and the directory to catch file recreations
-      PathModified = "%h/.config/hypr/hyprpaper.conf";
-      PathChanged = "%h/.config/hypr";
-      Unit = "hyprpaper-restart.service";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
-    };
-  };
+  home.activation.applyHyprpaperTheme = lib.hm.dag.entryAfter ["linkGeneration"] ''
+    hyprpaper_config="$HOME/.config/hypr/hyprpaper.conf"
+    wallpaper=""
+    if [ -r "$hyprpaper_config" ]; then
+      wallpaper="$(${pkgs.gnused}/bin/sed -n 's/^[[:space:]]*path=//p' "$hyprpaper_config" | ${pkgs.coreutils}/bin/head -n1)"
+    fi
+    if [ -n "''${WAYLAND_DISPLAY:-}" ] && [ -n "$wallpaper" ] && ${pkgs.systemd}/bin/systemctl --user is-active --quiet hyprpaper.service; then
+      ${pkgs.hyprland}/bin/hyprctl monitors -j \
+        | ${pkgs.jq}/bin/jq -r '.[].name' \
+        | while IFS= read -r monitor; do
+            [ -n "$monitor" ] && ${pkgs.hyprland}/bin/hyprctl hyprpaper wallpaper "$monitor,$wallpaper" >/dev/null
+          done
+    fi
+  '';
 }

@@ -36,31 +36,20 @@ in
     };
   };
 
-  systemd.user.services.vicinae-reload = {
-    Unit = {
-      Description = "Restart Vicinae after config updates";
-    };
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.systemd}/bin/systemctl --user restart vicinae.service";
-    };
-  };
-
-  systemd.user.paths.vicinae-reload = {
-    Unit = {
-      Description = "Watch Vicinae config for changes";
-    };
-    Path = {
-      PathModified = "%h/.config/vicinae/vicinae.json";
-      PathChanged = "%h/.config/vicinae";
-      Unit = "vicinae-reload.service";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-  };
+  systemd.user.services.vicinae.Unit.X-SwitchMethod = "keep-old";
 
   home.activation = lib.mkIf config.services.vicinae.enable {
+    applyVicinaeTheme = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      vicinae_config="$HOME/.config/vicinae/vicinae.json"
+      vicinae_theme=""
+      if [ -r "$vicinae_config" ]; then
+        vicinae_theme="$(${pkgs.jq}/bin/jq -r '.theme.name // empty' "$vicinae_config")"
+      fi
+      if [ -n "''${WAYLAND_DISPLAY:-}" ] && [ -n "$vicinae_theme" ] && ${pkgs.systemd}/bin/systemctl --user is-active --quiet vicinae.service; then
+        "$newGenPath/home-path/bin/vicinae" theme set "$vicinae_theme" >/dev/null
+      fi
+    '';
+
     removePokemonExtension = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       rm -rf "$HOME/.local/share/vicinae/extensions/${pokemonExtensionId}"
     '';
