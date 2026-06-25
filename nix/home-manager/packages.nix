@@ -89,20 +89,8 @@ in rec {
     inputs.apple-fonts.packages.${system}.sf-pro-nerd
   ];
 
-  linux_packages = let
-    theme-switch = pkgs.writeShellApplication {
-      name = "theme-switch";
-      text = builtins.readFile ../../scripts/theme-switch.sh;
-      runtimeInputs = [
-        pkgs.gawk
-        pkgs.gnugrep
-        pkgs.systemdMinimal
-        pkgs.theme-manager
-      ];
-    };
-  in [
+  linux_packages = [
     # Local wrappers and scripts
-    theme-switch
     xdg-terminal-exec
     yazi-wrapper
 

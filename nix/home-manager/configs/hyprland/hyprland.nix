@@ -10,9 +10,6 @@
   scripts = import ../../scripts.nix {pkgs = pkgs;};
   system = pkgs.stdenv.hostPlatform.system;
   hyprfocus = inputs.hyprfocus.packages.${system}.hyprfocus;
-
-  colors = config.lib.stylix.colors;
-  rgb = color: "rgb(${color})";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -34,15 +31,15 @@ in {
   xdg.configFile."hypr/nix.lua".text = ''
     return {
       colors = {
-        background = "${rgb colors.base07}",
-        group_active = "${rgb colors.base0C}",
-        group_inactive = "${rgb colors.base01}",
-        group_text = "${rgb colors.base01}",
-        group_text_inactive = "${rgb colors.base06}",
-        border_active = "${rgb colors.base0D}",
-        border_inactive = "${rgb colors.base04}",
-        border_locked_active = "${rgb colors.base0C}",
-        shadow = "rgba(${colors.base07}99)",
+        background = "rgb(1C1C1E)",
+        group_active = "rgb(0A84FF)",
+        group_inactive = "rgb(2C2C2E)",
+        group_text = "rgb(FFFFFF)",
+        group_text_inactive = "rgb(FFFFFF)",
+        border_active = "rgb(0A84FF)",
+        border_inactive = "rgb(545458)",
+        border_locked_active = "rgb(30D158)",
+        shadow = "rgba(1C1C1E99)",
       },
 
       commands = {

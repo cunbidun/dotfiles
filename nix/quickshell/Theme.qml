@@ -5,7 +5,7 @@ import Quickshell.Io
 Item {
     id: theme
 
-    readonly property string currentThemeNamePath: `${Quickshell.env("HOME")}/.local/state/stylix/current-theme-name.txt`
+    readonly property string currentThemeNamePath: `${Quickshell.env("HOME")}/.local/state/theme-manager/current-theme-name.txt`
     readonly property string themeName: resolveThemeName(currentThemeName)
     readonly property string themeFilePath: `${Quickshell.env("HOME")}/.config/quickshell/cunbidun/themes/${themeName}.json`
     readonly property int fontSize: 12

@@ -5,7 +5,6 @@
   ...
 }: let
   cfg = config.services.theme-manager;
-  hook = pkgs.writeScriptBin "theme-change-hook" cfg.hookScriptContent;
 in {
   options.services.theme-manager = {
     enable = lib.mkEnableOption "theme-manager";
@@ -34,10 +33,6 @@ in {
       description = "File containing latitude and longitude, one per line.";
     };
 
-    hookScriptContent = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Full Bash script contents to run when theme changes.";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -47,8 +42,6 @@ in {
     xdg.configFile."theme-manager/config.yaml".text = ''
       themes:
       ${lib.concatStringsSep "\n" (map (t: "  - " + t) cfg.themes)}
-
-      script: "${lib.getExe hook}"
       autoSwitch: ${if cfg.autoSwitch then "true" else "false"}
       locationFile: "${cfg.locationFile}"
     '';

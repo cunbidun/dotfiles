@@ -1,10 +1,22 @@
 {
   lib,
+  hyprland,
   python3,
   pkgs ? python3.pkgs,
+  vicinae,
 }: let
   # Pull common libs from python's pkgs set's top-level if available
   inherit (pkgs) gobject-introspection gtk3 libappindicator-gtk3 glib pango harfbuzz gdk-pixbuf atk;
+  runtimePath = lib.makeBinPath [
+    pkgs.coreutils
+    pkgs.dconf
+    pkgs.google-chrome
+    hyprland
+    pkgs.procps
+    pkgs.quickshell
+    pkgs.systemdMinimal
+    vicinae
+  ];
 in
   python3.pkgs.buildPythonApplication {
     pname = "theme-manager";
@@ -32,6 +44,7 @@ in
     makeWrapperArgs = [
       "--set GI_TYPELIB_PATH ${gtk3.out}/lib/girepository-1.0:${gobject-introspection.out}/lib/girepository-1.0:${glib.out}/lib/girepository-1.0:${libappindicator-gtk3.out}/lib/girepository-1.0:${pango.out}/lib/girepository-1.0:${harfbuzz.out}/lib/girepository-1.0:${gdk-pixbuf.out}/lib/girepository-1.0:${atk.out}/lib/girepository-1.0"
       "--set XDG_DATA_DIRS ${gtk3.out}/share:${libappindicator-gtk3.out}/share:$XDG_DATA_DIRS"
+      "--prefix PATH : ${runtimePath}"
       "--set PYSTRAY_BACKEND appindicator"
     ];
 

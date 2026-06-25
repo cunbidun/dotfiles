@@ -20,7 +20,6 @@ in {
     ../../home-manager/configs/vscode.nix
     ../../home-manager/configs/shared/git.nix
     inputs.self.homeManagerModules.theme-manager
-    inputs.stylix.homeModules.stylix
     inputs.mac-app-util.homeManagerModules.default
   ];
   home.packages = package_config.default_packages ++ package_config.mac_packages;

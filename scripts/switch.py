@@ -196,7 +196,8 @@ def main():
         choices=["macbook-m1", "nixos", "home-server", "test-vm"],
         help="Configuration profile",
     )
-    parser.add_argument("--no-commit", action="store_true", help="Skip git commit")
+    parser.add_argument("--commit", action="store_true", help="Commit changes after successful switch")
+    parser.add_argument("--no-commit", action="store_true", help="Skip git commit (default)")
     parser.add_argument(
         "--commit-message",
         default=f"Auto commit: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
@@ -258,7 +259,7 @@ def main():
     # Commit changes
     run_cmd(["git", "add", "-A"])
 
-    if not args.no_commit:
+    if args.commit and not args.no_commit:
         # Check if there are changes to commit
         result = run_cmd(["git", "diff-index", "--quiet", "HEAD", "--"], check=False)
         if result.returncode != 0:
@@ -279,7 +280,7 @@ def main():
         else:
             print("No changes to commit.")
     else:
-        print("--no-commit flag set; skipping commit.")
+        print("Commit disabled; skipping commit.")
 
     print("Configuration switch completed successfully.")
     return 0

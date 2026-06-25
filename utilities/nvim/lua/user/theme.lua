@@ -1,6 +1,6 @@
 local M = {}
 
-local state_dir = vim.fn.expand("~/.local/state/stylix")
+local state_dir = vim.fn.expand("~/.local/state/theme-manager")
 local theme_file = state_dir .. "/current-theme-name.txt"
 
 local themes = {
@@ -43,8 +43,7 @@ end
 function M.setup()
 	M.apply(true)
 
-	-- Home-manager *replaces the symlink* on a theme switch, so watch the parent
-	-- dir (a stable inode); a watch on the file itself would die on the first relink.
+	-- Watch the parent directory so atomic file replacement triggers one reload.
 	local watcher = (vim.uv or vim.loop).new_fs_event()
 	if not watcher or vim.fn.isdirectory(state_dir) == 0 then
 		return

@@ -1,6 +1,6 @@
 # Centralized theme configuration
 # This is the single source of truth for all theme mappings across the system
-# Used by stylix.nix and any other theme-aware configurations
+# Used by theme-runtime.nix and any other theme-aware configurations
 # to get the theme name: https://github.com/tinted-theming/schemes
 {
   catppuccin = {
@@ -32,7 +32,7 @@
       scheme = "standardized-light";
       wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
       vscodeTheme = "Light Modern";
-      vicinaeTheme = "vicinae-light";
+      vicinaeTheme = "theme-manager-default-light";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";
@@ -43,7 +43,7 @@
       scheme = "standardized-dark";
       wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
       vscodeTheme = "Dark Modern";
-      vicinaeTheme = "vicinae-dark";
+      vicinaeTheme = "theme-manager-default-dark";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";

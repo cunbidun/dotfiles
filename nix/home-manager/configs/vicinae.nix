@@ -23,33 +23,14 @@ in
     # Hyprland 0.52 started validating exclusive edge anchors and
     # LayerShellQt (used by Vicinae) currently violates that contract,
     # so disable layer shell until upstream fixes the issue.
-    settings = {
-      faviconService = "twenty"; # twenty | google | none
-      font.size = 11;
-      popToRootOnClose = false;
-      rootSearch.searchFiles = false;
-      window = {
-        csd = true;
-        opacity = 0.95;
-        rounding = 0;
-      };
-    };
   };
 
-  systemd.user.services.vicinae.Unit.X-SwitchMethod = "keep-old";
+  systemd.user.services.vicinae = {
+    Unit.X-SwitchMethod = "keep-old";
+    Service.KillMode = lib.mkForce "control-group";
+  };
 
   home.activation = lib.mkIf config.services.vicinae.enable {
-    applyVicinaeTheme = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
-      vicinae_config="$HOME/.config/vicinae/vicinae.json"
-      vicinae_theme=""
-      if [ -r "$vicinae_config" ]; then
-        vicinae_theme="$(${pkgs.jq}/bin/jq -r '.theme.name // empty' "$vicinae_config")"
-      fi
-      if [ -n "''${WAYLAND_DISPLAY:-}" ] && [ -n "$vicinae_theme" ] && ${pkgs.systemd}/bin/systemctl --user is-active --quiet vicinae.service; then
-        "$newGenPath/home-path/bin/vicinae" theme set "$vicinae_theme" >/dev/null
-      fi
-    '';
-
     removePokemonExtension = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       rm -rf "$HOME/.local/share/vicinae/extensions/${pokemonExtensionId}"
     '';

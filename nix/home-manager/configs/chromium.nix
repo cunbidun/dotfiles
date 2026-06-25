@@ -9,8 +9,6 @@
   chromePackage = pkgs.google-chrome;
   chromeBinary = "${chromePackage}/bin/google-chrome-stable";
 
-  # Import shared Chrome configuration
-  chromeConfig = import ./shared/chrome-config.nix;
   mkChromePWA = {
     name,
     url,
@@ -32,9 +30,6 @@
 in {
   # add xdg entries for PWAs
   home.packages = lib.mkIf isLinux [
-    # (pkgs.google-chrome.override {
-    #   commandLineArgs = "--refresh-platform-policy";
-    # })
     chromePackage
   ];
   xdg = lib.mkIf isLinux {
@@ -59,13 +54,4 @@ in {
       })
     ];
   };
-  # Generate Chrome policy file in user home directory
-  home.file.".local/etc/chrome-policy.json" = lib.mkIf isLinux {
-    text = chromeConfig.mkChromePolicy chromeConfig.baseExtensions;
-  };
-  home.activation.refresh_chrome_policy = lib.mkIf isLinux ''
-    if ${pkgs.procps}/bin/pgrep -u "$USER" -x chrome >/dev/null; then
-      (${chromeBinary} --refresh-platform-policy --no-startup-window >/dev/null 2>&1 &)
-    fi
-  '';
 }

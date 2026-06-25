@@ -90,10 +90,6 @@
       url = "github:stelcodes/bunny.yazi/71b14a3d624572f4884354c2e218296e9ece07cc";
       flake = false;
     };
-    stylix = {
-      url = "github:nix-community/stylix";
-    };
-
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

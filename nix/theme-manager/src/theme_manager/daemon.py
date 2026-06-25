@@ -7,10 +7,11 @@ from datetime import datetime, timezone, timedelta
 from astral import LocationInfo
 from astral.sun import sun
 
+from .runtime import apply_theme
 from .tray import ThemeManagerTray
 
 CONFIG_PATH = os.path.expanduser("~/.config/theme-manager/config.yaml")
-STYLIX_THEME_PATH = os.path.expanduser("~/.local/state/stylix/current-theme-name.txt")
+THEME_STATE_PATH = os.path.expanduser("~/.local/state/theme-manager/current-theme-name.txt")
 SOCKET_PATH = os.path.expanduser("~/.local/share/theme-manager/socket")
 LOCK_PATH = os.path.expanduser("~/.local/share/theme-manager/lock")
 OVERRIDE_PATH = os.path.expanduser("~/.local/state/theme-manager/polarity-override.json")
@@ -24,7 +25,7 @@ class ThemeManagerDaemon:
         self.current_theme, self.current_polarity = self._load_current_state()
 
         self.lock = threading.Lock()
-        self.script_running = False  # guarded by self.lock
+        self.theme_change_running = False  # guarded by self.lock
         self.server_socket = None
         self._accept_thread = None
         self._scheduler_thread = None
@@ -32,31 +33,19 @@ class ThemeManagerDaemon:
 
     # ---------- config & state helpers ---------- #
     def _load_config(self):
-        cfg = yaml.safe_load(open(CONFIG_PATH))
-        script = os.path.expanduser(cfg["script"])
+        return yaml.safe_load(open(CONFIG_PATH))
 
-        if not os.path.exists(script) or not os.path.isfile(script):
-            print(f"ERROR: script '{script}' does not exist or is not a file", file=sys.stderr)
-            sys.exit(1)
-
-        if not os.access(script, os.X_OK):
-            print(f"ERROR: script '{script}' is not executable", file=sys.stderr)
-            sys.exit(1)
-
-        cfg["script"] = script
-        return cfg
-
-    def _split_stylix_theme(self, stylix_theme: str) -> tuple[str, str] | None:
-        if "-" not in stylix_theme:
+    def _split_theme_name(self, theme_name: str) -> tuple[str, str] | None:
+        if "-" not in theme_name:
             return None
-        theme, polarity = stylix_theme.rsplit("-", 1)
+        theme, polarity = theme_name.rsplit("-", 1)
         if theme not in self.allowed or polarity not in ("light", "dark"):
             return None
         return theme, polarity
 
     def _load_current_state(self) -> tuple[str, str]:
         try:
-            parsed = self._split_stylix_theme(self._get_stylix_theme_name())
+            parsed = self._split_theme_name(self._get_theme_state_name())
         except FileNotFoundError:
             parsed = None
         if parsed is None:
@@ -171,6 +160,11 @@ class ThemeManagerDaemon:
             print("Auto polarity disabled", flush=True)
             return
 
+        try:
+            self._apply_current_theme()
+        except Exception as e:
+            print(f"ERROR initial theme apply failed: {e}", file=sys.stderr, flush=True)
+
         while True:
             try:
                 polarity, next_switch = self._scheduled_polarity()
@@ -213,10 +207,10 @@ class ThemeManagerDaemon:
     def _apply_auto_polarity(self, polarity: str):
         acquired = False
         with self.lock:
-            if self.script_running:
+            if self.theme_change_running:
                 print("Auto polarity skipped: theme switch already running", flush=True)
             else:
-                self.script_running = True
+                self.theme_change_running = True
                 acquired = True
         if acquired:
             try:
@@ -235,8 +229,8 @@ class ThemeManagerDaemon:
     def _get_polarity(self):
         return self.current_polarity
 
-    def _get_stylix_theme_name(self):
-        with open(STYLIX_THEME_PATH, 'r') as f:
+    def _get_theme_state_name(self):
+        with open(THEME_STATE_PATH, 'r') as f:
             return f.read().strip()
 
     def _apply_polarity(self, polarity: str) -> bool:
@@ -244,14 +238,21 @@ class ThemeManagerDaemon:
             return False
         old_polarity = self.current_polarity
         self.current_polarity = polarity
-        proc = subprocess.run([self.config["script"], "-t", self.current_theme, "-p", polarity], check=False)
-        if proc.returncode != 0:
+        try:
+            active = apply_theme(self.current_theme, polarity)
+        except Exception:
             self.current_polarity = old_polarity
-            return False
-        active = self._get_stylix_theme_name()
+            raise
         expected = f"{self.current_theme}-{polarity}"
         if active != expected:
             self.current_polarity = old_polarity
+            raise RuntimeError(f"active theme is {active}, expected {expected}")
+        return True
+
+    def _apply_current_theme(self) -> bool:
+        active = apply_theme(self.current_theme, self.current_polarity)
+        expected = f"{self.current_theme}-{self.current_polarity}"
+        if active != expected:
             raise RuntimeError(f"active theme is {active}, expected {expected}")
         return True
 
@@ -263,15 +264,15 @@ class ThemeManagerDaemon:
     # ---------- concurrency helpers ---------- #
     def _acquire_write(self, conn) -> bool:
         with self.lock:
-            if self.script_running:
-                conn.sendall(b"ERROR script busy\n")
+            if self.theme_change_running:
+                conn.sendall(b"ERROR theme change busy\n")
                 return False
-            self.script_running = True
+            self.theme_change_running = True
             return True
 
     def _release_write(self):
         with self.lock:
-            self.script_running = False
+            self.theme_change_running = False
 
     # ---------- command handlers ---------- #
     def _handle_set_polarity(self, conn, pol: str):
@@ -309,28 +310,15 @@ class ThemeManagerDaemon:
             polarity = self._get_polarity()
             self.current_theme = theme
             self.current_polarity = polarity
-            proc = subprocess.run([self.config["script"], "-t", theme, "-p", polarity], check=False)
+            active = apply_theme(theme, polarity)
         except Exception as e:
             self.current_theme = old_theme
             self.current_polarity = old_polarity
             self._release_write()
-            conn.sendall(f"ERROR failed to run script: {e}\n".encode())
+            conn.sendall(f"ERROR failed to apply theme: {e}\n".encode())
             return
 
         try:
-            if proc.returncode != 0:
-                self.current_theme = old_theme
-                self.current_polarity = old_polarity
-                conn.sendall(f"ERROR script failed with exit code {proc.returncode}\n".encode())
-                return
-
-            try:
-                active = self._get_stylix_theme_name()
-            except FileNotFoundError:
-                self.current_theme = old_theme
-                self.current_polarity = old_polarity
-                conn.sendall(b"ERROR active theme file is missing\n")
-                return
             expected = f"{theme}-{polarity}"
             if active != expected:
                 self.current_theme = old_theme
