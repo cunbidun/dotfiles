@@ -211,9 +211,14 @@ class ThemeManagerTray:
         if self.icon:
             self.icon.stop()
 
+    def _refresh_interval(self) -> int:
+        status = self.schedule_status or {}
+        remaining = str(status.get("overrideRemaining") if status.get("override") else status.get("remaining", ""))
+        return 60 if "h" in remaining else 1
+
     def _refresh_loop(self):
         while self._running:
-            time.sleep(1)
+            time.sleep(self._refresh_interval())
             self.refresh_menu()
 
     def run(self):
