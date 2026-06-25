@@ -49,7 +49,7 @@ class ThemeManagerTray:
         self.themes: list[str] = []
         self.icon: pystray.Icon | None = None
         self._font: ImageFont.FreeTypeFont | ImageFont.ImageFont | None = None
-        self._menu_active = False  # suppress auto refresh when user interacting
+        self._running = False
         self.update_status()
 
     def _install_menu_css(self):
@@ -207,17 +207,26 @@ class ThemeManagerTray:
             self.icon.update_menu()
 
     def quit_app(self, *_):
+        self._running = False
         if self.icon:
             self.icon.stop()
+
+    def _refresh_loop(self):
+        while self._running:
+            time.sleep(1)
+            self.refresh_menu()
 
     def run(self):
         self.update_status()
         logger.info("Starting tray icon")
         self.icon = pystray.Icon("theme-manager", self.create_image(), "Theme Manager", pystray.Menu(*self.build_menu()))
+        self._running = True
+        threading.Thread(target=self._refresh_loop, daemon=True).start()
         try:
             self.icon.run()
         except KeyboardInterrupt:
             logger.info("KeyboardInterrupt received; quitting tray")
             self.quit_app()
         finally:
+            self._running = False
             logger.info("Tray icon stopped")
