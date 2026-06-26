@@ -69,6 +69,21 @@
         export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
       fi
 
+      bat() {
+        for arg in "$@"; do
+          case "$arg" in
+            --theme|--theme=*) command bat "$@"; return ;;
+          esac
+        done
+
+        case "$(cat "$HOME/.local/state/theme-manager/current-theme-name.txt" 2>/dev/null)" in
+          catppuccin-light) command bat --theme="Catppuccin Latte" "$@" ;;
+          catppuccin-dark) command bat --theme="Catppuccin Mocha" "$@" ;;
+          default-light) command bat --theme="GitHub" "$@" ;;
+          *) command bat --theme="Visual Studio Dark+" "$@" ;;
+        esac
+      }
+
       eval "$(starship init zsh)"
       eval "$(atuin init zsh --disable-up-arrow)"
 

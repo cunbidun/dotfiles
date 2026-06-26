@@ -42,6 +42,15 @@ Generated theme inputs live under:
 
 ## Runtime Classes
 
+| Type | Use when | Apps | Owner | Switch |
+| --- | --- | --- | --- | --- |
+| Hermetic | Known before startup | Codex, Claude | Home Manager | Rebuild writes final config |
+| Class 1 | Config can run code | Neovim, Quickshell, Hyprland | App config | App hot reloads |
+| Class 2 | App watches data | VS Code | Nix input + live file | Runtime writes live file |
+| Class 3 | Needs signal/API | Kitty, Chrome, Hyprpaper | Live file/API | Runtime writes, then signals |
+| Class 4 | Cannot reload safely | Startup-only apps | Generated/live config | Next start picks it up |
+| Launch CLI | Reads state at launch | bat | Shell wrapper | New command uses state |
+
 ### Class 1: Code Config
 
 Best case. App config is code, so the app can read state and hot reload itself without systemd restarts or external
