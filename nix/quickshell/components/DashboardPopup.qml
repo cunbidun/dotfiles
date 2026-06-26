@@ -479,7 +479,7 @@ Rectangle {
                 runCommand("pid=$(cat /tmp/quickshell-dashboard-inhibit.pid 2>/dev/null || true); [ -n \"$pid\" ] && kill \"$pid\" 2>/dev/null; rm -f /tmp/quickshell-dashboard-inhibit.pid");
                 root.inhibited = false;
             } else {
-                runCommand("systemd-inhibit --what=idle:sleep --who=quickshell-dashboard --why='dashboard inhibit' sleep infinity & echo $! >/tmp/quickshell-dashboard-inhibit.pid");
+                runCommand("systemd-inhibit --what=idle --who=quickshell-dashboard --why='dashboard inhibit' sleep infinity & echo $! >/tmp/quickshell-dashboard-inhibit.pid");
                 root.inhibited = true;
             }
         } else if (action === "nightlight") {

@@ -4,7 +4,7 @@ targetName: input: (self: super: {
   "${targetName}" =
     super."${targetName}" or {}
     // import input {
-      inherit (super) system;
+      system = super.stdenv.hostPlatform.system;
       config.allowUnfree = super.config.allowUnfree or false;
     };
 })

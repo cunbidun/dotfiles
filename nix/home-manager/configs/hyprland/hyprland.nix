@@ -9,6 +9,7 @@
 }: let
   scripts = import ../../scripts.nix {pkgs = pkgs;};
   system = pkgs.stdenv.hostPlatform.system;
+  hyprlandConfig = "${config.home.homeDirectory}/dotfiles/nix/home-manager/configs/hyprland/lua";
   hyprfocus = inputs.hyprfocus.packages.${system}.hyprfocus;
 in {
   wayland.windowManager.hyprland = {
@@ -26,35 +27,28 @@ in {
     extraConfig = "";
   };
 
-  xdg.configFile."hypr/hyprland.lua".source = ./lua/hyprland.lua;
+  xdg.configFile."hypr/hyprland.lua".text = ''
+    require("user.hyprland")
+  '';
 
-  xdg.configFile."hypr/nix.lua".text = ''
+  xdg.configFile."hypr/user/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "${hyprlandConfig}/hyprland.lua";
+  xdg.configFile."hypr/user/theme.lua".source = config.lib.file.mkOutOfStoreSymlink "${hyprlandConfig}/theme.lua";
+
+  xdg.configFile."hypr/user/command.lua".text = ''
     return {
-      colors = {
-        background = "rgb(1C1C1E)",
-        group_active = "rgb(0A84FF)",
-        group_inactive = "rgb(2C2C2E)",
-        group_text = "rgb(FFFFFF)",
-        group_text_inactive = "rgb(FFFFFF)",
-        border_active = "rgb(0A84FF)",
-        border_inactive = "rgb(545458)",
-        border_locked_active = "rgb(30D158)",
-        shadow = "rgba(1C1C1E99)",
-      },
+      increase_volume = "${lib.getExe scripts.increase-volume}",
+      decrease_volume = "${lib.getExe scripts.decrease-volume}",
+      toggle_volume = "${lib.getExe scripts.toggle-volume}",
+      playerctl = "${lib.getExe pkgs.playerctl}",
+      hyprland_mode = "${lib.getExe scripts.hyprland-mode}",
+      screenshot_copy_upload = "${lib.getExe scripts."screenshot-copy-upload"}",
+      wsctl = "${lib.getExe scripts.wsctl}",
+    }
+  '';
 
-      commands = {
-        increase_volume = "${lib.getExe scripts.increase-volume}",
-        decrease_volume = "${lib.getExe scripts.decrease-volume}",
-        toggle_volume = "${lib.getExe scripts.toggle-volume}",
-        playerctl = "${lib.getExe pkgs.playerctl}",
-        hyprland_mode = "${lib.getExe scripts.hyprland-mode}",
-        screenshot_copy_upload = "${lib.getExe scripts."screenshot-copy-upload"}",
-        wsctl = "${lib.getExe scripts.wsctl}",
-      },
-
-      plugins = {
-        hyprfocus = "${hyprfocus}/lib/libhyprfocus.so",
-      },
+  xdg.configFile."hypr/user/plugin.lua".text = ''
+    return {
+      hyprfocus = "${hyprfocus}/lib/libhyprfocus.so",
     }
   '';
 }

@@ -191,8 +191,10 @@ class ThemeManagerDaemon:
                     remaining = int((wait_until - datetime.now(timezone.utc)).total_seconds())
                     if remaining <= 0:
                         break
-                    time.sleep(min(60, remaining))
-                    if remaining > 60:
+                    time.sleep(1)
+                    if remaining <= 3600:
+                        self._update_tray()
+                    elif remaining % 60 == 0:
                         self._log_next_switch(polarity, next_switch)
                         self._update_tray()
 
@@ -333,7 +335,7 @@ class ThemeManagerDaemon:
 
     def _update_tray(self):
         if self.tray:
-            self.tray.refresh_menu()
+            self.tray.refresh_status()
 
     # ---------- client handling ---------- #
     def _handle_client(self, conn: socket.socket):

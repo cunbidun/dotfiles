@@ -378,7 +378,128 @@
       when = "editorFocus || editorIsOpen";
     }
   ];
+
+  vscodeSettings = {
+    "remote.SSH.defaultExtensions" = [
+      "ms-python.python"
+      "ms-python.vscode-pylance"
+      "ms-python.debugpy"
+      "ms-python.black-formatter"
+      "ms-python.isort"
+      "ms-python.vscode-python-envs"
+      "github.copilot-chat"
+      "esbenp.prettier-vscode"
+    ];
+    "remote.autoForwardPorts" = false;
+    "remote.restoreForwardedPorts" = false;
+    "editor.fontFamily" = "SFMono Nerd Font";
+    "editor.minimap.enabled" = false;
+    "editor.rulers" = [120];
+    "files.saveConflictResolution" = "overwriteFileOnDisk";
+    "terminal.integrated.defaultProfile.linux" = "zsh";
+    "vim.leader" = " ";
+    "vim.handleKeys" = {
+      "J" = false;
+      "gJ" = false;
+    };
+    "vim.normalModeKeyBindings" = [
+      {
+        before = ["<TAB>"];
+        commands = ["workbench.action.nextEditorInGroup"];
+        silent = true;
+      }
+      {
+        before = ["<S-TAB>"];
+        commands = ["workbench.action.previousEditorInGroup"];
+        silent = true;
+      }
+      {
+        before = ["<S-x>"];
+        commands = ["workbench.action.closeActiveEditor"];
+        silent = true;
+      }
+    ];
+    "vim.normalModeKeyBindingsNonRecursive" = [
+      {
+        before = [
+          "<leader>"
+          "b"
+        ];
+        commands = ["workbench.action.toggleSidebarVisibility"];
+      }
+      {
+        before = [
+          "<leader>"
+          "e"
+        ];
+        commands = ["workbench.files.action.showActiveFileInExplorer"];
+      }
+      {
+        before = ["s"];
+        commands = ["flash-vscode.start"];
+      }
+      {
+        before = ["S"];
+        commands = ["flash-vscode.startSelection"];
+      }
+      {
+        before = ["<BS>"];
+        commands = ["flash-vscode.backspace"];
+      }
+      {
+        before = ["<C-o>"];
+        commands = ["workbench.action.navigateBack"];
+        silent = true;
+      }
+    ];
+    "vim.useSystemClipboard" = true;
+    "flash-vscode.caseSensitive" = false;
+    "workbench.iconTheme" = "material-icon-theme";
+    "explorer.confirmDragAndDrop" = false;
+    "files.exclude" = {
+      "**/__pycache__" = true;
+      "**/.pytest_cache" = true;
+    };
+    "[python]".editor.defaultFormatter = "ms-python.black-formatter";
+    "cSpell.userWords" = [
+      "opensearch"
+      "opensearchservice"
+      "openserach"
+      "powertools"
+    ];
+    "chat.tools.autoApprove" = true;
+    "black-formatter.args" = [
+      "--line-length"
+      "120"
+    ];
+    "window.customMenuBarAltFocus" = false;
+    "window.enableMenuBarMnemonics" = false;
+    "diffEditor.hideUnchangedRegions.enabled" = true;
+    "json.format.keepLines" = true;
+    "[jsonc]".editor.formatOnSave = true;
+    "github.copilot.enable" = {
+      "*" = true;
+      plaintext = false;
+      markdown = true;
+      scminput = false;
+    };
+    "python.languageServer" = "Default";
+    "python.pyrefly.disableLanguageServices" = true;
+    "python.terminal.activateEnvironment" = false;
+    "security.workspace.trust.untrustedFiles" = "open";
+    "terminal.integrated.enableMultiLinePasteWarning" = "never";
+    "git.blame.editorDecoration.enabled" = true;
+    "explorer.confirmDelete" = false;
+    "accessibility.dimUnfocused.enabled" = true;
+    "everforest.darkContrast" = "hard";
+    "everforest.darkWorkbench" = "flat";
+  }
+  // lib.optionalAttrs isDarwin {
+    "window.autoDetectColorScheme" = true;
+  };
 in {
+  home.file.".local/state/theme-manager/nix/code/settings.base.json".text = builtins.toJSON vscodeSettings;
+
   programs.vscode = {
     enable = true;
     package = vscodePackage;
@@ -398,122 +519,7 @@ in {
           else []
         );
 
-      userSettings = {
-        "remote.SSH.defaultExtensions" = [
-          "ms-python.python"
-          "ms-python.vscode-pylance"
-          "ms-python.debugpy"
-          "ms-python.black-formatter"
-          "ms-python.isort"
-          "ms-python.vscode-python-envs"
-          "github.copilot-chat"
-          "esbenp.prettier-vscode"
-        ];
-        "remote.autoForwardPorts" = false;
-        "remote.restoreForwardedPorts" = false;
-        "editor.fontFamily" = "SFMono Nerd Font";
-        "editor.minimap.enabled" = false;
-        "editor.rulers" = [120];
-        "files.saveConflictResolution" = "overwriteFileOnDisk";
-        "terminal.integrated.defaultProfile.linux" = "zsh";
-        "vim.leader" = " ";
-        "vim.handleKeys" = {
-          "J" = false;
-          "gJ" = false;
-        };
-        "vim.normalModeKeyBindings" = [
-          {
-            before = ["<TAB>"];
-            commands = ["workbench.action.nextEditorInGroup"];
-            silent = true;
-          }
-          {
-            before = ["<S-TAB>"];
-            commands = ["workbench.action.previousEditorInGroup"];
-            silent = true;
-          }
-          {
-            before = ["<S-x>"];
-            commands = ["workbench.action.closeActiveEditor"];
-            silent = true;
-          }
-        ];
-        "vim.normalModeKeyBindingsNonRecursive" = [
-          {
-            before = [
-              "<leader>"
-              "b"
-            ];
-            commands = ["workbench.action.toggleSidebarVisibility"];
-          }
-          {
-            before = [
-              "<leader>"
-              "e"
-            ];
-            commands = ["workbench.files.action.showActiveFileInExplorer"];
-          }
-          {
-            before = ["s"];
-            commands = ["flash-vscode.start"];
-          }
-          {
-            before = ["S"];
-            commands = ["flash-vscode.startSelection"];
-          }
-          {
-            before = ["<BS>"];
-            commands = ["flash-vscode.backspace"];
-          }
-          {
-            before = ["<C-o>"];
-            commands = ["workbench.action.navigateBack"];
-            silent = true;
-          }
-        ];
-        "vim.useSystemClipboard" = true;
-        "flash-vscode.caseSensitive" = false;
-        "workbench.iconTheme" = "material-icon-theme";
-        "explorer.confirmDragAndDrop" = false;
-        "files.exclude" = {
-          "**/__pycache__" = true;
-          "**/.pytest_cache" = true;
-        };
-        "window.autoDetectColorScheme" = lib.mkIf isDarwin true;
-        "[python]".editor.defaultFormatter = "ms-python.black-formatter";
-        "cSpell.userWords" = [
-          "opensearch"
-          "opensearchservice"
-          "openserach"
-          "powertools"
-        ];
-        "chat.tools.autoApprove" = true;
-        "black-formatter.args" = [
-          "--line-length"
-          "120"
-        ];
-        "window.customMenuBarAltFocus" = false;
-        "window.enableMenuBarMnemonics" = false;
-        "diffEditor.hideUnchangedRegions.enabled" = true;
-        "json.format.keepLines" = true;
-        "[jsonc]".editor.formatOnSave = true;
-        "github.copilot.enable" = {
-          "*" = true;
-          plaintext = false;
-          markdown = true;
-          scminput = false;
-        };
-        "python.languageServer" = "Default";
-        "python.pyrefly.disableLanguageServices" = true;
-        "python.terminal.activateEnvironment" = false;
-        "security.workspace.trust.untrustedFiles" = "open";
-        "terminal.integrated.enableMultiLinePasteWarning" = "never";
-        "git.blame.editorDecoration.enabled" = true;
-        "explorer.confirmDelete" = false;
-        "accessibility.dimUnfocused.enabled" = true;
-        "everforest.darkContrast" = "hard";
-        "everforest.darkWorkbench" = "flat";
-      };
+      userSettings = {};
       # to search extensions: https://nix-community.github.io/nix4vscode/
       extensions =
         pkgs.nix4vscode.forVscodeVersion vscodeFullVersion [

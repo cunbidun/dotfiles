@@ -9,10 +9,6 @@
   themeConfigs = import ./shared/theme-configs.nix;
   chromeConfig = import ./shared/chrome-config.nix;
 
-  stripHash = color: lib.removePrefix "#" color;
-  rgb = color: "rgb(${stripHash color})";
-  rgba = color: alpha: "rgba(${stripHash color}${alpha})";
-
   kittyThemes = {
     catppuccin = {
       light = "Catppuccin-Latte.conf";
@@ -207,17 +203,6 @@
         then "adw-gtk3"
         else "adw-gtk3-dark";
       kittyTheme = kittyThemeFile theme polarity;
-      hyprland = {
-        background = rgb colors.popupBackground.color;
-        groupActive = rgb colors.selectedBackground;
-        groupInactive = rgb colors.moduleBackground.color;
-        groupText = rgb colors.selectedForeground;
-        groupTextInactive = rgb colors.popupText;
-        borderActive = rgb colors.selectedBackground;
-        borderInactive = rgb colors.popupBorder.color;
-        borderLockedActive = rgb colors.popupSuccess;
-        shadow = rgba colors.popupBackground.color "99";
-      };
     };
 
   runtimeThemes = lib.mapAttrs (theme: polarities:
@@ -243,6 +228,7 @@
     value.text = kittyThemeConf polarity;
   })
   themeConfigs.default);
+
 in {
   config = lib.mkIf isLinux {
     services.theme-manager = {
@@ -252,7 +238,7 @@ in {
     };
 
     home.file = chromePolicyFiles // vicinaeThemeFiles // kittyThemeFiles // {
-      ".local/share/theme-manager/themes.json".text = builtins.toJSON runtimeThemes;
+      ".local/state/theme-manager/nix/themes.json".text = builtins.toJSON runtimeThemes;
     };
 
   };

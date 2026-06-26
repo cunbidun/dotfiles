@@ -132,6 +132,10 @@
       url = "github:obra/superpowers";
       flake = false;
     };
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
   };
 
   outputs =

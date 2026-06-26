@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   userdata,
@@ -358,11 +359,12 @@ let
       fi
     '') treesitter-grammars}
   '';
+  nvimConfig = "${config.home.homeDirectory}/dotfiles/utilities/nvim";
 in
 {
   home.file = {
     ".local/share/vim-plugins".source = local-plugin-dir;
-    ".config/nvim".source = ../../../utilities/nvim;
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink nvimConfig;
   };
 
   home.packages = [ neovim-with-packages ];

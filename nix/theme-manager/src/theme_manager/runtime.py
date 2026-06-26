@@ -9,7 +9,9 @@ from pathlib import Path
 
 
 STATE_FILE = Path.home() / ".local/state/theme-manager/current-theme-name.txt"
-THEMES_FILE = Path.home() / ".local/share/theme-manager/themes.json"
+THEMES_FILE = Path.home() / ".local/state/theme-manager/nix/themes.json"
+VSCODE_BASE_SETTINGS = Path.home() / ".local/state/theme-manager/nix/code/settings.base.json"
+VSCODE_SETTINGS_TARGET = Path.home() / ".config/Code/User/settings.json"
 CHROME_POLICY_DIR = Path.home() / ".local/share/theme-manager/chrome-policy"
 CHROME_POLICY_TARGET = Path.home() / ".local/etc/chrome-policy.json"
 KITTY_THEME_TARGET = Path.home() / ".local/state/theme-manager/kitty-theme.conf"
@@ -21,13 +23,6 @@ def _run(args: list[str], *, check: bool = False, stdout=None, stderr=None) -> s
 
 def _is_active(unit: str) -> bool:
     return _run(["systemctl", "--user", "is-active", "--quiet", unit]).returncode == 0
-
-
-def _current_theme_name() -> str:
-    try:
-        return STATE_FILE.read_text().strip()
-    except FileNotFoundError:
-        return ""
 
 
 def _atomic_write(path: Path, text: str):
@@ -50,45 +45,13 @@ def _atomic_copy(source: Path, target: Path) -> bool:
     return True
 
 
-def _hypr_lua_string(value: str) -> str:
-    return json.dumps(value)
+def _apply_vscode(vscode_theme: str):
+    settings = json.loads(VSCODE_BASE_SETTINGS.read_text())
+    settings["workbench.colorTheme"] = vscode_theme
+    _atomic_write(VSCODE_SETTINGS_TARGET, json.dumps(settings, indent=2, sort_keys=True) + "\n")
 
 
-def _apply_hyprland(theme: dict):
-    hypr = theme["hyprland"]
-    config = f"""hl.config({{
-    misc = {{
-      background_color = {_hypr_lua_string(hypr['background'])},
-    }},
-    general = {{
-      col = {{
-        active_border = {_hypr_lua_string(hypr['borderActive'])},
-        inactive_border = {_hypr_lua_string(hypr['borderInactive'])},
-      }},
-    }},
-    group = {{
-      col = {{
-        border_active = {_hypr_lua_string(hypr['borderActive'])},
-        border_inactive = {_hypr_lua_string(hypr['borderInactive'])},
-        border_locked_active = {_hypr_lua_string(hypr['borderLockedActive'])},
-      }},
-      groupbar = {{
-        col = {{
-          active = {_hypr_lua_string(hypr['groupActive'])},
-          inactive = {_hypr_lua_string(hypr['groupInactive'])},
-        }},
-        text_color = {_hypr_lua_string(hypr['groupText'])},
-        text_color_inactive = {_hypr_lua_string(hypr['groupTextInactive'])},
-      }},
-    }},
-    decoration = {{
-      shadow = {{
-        color = {_hypr_lua_string(hypr['shadow'])},
-      }},
-    }},
-  }})"""
-    _run(["hyprctl", "eval", config], check=True)
-
+def _apply_hyprpaper(theme: dict):
     if _is_active("hyprpaper.service"):
         wallpaper = theme["wallpaper"]
         _run(["hyprctl", "hyprpaper", "preload", wallpaper], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -134,7 +97,6 @@ def apply_theme(theme: str, polarity: str) -> str:
     themes = json.loads(THEMES_FILE.read_text())
     selected = themes[theme][polarity]
     theme_name = selected["name"]
-    theme_changed = _current_theme_name() != theme_name
 
     print(f"Switching to theme '{theme}' with polarity '{polarity}'...", flush=True)
 
@@ -148,13 +110,14 @@ def apply_theme(theme: str, polarity: str) -> str:
     shutil.copyfile(selected["kittyTheme"], KITTY_THEME_TARGET)
     _run(["pkill", "-USR1", "-u", os.environ.get("USER", ""), "-f", r"^kitty( |$)"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+    _apply_vscode(selected["vscodeTheme"])
+
     policy_source = CHROME_POLICY_DIR / f"{theme_name}.json"
     if policy_source.exists() and _atomic_copy(policy_source, CHROME_POLICY_TARGET):
         if _run(["pgrep", "-u", os.environ.get("USER", ""), "-x", "chrome"], stdout=subprocess.DEVNULL).returncode == 0:
             subprocess.Popen(["google-chrome-stable", "--refresh-platform-policy", "--no-startup-window"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    if theme_changed and os.environ.get("HYPRLAND_INSTANCE_SIGNATURE"):
-        _apply_hyprland(selected)
+    _apply_hyprpaper(selected)
 
     _apply_vicinae(selected["vicinaeTheme"])
 

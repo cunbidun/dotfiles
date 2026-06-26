@@ -206,6 +206,12 @@ class ThemeManagerTray:
             self.icon.menu = pystray.Menu(*self.build_menu())
             self.icon.update_menu()
 
+    def refresh_status(self):
+        old_polarity = self.current_polarity
+        self.update_status()
+        if self.icon and self.current_polarity != old_polarity:
+            self.icon.icon = self.create_image()
+
     def quit_app(self, *_):
         self._running = False
         if self.icon:
@@ -219,7 +225,7 @@ class ThemeManagerTray:
     def _refresh_loop(self):
         while self._running:
             time.sleep(self._refresh_interval())
-            self.refresh_menu()
+            self.refresh_status()
 
     def run(self):
         self.update_status()
