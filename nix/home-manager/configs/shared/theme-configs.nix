@@ -9,7 +9,6 @@
       wallpaper = ../../../../wallpapers/rose-pine-dawn-wallpaper.jpeg;
       vscodeTheme = "Rosé Pine Dawn";
       vicinaeTheme = "rose-pine-dawn";
-      gtkTheme = "rose-pine-dawn";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";
@@ -21,7 +20,6 @@
       wallpaper = ../../../../wallpapers/rose-pine-moon-wallpaper.jpeg;
       vscodeTheme = "Rosé Pine";
       vicinaeTheme = "rose-pine";
-      gtkTheme = "rose-pine";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";
@@ -59,7 +57,6 @@
       wallpaper = ../../../../wallpapers/fog_forest_2.png;
       vscodeTheme = "Everforest Light";
       vicinaeTheme = "theme-manager-everforest-light";
-      gtkTheme = "Everforest-Light";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";
@@ -73,7 +70,6 @@
       wallpaper = ../../../../wallpapers/fog_forest_2.png;
       vscodeTheme = "Everforest Dark";
       vicinaeTheme = "theme-manager-everforest-dark";
-      gtkTheme = "Everforest-Dark";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";

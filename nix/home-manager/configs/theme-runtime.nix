@@ -46,12 +46,9 @@
         if polarity == "light"
         then "prefer-light"
         else "prefer-dark";
-      gtkTheme =
-        themeConfig.gtkTheme or (
-          if polarity == "light"
-          then "adw-gtk3"
-          else "adw-gtk3-dark"
-        );
+      # No GTK theme name is set; rely solely on color-scheme (prefer-dark/
+      # prefer-light) to drive app + Chrome dark/light, like catppuccin/default.
+      gtkTheme = "";
       kittyTheme = kittyThemeFile theme polarity;
       tmuxTheme = config.themeManager.tmux.themePath theme polarity;
     };
@@ -80,11 +77,6 @@ in {
       // {
         ".local/state/theme-manager/nix/themes.json".text = builtins.toJSON runtimeThemes;
       };
-
-    home.packages = [
-      pkgs.everforest-gtk-theme
-      pkgs.rose-pine-gtk-theme
-    ];
 
     home.activation.reapplyRuntimeTheme = lib.hm.dag.entryAfter ["vscodeProfiles"] ''
       if [ -S "$HOME/.local/share/theme-manager/socket" ]; then
