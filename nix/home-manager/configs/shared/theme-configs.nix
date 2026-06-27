@@ -6,7 +6,7 @@
   rose-pine = {
     light = {
       scheme = "rose-pine-dawn";
-      wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
+      wallpaper = ../../../../wallpapers/rose-pine-dawn-wallpaper.jpeg;
       vscodeTheme = "Rosé Pine Dawn";
       vicinaeTheme = "rose-pine-dawn";
       gtkTheme = "rose-pine-dawn";
@@ -18,7 +18,7 @@
     };
     dark = {
       scheme = "rose-pine";
-      wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
+      wallpaper = ../../../../wallpapers/rose-pine-moon-wallpaper.jpeg;
       vscodeTheme = "Rosé Pine";
       vicinaeTheme = "rose-pine";
       gtkTheme = "rose-pine";
