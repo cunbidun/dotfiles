@@ -5,25 +5,6 @@ in
     id = "odibdilhnhgpmekdknegmafphclfcalk";
     name = "Theme Manager Everforest Light";
     packageName = "theme-manager-everforest-light";
-    publicKey = builtins.concatStringsSep "" [
-      "MIIBIjANBgkqhkiG9w0BAQEF"
-      "AAOCAQ8AMIIBCgKCAQEAuaDP"
-      "Xs7I3dZe+Z5oWdulHtfdENOg"
-      "Oscd0mH8G3KThqngbU90fP1F" # pragma: allowlist secret
-      "z9quzPr87OreXA5LBhVPiH7v"
-      "lf1KKNtXT5iOcePdvgtVISXh"
-      "YWXfKljs/epFeLXoFyu4ZsPv"
-      "TtQPXekTydGYaF6cW0k6Q1bR"
-      "O4ySzkKWcq9Fb2RL/FsnVJZ9"
-      "w1D8Ifm5r5cnmcJh59K/kZbw"
-      "tHgNcJFSsPCUu6lRryGxY1wt" # pragma: allowlist secret
-      "3jEoOQZLS6+1EdB2ruCWojU+"
-      "lhhdXO3qiqhQ0yc3G2wmS3wq"
-      "YGg4/9sr/4WbYkQKWvVXnHku"
-      "zKA/Csla3dqr1BDyc3e+n/yG"
-      "a8LlLkrCjm8HGIwhxTFlko5S"
-      "6QIDAQAB"
-    ];
     version = "1.0.0";
     theme = {
       colors = {

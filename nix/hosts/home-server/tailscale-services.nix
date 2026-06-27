@@ -121,7 +121,6 @@ let
   serveRoutes = {
     "svc:spending"      = { port = 3002;  };
     "svc:ai-proxy"      = { port = 20128; };
-    "svc:files"         = { port = 16000; };
     "svc:self-learning" = { port = 8765;  };
     "svc:opencode"      = { port = 10300; };
     "svc:photos"        = { port = 2283;  };

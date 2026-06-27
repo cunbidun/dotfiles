@@ -113,7 +113,7 @@
           require_repo = true;
           when = true;
           format = "[$output]($style)";
-          style = "white";
+          style = "purple";
         };
 
         line_break = {
