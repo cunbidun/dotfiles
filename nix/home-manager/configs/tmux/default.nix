@@ -9,11 +9,6 @@
   themeDir = "${config.home.homeDirectory}/.local/share/theme-manager/tmux";
   themeStatePath = "${config.home.homeDirectory}/.local/state/theme-manager/tmux-theme.conf";
   tmuxThemePath = theme: polarity: "${themeDir}/theme-manager-${theme}-${polarity}.conf";
-  rosePineTmuxTheme = variant: ''
-    set -g @rose_pine_variant '${variant}'
-    set -g @rose_pine_bar_bg_disable 'on'
-    run-shell '${pkgs.tmuxPlugins.rose-pine}/share/tmux-plugins/rose-pine/rose-pine.tmux; ${pkgs.tmux}/bin/tmux set -g status 2; ${pkgs.tmux}/bin/tmux set -g status-format[0] "#[bg=default,fg=default]"'
-  '';
   tmuxReloadScript = pkgs.writeShellScript "tmux-reload" ''
     set -euo pipefail
     socket="$XDG_RUNTIME_DIR/tmux-$(id -u)/default"
@@ -59,8 +54,9 @@ in {
         set -ga terminal-overrides ",tmux-256color:RGB"
         set -g renumber-windows on
         set -sg repeat-time 600
-        set -g status 2
-        set -g status-format[0] "#[bg=default,fg=default]"
+        run-shell '${pkgs.tmux}/bin/tmux set -g status-format[1] "$(${pkgs.tmux}/bin/tmux show-options -gqv status-format[0])"'
+        run-shell '${pkgs.tmux}/bin/tmux set -g status-format[0] "#[bg=default,fg=default]"'
+        run-shell '${pkgs.tmux}/bin/tmux set -g status 2'
         setw -g xterm-keys on
         source-file -q ${themeStatePath}
 
@@ -95,8 +91,8 @@ in {
       ".local/share/theme-manager/tmux/theme-manager-everforest-dark.conf".source = ./everforest-dark.conf;
       ".local/share/theme-manager/tmux/theme-manager-catppuccin-light.conf".source = ./catppuccin-light.conf;
       ".local/share/theme-manager/tmux/theme-manager-catppuccin-dark.conf".source = ./catppuccin-dark.conf;
-      ".local/share/theme-manager/tmux/theme-manager-rose-pine-light.conf".text = rosePineTmuxTheme "dawn";
-      ".local/share/theme-manager/tmux/theme-manager-rose-pine-dark.conf".text = rosePineTmuxTheme "main";
+      ".local/share/theme-manager/tmux/theme-manager-rose-pine-light.conf".source = ./rose-pine-light.conf;
+      ".local/share/theme-manager/tmux/theme-manager-rose-pine-dark.conf".source = ./rose-pine-dark.conf;
     };
 
     systemd.user.services.tmux-reload = {

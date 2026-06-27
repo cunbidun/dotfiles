@@ -378,7 +378,7 @@ Edit:
 nix/home-manager/configs/tmux/default.nix
 ```
 
-Prefer packaged tmux plugins when possible. Rosé Pine uses `pkgs.tmuxPlugins.rose-pine`; simple themes use local files:
+Prefer packaged tmux plugins only if they do not replace the status layout. Simple themes use local files:
 
 ```text
 nix/home-manager/configs/tmux/mytheme-light.conf

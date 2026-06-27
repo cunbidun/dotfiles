@@ -1,6 +1,6 @@
 -- Terminal (multi-group terminal manager)
 local term = require("terminal")
-vim.keymap.set({ "n", "t" }, "<leader>tt", term.toggle, { desc = "Terminal toggle" })
+vim.keymap.set({ "n", "t" }, "<C-\\>", term.toggle, { desc = "Terminal toggle" })
 vim.keymap.set({ "n", "t" }, "<leader>ts", term.split, { desc = "Terminal split pane" })
 vim.keymap.set({ "n", "t" }, "<leader>tn", term.new_group, { desc = "Terminal new group" })
 vim.keymap.set({ "n", "t" }, "<leader>tl", term.next_group, { desc = "Terminal next group" })
