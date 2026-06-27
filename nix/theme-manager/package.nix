@@ -15,6 +15,7 @@
     pkgs.procps
     pkgs.quickshell
     pkgs.systemdMinimal
+    pkgs.tmux
     vicinae
   ];
 in

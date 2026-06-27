@@ -1,5 +1,6 @@
 {
   config,
+  hostName,
   lib,
   pkgs,
   userdata,
@@ -116,6 +117,10 @@ let
     {
       pkg = catppuccin-nvim;
       dir = "catppuccin";
+    }
+    {
+      pkg = everforest;
+      dir = "everforest";
     }
 
     {
@@ -359,12 +364,15 @@ let
       fi
     '') treesitter-grammars}
   '';
-  nvimConfig = "${config.home.homeDirectory}/dotfiles/utilities/nvim";
+  nvimConfig =
+    if hostName == "nixos"
+    then config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim"
+    else ../../../utilities/nvim;
 in
 {
   home.file = {
     ".local/share/vim-plugins".source = local-plugin-dir;
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink nvimConfig;
+    ".config/nvim".source = nvimConfig;
   };
 
   home.packages = [ neovim-with-packages ];

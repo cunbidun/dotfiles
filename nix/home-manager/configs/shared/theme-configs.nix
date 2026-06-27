@@ -13,7 +13,7 @@
         theme = "catppuccin";
         colorScheme = "latte";
       };
-      chromeExtension = "jhjnalhegpceacdhbplhnakmkdliaddd"; # Catppuccin extension
+      chromeExtensions = [ "jhjnalhegpceacdhbplhnakmkdliaddd" ]; # Catppuccin extension
     };
     dark = {
       scheme = "catppuccin-mocha";
@@ -24,7 +24,37 @@
         theme = "catppuccin";
         colorScheme = "mocha";
       };
-      chromeExtension = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; # Catppuccin extension
+      chromeExtensions = [ "bkkmolkhemgaeaeggcmfbghljjjoofoh" ]; # Catppuccin extension
+    };
+  };
+  everforest = {
+    light = {
+      scheme = "everforest";
+      wallpaper = ../../../../wallpapers/fog_forest_2.png;
+      vscodeTheme = "Everforest Light";
+      vicinaeTheme = "vicinae-light";
+      gtkTheme = "Everforest-Light";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      localChromeExtensions = [ "everforest-light" ];
+      chromeExtensions = [
+      ];
+    };
+    dark = {
+      scheme = "everforest-dark-hard";
+      wallpaper = ../../../../wallpapers/fog_forest_2.png;
+      vscodeTheme = "Everforest Dark";
+      vicinaeTheme = "vicinae-dark";
+      gtkTheme = "Everforest-Dark";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      chromeExtensions = [
+        "dlcadbmcfambdjhecipbnolmjchgnode" # Everforest Chrome Theme
+      ];
     };
   };
   default = {
@@ -37,7 +67,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      chromeExtension = null; # Default theme - no specific extension needed
+      chromeExtensions = [ ]; # Default theme - no specific extension needed
     };
     dark = {
       scheme = "standardized-dark";
@@ -48,7 +78,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      chromeExtension = null; # Default theme - no specific extension needed
+      chromeExtensions = [ ]; # Default theme - no specific extension needed
     };
   };
 }

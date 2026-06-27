@@ -2,6 +2,7 @@
 # https://wiki.hypr.land/Configuring/Start/
 {
   config,
+  hostName,
   inputs,
   lib,
   pkgs,
@@ -10,6 +11,14 @@
   scripts = import ../../scripts.nix {pkgs = pkgs;};
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandConfig = "${config.home.homeDirectory}/dotfiles/nix/home-manager/configs/hyprland/lua";
+  hyprlandSource =
+    if hostName == "nixos"
+    then config.lib.file.mkOutOfStoreSymlink "${hyprlandConfig}/hyprland.lua"
+    else ./lua/hyprland.lua;
+  themeSource =
+    if hostName == "nixos"
+    then config.lib.file.mkOutOfStoreSymlink "${hyprlandConfig}/theme.lua"
+    else ./lua/theme.lua;
   hyprfocus = inputs.hyprfocus.packages.${system}.hyprfocus;
 in {
   wayland.windowManager.hyprland = {
@@ -31,8 +40,8 @@ in {
     require("user.hyprland")
   '';
 
-  xdg.configFile."hypr/user/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "${hyprlandConfig}/hyprland.lua";
-  xdg.configFile."hypr/user/theme.lua".source = config.lib.file.mkOutOfStoreSymlink "${hyprlandConfig}/theme.lua";
+  xdg.configFile."hypr/user/hyprland.lua".source = hyprlandSource;
+  xdg.configFile."hypr/user/theme.lua".source = themeSource;
 
   xdg.configFile."hypr/user/command.lua".text = ''
     return {

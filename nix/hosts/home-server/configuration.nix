@@ -1,5 +1,6 @@
 {
   config,
+  hostName,
   userdata,
   pkgs,
   lib,
@@ -23,7 +24,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "home-server";
+  networking.hostName = hostName;
   networking.networkmanager.enable = true;
 
   # User groups specific to home-server
@@ -268,7 +269,7 @@
         http_addr = "127.0.0.1";
         http_port = 3010;
       };
-      security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
+      security.secret_key = "SW2YcwTIb9zpOOhoPsMm"; # pragma: allowlist secret
       # Disable auth for LAN/Tailscale-only access
       "auth.anonymous" = {
         enabled = true;
@@ -304,7 +305,7 @@
     let
       raw = pkgs.fetchurl {
         url = "https://grafana.com/api/dashboards/1860/revisions/latest/download";
-        sha256 = "11hrll7fm626ikbva5md4gm0rca537vp4xsxa9sxl1pk15s6nk0q";
+        sha256 = "11hrll7fm626ikbva5md4gm0rca537vp4xsxa9sxl1pk15s6nk0q"; # pragma: allowlist secret
       };
 
       patchScript = pkgs.writeText "patch-dashboard.py" ''

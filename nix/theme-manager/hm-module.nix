@@ -51,7 +51,7 @@ in {
         ConditionEnvironment = "WAYLAND_DISPLAY";
         After = [config.wayland.systemd.target];
         PartOf = [config.wayland.systemd.target];
-        X-SwitchMethod = "keep-old";
+        X-RestartIfChanged = true;
       };
 
       Install = {

@@ -15,6 +15,7 @@ VSCODE_SETTINGS_TARGET = Path.home() / ".config/Code/User/settings.json"
 CHROME_POLICY_DIR = Path.home() / ".local/share/theme-manager/chrome-policy"
 CHROME_POLICY_TARGET = Path.home() / ".local/etc/chrome-policy.json"
 KITTY_THEME_TARGET = Path.home() / ".local/state/theme-manager/kitty-theme.conf"
+TMUX_THEME_TARGET = Path.home() / ".local/state/theme-manager/tmux-theme.conf"
 
 
 def _run(args: list[str], *, check: bool = False, stdout=None, stderr=None) -> subprocess.CompletedProcess:
@@ -23,6 +24,11 @@ def _run(args: list[str], *, check: bool = False, stdout=None, stderr=None) -> s
 
 def _is_active(unit: str) -> bool:
     return _run(["systemctl", "--user", "is-active", "--quiet", unit]).returncode == 0
+
+def _tmux_args() -> list[str]:
+    runtime_dir = os.environ.get("XDG_RUNTIME_DIR")
+    socket = Path(runtime_dir) / f"tmux-{os.getuid()}" / "default" if runtime_dir else None
+    return ["tmux", "-S", str(socket)] if socket and socket.exists() else ["tmux"]
 
 
 def _atomic_write(path: Path, text: str):
@@ -65,7 +71,6 @@ def _apply_hyprpaper(theme: dict):
 def _apply_vicinae(vicinae_theme: str):
     if not _is_active("vicinae.service"):
         return
-    _run(["vicinae", "theme", "set", vicinae_theme], stdout=subprocess.DEVNULL, check=True)
     config = Path.home() / ".config/vicinae/settings.json"
     payload = {
         "$schema": "https://vicinae.com/schemas/config.json",
@@ -87,6 +92,7 @@ def _apply_vicinae(vicinae_theme: str):
         },
     }
     _atomic_write(config, json.dumps(payload, indent=2) + "\n")
+    _run(["vicinae", "theme", "set", vicinae_theme], stdout=subprocess.DEVNULL, check=True)
 
 
 def apply_theme(theme: str, polarity: str) -> str:
@@ -109,6 +115,10 @@ def apply_theme(theme: str, polarity: str) -> str:
 
     shutil.copyfile(selected["kittyTheme"], KITTY_THEME_TARGET)
     _run(["pkill", "-USR1", "-u", os.environ.get("USER", ""), "-f", r"^kitty( |$)"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    if tmux_theme := selected.get("tmuxTheme"):
+        shutil.copyfile(tmux_theme, TMUX_THEME_TARGET)
+        _run(_tmux_args() + ["source-file", str(TMUX_THEME_TARGET)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     _apply_vscode(selected["vscodeTheme"])
 

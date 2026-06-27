@@ -1,5 +1,6 @@
 {
   inputs,
+  hostName,
   pkgs,
   userdata,
   lib,
@@ -19,7 +20,7 @@
     efiSupport = false;
   };
 
-  networking.hostName = "test-vm";
+  networking.hostName = hostName;
   networking.networkmanager.enable = true;
 
   # This node's single tailnet identity tag (owned + authorized by the ACL in

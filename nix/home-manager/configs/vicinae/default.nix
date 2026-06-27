@@ -4,11 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   pokemonExtensionId = "a2cd0c72-8b73-4610-b0d9-f838a519fccf";
-in
-{
+in {
   services.vicinae = {
     enable = true;
     systemd = {
@@ -30,8 +28,13 @@ in
     Service.KillMode = lib.mkForce "control-group";
   };
 
+  home.file = {
+    ".local/share/vicinae/themes/theme-manager-default-light.toml".source = ./default-light.toml;
+    ".local/share/vicinae/themes/theme-manager-default-dark.toml".source = ./default-dark.toml;
+  };
+
   home.activation = lib.mkIf config.services.vicinae.enable {
-    removePokemonExtension = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    removePokemonExtension = lib.hm.dag.entryAfter ["writeBoundary"] ''
       rm -rf "$HOME/.local/share/vicinae/extensions/${pokemonExtensionId}"
     '';
   };

@@ -8,6 +8,8 @@ local themes = {
 	["default-light"] = { background = "light", colorscheme = "vscode" },
 	["catppuccin-dark"] = { background = "dark", colorscheme = "catppuccin", flavour = "mocha" },
 	["catppuccin-light"] = { background = "light", colorscheme = "catppuccin", flavour = "latte" },
+	["everforest-dark"] = { background = "dark", colorscheme = "everforest" },
+	["everforest-light"] = { background = "light", colorscheme = "everforest" },
 }
 
 local last
@@ -36,6 +38,10 @@ function M.apply(force)
 		pcall(function()
 			require("catppuccin").setup({ flavour = theme.flavour, transparent_background = true })
 		end)
+	end
+	if theme.colorscheme == "everforest" then
+		vim.g.everforest_background = "hard"
+		vim.g.everforest_transparent_background = 1
 	end
 	pcall(vim.cmd.colorscheme, theme.colorscheme)
 end

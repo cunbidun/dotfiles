@@ -1,0 +1,79 @@
+[meta]
+version = 1
+name = "Theme Manager Default Light"
+description = "macOS-style light theme"
+variant = "light"
+inherits = "vicinae-light"
+
+[colors.accents]
+blue = "#007AFF"
+green = "#28CD41"
+magenta = "#AF52DE"
+orange = "#FF9500"
+red = "#FF3B30"
+yellow = "#FFCC00"
+cyan = "#32ADE6"
+purple = "#5856D6"
+
+[colors.core]
+accent = "colors.accents.blue"
+accent_foreground = "#FFFFFF"
+background = "#F5F5F7"
+foreground = "#1D1D1F"
+secondary_background = "#FFFFFF"
+border = "#D2D2D7"
+
+[colors.main_window]
+border = "colors.core.border"
+footer = { background = "#F2F2F7" }
+
+[colors.settings_window]
+border = "colors.core.border"
+
+[colors.shortcut]
+border = "colors.core.border"
+
+[colors.text]
+default = "colors.core.foreground"
+muted = "#6E6E73"
+danger = "colors.accents.red"
+success = "#1FAD35"
+placeholder = "#8E8E93"
+selection = { background = "colors.core.accent", foreground = "#FFFFFF" }
+
+[colors.text.links]
+default = "colors.accents.blue"
+visited = "colors.accents.purple"
+
+[colors.input]
+border = "colors.core.border"
+border_focus = "colors.core.accent"
+border_error = "colors.accents.red"
+
+[colors.button.primary]
+background = "colors.core.secondary_background"
+foreground = "colors.core.foreground"
+hover = { background = "#F2F2F7" }
+focus = { outline = "colors.core.accent" }
+
+[colors.list.item.hover]
+foreground = "colors.core.foreground"
+secondary_foreground = "#6E6E73"
+
+[colors.list.item.selection]
+background = "#DCEBFF"
+foreground = "colors.core.foreground"
+secondary_background = "colors.core.accent"
+secondary_foreground = "#6E6E73"
+
+[colors.grid.item]
+background = "colors.core.secondary_background"
+hover = { outline = "colors.core.accent" }
+selection = { outline = "colors.core.accent" }
+
+[colors.scrollbars]
+background = "#C7C7CC"
+
+[colors.loading]
+bar = "colors.core.accent"
+spinner = "colors.core.foreground"

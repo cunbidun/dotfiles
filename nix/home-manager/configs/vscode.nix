@@ -492,6 +492,7 @@
     "explorer.confirmDelete" = false;
     "accessibility.dimUnfocused.enabled" = true;
     "everforest.darkContrast" = "hard";
+    "everforest.lightContrast" = "hard";
     "everforest.darkWorkbench" = "flat";
   }
   // lib.optionalAttrs isDarwin {
@@ -553,6 +554,7 @@ in {
           "ms-vscode.cpptools"
           "ms-vscode.remote-explorer"
           "pkief.material-icon-theme"
+          "sainnhe.everforest"
           "streetsidesoftware.code-spell-checker"
           "tamasfe.even-better-toml"
           "timonwong.shellcheck"

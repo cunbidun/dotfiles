@@ -4,6 +4,7 @@
 {
   inputs,
   config,
+  hostName,
   pkgs,
   userdata,
   lib,
@@ -41,8 +42,9 @@
 
   boot.kernel.sysctl."fs.inotify.max_user_watches" = 524288;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = hostName;
   networking.networkmanager.enable = true;
+  services.tailscale.extraSetFlags = ["--ssh"];
 
   # Configure keymap in X11
   services.xserver.xkb = {

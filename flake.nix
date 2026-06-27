@@ -158,14 +158,19 @@
       mkHomeConfiguration =
         {
           system,
+          hostName,
           homePath,
+          ...
         }:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = mkPkgs system;
-          modules = [homePath];
-          extraSpecialArgs = {
-            inherit inputs;
-            userdata = userdata;
+        {
+          name = "${userdata.username}@${hostName}";
+          value = home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs system;
+            modules = [homePath];
+            extraSpecialArgs = {
+              inherit inputs hostName;
+              userdata = userdata;
+            };
           };
         };
 
@@ -189,21 +194,49 @@
       mkNixosHost =
         {
           system,
+          hostName,
           hostPath,
-          homePath,
           diskoPath,
+          ...
         }:
-        nixpkgs-unstable.lib.nixosSystem {
-          pkgs = mkPkgs system;
-          specialArgs = {
-            inherit inputs userdata;
+        {
+          name = hostName;
+          value = nixpkgs-unstable.lib.nixosSystem {
+            pkgs = mkPkgs system;
+            specialArgs = {
+              inherit inputs userdata hostName;
+            };
+            modules = [
+              inputs.disko.nixosModules.disko
+              diskoPath
+              hostPath
+            ];
           };
-          modules = [
-            inputs.disko.nixosModules.disko
-            diskoPath
-            hostPath
-          ];
         };
+
+      nixosHosts = [
+        {
+          system = "x86_64-linux";
+          hostName = "nixos";
+          hostPath = ./nix/hosts/nixos/configuration.nix;
+          homePath = ./nix/hosts/nixos/home.nix;
+          diskoPath = ./nix/hosts/nixos/disko.nix;
+        }
+        {
+          system = "x86_64-linux";
+          hostName = "home-server";
+          hostPath = ./nix/hosts/home-server/configuration.nix;
+          homePath = ./nix/hosts/home-server/home.nix;
+          diskoPath = ./nix/hosts/home-server/disko.nix;
+        }
+        {
+          system = "x86_64-linux";
+          hostName = "test-vm";
+          hostPath = ./nix/hosts/test-vm/configuration.nix;
+          homePath = ./nix/hosts/test-vm/home.nix;
+          diskoPath = ./nix/hosts/test-vm/disko.nix;
+        }
+      ];
 
       minimalSystem = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
@@ -234,62 +267,23 @@
       # -----------------------#
       #  nixos configurations  #
       # -----------------------#
-      nixosConfigurations = {
-        nixos = mkNixosHost {
-          system = "x86_64-linux";
-          hostPath = ./nix/hosts/nixos/configuration.nix;
-          homePath = ./nix/hosts/nixos/home.nix;
-          diskoPath = ./nix/hosts/nixos/disko.nix;
-        };
-
-        home-server = mkNixosHost {
-          system = "x86_64-linux";
-          hostPath = ./nix/hosts/home-server/configuration.nix;
-          homePath = ./nix/hosts/home-server/home.nix;
-          diskoPath = ./nix/hosts/home-server/disko.nix;
-        };
-
-        test-vm = nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = mkPkgs "x86_64-linux";
-          specialArgs = {
-            inherit inputs userdata;
-          };
-          modules = [
-            inputs.disko.nixosModules.disko
-            ./nix/hosts/test-vm/disko.nix
-            ./nix/hosts/test-vm/configuration.nix
-          ];
-        };
-
-        minimal = minimalSystem;
-
-      };
+      nixosConfigurations = builtins.listToAttrs ((map mkNixosHost nixosHosts) ++ [
+        {
+          name = "minimal";
+          value = minimalSystem;
+        }
+      ]);
 
       # -----------------------#
       # home-manager configs   #
       # -----------------------#
-      homeConfigurations = {
-        "${userdata.username}@macbook-m1" = mkHomeConfiguration {
+      homeConfigurations = builtins.listToAttrs ([
+        (mkHomeConfiguration {
           system = "aarch64-darwin";
+          hostName = "macbook-m1";
           homePath = ./nix/hosts/macbook/home.nix;
-        };
-
-        "${userdata.username}@nixos" = mkHomeConfiguration {
-          system = "x86_64-linux";
-          homePath = ./nix/hosts/nixos/home.nix;
-        };
-
-        "${userdata.username}@home-server" = mkHomeConfiguration {
-          system = "x86_64-linux";
-          homePath = ./nix/hosts/home-server/home.nix;
-        };
-
-        "${userdata.username}@test-vm" = mkHomeConfiguration {
-          system = "x86_64-linux";
-          homePath = ./nix/hosts/test-vm/home.nix;
-        };
-      };
+        })
+      ] ++ (map mkHomeConfiguration nixosHosts));
 
       # -----------------------#
       #     runnable apps      #

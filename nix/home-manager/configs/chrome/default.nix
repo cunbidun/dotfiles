@@ -33,7 +33,7 @@ in {
     chromePackage
   ];
   xdg = lib.mkIf isLinux {
-    dataFile."icons/hicolor/scalable/apps/messenger.svg".source = ../../../icons/messenger.svg;
+    dataFile."icons/hicolor/scalable/apps/messenger.svg".source = ../../../../icons/messenger.svg;
     desktopEntries = lib.listToAttrs [
       (mkChromePWA {
         name = "Messenger";

@@ -11,9 +11,12 @@ Rule: keep apps out of runtime managers unless they need runtime changes.
 Local edit exceptions should be host-gated, not user-gated. The same user exists on multiple machines, but only one host
 has the editable checkout path.
 
+Define each `hostName` once in `flake.nix`, then pass it to both NixOS `specialArgs` and Home Manager
+`extraSpecialArgs`.
+
 ```nix
 ".config/nvim".source =
-  if config.networking.hostName or "" == "nixos"
+  if hostName == "nixos"
   then config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim"
   else ../../../utilities/nvim;
 ```
@@ -49,7 +52,7 @@ Generated theme inputs live under:
 | Class 2 | App watches data | VS Code | Nix input + live file | Runtime writes live file |
 | Class 3 | Needs signal/API | Kitty, Chrome, Hyprpaper | Live file/API | Runtime writes, then signals |
 | Class 4 | Cannot reload safely | Startup-only apps | Generated/live config | Next start picks it up |
-| Launch CLI | Reads state at launch | bat | Shell wrapper | New command uses state |
+| Shell env CLI | Reads env at launch | bat, fzf | Shell hook | Next prompt refreshes env |
 
 ### Class 1: Code Config
 
@@ -95,10 +98,26 @@ Use this when the app cannot safely reload while running.
 
 Rule: write config for next start. Forced restart is a user action, not a normal switch.
 
+### Shell Env CLI
+
+Use this when a CLI app supports a native environment variable and reads it at process start.
+
+Current examples:
+
+- `bat` reads `BAT_THEME`.
+- `fzf` reads `FZF_DEFAULT_OPTS`.
+
+Zsh refreshes these environment variables from `current-theme-name.txt` with `precmd` and `preexec`, so each prompt and
+next command get the current theme without shadowing app binaries.
+
+Rule: prefer app-native environment variables over shell wrappers. Use a shell hook only to keep the env var fresh in
+long-running shells.
+
 ## Adding Apps
 
 1. If the config is known before startup, use hermetic Nix config and stop.
 2. If the app config is code, make it self-react to runtime state.
 3. If it needs generated data, put Nix inputs under `~/.local/state/theme-manager/nix/<app>/...`.
 4. If it needs a live mutable file, keep Home Manager off that target and let runtime code write it atomically.
-5. Keep shared mappings in Nix-generated data, not duplicated in runtime scripts.
+5. If it supports a native environment variable, refresh that env var from shell hooks instead of wrapping commands.
+6. Keep shared mappings in Nix-generated data, not duplicated in runtime scripts.

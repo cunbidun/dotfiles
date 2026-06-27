@@ -5,14 +5,12 @@
   inputs,
   userdata,
   ...
-}:
-let
+}: let
   package_config = import ../../home-manager/packages.nix {
     pkgs = pkgs;
     inputs = inputs;
   };
-in
-{
+in {
   imports = [
     ../../home-manager/profiles/linux.nix
     inputs.sops-nix.homeManagerModules.sops
@@ -23,24 +21,24 @@ in
     ../../home-manager/configs/zsh.nix
     ../../home-manager/configs/direnv.nix
     ../../home-manager/configs/starship.nix
-    ../../home-manager/configs/kitty.nix
+    ../../home-manager/configs/kitty
     ../../home-manager/configs/hyprland/hyprland.nix
     ../../home-manager/configs/quickshell.nix
     ../../home-manager/configs/hyprland/hypridle.nix
     ../../home-manager/configs/hyprland/pyprland.nix
     ../../home-manager/configs/hyprland/hyprpaper.nix
     ../../home-manager/configs/nvim.nix
-    ../../home-manager/configs/tmux.nix
+    ../../home-manager/configs/tmux
     ../../home-manager/configs/yazi.nix
     ../../home-manager/configs/hyprlock.nix
-    ../../home-manager/configs/vicinae.nix
+    ../../home-manager/configs/vicinae
     ../../home-manager/configs/vscode.nix
     inputs.vicinae.homeManagerModules.default
     ../../home-manager/systemd.nix
     ../../home-manager/configs/theme-runtime.nix
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/spicetify.nix
-    ../../home-manager/configs/chromium.nix
+    ../../home-manager/configs/chrome
     ../../home-manager/configs/minecraft.nix
     ../../home-manager/configs/xremap.nix
     ../../home-manager/configs/shared/git.nix
@@ -73,7 +71,7 @@ in
         "SFMono Nerd Font"
         "Noto Sans Mono CJK SC"
       ];
-      emoji = [ "Noto Color Emoji" ];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -117,7 +115,7 @@ in
         "Office"
         "Utility"
       ];
-      mimeType = [ "x-scheme-handler/claude" ];
+      mimeType = ["x-scheme-handler/claude"];
       settings = {
         StartupWMClass = "Claude";
       };
@@ -126,18 +124,18 @@ in
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = [ "org.gnome.Evince.desktop" ];
-        "image/jpeg" = [ "feh.desktop" ];
-        "image/png" = [ "feh.desktop" ];
-        "text/plain" = [ "nvim.desktop" ];
-        "inode/directory" = [ "yazi.desktop" ];
-        "text/html" = [ "google-chrome.desktop" ];
-        "application/xhtml+xml" = [ "google-chrome.desktop" ];
-        "application/x-www-form-urlencoded" = [ "google-chrome.desktop" ];
-        "x-scheme-handler/http" = [ "google-chrome.desktop" ];
-        "x-scheme-handler/https" = [ "google-chrome.desktop" ];
+        "application/pdf" = ["org.gnome.Evince.desktop"];
+        "image/jpeg" = ["feh.desktop"];
+        "image/png" = ["feh.desktop"];
+        "text/plain" = ["nvim.desktop"];
+        "inode/directory" = ["yazi.desktop"];
+        "text/html" = ["google-chrome.desktop"];
+        "application/xhtml+xml" = ["google-chrome.desktop"];
+        "application/x-www-form-urlencoded" = ["google-chrome.desktop"];
+        "x-scheme-handler/http" = ["google-chrome.desktop"];
+        "x-scheme-handler/https" = ["google-chrome.desktop"];
         # Point terminal handler at kitty -e; avoids Vicinae sending apps through kitty +open URL mode
-        "x-scheme-handler/terminal" = [ "kitty.desktop" ];
+        "x-scheme-handler/terminal" = ["kitty.desktop"];
       };
     };
 
@@ -158,10 +156,10 @@ in
       ];
     };
     portal.config = {
-      common.default = [ "hyprland;gtk" ];
-      hyprland.default = [ "hyprland" ];
-      hyprland."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-      common."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+      common.default = ["hyprland;gtk"];
+      hyprland.default = ["hyprland"];
+      hyprland."org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
+      common."org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
     };
 
     # https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser
@@ -203,7 +201,7 @@ in
     type = "fcitx5"; # tell HM which backend you want
     fcitx5 = {
       waylandFrontend = true; # flip to false on pure‑X11
-      addons = with pkgs; [ fcitx5-bamboo ]; # pull the Bamboo engine
+      addons = with pkgs; [fcitx5-bamboo]; # pull the Bamboo engine
 
       settings = {
         ## 1.  ~/.config/fcitx5/profile  ── engine list & order
@@ -228,7 +226,7 @@ in
             # Skip first input method while enumerating
             EnumerateSkipFirst = "False";
           };
-          "Hotkey/TriggerKeys" = { };
+          "Hotkey/TriggerKeys" = {};
           "Hotkey/EnumerateForwardKeys" = {
             "0" = "Super+space";
           };
@@ -240,7 +238,7 @@ in
       };
     };
   };
-  systemd.user.services.fcitx5-daemon = lib.mkForce { };
+  systemd.user.services.fcitx5-daemon = lib.mkForce {};
 
   programs.bat = {
     enable = true;

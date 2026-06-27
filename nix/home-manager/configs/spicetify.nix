@@ -82,6 +82,7 @@
         catppuccin-light) exec ${spotifyPackages.catppuccin.light}/share/spotify/spotify "$@" ;;
         catppuccin-dark) exec ${spotifyPackages.catppuccin.dark}/share/spotify/spotify "$@" ;;
         default-light) exec ${spotifyPackages.default.light}/share/spotify/spotify "$@" ;;
+        everforest-light) exec ${spotifyPackages.default.light}/share/spotify/spotify "$@" ;;
         *) exec ${spotifyPackages.default.dark}/share/spotify/spotify "$@" ;;
       esac
     '';

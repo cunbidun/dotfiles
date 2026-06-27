@@ -38,6 +38,13 @@ local plugins = {
 		priority = 1000,
 	},
 	{
+		"sainnhe/everforest",
+		dir = root .. "/everforest",
+		name = "everforest",
+		lazy = false,
+		priority = 1000,
+	},
+	{
 		"folke/snacks.nvim",
 		opts = {
 			image = { enabled = true },

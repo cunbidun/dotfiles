@@ -35,6 +35,10 @@ class ThemeManagerDaemon:
     def _load_config(self):
         return yaml.safe_load(open(CONFIG_PATH))
 
+    def _reload_config(self):
+        self.config = self._load_config()
+        self.allowed = self.config["themes"]
+
     def _split_theme_name(self, theme_name: str) -> tuple[str, str] | None:
         if "-" not in theme_name:
             return None
@@ -344,6 +348,7 @@ class ThemeManagerDaemon:
             if not data or not data[0]:
                 return
             cmd = data[0]
+            self._reload_config()
 
             if cmd == "GET-THEME":
                 conn.sendall(f"OK {self.current_theme}\n".encode())
