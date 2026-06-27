@@ -7,7 +7,7 @@
 }: let
   pokemonExtensionId = "a2cd0c72-8b73-4610-b0d9-f838a519fccf";
 in {
-  services.vicinae = {
+  programs.vicinae = {
     enable = true;
     systemd = {
       enable = true;
@@ -35,7 +35,7 @@ in {
     ".local/share/vicinae/themes/theme-manager-everforest-dark.toml".source = ./everforest-dark.toml;
   };
 
-  home.activation = lib.mkIf config.services.vicinae.enable {
+  home.activation = lib.mkIf config.programs.vicinae.enable {
     removePokemonExtension = lib.hm.dag.entryAfter ["writeBoundary"] ''
       rm -rf "$HOME/.local/share/vicinae/extensions/${pokemonExtensionId}"
     '';
