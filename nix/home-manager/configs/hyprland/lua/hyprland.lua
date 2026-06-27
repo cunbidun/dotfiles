@@ -374,31 +374,4 @@ local function place_tree(ctx, targets, area, i, side)
 	end
 end
 
-hl.layout.register("editor_side_tree", {
-	recalculate = function(ctx)
-		local n = #ctx.targets
-		if n == 0 then
-			return
-		end
-
-		-- First window takes full screen.
-		if n == 1 then
-			ctx.targets[1]:place(ctx.area)
-			return
-		end
-
-		-- Main/editor is the first window, kept on the right 2/3.
-		local support_area = ctx:split(ctx.area, "left", 1.0 / 3.0)
-		local main_area = ctx:split(ctx.area, "right", 2.0 / 3.0)
-
-		ctx.targets[1]:place(main_area)
-
-		-- Remaining windows tile inside the left 1/3.
-		place_tree(ctx, ctx.targets, support_area, 2, "v")
-	end,
-})
-
-hl.workspace_rule({ workspace = "1", layout = "lua:editor_side_tree" })
-hl.workspace_rule({ workspace = "7", layout = "scrolling" })
 hl.bind(mainMod .. " + p", hl.dsp.layout("promote"))
-hl.workspace_rule({ workspace = "9", layout = "lua:editor_side_tree" })
