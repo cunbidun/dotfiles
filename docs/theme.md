@@ -64,7 +64,7 @@ mytheme = {
     wallpaper = ../../../../wallpapers/...;
     vscodeTheme = "...";
     vicinaeTheme = "theme-manager-mytheme-light";
-    gtkTheme = "...";
+    gtkTheme = "";
     spicetify = {
       theme = "default";
       colorScheme = "Ocean";
@@ -77,7 +77,7 @@ mytheme = {
     wallpaper = ../../../../wallpapers/...;
     vscodeTheme = "...";
     vicinaeTheme = "theme-manager-mytheme-dark";
-    gtkTheme = "...";
+    gtkTheme = "";
     spicetify = {
       theme = "default";
       colorScheme = "Ocean";
@@ -91,7 +91,8 @@ mytheme = {
 Prefer packaged values:
 
 - `scheme`: use a packaged Base16/Tinted scheme when available.
-- `gtkTheme`: use a packaged GTK theme name when available.
+- `gtkTheme`: always set to `""`. Per-theme GTK theme names are no longer applied; only polarity
+  (light/dark) matters for GTK.
 - `chromeExtensions`: use Chrome Web Store extension IDs only when the theme exists.
 - `localChromeExtensions`: use only for locally packaged Chrome themes registered in `theme-runtime.nix`.
 - `spicetify`: use a packaged Spicetify theme if one exists; otherwise map to default.
@@ -288,32 +289,17 @@ Register it in `localChromeThemes` in `theme-runtime.nix`, then list the local n
 
 ### 8. GTK Theme
 
-If a GTK package exists, add it to `home.packages` in:
-
-```text
-nix/home-manager/configs/theme-runtime.nix
-```
-
-Example:
+Per-theme GTK theme names are no longer set. Leave `gtkTheme = ""` in `theme-configs.nix` for both
+polarities; only the light/dark polarity matters for GTK.
 
 ```nix
-home.packages = [
-  pkgs.everforest-gtk-theme
-  pkgs.rose-pine-gtk-theme
-];
+gtkTheme = "";
 ```
 
-Set `gtkTheme` in `theme-configs.nix`:
-
-```nix
-gtkTheme = "Everforest-Dark";
-```
-
-Runtime writes:
+Runtime only writes the color scheme based on polarity:
 
 ```bash
 dconf write /org/gnome/desktop/interface/color-scheme ...
-dconf write /org/gnome/desktop/interface/gtk-theme ...
 ```
 
 ### 9. Vicinae Theme
