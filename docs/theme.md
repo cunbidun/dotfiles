@@ -38,6 +38,7 @@ Live files written by `theme-manager`:
 ~/.config/Code/User/settings.json
 ~/.local/etc/chrome-policy.json
 ~/.local/state/theme-manager/kitty-theme.conf
+~/.local/state/theme-manager/tmux-theme.conf
 ~/.config/vicinae/settings.json
 ```
 
@@ -68,6 +69,7 @@ mytheme = {
       theme = "default";
       colorScheme = "Ocean";
     };
+    localChromeExtensions = [];
     chromeExtensions = [];
   };
   dark = {
@@ -80,6 +82,7 @@ mytheme = {
       theme = "default";
       colorScheme = "Ocean";
     };
+    localChromeExtensions = [];
     chromeExtensions = [];
   };
 };
@@ -90,6 +93,7 @@ Prefer packaged values:
 - `scheme`: use a packaged Base16/Tinted scheme when available.
 - `gtkTheme`: use a packaged GTK theme name when available.
 - `chromeExtensions`: use Chrome Web Store extension IDs only when the theme exists.
+- `localChromeExtensions`: use only for locally packaged Chrome themes registered in `theme-runtime.nix`.
 - `spicetify`: use a packaged Spicetify theme if one exists; otherwise map to default.
 
 ### 2. Kitty Theme
@@ -138,7 +142,7 @@ nix/quickshell/Theme.qml
 Update `resolveThemeName` allowlist:
 
 ```qml
-["default-dark", "default-light", "catppuccin-dark", "catppuccin-light", "mytheme-dark", "mytheme-light"]
+["default-dark", "default-light", "catppuccin-dark", "catppuccin-light", "everforest-dark", "everforest-light", "mytheme-dark", "mytheme-light"]
 ```
 
 QuickShell watches `current-theme-name.txt` and the JSON theme file, so no external reload should be needed beyond the
@@ -274,6 +278,14 @@ Verify live policy:
 jq '.ExtensionInstallForcelist | contains(["<extension-id>"])' ~/.local/etc/chrome-policy.json
 ```
 
+For local Chrome themes, add a package under:
+
+```text
+nix/home-manager/configs/chrome/themes/
+```
+
+Register it in `localChromeThemes` in `theme-runtime.nix`, then list the local name in `localChromeExtensions`.
+
 ### 8. GTK Theme
 
 If a GTK package exists, add it to `home.packages` in:
@@ -285,7 +297,10 @@ nix/home-manager/configs/theme-runtime.nix
 Example:
 
 ```nix
-home.packages = [pkgs.everforest-gtk-theme];
+home.packages = [
+  pkgs.everforest-gtk-theme
+  pkgs.rose-pine-gtk-theme
+];
 ```
 
 Set `gtkTheme` in `theme-configs.nix`:
@@ -303,13 +318,26 @@ dconf write /org/gnome/desktop/interface/gtk-theme ...
 
 ### 9. Vicinae Theme
 
-`theme-runtime.nix` generates Vicinae TOML from the QuickShell palette for every theme/polarity.
+Prefer a Vicinae bundled theme name when available. Check the active package:
+
+```bash
+find $(nix eval --raw ~/dotfiles#homeConfigurations."cunbidun@nixos".config.services.vicinae.package.outPath)/share/vicinae/themes -maxdepth 1 -type f | rg -i mytheme
+```
 
 Set in `theme-configs.nix`:
 
 ```nix
-vicinaeTheme = "theme-manager-mytheme-dark";
+vicinaeTheme = "mytheme-dark";
 ```
+
+If Vicinae does not ship the theme, add static TOML files under:
+
+```text
+nix/home-manager/configs/vicinae/
+```
+
+Register them in `nix/home-manager/configs/vicinae/default.nix`, then use the `theme-manager-*` name in
+`theme-configs.nix`.
 
 Runtime runs:
 
@@ -342,7 +370,25 @@ bat --list-themes | rg -i mytheme
 If no theme exists, use `base16` or nearest packaged theme. Do not wrap `bat` or `fzf`; the zsh hook updates environment
 variables before prompts and commands.
 
-### 11. Spotify
+### 11. Tmux Theme
+
+Edit:
+
+```text
+nix/home-manager/configs/tmux/default.nix
+```
+
+Prefer packaged tmux plugins when possible. Rosé Pine uses `pkgs.tmuxPlugins.rose-pine`; simple themes use local files:
+
+```text
+nix/home-manager/configs/tmux/mytheme-light.conf
+nix/home-manager/configs/tmux/mytheme-dark.conf
+```
+
+Register both as `theme-manager-mytheme-light.conf` and `theme-manager-mytheme-dark.conf`. `theme-manager` copies the
+selected file to `~/.local/state/theme-manager/tmux-theme.conf` and sources it into the running tmux server.
+
+### 12. Spotify
 
 Edit:
 
@@ -388,6 +434,19 @@ Check generated runtime data:
 
 ```bash
 jq '.mytheme' ~/.local/state/theme-manager/nix/themes.json
+```
+
+Check terminal runtimes:
+
+```bash
+readlink -f ~/.local/state/theme-manager/kitty-theme.conf
+cat ~/.local/state/theme-manager/tmux-theme.conf
+```
+
+Check Vicinae theme:
+
+```bash
+jq '.theme.light.name, .theme.dark.name' ~/.config/vicinae/settings.json
 ```
 
 Check Neovim plugin:

@@ -45,6 +45,13 @@ local plugins = {
 		priority = 1000,
 	},
 	{
+		"rose-pine/neovim",
+		dir = root .. "/rose-pine",
+		name = "rose-pine",
+		lazy = false,
+		priority = 1000,
+	},
+	{
 		"folke/snacks.nvim",
 		opts = {
 			image = { enabled = true },

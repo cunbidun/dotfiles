@@ -111,7 +111,7 @@ def apply_theme(theme: str, polarity: str) -> str:
 
     if os.environ.get("DBUS_SESSION_BUS_ADDRESS"):
         _run(["dconf", "write", "/org/gnome/desktop/interface/color-scheme", repr(selected["gtkColorScheme"])], check=True)
-        _run(["dconf", "write", "/org/gnome/desktop/interface/gtk-theme", "''"], check=True)
+        _run(["dconf", "write", "/org/gnome/desktop/interface/gtk-theme", repr(selected["gtkTheme"])], check=True)
 
     shutil.copyfile(selected["kittyTheme"], KITTY_THEME_TARGET)
     _run(["pkill", "-USR1", "-u", os.environ.get("USER", ""), "-f", r"^kitty( |$)"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

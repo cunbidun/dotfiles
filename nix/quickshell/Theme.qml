@@ -191,7 +191,7 @@ Item {
 
     function resolveThemeName(name) {
         const normalized = String(name || "").trim();
-        if (["default-dark", "default-light", "catppuccin-dark", "catppuccin-light", "everforest-dark", "everforest-light"].includes(normalized)) {
+        if (["default-dark", "default-light", "catppuccin-dark", "catppuccin-light", "everforest-dark", "everforest-light", "rose-pine-dark", "rose-pine-light"].includes(normalized)) {
             return normalized;
         }
         return normalized.endsWith("-light") ? "default-light" : "default-dark";

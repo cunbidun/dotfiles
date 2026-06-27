@@ -10,6 +10,8 @@ local themes = {
 	["catppuccin-light"] = { background = "light", colorscheme = "catppuccin", flavour = "latte" },
 	["everforest-dark"] = { background = "dark", colorscheme = "everforest" },
 	["everforest-light"] = { background = "light", colorscheme = "everforest" },
+	["rose-pine-dark"] = { background = "dark", colorscheme = "rose-pine", variant = "main" },
+	["rose-pine-light"] = { background = "light", colorscheme = "rose-pine", variant = "dawn" },
 }
 
 local last
@@ -42,6 +44,11 @@ function M.apply(force)
 	if theme.colorscheme == "everforest" then
 		vim.g.everforest_background = "hard"
 		vim.g.everforest_transparent_background = 1
+	end
+	if theme.colorscheme == "rose-pine" then
+		pcall(function()
+			require("rose-pine").setup({ variant = theme.variant, dark_variant = "main" })
+		end)
 	end
 	pcall(vim.cmd.colorscheme, theme.colorscheme)
 end

@@ -3,6 +3,32 @@
 # Used by theme-runtime.nix and any other theme-aware configurations
 # to get the theme name: https://github.com/tinted-theming/schemes
 {
+  rose-pine = {
+    light = {
+      scheme = "rose-pine-dawn";
+      wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
+      vscodeTheme = "Rosé Pine Dawn";
+      vicinaeTheme = "rose-pine-dawn";
+      gtkTheme = "rose-pine-dawn";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      chromeExtensions = [ "faffeempkcpjhcmfpglpkdpbkdmbpaab" ];
+    };
+    dark = {
+      scheme = "rose-pine";
+      wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
+      vscodeTheme = "Rosé Pine";
+      vicinaeTheme = "rose-pine";
+      gtkTheme = "rose-pine";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      chromeExtensions = [ "noimedcjdohhokijigpfcbjcfcaaahej" ];
+    };
+  };
   catppuccin = {
     light = {
       scheme = "catppuccin-latte";

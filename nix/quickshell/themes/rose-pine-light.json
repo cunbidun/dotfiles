@@ -1,0 +1,30 @@
+{
+  "name": "rose-pine-light",
+  "variant": "light",
+  "flavor": "dawn",
+  "colors": {
+    "selectedForeground": "#FAF4ED",
+    "selectedBackground": "#D7827E",
+    "notSelectedForeground": "#575279",
+    "notSelectedBackground": { "color": "#DFDAD9", "alpha": 0.78 },
+    "barBackground": "transparent",
+    "barBorder": { "color": "#CECACD", "alpha": 0.72 },
+    "moduleBackground": { "color": "#FAF4ED", "alpha": 0.84 },
+    "moduleHoverBackground": { "color": "#F2E9E1", "alpha": 0.86 },
+    "chipBackground": { "color": "#FAF4ED", "alpha": 0.84 },
+    "chipHoverBackground": { "color": "#F2E9E1", "alpha": 0.86 },
+    "iconMutedColor": "#9893A5",
+    "popupBackground": { "color": "#FAF4ED", "alpha": 0.82 },
+    "popupSectionBackground": { "color": "#FFFAF3", "alpha": 0.76 },
+    "popupElevatedBackground": { "color": "#FAF4ED", "alpha": 0.94 },
+    "popupElevatedBorder": { "color": "#CECACD", "alpha": 0.72 },
+    "popupHoverBackground": { "color": "#F2E9E1", "alpha": 0.86 },
+    "popupBorder": { "color": "#CECACD", "alpha": 0.72 },
+    "popupText": "#575279",
+    "popupMutedText": "#797593",
+    "calendarWeekendText": "#B4637A",
+    "popupSuccess": "#286983",
+    "popupWarning": "#EA9D34",
+    "popupDanger": "#B4637A"
+  }
+}

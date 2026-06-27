@@ -553,6 +553,7 @@ in {
           "ms-vscode-remote.remote-ssh-edit"
           "ms-vscode.cpptools"
           "ms-vscode.remote-explorer"
+          "mvllow.rose-pine"
           "pkief.material-icon-theme"
           "sainnhe.everforest"
           "streetsidesoftware.code-spell-checker"

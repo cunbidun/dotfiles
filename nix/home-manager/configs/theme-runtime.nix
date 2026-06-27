@@ -21,6 +21,10 @@
       light = "everforest_light_hard.conf";
       dark = "everforest_dark_hard.conf";
     };
+    rose-pine = {
+      light = "rose-pine-dawn.conf";
+      dark = "rose-pine.conf";
+    };
   };
 
   kittyThemeFile = theme: polarity:
@@ -77,7 +81,10 @@ in {
         ".local/state/theme-manager/nix/themes.json".text = builtins.toJSON runtimeThemes;
       };
 
-    home.packages = [pkgs.everforest-gtk-theme];
+    home.packages = [
+      pkgs.everforest-gtk-theme
+      pkgs.rose-pine-gtk-theme
+    ];
 
     home.activation.reapplyRuntimeTheme = lib.hm.dag.entryAfter ["vscodeProfiles"] ''
       if [ -S "$HOME/.local/share/theme-manager/socket" ]; then

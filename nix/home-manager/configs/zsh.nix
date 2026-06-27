@@ -94,6 +94,14 @@
             export BAT_THEME="base16"
             export FZF_DEFAULT_OPTS="--color=bg+:#414B50,bg:#272E33,spinner:#A7C080,hl:#E67E80 --color=fg:#D3C6AA,header:#E67E80,info:#7FBBB3,pointer:#A7C080 --color=marker:#83C092,fg+:#D3C6AA,prompt:#A7C080,hl+:#E67E80 --color=selected-bg:#464E53 --color=border:#4F5B58,label:#D3C6AA"
             ;;
+          rose-pine-light)
+            export BAT_THEME="base16"
+            export FZF_DEFAULT_OPTS="--color=bg+:#F2E9E1,bg:#FAF4ED,spinner:#D7827E,hl:#B4637A --color=fg:#575279,header:#B4637A,info:#907AA9,pointer:#D7827E --color=marker:#286983,fg+:#575279,prompt:#907AA9,hl+:#B4637A --color=selected-bg:#DFDAD9 --color=border:#CECACD,label:#575279"
+            ;;
+          rose-pine-dark)
+            export BAT_THEME="base16"
+            export FZF_DEFAULT_OPTS="--color=bg+:#26233A,bg:#191724,spinner:#EBBCBA,hl:#EB6F92 --color=fg:#E0DEF4,header:#EB6F92,info:#C4A7E7,pointer:#EBBCBA --color=marker:#31748F,fg+:#E0DEF4,prompt:#C4A7E7,hl+:#EB6F92 --color=selected-bg:#403D52 --color=border:#524F67,label:#E0DEF4"
+            ;;
           default-light)
             export BAT_THEME="GitHub"
             export FZF_DEFAULT_OPTS="--color=bg+:#F2F2F7,bg:#FFFFFF,spinner:#007AFF,hl:#FF3B30 --color=fg:#1D1D1F,header:#FF3B30,info:#5856D6,pointer:#007AFF --color=marker:#34C759,fg+:#000000,prompt:#007AFF,hl+:#FF3B30 --color=selected-bg:#E5E5EA --color=border:#C7C7CC,label:#1D1D1F"

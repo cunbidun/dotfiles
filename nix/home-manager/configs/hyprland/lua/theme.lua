@@ -5,6 +5,28 @@ local themeStateFile = home .. "/.local/state/theme-manager/current-theme-name.t
 local activeThemeName = nil
 
 local themes = {
+	["rose-pine-dark"] = {
+		background = "rgb(191724)",
+		group_active = "rgb(EBBCBA)",
+		group_inactive = "rgb(26233A)",
+		group_text = "rgb(191724)",
+		group_text_inactive = "rgb(E0DEF4)",
+		border_active = "rgb(EBBCBA)",
+		border_inactive = "rgb(524F67)",
+		border_locked_active = "rgb(31748F)",
+		shadow = "rgba(19172499)",
+	},
+	["rose-pine-light"] = {
+		background = "rgb(FAF4ED)",
+		group_active = "rgb(D7827E)",
+		group_inactive = "rgb(F2E9E1)",
+		group_text = "rgb(FAF4ED)",
+		group_text_inactive = "rgb(575279)",
+		border_active = "rgb(D7827E)",
+		border_inactive = "rgb(CECACD)",
+		border_locked_active = "rgb(286983)",
+		shadow = "rgba(FAF4ED99)",
+	},
 	["catppuccin-dark"] = {
 		background = "rgb(1E1E2E)",
 		group_active = "rgb(89B4FA)",

@@ -122,6 +122,10 @@ let
       pkg = everforest;
       dir = "everforest";
     }
+    {
+      pkg = rose-pine;
+      dir = "rose-pine";
+    }
 
     {
       pkg = mini-ai;
