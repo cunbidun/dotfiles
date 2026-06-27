@@ -31,6 +31,8 @@ in {
   home.file = {
     ".local/share/vicinae/themes/theme-manager-default-light.toml".source = ./default-light.toml;
     ".local/share/vicinae/themes/theme-manager-default-dark.toml".source = ./default-dark.toml;
+    ".local/share/vicinae/themes/theme-manager-everforest-light.toml".source = ./everforest-light.toml;
+    ".local/share/vicinae/themes/theme-manager-everforest-dark.toml".source = ./everforest-dark.toml;
   };
 
   home.activation = lib.mkIf config.services.vicinae.enable {

@@ -1,0 +1,79 @@
+[meta]
+version = 1
+name = "Theme Manager Everforest Dark"
+description = "Everforest dark (hard) theme"
+variant = "dark"
+inherits = "vicinae-dark"
+
+[colors.accents]
+blue = "#7fbbb3"
+green = "#a7c080"
+magenta = "#d699b6"
+orange = "#e69875"
+red = "#e67e80"
+yellow = "#dbbc7f"
+cyan = "#83c092"
+purple = "#d699b6"
+
+[colors.core]
+accent = "colors.accents.green"
+accent_foreground = "#272e33"
+background = "#272e33"
+foreground = "#d3c6aa"
+secondary_background = "#2e383c"
+border = "#414b50"
+
+[colors.main_window]
+border = "colors.core.border"
+footer = { background = "colors.core.secondary_background" }
+
+[colors.settings_window]
+border = "colors.core.border"
+
+[colors.shortcut]
+border = "colors.core.border"
+
+[colors.text]
+default = "colors.core.foreground"
+muted = "#859289"
+danger = "colors.accents.red"
+success = "colors.accents.green"
+placeholder = "#7a8478"
+selection = { background = "colors.core.accent", foreground = "#272e33" }
+
+[colors.text.links]
+default = "colors.accents.blue"
+visited = "colors.accents.purple"
+
+[colors.input]
+border = "colors.core.border"
+border_focus = "colors.core.accent"
+border_error = "colors.accents.red"
+
+[colors.button.primary]
+background = "colors.core.secondary_background"
+foreground = "colors.core.foreground"
+hover = { background = "#374145" }
+focus = { outline = "colors.core.accent" }
+
+[colors.list.item.hover]
+foreground = "colors.core.foreground"
+secondary_foreground = "#859289"
+
+[colors.list.item.selection]
+background = "#3a4940"
+foreground = "colors.core.foreground"
+secondary_background = "colors.core.accent"
+secondary_foreground = "#859289"
+
+[colors.grid.item]
+background = "colors.core.secondary_background"
+hover = { outline = "colors.core.accent" }
+selection = { outline = "colors.core.accent" }
+
+[colors.scrollbars]
+background = "#4f5b58"
+
+[colors.loading]
+bar = "colors.core.accent"
+spinner = "colors.core.foreground"

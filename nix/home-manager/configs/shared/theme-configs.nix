@@ -32,7 +32,7 @@
       scheme = "everforest";
       wallpaper = ../../../../wallpapers/fog_forest_2.png;
       vscodeTheme = "Everforest Light";
-      vicinaeTheme = "vicinae-light";
+      vicinaeTheme = "theme-manager-everforest-light";
       gtkTheme = "Everforest-Light";
       spicetify = {
         theme = "default";
@@ -46,7 +46,7 @@
       scheme = "everforest-dark-hard";
       wallpaper = ../../../../wallpapers/fog_forest_2.png;
       vscodeTheme = "Everforest Dark";
-      vicinaeTheme = "vicinae-dark";
+      vicinaeTheme = "theme-manager-everforest-dark";
       gtkTheme = "Everforest-Dark";
       spicetify = {
         theme = "default";
