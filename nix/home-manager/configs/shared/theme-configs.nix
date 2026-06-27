@@ -6,7 +6,7 @@
   rose-pine = {
     light = {
       scheme = "rose-pine-dawn";
-      wallpaper = ../../../../wallpapers/rose-pine-dawn-wallpaper.jpeg;
+      wallpaper = ../../../../wallpapers/rose-pine-dawn-wallpaper.jpg;
       vscodeTheme = "Rosé Pine Dawn";
       vicinaeTheme = "rose-pine-dawn";
       spicetify = {
