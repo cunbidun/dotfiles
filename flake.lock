@@ -1381,22 +1381,6 @@
         "type": "github"
       }
     },
-    "ponytail": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1782437288,
-        "narHash": "sha256-THnCoQYOe/nKk1mA2+30BwvMrQ6HUPexTOFf9TSJjWg=",
-        "owner": "DietrichGebert",
-        "repo": "ponytail",
-        "rev": "c4d1925ae9b76a1b641877328209ad25cfeb5ef2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DietrichGebert",
-        "repo": "ponytail",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -1483,7 +1467,6 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "obra-superpowers": "obra-superpowers",
-        "ponytail": "ponytail",
         "pyprland": "pyprland",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",

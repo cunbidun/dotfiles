@@ -14,8 +14,6 @@ let
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
   chromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/opencode-profile";
   codexChromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/codex-profile";
-  codexMarketplaceDir = "${config.home.homeDirectory}/.codex/marketplaces/ponytail";
-  ponytailPluginCache = "${config.home.homeDirectory}/.codex/plugins/cache/ponytail/ponytail/4.8.3";
   npx = "${pkgs.nodejs}/bin/npx";
   lspPath = pkgs.lib.makeBinPath [
     pkgs.nixd
@@ -90,28 +88,12 @@ let
       enabled = true;
     };
 
-    marketplaces.ponytail = {
-      source_type = "local";
-      source = codexMarketplaceDir;
-    };
-
     plugins = {
       "gmail@openai-curated".enabled = true;
       "github@openai-curated".enabled = true;
-      "linear@openai-curated".enabled = true;
       "google-calendar@openai-curated".enabled = true;
       "google-drive@openai-curated".enabled = true;
       "slack@openai-curated".enabled = true;
-      "ponytail@ponytail".enabled = true;
-    };
-
-    hooks.state = {
-      "ponytail@ponytail:hooks/claude-codex-hooks.json:session_start:0:0".trusted_hash =
-        "sha256:35ad4fd900da217d98e6eb60198465bd10d55e21eacd72758621dc385145cc05";
-      "ponytail@ponytail:hooks/claude-codex-hooks.json:user_prompt_submit:0:0".trusted_hash =
-        "sha256:22db2f951755c593f9deba5e69cd1be1c87e0c9b2f5538a13b5dd9911141793f";
-      "ponytail@ponytail:hooks/claude-codex-hooks.json:subagent_start:0:0".trusted_hash =
-        "sha256:28c43eada804ad00a4e651d6af6320c01e763b1df060af0ab74865a55bc1c9a9";
     };
 
     tui.model_availability_nux."cx/gpt-5.5" = 4;
@@ -284,20 +266,4 @@ in
     source = codexConfigFile;
     force = true;
   };
-
-  home.activation.installPonytailCodexPlugin = lib.hm.dag.entryAfter [ "installPackages" ] ''
-    if [ -e "${codexMarketplaceDir}" ]; then
-      run chmod -R u+w "${codexMarketplaceDir}"
-    fi
-    if [ -e "${ponytailPluginCache}" ]; then
-      run chmod -R u+w "${ponytailPluginCache}"
-    fi
-    run rm -rf "${codexMarketplaceDir}"
-    run rm -rf "${ponytailPluginCache}"
-    run mkdir -p "$(dirname "${codexMarketplaceDir}")"
-    run mkdir -p "${ponytailPluginCache}"
-    run cp -R "${inputs.ponytail}" "${codexMarketplaceDir}"
-    run cp -R "${inputs.ponytail}/." "${ponytailPluginCache}/"
-    run chmod -R u+w "${codexMarketplaceDir}" "${ponytailPluginCache}"
-  '';
 }
