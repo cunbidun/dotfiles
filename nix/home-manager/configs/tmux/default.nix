@@ -54,6 +54,10 @@ in {
         set -ga terminal-overrides ",tmux-256color:RGB"
         set -g renumber-windows on
         set -sg repeat-time 600
+        # Reset to tmux's built-in default first so re-sourcing is idempotent:
+        # without this, a reload copies the already-blanked spacer into row[1],
+        # wiping the real status line and making the whole bar transparent.
+        run-shell '${pkgs.tmux}/bin/tmux set -gu status-format'
         run-shell '${pkgs.tmux}/bin/tmux set -g status-format[1] "$(${pkgs.tmux}/bin/tmux show-options -gqv status-format[0])"'
         run-shell '${pkgs.tmux}/bin/tmux set -g status-format[0] "#[bg=default,fg=default]"'
         run-shell '${pkgs.tmux}/bin/tmux set -g status 2'
