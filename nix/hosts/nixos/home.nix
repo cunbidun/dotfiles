@@ -169,7 +169,7 @@ in {
         force = true;
         text = ''
           [filechooser]
-          cmd=/etc/profiles/per-user/${userdata.username}/bin/yazi-wrapper
+          cmd=${package_config.yazi-wrapper}/bin/yazi-wrapper
           env=TERMCMD=${pkgs.kitty}/bin/kitty --title FileChooser
         '';
       };

@@ -55,6 +55,8 @@
     exec kitty -d "$PWD" -e "''${args[@]}"
   '';
 in rec {
+  inherit yazi-wrapper;
+
   default_packages = [
     # Core CLI utilities
     pkgs.alejandra # Nix formatter
