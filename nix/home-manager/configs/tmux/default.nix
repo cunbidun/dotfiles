@@ -6,21 +6,6 @@
 }: let
   tmuxConfigDir = "${config.home.homeDirectory}/.config/tmux";
   tmuxConfigPath = "${tmuxConfigDir}/tmux.conf";
-  tmuxReloadScript = pkgs.writeShellScript "tmux-reload" ''
-    set -euo pipefail
-    socket="$XDG_RUNTIME_DIR/tmux-$(id -u)/default"
-    tmux=(${pkgs.tmux}/bin/tmux)
-    if [ -S "$socket" ]; then
-      tmux+=(-S "$socket")
-    fi
-
-    if ! "''${tmux[@]}" has-session 2>/dev/null; then
-      exit 0
-    fi
-
-    "''${tmux[@]}" source-file ${tmuxConfigPath}
-    "''${tmux[@]}" display-message "tmux config reloaded"
-  '';
 in {
   config = {
     programs.tmux = {
@@ -72,7 +57,7 @@ in {
         # -- key-bind --
         bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
         bind e new-window -n "tmux.conf" "sh -c '$EDITOR ${tmuxConfigPath}'"
-        bind r run-shell "${tmuxReloadScript}"
+        bind r source-file ${tmuxConfigPath} \; display-message "tmux.conf reloaded"
         bind -n C-q confirm-before -p "kill-session? (y/n)" kill-session
 
         # window navigation
@@ -93,22 +78,5 @@ in {
       '';
     };
 
-    systemd.user.services.tmux-reload = {
-      Unit.Description = "Reload tmux after config updates";
-      Service = {
-        Type = "oneshot";
-        ExecStart = tmuxReloadScript;
-      };
-    };
-
-    systemd.user.paths.tmux-reload = {
-      Unit.Description = "Watch tmux config for changes";
-      Path = {
-        PathModified = tmuxConfigPath;
-        PathChanged = tmuxConfigDir;
-        Unit = "tmux-reload.service";
-      };
-      Install.WantedBy = ["default.target"];
-    };
   };
 }
