@@ -145,7 +145,7 @@
       };
 
       palettes.default = {
-        frame = "#434c5e";
+        frame = "bright-black";
       };
     };
   };
