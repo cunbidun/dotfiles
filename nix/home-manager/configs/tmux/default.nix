@@ -62,6 +62,10 @@ in {
         run-shell '${pkgs.tmux}/bin/tmux set -g status-format[0] "#[bg=default,fg=default]"'
         run-shell '${pkgs.tmux}/bin/tmux set -g status 2'
         setw -g xterm-keys on
+        # Baseline theme so fresh/headless hosts (e.g. over SSH) get a real
+        # theme even before the theme-manager daemon has written the runtime
+        # state file. The -q state source below overrides it when present.
+        source-file -q ${tmuxThemePath "default" "dark"}
         source-file -q ${themeStatePath}
 
         # -- key-bind --
