@@ -6,9 +6,6 @@
 }: let
   tmuxConfigDir = "${config.home.homeDirectory}/.config/tmux";
   tmuxConfigPath = "${tmuxConfigDir}/tmux.conf";
-  themeDir = "${config.home.homeDirectory}/.local/share/theme-manager/tmux";
-  themeStatePath = "${config.home.homeDirectory}/.local/state/theme-manager/tmux-theme.conf";
-  tmuxThemePath = theme: polarity: "${themeDir}/theme-manager-${theme}-${polarity}.conf";
   tmuxReloadScript = pkgs.writeShellScript "tmux-reload" ''
     set -euo pipefail
     socket="$XDG_RUNTIME_DIR/tmux-$(id -u)/default"
@@ -25,13 +22,6 @@
     "''${tmux[@]}" display-message "tmux config reloaded"
   '';
 in {
-  options.themeManager.tmux.themePath = lib.mkOption {
-    type = lib.types.functionTo (lib.types.functionTo lib.types.str);
-    default = tmuxThemePath;
-    readOnly = true;
-    description = "Return theme-manager's tmux theme path for a theme and polarity.";
-  };
-
   config = {
     programs.tmux = {
       enable = true;
@@ -60,11 +50,24 @@ in {
         set -gu status-format
         set -g status on
         setw -g xterm-keys on
-        # Baseline theme so fresh/headless hosts (e.g. over SSH) get a real
-        # theme even before the theme-manager daemon has written the runtime
-        # state file. The -q state source below overrides it when present.
-        source-file -q ${tmuxThemePath "default" "dark"}
-        source-file -q ${themeStatePath}
+
+        # -- theme --
+        # Reference only the terminal's ANSI palette (colour0-15) and its
+        # default fg/bg -- never hex. The terminal (kitty) owns these slots, so
+        # the bar follows whatever theme kitty is set to (including remote
+        # sessions over SSH, since rendering happens locally) and flips
+        # light/dark automatically via `default`. No per-theme files, no
+        # runtime sourcing. colour2 gives the active window each palette's
+        # green accent; colour0 is the dim border / copy-mode surface.
+        set -g status-style                "bg=default,fg=default"
+        set -g status-left-style           "bg=default,fg=default"
+        set -g status-right-style          "bg=default,fg=colour8"
+        set -g window-status-style         "bg=default,fg=colour8"
+        set -g window-status-current-style "bg=colour2,fg=colour0,bold"
+        set -g pane-border-style           "fg=colour0"
+        set -g pane-active-border-style    "fg=colour2"
+        set -g message-style               "bg=colour2,fg=colour0"
+        set -g mode-style                  "bg=colour0,fg=default"
 
         # -- key-bind --
         bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
@@ -88,17 +91,6 @@ in {
           send-keys -X start-of-line\;\
           send-keys -X search-forward "$USER@"
       '';
-    };
-
-    home.file = {
-      ".local/share/theme-manager/tmux/theme-manager-default-light.conf".source = ./default-light.conf;
-      ".local/share/theme-manager/tmux/theme-manager-default-dark.conf".source = ./default-dark.conf;
-      ".local/share/theme-manager/tmux/theme-manager-everforest-light.conf".source = ./everforest-light.conf;
-      ".local/share/theme-manager/tmux/theme-manager-everforest-dark.conf".source = ./everforest-dark.conf;
-      ".local/share/theme-manager/tmux/theme-manager-catppuccin-light.conf".source = ./catppuccin-light.conf;
-      ".local/share/theme-manager/tmux/theme-manager-catppuccin-dark.conf".source = ./catppuccin-dark.conf;
-      ".local/share/theme-manager/tmux/theme-manager-rose-pine-light.conf".source = ./rose-pine-light.conf;
-      ".local/share/theme-manager/tmux/theme-manager-rose-pine-dark.conf".source = ./rose-pine-dark.conf;
     };
 
     systemd.user.services.tmux-reload = {

@@ -50,7 +50,6 @@
       # prefer-light) to drive app + Chrome dark/light, like catppuccin/default.
       gtkTheme = "";
       kittyTheme = kittyThemeFile theme polarity;
-      tmuxTheme = config.themeManager.tmux.themePath theme polarity;
     };
 
   runtimeThemes = lib.mapAttrs (theme: polarities:
