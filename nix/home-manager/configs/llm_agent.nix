@@ -31,6 +31,29 @@ let
     pkgs.coreutils
   ];
   codexToml = pkgs.formats.toml { };
+  mattEngineeringSkills = [
+    "ask-matt"
+    "code-review"
+    "codebase-design"
+    "diagnosing-bugs"
+    "domain-modeling"
+    "grill-with-docs"
+    "implement"
+    "improve-codebase-architecture"
+    "prototype"
+    "resolving-merge-conflicts"
+    "tdd"
+    "to-issues"
+    "to-prd"
+    "triage"
+  ];
+  mattSkills =
+    lib.genAttrs mattEngineeringSkills (
+      name: "${inputs.mattpocock-skills}/skills/engineering/${name}"
+    )
+    // {
+      grilling = "${inputs.mattpocock-skills}/skills/productivity/grilling";
+    };
   codexConfigFile = codexToml.generate "codex-config.toml" {
     model_provider = "9router";
     model = "cx/gpt-5.5";
@@ -246,9 +269,7 @@ in
   programs.opencode = {
     enable = true;
     package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
-    skills = {
-      grilling = "${inputs.mattpocock-skills}/skills/productivity/grilling";
-    };
+    skills = mattSkills;
     tui = {
       theme = "system";
     };
@@ -264,11 +285,14 @@ in
     fi
   '';
 
-  home.file.".codex/config.toml" = {
-    source = codexConfigFile;
-    force = true;
-  };
-
-  home.file.".codex/skills/grilling".source =
-    "${inputs.mattpocock-skills}/skills/productivity/grilling";
+  home.file =
+    {
+      ".codex/config.toml" = {
+        source = codexConfigFile;
+        force = true;
+      };
+    }
+    // lib.mapAttrs' (
+      name: source: lib.nameValuePair ".codex/skills/${name}" { inherit source; }
+    ) mattSkills;
 }
