@@ -410,9 +410,6 @@ Rectangle {
         if (itemId.match(/^steam$/)) {
             return `file://${root.iconRoot}/systray/${polarity}/steam.svg`;
         }
-        if (itemId.match(/Slack_status_icon_.*/)) {
-            return `file://${root.iconRoot}/systray/${polarity}/slack.svg`;
-        }
         if (itemId.match(/Claude_status_icon_.*/)) {
             return `file://${root.iconRoot}/systray/${polarity}/claude.svg`;
         }

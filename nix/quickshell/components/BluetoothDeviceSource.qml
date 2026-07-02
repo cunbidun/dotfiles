@@ -11,7 +11,7 @@ QtObject {
     id: root
 
     readonly property var adapter: Bluetooth.defaultAdapter
-    readonly property bool enabled: adapter ? adapter.enabled : false
+    readonly property bool enabled: !!(adapter?.enabled || root.connectedDevices.length > 0)
     readonly property bool discovering: adapter ? adapter.discovering : false
     readonly property string adapterDisplayName: root.goodName(adapter?.name) ? adapter.name : "Bluetooth"
 

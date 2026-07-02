@@ -246,7 +246,10 @@ in
   programs.opencode = {
     enable = true;
     package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
-    skills = "${inputs.obra-superpowers}/skills";
+    skills = {
+      grill-me = "${inputs.mattpocock-skills}/skills/productivity/grill-me";
+      grilling = "${inputs.mattpocock-skills}/skills/productivity/grilling";
+    };
     tui = {
       theme = "system";
     };
@@ -266,4 +269,9 @@ in
     source = codexConfigFile;
     force = true;
   };
+
+  home.file.".codex/skills/grill-me".source =
+    "${inputs.mattpocock-skills}/skills/productivity/grill-me";
+  home.file.".codex/skills/grilling".source =
+    "${inputs.mattpocock-skills}/skills/productivity/grilling";
 }

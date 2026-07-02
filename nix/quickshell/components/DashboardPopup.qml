@@ -483,7 +483,7 @@ Rectangle {
                 root.inhibited = true;
             }
         } else if (action === "nightlight") {
-            runCommand(`systemctl --user ${root.nightLight ? "stop" : "start"} hyprsunset.service`);
+            runCommand(`systemctl --user ${root.nightLight ? "stop hyprsunset-geoclue.service hyprsunset.service" : "restart hyprsunset-geoclue.service"}`);
         } else if (action === "theme") {
             runCommand("themectl toggle-polarity");
         }
