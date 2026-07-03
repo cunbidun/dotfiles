@@ -87,6 +87,10 @@ in {
     containers."9router" = {
       image = imageRef;
       autoStart = true;
+      # The app runs as uid/gid 1000 inside the container; map the host user
+      # onto it so files in dataDir stay owned by the user instead of a
+      # subuid (which would lock the user out of their own data).
+      userNS = "keep-id:uid=1000,gid=1000";
       ports = ["20128:20128"];
       volumes = ["${dataDir}:/app/data"];
       environment = {
