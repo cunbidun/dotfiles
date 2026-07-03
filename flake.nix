@@ -79,7 +79,7 @@
     yazi-plugins = {
       # Pin plugin revisions so flake update doesn't silently drift plugins
       # ahead of the pinned Yazi release.
-      url = "github:yazi-rs/plugins/39aaf6dc77e546fe7f7836f102a6c57f96d15365";
+      url = "github:yazi-rs/plugins/cf2c6d8ef37f70824ad09eee0ee13e40a35dbdaa";
       flake = false;
     };
     yazi-restore = {
