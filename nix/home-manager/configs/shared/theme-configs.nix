@@ -63,6 +63,7 @@
       };
       localChromeExtensions = [ "everforest-light" ];
       chromeExtensions = [
+        "neffpnembhpgfdhfpodffkoefklmodoi"
       ];
     };
     dark = {
@@ -76,6 +77,7 @@
       };
       chromeExtensions = [
         "dlcadbmcfambdjhecipbnolmjchgnode" # Everforest Chrome Theme
+        "neffpnembhpgfdhfpodffkoefklmodoi"
       ];
     };
   };

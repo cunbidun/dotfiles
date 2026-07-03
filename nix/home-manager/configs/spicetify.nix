@@ -82,9 +82,11 @@
         catppuccin-light) exec ${spotifyPackages.catppuccin.light}/share/spotify/spotify "$@" ;;
         catppuccin-dark) exec ${spotifyPackages.catppuccin.dark}/share/spotify/spotify "$@" ;;
         default-light) exec ${spotifyPackages.default.light}/share/spotify/spotify "$@" ;;
-        everforest-light) exec ${spotifyPackages.default.light}/share/spotify/spotify "$@" ;;
-        rose-pine-light) exec ${spotifyPackages.default.light}/share/spotify/spotify "$@" ;;
-        rose-pine-dark) exec ${spotifyPackages.default.dark}/share/spotify/spotify "$@" ;;
+        default-dark) exec ${spotifyPackages.default.dark}/share/spotify/spotify "$@" ;;
+        everforest-light) exec ${spotifyPackages.everforest.light}/share/spotify/spotify "$@" ;;
+        everforest-dark) exec ${spotifyPackages.everforest.dark}/share/spotify/spotify "$@" ;;
+        rose-pine-light) exec ${spotifyPackages.rose-pine.light}/share/spotify/spotify "$@" ;;
+        rose-pine-dark) exec ${spotifyPackages.rose-pine.dark}/share/spotify/spotify "$@" ;;
         *) exec ${spotifyPackages.default.dark}/share/spotify/spotify "$@" ;;
       esac
     '';

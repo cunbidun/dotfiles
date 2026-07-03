@@ -128,11 +128,7 @@ Item {
 
     function sortedSubWorkspaces(workspaceValues, project, focusedName) {
         return projectWorkspaces(workspaceValues, project).filter(entry => {
-            if (entry.parsed.sub.length === 0) {
-                return false;
-            }
-
-            return entry.workspace.name === focusedName || entry.workspace.active || entry.workspace.focused;
+            return entry.parsed.sub.length > 0;
         }).sort((left, right) => left.parsed.sub.localeCompare(right.parsed.sub, undefined, { numeric: true }));
     }
 
@@ -161,21 +157,17 @@ Item {
             }
 
             buttons.push({
-                label: isFocusedProject && focused.sub.length > 0 ? `${baseLabel}[${focused.sub}]` : `${baseLabel}${rememberedSuffix}`,
-                active: !!isFocusedProject,
+                label: `${baseLabel}${isFocusedProject ? "" : rememberedSuffix}`,
+                active: !!isFocusedProject && focused.sub.length === 0,
                 occupied,
                 virtualWorkspace: rememberedSuffix.length > 0,
                 activate: () => focusProject(project)
             });
 
             for (const entry of subWorkspaces) {
-                if (entry.workspace.name === focusedName) {
-                    continue;
-                }
-
                 buttons.push({
                     label: `${baseLabel}[${entry.parsed.sub}]`,
-                    active: false,
+                    active: entry.workspace.name === focusedName,
                     occupied: true,
                     virtualWorkspace: true,
                     activate: () => focusWorkspace(entry.workspace.name)
