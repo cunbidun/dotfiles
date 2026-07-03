@@ -89,8 +89,12 @@ in {
       autoStart = true;
       # The app runs as uid/gid 1000 inside the container; map the host user
       # onto it so files in dataDir stay owned by the user instead of a
-      # subuid (which would lock the user out of their own data).
+      # subuid (which would lock the user out of their own data). keep-id
+      # defaults the run user to the mapped uid, but the entrypoint must
+      # start as container root: it uses su-exec to drop to 1000 itself.
       userNS = "keep-id:uid=1000,gid=1000";
+      user = "0";
+      group = "0";
       ports = ["20128:20128"];
       volumes = ["${dataDir}:/app/data"];
       environment = {
