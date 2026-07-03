@@ -5,6 +5,7 @@
 }: let
   images = builtins.fromJSON (builtins.readFile ./container-images.json);
   image = images."9router";
+  imageRef = "${image.repository}:${image.tag}@${image.digest}";
   gptModels = [
     "gpt-5.5"
     "gpt-5.5-review"
@@ -112,13 +113,13 @@ in {
 
   networking.firewall.allowedTCPPorts = [20128];
 
+  systemd.services."docker-9router".restartTriggers = [imageRef];
+
   virtualisation.oci-containers = {
     backend = "docker";
     containers."9router" = {
-      image = "${image.repository}:${image.tag}@${image.digest}";
-      # The service is restarted when the pinned digest changes. Pull on start so
-      # Docker resolves the new manifest to the current platform image instead
-      # of reusing an older cached digest for the tag.
+      image = imageRef;
+      # Pull on start so Docker resolves the pinned manifest to the platform image.
       pull = "always";
       ports = [
         "20128:20128"
