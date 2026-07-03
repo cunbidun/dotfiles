@@ -12,6 +12,7 @@
   };
 in {
   imports = [
+    ./9router-home.nix
     ../../home-manager/profiles/linux.nix
     inputs.sops-nix.homeManagerModules.sops
     ../../home-manager/configs/zsh.nix
