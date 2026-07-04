@@ -13,6 +13,17 @@ let
     exec ${pkgs.opentofu}/bin/tofu "$@"
   '';
 
+  gruvbox-material = pkgs.vimUtils.buildVimPlugin {
+    pname = "gruvbox-material";
+    version = "unstable-2026-07-04";
+    src = pkgs.fetchFromGitHub {
+      owner = "sainnhe";
+      repo = "gruvbox-material";
+      rev = "master";
+      sha256 = "1kjwvfpfw46bw59y83mw595hl0dajs22hqf0kx80m7hji18my843";
+    };
+  };
+
   nvim-plugins = with pkgs.vimPlugins; [
     {
       pkg = lazy-nvim;
@@ -121,6 +132,10 @@ let
     {
       pkg = everforest;
       dir = "everforest";
+    }
+    {
+      pkg = gruvbox-material;
+      dir = "gruvbox-material";
     }
     {
       pkg = rose-pine;

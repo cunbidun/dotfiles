@@ -10,6 +10,8 @@ local themes = {
 	["catppuccin-light"] = { background = "light", colorscheme = "catppuccin", flavour = "latte" },
 	["everforest-dark"] = { background = "dark", colorscheme = "everforest" },
 	["everforest-light"] = { background = "light", colorscheme = "everforest" },
+	["gruvbox-dark"] = { background = "dark", colorscheme = "gruvbox-material" },
+	["gruvbox-light"] = { background = "light", colorscheme = "gruvbox-material" },
 	["rose-pine-dark"] = { background = "dark", colorscheme = "rose-pine", variant = "main" },
 	["rose-pine-light"] = { background = "light", colorscheme = "rose-pine", variant = "dawn" },
 }
@@ -44,6 +46,10 @@ function M.apply(force)
 	if theme.colorscheme == "everforest" then
 		vim.g.everforest_background = "hard"
 		vim.g.everforest_transparent_background = 1
+	end
+	if theme.colorscheme == "gruvbox-material" then
+		vim.g.gruvbox_material_background = "hard"
+		vim.g.gruvbox_material_transparent_background = 1
 	end
 	if theme.colorscheme == "rose-pine" then
 		pcall(function()

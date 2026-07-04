@@ -494,6 +494,8 @@
     "everforest.darkContrast" = "hard";
     "everforest.lightContrast" = "hard";
     "everforest.darkWorkbench" = "flat";
+    "gruvboxMaterial.darkContrast" = "hard";
+    "gruvboxMaterial.lightContrast" = "hard";
   }
   // lib.optionalAttrs isDarwin {
     "window.autoDetectColorScheme" = true;
@@ -555,6 +557,7 @@ in {
           "ms-vscode.remote-explorer"
           "mvllow.rose-pine"
           "pkief.material-icon-theme"
+          "sainnhe.gruvbox-material"
           "sainnhe.everforest"
           "streetsidesoftware.code-spell-checker"
           "tamasfe.even-better-toml"

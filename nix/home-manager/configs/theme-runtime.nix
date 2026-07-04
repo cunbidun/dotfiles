@@ -10,6 +10,7 @@
   chromeConfig = import ./chrome/config.nix;
   localChromeThemes = {
     everforest-light = import ./chrome/themes/everforest-light.nix {inherit pkgs;};
+    gruvbox-light = import ./chrome/themes/gruvbox-light.nix {inherit pkgs;};
   };
 
   kittyThemes = {
@@ -20,6 +21,10 @@
     everforest = {
       light = "everforest_light_hard.conf";
       dark = "everforest_dark_hard.conf";
+    };
+    gruvbox = {
+      light = "GruvboxMaterialLightHard.conf";
+      dark = "GruvboxMaterialDarkHard.conf";
     };
     rose-pine = {
       light = "rose-pine-dawn.conf";

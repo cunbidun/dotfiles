@@ -85,6 +85,8 @@
         default-dark) exec ${spotifyPackages.default.dark}/share/spotify/spotify "$@" ;;
         everforest-light) exec ${spotifyPackages.everforest.light}/share/spotify/spotify "$@" ;;
         everforest-dark) exec ${spotifyPackages.everforest.dark}/share/spotify/spotify "$@" ;;
+        gruvbox-light) exec ${spotifyPackages.gruvbox.light}/share/spotify/spotify "$@" ;;
+        gruvbox-dark) exec ${spotifyPackages.gruvbox.dark}/share/spotify/spotify "$@" ;;
         rose-pine-light) exec ${spotifyPackages.rose-pine.light}/share/spotify/spotify "$@" ;;
         rose-pine-dark) exec ${spotifyPackages.rose-pine.dark}/share/spotify/spotify "$@" ;;
         *) exec ${spotifyPackages.default.dark}/share/spotify/spotify "$@" ;;

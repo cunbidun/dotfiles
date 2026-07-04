@@ -79,6 +79,34 @@
       ];
     };
   };
+  gruvbox = {
+    light = {
+      scheme = "gruvbox-material-light-hard";
+      wallpaper = ../../../../wallpapers/gruvbox-trees.png;
+      vscodeTheme = "Gruvbox Material Light";
+      vicinaeTheme = "theme-manager-gruvbox-light";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      localChromeExtensions = [ "gruvbox-light" ];
+      chromeExtensions = [
+      ];
+    };
+    dark = {
+      scheme = "gruvbox-material-dark-hard";
+      wallpaper = ../../../../wallpapers/gruvbox-trees.png;
+      vscodeTheme = "Gruvbox Material Dark";
+      vicinaeTheme = "theme-manager-gruvbox-dark";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      chromeExtensions = [
+        "fjofdcgahcnlkdjapcbeonbnmjdnfcki"
+      ];
+    };
+  };
   default = {
     light = {
       scheme = "standardized-light";

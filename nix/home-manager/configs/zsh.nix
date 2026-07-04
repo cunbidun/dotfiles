@@ -94,6 +94,14 @@
             export BAT_THEME="base16"
             export FZF_DEFAULT_OPTS="--color=bg+:#414B50,bg:#272E33,spinner:#A7C080,hl:#E67E80 --color=fg:#D3C6AA,header:#E67E80,info:#7FBBB3,pointer:#A7C080 --color=marker:#83C092,fg+:#D3C6AA,prompt:#A7C080,hl+:#E67E80 --color=selected-bg:#464E53 --color=border:#4F5B58,label:#D3C6AA"
             ;;
+          gruvbox-light)
+            export BAT_THEME="gruvbox-light"
+            export FZF_DEFAULT_OPTS="--color=bg+:#F2E5BC,bg:#FBF1C7,spinner:#B47109,hl:#C14A4A --color=fg:#3C3836,header:#C14A4A,info:#45707A,pointer:#B47109 --color=marker:#6C782E,fg+:#3C3836,prompt:#B47109,hl+:#C14A4A --color=selected-bg:#EBDBB2 --color=border:#D5C4A1,label:#3C3836"
+            ;;
+          gruvbox-dark)
+            export BAT_THEME="gruvbox-dark"
+            export FZF_DEFAULT_OPTS="--color=bg+:#282828,bg:#1D2021,spinner:#D8A657,hl:#EA6962 --color=fg:#DDC7A1,header:#EA6962,info:#7DAEA3,pointer:#D8A657 --color=marker:#A9B665,fg+:#DDC7A1,prompt:#D8A657,hl+:#EA6962 --color=selected-bg:#3C3836 --color=border:#504945,label:#DDC7A1"
+            ;;
           rose-pine-light)
             export BAT_THEME="base16"
             export FZF_DEFAULT_OPTS="--color=bg+:#F2E9E1,bg:#FAF4ED,spinner:#D7827E,hl:#B4637A --color=fg:#575279,header:#B4637A,info:#907AA9,pointer:#D7827E --color=marker:#286983,fg+:#575279,prompt:#907AA9,hl+:#B4637A --color=selected-bg:#DFDAD9 --color=border:#CECACD,label:#575279"

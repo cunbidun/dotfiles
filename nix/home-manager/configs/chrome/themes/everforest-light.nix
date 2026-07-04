@@ -6,6 +6,7 @@ in
     name = "Theme Manager Everforest Light";
     packageName = "theme-manager-everforest-light";
     version = "1.0.0";
+    keyName = "everforest-rsa";
     theme = {
       colors = {
         frame = [242 239 223];

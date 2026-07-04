@@ -1,0 +1,30 @@
+{
+  "name": "gruvbox-dark",
+  "variant": "dark",
+  "flavor": "material-hard",
+  "colors": {
+    "selectedForeground": "#1D2021",
+    "selectedBackground": "#D8A657",
+    "notSelectedForeground": "#D4BE98",
+    "notSelectedBackground": { "color": "#3C3836", "alpha": 0.72 },
+    "barBackground": "transparent",
+    "barBorder": { "color": "#504945", "alpha": 0.72 },
+    "moduleBackground": { "color": "#282828", "alpha": 0.76 },
+    "moduleHoverBackground": { "color": "#3C3836", "alpha": 0.86 },
+    "chipBackground": { "color": "#282828", "alpha": 0.76 },
+    "chipHoverBackground": { "color": "#3C3836", "alpha": 0.86 },
+    "iconMutedColor": "#928374",
+    "popupBackground": { "color": "#1D2021", "alpha": 0.82 },
+    "popupSectionBackground": { "color": "#282828", "alpha": 0.68 },
+    "popupElevatedBackground": { "color": "#282828", "alpha": 0.94 },
+    "popupElevatedBorder": { "color": "#504945", "alpha": 0.72 },
+    "popupHoverBackground": { "color": "#3C3836", "alpha": 0.86 },
+    "popupBorder": { "color": "#504945", "alpha": 0.72 },
+    "popupText": "#D4BE98",
+    "popupMutedText": "#928374",
+    "calendarWeekendText": "#EA6962",
+    "popupSuccess": "#A9B665",
+    "popupWarning": "#D8A657",
+    "popupDanger": "#EA6962"
+  }
+}

@@ -45,6 +45,13 @@ local plugins = {
 		priority = 1000,
 	},
 	{
+		"sainnhe/gruvbox-material",
+		dir = root .. "/gruvbox-material",
+		name = "gruvbox-material",
+		lazy = false,
+		priority = 1000,
+	},
+	{
 		"rose-pine/neovim",
 		dir = root .. "/rose-pine",
 		name = "rose-pine",

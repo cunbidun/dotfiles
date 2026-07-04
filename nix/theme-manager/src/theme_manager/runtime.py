@@ -58,7 +58,7 @@ def _apply_hyprpaper(theme: dict):
         for monitor in json.loads(monitors):
             name = monitor.get("name")
             if name:
-                _run(["hyprctl", "hyprpaper", "wallpaper", f"{name}, {wallpaper}, cover"], stdout=subprocess.DEVNULL)
+                _run(["hyprctl", "hyprpaper", "wallpaper", f"{name},{wallpaper}"], stdout=subprocess.DEVNULL)
 
 
 def _apply_vicinae(vicinae_theme: str):
