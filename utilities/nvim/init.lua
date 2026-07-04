@@ -52,6 +52,13 @@ local plugins = {
 		priority = 1000,
 	},
 	{
+		"arcticicestudio/nord-vim",
+		dir = root .. "/nord-vim",
+		name = "nord-vim",
+		lazy = false,
+		priority = 1000,
+	},
+	{
 		"rose-pine/neovim",
 		dir = root .. "/rose-pine",
 		name = "rose-pine",

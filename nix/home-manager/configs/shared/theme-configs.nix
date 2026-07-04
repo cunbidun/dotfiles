@@ -13,7 +13,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      chromeExtensions = [ "faffeempkcpjhcmfpglpkdpbkdmbpaab" ];
+      chromeExtensions = ["faffeempkcpjhcmfpglpkdpbkdmbpaab"];
     };
     dark = {
       scheme = "rose-pine";
@@ -24,7 +24,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      chromeExtensions = [ "noimedcjdohhokijigpfcbjcfcaaahej" ];
+      chromeExtensions = ["noimedcjdohhokijigpfcbjcfcaaahej"];
     };
   };
   catppuccin = {
@@ -37,7 +37,7 @@
         theme = "catppuccin";
         colorScheme = "latte";
       };
-      chromeExtensions = [ "jhjnalhegpceacdhbplhnakmkdliaddd" ]; # Catppuccin extension
+      chromeExtensions = ["jhjnalhegpceacdhbplhnakmkdliaddd"]; # Catppuccin extension
     };
     dark = {
       scheme = "catppuccin-mocha";
@@ -48,7 +48,7 @@
         theme = "catppuccin";
         colorScheme = "mocha";
       };
-      chromeExtensions = [ "bkkmolkhemgaeaeggcmfbghljjjoofoh" ]; # Catppuccin extension
+      chromeExtensions = ["bkkmolkhemgaeaeggcmfbghljjjoofoh"]; # Catppuccin extension
     };
   };
   everforest = {
@@ -61,7 +61,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      localChromeExtensions = [ "everforest-light" ];
+      localChromeExtensions = ["everforest-light"];
       chromeExtensions = [
       ];
     };
@@ -89,7 +89,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      localChromeExtensions = [ "gruvbox-light" ];
+      localChromeExtensions = ["gruvbox-light"];
       chromeExtensions = [
       ];
     };
@@ -107,6 +107,34 @@
       ];
     };
   };
+  nord = {
+    light = {
+      scheme = "nord-light";
+      wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
+      vscodeTheme = "Nord Light";
+      vicinaeTheme = "nord-light";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      localChromeExtensions = ["nord-light"];
+      chromeExtensions = [
+      ];
+    };
+    dark = {
+      scheme = "nord";
+      wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
+      vscodeTheme = "Nord";
+      vicinaeTheme = "nord";
+      spicetify = {
+        theme = "default";
+        colorScheme = "Ocean";
+      };
+      chromeExtensions = [
+        "honjmojpikfebagfakclmgbcchedenbo"
+      ];
+    };
+  };
   default = {
     light = {
       scheme = "standardized-light";
@@ -117,7 +145,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      chromeExtensions = [ ]; # Default theme - no specific extension needed
+      chromeExtensions = []; # Default theme - no specific extension needed
     };
     dark = {
       scheme = "standardized-dark";
@@ -128,7 +156,7 @@
         theme = "default";
         colorScheme = "Ocean";
       };
-      chromeExtensions = [ ]; # Default theme - no specific extension needed
+      chromeExtensions = []; # Default theme - no specific extension needed
     };
   };
 }

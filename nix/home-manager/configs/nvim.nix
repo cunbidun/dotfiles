@@ -5,8 +5,7 @@
   pkgs,
   userdata,
   ...
-}:
-let
+}: let
   inherit (pkgs.stdenv) isLinux;
 
   terraform-compat = pkgs.writeShellScriptBin "terraform" ''
@@ -21,6 +20,16 @@ let
       repo = "gruvbox-material";
       rev = "master";
       sha256 = "1kjwvfpfw46bw59y83mw595hl0dajs22hqf0kx80m7hji18my843";
+    };
+  };
+  nord-vim = pkgs.vimUtils.buildVimPlugin {
+    pname = "nord-vim";
+    version = "unstable-2026-07-04";
+    src = pkgs.fetchFromGitHub {
+      owner = "arcticicestudio";
+      repo = "nord-vim";
+      rev = "main";
+      sha256 = "1f3k8hxf21fij776xw830f71wvl6v5qmv5h806l773c9sx2dp1rz";
     };
   };
 
@@ -138,6 +147,10 @@ let
       dir = "gruvbox-material";
     }
     {
+      pkg = nord-vim;
+      dir = "nord-vim";
+    }
+    {
       pkg = rose-pine;
       dir = "rose-pine";
     }
@@ -237,8 +250,7 @@ let
     }
   ];
 
-  treesitter-grammars =
-    with pkgs.vimPlugins.nvim-treesitter-parsers;
+  treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter-parsers;
     [
       bash
       css
@@ -261,7 +273,7 @@ let
     ++ lib.optionals (pkgs.vimPlugins.nvim-treesitter-parsers ? helm) [
       pkgs.vimPlugins.nvim-treesitter-parsers.helm
     ]
-    ++ [ pkgs.tree-sitter-grammars.tree-sitter-norg ];
+    ++ [pkgs.tree-sitter-grammars.tree-sitter-norg];
 
   formatters = with pkgs; [
     alejandra
@@ -308,8 +320,7 @@ let
     shellcheck
   ];
 
-  tools =
-    with pkgs;
+  tools = with pkgs;
     [
       cargo
       gcc
@@ -329,70 +340,70 @@ let
       tree-sitter
     ]
     ++ lib.optionals isLinux (
-      with pkgs;
-      [
+      with pkgs; [
         wl-clipboard
         xclip
         xsel
       ]
     );
 
-  debug-tools = lib.optionals isLinux (with pkgs; [ gdb ]) ++ [ pkgs.lldb ];
+  debug-tools = lib.optionals isLinux (with pkgs; [gdb]) ++ [pkgs.lldb];
 
-  extractLang =
-    grammar:
-    let
-      name = if grammar ? pname then grammar.pname else grammar.name;
-    in
-    if lib.hasPrefix "nvim-treesitter-grammar-" name then
-      lib.removePrefix "nvim-treesitter-grammar-" name
-    else if lib.hasPrefix "vimplugin-treesitter-grammar-" name then
-      lib.removePrefix "vimplugin-treesitter-grammar-" name
-    else if lib.hasPrefix "tree-sitter-" name then
-      lib.removePrefix "tree-sitter-" name
-    else
-      name;
+  extractLang = grammar: let
+    name =
+      if grammar ? pname
+      then grammar.pname
+      else grammar.name;
+  in
+    if lib.hasPrefix "nvim-treesitter-grammar-" name
+    then lib.removePrefix "nvim-treesitter-grammar-" name
+    else if lib.hasPrefix "vimplugin-treesitter-grammar-" name
+    then lib.removePrefix "vimplugin-treesitter-grammar-" name
+    else if lib.hasPrefix "tree-sitter-" name
+    then lib.removePrefix "tree-sitter-" name
+    else name;
 
   neovim-with-packages = pkgs.symlinkJoin {
     name = "neovim-with-packages";
-    paths = [ pkgs.nixpkgs-stable.neovim ];
-    buildInputs = [ pkgs.makeWrapper ];
+    paths = [pkgs.nixpkgs-stable.neovim];
+    buildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/nvim \
-        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ pkgs.sqlite ]} \
+        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [pkgs.sqlite]} \
         --prefix PATH : ${lib.makeBinPath (formatters ++ lsp-servers ++ linters ++ tools ++ debug-tools)}
     '';
   };
 
-  local-plugin-dir = pkgs.runCommand "vim-plugins" { } ''
+  local-plugin-dir = pkgs.runCommand "vim-plugins" {} ''
     mkdir -p "$out"
 
     ${lib.concatMapStrings (plugin: ''
-      ln -s "${plugin.pkg}" "$out/${plugin.dir}"
-    '') nvim-plugins}
+        ln -s "${plugin.pkg}" "$out/${plugin.dir}"
+      '')
+      nvim-plugins}
 
     ${lib.concatMapStrings (grammar: ''
-      lang="${extractLang grammar}"
-      target="$out/nvim-treesitter-grammar-$lang"
+        lang="${extractLang grammar}"
+        target="$out/nvim-treesitter-grammar-$lang"
 
-      if [ -f "${grammar}/parser" ]; then
-        mkdir -p "$target/parser"
-        ln -s "${grammar}/parser" "$target/parser/$lang.so"
-      else
-        ln -s "${grammar}" "$target"
-      fi
-    '') treesitter-grammars}
+        if [ -f "${grammar}/parser" ]; then
+          mkdir -p "$target/parser"
+          ln -s "${grammar}/parser" "$target/parser/$lang.so"
+        else
+          ln -s "${grammar}" "$target"
+        fi
+      '')
+      treesitter-grammars}
   '';
   nvimConfig =
     if hostName == "nixos"
     then config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/utilities/nvim"
     else ../../../utilities/nvim;
-in
-{
+in {
   home.file = {
     ".local/share/vim-plugins".source = local-plugin-dir;
     ".config/nvim".source = nvimConfig;
   };
 
-  home.packages = [ neovim-with-packages ];
+  home.packages = [neovim-with-packages];
 }

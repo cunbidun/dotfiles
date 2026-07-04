@@ -67,6 +67,36 @@
       QUkyXwr3LYi0t4DERhw=
       -----END PRIVATE KEY-----
     '';
+    nord-rsa = ''
+      -----BEGIN PRIVATE KEY-----
+      MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7Tud4RBZMfBwh
+      qaNYjO1cMwlVlnfsNHFP5kjGvMr4iLrVvpkuderPLjE1F/3rqjHa5Kq/86/SvFFB
+      k0bQz8g1vNTyvdTmHxYhpqGtWUNYXWsoGStUhcueEE0bYx4x5bUsjzeCdvTwRO/Q
+      DjNx0X2wh3uqCf/pTKoLz82c80YRy+hPFr5W+cKTXPgZKiXhm2BtQsoQ+Tl1TxOX
+      g/xJ9ErpEfAhw2kwSwqcjetR2ZscCODQN5ju89gADWbojEqrUHvVwK/IBLp5N1Fx
+      nTSUo5JyKEWJfwIow+IQuG3h7XP2QwvytiMzv5a31clBafFZZ0tzs51WQuwmqdq2
+      9eVXC6bNAgMBAAECggEABQ+aFyeQExQ97fH70VKXWHFNg0vvmi0S1tiY4HerFxez
+      ebasogYr0OsQGJL9WH5T/Ja+YWjDBQzzWglFDSILTrghztfITNF2iriwpSxiXUeP
+      kZ1LJkHMac0441TItOjE5GOPt4B7QywpIjzUyowhR8Wdo4sZBlsFXmXd9ImDImVR
+      gQc3UU3Kvy8cAnPgXHsA/FhoNW9PomGnhXau8b92RLFzTXuEVmZLij2KM4kaJIQN
+      I10RAfM1Z/k5rdkfn5B8dumzita7HQ+lcgVQ152f3o0gWLbRkb7VCfZxo4wK81DC
+      In4zMVPyvl3G7pO4sJdhqe7Vh0p/EFHxo1QUhTHaBwKBgQD/TvjuAG5NO0wLh746
+      /3Diu49NrIYUI1D35+dXSB/Mi/PmfG6doSGGE1CPaRAE0xTON8Ta38VL1b93NkXR
+      VwnujumHlD1QCiT2OZHFxERF3UEQATenobdQcu+FfaF7yNX7tF2Esz7yXdCYdV/L
+      juUwrRGSe4Wmhy4635ltCU99ywKBgQC70MgCd6A3VOp+Uwgr9y1UVwhXPJMRB03y
+      8sYQEQOKCXsVaLl+uP3Cn7Q39BZnt2G8Wjl8t04PfZO923VHvk6Jn8GLovn/hAkO
+      AQMtrjhPjIEXAzY1wkd+OHj3D+iz/9d/lYRW2Bnt1GkOG1kRhT06bM/VVfUslL/3
+      /9LilybaxwKBgQCm95K8s/Nu9tSoxcGW++9rmJYDiky1ZtNRDYyx/C0vrGd52O7O
+      j85IzODmqSMcxJ7aroZDTgzNp6Br6kaGvZF1PmljjYL7kWbS0JuQ5uZvel9OhD1N
+      l+k257PVbW/qcFHhJvfyDPehsdD1o+1eRrmEt+rCDZ4+ZjHJtumz8V7XOQKBgBDh
+      5IisPh+bJ3Txe8OP9WgmZp6I2GNod65F+l3JWbsXvROglUP51v2eo3GAJF9wUX2/
+      0nkOdRrZW+VuC63GQoMGdDxcCwLX2ISEvMdnaLJl29i4ti/A5fJHm0ACExXTAoj6
+      ZKn1xObm+AaHmMsFYgqVa10u29oFCPh+63LoyVpTAoGBAMXZn9D5eAFhUejd0E/3
+      KGipjArh+ExoZvzpPqP5lxbvrDrUKsJwy9L9XQ8dus7wleVDnFncWV9LRI1xulid
+      DaXz/QAiHpobTpRx2iHhW6EUO1wzGcu985M/92BFRH8J72+9efR6cFCoJvNwHFxp
+      Ps8pVTVg+zvU/TmTK45qj3Fs
+      -----END PRIVATE KEY-----
+    '';
   };
   manifestJson = builtins.toJSON {
     manifest_version = 3;

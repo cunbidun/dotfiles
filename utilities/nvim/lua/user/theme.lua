@@ -12,6 +12,8 @@ local themes = {
 	["everforest-light"] = { background = "light", colorscheme = "everforest" },
 	["gruvbox-dark"] = { background = "dark", colorscheme = "gruvbox-material" },
 	["gruvbox-light"] = { background = "light", colorscheme = "gruvbox-material" },
+	["nord-dark"] = { background = "dark", colorscheme = "nord" },
+	["nord-light"] = { background = "light", colorscheme = "nord" },
 	["rose-pine-dark"] = { background = "dark", colorscheme = "rose-pine", variant = "main" },
 	["rose-pine-light"] = { background = "light", colorscheme = "rose-pine", variant = "dawn" },
 }
