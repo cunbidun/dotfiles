@@ -54,12 +54,11 @@ def _apply_vscode(vscode_theme: str):
 def _apply_hyprpaper(theme: dict):
     if _is_active("hyprpaper.service"):
         wallpaper = theme["wallpaper"]
-        _run(["hyprctl", "hyprpaper", "preload", wallpaper], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         monitors = subprocess.check_output(["hyprctl", "monitors", "-j"], text=True)
         for monitor in json.loads(monitors):
             name = monitor.get("name")
             if name:
-                _run(["hyprctl", "hyprpaper", "wallpaper", f"{name},{wallpaper}"], stdout=subprocess.DEVNULL)
+                _run(["hyprctl", "hyprpaper", "wallpaper", f"{name}, {wallpaper}, cover"], stdout=subprocess.DEVNULL)
 
 
 def _apply_vicinae(vicinae_theme: str):

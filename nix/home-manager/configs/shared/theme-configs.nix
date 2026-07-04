@@ -63,7 +63,6 @@
       };
       localChromeExtensions = [ "everforest-light" ];
       chromeExtensions = [
-        "neffpnembhpgfdhfpodffkoefklmodoi"
       ];
     };
     dark = {
@@ -77,14 +76,13 @@
       };
       chromeExtensions = [
         "dlcadbmcfambdjhecipbnolmjchgnode" # Everforest Chrome Theme
-        "neffpnembhpgfdhfpodffkoefklmodoi"
       ];
     };
   };
   default = {
     light = {
       scheme = "standardized-light";
-      wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
+      wallpaper = ../../../../wallpapers/tree-light.jpg;
       vscodeTheme = "Light Modern";
       vicinaeTheme = "theme-manager-default-light";
       spicetify = {
@@ -95,7 +93,7 @@
     };
     dark = {
       scheme = "standardized-dark";
-      wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
+      wallpaper = ../../../../wallpapers/tree-dark.jpg;
       vscodeTheme = "Dark Modern";
       vicinaeTheme = "theme-manager-default-dark";
       spicetify = {
