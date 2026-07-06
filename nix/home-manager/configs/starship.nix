@@ -56,6 +56,7 @@
       };
 
       git_status = {
+        use_git_executable = true;
         untracked = "?\${count}";
         modified = "[*\${count}](yellow)";
         deleted = "✘\${count}";

@@ -32,6 +32,17 @@
       sha256 = "1f3k8hxf21fij776xw830f71wvl6v5qmv5h806l773c9sx2dp1rz";
     };
   };
+  nord-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "nord-nvim";
+    version = "unstable-2026-07-04";
+    doCheck = false;
+    src = pkgs.fetchFromGitHub {
+      owner = "dupeiran001";
+      repo = "nord.nvim";
+      rev = "c7a5c6d08ba127645f4c1e51d161b679302ad272";
+      sha256 = "0gfhvhssprzv82jylwgpf9r44x2b1bd5c9b0r7y4m3an4h6qxan1";
+    };
+  };
 
   nvim-plugins = with pkgs.vimPlugins; [
     {
@@ -148,7 +159,11 @@
     }
     {
       pkg = nord-vim;
-      dir = "nord-vim";
+      dir = "nord";
+    }
+    {
+      pkg = nord-nvim;
+      dir = "nord-light";
     }
     {
       pkg = rose-pine;

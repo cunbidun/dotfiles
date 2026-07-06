@@ -53,9 +53,16 @@ local plugins = {
 	},
 	{
 		"arcticicestudio/nord-vim",
-		dir = root .. "/nord-vim",
-		name = "nord-vim",
+		dir = root .. "/nord",
+		name = "nord",
 		lazy = false,
+		priority = 1000,
+	},
+	{
+		"dupeiran001/nord.nvim",
+		dir = root .. "/nord-light",
+		name = "nord-light",
+		lazy = true,
 		priority = 1000,
 	},
 	{

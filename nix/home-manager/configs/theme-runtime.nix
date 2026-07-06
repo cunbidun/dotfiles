@@ -13,38 +13,6 @@
     gruvbox-light = import ./chrome/themes/gruvbox-light.nix {inherit pkgs;};
     nord-light = import ./chrome/themes/nord-light.nix {inherit pkgs;};
   };
-  kittyNordLight = pkgs.writeText "kitty-nord-light.conf" ''
-    background #e5e9f0
-    foreground #2e3440
-    selection_background #aebacf
-    selection_foreground #2e3440
-    cursor #2e3440
-    cursor_text_color #e5e9f0
-    url_color #60728c
-    active_border_color #aebacf
-    inactive_border_color #c2d0e7
-    active_tab_background #e5e9f0
-    active_tab_foreground #2e3440
-    inactive_tab_background #c2d0e7
-    inactive_tab_foreground #60728c
-    tab_bar_background #c2d0e7
-    color0 #e5e9f0
-    color1 #99324b
-    color2 #4f894c
-    color3 #9a7500
-    color4 #3b6ea8
-    color5 #97365b
-    color6 #398eac
-    color7 #2e3440
-    color8 #b8c5db
-    color9 #99324b
-    color10 #4f894c
-    color11 #9a7500
-    color12 #3b6ea8
-    color13 #97365b
-    color14 #398eac
-    color15 #29838d
-  '';
 
   kittyThemes = {
     catppuccin = {
@@ -73,7 +41,7 @@
     if theme == "default"
     then config.themeManager.kitty.themePath polarity
     else if theme == "nord" && polarity == "light"
-    then kittyNordLight
+    then ./kitty/nord-light.conf
     else "${pkgs.kitty-themes}/share/kitty-themes/themes/${kittyThemes.${theme}.${polarity}}";
 
   runtimeTheme = theme: polarity: themeConfig: let

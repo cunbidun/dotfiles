@@ -13,7 +13,7 @@ local themes = {
 	["gruvbox-dark"] = { background = "dark", colorscheme = "gruvbox-material" },
 	["gruvbox-light"] = { background = "light", colorscheme = "gruvbox-material" },
 	["nord-dark"] = { background = "dark", colorscheme = "nord" },
-	["nord-light"] = { background = "light", colorscheme = "nord" },
+	["nord-light"] = { background = "light", colorscheme = "nord-light" },
 	["rose-pine-dark"] = { background = "dark", colorscheme = "rose-pine", variant = "main" },
 	["rose-pine-light"] = { background = "light", colorscheme = "rose-pine", variant = "dawn" },
 }
@@ -56,6 +56,18 @@ function M.apply(force)
 	if theme.colorscheme == "rose-pine" then
 		pcall(function()
 			require("rose-pine").setup({ variant = theme.variant, dark_variant = "main" })
+		end)
+	end
+	if theme.colorscheme == "nord-light" then
+		pcall(function()
+			require("nord").setup({
+				style = "light",
+				transparent = true,
+				styles = {
+					sidebars = "transparent",
+					floats = "transparent",
+				},
+			})
 		end)
 	end
 	pcall(vim.cmd.colorscheme, theme.colorscheme)

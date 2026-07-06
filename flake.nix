@@ -79,7 +79,7 @@
     yazi-plugins = {
       # Pin plugin revisions so flake update doesn't silently drift plugins
       # ahead of the pinned Yazi release.
-      url = "github:yazi-rs/plugins/cf2c6d8ef37f70824ad09eee0ee13e40a35dbdaa";
+      url = "github:yazi-rs/plugins/8cd50c622898d3ace3ca821f540241965308289a";
       flake = false;
     };
     yazi-restore = {
@@ -120,7 +120,7 @@
       url = "github:numtide/llm-agents.nix";
     };
     claude-desktop = {
-      url = "github:aaddrick/claude-desktop-debian/v2.0.22+claude1.15962.1";
+      url = "github:aaddrick/claude-desktop-debian/v3.0.1+claude1.18286.0";
     };
     codex-desktop-linux = {
       url = "github:ilysenko/codex-desktop-linux";

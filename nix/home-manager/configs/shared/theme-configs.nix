@@ -82,9 +82,9 @@
   gruvbox = {
     light = {
       scheme = "gruvbox-material-light-hard";
-      wallpaper = ../../../../wallpapers/gruvbox-trees.png;
+      wallpaper = ../../../../wallpapers/gruvbox-forest-cabin.png;
       vscodeTheme = "Gruvbox Material Light";
-      vicinaeTheme = "theme-manager-gruvbox-light";
+      vicinaeTheme = "gruvbox-light";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";
@@ -95,9 +95,9 @@
     };
     dark = {
       scheme = "gruvbox-material-dark-hard";
-      wallpaper = ../../../../wallpapers/gruvbox-trees.png;
+      wallpaper = ../../../../wallpapers/gruvbox-dark-wallpaper.png;
       vscodeTheme = "Gruvbox Material Dark";
-      vicinaeTheme = "theme-manager-gruvbox-dark";
+      vicinaeTheme = "gruvbox-dark";
       spicetify = {
         theme = "default";
         colorScheme = "Ocean";
@@ -110,7 +110,7 @@
   nord = {
     light = {
       scheme = "nord-light";
-      wallpaper = ../../../../wallpapers/big-sur-mountains-day.jpg;
+      wallpaper = ../../../../wallpapers/nord-light-wallpaper.png;
       vscodeTheme = "Nord Light";
       vicinaeTheme = "nord-light";
       spicetify = {
@@ -123,7 +123,7 @@
     };
     dark = {
       scheme = "nord";
-      wallpaper = ../../../../wallpapers/big-sur-mountains-night.jpg;
+      wallpaper = ../../../../wallpapers/nord-dark-wallpaper.png;
       vscodeTheme = "Nord";
       vicinaeTheme = "nord";
       spicetify = {
