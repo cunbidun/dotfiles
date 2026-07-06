@@ -22,6 +22,7 @@ in {
         pkgs.bash
         pkgs.brightnessctl
         pkgs.coreutils
+        pkgs.pulseaudio
         pkgs.systemd
         pkgs.wireplumber
       ];

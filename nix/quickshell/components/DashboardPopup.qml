@@ -25,6 +25,7 @@ Rectangle {
     property bool adjustingVolume: false
     property bool adjustingBrightness: false
     property var audioOutputs: []
+    property var audioInputs: []
     readonly property int cell: theme.dashboardControlCell
     readonly property int gap: theme.gap
     readonly property int tileWidth: cell * 2 + gap
@@ -295,7 +296,6 @@ Rectangle {
 
                 Repeater {
                     model: root.audioOutputs
-
                     Rectangle {
                         id: outputRow
 
@@ -304,7 +304,7 @@ Rectangle {
                         width: parent.width
                         height: root.theme.compactRowHeight
                         radius: root.theme.popupSectionRadius
-                        color: outputHover.containsMouse || modelData.active ? root.theme.chipHoverBackground : root.theme.transparentColor
+                        color: outputHover.containsMouse || outputRow.modelData.active ? root.theme.chipHoverBackground : root.theme.transparentColor
 
                         Text {
                             anchors.left: parent.left
@@ -319,7 +319,7 @@ Rectangle {
                         Text {
                             anchors.left: parent.left
                             anchors.leftMargin: root.theme.popupElementSize
-                            anchors.right: checkIcon.left
+                            anchors.right: outputCheckIcon.left
                             anchors.rightMargin: root.theme.gap
                             anchors.verticalCenter: parent.verticalCenter
                             text: outputRow.modelData.name
@@ -330,7 +330,7 @@ Rectangle {
                         }
 
                         Text {
-                            id: checkIcon
+                            id: outputCheckIcon
 
                             anchors.right: parent.right
                             anchors.rightMargin: root.theme.gap
@@ -356,6 +356,81 @@ Rectangle {
                     width: parent.width
                     visible: root.audioOutputs.length === 0
                     text: "No output devices"
+                    color: root.theme.popupMutedText
+                    font.family: root.theme.fontFamily
+                    font.pixelSize: root.theme.fontSizeSmall
+                }
+
+                Text {
+                    width: parent.width
+                    text: "Input"
+                    color: root.theme.popupMutedText
+                    font.family: root.theme.fontFamilyEmphasis
+                    font.pixelSize: root.theme.fontSizeSmall
+                }
+
+                Repeater {
+                    model: root.audioInputs
+                    Rectangle {
+                        id: inputRow
+
+                        required property var modelData
+
+                        width: parent.width
+                        height: root.theme.compactRowHeight
+                        radius: root.theme.popupSectionRadius
+                        color: inputHover.containsMouse || inputRow.modelData.active ? root.theme.chipHoverBackground : root.theme.transparentColor
+
+                        Text {
+                            anchors.left: parent.left
+                            anchors.leftMargin: root.theme.gap
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: "󰍬"
+                            color: inputRow.modelData.active ? root.theme.popupAccent : root.theme.popupMutedText
+                            font.family: root.theme.fontFamily
+                            font.pixelSize: root.theme.fontSize
+                        }
+
+                        Text {
+                            anchors.left: parent.left
+                            anchors.leftMargin: root.theme.popupElementSize
+                            anchors.right: inputCheckIcon.left
+                            anchors.rightMargin: root.theme.gap
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: inputRow.modelData.name
+                            color: inputRow.modelData.active ? root.theme.popupAccent : root.theme.popupText
+                            elide: Text.ElideRight
+                            font.family: inputRow.modelData.active ? root.theme.fontFamilyEmphasis : root.theme.fontFamily
+                            font.pixelSize: root.theme.fontSizeSmall
+                        }
+
+                        Text {
+                            id: inputCheckIcon
+
+                            anchors.right: parent.right
+                            anchors.rightMargin: root.theme.gap
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: inputRow.modelData.active ? "" : ""
+                            color: root.theme.popupAccent
+                            font.family: root.theme.fontFamily
+                            font.pixelSize: root.theme.fontSize
+                        }
+
+                        MouseArea {
+                            id: inputHover
+
+                            anchors.fill: parent
+                            cursorShape: Qt.ArrowCursor
+                            hoverEnabled: true
+                            onClicked: root.setAudioInput(inputRow.modelData)
+                        }
+                    }
+                }
+
+                Text {
+                    width: parent.width
+                    visible: root.audioInputs.length === 0
+                    text: "No input devices"
                     color: root.theme.popupMutedText
                     font.family: root.theme.fontFamily
                     font.pixelSize: root.theme.fontSizeSmall
@@ -429,6 +504,7 @@ Rectangle {
         }
         root.stats = next;
         root.audioOutputs = next.audio_outputs || [];
+        root.audioInputs = next.audio_inputs || [];
         root.recording = next.recording === "recording";
         root.nightLight = next.nightlight === "active";
         if (!root.adjustingVolume) {
@@ -498,6 +574,14 @@ Rectangle {
 
     function setAudioOutput(id) {
         runCommand(`wpctl set-default ${id}`);
+    }
+
+    function setAudioInput(input) {
+        if (input.bluetooth) {
+            runCommand(`pactl set-card-profile '${input.card}' '${input.headset_profile}'; sleep 0.4; pactl set-default-source '${input.id}'; pactl set-source-mute '${input.id}' 0; pactl set-source-volume '${input.id}' 100%`);
+            return;
+        }
+        runCommand(`wpctl set-default ${input.id}; pactl list cards | awk '/Name: bluez_card\\./ { card=$2 } /Active Profile: headset-head-unit/ { print card }' | while read -r card; do pactl set-card-profile "$card" a2dp-sink; done`);
     }
 
     function setBrightness(value, dragging) {

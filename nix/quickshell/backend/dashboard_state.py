@@ -161,6 +161,102 @@ def audio_outputs_value():
         outputs.append({"id": sink_id, "active": "*" in prefix, "name": name.strip()})
     return outputs
 
+def audio_inputs_value():
+    output = run_text(["wpctl", "status"])
+    default_source = run_text(["pactl", "get-default-source"])
+    bluetooth_cards = bluetooth_audio_cards()
+    bluetooth_names = {card["description"] for card in bluetooth_cards}
+    inputs = []
+    in_sources = False
+    bluetooth_input_present = False
+    input_names = set()
+    for line in output.splitlines():
+        if "Sources:" in line:
+            in_sources = True
+            continue
+        if in_sources and ("Filters:" in line or "Video" in line):
+            break
+        if not in_sources:
+            continue
+        match = re.search(r"([^0-9]*)(\d+)\.\s+(.*?)(?:\s+\[vol:.*)?$", line)
+        if not match:
+            continue
+        prefix, source_id, name = match.groups()
+        clean_name = name.strip()
+        input_names.add(clean_name)
+        bluetooth_input_present = bluetooth_input_present or "bluez_input." in line
+        inputs.append({
+            "id": source_id,
+            "active": "*" in prefix or (default_source.startswith("bluez_input.") and clean_name in bluetooth_names),
+            "name": clean_name,
+            "bluetooth": False,
+        })
+
+    for card in bluetooth_cards:
+        source_name = card["source"]
+        if bluetooth_input_present or card["description"] in input_names:
+            continue
+        inputs.append({
+            "id": source_name,
+            "active": default_source == source_name,
+            "name": f"{card['description']} Microphone",
+            "bluetooth": True,
+            "card": card["name"],
+            "headset_profile": card["headset_profile"],
+            "a2dp_profile": card["a2dp_profile"],
+        })
+    return inputs
+
+def bluetooth_audio_cards():
+    output = run_text(["pactl", "list", "cards"], timeout=2.0)
+    cards = []
+    current = None
+    in_profiles = False
+    for line in output.splitlines():
+        if line.startswith("Card #"):
+            if current:
+                cards.append(current)
+            current = None
+            in_profiles = False
+            continue
+        if current is None and "\tName: bluez_card." in line:
+            name = line.split("Name:", 1)[1].strip()
+            mac = name.removeprefix("bluez_card.").replace("_", ":")
+            current = {
+                "name": name,
+                "description": "Bluetooth Headset",
+        "source": f"bluez_input.{mac}",
+                "headset_profiles": [],
+                "a2dp_profile": "",
+            }
+            continue
+        if current is None:
+            continue
+        if "\tdevice.description =" in line:
+            current["description"] = line.split("=", 1)[1].strip().strip('"')
+        elif line.strip() == "Profiles:":
+            in_profiles = True
+        elif line.strip() == "Ports:":
+            in_profiles = False
+        elif in_profiles:
+            profile = line.strip().split(":", 1)[0]
+            if profile.startswith("headset-head-unit"):
+                current["headset_profiles"].append(profile)
+            elif profile.startswith("a2dp-sink") and current["a2dp_profile"] != "a2dp-sink":
+                current["a2dp_profile"] = profile
+    if current:
+        cards.append(current)
+    for card in cards:
+        profiles = card.pop("headset_profiles", [])
+        card["headset_profile"] = best_headset_profile(profiles)
+    return [card for card in cards if card["headset_profile"] and card["a2dp_profile"]]
+
+def best_headset_profile(profiles):
+    for preferred in ("headset-head-unit", "headset-head-unit-msbc", "headset-head-unit-cvsd"):
+        if preferred in profiles:
+            return preferred
+    return profiles[0] if profiles else ""
+
 
 def brightness_value():
     output = run_text(["brightnessctl", "-m"])
@@ -217,6 +313,7 @@ class DashboardStatePoller:
             "net": self.net_value(),
             "volume": volume_value(),
             "audio_outputs": audio_outputs_value(),
+            "audio_inputs": audio_inputs_value(),
             "brightness": brightness_value(),
             "recording": recording_value(),
             "nightlight": nightlight_value(),
