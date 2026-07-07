@@ -25,6 +25,61 @@
     pamixer -t
   '';
 
+  handy-transcribe = pkgs.writeShellApplication {
+    name = "handy-transcribe";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.gnused
+      pkgs.handy
+      pkgs.libnotify
+      pkgs.pipewire
+      pkgs.systemd
+    ];
+    text = ''
+      set -euo pipefail
+
+      notify() {
+        notify-send -a Handy -t 3000 "$@" || true
+      }
+
+      if ! systemctl --user --quiet is-active handy.service; then
+        notify "Handy is not running" "Start handy.service, then try transcription again."
+        exit 1
+      fi
+
+      if ! source_info="$(wpctl inspect @DEFAULT_AUDIO_SOURCE@ 2>/dev/null)"; then
+        notify "No microphone selected" "Choose an input device before starting transcription."
+        exit 1
+      fi
+
+      source_name="$(printf '%s\n' "$source_info" | sed -n 's/^  [*] node.description = "\(.*\)"$/\1/p' | head -n 1)"
+      if [ -z "$source_name" ]; then
+        source_name="$(printf '%s\n' "$source_info" | sed -n 's/^  [*] node.name = "\(.*\)"$/\1/p' | head -n 1)"
+      fi
+
+      if [ -z "$source_name" ]; then
+        notify "No microphone selected" "Choose an input device before starting transcription."
+        exit 1
+      fi
+
+      source_node="$(printf '%s\n' "$source_info" | sed -n 's/^  [*] node.name = "\(.*\)"$/\1/p' | head -n 1)"
+      media_class="$(printf '%s\n' "$source_info" | sed -n 's/^  [*] media.class = "\(.*\)"$/\1/p' | head -n 1)"
+      if [ "$media_class" != "Audio/Source" ]; then
+        notify "No microphone selected" "Default source is not a microphone."
+        exit 1
+      fi
+
+      source_class="$(printf '%s\n' "$source_info" | sed -n 's/^    device.class = "\(.*\)"$/\1/p' | head -n 1)"
+      if [ "$source_class" = "monitor" ] || [[ "$source_node" == *.monitor ]]; then
+        notify "No microphone selected" "Default source is a monitor, not a microphone."
+        exit 1
+      fi
+
+      notify "Transcription toggled" "$source_name"
+      exec handy --toggle-transcription
+    '';
+  };
+
   hyprland-mode = pkgs.writeShellScriptBin "hyprland-mode" ''
     modes=("Competitive Programming (cp)" "Reset (normal)" "Gaming (gaming)")
 

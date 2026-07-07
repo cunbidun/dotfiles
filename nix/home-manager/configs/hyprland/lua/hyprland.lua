@@ -241,7 +241,7 @@ hl.bind("XF86MonBrightnessUp", exec("brightnessctl set +5%"), { locked = true, r
 hl.bind(mainMod .. " + Return", exec("$TERMINAL"))
 hl.bind(mainMod .. " + P", exec("vicinae dmenu-apps"))
 hl.bind("ALT + space", exec("vicinae toggle"))
-hl.bind(mainMod .. " + O", exec("handy --toggle-transcription"))
+hl.bind(mainMod .. " + O", exec(command.handy_transcribe))
 hl.bind(mainMod .. " + M", exec(command.hyprland_mode))
 hl.bind(mainMod .. " + SHIFT + S", exec("slurp | grim -g - - | wl-copy -t image/png"))
 hl.bind(mainMod .. " + CTRL + SHIFT + S", exec(command.screenshot_copy_upload))

@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: let
+  scripts = import ../scripts.nix {inherit pkgs;};
   settings = {
     always_on_microphone = false;
     app_language = "en-US";
@@ -186,7 +187,10 @@
     word_correction_threshold = 0.18;
   };
 in {
-  home.packages = [pkgs.handy];
+  home.packages = [
+    pkgs.handy
+    scripts.handy-transcribe
+  ];
 
   xdg.dataFile."com.pais.handy/settings_store.json".text = builtins.toJSON {
     inherit settings;

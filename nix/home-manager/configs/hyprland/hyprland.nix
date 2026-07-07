@@ -50,6 +50,7 @@ in {
       toggle_volume = "${lib.getExe scripts.toggle-volume}",
       playerctl = "${lib.getExe pkgs.playerctl}",
       hyprland_mode = "${lib.getExe scripts.hyprland-mode}",
+      handy_transcribe = "${lib.getExe scripts.handy-transcribe}",
       screenshot_copy_upload = "${lib.getExe scripts."screenshot-copy-upload"}",
       wsctl = "${lib.getExe scripts.wsctl}",
     }
