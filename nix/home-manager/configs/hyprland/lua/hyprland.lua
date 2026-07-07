@@ -185,6 +185,8 @@ local windowRules = {
 	{ match = { class = "^(obsidian)$" }, float = true },
 	{ match = { title = "^(Scratchpad)$" }, float = true },
 	{ match = { title = "^(Open File)$" }, float = true },
+	{ match = { class = "^(handy)$" }, no_initial_focus = true },
+	{ match = { class = "^(handy)$" }, no_focus = true },
 	{ match = { class = "^(ueberzugpp.*)$" }, no_anim = true },
 	{ match = { title = "^(.*ueberzugpp.*)$" }, no_anim = true },
 	{ match = { class = "^(vicinae.*)$" }, stay_focused = true },
