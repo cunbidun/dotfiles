@@ -99,7 +99,6 @@ in rec {
     # AI desktop apps
     inputs.claude-desktop.packages.${system}.claude-desktop-fhs
     inputs.codex-desktop-linux.packages.${system}.codex-desktop
-    pkgs.handy
 
     # Hyprland
     inputs.hyprland-contrib.packages.${system}.hyprprop
@@ -114,7 +113,6 @@ in rec {
     pkgs.slurp # Region selector for Wayland screenshots
     pkgs.wev # Wayland event viewer
     pkgs.wl-clipboard # Wayland clipboard tools
-    pkgs.wtype # Wayland text injection for Handy
 
     # Desktop and media apps
     pkgs.arandr # Display management UI

@@ -12,6 +12,7 @@ Rectangle {
     required property var panelWindow
     property string fcitxInputMethod: ""
     property int fcitxState: 0
+    property string handyTrayState: "idle"
     property var activeTrayItem: null
     property var menuStack: []
     property bool menuOpen: false
@@ -19,6 +20,7 @@ Rectangle {
     property real menuAnchorY: 0
     readonly property var activeMenuHandle: menuStack.length > 0 ? menuStack[menuStack.length - 1] : (activeTrayItem ? activeTrayItem.menu : null)
     readonly property bool hasFcitxTrayItem: SystemTray.items.values.some(item => root.isFcitx(item.id))
+    readonly property bool hasHandyTrayItem: SystemTray.items.values.some(item => root.isHandyTrayItem(item.id, item.icon))
 
     readonly property string iconRoot: `${Quickshell.env("HOME")}/dotfiles/nix/quickshell/assets/icons`
 
@@ -301,6 +303,14 @@ Rectangle {
         onTriggered: root.refreshFcitx()
     }
 
+    Timer {
+        interval: 500
+        running: root.visible && root.hasHandyTrayItem
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: root.refreshHandyTrayState()
+    }
+
     Process {
         id: fcitxProcess
 
@@ -317,8 +327,21 @@ Rectangle {
         onExited: () => root.refreshFcitx()
     }
 
+    Process {
+        id: handyTrayStateProcess
+
+        command: ["true"]
+        stdout: StdioCollector {
+            onStreamFinished: root.updateHandyTrayState(text)
+        }
+    }
+
     function isFcitx(id) {
         return String(id || "").match(/Fcitx/) !== null;
+    }
+
+    function isHandyTrayItem(id, iconName) {
+        return String(id || "").match(/^tray-icon tray app /) && String(iconName || "").match(/\/tray-icon-/);
     }
 
     function refreshFcitx() {
@@ -333,6 +356,30 @@ Rectangle {
         fcitxToggleProcess.running = true;
     }
 
+    function refreshHandyTrayState() {
+        if (handyTrayStateProcess.running) return;
+        handyTrayStateProcess.command = ["sh", "-c", `
+items=$(busctl --user get-property org.kde.StatusNotifierWatcher /StatusNotifierWatcher org.kde.StatusNotifierWatcher RegisteredStatusNotifierItems 2>/dev/null | sed 's/^as [0-9][0-9]* //; s/"//g')
+for item in $items; do
+  service=\${item%%/*}
+  objpath=/\${item#*/}
+  title=$(busctl --user get-property "$service" "$objpath" org.kde.StatusNotifierItem Title 2>/dev/null | sed -E 's/^s "(.*)"/\\1/')
+  [ "$title" = handy ] || continue
+  icon=$(busctl --user get-property "$service" "$objpath" org.kde.StatusNotifierItem IconName 2>/dev/null | sed -E 's/^s "(.*)"/\\1/')
+  [ -f "$icon" ] || exit 0
+  hash=$(sha256sum "$icon" | awk '{print $1}')
+  case "$hash" in
+    3567428111c9bb26385a067b32c94351308104c1582a6c8cf68ade6e250c9a52|b554fd1013bd2f8312eab255c47278ed76ce2808aabecbd8648f961d45afbe9d|c0e672564f498316ad5b7a9f78bd703aec8722eca25f3e2fe19d23beaf114cd6) echo idle ;;
+    be9baf02cf504d218e4b3c2e0e10f4845a790f75df48990d6f78e76ded993cef|51596aa529120696e46309f9b135ac4f199158849810373e9c88f85daf59e395|ce2cb47c930b73d59a0d30f26aa1c6d369a106f64a4afe5571d60a29ae63ec56) echo recording ;;
+    7b03376131c570d2a67eeac29410c983c6b5483ec188f8d520ff09d28202d0e9|af81a67d3df7226b48247271fd309394e46a5fcf17aaa6d2d9da11b917d8bf64) echo transcribing ;;
+    *) echo idle ;;
+  esac
+  exit 0
+done
+`];
+        handyTrayStateProcess.running = true;
+    }
+
     function updateFcitx(rawText) {
         for (const line of rawText.trim().split("\n")) {
             if (line.startsWith("im=")) {
@@ -340,6 +387,13 @@ Rectangle {
             } else if (line.startsWith("state=")) {
                 root.fcitxState = Number(line.slice(6).trim() || 0);
             }
+        }
+    }
+
+    function updateHandyTrayState(rawText) {
+        const state = rawText.trim();
+        if (state === "recording" || state === "transcribing" || state === "idle") {
+            root.handyTrayState = state;
         }
     }
 
@@ -415,6 +469,9 @@ Rectangle {
         }
         if (itemId.match(/Codex_status_icon_.*/)) {
             return `file://${root.iconRoot}/codex-tray.svg`;
+        }
+        if (root.isHandyTrayItem(itemId, iconName)) {
+            return `file://${root.iconRoot}/systray/${polarity}/handy-${root.handyTrayState}.svg`;
         }
         return iconName || "";
     }

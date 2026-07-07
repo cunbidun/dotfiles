@@ -127,7 +127,7 @@ Rectangle {
                 spacing: root.gap
 
                 ControlTile { theme: root.theme; width: root.tileWidth; height: root.theme.dashboardTileHeight; icon: "󰤨"; title: "Wi-Fi"; value: root.wifiTileValue(); active: root.wifiEnabled; activate: () => root.activeView = "network" }
-                ControlTile { theme: root.theme; width: root.tileWidth; height: root.theme.dashboardTileHeight; icon: "󰂯"; title: "Bluetooth"; value: root.bluetoothTileValue(); active: root.connectedBluetoothDevices > 0; activate: () => root.activeView = "bluetooth" }
+                ControlTile { theme: root.theme; width: root.tileWidth; height: root.theme.dashboardTileHeight; icon: "󰂯"; title: "Bluetooth"; value: root.bluetoothTileValue(); active: root.bluetoothSource.enabled; activate: () => root.activeView = "bluetooth" }
             }
 
             Rectangle {

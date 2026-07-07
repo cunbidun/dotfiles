@@ -11,6 +11,7 @@ QtObject {
     id: root
 
     readonly property var adapter: Bluetooth.defaultAdapter
+    readonly property bool adapterEnabled: !!adapter?.enabled
     readonly property bool enabled: !!(adapter?.enabled || root.connectedDevices.length > 0)
     readonly property bool discovering: adapter ? adapter.discovering : false
     readonly property string adapterDisplayName: root.goodName(adapter?.name) ? adapter.name : "Bluetooth"
@@ -28,7 +29,23 @@ QtObject {
 
     Component.onCompleted: root.syncDiscovery()
     onEnabledChanged: root.syncDiscovery()
+    onAdapterEnabledChanged: root.syncDiscovery()
     onAdapterChanged: root.syncDiscovery()
+    onDiscoveringChanged: {
+        if (root.adapterEnabled && !root.discovering) {
+            discoveryTimer.restart();
+        }
+    }
+
+    property var discoveryTimer: Timer {
+        id: discoveryTimer
+
+        interval: 3000
+        running: root.adapterEnabled
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: root.syncDiscovery()
+    }
 
     function setEnabled(value) {
         if (root.adapter) {
@@ -111,7 +128,7 @@ QtObject {
 
     function syncDiscovery() {
         if (root.adapter) {
-            root.adapter.discovering = root.enabled;
+            root.adapter.discovering = root.adapterEnabled;
         }
     }
 

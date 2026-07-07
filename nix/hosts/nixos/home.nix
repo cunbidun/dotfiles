@@ -39,6 +39,7 @@ in {
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/spicetify.nix
     ../../home-manager/configs/chrome
+    ../../home-manager/configs/handy.nix
     ../../home-manager/configs/minecraft.nix
     ../../home-manager/configs/wechat.nix
     ../../home-manager/configs/xremap.nix
