@@ -228,7 +228,13 @@ class ThemeManagerDaemon:
     # ---------- system helpers ---------- #
     def _notify(self, summary: str, body: str = ""):
         try:
-            subprocess.Popen(["notify-send", summary, body])
+            subprocess.Popen([
+                "notify-send",
+                "-h",
+                "string:x-canonical-private-synchronous:theme-manager",
+                summary,
+                body,
+            ])
         except FileNotFoundError:
             pass
 

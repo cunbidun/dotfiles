@@ -39,7 +39,7 @@
       set -euo pipefail
 
       notify() {
-        notify-send -a Handy -t 3000 "$@" || true
+        notify-send -a Handy -t 3000 -h string:x-canonical-private-synchronous:handy-transcription "$@" || true
       }
 
       if ! systemctl --user --quiet is-active handy.service; then

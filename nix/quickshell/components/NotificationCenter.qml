@@ -28,7 +28,7 @@ ModuleChip {
         bodyMarkupSupported: true
         imageSupported: true
         persistenceSupported: true
-        extraHints: ["desktop-entry", "sender-pid", "pid"]
+        extraHints: ["desktop-entry", "sender-pid", "pid", "x-canonical-private-synchronous", "x-dunst-stack-tag", "synchronous", "private-synchronous"]
 
         onNotification: notification => {
             if (root.dnd) {
@@ -56,8 +56,9 @@ ModuleChip {
                     invoke: () => action.invoke()
                 }))
             };
+            record.replacementKey = root.replacementKey(record);
             console.log(`[notification] app=${record.appName} desktop=${record.desktopEntry} icon=${record.appIcon} summary=${record.summary} hints=${JSON.stringify(record.hints)} actions=${JSON.stringify(record.actions.map(action => ({ identifier: action.identifier, text: action.text })))}`);
-            root.notifications = [record, ...root.notifications].slice(0, 30);
+            root.addNotification(record);
             root.showToast(record);
         }
     }
@@ -191,6 +192,51 @@ ModuleChip {
     function closeNotification(record) {
         root.removeNotification(record);
         record.notification?.dismiss();
+    }
+
+    function addNotification(record) {
+        const replacementIndex = root.notifications.findIndex(notification => root.canReplace(notification, record));
+        if (replacementIndex < 0) {
+            root.notifications = [record, ...root.notifications].slice(0, 30);
+            return;
+        }
+
+        const oldRecord = root.notifications[replacementIndex];
+        const notifications = root.notifications.slice();
+        notifications.splice(replacementIndex, 1);
+        root.notifications = [record, ...notifications].slice(0, 30);
+        if (root.toastRecord && root.toastRecord.key === oldRecord.key) {
+            root.toastRecord = record;
+        }
+    }
+
+    function canReplace(oldRecord, newRecord) {
+        return oldRecord.replacementKey
+            && newRecord.replacementKey
+            && oldRecord.replacementKey === newRecord.replacementKey;
+    }
+
+    function replacementKey(record) {
+        for (const hint of ["x-canonical-private-synchronous", "x-dunst-stack-tag", "synchronous", "private-synchronous"]) {
+            const value = root.hintString(record.hints, hint);
+            if (value.length > 0) {
+                return `hint:${record.appName}:${hint}:${value}`;
+            }
+        }
+
+        if (record.notification?.id > 0) {
+            return `id:${record.appName}:${record.notification.id}`;
+        }
+
+        return "";
+    }
+
+    function hintString(hints, name) {
+        const value = hints?.[name];
+        if (value === undefined || value === null) {
+            return "";
+        }
+        return String(value);
     }
 
     function showToast(record) {
