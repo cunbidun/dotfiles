@@ -43,16 +43,19 @@ in {
         # sessions over SSH, since rendering happens locally) and flips
         # light/dark automatically via `default`. No per-theme files, no
         # runtime sourcing. colour2 gives the active window each palette's
-        # green accent; colour0 is the dim border / copy-mode surface.
+        # green accent; colour4 matches the terminal selection accent; colour7
+        # is readable muted text; colour0 is the dim border surface.
         set -g status-style                "bg=default,fg=default"
         set -g status-left-style           "bg=default,fg=default"
-        set -g status-right-style          "bg=default,fg=colour8"
-        set -g window-status-style         "bg=default,fg=colour8"
+        set -g status-right-style          "bg=default,fg=colour7"
+        set -g window-status-style         "bg=default,fg=colour7"
         set -g window-status-current-style "bg=colour2,fg=colour0,bold"
         set -g pane-border-style           "fg=colour0"
         set -g pane-active-border-style    "fg=colour2"
         set -g message-style               "bg=colour2,fg=colour0"
-        set -g mode-style                  "bg=colour0,fg=default"
+        set -g mode-style                  "bg=colour4,fg=colour15"
+        set -g copy-mode-match-style       "bg=colour3,fg=colour0"
+        set -g copy-mode-current-match-style "bg=colour4,fg=colour15"
 
         # -- key-bind --
         bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
