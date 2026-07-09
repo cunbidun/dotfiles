@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   system = pkgs.stdenv.hostPlatform.system;
 
   yazi-wrapper = pkgs.writeShellApplication {
@@ -54,7 +55,8 @@
     test -n "$*" && args=("$@")
     exec kitty -d "$PWD" -e "''${args[@]}"
   '';
-in rec {
+in
+rec {
   inherit yazi-wrapper;
 
   default_packages = [
@@ -152,8 +154,8 @@ in rec {
     # Stable-pinned apps
     pkgs.nixpkgs-stable.jetbrains.datagrip
     pkgs.nixpkgs-stable.libreoffice
-    pkgs.nixpkgs-stable.zoom-us
+    pkgs.zoom-us
   ];
 
-  mac_packages = [];
+  mac_packages = [ ];
 }
