@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   images = builtins.fromJSON (builtins.readFile ./container-images.json);
   image = images."9router";
   # Podman (containers/image) rejects `repo:tag@digest` references, so pin by
@@ -11,6 +12,7 @@
   imageRef = "${image.repository}@${image.digest}";
   dataDir = "${config.home.homeDirectory}/.local/share/9router";
   gptModels = [
+    "gpt-6.6-sol"
     "gpt-5.5"
     "gpt-5.5-review"
     "gpt-5.4"
@@ -30,16 +32,21 @@
     "gpt-5.3-codex-spark"
     "gpt-5.3-codex-spark-review"
   ];
-  modelAliases = builtins.listToAttrs (map (model: {
+  modelAliases = builtins.listToAttrs (
+    map (model: {
       name = model;
       value = "cx/${model}";
-    })
-    gptModels);
+    }) gptModels
+  );
   modelAliasesFile = pkgs.writeText "9router-model-aliases.json" (builtins.toJSON modelAliases);
 
   modelAliasesScript = pkgs.writeShellApplication {
     name = "9router-model-aliases";
-    runtimeInputs = [pkgs.coreutils pkgs.curl pkgs.jq];
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.curl
+      pkgs.jq
+    ];
     text = ''
       base_url="http://127.0.0.1:20128"
       data_dir="${dataDir}"
@@ -81,7 +88,8 @@
       done
     '';
   };
-in {
+in
+{
   services.podman = {
     enable = true;
     containers."9router" = {
@@ -95,15 +103,15 @@ in {
       userNS = "keep-id:uid=1000,gid=1000";
       user = "0";
       group = "0";
-      ports = ["20128:20128"];
-      volumes = ["${dataDir}:/app/data"];
+      ports = [ "20128:20128" ];
+      volumes = [ "${dataDir}:/app/data" ];
       environment = {
         DATA_DIR = "/app/data";
       };
     };
   };
 
-  home.activation."9routerDataDir" = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation."9routerDataDir" = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     run install -d -m 0750 ${lib.escapeShellArg dataDir}
     run install -d -m 0700 ${lib.escapeShellArg "${dataDir}/auth"}
   '';
@@ -111,8 +119,8 @@ in {
   systemd.user.services."9router-model-aliases" = {
     Unit = {
       Description = "Reconcile declarative 9router model aliases";
-      After = ["podman-9router.service"];
-      Wants = ["podman-9router.service"];
+      After = [ "podman-9router.service" ];
+      Wants = [ "podman-9router.service" ];
     };
     Service = {
       Type = "oneshot";
@@ -122,7 +130,7 @@ in {
       ExecStart = "${modelAliasesScript}/bin/9router-model-aliases";
     };
     Install = {
-      WantedBy = ["default.target"];
+      WantedBy = [ "default.target" ];
     };
   };
 }
