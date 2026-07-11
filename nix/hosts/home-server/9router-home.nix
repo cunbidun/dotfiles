@@ -13,6 +13,7 @@ let
   dataDir = "${config.home.homeDirectory}/.local/share/9router";
   gptModels = [
     "gpt-6.6-sol"
+    "gpt-5.6-sol"
     "gpt-5.5"
     "gpt-5.5-review"
     "gpt-5.4"
@@ -39,6 +40,13 @@ let
     }) gptModels
   );
   modelAliasesFile = pkgs.writeText "9router-model-aliases.json" (builtins.toJSON modelAliases);
+  settingsFile = pkgs.writeText "9router-settings.json" (
+    builtins.toJSON {
+      cavemanEnabled = false;
+      cavemanLevel = "full";
+      ponytailEnabled = false;
+    }
+  );
 
   modelAliasesScript = pkgs.writeShellApplication {
     name = "9router-model-aliases";
@@ -46,11 +54,14 @@ let
       pkgs.coreutils
       pkgs.curl
       pkgs.jq
+      pkgs.sqlite
+      pkgs.systemd
     ];
     text = ''
       base_url="http://127.0.0.1:20128"
       data_dir="${dataDir}"
       auth_dir="$data_dir/auth"
+      db="$data_dir/db/data.sqlite"
 
       install -d -m 0750 "$data_dir"
       install -d -m 0700 "$auth_dir"
@@ -73,6 +84,22 @@ let
       done
 
       curl -fsS "$base_url/api/health" >/dev/null
+
+      if [ -s "$db" ]; then
+        before="$(sqlite3 "$db" "select data from settings where id = 1;" || true)"
+        sqlite3 "$db" "insert into settings (id, data) values (1, json(readfile('${settingsFile}'))) on conflict(id) do update set data = json_patch(data, json(readfile('${settingsFile}')));"
+        after="$(sqlite3 "$db" "select data from settings where id = 1;" || true)"
+        if [ "$before" != "$after" ]; then
+          systemctl --user restart podman-9router.service
+          for _ in $(seq 1 60); do
+            if curl -fsS "$base_url/api/health" >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl -fsS "$base_url/api/health" >/dev/null
+        fi
+      fi
 
       raw_id="$(tr -d '\r\n' < "$data_dir/machine-id")"
       cli_secret="$(tr -d '\r\n' < "$auth_dir/cli-secret")"

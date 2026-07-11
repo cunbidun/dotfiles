@@ -56,8 +56,8 @@ let
     };
   codexConfigFile = codexToml.generate "codex-config.toml" {
     model_provider = "9router";
-    model = "cx/gpt-5.5";
-    model_reasoning_effort = "medium";
+    model = "cx/gpt-5.6-sol";
+    model_reasoning_effort = "high";
     personality = "pragmatic";
 
     model_providers."9router" = {
@@ -119,7 +119,7 @@ let
       "slack@openai-curated".enabled = true;
     };
 
-    tui.model_availability_nux."cx/gpt-5.5" = 4;
+    tui.model_availability_nux."cx/gpt-5.6-sol" = 4;
   };
 in
 {

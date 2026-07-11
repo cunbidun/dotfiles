@@ -9,7 +9,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./9router.nix
     ./home-page.nix
     ./immich.nix
     ./tailscale-services.nix
@@ -28,11 +27,17 @@
   networking.networkmanager.enable = true;
 
   # User groups specific to home-server
-  users.users.${userdata.username}.extraGroups = [
-    "wheel"
-    "networkmanager"
-    "docker"
-  ];
+  users.users.${userdata.username} = {
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
+    # Start the user manager at boot so rootless 9router runs without a login.
+    linger = true;
+    # Subordinate UID/GID ranges for rootless podman user namespaces.
+    autoSubUidGidRange = true;
+  };
 
   # Dedicated, unprivileged landing account for tailnet guests. Tailscale SSH
   # maps approved guests to this user. Deliberately NOT in `wheel`/`docker`,
@@ -53,6 +58,8 @@
 
   # home-server specific: act as a subnet/exit-node client
   services.tailscale.useRoutingFeatures = "client";
+
+  networking.firewall.allowedTCPPorts = [20128];
 
   sops = {
     defaultSopsFile = ../../../secrets/system.yaml;
