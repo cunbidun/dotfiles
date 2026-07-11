@@ -18,9 +18,12 @@ in {
     ../../home-manager/configs/nvim.nix
     ../../home-manager/configs/tmux
     ../../home-manager/configs/vscode.nix
+    ../../home-manager/configs/llm_agent.nix
     ../../home-manager/configs/shared/git.nix
+    ../../home-manager/configs/user-secrets.nix
     inputs.self.homeManagerModules.theme-manager
     inputs.mac-app-util.homeManagerModules.default
+    inputs.sops-nix.homeManagerModules.sops
   ];
   home.packages = package_config.default_packages ++ package_config.mac_packages;
   home.stateVersion = "23.11";

@@ -157,5 +157,7 @@ rec {
     pkgs.zoom-us
   ];
 
-  mac_packages = [ ];
+  mac_packages = [
+    pkgs._1password-cli
+  ];
 }
