@@ -1,16 +1,4 @@
 return {
-	{
-		"stevearc/conform.nvim",
-		optional = true,
-		opts = function(_, opts)
-			opts.formatters = opts.formatters or {}
-			opts.formatters.sqlfluff = vim.tbl_deep_extend("force", opts.formatters.sqlfluff or {}, {
-				cwd = false,
-				require_cwd = false,
-			})
-			return opts
-		end,
-	},
 	-- Disable LSP keymaps that conflict with competitive programming bindings.
 	-- <leader>ca (CodeAction) and <leader>cr (Rename) clash with CP Archive/Run.
 	-- The user's own bindings are <leader>rn (rename) and <leader>ca (→ CP Archive via cp.lua).

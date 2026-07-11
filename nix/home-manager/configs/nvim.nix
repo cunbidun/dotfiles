@@ -304,7 +304,6 @@
     prettier
     rustfmt
     shfmt
-    sqlfluff
     stylua
     statix
   ];

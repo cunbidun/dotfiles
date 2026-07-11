@@ -87,7 +87,6 @@ local plugins = {
 	{ import = "lazyvim.plugins.extras.lang.yaml" },
 	{ import = "lazyvim.plugins.extras.lang.toml" },
 	{ import = "lazyvim.plugins.extras.lang.docker" },
-	{ import = "lazyvim.plugins.extras.lang.sql" },
 	{ import = "lazyvim.plugins.extras.lang.prisma" },
 	{ import = "lazyvim.plugins.extras.lang.php" },
 	{ import = "lazyvim.plugins.extras.lang.go" },

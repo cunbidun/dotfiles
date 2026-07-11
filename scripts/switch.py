@@ -1,4 +1,5 @@
 import argparse
+import getpass
 import os
 import shlex
 import subprocess
@@ -161,7 +162,7 @@ def switch_system(args: argparse.Namespace, git_root: Path, is_darwin: bool):
 
 
 def switch_home(args: argparse.Namespace, git_root: Path):
-    username = os.environ.get("USER", "cunbidun")
+    username = getpass.getuser()
     flake_ref = f"{git_root}#{username}@{args.profile}"
     if args.profile in ("home-server", "test-vm"):
         target, ssh_opts = remote_profile(args.profile)

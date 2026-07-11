@@ -22,6 +22,10 @@
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
 
+  # Work around nix-darwin manual generation using a removed nixos-render-docs flag.
+  documentation.enable = false;
+  system.tools.darwin-uninstaller.enable = false;
+
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = stateVersion;
@@ -188,7 +192,8 @@
     enable = true;
 
     onActivation = {
-      cleanup = "uninstall";
+      cleanup = "none";
+      extraFlags = [ "--cleanup" ];
       upgrade = true;
     };
 
