@@ -12,8 +12,9 @@ let
   imageRef = "${image.repository}@${image.digest}";
   dataDir = "${config.home.homeDirectory}/.local/share/9router";
   gptModels = [
-    "gpt-6.6-sol"
     "gpt-5.6-sol"
+    "gpt-5.6-terra"
+    "gpt-5.6-luna"
     "gpt-5.5"
     "gpt-5.5-review"
     "gpt-5.4"
