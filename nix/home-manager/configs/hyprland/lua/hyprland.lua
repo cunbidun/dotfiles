@@ -183,8 +183,6 @@ local windowRules = {
 	{ match = { title = "^(Spotify Premium)$" }, float = true },
 	{ match = { class = "^([Ss]ignal)$" }, float = true },
 	{ match = { class = "^(obsidian)$" }, float = true },
-	{ match = { class = "^([Zz]oom)$" }, float = true },
-	{ match = { class = "^([Zz]oom)$", title = "^(menu window|confirm window)$" }, stay_focused = true },
 	{ match = { title = "^(Scratchpad)$" }, float = true },
 	{ match = { title = "^(Open File)$" }, float = true },
 	{ match = { class = "^(ueberzugpp.*)$" }, no_anim = true },

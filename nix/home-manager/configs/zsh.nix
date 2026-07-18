@@ -6,6 +6,8 @@
 }: {
   programs.zsh = {
     enable = true;
+    # Lock in the legacy dotDir (files in $HOME) to silence the HM 26.05 warning.
+    dotDir = config.home.homeDirectory;
     enableCompletion = true;
 
     autosuggestion = {

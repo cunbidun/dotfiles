@@ -154,7 +154,6 @@ rec {
     # Stable-pinned apps
     pkgs.nixpkgs-stable.jetbrains.datagrip
     pkgs.nixpkgs-stable.libreoffice
-    pkgs.zoom-us
   ];
 
   mac_packages = [
