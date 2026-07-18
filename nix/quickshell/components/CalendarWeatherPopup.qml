@@ -55,6 +55,10 @@ Rectangle {
         }
     }
 
+    Process {
+        id: openWeatherUrl
+    }
+
     Timer {
         interval: 15 * 60 * 1000
         running: true
@@ -221,7 +225,22 @@ Rectangle {
             width: content.width
             height: root.weatherSectionHeight
             radius: root.theme.popupSectionRadius
-            color: root.theme.popupSectionBackground
+            color: weatherMouse.containsMouse ? root.theme.popupBackground : root.theme.popupSectionBackground
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 120
+                }
+            }
+
+            MouseArea {
+                id: weatherMouse
+
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: root.openWeather()
+            }
 
             Column {
                 id: weatherContent
@@ -341,6 +360,15 @@ Rectangle {
                 }
             }
         }
+    }
+
+    function openWeather() {
+        if (!root.theme.weatherUrl || root.theme.weatherUrl.length === 0) {
+            return;
+        }
+
+        openWeatherUrl.command = ["bash", "-lc", `xdg-open ${JSON.stringify(root.theme.weatherUrl)}`];
+        openWeatherUrl.running = true;
     }
 
     function shiftMonth(delta) {

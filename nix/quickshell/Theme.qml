@@ -76,6 +76,7 @@ Item {
     readonly property string weatherLocation: "10001"
     readonly property string weatherApiKeyPath: `${Quickshell.env("HOME")}/.config/quickshell/weather_api_key`
     readonly property bool weatherMetric: true
+    readonly property string weatherUrl: `https://weather.com/weather/today/l/${encodeURIComponent(weatherLocation)}`
 
     readonly property int workspaceGap: Math.round(em * 0.375)
     readonly property int workspaceHeight: barItemHeight
