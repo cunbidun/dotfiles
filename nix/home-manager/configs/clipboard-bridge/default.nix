@@ -205,9 +205,11 @@ in {
     (lib.mkIf cfg.source.enable (lib.mkMerge [
       {home.packages = [sourceDaemon];}
 
-      # optionalAttrs (not mkIf) so the platform-specific option path is absent
-      # entirely on the other OS, where it isn't declared.
-      (lib.optionalAttrs pkgs.stdenv.isDarwin {
+      # mkIf, not optionalAttrs: deciding the *shape* of config from `pkgs`
+      # forces `config` to resolve `_module.args`, which is infinite recursion.
+      # home-manager imports both launchd and systemd unconditionally, so both
+      # option paths exist on either platform and only the condition differs.
+      (lib.mkIf pkgs.stdenv.isDarwin {
         launchd.agents.clipboard-bridge = {
           enable = true;
           config = {
@@ -220,7 +222,7 @@ in {
         };
       })
 
-      (lib.optionalAttrs pkgs.stdenv.isLinux {
+      (lib.mkIf pkgs.stdenv.isLinux {
         systemd.user.services.clipboard-bridge = {
           Unit = {
             Description = "Clipboard bridge (serves clipboard images to remote SSH sessions)";
