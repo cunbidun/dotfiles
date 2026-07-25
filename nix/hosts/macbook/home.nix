@@ -48,8 +48,12 @@ in {
     };
   };
 
-  # Screenshots taken on this Mac are readable from SSH sessions it opens.
-  services.clipboardBridge.source.enable = true;
+  # The daemon role here is filled by upstream clipaste (installed outside Nix),
+  # which already serves the same HTTP contract on 127.0.0.1:18340 and reads the
+  # macOS pasteboard natively. Enabling our own source would collide on that
+  # port, so only the tunnel below is configured on this host; the module's
+  # source role is used on the nixos desktop, where clipaste refuses to run.
+  services.clipboardBridge.source.enable = false;
 
   # SSH client config, declarative (mirrors nix/hosts/nixos/home.nix). The
   # RemoteForward on `home-server` is the clipboard-bridge reverse tunnel: it
