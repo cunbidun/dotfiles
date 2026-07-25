@@ -270,6 +270,18 @@ in {
           default = ":99";
           description = "Display the headless X server runs on.";
         };
+
+        wrapPrograms = lib.mkOption {
+          type = lib.types.listOf lib.types.package;
+          default = [];
+          example = lib.literalExpression "[ inputs.llm-agents.packages.\${system}.codex ]";
+          description = ''
+            Packages whose executables read the clipboard in-process over X11
+            and therefore need DISPLAY pointing at the headless server. Each is
+            re-exposed with DISPLAY set and takes precedence over the unwrapped
+            package, so DISPLAY does not have to be set for the whole session.
+          '';
+        };
       };
     };
   };
@@ -320,11 +332,23 @@ in {
     })
 
     (lib.mkIf (cfg.sink.enable && cfg.sink.x11.enable) {
-      # Point every session at the headless server, so clipboard readers find it.
-      # sessionVariables covers shells (login via .zprofile, non-login via
-      # .zshenv); systemd user services read environment.d instead, so set both.
-      home.sessionVariables.DISPLAY = cfg.sink.x11.display;
-      systemd.user.sessionVariables.DISPLAY = cfg.sink.x11.display;
+      # Deliberately no global DISPLAY. On a headless host that would advertise a
+      # display to every tool on the box, most of which would then behave as if a
+      # GUI existed. Only the programs that actually read the clipboard in-process
+      # need it, so they are wrapped individually via wrapPrograms below.
+
+      # hiPrio so these win the collision against the unwrapped package, which
+      # stays in home.packages via the shared package list.
+      home.packages = map (p:
+        lib.hiPrio (pkgs.symlinkJoin {
+          name = "${lib.getName p}-x11";
+          paths = [p];
+          nativeBuildInputs = [pkgs.makeWrapper];
+          postBuild = lib.concatMapStrings (bin: ''
+            wrapProgram $out/bin/${bin} --set DISPLAY ${cfg.sink.x11.display}
+          '') (builtins.attrNames (builtins.readDir "${p}/bin"));
+        }))
+      cfg.sink.x11.wrapPrograms;
 
       systemd.user.services.clipboard-xvfb = {
         Unit.Description = "Headless X server backing remote clipboard paste";

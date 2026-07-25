@@ -34,8 +34,19 @@ in {
   # machine the SSH session came from (see configs/clipboard-bridge).
   services.clipboardBridge.sink = {
     enable = true;
-    # Codex reads the clipboard in-process over X11 and never calls the shims.
-    x11.enable = true;
+    x11 = {
+      # Codex reads the clipboard in-process (via the arboard crate) instead of
+      # shelling out, so the xclip/wl-paste shims never intercept it and Ctrl+V
+      # fails with an X11 connection error. A headless X server whose CLIPBOARD
+      # selection we own fixes that.
+      enable = true;
+      # Wrap codex alone rather than exporting DISPLAY for the session: this host
+      # has no display, and advertising one globally would make every other tool
+      # believe a GUI exists.
+      wrapPrograms = [
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+      ];
+    };
   };
 
   home.sessionVariables = {
