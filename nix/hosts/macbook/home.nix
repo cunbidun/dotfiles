@@ -21,6 +21,7 @@ in {
     ../../home-manager/configs/llm_agent.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/user-secrets.nix
+    ../../home-manager/configs/clipboard-bridge
     inputs.self.homeManagerModules.theme-manager
     inputs.mac-app-util.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
@@ -43,6 +44,32 @@ in {
       user = {
         name = userdata.name;
         email = userdata.email;
+      };
+    };
+  };
+
+  # Screenshots taken on this Mac are readable from SSH sessions it opens.
+  services.clipboardBridge.source.enable = true;
+
+  # SSH client config, declarative (mirrors nix/hosts/nixos/home.nix). The
+  # RemoteForward on `home-server` is the clipboard-bridge reverse tunnel: it
+  # exposes this Mac's daemon as a unix socket on the server, where the
+  # xclip/wl-paste shims read it. Paste with Ctrl+V in Claude Code over SSH.
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    settings = {
+      "*" = {
+        AddKeysToAgent = "yes";
+        UseKeychain = "yes";
+        ForwardAgent = "yes";
+        IdentityFile = "~/.ssh/id_ed25519";
+        # Quotes are part of the value: the path contains spaces.
+        IdentityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+      };
+      "home-server" = {
+        HostName = "home-server";
+        RemoteForward = "${config.services.clipboardBridge.socketPath} 127.0.0.1:${toString config.services.clipboardBridge.source.port}";
       };
     };
   };

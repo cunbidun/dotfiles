@@ -56,6 +56,14 @@
   # SSH specific to home-server
   services.openssh.settings.PermitRootLogin = "yes";
 
+  # Let the clipboard-bridge reverse tunnel (see configs/clipboard-bridge)
+  # rebind its unix socket instead of failing on a leftover file, so the most
+  # recent SSH session owns it. sshd creates forwarded sockets 0600, which is
+  # what keeps the tailnet-guest account above from reading the clipboard.
+  services.openssh.extraConfig = ''
+    StreamLocalBindUnlink yes
+  '';
+
   # home-server specific: act as a subnet/exit-node client
   services.tailscale.useRoutingFeatures = "client";
 

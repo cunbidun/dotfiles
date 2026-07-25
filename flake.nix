@@ -48,7 +48,7 @@
     # | Hyprland |
     # +----------+
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.55.4?submodules=1";
+      url = "github:hyprwm/Hyprland/v0.56.0?submodules=1";
     };
     pyprland = {
       url = "github:hyprland-community/pyprland";
@@ -79,11 +79,11 @@
     yazi-plugins = {
       # Pin plugin revisions so flake update doesn't silently drift plugins
       # ahead of the pinned Yazi release.
-      url = "github:yazi-rs/plugins/8cd50c622898d3ace3ca821f540241965308289a";
+      url = "github:yazi-rs/plugins/bbac5e75b22a2893ef7cdd2bd6814b15f2abb91e";
       flake = false;
     };
     yazi-restore = {
-      url = "github:boydaihungst/restore.yazi/0e0870460b9b74c5ae98b7f96c7c26a9a274ce6d";
+      url = "github:boydaihungst/restore.yazi/7bfcfcbda078b7e51d1ff9a62db9c654a3952fa4";
       flake = false;
     };
     yazi-bunny = {
@@ -113,14 +113,14 @@
     # +-- MacOS specific --+
     mac-app-util.url = "github:hraban/mac-app-util";
     mac-default-browser = {
-      url = "github:macadmins/default-browser/v1.0.18";
+      url = "github:macadmins/default-browser/v1.1.19";
       flake = false;
     };
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
     claude-desktop = {
-      url = "github:aaddrick/claude-desktop-debian/v3.0.1+claude1.18286.0";
+      url = "github:aaddrick/claude-desktop-debian/v3.2.1+claude1.24012.0";
     };
     codex-desktop-linux = {
       url = "github:ilysenko/codex-desktop-linux";

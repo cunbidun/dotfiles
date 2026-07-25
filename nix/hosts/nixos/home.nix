@@ -36,6 +36,7 @@ in {
     inputs.vicinae.homeManagerModules.default
     ../../home-manager/systemd.nix
     ../../home-manager/configs/theme-runtime.nix
+    ../../home-manager/configs/clipboard-bridge
     ../../home-manager/configs/activitywatch.nix
     ../../home-manager/configs/spicetify.nix
     ../../home-manager/configs/chrome
@@ -262,9 +263,16 @@ in {
         HostName = "home-server.${userdata.tailnetDomain}";
         User = userdata.username;
         Port = 22;
+        # Clipboard-bridge reverse tunnel: exposes this desktop's clipboard
+        # daemon as a unix socket on home-server, where the xclip/wl-paste
+        # shims read it. See configs/clipboard-bridge.
+        RemoteForward = "${config.services.clipboardBridge.socketPath} 127.0.0.1:${toString config.services.clipboardBridge.source.port}";
       };
     };
   };
+  # Screenshots taken on this desktop are readable from SSH sessions it opens.
+  services.clipboardBridge.source.enable = true;
+
   programs.zoxide.enable = true;
 
   # This value determines the Home Manager release that your

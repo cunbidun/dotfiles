@@ -24,10 +24,15 @@ in {
     ../../home-manager/configs/llm_agent.nix
     ../../home-manager/configs/user-secrets.nix
     ../../home-manager/configs/yazi.nix
+    ../../home-manager/configs/clipboard-bridge
   ];
 
   # Only include default packages, no GUI packages
   home.packages = package_config.default_packages;
+
+  # Headless host: Claude Code here reads screenshots from whichever desktop
+  # machine the SSH session came from (see configs/clipboard-bridge).
+  services.clipboardBridge.sink.enable = true;
 
   home.sessionVariables = {
     EDITOR = "nvim";
