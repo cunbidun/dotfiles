@@ -34,6 +34,9 @@ in {
         # two-row spacer state instead of stacking onto it.
         set -gu status-format
         set -g status on
+        # status-left renders the session name ("[#S] "); tmux caps it at 10
+        # columns by default, which truncates longer session names.
+        set -g status-left-length 100
         setw -g xterm-keys on
 
         # -- theme --
