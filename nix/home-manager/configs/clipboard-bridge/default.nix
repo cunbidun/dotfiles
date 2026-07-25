@@ -321,7 +321,10 @@ in {
 
     (lib.mkIf (cfg.sink.enable && cfg.sink.x11.enable) {
       # Point every session at the headless server, so clipboard readers find it.
+      # sessionVariables covers shells (login via .zprofile, non-login via
+      # .zshenv); systemd user services read environment.d instead, so set both.
       home.sessionVariables.DISPLAY = cfg.sink.x11.display;
+      systemd.user.sessionVariables.DISPLAY = cfg.sink.x11.display;
 
       systemd.user.services.clipboard-xvfb = {
         Unit.Description = "Headless X server backing remote clipboard paste";
