@@ -240,6 +240,7 @@
       "datagrip"
       "codex-app"
       "claude"
+      "handy"
     ];
     global.autoUpdate = true;
   };
