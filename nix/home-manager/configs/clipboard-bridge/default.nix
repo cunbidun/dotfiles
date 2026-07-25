@@ -167,6 +167,68 @@
     echo "clipaste-paste: could not reach the clipboard bridge (is the tunnel up?)" >&2
     exit 1
   '';
+  # Codex (and anything else built on the arboard crate) reads the clipboard
+  # in-process over X11 rather than shelling out, so the shims above never see
+  # it. Giving it a real headless X server whose CLIPBOARD selection we own makes
+  # Ctrl+V work natively. X11 selections are pull-based, so the image is fetched
+  # only when a paste actually happens — nothing polls.
+  x11Owner = pkgs.writeScriptBin "clipboard-x11-owner" ''
+    #!${pkgs.python3.withPackages (ps: [ps.xlib])}/bin/python3
+    """Own the X CLIPBOARD selection, serving the remote image on demand."""
+    import urllib.request
+    from Xlib import X, Xatom, display
+    from Xlib.protocol import event
+
+    URL = "http://127.0.0.1:${toString cfg.port}/clipboard/image"
+    # One ChangeProperty cannot exceed the server's maximum request length, so
+    # oversized images are appended in chunks. The requestor still sees a single
+    # property, which avoids the INCR state machine entirely.
+    CHUNK = 200000
+
+    d = display.Display()
+    win = d.screen().root.create_window(0, 0, 1, 1, 0, X.CopyFromParent)
+    CLIPBOARD = d.get_atom("CLIPBOARD")
+    TARGETS = d.get_atom("TARGETS")
+    PNG = d.get_atom("image/png")
+
+
+    def serve(req):
+        """Fill the requestor's property; return it, or NONE to refuse."""
+        prop = req.property if req.property != X.NONE else req.target
+        try:
+            if req.target == TARGETS:
+                req.requestor.change_property(prop, Xatom.ATOM, 32, [TARGETS, PNG])
+            elif req.target == PNG:
+                with urllib.request.urlopen(URL, timeout=10) as r:
+                    data = r.read()
+                if not data:
+                    return X.NONE
+                req.requestor.change_property(prop, PNG, 8, data[:CHUNK])
+                for i in range(CHUNK, len(data), CHUNK):
+                    req.requestor.change_property(
+                        prop, PNG, 8, data[i:i + CHUNK], mode=X.PropModeAppend
+                    )
+            else:
+                return X.NONE
+        except Exception:
+            # A dead tunnel must not kill the owner, or paste breaks until restart.
+            return X.NONE
+        return prop
+
+
+    win.set_selection_owner(CLIPBOARD, X.CurrentTime)
+    d.sync()
+    while True:
+        e = d.next_event()
+        if e.type == X.SelectionRequest:
+            d.send_event(e.requestor, event.SelectionNotify(
+                time=e.time, requestor=e.requestor, selection=e.selection,
+                target=e.target, property=serve(e)))
+            d.flush()
+        elif e.type == X.SelectionClear:
+            win.set_selection_owner(CLIPBOARD, X.CurrentTime)
+            d.sync()
+  '';
 in {
   options.services.clipboardBridge = {
     port = lib.mkOption {
@@ -195,6 +257,20 @@ in {
 
     sink = {
       enable = lib.mkEnableOption "the xclip/wl-paste shims (headless hosts running Claude Code)";
+
+      x11 = {
+        enable = lib.mkEnableOption ''
+          a headless X server owning the CLIPBOARD selection, so in-process
+          clipboard readers (Codex, and anything else using arboard) can paste
+          natively instead of going through the xclip shim
+        '';
+
+        display = lib.mkOption {
+          type = lib.types.str;
+          default = ":99";
+          description = "Display the headless X server runs on.";
+        };
+      };
     };
   };
 
@@ -241,6 +317,39 @@ in {
 
     (lib.mkIf cfg.sink.enable {
       home.packages = [sinkXclip sinkWlPaste sinkPasteHelper];
+    })
+
+    (lib.mkIf (cfg.sink.enable && cfg.sink.x11.enable) {
+      # Point every session at the headless server, so clipboard readers find it.
+      home.sessionVariables.DISPLAY = cfg.sink.x11.display;
+
+      systemd.user.services.clipboard-xvfb = {
+        Unit.Description = "Headless X server backing remote clipboard paste";
+        Service = {
+          # /tmp/.X11-unix does not exist on a headless host; /tmp is sticky, so
+          # creating it needs no privileges.
+          ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /tmp/.X11-unix";
+          ExecStart = "${pkgs.xorg.xvfb}/bin/Xvfb ${cfg.sink.x11.display} -screen 0 16x16x8 -nolisten tcp";
+          Restart = "on-failure";
+          RestartSec = "2";
+        };
+        Install.WantedBy = ["default.target"];
+      };
+
+      systemd.user.services.clipboard-x11-owner = {
+        Unit = {
+          Description = "Owns the X CLIPBOARD selection, serving images on demand";
+          After = ["clipboard-xvfb.service"];
+          Requires = ["clipboard-xvfb.service"];
+        };
+        Service = {
+          Environment = "DISPLAY=${cfg.sink.x11.display}";
+          ExecStart = "${x11Owner}/bin/clipboard-x11-owner";
+          Restart = "on-failure";
+          RestartSec = "2";
+        };
+        Install.WantedBy = ["default.target"];
+      };
     })
   ];
 }

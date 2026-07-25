@@ -32,7 +32,11 @@ in {
 
   # Headless host: Claude Code here reads screenshots from whichever desktop
   # machine the SSH session came from (see configs/clipboard-bridge).
-  services.clipboardBridge.sink.enable = true;
+  services.clipboardBridge.sink = {
+    enable = true;
+    # Codex reads the clipboard in-process over X11 and never calls the shims.
+    x11.enable = true;
+  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
