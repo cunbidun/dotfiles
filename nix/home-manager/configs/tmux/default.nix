@@ -55,7 +55,11 @@ in {
         set -g window-status-current-style "bg=colour2,fg=colour0,bold"
         set -g pane-border-style           "fg=colour0"
         set -g pane-active-border-style    "fg=colour2"
-        set -g message-style               "bg=colour2,fg=colour0"
+        # fill= is required: it paints the whole status line, not just the
+        # message text. tmux's own default carries it (bg=yellow,fg=black,
+        # fill=yellow); omitting it leaves the status bar visible underneath
+        # the command prompt when you hit prefix+:.
+        set -g message-style               "bg=colour2,fg=colour0,fill=colour2"
         set -g mode-style                  "bg=colour4,fg=colour15"
         set -g copy-mode-match-style       "bg=colour3,fg=colour0"
         set -g copy-mode-current-match-style "bg=colour4,fg=colour15"
