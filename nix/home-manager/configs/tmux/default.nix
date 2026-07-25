@@ -76,6 +76,11 @@ in {
         bind -r C-h previous-window
         bind -r C-l next-window
 
+        # Re-root the session at the current pane's directory, so newly created
+        # windows and panes start there. Bound after `unbind p` above, which
+        # freed p from its default previous-window binding.
+        bind p attach-session -c "#{pane_current_path}" \; display-message "cwd -> #{pane_current_path}"
+
         # -- copy mode --
         bind -T copy-mode-vi v send -X begin-selection
         bind -T copy-mode-vi C-v send -X rectangle-toggle
