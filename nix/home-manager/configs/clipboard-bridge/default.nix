@@ -14,10 +14,13 @@
 #            and `wl-paste` that shadow the real ones, so an unmodified Claude
 #            Code transparently gets the desktop's screenshot on Ctrl+V.
 #
-# Transport is an SSH reverse tunnel onto a unix socket rather than a TCP port:
-# a forwarded TCP port on the sink is reachable by every local account there
-# (home-server has an unprivileged tailnet-guest user), whereas sshd creates
-# forwarded sockets 0600-owned by the connecting user.
+# Transport is an SSH reverse tunnel on a loopback TCP port, which needs no
+# privileges on either end. A unix socket would isolate better, but sshd creates
+# forwarded sockets owned by root rather than by the connecting user, so making
+# one usable requires StreamLocalBindMask in sshd_config — i.e. root on the sink.
+# Caveat of TCP: the forwarded port is reachable by any local account on the sink
+# while a session is open. Push-to-file would avoid both problems if that ever
+# matters more than the convenience of an on-demand pull.
 {
   config,
   lib,
@@ -60,7 +63,7 @@
 
     PROBE_CMD = ${builtins.toJSON backend.probe}
     FETCH_CMD = ${builtins.toJSON backend.fetch}
-    PORT = ${toString cfg.source.port}
+    PORT = ${toString cfg.port}
 
 
     def has_image():
@@ -109,22 +112,21 @@
         ThreadingHTTPServer(("127.0.0.1", PORT), Handler).serve_forever()
   '';
 
-  # Talks to the source daemon through the forwarded socket. `curl` needs a URL
-  # even when the transport is a unix socket, hence the placeholder host.
-  curlSocket = "${pkgs.curl}/bin/curl -sf --unix-socket ${cfg.socketPath}";
+  # Talks to the source daemon through the forwarded loopback port.
+  curlBase = "${pkgs.curl}/bin/curl -sf --max-time 10 http://127.0.0.1:${toString cfg.port}";
 
   # Shadows the real xclip. Claude Code calls it two ways: once to list
   # available targets, once to read the PNG itself.
   sinkXclip = pkgs.writeShellScriptBin "xclip" ''
     case "$*" in
       *"-t TARGETS"*"-o"*)
-        if ${curlSocket} http://localhost/clipboard/type 2>/dev/null | grep -q '"image"'; then
+        if ${curlBase}/clipboard/type 2>/dev/null | grep -q '"image"'; then
           printf 'TARGETS\nimage/png\n'
         fi
         exit 0
         ;;
       *"-t image/png"*"-o"*)
-        ${curlSocket} http://localhost/clipboard/image 2>/dev/null || true
+        ${curlBase}/clipboard/image 2>/dev/null || true
         exit 0
         ;;
     esac
@@ -136,13 +138,13 @@
   sinkWlPaste = pkgs.writeShellScriptBin "wl-paste" ''
     case "$*" in
       *"--list-types"*)
-        if ${curlSocket} http://localhost/clipboard/type 2>/dev/null | grep -q '"image"'; then
+        if ${curlBase}/clipboard/type 2>/dev/null | grep -q '"image"'; then
           printf 'image/png\ntext/plain\n'
         fi
         exit 0
         ;;
       *"--type image/"*|*"-t image/"*)
-        ${curlSocket} http://localhost/clipboard/image 2>/dev/null || true
+        ${curlBase}/clipboard/image 2>/dev/null || true
         exit 0
         ;;
     esac
@@ -152,12 +154,12 @@
   # For tools that read the clipboard in-process and never call xclip (Codex
   # CLI): materialise the image and print its path to hand over manually.
   sinkPasteHelper = pkgs.writeShellScriptBin "clipaste-paste" ''
-    if ! ${curlSocket} http://localhost/clipboard/type 2>/dev/null | grep -q '"image"'; then
+    if ! ${curlBase}/clipboard/type 2>/dev/null | grep -q '"image"'; then
       echo "clipaste-paste: no image on the clipboard of the machine you SSH'd in from" >&2
       exit 1
     fi
     out="''${TMPDIR:-/tmp}/clipboard-bridge-$(date +%s)-$$.png"
-    if ${curlSocket} -o "$out" http://localhost/clipboard/image 2>/dev/null && [ -s "$out" ]; then
+    if ${curlBase}/clipboard/image -o "$out" 2>/dev/null && [ -s "$out" ]; then
       echo "$out"
       exit 0
     fi
@@ -167,13 +169,14 @@
   '';
 in {
   options.services.clipboardBridge = {
-    socketPath = lib.mkOption {
-      type = lib.types.str;
-      default = "/run/user/1000/clipboard-bridge.sock";
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = 18340;
       description = ''
-        Unix socket on the sink host that the SSH reverse tunnel binds. Sources
-        point their RemoteForward at this path; the sink's shims read from it.
-        Must be writable by the SSH user on the sink (uid 1000 there).
+        Loopback port the source daemon listens on and that the SSH reverse
+        tunnel binds on the sink. Sources point their RemoteForward at it; the
+        sink's shims read from it. 18340 is upstream clipaste's default, so the
+        shims stay compatible with the real clipaste daemon.
       '';
     };
 
@@ -187,12 +190,6 @@ in {
           then "macos"
           else "wayland";
         description = "Which clipboard implementation to read from.";
-      };
-
-      port = lib.mkOption {
-        type = lib.types.port;
-        default = 18340;
-        description = "Loopback port the daemon listens on (clipaste's default).";
       };
     };
 

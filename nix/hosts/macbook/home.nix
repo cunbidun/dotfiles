@@ -73,7 +73,7 @@ in {
       };
       "home-server" = {
         HostName = "home-server";
-        RemoteForward = "${config.services.clipboardBridge.socketPath} 127.0.0.1:${toString config.services.clipboardBridge.source.port}";
+        RemoteForward = "${toString config.services.clipboardBridge.port} 127.0.0.1:${toString config.services.clipboardBridge.port}";
       };
     };
   };
