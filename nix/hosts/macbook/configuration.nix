@@ -193,7 +193,10 @@
 
     onActivation = {
       cleanup = "none";
-      extraFlags = [ "--cleanup" ];
+      # Refresh Homebrew's API cache in-band during switch. Without this,
+      # nix-darwin runs brew with HOMEBREW_NO_AUTO_UPDATE=1 and the cask
+      # metadata goes stale until `brew update` is run out of band.
+      autoUpdate = true;
       upgrade = true;
     };
 
