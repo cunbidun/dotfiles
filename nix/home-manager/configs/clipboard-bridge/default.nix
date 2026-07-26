@@ -175,6 +175,7 @@
   x11Owner = pkgs.writeScriptBin "clipboard-x11-owner" ''
     #!${pkgs.python3.withPackages (ps: [ps.xlib])}/bin/python3
     """Own the X CLIPBOARD selection, serving the remote image on demand."""
+    import sys
     import urllib.request
     from Xlib import X, Xatom, display
     from Xlib.protocol import event
@@ -192,26 +193,38 @@
     PNG = d.get_atom("image/png")
 
 
+    def log(*a):
+        """Journal every request: which target a client asked for is the only way
+        to see why an in-process reader rejects what we offer."""
+        print(*a, file=sys.stderr, flush=True)
+
+
     def serve(req):
         """Fill the requestor's property; return it, or NONE to refuse."""
         prop = req.property if req.property != X.NONE else req.target
+        name = d.get_atom_name(req.target)
         try:
             if req.target == TARGETS:
                 req.requestor.change_property(prop, Xatom.ATOM, 32, [TARGETS, PNG])
+                log("request TARGETS -> offered image/png")
             elif req.target == PNG:
                 with urllib.request.urlopen(URL, timeout=10) as r:
                     data = r.read()
                 if not data:
+                    log("request", name, "-> refused: source returned no data")
                     return X.NONE
                 req.requestor.change_property(prop, PNG, 8, data[:CHUNK])
                 for i in range(CHUNK, len(data), CHUNK):
                     req.requestor.change_property(
                         prop, PNG, 8, data[i:i + CHUNK], mode=X.PropModeAppend
                     )
+                log("request", name, "-> served", len(data), "bytes")
             else:
+                log("request", name, "-> refused: unsupported target")
                 return X.NONE
-        except Exception:
+        except Exception as exc:
             # A dead tunnel must not kill the owner, or paste breaks until restart.
+            log("request", name, "-> failed:", exc)
             return X.NONE
         return prop
 
