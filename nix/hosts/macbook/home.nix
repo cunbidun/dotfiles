@@ -48,6 +48,12 @@ in {
     };
   };
 
+  # Keep one dedicated reverse tunnel to home-server rather than attaching it to
+  # interactive sessions: only the first session can bind the port, so with
+  # several open the others silently lose the tunnel and paste breaks depending
+  # on which session is oldest.
+  services.clipboardBridge.source.tunnelTo = ["home-server"];
+
   # The daemon role here is filled by upstream clipaste (installed outside Nix),
   # which already serves the same HTTP contract on 127.0.0.1:18340 and reads the
   # macOS pasteboard natively. Enabling our own source would collide on that
@@ -56,9 +62,8 @@ in {
   services.clipboardBridge.source.enable = false;
 
   # SSH client config, declarative (mirrors nix/hosts/nixos/home.nix). The
-  # RemoteForward on `home-server` is the clipboard-bridge reverse tunnel: it
-  # exposes this Mac's daemon as a unix socket on the server, where the
-  # xclip/wl-paste shims read it. Paste with Ctrl+V in Claude Code over SSH.
+  # clipboard tunnel deliberately lives in its own connection above rather than
+  # in this block, so opening several sessions cannot break it.
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -73,7 +78,6 @@ in {
       };
       "home-server" = {
         HostName = "home-server";
-        RemoteForward = "${toString config.services.clipboardBridge.port} 127.0.0.1:${toString config.services.clipboardBridge.port}";
       };
     };
   };

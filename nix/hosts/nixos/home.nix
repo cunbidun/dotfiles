@@ -263,15 +263,14 @@ in {
         HostName = "home-server.${userdata.tailnetDomain}";
         User = userdata.username;
         Port = 22;
-        # Clipboard-bridge reverse tunnel: exposes this desktop's clipboard
-        # daemon as a unix socket on home-server, where the xclip/wl-paste
-        # shims read it. See configs/clipboard-bridge.
-        RemoteForward = "${toString config.services.clipboardBridge.port} 127.0.0.1:${toString config.services.clipboardBridge.port}";
       };
     };
   };
   # Screenshots taken on this desktop are readable from SSH sessions it opens.
-  services.clipboardBridge.source.enable = true;
+  services.clipboardBridge.source = {
+    enable = true;
+    tunnelTo = ["home-server"];
+  };
 
   programs.zoxide.enable = true;
 

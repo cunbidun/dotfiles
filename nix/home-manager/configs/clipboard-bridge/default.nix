@@ -112,6 +112,28 @@
         ThreadingHTTPServer(("127.0.0.1", PORT), Handler).serve_forever()
   '';
 
+  # Keeps one reverse tunnel alive per sink. ExitOnForwardFailure makes ssh quit
+  # when the port is already bound, so the supervisor retries instead of leaving
+  # a live connection with no forwarding. On darwin this must be the system ssh:
+  # the generated ssh_config uses UseKeychain, which upstream OpenSSH rejects.
+  tunnelArgv = host: [
+    (
+      if pkgs.stdenv.isDarwin
+      then "/usr/bin/ssh"
+      else "${pkgs.openssh}/bin/ssh"
+    )
+    "-N"
+    "-o"
+    "ExitOnForwardFailure=yes"
+    "-o"
+    "ServerAliveInterval=30"
+    "-o"
+    "ServerAliveCountMax=3"
+    "-R"
+    "${toString cfg.port}:127.0.0.1:${toString cfg.port}"
+    host
+  ];
+
   # Talks to the source daemon through the forwarded loopback port.
   curlBase = "${pkgs.curl}/bin/curl -sf --max-time 10 http://127.0.0.1:${toString cfg.port}";
 
@@ -258,6 +280,23 @@ in {
     source = {
       enable = lib.mkEnableOption "the clipboard bridge daemon (machines with a real clipboard)";
 
+      tunnelTo = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        example = lib.literalExpression ''["home-server"]'';
+        description = ''
+          SSH host aliases to keep a reverse tunnel open to, so the sink can
+          reach this machine's clipboard.
+
+          Putting RemoteForward in ssh_config instead ties the tunnel to
+          interactive sessions, and only the first one can bind the port: every
+          later session warns and silently continues without a tunnel, so paste
+          works or not depending on which session happens to be oldest. A
+          dedicated connection owns the port instead, and paste keeps working
+          with any number of sessions, or none.
+        '';
+      };
+
       backend = lib.mkOption {
         type = lib.types.enum ["macos" "wayland" "x11"];
         default =
@@ -300,6 +339,40 @@ in {
   };
 
   config = lib.mkMerge [
+    (lib.mkIf (cfg.source.tunnelTo != []) (lib.mkMerge [
+      (lib.mkIf pkgs.stdenv.isDarwin {
+        launchd.agents =
+          lib.listToAttrs (map (host:
+            lib.nameValuePair "clipboard-tunnel-${host}" {
+              enable = true;
+              config = {
+                ProgramArguments = tunnelArgv host;
+                RunAtLoad = true;
+                KeepAlive = true;
+              };
+            })
+          cfg.source.tunnelTo);
+      })
+
+      (lib.mkIf pkgs.stdenv.isLinux {
+        systemd.user.services =
+          lib.listToAttrs (map (host:
+            lib.nameValuePair "clipboard-tunnel-${host}" {
+              Unit = {
+                Description = "Reverse clipboard tunnel to ${host}";
+                After = ["network-online.target"];
+              };
+              Service = {
+                ExecStart = lib.escapeShellArgs (tunnelArgv host);
+                Restart = "always";
+                RestartSec = "5";
+              };
+              Install.WantedBy = ["default.target"];
+            })
+          cfg.source.tunnelTo);
+      })
+    ]))
+
     (lib.mkIf cfg.source.enable (lib.mkMerge [
       {home.packages = [sourceDaemon];}
 
