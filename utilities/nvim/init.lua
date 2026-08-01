@@ -181,6 +181,9 @@ vim.filetype.add({
 -- Keybindings (see keymaps.lua)
 require("user.keymaps")
 
+-- Treesitter highlighting and folding (see treesitter.lua)
+require("user.treesitter")
+
 -- Competitive programming commands and keymaps (only when CP_ENV=1)
 if is_cp then
 	require("user.config.competitive_programming")
