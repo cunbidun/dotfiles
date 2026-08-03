@@ -25,6 +25,7 @@ in {
     ../../home-manager/configs/user-secrets.nix
     ../../home-manager/configs/yazi.nix
     ../../home-manager/configs/clipboard-bridge
+    ../../home-manager/configs/activitywatch/server.nix
   ];
 
   # Only include default packages, no GUI packages

@@ -1,4 +1,5 @@
 [tool.codespell]
-ignore-words-list = "iterm,trough,FileTest,Ot,noice,enew"
+# "crate" is the Rust packaging unit, not a typo for "create".
+ignore-words-list = "iterm,trough,FileTest,Ot,noice,enew,crate"
 ignore-regex = "FileTest|Ot"
 skip = "generated/,result,.git,flake.lock,.vscode"

@@ -47,12 +47,17 @@ return {
 	-- branch and project into the aw-watcher-neovim_<host> bucket. The package is
 	-- pinned in nix (nvim.nix), so lazy only has to resolve it out of the plugin
 	-- root -- no download. `opts = {}` is required by the plugin even when empty.
+	--
+	-- The server is on home-server, reached over the tailnet, so this config is
+	-- correct on every machine including home-server itself. Kept in sync by hand
+	-- with nix/home-manager/configs/activitywatch/endpoint.nix, which nix-side
+	-- watchers read -- lua cannot import it.
 	{
 		"lowitea/aw-watcher.nvim",
 		event = "VeryLazy",
 		opts = {
 			aw_server = {
-				host = "127.0.0.1",
+				host = "home-server",
 				port = 5600,
 			},
 		},

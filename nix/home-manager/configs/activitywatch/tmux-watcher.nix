@@ -21,10 +21,11 @@
   # very tmux the user's sessions run under, not a second copy from pkgs.
   tmuxPackage = config.programs.tmux.package;
 
+  endpoint = import ./endpoint.nix;
+
   settings = {
     tmux = "${tmuxPackage}/bin/tmux";
-    host = "127.0.0.1";
-    port = 5600;
+    inherit (endpoint) host port;
     # Poll interval, and how long a gap the server may bridge when merging two
     # heartbeats carrying identical data. pulsetime > poll keeps a steady pane
     # from fragmenting into one event per tick.
@@ -246,7 +247,7 @@ in {
       Description = "ActivityWatch watcher 'tmux'";
       # Focus gating reads buckets that only awatcher fills, so this watcher is
       # useless outside a graphical session and follows it in and out.
-      After = ["graphical-session.target" "activitywatch.service"];
+      After = ["graphical-session.target"];
       Requisite = ["graphical-session.target"];
       PartOf = ["graphical-session.target"];
     };
