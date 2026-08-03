@@ -144,22 +144,24 @@
             "#{session_name}",
             "#{window_index}",
             "#{window_name}",
+            "#{pane_index}",
             "#{pane_current_command}",
             "#{pane_current_path}",
         ])
         line = tmux(sock, "display-message", "-p", "-t", session, "-F", fmt)
         if not line:
             return None
-        name, index, window, command, path = line.split("\t")
+        name, index, window, pane, command, path = line.split("\t")
         home = os.path.expanduser("~")
         pretty = f"~{path[len(home):]}" if path.startswith(home) else path
         return {
             "session": name,
             "window": f"{index}:{window}",
+            "pane": f"{pane}:{command}",
             "command": command,
             "path": pretty,
             "project": os.path.basename(path) or path,
-            "title": f"{name} > {window} > {command}",
+            "title": f"{name} - {index}:{window} - {pane}:{command} - {pretty}",
         }
 
 
