@@ -134,8 +134,10 @@
         event = last_event(WINDOW_BUCKET)
         if event is None:
             return "no window events"
+        # An unchanged window stays a single event whose duration grows, so its
+        # end -- not its start -- is what says whether awatcher is still alive.
         stamp = datetime.fromisoformat(event["timestamp"])
-        age = (datetime.now(timezone.utc) - stamp).total_seconds()
+        age = (datetime.now(timezone.utc) - stamp).total_seconds() - event["duration"]
         if age > CFG["focusMaxAge"]:
             return f"window bucket stale ({int(age)}s)"
         app = event["data"].get("app", "")
@@ -168,17 +170,28 @@
         # aw-server may still be starting; the bucket is created lazily so a slow
         # server delays the first heartbeat instead of crash-looping the unit.
         ready = False
+        # Skipping is the normal state (any second spent outside tmux), so only
+        # transitions are logged -- enough to answer "why is nothing recorded?"
+        # from journalctl without a line every poll. None is a meaningful state
+        # here ("recording"), hence a separate sentinel for "nothing logged yet".
+        unset = object()
+        last_state = unset
         while True:
             try:
                 if not ready:
                     ensure_bucket()
                     ready = True
                 pane = foreground_pane()
-                if pane is not None and blocked() is None:
+                state = "no attached client" if pane is None else blocked()
+                if state is None:
                     heartbeat(pane)
+                if state != last_state:
+                    log(f"recording {pane['title']}" if state is None else f"idle: {state}")
+                    last_state = state
             except Exception as err:  # noqa: BLE001 -- a poll failure must not end the loop
-                log(f"aw-watcher-tmux: {err!r}")
+                log(f"error: {err!r}")
                 ready = False
+                last_state = unset
             time.sleep(CFG["poll"])
 
 
