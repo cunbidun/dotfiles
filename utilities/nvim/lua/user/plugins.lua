@@ -43,6 +43,29 @@ return {
 			},
 		},
 	},
+	-- ActivityWatch editor watcher: heartbeats the edited file, filetype, git
+	-- branch and project into the aw-watcher-neovim_<host> bucket. The package is
+	-- pinned in nix (nvim.nix), so lazy only has to resolve it out of the plugin
+	-- root -- no download. `opts = {}` is required by the plugin even when empty.
+	{
+		"lowitea/aw-watcher.nvim",
+		event = "VeryLazy",
+		opts = {
+			aw_server = {
+				host = "127.0.0.1",
+				port = 5600,
+			},
+		},
+		config = function(_, opts)
+			require("aw_watcher").setup(opts)
+			-- The plugin fills branch/project from FileType/BufEnter/FocusGained,
+			-- all of which already fired for the buffer opened at startup. Seed them
+			-- once so the first file of a session isn't reported without a project.
+			local utils = require("aw_watcher.utils")
+			utils.set_branch_name()
+			utils.set_project_name()
+		end,
+	},
 	-- Suppress nvim 0.12 + noice incompatibility: vim._with fires cmdline_block_append
 	-- events via :append during BufReadPost which noice's handler can't handle safely.
 	{

@@ -37,7 +37,7 @@ in {
     ../../home-manager/systemd.nix
     ../../home-manager/configs/theme-runtime.nix
     ../../home-manager/configs/clipboard-bridge
-    ../../home-manager/configs/activitywatch.nix
+    ../../home-manager/configs/activitywatch
     ../../home-manager/configs/spicetify.nix
     ../../home-manager/configs/chrome
     ../../home-manager/configs/handy.nix

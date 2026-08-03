@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  imports = [./tmux-watcher.nix];
+
   services.activitywatch = {
     enable = true;
     package = pkgs.nixpkgs-stable.aw-server-rust;

@@ -20,6 +20,14 @@ local themes = {
 
 local last
 
+-- Snacks links untracked and ignored files to the same NonText gray, so untracked
+-- files read as ignored in the explorer. VS Code paints untracked green (same hue as
+-- added) and keeps gray for ignored only. Linking to the "added" group keeps this
+-- theme-aware instead of pinning VS Code's #73C991.
+local function fix_git_status_hl()
+	vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { link = "SnacksPickerGitStatusAdded" })
+end
+
 local function load_plugin(name)
 	pcall(function()
 		require("lazy").load({ plugins = { name } })
@@ -74,7 +82,15 @@ function M.apply(force)
 end
 
 function M.setup()
+	-- Runs after the colorscheme (and after snacks re-applies its own defaults),
+	-- so our link wins on every theme switch.
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		group = vim.api.nvim_create_augroup("user_git_status_hl", { clear = true }),
+		callback = fix_git_status_hl,
+	})
+
 	M.apply(true)
+	fix_git_status_hl()
 
 	-- Watch the parent directory so atomic file replacement triggers one reload.
 	local watcher = (vim.uv or vim.loop).new_fs_event()
