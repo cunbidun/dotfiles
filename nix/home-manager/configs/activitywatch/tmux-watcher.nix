@@ -44,6 +44,7 @@
     import json
     import os
     import socket
+    import stat
     import subprocess
     import sys
     import time
@@ -87,21 +88,58 @@
         return events[0] if events else None
 
 
-    def tmux(*args):
+    def tmux(sock, *args):
         result = subprocess.run(
-            [CFG["tmux"], *args], capture_output=True, text=True, timeout=5
+            [CFG["tmux"], "-S", sock, *args], capture_output=True, text=True, timeout=5
         )
         # Non-zero covers the common "no server running" case, which is not an error.
         return result.stdout.strip() if result.returncode == 0 else None
 
 
+    def sockets():
+        """Every tmux server socket this user has, across candidate socket dirs.
+
+        home-manager's programs.tmux.secureSocket (on by default) moves the socket
+        under XDG_RUNTIME_DIR by exporting TMUX_TMPDIR from hm-session-vars.sh --
+        which only interactive shells source. A systemd unit inherits none of it
+        and would fall back to tmux's compiled-in /tmp, finding nothing forever.
+        Scanning the candidate dirs avoids depending on that variable at all, and
+        picks up `tmux -L <name>` sockets for free.
+        """
+        uid = os.getuid()
+        found, seen = [], set()
+        for base in (os.environ.get("TMUX_TMPDIR"), os.environ.get("XDG_RUNTIME_DIR"), "/tmp"):
+            directory = os.path.join(base, f"tmux-{uid}") if base else None
+            if directory is None or directory in seen:
+                continue
+            seen.add(directory)
+            try:
+                entries = list(os.scandir(directory))
+            except OSError:  # dir absent on hosts where tmux never ran
+                continue
+            found += [e.path for e in entries if stat.S_ISSOCK(e.stat().st_mode)]
+        return found
+
+
     def foreground_pane():
-        """Active pane of the session whose client was used most recently."""
-        clients = tmux("list-clients", "-F", "#{client_activity}\t#{client_session}")
-        if not clients:
+        """Active pane of the session whose client was used most recently.
+
+        client_activity only advances on client *input*, so reading a second
+        attached session without typing still attributes time to the one last
+        typed in. No better signal exists: tmux cannot see OS-level focus.
+        """
+        newest = None
+        for sock in sockets():
+            clients = tmux(sock, "list-clients", "-F", "#{client_activity}\t#{client_session}")
+            if not clients:
+                continue
+            for line in clients.splitlines():
+                activity, session = line.split("\t", 1)
+                if newest is None or int(activity) > newest[0]:
+                    newest = (int(activity), sock, session)
+        if newest is None:
             return None
-        newest = max(clients.splitlines(), key=lambda line: int(line.split("\t")[0]))
-        session = newest.split("\t")[1]
+        _, sock, session = newest
         fmt = "\t".join([
             "#{session_name}",
             "#{window_index}",
@@ -109,7 +147,7 @@
             "#{pane_current_command}",
             "#{pane_current_path}",
         ])
-        line = tmux("display-message", "-p", "-t", session, "-F", fmt)
+        line = tmux(sock, "display-message", "-p", "-t", session, "-F", fmt)
         if not line:
             return None
         name, index, window, command, path = line.split("\t")
