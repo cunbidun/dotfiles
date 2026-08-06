@@ -22,6 +22,7 @@ in {
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/user-secrets.nix
     ../../home-manager/configs/clipboard-bridge
+    ../../home-manager/configs/activitywatch/darwin.nix
     inputs.self.homeManagerModules.theme-manager
     inputs.mac-app-util.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops

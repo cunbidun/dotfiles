@@ -11,6 +11,12 @@
 #
 # Consequence worth knowing: heartbeats are not buffered. While the tailnet is
 # down, watchers lose that stretch of time rather than backfilling it.
+#
+# `host` is the bare tailnet name, which only resolves as-is where tailscaled
+# owns DNS. That holds on the NixOS hosts but not on darwin: there the router's
+# search domain wins and the name lands on the LAN address, where 5600 is closed
+# per the note above. Anything that has to work on darwin qualifies it with
+# userdata.tailnetDomain, the way ./server.nix and ./darwin.nix do.
 {
   host = "home-server";
   port = 5600;
