@@ -10,6 +10,10 @@
 }: let
   endpoint = import ./endpoint.nix;
 in {
+  # Derived data, so it lives with the datastore rather than with the watchers --
+  # see the header of ./ios-mirror.nix.
+  imports = [./ios-mirror.nix];
+
   services.activitywatch = {
     enable = true;
     package = pkgs.nixpkgs-stable.aw-server-rust;
