@@ -17,7 +17,6 @@ in {
     ../../home-manager/configs/starship.nix
     ../../home-manager/configs/nvim.nix
     ../../home-manager/configs/tmux
-    ../../home-manager/configs/vscode.nix
     ../../home-manager/configs/llm_agent.nix
     ../../home-manager/configs/shared/git.nix
     ../../home-manager/configs/user-secrets.nix
