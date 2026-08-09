@@ -1,0 +1,307 @@
+{
+  "alicode": {
+    "name": "Alibaba",
+    "color": "#FF6A00",
+    "textIcon": "ALi"
+  },
+  "alicode-intl": {
+    "name": "Alibaba Coding",
+    "color": "#FF6A00",
+    "textIcon": "ALi"
+  },
+  "alims-intl": {
+    "name": "Alibaba Studio",
+    "color": "#FF6A00",
+    "textIcon": "ALi"
+  },
+  "anthropic": {
+    "name": "Anthropic",
+    "color": "#D97757",
+    "textIcon": "AN"
+  },
+  "assemblyai": {
+    "name": "AssemblyAI",
+    "color": "#0062FF",
+    "textIcon": "AA"
+  },
+  "azure": {
+    "name": "Azure OpenAI",
+    "color": "#0078D4",
+    "textIcon": "AZ"
+  },
+  "black-forest-labs": {
+    "name": "Black Forest Labs",
+    "color": "#111827",
+    "textIcon": "BF"
+  },
+  "blackbox": {
+    "name": "Blackbox AI",
+    "color": "#5B5FEF",
+    "textIcon": "BB"
+  },
+  "byteplus": {
+    "name": "BytePlus ModelArk",
+    "color": "#2563EB",
+    "textIcon": "BP"
+  },
+  "cerebras": {
+    "name": "Cerebras",
+    "color": "#FF4F00",
+    "textIcon": "CB"
+  },
+  "cline": {
+    "name": "Cline",
+    "color": "#5B9BD5",
+    "textIcon": "CL"
+  },
+  "clinepass": {
+    "name": "ClinePass",
+    "color": "#5B9BD5",
+    "textIcon": "CP"
+  },
+  "cloudflare-ai": {
+    "name": "Cloudflare",
+    "color": "#F38020",
+    "textIcon": "CF"
+  },
+  "cohere": {
+    "name": "Cohere",
+    "color": "#39594D",
+    "textIcon": "CO"
+  },
+  "comfyui": {
+    "name": "ComfyUI",
+    "color": "#4CAF50",
+    "textIcon": "CF"
+  },
+  "commandcode": {
+    "name": "Command Code",
+    "color": "#000000",
+    "textIcon": "CC"
+  },
+  "deepgram": {
+    "name": "Deepgram",
+    "color": "#13EF93",
+    "textIcon": "DG"
+  },
+  "deepseek": {
+    "name": "DeepSeek",
+    "color": "#4D6BFE",
+    "textIcon": "DS"
+  },
+  "fal-ai": {
+    "name": "Fal.ai",
+    "color": "#2563EB",
+    "textIcon": "FL"
+  },
+  "featherless": {
+    "name": "Featherless",
+    "color": "#111827",
+    "textIcon": "FL"
+  },
+  "fireworks": {
+    "name": "Fireworks AI",
+    "color": "#7B2EF2",
+    "textIcon": "FW"
+  },
+  "gemini": {
+    "name": "Gemini",
+    "color": "#4285F4",
+    "textIcon": "GE"
+  },
+  "glm": {
+    "name": "GLM Coding",
+    "color": "#2563EB",
+    "textIcon": "GL"
+  },
+  "glm-cn": {
+    "name": "GLM (China)",
+    "color": "#DC2626",
+    "textIcon": "GC"
+  },
+  "grok-cli": {
+    "name": "Grok CLI (Grok Build)",
+    "color": "#1DA1F2",
+    "textIcon": "GC"
+  },
+  "grok-web": {
+    "name": "Grok Web (Subscription)",
+    "color": "#1DA1F2",
+    "textIcon": "GW"
+  },
+  "groq": {
+    "name": "Groq",
+    "color": "#F55036",
+    "textIcon": "GQ"
+  },
+  "huggingface": {
+    "name": "HuggingFace",
+    "color": "#FFD21E",
+    "textIcon": "HF"
+  },
+  "hyperbolic": {
+    "name": "Hyperbolic",
+    "color": "#00D4FF",
+    "textIcon": "HY"
+  },
+  "kilocode": {
+    "name": "Kilo Code",
+    "color": "#FF6B35",
+    "textIcon": "KC"
+  },
+  "kimchi": {
+    "name": "Kimchi",
+    "color": "#FF521D",
+    "textIcon": "KC"
+  },
+  "kimi": {
+    "name": "Kimi",
+    "color": "#1E3A8A",
+    "textIcon": "KM"
+  },
+  "minimax": {
+    "name": "Minimax Coding",
+    "color": "#7C3AED",
+    "textIcon": "MM"
+  },
+  "minimax-cn": {
+    "name": "Minimax (China)",
+    "color": "#DC2626",
+    "textIcon": "MC"
+  },
+  "mistral": {
+    "name": "Mistral",
+    "color": "#FF7000",
+    "textIcon": "MI"
+  },
+  "nanobanana": {
+    "name": "NanoBanana API",
+    "color": "#FFD700",
+    "textIcon": "🍌"
+  },
+  "nebius": {
+    "name": "Nebius AI",
+    "color": "#6C5CE7",
+    "textIcon": "NB"
+  },
+  "nvidia": {
+    "name": "NVIDIA NIM",
+    "color": "#76B900",
+    "textIcon": "NV"
+  },
+  "openai": {
+    "name": "OpenAI",
+    "color": "#10A37F",
+    "textIcon": "OA"
+  },
+  "opencode": {
+    "name": "OpenCode Free",
+    "color": "#E87040",
+    "textIcon": "OC"
+  },
+  "opencode-go": {
+    "name": "OpenCode Go",
+    "color": "#E87040",
+    "textIcon": "OC"
+  },
+  "openrouter": {
+    "name": "OpenRouter",
+    "color": "#F97316",
+    "textIcon": "OR"
+  },
+  "perplexity": {
+    "name": "Perplexity",
+    "color": "#20808D",
+    "textIcon": "PP"
+  },
+  "perplexity-agent": {
+    "name": "Perplexity Agent",
+    "color": "#20808D",
+    "textIcon": "PA"
+  },
+  "perplexity-web": {
+    "name": "Perplexity Web (Pro/Max)",
+    "color": "#20808D",
+    "textIcon": "PW"
+  },
+  "poolside": {
+    "name": "Poolside",
+    "color": "#0EA5E9",
+    "textIcon": "PS"
+  },
+  "recraft": {
+    "name": "Recraft",
+    "color": "#EC4899",
+    "textIcon": "RC"
+  },
+  "runwayml": {
+    "name": "Runway ML",
+    "color": "#000000",
+    "textIcon": "RW"
+  },
+  "sdwebui": {
+    "name": "SD WebUI",
+    "color": "#FF7043",
+    "textIcon": "SD"
+  },
+  "siliconflow": {
+    "name": "SiliconFlow",
+    "color": "#5B6EF5",
+    "textIcon": "SF"
+  },
+  "stability-ai": {
+    "name": "Stability AI",
+    "color": "#8B5CF6",
+    "textIcon": "SA"
+  },
+  "together": {
+    "name": "Together AI",
+    "color": "#0F6FFF",
+    "textIcon": "TG"
+  },
+  "venice": {
+    "name": "Venice AI",
+    "color": "#DC2626",
+    "textIcon": "VE"
+  },
+  "vercel-ai-gateway": {
+    "name": "Vercel AI Gateway",
+    "color": "#111827",
+    "textIcon": "VG"
+  },
+  "vertex": {
+    "name": "Vertex AI",
+    "color": "#4285F4",
+    "textIcon": "VX"
+  },
+  "vertex-partner": {
+    "name": "Vertex Partner",
+    "color": "#34A853",
+    "textIcon": "VP"
+  },
+  "volcengine-ark": {
+    "name": "Volcengine Ark",
+    "color": "#1677FF",
+    "textIcon": "ARK"
+  },
+  "voyage-ai": {
+    "name": "Voyage AI",
+    "color": "#0EA5E9",
+    "textIcon": "VG"
+  },
+  "xai": {
+    "name": "xAI (Grok)",
+    "color": "#1DA1F2",
+    "textIcon": "XA"
+  },
+  "xiaomi-mimo": {
+    "name": "Xiaomi MiMo",
+    "color": "#FF6900",
+    "textIcon": "XM"
+  },
+  "xiaomi-tokenplan": {
+    "name": "Xiaomi MiMo (Token Plan)",
+    "color": "#FF6700",
+    "textIcon": "XT"
+  }
+}

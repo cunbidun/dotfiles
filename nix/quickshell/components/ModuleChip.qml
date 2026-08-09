@@ -5,6 +5,8 @@ Rectangle {
 
     required property var theme
     property string icon: ""
+    // Image icon (e.g. a brand SVG) used instead of the nerd-font glyph when set.
+    property string iconSource: ""
     property string label: ""
     property bool active: false
     property int maxLabelWidth: 0
@@ -13,7 +15,7 @@ Rectangle {
     property color iconColor: active ? theme.selectedForeground : theme.chipIcon
     property var activate: () => {}
 
-    visible: label.length > 0 || icon.length > 0
+    visible: label.length > 0 || icon.length > 0 || iconSource.length > 0
     implicitWidth: content.implicitWidth + theme.chipPaddingX * 2
     implicitHeight: theme.barItemHeight
     width: implicitWidth
@@ -31,13 +33,34 @@ Rectangle {
         id: content
 
         anchors.centerIn: parent
-        spacing: root.icon.length > 0 && root.label.length > 0 ? root.theme.iconGap : 0
+        spacing: (root.icon.length > 0 || root.iconSource.length > 0) && root.label.length > 0 ? root.theme.iconGap : 0
         height: root.height
+
+        Item {
+            id: iconImageSlot
+
+            visible: root.iconSource.length > 0
+            width: visible ? root.theme.barIconSize : 0
+            height: parent.height
+
+            Image {
+                anchors.centerIn: parent
+                width: root.theme.barIconSize
+                height: root.theme.barIconSize
+                source: root.iconSource
+                // SVGs rasterize at sourceSize, so render above the display size
+                // and let it scale down rather than up.
+                sourceSize.width: root.theme.barIconSize * 3
+                sourceSize.height: root.theme.barIconSize * 3
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+            }
+        }
 
         Text {
             id: iconText
 
-            visible: root.icon.length > 0
+            visible: root.icon.length > 0 && root.iconSource.length === 0
             height: parent.height
             text: root.icon
             color: root.iconColor

@@ -78,6 +78,17 @@ Item {
     readonly property bool weatherMetric: true
     readonly property string weatherUrl: `https://weather.com/weather/today/l/${encodeURIComponent(weatherLocation)}`
 
+    // 9Router proxy — exposes per-connection quota at /api/usage/<connection id>.
+    readonly property string aiProxyUrl: "https://ai-proxy.tail9b4f4d.ts.net"
+    readonly property int aiQuotaRefreshInterval: 5 * 60 * 1000
+    readonly property int aiQuotaPopupWidth: popupWidth
+    readonly property int aiQuotaMaxListHeight: Math.round(em * 34)
+    readonly property int aiQuotaBarHeight: Math.round(em * 0.42)
+    readonly property int aiQuotaProviderIconSize: Math.round(em * 1.5)
+    // Remaining-percentage thresholds that drive the chip tint and bar colors.
+    readonly property real aiQuotaWarnPercent: 40
+    readonly property real aiQuotaDangerPercent: 15
+
     readonly property int workspaceGap: Math.round(em * 0.375)
     readonly property int workspaceHeight: barItemHeight
     readonly property int workspaceRadius: generalRadius

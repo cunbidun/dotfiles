@@ -55,6 +55,11 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         spacing: root.theme.moduleGap
 
+        AiQuota {
+            theme: root.theme
+            panelWindow: root.panelWindow
+        }
+
         SystemTray {
             theme: root.theme
             panelWindow: root.panelWindow
