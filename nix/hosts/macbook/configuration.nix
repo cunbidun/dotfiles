@@ -226,7 +226,6 @@
       "iterm2"
       "1password"
       "spotify"
-      "alt-tab"
       "signal"
       "obsidian"
       "discord"
