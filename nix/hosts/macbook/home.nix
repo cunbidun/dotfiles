@@ -54,6 +54,12 @@ in {
   # on which session is oldest.
   services.clipboardBridge.source.tunnelTo = ["home-server"];
 
+  # A port of this host's own on home-server. Sharing 18340 with the nixos
+  # desktop meant only one of the two could ever bind it, and because this is a
+  # laptop it usually won and then slept — leaving the port held by tailscaled
+  # and the desktop's tunnel crash-looping until tailscaled was restarted.
+  services.clipboardBridge.source.remotePort = 18341;
+
   # The daemon role here is filled by upstream clipaste (installed outside Nix),
   # which already serves the same HTTP contract on 127.0.0.1:18340 and reads the
   # macOS pasteboard natively. Enabling our own source would collide on that

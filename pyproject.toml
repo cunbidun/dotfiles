@@ -1,5 +1,8 @@
 [tool.codespell]
 # "crate" is the Rust packaging unit, not a typo for "create".
-ignore-words-list = "iterm,trough,FileTest,Ot,noice,enew,crate"
+# "requestor" is the X11 spelling: it is the name of a field in the protocol's
+# SelectionRequest/SelectionNotify events, and of the python-xlib attribute
+# reading it, so it cannot be spelled "requester" here.
+ignore-words-list = "iterm,trough,FileTest,Ot,noice,enew,crate,requestor"
 ignore-regex = "FileTest|Ot"
 skip = "generated/,result,.git,flake.lock,.vscode"

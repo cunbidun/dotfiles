@@ -130,25 +130,63 @@
     "-o"
     "ServerAliveCountMax=3"
     "-R"
-    "${toString cfg.port}:127.0.0.1:${toString cfg.port}"
+    "${toString cfg.source.remotePort}:127.0.0.1:${toString cfg.port}"
     host
   ];
 
-  # Talks to the source daemon through the forwarded loopback port.
-  curlBase = "${pkgs.curl}/bin/curl -sf --max-time 10 http://127.0.0.1:${toString cfg.port}";
+  sinkPortList = lib.concatMapStringsSep " " toString cfg.sink.ports;
+
+  # Finds the first source that actually answers with an image on its clipboard.
+  #
+  # Timeouts are short and deliberate. A source that went to sleep leaves its
+  # forwarded listener bound on the sink (tailscaled owns the listener
+  # in-process and does not release it when the peer stops answering), so
+  # connections to a dead source are accepted and then hang forever rather than
+  # being refused. Waiting the old 10s on the first such port made every paste
+  # feel broken; 2s is well past a loopback round-trip and lets the loop move on
+  # to a source that is awake.
+  sinkProbe = ''
+    curl_bridge() { # <port> <path> [curl args...]
+      local port=$1 path=$2
+      shift 2
+      ${pkgs.curl}/bin/curl -sf --max-time 2 "$@" "http://127.0.0.1:$port$path"
+    }
+
+    # Echoes the port serving an image, or nothing when no source has one.
+    image_port() {
+      local port
+      for port in ${sinkPortList}; do
+        if curl_bridge "$port" /clipboard/type 2>/dev/null | grep -q '"image"'; then
+          echo "$port"
+          return 0
+        fi
+      done
+      return 1
+    }
+
+    # Only ever called with a port that just answered the probe, so the transfer
+    # gets a real budget: a large screenshot over a relayed tunnel is slow, but
+    # it is no longer at risk of blocking on a dead source.
+    fetch_image() { # <port> [curl args...]
+      local port=$1
+      shift
+      ${pkgs.curl}/bin/curl -sf --max-time 20 "$@" "http://127.0.0.1:$port/clipboard/image"
+    }
+  '';
 
   # Shadows the real xclip. Claude Code calls it two ways: once to list
   # available targets, once to read the PNG itself.
   sinkXclip = pkgs.writeShellScriptBin "xclip" ''
+    ${sinkProbe}
     case "$*" in
       *"-t TARGETS"*"-o"*)
-        if ${curlBase}/clipboard/type 2>/dev/null | grep -q '"image"'; then
+        if image_port >/dev/null; then
           printf 'TARGETS\nimage/png\n'
         fi
         exit 0
         ;;
       *"-t image/png"*"-o"*)
-        ${curlBase}/clipboard/image 2>/dev/null || true
+        port=$(image_port) && fetch_image "$port" 2>/dev/null || true
         exit 0
         ;;
     esac
@@ -158,15 +196,16 @@
   '';
 
   sinkWlPaste = pkgs.writeShellScriptBin "wl-paste" ''
+    ${sinkProbe}
     case "$*" in
       *"--list-types"*)
-        if ${curlBase}/clipboard/type 2>/dev/null | grep -q '"image"'; then
+        if image_port >/dev/null; then
           printf 'image/png\ntext/plain\n'
         fi
         exit 0
         ;;
       *"--type image/"*|*"-t image/"*)
-        ${curlBase}/clipboard/image 2>/dev/null || true
+        port=$(image_port) && fetch_image "$port" 2>/dev/null || true
         exit 0
         ;;
     esac
@@ -176,12 +215,13 @@
   # For tools that read the clipboard in-process and never call xclip (Codex
   # CLI): materialise the image and print its path to hand over manually.
   sinkPasteHelper = pkgs.writeShellScriptBin "clipaste-paste" ''
-    if ! ${curlBase}/clipboard/type 2>/dev/null | grep -q '"image"'; then
+    ${sinkProbe}
+    if ! port=$(image_port); then
       echo "clipaste-paste: no image on the clipboard of the machine you SSH'd in from" >&2
       exit 1
     fi
     out="''${TMPDIR:-/tmp}/clipboard-bridge-$(date +%s)-$$.png"
-    if ${curlBase}/clipboard/image -o "$out" 2>/dev/null && [ -s "$out" ]; then
+    if fetch_image "$port" -o "$out" 2>/dev/null && [ -s "$out" ]; then
       echo "$out"
       exit 0
     fi
@@ -197,12 +237,18 @@
   x11Owner = pkgs.writeScriptBin "clipboard-x11-owner" ''
     #!${pkgs.python3.withPackages (ps: [ps.xlib])}/bin/python3
     """Own the X CLIPBOARD selection, serving the remote image on demand."""
+    import json
     import sys
     import urllib.request
     from Xlib import X, Xatom, display
     from Xlib.protocol import event
 
-    URL = "http://127.0.0.1:${toString cfg.port}/clipboard/image"
+    PORTS = ${builtins.toJSON cfg.sink.ports}
+    # Short, like the shell shims: a source that fell asleep leaves its listener
+    # bound, so a connection to it is accepted and then never answered. Probing
+    # cheaply first means a sleeping laptop costs 2s, not a hung paste.
+    PROBE_TIMEOUT = 2
+    FETCH_TIMEOUT = 20
     # One ChangeProperty cannot exceed the server's maximum request length, so
     # oversized images are appended in chunks. The requestor still sees a single
     # property, which avoids the INCR state machine entirely.
@@ -221,6 +267,24 @@
         print(*a, file=sys.stderr, flush=True)
 
 
+    def fetch_image():
+        """Return PNG bytes from the first source reporting an image, else b""."""
+        for port in PORTS:
+            base = "http://127.0.0.1:%d/clipboard" % port
+            try:
+                with urllib.request.urlopen(base + "/type", timeout=PROBE_TIMEOUT) as r:
+                    if json.load(r).get("type") != "image":
+                        continue
+                with urllib.request.urlopen(base + "/image", timeout=FETCH_TIMEOUT) as r:
+                    data = r.read()
+            except Exception as exc:
+                log("port", port, "-> unreachable:", exc)
+                continue
+            if data:
+                return data
+        return b""
+
+
     def serve(req):
         """Fill the requestor's property; return it, or NONE to refuse."""
         prop = req.property if req.property != X.NONE else req.target
@@ -230,8 +294,7 @@
                 req.requestor.change_property(prop, Xatom.ATOM, 32, [TARGETS, PNG])
                 log("request TARGETS -> offered image/png")
             elif req.target == PNG:
-                with urllib.request.urlopen(URL, timeout=10) as r:
-                    data = r.read()
+                data = fetch_image()
                 if not data:
                     log("request", name, "-> refused: source returned no data")
                     return X.NONE
@@ -270,10 +333,13 @@ in {
       type = lib.types.port;
       default = 18340;
       description = ''
-        Loopback port the source daemon listens on and that the SSH reverse
-        tunnel binds on the sink. Sources point their RemoteForward at it; the
-        sink's shims read from it. 18340 is upstream clipaste's default, so the
-        shims stay compatible with the real clipaste daemon.
+        Loopback port the source daemon listens on, on the source machine
+        itself. 18340 is upstream clipaste's default, so this stays compatible
+        with the real clipaste daemon on hosts that run it.
+
+        This is the local end of the tunnel only. Which port the forward binds
+        on the sink is `source.remotePort`, and which ports the sink reads from
+        is `sink.ports`.
       '';
     };
 
@@ -297,6 +363,23 @@ in {
         '';
       };
 
+      remotePort = lib.mkOption {
+        type = lib.types.port;
+        default = cfg.port;
+        description = ''
+          Port this machine's reverse tunnel binds on the sink. Every source
+          that tunnels to the same sink needs a distinct one: only the first
+          can bind, and the losers' tunnel units then crash-loop forever on
+          `remote port forwarding failed`, with no paste from those machines.
+
+          The failure outlives the session that caused it when the sink is
+          reached over Tailscale SSH. There the listener belongs to tailscaled
+          itself rather than to a per-session sshd child, so a source that
+          sleeps mid-session leaves the port bound and unanswering until
+          tailscaled restarts.
+        '';
+      };
+
       backend = lib.mkOption {
         type = lib.types.enum ["macos" "wayland" "x11"];
         default =
@@ -309,6 +392,21 @@ in {
 
     sink = {
       enable = lib.mkEnableOption "the xclip/wl-paste shims (headless hosts running Claude Code)";
+
+      ports = lib.mkOption {
+        type = lib.types.listOf lib.types.port;
+        default = [cfg.port];
+        example = lib.literalExpression "[18340 18341]";
+        description = ''
+          Ports to look for a source on, in order — one per source machine's
+          `source.remotePort`. The first that reports an image on its clipboard
+          wins, so paste serves whichever machine you are actually typing on
+          rather than whichever one happened to connect first.
+
+          Order matters only as a tie-break when two sources both hold an
+          image; put the machine you SSH in from most often first.
+        '';
+      };
 
       x11 = {
         enable = lib.mkEnableOption ''

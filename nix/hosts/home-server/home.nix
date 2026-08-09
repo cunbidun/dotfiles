@@ -35,6 +35,11 @@ in {
   # machine the SSH session came from (see configs/clipboard-bridge).
   services.clipboardBridge.sink = {
     enable = true;
+    # One port per source, matching each one's source.remotePort: the nixos
+    # desktop on 18340, the macbook on 18341. Desktop first because that is
+    # where most sessions come from, and the order only breaks ties when both
+    # machines happen to hold an image.
+    ports = [18340 18341];
     x11 = {
       # Codex reads the clipboard in-process (via the arboard crate) instead of
       # shelling out, so the xclip/wl-paste shims never intercept it and Ctrl+V
