@@ -118,6 +118,11 @@ let
   '';
 
   # ── Serve routes ─────────────────────────────────────────────────────────
+  # Every route here is tailnet-private. Funnel (public) is NOT available for
+  # services: `tailscale funnel` has no `--service` flag as of 1.98.8 (it fails
+  # with `flag provided but not defined: -service`), so anything that must be
+  # reachable off-tailnet has to ride the machine-level route below, on the
+  # device's own name.
   serveRoutes = {
     "svc:spending"      = { port = 3002;  };
     "svc:ai-proxy"      = { port = 20128; };
@@ -128,9 +133,22 @@ let
   };
 
   serveScript = pkgs.writeShellScript "tailscale-serve-apply" ''
-    # Machine-level: hub at home-server.${tailnet}
-    ${ts} serve --bg --https=443 http://127.0.0.1:3001 2>/dev/null \
-      && echo "OK: machine-level serve"
+    # Machine-level: the workspace, published publicly over Funnel at
+    # home-server.${tailnet}. This is the only public route; see serveRoutes
+    # above for why it cannot be a service.
+    #
+    # MUST be `funnel`, not `serve`: the two write the same 443 handler and
+    # differ only in setting AllowFunnel, so the `serve` form silently drops the
+    # URL to "tailnet only". `--yes` skips the confirmation prompt that would
+    # otherwise hang this unit.
+    #
+    # Everything in this script is re-applied on every switch (see the
+    # activation script below) because `tailscale funnel reset` wipes this
+    # handler *and* every service route at once, and these units are
+    # RemainAfterExit — so without that, a reset stays broken until a rebuild
+    # happens to change this file.
+    ${ts} funnel --bg --yes --https=443 http://127.0.0.1:3000 2>/dev/null \
+      && echo "OK: machine-level funnel (public)"
 
     # Service-level: one command per service, idempotent
     ${lib.concatMapStrings (svc: let cfg = serveRoutes.${svc}; in ''

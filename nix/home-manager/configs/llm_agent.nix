@@ -11,6 +11,15 @@ let
   cacheHome = config.xdg.cacheHome;
   githubTokenPath = "${configHome}/opencode/github_read_only_token";
   ninerouterTokenPath = "${configHome}/opencode/ninerouter_api_key";
+
+  # The 9router LLM proxy on the home-server, addressed by its Tailscale
+  # *Service* name rather than the device's — svc:ai-proxy is routed to
+  # 127.0.0.1:20128 (hosts/home-server/tailscale-services.nix), so this survives
+  # device renames. The previous `home-server.<tailnet>:20128` form pointed at
+  # the device and broke the moment it was renamed.
+  aiProxyBaseUrl = "https://ai-proxy.${userdata.tailnetDomain}/v1";
+  # One model id, shared by codex and opencode so they never drift apart.
+  aiProxyModel = "cx/gpt-5.6-sol";
   chromeBinary = "${pkgs.google-chrome}/bin/google-chrome-stable";
   chromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/opencode-profile";
   codexChromeDevToolsProfile = "${cacheHome}/chrome-devtools-mcp/codex-profile";
@@ -56,13 +65,13 @@ let
     };
   codexConfigFile = codexToml.generate "codex-config.toml" {
     model_provider = "9router";
-    model = "cx/gpt-5.6-sol";
+    model = aiProxyModel;
     model_reasoning_effort = "high";
     personality = "pragmatic";
 
     model_providers."9router" = {
       name = "9router";
-      base_url = "http://home-server.${userdata.tailnetDomain}:20128/v1";
+      base_url = aiProxyBaseUrl;
       env_key = "NINEROUTER_API_KEY";
     };
 
@@ -140,6 +149,21 @@ in
     "$schema" = "https://opencode.ai/config.json";
     permission = "allow";
     plugin = [ "${inputs.obra-superpowers}/.opencode/plugins/superpowers.js" ];
+
+    # Route opencode through the same 9router proxy codex uses, via the
+    # openai-compatible adapter. The key is read from its sops file with
+    # opencode's `{file:…}` interpolation — the same mechanism as the github MCP
+    # token below — so it is never baked into the world-readable nix store.
+    model = "9router/${aiProxyModel}";
+    provider."9router" = {
+      npm = "@ai-sdk/openai-compatible";
+      name = "9router";
+      options = {
+        baseURL = aiProxyBaseUrl;
+        apiKey = "{file:${ninerouterTokenPath}}";
+      };
+      models.${aiProxyModel} = { };
+    };
     lsp = {
       nixd = {
         command = [ "${pkgs.nixd}/bin/nixd" ];

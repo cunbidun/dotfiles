@@ -258,9 +258,11 @@ in {
         TCPKeepAlive = "yes";
         IdentityAgent = "~/.1password/agent.sock";
       };
-      # Named host entries are discovered by many tunnel UIs.
+      # Named host entries are discovered by many tunnel UIs. The alias stays
+      # `home-server` (it is what tools and muscle memory type); only the FQDN
+      # tracks the Tailscale device name, which is no longer `home-server`.
       "home-server" = {
-        HostName = "home-server.${userdata.tailnetDomain}";
+        HostName = "${userdata.tailnetDeviceNames.homeServer}.${userdata.tailnetDomain}";
         User = userdata.username;
         Port = 22;
       };
