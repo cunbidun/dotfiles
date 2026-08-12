@@ -133,6 +133,17 @@ let
   };
 
   serveScript = pkgs.writeShellScript "tailscale-serve-apply" ''
+    # Wait for tailscaled to answer before touching any route. After= only
+    # orders unit *start*, so on a `switch` this can run while tailscaled is
+    # still coming back up — which is exactly how the funnel call below failed
+    # once while the later, slightly-less-early serve calls all succeeded.
+    i=0
+    while [ $i -lt 30 ]; do
+      ${ts} status --json >/dev/null 2>&1 && break
+      ${pkgs.coreutils}/bin/sleep 1
+      i=$((i + 1))
+    done
+
     # Machine-level: the workspace, published publicly over Funnel at
     # home-server.${tailnet}. This is the only public route; see serveRoutes
     # above for why it cannot be a service.
@@ -147,13 +158,20 @@ let
     # handler *and* every service route at once, and these units are
     # RemainAfterExit — so without that, a reset stays broken until a rebuild
     # happens to change this file.
-    ${ts} funnel --bg --yes --https=443 http://127.0.0.1:3000 2>/dev/null \
-      && echo "OK: machine-level funnel (public)"
+    # stderr is deliberately NOT sent to /dev/null. It used to be, and that hid
+    # a real failure: during one switch this funnel call failed while the
+    # `serve` calls below succeeded, so the public URL silently stayed on a
+    # stale handler with nothing in the journal to say why. Warn loudly instead
+    # — a wrong-but-quiet route is the failure mode worth protecting against.
+    ${ts} funnel --bg --yes --https=443 http://127.0.0.1:3000 \
+      && echo "OK: machine-level funnel (public)" \
+      || echo "WARN: machine-level funnel failed — public URL may be stale"
 
     # Service-level: one command per service, idempotent
     ${lib.concatMapStrings (svc: let cfg = serveRoutes.${svc}; in ''
-      ${ts} serve --service=${svc} --bg --https=443 http://127.0.0.1:${toString cfg.port} 2>/dev/null \
-        && echo "OK: ${svc}"
+      ${ts} serve --service=${svc} --bg --https=443 http://127.0.0.1:${toString cfg.port} \
+        && echo "OK: ${svc}" \
+        || echo "WARN: ${svc} failed"
     '') (builtins.attrNames serveRoutes)}
   '';
 
